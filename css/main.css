@@ -1803,6 +1803,7 @@ article:last-child .post-eof {
   text-align: center;
 }
 .links-of-author {
+  text-align: center;
   margin-top: 20px;
 }
 .links-of-author a,
@@ -1819,7 +1820,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #be7cff;
+  background: #3cfff0;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
