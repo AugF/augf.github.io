@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[test.py]]></title>
+    <url>%2F2019%2F09%2F09%2F1%2F</url>
+    <content type="text"><![CDATA[标题1标题2标题3 list1 list2 list3 list4 unordered_list1 unordered_list2 unordered_list3 list1 注释 小标题 小标题 sub-sub-title $ \frac{1}{2} \lambda \sum_{i=1}^{n} A_i $ $$f(x) = x + y$$ this is code block 1234# this is a big code blockimport numpy as npdef fun(a, b): return a+b 测试字体测试字体，文字片段 文字片段 文字片段 其他 网络图片也不知道能否显示出来，本地图片未知 试试链接百度一下 高级 流程图 等等]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[my first pages]]></title>
     <url>%2F2019%2F09%2F08%2Fmy-first-passage%2F</url>
     <content type="text"><![CDATA[这是一篇测试文章]]></content>
