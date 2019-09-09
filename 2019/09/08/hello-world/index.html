@@ -49,12 +49,23 @@
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copiar',
-      copy_success: 'Copiado',
-      copy_failure: 'Copiar falló'
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
     },
     sidebarPadding: 40
   };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
 </script>
 
   <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
@@ -139,7 +150,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Cambiar a barra de navegación">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -159,7 +170,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
       
@@ -170,7 +181,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Sobre mi</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
       
@@ -181,7 +192,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Etiquetas</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
 
   </li>
       
@@ -192,7 +203,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categorías</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
       
@@ -203,7 +214,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivo</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
   </ul>
@@ -238,14 +249,14 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eugene Wang">
       <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/default-avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="AugF's Notes">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">Hello World<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VzZXItbmFtZS9yZXBvLW5hbWUvdHJlZS9icmFuY2gtbmFtZS9zdWJkaXJlY3RvcnktbmFtZV9wb3N0cy9oZWxsby13b3JsZC5tZA==" title="Editar esta entrada"><i class="fa fa-pencil"></i></span>
+        <h2 class="post-title" itemprop="name headline">Hello World<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VzZXItbmFtZS9yZXBvLW5hbWUvdHJlZS9icmFuY2gtbmFtZS9zdWJkaXJlY3RvcnktbmFtZV9wb3N0cy9oZWxsby13b3JsZC5tZA==" title="Diesen Beitrag bearbeiten"><i class="fa fa-pencil"></i></span>
 
           
         </h2>
@@ -255,13 +266,13 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">Publicado el</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
 
               
                 
               
 
-              <time title="Creado por: 2019-09-08 20:36:11" itemprop="dateCreated datePublished" datetime="2019-09-08T20:36:11+08:00">2019-09-08</time>
+              <time title="Erstellt: 2019-09-08 20:36:11" itemprop="dateCreated datePublished" datetime="2019-09-08T20:36:11+08:00">2019-09-08</time>
             </span>
           
 
@@ -306,7 +317,7 @@
         <div id="reward-container">
   <div>Donate comment here.</div>
   <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    Donar
+    Spenden
   </button>
   <div id="qr" style="display: none;">
         
@@ -383,10 +394,10 @@
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          Tabla de contenidos
+          Inhaltsverzeichnis
         </li>
         <li class="sidebar-nav-overview">
-          Inicio
+          Übersicht
         </li>
       </ul>
 
@@ -400,7 +411,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
-      src="/images/avatar.gif"
+      src="/images/default-avatar.png"
       alt="Eugene Wang">
   <p class="site-author-name" itemprop="name">Eugene Wang</p>
   <div class="site-description" itemprop="description">Quick notes</div>
@@ -411,7 +422,7 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">3</span>
-          <span class="site-state-item-name">entradas</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
     
@@ -420,7 +431,7 @@
       <div class="site-state-item site-state-tags">
         
         <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">schlagwörter</span>
         
       </div>
     
@@ -502,9 +513,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
 </div>
-  <div class="powered-by">Creado mediante <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.9.0</div>
+  <div class="powered-by">Erstellt mit  <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Tema – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Muse</span> v7.4.0</div>
+  <div class="theme-info">Design – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Muse</span> v7.4.0</div>
 
         
 
