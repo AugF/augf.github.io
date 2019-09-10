@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>markdown</title>
+      <link href="/2019/09/10/1/"/>
+      <url>/2019/09/10/1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="标题1"><a href="#标题1" class="headerlink" title="标题1"></a>标题1</h1><h2 id="标题2"><a href="#标题2" class="headerlink" title="标题2"></a>标题2</h2><h3 id="标题3"><a href="#标题3" class="headerlink" title="标题3"></a>标题3</h3><ol><li>list1</li><li>list2</li><li>list3</li><li>list4</li></ol><ul><li>unordered_list1</li><li>unordered_list2</li><li>unordered_list3</li></ul><ol><li>list1<blockquote><p>注释</p></blockquote><ul><li>小标题<ul><li>小标题<ul><li>sub-sub-title</li></ul></li></ul></li></ul></li></ol><p>$ \frac{1}{2} \lambda \sum_{i=1}^{n} A_i $</p><p>$$f(x) = x + y$$</p><p><code>this is code block</code></p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this is a big code block</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a+b</span><br></pre></td></tr></table></figure><a id="more"></a><h3 id="测试字体"><a href="#测试字体" class="headerlink" title="测试字体"></a>测试字体</h3><p>测试字体，文字片段</p><p>文字片段</p><p>文字片段</p><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><img src="https://github.com/AugF/DailyNotes/blob/master/asserts/1.png" alt="网络图片"></p><blockquote><p>网络图片也不知道能否显示出来，本地图片未知</p></blockquote><p>试试链接<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">百度一下<i class="fa fa-external-link"></i></span></p><h3 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h3><ol><li>流程图</li><li>等等</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> test </category>
+          
+          <category> fun </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> test </tag>
+            
+            <tag> markdown </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2019/09/08/hello-world/"/>
       <url>/2019/09/08/hello-world/</url>
