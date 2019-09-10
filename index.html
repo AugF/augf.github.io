@@ -403,10 +403,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Node.js: 在服务器端的javascript<br>npm: 软件管理包  cnpm</p><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+          <p>Node.js: 在服务器端的javascript<br>npm: 软件管理包  cnpm</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
 <li>npm install -g hexo-cli 安装客户端<img src="/2019/09/10/hexo-study/1.jpg" title="hello world"></li>
 <li>建站<br>mkdir <code>&lt;folder&gt;</code><br>cd <code>&lt;folder&gt;</code><br>hexo init<br>npm install</li>
-</ol><p><img src="1.jpg" alt></p><ol start="3">
+</ol>
+<p><img src="1.jpg" alt></p>
+<ol start="3">
 <li><p>目录结构</p>
 <ul>
 <li>_config.sym<ul>
@@ -525,15 +528,163 @@
 </ul>
 </li>
 </ol>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/09/10/hexo-study/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
+<blockquote>
+<p>应用</p>
+<ol>
+<li>一键所有部署: hexo g -f -d</li>
+<li>模式：  –safe 安全模式，不会载入插件和脚本?  –debug 到debug.log  –slient 隐藏终端信息 –draft 显示文件夹中的草稿文章 –cwd 自定义当前工作目录的路径</li>
+</ol>
+</blockquote>
+<ol start="5">
+<li><p>文章</p>
+<ul>
+<li>布局 layout<ul>
+<li>false: 不要处理我的文章</li>
+<li>page: source ? 好像只是路径不同，所以是路径问题?</li>
+<li>post source/_posts</li>
+<li>draft source/_drafts  –draft 预览?</li>
+</ul>
+</li>
+<li>title, date, updated, comments, tags, categories, keywords<blockquote>
+<p>分类具有顺序性和层次性，标签没有顺序性和层次<br>-[Diary, Linux] -[PS3, ]</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>标签插件</p>
+<ul>
+<li><p>引用块 quote: </p>
+<blockquote>
+<blockquote></blockquote></blockquote>
+</li>
+<li><p>代码块 ocde</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure></blockquote>
+</li>
+<li><p>反引号代码块</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>text] code snippet``</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- 其他</span><br><span class="line">    - youtube视频  &#123;% youtube video_id %&#125; ? 如何用</span><br><span class="line">    - 插入Vimeo视频 &#123;% vimeo video_id %&#125;</span><br><span class="line">    - 引用文章 &#123;&#125;</span><br><span class="line">    - 引用资源</span><br><span class="line">        &gt; 引用文件，图片，链接等， 注意这里是特殊的格式</span><br></pre></td></tr></table></figure>
+</blockquote>
+<pre><code>{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">        - 插入swig标签  &#123;% raw %&#125; &#123;% endraw %&#125;</span><br><span class="line">        - 摘要 `&lt;!-- more --&gt;`</span><br><span class="line"></span><br><span class="line">7. 数据文件夹 hexo3.0新增功能  source/_data: 可以在网站中复用这些东西， 比如在menu.yml中配置的信息可以通过代码解析</span><br><span class="line"></span><br><span class="line">8. 服务器</span><br><span class="line">    - npm install hexo-server --save</span><br><span class="line">    - hexo server -p 5000 -i ip</span><br><span class="line"></span><br><span class="line">9. 生成器</span><br><span class="line">    - hexo generate --watch查看变动</span><br><span class="line"></span><br><span class="line">10. 部署</span><br><span class="line">    - 可以部署多个deploy:</span><br></pre></td></tr></table></figure></code></pre><p>  deploy:</p>
+<ul>
+<li>type:<br>repo:</li>
+<li>type:<br>repo<br>```</li>
+</ul>
+</li>
+<li><p>git</p>
+<ul>
+<li>npm install hexo-deployer-git –save</li>
+<li>参数<ul>
+<li>type: git</li>
+<li>repo: 地址</li>
+<li>branch: </li>
+<li>meassage: 自动提交消息</li>
+</ul>
+</li>
+<li>原理<blockquote>
+<p>当hexo deploy时，hexo会将public目录中的文件和目录推送到_config.yml对应的远端仓库，并且完全覆盖giants分支下的已有内容</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>变量</p>
+<ul>
+<li>全局变量<ul>
+<li>site 网站变量<ul>
+<li>posts</li>
+<li>pages ??</li>
+<li>categories</li>
+<li>tags</li>
+</ul>
+</li>
+<li>page: 针对该页面的内容<ul>
+<li>title</li>
+<li>date</li>
+<li>文章 posts<ul>
+<li>published</li>
+<li>categories</li>
+<li>tags</li>
+</ul>
+</li>
+<li>首页 index<ul>
+<li>per_page</li>
+<li>total</li>
+<li>current</li>
+</ul>
+</li>
+<li>归档 archive<ul>
+<li>archive</li>
+<li>year</li>
+<li>month</li>
+</ul>
+</li>
+<li>category分类，与index布局相同<ul>
+<li>category</li>
+</ul>
+</li>
+<li>标签 tag:<ul>
+<li>tag</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>config: 网站配置</li>
+<li>theme: 主题配置</li>
+<li>_ : loadsh函数库</li>
+<li>path: 当前页面的路径（不含根路径）</li>
+<li>url: 当前页面的完整网址</li>
+<li>env: 环境变量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>辅助函数</p>
+<ul>
+<li>&lt;%- image_tag(path, [options]) %&gt; 插入图片<ul>
+<li>alt,  class, id, width, height<blockquote>
+<p>CDN图片引用访问 Cloudinary</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>gravatar 全球唯一关联邮箱图片</li>
+<li>toc</li>
+</ul>
+</li>
+</ol>
+<ol start="13">
+<li>插件<ul>
+<li>脚本  scripts</li>
+<li>插件  node_modules  hexo-XX<ul>
+<li>官方</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>mathjax: true<br>reward: false<br>password:</p>
+<p>Front-matter</p>
+<p> npm install hexo-generator-searchdb –save</p>
+<p>问题：</p>
+<ol>
+<li>About页面没有</li>
+<li>对应的编辑器没有</li>
+<li>侧边栏不好看</li>
+</ol>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLndpbnNreS53YW5nL0hleG8lRTUlOEQlOUElRTUlQUUlQTIvSGV4byVFNSU4RCU5QSVFNSVBRSVBMk5leHQlRTQlQjglQkIlRTklQTIlOTglRTklODUlOEQlRTclQkQlQUUv" title="https://blog.winsky.wang/Hexo%E5%8D%9A%E5%AE%A2/Hexo%E5%8D%9A%E5%AE%A2Next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/">https://blog.winsky.wang/Hexo%E5%8D%9A%E5%AE%A2/Hexo%E5%8D%9A%E5%AE%A2Next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/<i class="fa fa-external-link"></i></span></p>
+<p>todo</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZy9kb2NzL2dldHRpbmctc3RhcnRlZC8=" title="https://theme-next.org/docs/getting-started/">https://theme-next.org/docs/getting-started/<i class="fa fa-external-link"></i></span></p>
+<p>todo<br>SEO工具<br>获取token</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHVmcmVlLmNvbS8xODczLmh0bWw=" title="https://www.baidufree.com/1873.html">https://www.baidufree.com/1873.html<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9odWktd2FuZy5pbmZvLzIwMTYvMTAvMjMvSGV4byVFNiU4RiU5MiVFNCVCQiVCNiVFNCVCOSU4QiVFNyU5OSVCRSVFNSVCQSVBNiVFNCVCOCVCQiVFNSU4QSVBOCVFNiU4RiU5MCVFNCVCQSVBNCVFOSU5MyVCRSVFNiU4RSVBNS8=" title="https://hui-wang.info/2016/10/23/Hexo%E6%8F%92%E4%BB%B6%E4%B9%8B%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8F%90%E4%BA%A4%E9%93%BE%E6%8E%A5/">https://hui-wang.info/2016/10/23/Hexo%E6%8F%92%E4%BB%B6%E4%B9%8B%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8F%90%E4%BA%A4%E9%93%BE%E6%8E%A5/<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zODE0Mzk0Ng==" title="https://zhuanlan.zhihu.com/p/38143946">https://zhuanlan.zhihu.com/p/38143946<i class="fa fa-external-link"></i></span><br>优化和维护暂时还不可，2-5天<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9mOGVjNDIyZWJkNTI=" title="https://www.jianshu.com/p/f8ec422ebd52">https://www.jianshu.com/p/f8ec422ebd52<i class="fa fa-external-link"></i></span></p>
+<p>谷歌站点地图<br><span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZT9yZXNvdXJjZV9pZD1odHRwcyUzQSUyRiUyRmF1Z2YuZ2l0aHViLmlvJTJG" title="https://search.google.com/search-console?resource_id=https%3A%2F%2Faugf.github.io%2F">https://search.google.com/search-console?resource_id=https%3A%2F%2Faugf.github.io%2F<i class="fa fa-external-link"></i></span></p>
+
         
       
     </div>
@@ -732,15 +883,19 @@
 
       
           <p>Welcome to <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==" title="https://hexo.io/">Hexo<i class="fa fa-external-link"></i></span>! This is your very first post. Check <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3Mv" title="https://hexo.io/docs/">documentation<i class="fa fa-external-link"></i></span> for more info. If you get any problems when using Hexo, you can find the answer in <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3MvdHJvdWJsZXNob290aW5nLmh0bWw=" title="https://hexo.io/docs/troubleshooting.html">troubleshooting<i class="fa fa-external-link"></i></span> or you can ask me on <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvL2lzc3Vlcw==" title="https://github.com/hexojs/hexo/issues">GitHub<i class="fa fa-external-link"></i></span>.</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/09/08/hello-world/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvd3JpdGluZy5odG1s" title="https://hexo.io/docs/writing.html">Writing<i class="fa fa-external-link"></i></span></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvc2VydmVyLmh0bWw=" title="https://hexo.io/docs/server.html">Server<i class="fa fa-external-link"></i></span></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3MvZ2VuZXJhdGluZy5odG1s" title="https://hexo.io/docs/generating.html">Generating<i class="fa fa-external-link"></i></span></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3MvZGVwbG95bWVudC5odG1s" title="https://hexo.io/docs/deployment.html">Deployment<i class="fa fa-external-link"></i></span></p>
+
         
       
     </div>
