@@ -71,21 +71,19 @@
     })();
 </script>
 
-  <meta name="description" content="标题1标题2标题3 list1 list2 list3 list4   unordered_list1 unordered_list2 unordered_list3   list1 注释   小标题 小标题 sub-sub-title        $ \frac{1}{2} \lambda \sum_{i=1}^{n} A_i $ $$f(x) = x + y$$ this is code b">
-<meta name="keywords" content="hexo, notes">
+  <meta name="description" content="这是一篇测试文章">
+<meta name="keywords" content="test">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test.py">
-<meta property="og:url" content="https://augf.github.io/2019/09/09/1/index.html">
+<meta property="og:title" content="my first pages">
+<meta property="og:url" content="https://augf.github.io/uncategorized/my-first-passage">
 <meta property="og:site_name" content="AugF&#39;s Notes">
-<meta property="og:description" content="标题1标题2标题3 list1 list2 list3 list4   unordered_list1 unordered_list2 unordered_list3   list1 注释   小标题 小标题 sub-sub-title        $ \frac{1}{2} \lambda \sum_{i=1}^{n} A_i $ $$f(x) = x + y$$ this is code b">
+<meta property="og:description" content="这是一篇测试文章">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://github.com/AugF/DailyNotes/blob/master/asserts/1.png">
-<meta property="og:updated_time" content="2019-09-09T16:43:06.015Z">
+<meta property="og:updated_time" content="2019-09-08T13:12:03.223Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test.py">
-<meta name="twitter:description" content="标题1标题2标题3 list1 list2 list3 list4   unordered_list1 unordered_list2 unordered_list3   list1 注释   小标题 小标题 sub-sub-title        $ \frac{1}{2} \lambda \sum_{i=1}^{n} A_i $ $$f(x) = x + y$$ this is code b">
-<meta name="twitter:image" content="https://github.com/AugF/DailyNotes/blob/master/asserts/1.png">
-  <link rel="canonical" href="https://augf.github.io/2019/09/09/1/">
+<meta name="twitter:title" content="my first pages">
+<meta name="twitter:description" content="这是一篇测试文章">
+  <link rel="canonical" href="https://augf.github.io/uncategorized/my-first-passage">
 
 
 <script id="page-configurations">
@@ -99,7 +97,7 @@
   };
 </script>
 
-  <title>test.py | AugF's Notes</title>
+  <title>my first pages | AugF's Notes</title>
   
 
 
@@ -286,7 +284,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/09/1/">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/uncategorized/my-first-passage">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eugene Wang">
@@ -298,7 +296,7 @@
       <meta itemprop="name" content="AugF's Notes">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">test.py
+        <h2 class="post-title" itemprop="name headline">my first pages
 
           
         </h2>
@@ -314,19 +312,11 @@
                 
               
 
-              <time title="创建时间：2019-09-09 11:07:58" itemprop="dateCreated datePublished" datetime="2019-09-09T11:07:58+08:00">2019-09-09</time>
+              <time title="创建时间：2019-09-08 21:11:13 / 修改时间：21:12:03" itemprop="dateCreated datePublished" datetime="2019-09-08T21:11:13+08:00">2019-09-08</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-10 00:43:06" itemprop="dateModified" datetime="2019-09-10T00:43:06+08:00">2019-09-10</time>
-              </span>
             
           
 
@@ -349,51 +339,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="标题1"><a href="#标题1" class="headerlink" title="标题1"></a>标题1</h1><h2 id="标题2"><a href="#标题2" class="headerlink" title="标题2"></a>标题2</h2><h3 id="标题3"><a href="#标题3" class="headerlink" title="标题3"></a>标题3</h3><ol>
-<li>list1</li>
-<li>list2</li>
-<li>list3</li>
-<li>list4</li>
-</ol>
-<ul>
-<li>unordered_list1</li>
-<li>unordered_list2</li>
-<li>unordered_list3</li>
-</ul>
-<ol>
-<li>list1<blockquote>
-<p>注释</p>
-</blockquote>
-<ul>
-<li>小标题<ul>
-<li>小标题<ul>
-<li>sub-sub-title</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>$ \frac{1}{2} \lambda \sum_{i=1}^{n} A_i $</p>
-<p>$$f(x) = x + y$$</p>
-<p><code>this is code block</code></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this is a big code block</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a+b</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h3 id="测试字体"><a href="#测试字体" class="headerlink" title="测试字体"></a>测试字体</h3><p>测试字体，文字片段</p>
-<p>文字片段</p>
-<p>文字片段</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><img src="https://github.com/AugF/DailyNotes/blob/master/asserts/1.png" alt="网络图片"></p>
-<blockquote>
-<p>网络图片也不知道能否显示出来，本地图片未知</p>
-</blockquote>
-<p>试试链接<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">百度一下<i class="fa fa-external-link"></i></span></p>
-<h3 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h3><ol>
-<li>流程图</li>
-<li>等等</li>
-</ol>
+        <p>这是一篇测试文章</p>
 
     </div>
 
@@ -410,7 +356,7 @@
     <strong>本文作者： </strong>Eugene Wang</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://augf.github.io/2019/09/09/1/" title="test.py">https://augf.github.io/2019/09/09/1/</a>
+    <a href="https://augf.github.io/uncategorized/my-first-passage" title="my first pages">https://augf.github.io/uncategorized/my-first-passage</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -420,14 +366,23 @@
       
 
       <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/test/" rel="tag"># test</a>
+            
+          </div>
+        
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/09/08/my-first-passage/" rel="next" title="my first pages">
-                  <i class="fa fa-chevron-left"></i> my first pages
+                <a href="/uncategorized/hello-world" rel="next" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
                 </a>
               
             </div>
@@ -435,6 +390,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/uncategorized/1" rel="prev" title="test.py">
+                  test.py <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -490,8 +449,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#标题1"><span class="nav-number">1.</span> <span class="nav-text">标题1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标题2"><span class="nav-number">1.1.</span> <span class="nav-text">标题2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标题3"><span class="nav-number">1.1.1.</span> <span class="nav-text">标题3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试字体"><span class="nav-number">1.1.2.</span> <span class="nav-text">测试字体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">1.1.3.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级"><span class="nav-number">1.1.4.</span> <span class="nav-text">高级</span></a></li></ol></li></ol></li></ol></div>
-        
       </div>
       <!--/noindex-->
 
@@ -705,58 +662,6 @@
 
   
 
-  
-    
-      
-<script type="text/x-mathjax-config">
-    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        extensions: ['[mhchem]/mhchem.js'],
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
   
 
   
