@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://augf.github.io/2019/09/10/1/</loc>
+    <loc>https://augf.github.io/categories/index.html</loc>
     
-    <lastmod>2019-09-10T06:10:52.700Z</lastmod>
+    <lastmod>2019-09-10T06:18:09.573Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://augf.github.io/tags/index-1.html</loc>
+    <loc>https://augf.github.io/tags/index.html</loc>
     
-    <lastmod>2019-09-10T02:28:16.456Z</lastmod>
+    <lastmod>2019-09-10T06:17:36.028Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/10/1/</loc>
+    
+    <lastmod>2019-09-10T06:10:52.700Z</lastmod>
     
   </url>
   
@@ -26,20 +33,6 @@
     <loc>https://augf.github.io/archives/index.html</loc>
     
     <lastmod>2019-09-10T02:00:40.316Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/categories/index.html</loc>
-    
-    <lastmod>2019-09-08T15:07:38.146Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/tags/index.html</loc>
-    
-    <lastmod>2019-09-08T15:04:53.848Z</lastmod>
     
   </url>
   
