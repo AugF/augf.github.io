@@ -1,5 +1,5 @@
+https://augf.github.io/2019/09/12/daily-thinking/
 https://augf.github.io/2019/09/11/semi-gnn-relization-progress/
 https://augf.github.io/2019/09/10/deep-learning-study/
 https://augf.github.io/2019/09/10/ipython-personnal-reference/
 https://augf.github.io/2019/09/10/About-me/
-https://augf.github.io/2019/09/10/hexo-study/
