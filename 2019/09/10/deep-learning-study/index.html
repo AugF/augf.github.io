@@ -72,14 +72,14 @@
 </script>
 
   <meta name="description" content="1. tensorflowstensorflow 数据流图  用于数值计算单开源软件库 Nodes : 数学操作  特别地，有数据输入和数据输出的节点， 或者是读取、写入持久变量的终点persistent  edges: 多维数据数组， tensor  根据不同的计算, 张, 即数据的大小可变size  特征  高度的灵活性，可自己写C++ 可以在CPU, GPU, Docker等， Portab">
-<meta name="keywords" content="deeplearning,tools,numpy,tensorflow">
+<meta name="keywords" content="tools,deeplearning,numpy,tensorflow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deep learning study">
 <meta property="og:url" content="https://augf.github.io/2019/09/10/deep-learning-study/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
 <meta property="og:description" content="1. tensorflowstensorflow 数据流图  用于数值计算单开源软件库 Nodes : 数学操作  特别地，有数据输入和数据输出的节点， 或者是读取、写入持久变量的终点persistent  edges: 多维数据数组， tensor  根据不同的计算, 张, 即数据的大小可变size  特征  高度的灵活性，可自己写C++ 可以在CPU, GPU, Docker等， Portab">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-10T12:58:14.358Z">
+<meta property="og:updated_time" content="2019-09-10T16:04:29.824Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deep learning study">
 <meta name="twitter:description" content="1. tensorflowstensorflow 数据流图  用于数值计算单开源软件库 Nodes : 数学操作  特别地，有数据输入和数据输出的节点， 或者是读取、写入持久变量的终点persistent  edges: 多维数据数组， tensor  根据不同的计算, 张, 即数据的大小可变size  特征  高度的灵活性，可自己写C++ 可以在CPU, GPU, Docker等， Portab">
@@ -201,7 +201,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">7</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">9</span></a>
 
   </li>
       
@@ -214,7 +214,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">7</span></a>
 
   </li>
       
@@ -227,7 +227,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">6</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">7</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -312,11 +312,19 @@
                 
               
 
-              <time title="创建时间：2019-09-10 20:56:16 / 修改时间：20:58:14" itemprop="dateCreated datePublished" datetime="2019-09-10T20:56:16+08:00">2019-09-10</time>
+              <time title="创建时间：2019-09-10 20:56:16" itemprop="dateCreated datePublished" datetime="2019-09-10T20:56:16+08:00">2019-09-10</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-11 00:04:29" itemprop="dateModified" datetime="2019-09-11T00:04:29+08:00">2019-09-11</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -482,6 +490,7 @@
 </ul>
 </li>
 </ul>
+<a id="more"></a>
 <h3 id="1-4-其它"><a href="#1-4-其它" class="headerlink" title="1.4 其它"></a>1.4 其它</h3><p>tensorflow使用数据流图将计算表示为独立的指令之间的依赖关系，这可生成低级别的编程模型。<br>首先定义低级别的编程模型，在改模型中，首先定义数据流图，然后创建tensorflow会话。</p>
 <p>why？ 数据流图</p>
 <blockquote>
@@ -995,9 +1004,9 @@
 <li><p>对列求和, 然后做每行；直接 T / np.sum(T, axis=1, keepdims=True) // 保证最后得出的结果是矩阵</p>
 </li>
 <li><p>np.mat(A): 返回举证的特殊的抽象类型，什么时候用到也不知道</p>
-<h2 id="3-pandas"><a href="#3-pandas" class="headerlink" title="3. pandas"></a>3. pandas</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cucHlwYW5kYXMuY24v" title="https://www.pypandas.cn/">https://www.pypandas.cn/<i class="fa fa-external-link"></i></span></p>
 </li>
 </ol>
+<h2 id="3-pandas"><a href="#3-pandas" class="headerlink" title="3. pandas"></a>3. pandas</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cucHlwYW5kYXMuY24v" title="https://www.pypandas.cn/">https://www.pypandas.cn/<i class="fa fa-external-link"></i></span></p>
 <p>pandas: 处理表格和混杂数据<br>numpy: 处理统一的数值数据<br>scipy: 数值计算工具<br>分析库：scikit-learn 和 statsmodels<br>数据化可视库: matplotlib</p>
 <ul>
 <li><p>数据结构</p>
@@ -1538,9 +1547,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/deeplearning/" rel="tag"><i class="fa fa-tag"></i> deeplearning</a>
-            
               <a href="/tags/tools/" rel="tag"><i class="fa fa-tag"></i> tools</a>
+            
+              <a href="/tags/deeplearning/" rel="tag"><i class="fa fa-tag"></i> deeplearning</a>
             
               <a href="/tags/numpy/" rel="tag"><i class="fa fa-tag"></i> numpy</a>
             
@@ -1563,6 +1572,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/11/semi-gnn-relization-progress/" rel="prev" title="semi-gnn, relization progress">
+                  semi-gnn, relization progress <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -1636,7 +1649,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1649,7 +1662,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1662,7 +1675,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
