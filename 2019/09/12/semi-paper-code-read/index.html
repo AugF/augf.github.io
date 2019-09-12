@@ -71,18 +71,18 @@
     })();
 </script>
 
-  <meta name="description" content="论文1https://github.com/tkipf/gcn Data  nn   nd  d=c:channels  e=f:classes   gcn 文件组织结构  readme.md  data:  d=c: chanels   e=f:classes citation network data:  cora, citeseer, pubmed nell:  revisiting sem">
+  <meta name="description" content="论文1https://github.com/tkipf/gcn Data  nn   nd  d=c:channels  e=f:classes   gcn 文件组织结构 readme.md data:  d=c: chanels   e=f:classes citation network data:  cora, citeseer, pubmed nell:  revisiting semi-">
 <meta name="keywords" content="gnn,semi-gnn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="semi-paper code read">
 <meta property="og:url" content="https://augf.github.io/2019/09/12/semi-paper-code-read/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
-<meta property="og:description" content="论文1https://github.com/tkipf/gcn Data  nn   nd  d=c:channels  e=f:classes   gcn 文件组织结构  readme.md  data:  d=c: chanels   e=f:classes citation network data:  cora, citeseer, pubmed nell:  revisiting sem">
+<meta property="og:description" content="论文1https://github.com/tkipf/gcn Data  nn   nd  d=c:channels  e=f:classes   gcn 文件组织结构 readme.md data:  d=c: chanels   e=f:classes citation network data:  cora, citeseer, pubmed nell:  revisiting semi-">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-12T05:36:45.179Z">
+<meta property="og:updated_time" content="2019-09-12T13:08:13.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="semi-paper code read">
-<meta name="twitter:description" content="论文1https://github.com/tkipf/gcn Data  nn   nd  d=c:channels  e=f:classes   gcn 文件组织结构  readme.md  data:  d=c: chanels   e=f:classes citation network data:  cora, citeseer, pubmed nell:  revisiting sem">
+<meta name="twitter:description" content="论文1https://github.com/tkipf/gcn Data  nn   nd  d=c:channels  e=f:classes   gcn 文件组织结构 readme.md data:  d=c: chanels   e=f:classes citation network data:  cora, citeseer, pubmed nell:  revisiting semi-">
   <link rel="canonical" href="https://augf.github.io/2019/09/12/semi-paper-code-read/">
 
 
@@ -201,7 +201,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">17</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">18</span></a>
 
   </li>
       
@@ -214,7 +214,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">14</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">15</span></a>
 
   </li>
       
@@ -227,7 +227,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">12</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">13</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -312,7 +312,7 @@
                 
               
 
-              <time title="创建时间：2019-09-12 12:47:23 / 修改时间：13:36:45" itemprop="dateCreated datePublished" datetime="2019-09-12T12:47:23+08:00">2019-09-12</time>
+              <time title="创建时间：2019-09-12 12:47:23 / 修改时间：21:08:13" itemprop="dateCreated datePublished" datetime="2019-09-12T12:47:23+08:00">2019-09-12</time>
             </span>
           
             
@@ -365,10 +365,8 @@
 <li>n<em>n   n</em>d  d=c:channels  e=f:classes</li>
 </ul>
 <ol>
-<li><p>gcn 文件组织结构</p>
-<ul>
-<li><p>readme.md</p>
-<ul>
+<li>gcn 文件组织结构<ul>
+<li>readme.md<ul>
 <li>data:  d=c: chanels   e=f:classes<ul>
 <li>citation network data:  cora, citeseer, pubmed</li>
 <li>nell:  revisiting semi-supervised learning with graph embedding</li>
@@ -377,8 +375,7 @@
 <li>model: gcn,  gcn_cheby, dense</li>
 </ul>
 </li>
-<li><p>gcn</p>
-<ul>
+<li>gcn<ul>
 <li>data<ul>
 <li>.tx  the feature vectors of test instances</li>
 <li>.ty  the one-hot labels</li>
@@ -401,7 +398,10 @@
 <li>gcn: semi-superised </li>
 <li>gcn_cheby: convolutional</li>
 <li>dense: basic multi-layer perceptron</li>
-<li>Model<ul>
+<li>Model<blockquote>
+<p>self.layers[0], 第一层的layer. 对第一层中的var的值，进行相加，这里的var只有weights, bias.  进行乘以固定系数相加<br>num_features_nonzero: dropout的方法也不同</p>
+</blockquote>
+<ul>
 <li>init<ul>
 <li>name, logging</li>
 <li>vars, placeholdres</li>
@@ -481,23 +481,30 @@
 <ul>
 <li>weight_decay: weight for l2 loss on embedding matrix</li>
 <li>early_stopping</li>
-<li>max_degree:  Chebyshev 不等式的阶<br>corn</li>
+<li>max_degree:  Chebyshev 不等式的阶</li>
+</ul>
+</li>
+<li>placeholders<ul>
+<li>support: [preprocess_adj(adj)]<blockquote>
+<p>为什么要这么做? 因为gcn_cheby模型中每层的A实际上是不一样的</p>
+</blockquote>
+</li>
+<li>features: </li>
+<li>labels: </li>
+<li>labels_mask: </li>
+<li>dropout: 注意稀疏矩阵和稠密矩阵 dropout方法还不一样 </li>
+<li>num_feature_nonzero: </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-</li>
-<li><p>x:  140,1433  tx: 1000,1433  ty: 1000, 7</p>
-</li>
-<li><p>allx: 1708  1433  ? 为何总数不相等</p>
-</li>
-<li><p>(allx,tx) 说明这两个不相等 </p>
 </li>
 </ul>
 </li>
 </ol>
-<h3 id="论文2"><a href="#论文2" class="headerlink" title="论文2"></a>论文2</h3><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tpbWl5b3VuZy9wbGFuZXRvaWQ=" title="https://github.com/kimiyoung/planetoid">https://github.com/kimiyoung/planetoid<i class="fa fa-external-link"></i></span></p>
+<p>corn<br>    - x:  140,1433  tx: 1000,1433  ty: 1000, 7<br>    - allx: 1708  1433  ? 为何总数不相等</p>
+<pre><code>- (allx,tx) 说明这两个不相等 </code></pre><h3 id="论文2"><a href="#论文2" class="headerlink" title="论文2"></a>论文2</h3><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tpbWl5b3VuZy9wbGFuZXRvaWQ=" title="https://github.com/kimiyoung/planetoid">https://github.com/kimiyoung/planetoid<i class="fa fa-external-link"></i></span></p>
 <ul>
 <li>test_ind.py:  induce model 的测试</li>
 <li>test_trans.py:  transive model的测试</li>
@@ -634,7 +641,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -647,7 +654,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -660,7 +667,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
