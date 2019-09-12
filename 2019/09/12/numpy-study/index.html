@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <link rel="alternate" href="/atom.xml" title="AugF's Notes" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <meta name="description" content="2. numpyhttps://www.numpy.org.cn/  python 太慢！！有个点就是关于python的切片都是复制，不是引用！不同numpynumpy基于C直接操作连续内存空间，比纯Python快10到100倍，并且使用内存更少  numpy提出的ndarry很好用,主要理解通用的数值数据处理上的强大功能，特别是在数组操作上pandas主要用于统计和分析 ！！！ 如何用整个数组的">
+<meta name="keywords" content="numpy,machinelearning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="numpy study">
+<meta property="og:url" content="https://augf.github.io/2019/09/12/numpy-study/index.html">
+<meta property="og:site_name" content="AugF&#39;s Notes">
+<meta property="og:description" content="2. numpyhttps://www.numpy.org.cn/  python 太慢！！有个点就是关于python的切片都是复制，不是引用！不同numpynumpy基于C直接操作连续内存空间，比纯Python快10到100倍，并且使用内存更少  numpy提出的ndarry很好用,主要理解通用的数值数据处理上的强大功能，特别是在数组操作上pandas主要用于统计和分析 ！！！ 如何用整个数组的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-12T11:46:57.889Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="numpy study">
+<meta name="twitter:description" content="2. numpyhttps://www.numpy.org.cn/  python 太慢！！有个点就是关于python的切片都是复制，不是引用！不同numpynumpy基于C直接操作连续内存空间，比纯Python快10到100倍，并且使用内存更少  numpy提出的ndarry很好用,主要理解通用的数值数据处理上的强大功能，特别是在数组操作上pandas主要用于统计和分析 ！！！ 如何用整个数组的">
+  <link rel="canonical" href="https://augf.github.io/2019/09/12/numpy-study/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>numpy study | AugF's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AugF's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">17</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">14</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">12</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/12/numpy-study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">numpy study
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-12 19:41:55 / 修改时间：19:46:57" itemprop="dateCreated datePublished" datetime="2019-09-12T19:41:55+08:00">2019-09-12</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/" itemprop="url" rel="index"><span itemprop="name">machinelearning</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/numpy/" itemprop="url" rel="index"><span itemprop="name">numpy</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="2-numpy"><a href="#2-numpy" class="headerlink" title="2. numpy"></a>2. numpy</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cubnVtcHkub3JnLmNuLw==" title="https://www.numpy.org.cn/">https://www.numpy.org.cn/<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>python 太慢！！有个点就是关于python的切片都是复制，不是引用！不同numpy<br>numpy基于C直接操作连续内存空间，比纯Python快10到100倍，并且使用内存更少</p>
+</blockquote>
+<p>numpy提出的ndarry很好用,主要理解通用的数值数据处理上的强大功能，特别是在数组操作上<br>pandas主要用于统计和分析</p>
+<p>！！！ 如何用整个数组的思想</p>
+<blockquote>
+<p>%time 可以直接统计时间</p>
+</blockquote>
+<h3 id="2-1-ndarry"><a href="#2-1-ndarry" class="headerlink" title="2.1 ndarry"></a>2.1 ndarry</h3><ul>
+<li><p>属性与方法</p>
+<blockquote>
+<p>可以认为如果改变了属性，必然会返回一个新的结构</p>
+</blockquote>
+<ul>
+<li>ar.shape: () 元组<ul>
+<li>di.reshape(): 改变形状, 返回一个新的数组<blockquote>
+<p>di.reshape() == np.reshape(di, 4)</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>ar.dtype: <ul>
+<li>基本类型<ul>
+<li>int64: 指的是位数, 64位，即8字节;  代码i8</li>
+<li>float64  default </li>
+<li>uint8</li>
+<li>complex64: 用两个32位的浮点数表示<blockquote>
+<p>? 复数如何定义</p>
+</blockquote>
+</li>
+<li>bool:  代码?</li>
+<li>object: python对象 代码O</li>
+<li>string_: 固定长度  S10, 10字节，每个字符一字节</li>
+<li>unicode_: U10</li>
+</ul>
+</li>
+<li>ar.astype(np.float64): 转换类型, 总会创建一个新的数组</li>
+</ul>
+</li>
+<li>ar.ndim： 有几维</li>
+<li>ar.T: 返回转置，仍然未原数组的引用</li>
+<li>ar.tranpose((1,0,2)): 轴对换，按照给定的元组进行重新轴的安排，比如获得新的数组</li>
+<li>转置=轴变换, ar.swapaxes(1,2): x,y,z; 这里就是对y轴和z轴进行变换</li>
+</ul>
+</li>
+<li><p>创建</p>
+<ul>
+<li>已有<ul>
+<li>np.array(sequence， dtype=””)</li>
+<li>np.asarray(arr) // 不确定是否是该类型</li>
+</ul>
+</li>
+<li>特定矩阵<ul>
+<li>np.ones(shape) , ones_like(x): 根据shape和类型创建</li>
+<li>np.zeros(shape) zeros_like  np.zeros((2,3))</li>
+<li>np.eye(3) 单位矩阵</li>
+<li>np.arange(10): 返回一维矩阵</li>
+<li>np.linspace(a, b, nums): 返回[a,b]闭区间的nums个数的数据</li>
+</ul>
+</li>
+<li>随机初始化<ul>
+<li>随机数： np.random.randint(a, size)</li>
+<li>不同: np.random.choice(a, size=(4,))</li>
+<li>np.random.shuffle(arr) 打乱现有的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>运算: vectorization, 作用到元素级别</p>
+<ul>
+<li><p>基本操作</p>
+<blockquote>
+<p><em>, -, /, *</em>, &gt;(bool)， ==<br>保证shape相同，不同用到广播</p>
+</blockquote>
+<ul>
+<li><p>基本操作上可以大做文章，比如跟已知的数组进行比较，</p>
+</li>
+<li><p>条件之间可以进行 ==, !=,  ~,  &amp;, | 等多种操作</p>
+<blockquote>
+<p>对于*, 如果两个操作树维度不等，按低维开始进行运算  *相等于 np.multiply</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data[name == &apos;Bob&apos;, 2:], 如果name是一维矩阵，矩阵的长度需要与比较的轴的长度相等</span><br><span class="line">mask = (names = &apos;Bob&apos;) | (names == &apos;Will&apos;), 注意这里and,or无效，要使用&amp;，|</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>因此，可以通过布尔将数组中所有的值给置为某种操作。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>切片操作</p>
+<blockquote>
+<p>注意是原始数组的试图，即不会被赋值，任何其他操作都会反映到原变化. 即是等号也会如此<br>? 如何复制,  reshape是否会改变原本的值<br>看了下，是不能step的</p>
+</blockquote>
+</li>
+<li><p>花式索引</p>
+<ul>
+<li>arr[i]: 即如果是二维的，那么默认操作就会直接将该轴对应的值全都进行改变</li>
+<li>arr[[1,2,3],[1,2,3]]: 可以直接返回对应的列和行， 直接进行切片</li>
+</ul>
+</li>
+<li><p>扩展，赋值运算 拷贝arr.copy()</p>
+<ul>
+<li>np.tile(arr, shape)<blockquote>
+<p>如果shape的维数大于arr的维数，那么直接按shape的坐标来分配<br>否则, 就考虑操作在对应维度上，比如先操作在行上，接着在列上，等等</p>
+</blockquote>
+</li>
+<li>np.repeat(3, 4) [3,3,3,3]<blockquote>
+<p>np.repeat(arr, [1,2], axis=0) // axis轴上, 第0行复制1次，第1行复制2次</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>stack 将arr进行合并，打包在一起</p>
+<ul>
+<li>vstack((arr1, arr2)): 默认 axis=1, 组合在一起  = np.stack((arr1,arr2), axis=0)</li>
+<li>hstack((arr1, arr2)): [1,2,3] , [2,3,4] =&gt; [1,2,3,2,3,4]: 一维扁平化的感觉</li>
+<li>stack((arr1, arr2)): 高级，重新组合为性的数组</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>高级操作</p>
+<ul>
+<li><p>通用函数ufunc: 快速的元素级数组函数</p>
+<ul>
+<li>一元<blockquote>
+<p>如果设置一个参数，返回array; 设置两个参数，在原数组操作; 当然二元除外</p>
+</blockquote>
+<ul>
+<li>幂函数 np.sqrt(arr) <code>arr**0.5</code>;  np.square(arr) <code>arr**2</code></li>
+<li>指数函数, 底数函数 np.exp(arr)  np.log(arr) np.log10() np.log2(),  np.log1p(arr) <code>log(1+x)</code><blockquote>
+<p>这里参数可以是一个，即对一个数组进行统计；如果是两个矩阵，则对应元素级别做</p>
+</blockquote>
+</li>
+<li>拆分小数 remainer, whole_part = np.modf(arr): 返回小数的小数，整数部分</li>
+<li>绝对值 np.abs, fabs:  对于非复数值，fabs更快</li>
+<li>获取符号 np.sign(arr): 获取符号</li>
+<li>对数进行近似整数化 np.ceil() 上;  np.floor() 下; np.rint() 四舍五入;</li>
+<li>判断值的类型，np.isnan() 不是一个数字的;  np.isfinite()   np.isinf</li>
+<li>三角函数 cos, cosh, sin</li>
+<li>逻辑非  np.logical_not  -arr</li>
+</ul>
+</li>
+<li>二元 <ul>
+<li>最值np.maximum(x,y) np.NaN为最终结果 np.fmax() np.NaN不考虑; np.minimum(), np.fmin()</li>
+<li>加减 np.add(), np.subtract()</li>
+<li>乘 np.multipy,  除np.divide, 丢弃余数 np.floor_divide, 向下整除; np.mod求余</li>
+<li>乘方 np.power</li>
+<li>传递正负号 np.copysign</li>
+<li>greater,  greater_equal, less, less_equal, not_equal</li>
+<li>&amp;, | , ^ , ~可对数组使用，list不行, 使用np.logical_and, np.logical_or, np.logical_xor</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>利用数组进行数据处理</p>
+<ul>
+<li>范围值  np.arange(start, end, step)</li>
+<li>网格数据 x,y = np.meshgrid(arr_1d, arr_1d)<blockquote>
+<p>得到 arr_1d作为x轴的网格数据, 即x的每列元素相同</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>将条件逻辑表述为数组运算 np.where(cond, true_ope, false_ope)</p>
+<blockquote>
+<p>将条件表达式的思想进行转变 <code>result = [(x if c else y) for x,y,c in zip(xarr, yarr, cond)]</code></p>
+</blockquote>
+<ul>
+<li>数组比较res = np.where(cond, xarr, yarr) //后面两个不必为数组<blockquote>
+<p>cond为真, 按xarr操作；否则，按yarr操作</p>
+</blockquote>
+</li>
+<li>值比较 res = np.where(cond, 2, -2)</li>
+<li>值、数组比较  res = np.where(arr&gt;0, 2, arr)</li>
+</ul>
+</li>
+<li><p>数学和统计方法</p>
+<blockquote>
+<p>aggregation, reduction, 属于arr的操作; axis是站在留下来的数据角度思考的</p>
+</blockquote>
+<ul>
+<li>和，平均值 arr.mean(), arr.sum()<blockquote>
+<p>axis=0, 表示留下第一维,其余维度都会进行计算; 如果，如果没有参数，则对所有元素操作</p>
+</blockquote>
+</li>
+<li>最值  max, min</li>
+<li>最值索引 agrmin, argmax, 同上</li>
+<li>标准差和方差 std, var</li>
+<li>累加和 累加积 arr.cursum() arr.cumprod , 同上, axis=0, 0维不进行操作</li>
+</ul>
+</li>
+<li><p>用于布尔数组的方法</p>
+<ul>
+<li>(arr==1).sum()  bool当做0和1</li>
+<li>存在 (arr==1).any()</li>
+<li>任意 (arr==1).all()</li>
+</ul>
+</li>
+<li><p>排序</p>
+<ul>
+<li>就地排序 arr.sort() ; 返回副本 np.sort()<blockquote>
+<p>参数为1, 对第1维进行排序</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>唯一化及集合逻辑</p>
+<ul>
+<li>返回唯一元素 np.unique(x)</li>
+<li>返回公共元素 np.intersect(x,y)</li>
+<li>返回并集 np.union1d(x,y)</li>
+<li>返回是否包含的布尔数组 np.in1d()</li>
+<li>集合的差  np.setdiff1d()</li>
+<li>集合的对称差 np.setxor1d()</li>
+</ul>
+</li>
+<li><p>用于数组的文件输入输出</p>
+<ul>
+<li>np.save,  np.load</li>
+</ul>
+</li>
+<li><p>线性代数 <code>numpy.linalg</code></p>
+<ul>
+<li>矩阵相乘 x.dot(y)  np.dot(x,y)  x @ np.ones(3)</li>
+<li>对角矩阵的操作 arrdd=np.diag(arr1d)  arr1d=np.diag(arrdd)</li>
+<li>计算对角线元素的和 a.trace()  np.trace()</li>
+<li>行列式 det()</li>
+<li>本特征值、本征向量？ $D = U^T A U$  U^T, np.diag(A) = LA.eig(D)<blockquote>
+<p>为什么有本?</p>
+</blockquote>
+</li>
+<li>QR分解？  qr</li>
+<li>SVD分解？  svd</li>
+<li>矩阵的逆 inv</li>
+<li>解线性方程组  Ax=b,  x=LA.solve(A,b)</li>
+<li>最小二乘解？ x=LA.lstsq(A,b)</li>
+</ul>
+</li>
+<li><p>伪随机数生成 import np.random as nrd </p>
+<blockquote>
+<p>np.random.seed(1234): 指定了全局状态; 那么每次设置这个值时，第一次都会产生相同的数,这个特点可以进行利用;<br>想真正的实现随机数，1. 随机种子随机指定： 2. 使用np.random.RandomState, 创建一个与其他隔离的随机数生成器</p>
+</blockquote>
+<ul>
+<li>指定随机种子<ul>
+<li>nrd.seed(int) 随机种子</li>
+</ul>
+</li>
+<li>返回某种数<ul>
+<li>nrd.permutation(arr/list1) 返回一个序列的随机排列或返回一个随机排列的范围</li>
+<li>shuffle(arr/list1) 对一个序列就地随机排列</li>
+<li>randint(a, size=shape) [0,a) randint(a,b, size=shape) [a,b)<blockquote>
+<p>注意和python自带的randint不同[a,b]</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>根据分布产生样本值，paras = (d1,d2,d3)<ul>
+<li>rand(d1,d2) 产生均匀分布的样本值 [0,1) 随机数的分布范围属于【0,1)</li>
+<li>binomial 产生二项分布的样本值</li>
+<li>normal(loc=0.0, scale=1.0) randn 产生正态高斯分布的样本值</li>
+<li>beta 产生beta分布的样本值</li>
+<li>chisquare 卡方分布</li>
+<li>gamma Gamma分布</li>
+<li>uniform [0,1) 均匀分布</li>
+</ul>
+</li>
+<li>均匀分布  ranf = random = sample = random_sample [0,1)</li>
+</ul>
+</li>
+<li><p>随机漫步</p>
+<blockquote>
+<p>一个简单随机漫步的例子：从0开始，步长1和-1出现的概率相等; 即取0,1之间的随机数,然后记录每一步的位置，就可以认为走路的过程为随机漫步<br>多维，一次模拟多次随机漫步; 也可用分布来模拟随机漫步</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>一些tips: 转换为对角阵，使用乘法来做</p>
+</blockquote>
+<ol>
+<li>对列求和, 然后做每行；直接 T / np.sum(T, axis=1, keepdims=True) // 保证最后得出的结果是矩阵</li>
+<li>np.mat(A): 返回矩阵的抽象类型，什么时候用到也不知道</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eugene Wang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://augf.github.io/2019/09/12/numpy-study/" title="numpy study">https://augf.github.io/2019/09/12/numpy-study/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/numpy/" rel="tag"><i class="fa fa-tag"></i> numpy</a>
+            
+              <a href="/tags/machinelearning/" rel="tag"><i class="fa fa-tag"></i> machinelearning</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/12/spcipy-study/" rel="next" title="spcipy study">
+                  <i class="fa fa-chevron-left"></i> spcipy study
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-numpy"><span class="nav-number">1.</span> <span class="nav-text">2. numpy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-ndarry"><span class="nav-number">1.1.</span> <span class="nav-text">2.1 ndarry</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/default-avatar.png"
+      alt="Eugene Wang">
+  <p class="site-author-name" itemprop="name">Eugene Wang</p>
+  <div class="site-description" itemprop="description">Quick notes</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="GitHub &rarr; https://github.com/AugF"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOnl1bnBhbndhbmdAZ21haWwuY29t" title="E-Mail &rarr; mailto:yunpanwang@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vSm9zd3hl" title="Weibo &rarr; https://weibo.com/Joswxe"><i class="fa fa-fw fa-weibo"></i>Weibo</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==" title="https://www.google.com">Google</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jbi5iaW5nLmNvbQ==" title="https://cn.bing.com">Bing</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">Baidu</span>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

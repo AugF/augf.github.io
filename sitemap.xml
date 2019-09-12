@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://augf.github.io/2019/09/12/numpy-study/</loc>
+    
+    <lastmod>2019-09-12T11:46:57.889Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/10/deep-learning-study/</loc>
+    
+    <lastmod>2019-09-12T11:44:34.116Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/12/spcipy-study/</loc>
+    
+    <lastmod>2019-09-12T11:42:52.612Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://augf.github.io/2019/09/12/blog-todo/</loc>
     
-    <lastmod>2019-09-12T05:42:13.824Z</lastmod>
+    <lastmod>2019-09-12T05:43:35.454Z</lastmod>
     
   </url>
   
@@ -26,13 +47,6 @@
     <loc>https://augf.github.io/2019/09/12/daily-thinking/</loc>
     
     <lastmod>2019-09-11T16:58:09.971Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/10/deep-learning-study/</loc>
-    
-    <lastmod>2019-09-11T16:21:59.771Z</lastmod>
     
   </url>
   

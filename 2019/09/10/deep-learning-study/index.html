@@ -79,7 +79,7 @@
 <meta property="og:site_name" content="AugF&#39;s Notes">
 <meta property="og:description" content="1. tensorflowstensorflow 数据流图  用于数值计算单开源软件库 Nodes : 数学操作  特别地，有数据输入和数据输出的节点， 或者是读取、写入持久变量的终点persistent  edges: 多维数据数组， tensor  根据不同的计算, 张, 即数据的大小可变size  特征  高度的灵活性，可自己写C++ 可以在CPU, GPU, Docker等， Portab">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-11T16:21:59.771Z">
+<meta property="og:updated_time" content="2019-09-12T11:44:34.116Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="deep learning study">
 <meta name="twitter:description" content="1. tensorflowstensorflow 数据流图  用于数值计算单开源软件库 Nodes : 数学操作  特别地，有数据输入和数据输出的节点， 或者是读取、写入持久变量的终点persistent  edges: 多维数据数组， tensor  根据不同的计算, 张, 即数据的大小可变size  特征  高度的灵活性，可自己写C++ 可以在CPU, GPU, Docker等， Portab">
@@ -201,7 +201,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">15</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">17</span></a>
 
   </li>
       
@@ -214,7 +214,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">14</span></a>
 
   </li>
       
@@ -227,7 +227,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">10</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">12</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -323,7 +323,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-12 00:21:59" itemprop="dateModified" datetime="2019-09-12T00:21:59+08:00">2019-09-12</time>
+                <time title="修改时间：2019-09-12 19:44:34" itemprop="dateModified" datetime="2019-09-12T19:44:34+08:00">2019-09-12</time>
               </span>
             
           
@@ -736,277 +736,7 @@
 </li>
 </ul>
 <p>？？ python 如何进行继承，是方法抽象吗？ 还有抽象方法呢？<br>@关键字<br>全局变量呢</p>
-<h2 id="2-numpy"><a href="#2-numpy" class="headerlink" title="2. numpy"></a>2. numpy</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cubnVtcHkub3JnLmNuLw==" title="https://www.numpy.org.cn/">https://www.numpy.org.cn/<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>python 太慢！！有个点就是关于python的切片都是复制，不是引用！不同numpy<br>numpy基于C直接操作连续内存空间，比纯Python快10到100倍，并且使用内存更少</p>
-</blockquote>
-<p>numpy提出的ndarry很好用,主要理解通用的数值数据处理上的强大功能，特别是在数组操作上<br>pandas主要用于统计和分析</p>
-<p>！！！ 如何用整个数组的思想</p>
-<blockquote>
-<p>%time 可以直接统计时间</p>
-</blockquote>
-<h3 id="2-1-ndarry"><a href="#2-1-ndarry" class="headerlink" title="2.1 ndarry"></a>2.1 ndarry</h3><h4 id="2-1-1-属性与方法"><a href="#2-1-1-属性与方法" class="headerlink" title="2.1.1 属性与方法"></a>2.1.1 属性与方法</h4><pre><code>&gt; 可以认为如果改变了属性，必然会返回一个新的结构
-- ar.shape: () 元组
-    - di.reshape(): 改变形状, 返回一个新的数组
-    &gt; di.reshape() == np.reshape(di, 4)
-- ar.dtype: 
-    - 基本类型
-        - int64: 指的是位数, 64位，即8字节;  代码i8
-        - float64  default 
-        - uint8
-        - complex64: 用两个32位的浮点数表示
-        &gt; ? 复数如何定义
-        - bool:  代码?
-        - object: python对象 代码O
-        - string_: 固定长度  S10, 10字节，每个字符一字节
-        - unicode_: U10
-    - ar.astype(np.float64): 转换类型, 总会创建一个新的数组
-- ar.ndim： 有几维
-- ar.T: 返回转置，仍然未原数组的引用
-- ar.tranpose((1,0,2)): 轴对换，按照给定的元组进行重新轴的安排，比如获得新的数组
-- 转置=轴变换, ar.swapaxes(1,2): x,y,z; 这里就是对y轴和z轴进行变换</code></pre><ul>
-<li><p>创建</p>
-<ul>
-<li>已有<ul>
-<li>np.array(sequence， dtype=””)</li>
-<li>np.asarray(arr) // 不确定是否是该类型</li>
-</ul>
-</li>
-<li>特定矩阵<ul>
-<li>np.ones(shape) , ones_like(x): 根据shape和类型创建</li>
-<li>np.zeros(shape) zeros_like  np.zeros((2,3))</li>
-<li>np.eye(3) 单位矩阵</li>
-<li>np.arange(10): 返回一维矩阵</li>
-<li>np.linspace(a, b, nums): 返回[a,b]闭区间的nums个数的数据</li>
-</ul>
-</li>
-<li>随机初始化<ul>
-<li>随机数： np.random.randint(a, size)</li>
-<li>不同: np.random.choice(a, size=(4,))</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>运算: vectorization, 作用到元素级别</p>
-<ul>
-<li><p>基本操作</p>
-<blockquote>
-<p><em>, -, /, *</em>, &gt;(bool)， ==<br>保证shape相同，不同用到广播</p>
-</blockquote>
-<ul>
-<li><p>基本操作上可以大做文章，比如跟已知的数组进行比较，</p>
-</li>
-<li><p>条件之间可以进行 ==, !=,  ~,  &amp;, | 等多种操作</p>
-<blockquote>
-<p>对于*, 如果两个操作树维度不等，按低维开始进行运算  *相等于 np.multiply</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data[name == &apos;Bob&apos;, 2:], 如果name是一维矩阵，矩阵的长度需要与比较的轴的长度相等</span><br><span class="line">mask = (names = &apos;Bob&apos;) | (names == &apos;Will&apos;), 注意这里and,or无效，要使用&amp;，|</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>因此，可以通过布尔将数组中所有的值给置为某种操作。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>切片操作</p>
-<blockquote>
-<p>注意是原始数组的试图，即不会被赋值，任何其他操作都会反映到原变化. 即是等号也会如此<br>? 如何复制,  reshape是否会改变原本的值<br>看了下，是不能step的</p>
-</blockquote>
-</li>
-<li><p>花式索引</p>
-<ul>
-<li>arr[i]: 即如果是二维的，那么默认操作就会直接将该轴对应的值全都进行改变</li>
-<li>arr[[1,2,3],[1,2,3]]: 可以直接返回对应的列和行， 直接进行切片</li>
-</ul>
-</li>
-<li><p>扩展，赋值运算 拷贝arr.copy()</p>
-<ul>
-<li>np.tile(arr, shape)<blockquote>
-<p>如果shape的维数大于arr的维数，那么直接按shape的坐标来分配<br>否则, 就考虑操作在对应维度上，比如先操作在行上，接着在列上，等等</p>
-</blockquote>
-</li>
-<li>np.repeat(3, 4) [3,3,3,3]<blockquote>
-<p>np.repeat(arr, [1,2], axis=0) // axis轴上, 第0行复制1次，第1行复制2次</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>stack 将arr进行合并，打包在一起</p>
-<ul>
-<li>vstack((arr1, arr2)): 默认 axis=1, 组合在一起  = np.stack((arr1,arr2), axis=0)</li>
-<li>hstack((arr1, arr2)): [1,2,3] , [2,3,4] =&gt; [1,2,3,2,3,4]: 一维扁平化的感觉</li>
-<li>stack((arr1, arr2)): 高级，重新组合为性的数组</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>高级操作</p>
-<ul>
-<li><p>通用函数ufunc: 快速的元素级数组函数</p>
-<ul>
-<li>一元<blockquote>
-<p>如果设置一个参数，返回array; 设置两个参数，在原数组操作; 当然二元除外</p>
-</blockquote>
-<ul>
-<li>幂函数 np.sqrt(arr) <code>arr**0.5</code>;  np.square(arr) <code>arr**2</code></li>
-<li>指数函数, 底数函数 np.exp(arr)  np.log(arr) np.log10() np.log2(),  np.log1p(arr) <code>log(1+x)</code><blockquote>
-<p>这里参数可以是一个，即对一个数组进行统计；如果是两个矩阵，则对应元素级别做</p>
-</blockquote>
-</li>
-<li>拆分小数 remainer, whole_part = np.modf(arr): 返回小数的小数，整数部分</li>
-<li>绝对值 np.abs, fabs:  对于非复数值，fabs更快</li>
-<li>获取符号 np.sign(arr): 获取符号</li>
-<li>对数进行近似整数化 np.ceil() 上;  np.floor() 下; np.rint() 四舍五入;</li>
-<li>判断值的类型，np.isnan() 不是一个数字的;  np.isfinite()   np.isinf</li>
-<li>三角函数 cos, cosh, sin</li>
-<li>逻辑非  np.logical_not  -arr</li>
-</ul>
-</li>
-<li>二元 <ul>
-<li>最值np.maximum(x,y) np.NaN为最终结果 np.fmax() np.NaN不考虑; np.minimum(), np.fmin()</li>
-<li>加减 np.add(), np.subtract()</li>
-<li>乘 np.multipy,  除np.divide, 丢弃余数 np.floor_divide, 向下整除; np.mod求余</li>
-<li>乘方 np.power</li>
-<li>传递正负号 np.copysign</li>
-<li>greater,  greater_equal, less, less_equal, not_equal</li>
-<li>&amp;, | , ^ , ~可对数组使用，list不行, 使用np.logical_and, np.logical_or, np.logical_xor</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>利用数组进行数据处理</p>
-<ul>
-<li>范围值  np.arange(start, end, step)</li>
-<li>网格数据 x,y = np.meshgrid(arr_1d, arr_1d)<blockquote>
-<p>得到 arr_1d作为x轴的网格数据, 即x的每列元素相同</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>将条件逻辑表述为数组运算 np.where(cond, true_ope, false_ope)</p>
-<blockquote>
-<p>将条件表达式的思想进行转变 <code>result = [(x if c else y) for x,y,c in zip(xarr, yarr, cond)]</code></p>
-</blockquote>
-<ul>
-<li>数组比较res = np.where(cond, xarr, yarr) //后面两个不必为数组<blockquote>
-<p>cond为真, 按xarr操作；否则，按yarr操作</p>
-</blockquote>
-</li>
-<li>值比较 res = np.where(cond, 2, -2)</li>
-<li>值、数组比较  res = np.where(arr&gt;0, 2, arr)</li>
-</ul>
-</li>
-<li><p>数学和统计方法</p>
-<blockquote>
-<p>aggregation, reduction, 属于arr的操作; axis是站在留下来的数据角度思考的</p>
-</blockquote>
-<ul>
-<li>和，平均值 arr.mean(), arr.sum()<blockquote>
-<p>axis=0, 表示留下第一维,其余维度都会进行计算; 如果，如果没有参数，则对所有元素操作</p>
-</blockquote>
-</li>
-<li>最值  max, min</li>
-<li>最值索引 agrmin, argmax, 同上</li>
-<li>标准差和方差 std, var</li>
-<li>累加和 累加积 arr.cursum() arr.cumprod , 同上, axis=0, 0维不进行操作</li>
-</ul>
-</li>
-<li><p>用于布尔数组的方法</p>
-<ul>
-<li>(arr==1).sum()  bool当做0和1</li>
-<li>存在 (arr==1).any()</li>
-<li>任意 (arr==1).all()</li>
-</ul>
-</li>
-<li><p>排序</p>
-<ul>
-<li>就地排序 arr.sort() ; 返回副本 np.sort()<blockquote>
-<p>参数为1, 对第1维进行排序</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>唯一化及集合逻辑</p>
-<ul>
-<li>返回唯一元素 np.unique(x)</li>
-<li>返回公共元素 np.intersect(x,y)</li>
-<li>返回并集 np.union1d(x,y)</li>
-<li>返回是否包含的布尔数组 np.in1d()</li>
-<li>集合的差  np.setdiff1d()</li>
-<li>集合的对称差 np.setxor1d()</li>
-</ul>
-</li>
-<li><p>用于数组的文件输入输出</p>
-<ul>
-<li>np.save,  np.load</li>
-</ul>
-</li>
-<li><p>线性代数 <code>numpy.linalg</code></p>
-<ul>
-<li>矩阵相乘 x.dot(y)  np.dot(x,y)  x @ np.ones(3)</li>
-<li>对角矩阵的操作 arrdd=np.diag(arr1d)  arr1d=np.diag(arrdd)</li>
-<li>计算对角线元素的和 a.trace()  np.trace()</li>
-<li>行列式 det()</li>
-<li>本特征值、本征向量？ $D = U^T A U$  U^T, np.diag(A) = LA.eig(D)<blockquote>
-<p>为什么有本?</p>
-</blockquote>
-</li>
-<li>QR分解？  qr</li>
-<li>SVD分解？  svd</li>
-<li>矩阵的逆 inv</li>
-<li>解线性方程组  Ax=b,  x=LA.solve(A,b)</li>
-<li>最小二乘解？ x=LA.lstsq(A,b)</li>
-</ul>
-</li>
-<li><p>伪随机数生成 import np.random as nrd </p>
-<blockquote>
-<p>np.random.seed(1234): 指定了全局状态; 那么每次设置这个值时，第一次都会产生相同的数,这个特点可以进行利用;<br>想真正的实现随机数，1. 随机种子随机指定： 2. 使用np.random.RandomState, 创建一个与其他隔离的随机数生成器</p>
-</blockquote>
-<ul>
-<li>指定随机种子<ul>
-<li>nrd.seed(int) 随机种子</li>
-</ul>
-</li>
-<li>返回某种数<ul>
-<li>nrd.permutation(arr/list1) 返回一个序列的随机排列或返回一个随机排列的范围</li>
-<li>shuffle(arr/list1) 对一个序列就地随机排列</li>
-<li>randint(a, size=shape) [0,a) randint(a,b, size=shape) [a,b)<blockquote>
-<p>注意和python自带的randint不同[a,b]</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>根据分布产生样本值，paras = (d1,d2,d3)<ul>
-<li>rand(d1,d2) 产生均匀分布的样本值 [0,1) 随机数的分布范围属于【0,1)</li>
-<li>binomial 产生二项分布的样本值</li>
-<li>normal(loc=0.0, scale=1.0) randn 产生正态高斯分布的样本值</li>
-<li>beta 产生beta分布的样本值</li>
-<li>chisquare 卡方分布</li>
-<li>gamma Gamma分布</li>
-<li>uniform [0,1) 均匀分布</li>
-</ul>
-</li>
-<li>均匀分布  ranf = random = sample = random_sample [0,1)</li>
-</ul>
-</li>
-<li><p>随机漫步</p>
-<blockquote>
-<p>一个简单随机漫步的例子：从0开始，步长1和-1出现的概率相等; 即取0,1之间的随机数,然后记录每一步的位置，就可以认为走路的过程为随机漫步<br>多维，一次模拟多次随机漫步; 也可用分布来模拟随机漫步</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>一些tips: 转换为对角阵，使用乘法来做</p>
-</blockquote>
-<ol>
-<li><p>对列求和, 然后做每行；直接 T / np.sum(T, axis=1, keepdims=True) // 保证最后得出的结果是矩阵</p>
-</li>
-<li><p>np.mat(A): 返回举证的特殊的抽象类型，什么时候用到也不知道</p>
-</li>
-</ol>
-<h2 id="3-pandas"><a href="#3-pandas" class="headerlink" title="3. pandas"></a>3. pandas</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cucHlwYW5kYXMuY24v" title="https://www.pypandas.cn/">https://www.pypandas.cn/<i class="fa fa-external-link"></i></span></p>
+<h2 id="2-pandas"><a href="#2-pandas" class="headerlink" title="2. pandas"></a>2. pandas</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cucHlwYW5kYXMuY24v" title="https://www.pypandas.cn/">https://www.pypandas.cn/<i class="fa fa-external-link"></i></span></p>
 <p>pandas: 处理表格和混杂数据<br>numpy: 处理统一的数值数据<br>scipy: 数值计算工具<br>分析库：scikit-learn 和 statsmodels<br>数据化可视库: matplotlib</p>
 <ul>
 <li><p>数据结构</p>
@@ -1311,209 +1041,6 @@
 </ul>
 </li>
 </ul>
-<h2 id="5-scipy"><a href="#5-scipy" class="headerlink" title="5. scipy"></a>5. scipy</h2><p>scipy库依赖于numpy库，它提供了便捷且快速的N维数组操作。构建scipy库的原因是，它能与numpy数组一起工作，并提供许多用户友好和高效的数字实践，例如数值积分和优化的教程<br>numerical integration, interpolation插值， optimization, linear algebra线性代数 statistics统计</p>
-<ul>
-<li>cluster： cluster algorithms<ul>
-<li>vq: 只支持矢量化 vector quantization, k-means algorithms<ul>
-<li>whiten: normalize a group of observations on a per feature basis</li>
-<li>vq: assign codes from a code book to observations</li>
-<li>kmeans: </li>
-</ul>
-</li>
-<li>hierarchy: hierarchical and agglomerative clustering, 支持层次聚类和凝聚聚类; 1. generating hierarchical clusters from distance matrices 2. calculating statistics on clusters 3. cutting linkages to generate flat clusters 4. visualizing clusters with dendrograms</li>
-</ul>
-</li>
-<li>constants: physcial and mathematical constants<ul>
-<li>math<ul>
-<li>pi</li>
-<li>golden</li>
-<li>golden_ratio</li>
-</ul>
-</li>
-<li>physical<ul>
-<li>c: 光速</li>
-</ul>
-</li>
-<li>quick getting:  constants.value(u”elementary charge”), unit, precision, find</li>
-</ul>
-</li>
-<li>fftpack: fast fourier transform routines<ul>
-<li>fft: discrete 离散, both real or complex sequence</li>
-<li>ifft: inverse相反</li>
-<li>fft2, ifft2: 2-d</li>
-<li>fftn, ifftn</li>
-<li>dct 余弦变换</li>
-<li>dst: discrete sine transform</li>
-</ul>
-</li>
-<li>integrate: integration and orginary differential equation slovers<ul>
-<li>quad: definite integral: 有限积分，三个参数，函数、上下限</li>
-<li>dblquad: dobule类型</li>
-<li>tplquad: 计算多重积分的表达式, 积分限是函数</li>
-<li>nquad: 多重积分，积分限是具体的值</li>
-<li>fixed_quad: 计算一个固定的积分使用fixed-order的高斯分布</li>
-<li>trapz: 使用复合梯度算法计算, 同理simpz, romb</li>
-</ul>
-</li>
-<li>interpolate: 插值, interpolation and smoothing splines<ul>
-<li>interp1d</li>
-</ul>
-</li>
-<li>io: input and output<blockquote>
-<p>loadmat, savemat,可以加载matlab文件</p>
-</blockquote>
-</li>
-<li>linalg: linear algebra<ul>
-<li>basic<ul>
-<li>inv</li>
-<li>solve(a,b)  a*x=b</li>
-<li>solve_banded(): a是带状矩阵</li>
-<li>solve_triangular(a,b): 解决三角举证</li>
-<li>det 行列式</li>
-<li>norm 范数</li>
-<li>lstsq() 二乘解</li>
-<li>pinv: 矩阵的伪逆</li>
-<li>kron: 元素乘积</li>
-</ul>
-</li>
-<li>eigenvalue problems: 特征值问题<ul>
-<li>eig: 方阵特征值问题</li>
-</ul>
-</li>
-<li>Decompositions<ul>
-<li>lu: LU分解</li>
-<li>svd： 奇异值分解</li>
-<li>qr：QR分解</li>
-</ul>
-</li>
-<li>Matrix Functions<ul>
-<li>expm: 使用近似方法</li>
-</ul>
-</li>
-<li>Matrix Equation Solvers</li>
-</ul>
-</li>
-<li>ndimage: n-dimensional image processing<ul>
-<li>convolve(): 多维卷积操作</li>
-<li>gaussian_filter(): 高斯过滤</li>
-<li>laplace： 拉普拉斯过滤</li>
-<li>floutier_ellipsoid: 多维ellipsoid fourier filter</li>
-</ul>
-</li>
-<li>odr: orthogoal distance regression 正交距离回归问题</li>
-<li>optimize: optimization and root-finding routines<ul>
-<li>Optimization<ul>
-<li>scalar function标量函数: minimize_scalar</li>
-<li>Local(Multivariate) Optimization: 多元回归</li>
-<li>Global Optimization: brute()</li>
-<li>Least-squares and Curve Fitting<ul>
-<li>nonlinear</li>
-<li>linear</li>
-<li>curve fitting</li>
-</ul>
-</li>
-<li>Root finding</li>
-</ul>
-</li>
-<li>Linear Programming<ul>
-<li>linprog</li>
-</ul>
-</li>
-<li>Utilities<ul>
-<li>Finite-Difference Approximation<ul>
-<li>approx_fprime</li>
-<li>check_grad</li>
-</ul>
-</li>
-<li>Line Search</li>
-<li>Hessian Approximation</li>
-<li>Benchmark Problems</li>
-</ul>
-</li>
-<li>Legacy Fuctions 遗留功能<ul>
-<li>fmin</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>signal: signal processing<ul>
-<li>convolution<ul>
-<li>convolve</li>
-</ul>
-</li>
-<li>B-splines<ul>
-<li>bspline, cubic</li>
-</ul>
-</li>
-<li>Filtering</li>
-<li>Filter design</li>
-<li>Matlab-style IIR filter design: butter, cheby1</li>
-<li>Continuous-Time Linear Systems: lti()</li>
-<li>Discrete-Time Linear Systems</li>
-<li>LTI Representations</li>
-<li>Waveforms</li>
-<li>Window functions</li>
-<li>Wavelets</li>
-<li>Peak finding</li>
-<li>Spectral Analysis</li>
-</ul>
-</li>
-<li>sparse: sparse matrices and associated routines<ul>
-<li>Contents<ul>
-<li>bsr_matrix: block sparse row matrix</li>
-<li>coo_matrix: coordinate format</li>
-<li>csr_matrix,, csc_matrix: compressed sparse row matrix</li>
-<li>dia_matrix: sparse matrix with disgonal storage</li>
-<li>dok_matrix: dictionary of keys based sparse matrix</li>
-<li>lil_matrix: row-based linked list sparse matrix</li>
-<li>spmatrix: 以上的所有类型</li>
-</ul>
-</li>
-<li>Functions<ul>
-<li>eye(): ones on diagonal</li>
-<li>identity()</li>
-<li>kron(A,B)</li>
-<li>kronsum</li>
-<li>diags(), spdiags</li>
-<li>block_diag</li>
-<li>tril</li>
-<li>bmat: build,  hstack, vstack</li>
-<li>rand: uniformly distributed values.  random()</li>
-</ul>
-</li>
-<li>Save and load sparse matrices</li>
-<li>Sparse matrix tools: find(A)</li>
-<li>identifying sparse matrices: issparse(x)</li>
-</ul>
-</li>
-<li>spatial: spatial data structures and algorithms<ul>
-<li>Spatial Transformations</li>
-<li>Nearest-neighbor Queries<ul>
-<li>KDTree</li>
-<li>ckDTree</li>
-<li>Rectangle: Hyperrectangel</li>
-</ul>
-</li>
-<li>Delaunay Triangulation, Convex Hulls and Voronoi Diagrams</li>
-<li>Plotting Helpers</li>
-<li>Simplex representation</li>
-</ul>
-</li>
-<li>special special functions</li>
-<li>stats: statistical distributions and function<ul>
-<li>Statistical functions</li>
-<li>Continuous distributions</li>
-<li>Multivariate distributions</li>
-<li>Discrete distributions</li>
-<li>Summary statistics: descrube, gmean</li>
-<li>Frequency statistics: cumfreq</li>
-<li>Correlation functions</li>
-<li>Statistical tests</li>
-<li>Transformations</li>
-</ul>
-</li>
-</ul>
-<p>python: help in the pydoc module<br>help(obj)<br>numpy.info(obj)</p>
 
     </div>
 
@@ -1631,7 +1158,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-tensorflows"><span class="nav-number">1.</span> <span class="nav-text">1. tensorflows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-什么是tensorflow"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 什么是tensorflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-tensorflow可以做什么"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 tensorflow可以做什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-tensorflow入门指南"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 tensorflow入门指南</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-其它"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-tensorboard"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 tensorboard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-keras-高级接口"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 keras 高级接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-一个完整的pipeline"><span class="nav-number">1.6.1.</span> <span class="nav-text">1) 一个完整的pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）构建高级模型"><span class="nav-number">1.6.2.</span> <span class="nav-text">2）构建高级模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#函数式API"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">函数式API</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#模型子类化"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">模型子类化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义层"><span class="nav-number">1.6.2.3.</span> <span class="nav-text">自定义层</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-numpy"><span class="nav-number">2.</span> <span class="nav-text">2. numpy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-ndarry"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 ndarry</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-属性与方法"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 属性与方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-pandas"><span class="nav-number">3.</span> <span class="nav-text">3. pandas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-matplotlib"><span class="nav-number">4.</span> <span class="nav-text">4. matplotlib</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-scipy"><span class="nav-number">5.</span> <span class="nav-text">5. scipy</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-tensorflows"><span class="nav-number">1.</span> <span class="nav-text">1. tensorflows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-什么是tensorflow"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 什么是tensorflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-tensorflow可以做什么"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 tensorflow可以做什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-tensorflow入门指南"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 tensorflow入门指南</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-其它"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-tensorboard"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 tensorboard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-keras-高级接口"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 keras 高级接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-一个完整的pipeline"><span class="nav-number">1.6.1.</span> <span class="nav-text">1) 一个完整的pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）构建高级模型"><span class="nav-number">1.6.2.</span> <span class="nav-text">2）构建高级模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#函数式API"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">函数式API</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#模型子类化"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">模型子类化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义层"><span class="nav-number">1.6.2.3.</span> <span class="nav-text">自定义层</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-pandas"><span class="nav-number">2.</span> <span class="nav-text">2. pandas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-matplotlib"><span class="nav-number">3.</span> <span class="nav-text">4. matplotlib</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -1649,7 +1176,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1662,7 +1189,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1675,7 +1202,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

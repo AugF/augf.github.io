@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <link rel="alternate" href="/atom.xml" title="AugF's Notes" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <meta name="description" content="概览scipy库依赖于numpy库，它提供了便捷且快速的N维数组操作。构建scipy库的原因是，它能与numpy数组一起工作，并提供许多用户友好和高效的数字实践，例如数值积分和优化的教程numerical integration, interpolation插值， optimization, linear algebra线性代数 statistics统计  cluster： cluster alg">
+<meta name="keywords" content="machinelearning,scipy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spcipy study">
+<meta property="og:url" content="https://augf.github.io/2019/09/12/spcipy-study/index.html">
+<meta property="og:site_name" content="AugF&#39;s Notes">
+<meta property="og:description" content="概览scipy库依赖于numpy库，它提供了便捷且快速的N维数组操作。构建scipy库的原因是，它能与numpy数组一起工作，并提供许多用户友好和高效的数字实践，例如数值积分和优化的教程numerical integration, interpolation插值， optimization, linear algebra线性代数 statistics统计  cluster： cluster alg">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-12T11:42:52.612Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spcipy study">
+<meta name="twitter:description" content="概览scipy库依赖于numpy库，它提供了便捷且快速的N维数组操作。构建scipy库的原因是，它能与numpy数组一起工作，并提供许多用户友好和高效的数字实践，例如数值积分和优化的教程numerical integration, interpolation插值， optimization, linear algebra线性代数 statistics统计  cluster： cluster alg">
+  <link rel="canonical" href="https://augf.github.io/2019/09/12/spcipy-study/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>spcipy study | AugF's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AugF's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">17</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">14</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">12</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/12/spcipy-study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">spcipy study
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-12 14:24:20 / 修改时间：19:42:52" itemprop="dateCreated datePublished" datetime="2019-09-12T14:24:20+08:00">2019-09-12</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/" itemprop="url" rel="index"><span itemprop="name">machinelearning</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/scipy/" itemprop="url" rel="index"><span itemprop="name">scipy</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>scipy库依赖于numpy库，它提供了便捷且快速的N维数组操作。构建scipy库的原因是，它能与numpy数组一起工作，并提供许多用户友好和高效的数字实践，例如数值积分和优化的教程<br>numerical integration, interpolation插值， optimization, linear algebra线性代数 statistics统计</p>
+<ul>
+<li>cluster： cluster algorithms<ul>
+<li>vq: 只支持矢量化 vector quantization, k-means algorithms<ul>
+<li>whiten: normalize a group of observations on a per feature basis</li>
+<li>vq: assign codes from a code book to observations</li>
+<li>kmeans: </li>
+</ul>
+</li>
+<li>hierarchy: hierarchical and agglomerative clustering, 支持层次聚类和凝聚聚类; 1. generating hierarchical clusters from distance matrices 2. calculating statistics on clusters 3. cutting linkages to generate flat clusters 4. visualizing clusters with dendrograms</li>
+</ul>
+</li>
+<li>constants: physcial and mathematical constants<ul>
+<li>math<ul>
+<li>pi</li>
+<li>golden</li>
+<li>golden_ratio</li>
+</ul>
+</li>
+<li>physical<ul>
+<li>c: 光速</li>
+</ul>
+</li>
+<li>quick getting:  constants.value(u”elementary charge”), unit, precision, find</li>
+</ul>
+</li>
+<li>fftpack: fast fourier transform routines<ul>
+<li>fft: discrete 离散, both real or complex sequence</li>
+<li>ifft: inverse相反</li>
+<li>fft2, ifft2: 2-d</li>
+<li>fftn, ifftn</li>
+<li>dct 余弦变换</li>
+<li>dst: discrete sine transform</li>
+</ul>
+</li>
+<li>integrate: integration and orginary differential equation slovers<ul>
+<li>quad: definite integral: 有限积分，三个参数，函数、上下限</li>
+<li>dblquad: dobule类型</li>
+<li>tplquad: 计算多重积分的表达式, 积分限是函数</li>
+<li>nquad: 多重积分，积分限是具体的值</li>
+<li>fixed_quad: 计算一个固定的积分使用fixed-order的高斯分布</li>
+<li>trapz: 使用复合梯度算法计算, 同理simpz, romb</li>
+</ul>
+</li>
+<li>interpolate: 插值, interpolation and smoothing splines<ul>
+<li>interp1d</li>
+</ul>
+</li>
+<li>io: input and output<blockquote>
+<p>loadmat, savemat,可以加载matlab文件</p>
+</blockquote>
+</li>
+<li>linalg: linear algebra<ul>
+<li>basic<ul>
+<li>inv</li>
+<li>solve(a,b)  a*x=b</li>
+<li>solve_banded(): a是带状矩阵</li>
+<li>solve_triangular(a,b): 解决三角举证</li>
+<li>det 行列式</li>
+<li>norm 范数</li>
+<li>lstsq() 二乘解</li>
+<li>pinv: 矩阵的伪逆</li>
+<li>kron: 元素乘积</li>
+</ul>
+</li>
+<li>eigenvalue problems: 特征值问题<ul>
+<li>eig: 方阵特征值问题</li>
+</ul>
+</li>
+<li>Decompositions<ul>
+<li>lu: LU分解</li>
+<li>svd： 奇异值分解</li>
+<li>qr：QR分解</li>
+</ul>
+</li>
+<li>Matrix Functions<ul>
+<li>expm: 使用近似方法</li>
+</ul>
+</li>
+<li>Matrix Equation Solvers</li>
+</ul>
+</li>
+<li>ndimage: n-dimensional image processing<ul>
+<li>convolve(): 多维卷积操作</li>
+<li>gaussian_filter(): 高斯过滤</li>
+<li>laplace： 拉普拉斯过滤</li>
+<li>floutier_ellipsoid: 多维ellipsoid fourier filter</li>
+</ul>
+</li>
+<li>odr: orthogoal distance regression 正交距离回归问题</li>
+<li>optimize: optimization and root-finding routines<ul>
+<li>Optimization<ul>
+<li>scalar function标量函数: minimize_scalar</li>
+<li>Local(Multivariate) Optimization: 多元回归</li>
+<li>Global Optimization: brute()</li>
+<li>Least-squares and Curve Fitting<ul>
+<li>nonlinear</li>
+<li>linear</li>
+<li>curve fitting</li>
+</ul>
+</li>
+<li>Root finding</li>
+</ul>
+</li>
+<li>Linear Programming<ul>
+<li>linprog</li>
+</ul>
+</li>
+<li>Utilities<ul>
+<li>Finite-Difference Approximation<ul>
+<li>approx_fprime</li>
+<li>check_grad</li>
+</ul>
+</li>
+<li>Line Search</li>
+<li>Hessian Approximation</li>
+<li>Benchmark Problems</li>
+</ul>
+</li>
+<li>Legacy Fuctions 遗留功能<ul>
+<li>fmin</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>signal: signal processing<ul>
+<li>convolution<ul>
+<li>convolve</li>
+</ul>
+</li>
+<li>B-splines<ul>
+<li>bspline, cubic</li>
+</ul>
+</li>
+<li>Filtering</li>
+<li>Filter design</li>
+<li>Matlab-style IIR filter design: butter, cheby1</li>
+<li>Continuous-Time Linear Systems: lti()</li>
+<li>Discrete-Time Linear Systems</li>
+<li>LTI Representations</li>
+<li>Waveforms</li>
+<li>Window functions</li>
+<li>Wavelets</li>
+<li>Peak finding</li>
+<li>Spectral Analysis</li>
+</ul>
+</li>
+<li>sparse: sparse matrices and associated routines<ul>
+<li>Contents<ul>
+<li>bsr_matrix: block sparse row matrix</li>
+<li>coo_matrix: coordinate format</li>
+<li>csr_matrix,, csc_matrix: compressed sparse row matrix</li>
+<li>dia_matrix: sparse matrix with disgonal storage</li>
+<li>dok_matrix: dictionary of keys based sparse matrix</li>
+<li>lil_matrix: row-based linked list sparse matrix</li>
+<li>spmatrix: 以上的所有类型</li>
+</ul>
+</li>
+<li>Functions<ul>
+<li>eye(): ones on diagonal</li>
+<li>identity()</li>
+<li>kron(A,B)</li>
+<li>kronsum</li>
+<li>diags(), spdiags</li>
+<li>block_diag</li>
+<li>tril</li>
+<li>bmat: build,  hstack, vstack</li>
+<li>rand: uniformly distributed values.  random()</li>
+</ul>
+</li>
+<li>Save and load sparse matrices</li>
+<li>Sparse matrix tools: find(A)</li>
+<li>identifying sparse matrices: issparse(x)</li>
+</ul>
+</li>
+<li>spatial: spatial data structures and algorithms<ul>
+<li>Spatial Transformations</li>
+<li>Nearest-neighbor Queries<ul>
+<li>KDTree</li>
+<li>ckDTree</li>
+<li>Rectangle: Hyperrectangel</li>
+</ul>
+</li>
+<li>Delaunay Triangulation, Convex Hulls and Voronoi Diagrams</li>
+<li>Plotting Helpers</li>
+<li>Simplex representation</li>
+</ul>
+</li>
+<li>special special functions</li>
+<li>stats: statistical distributions and function<ul>
+<li>Statistical functions</li>
+<li>Continuous distributions</li>
+<li>Multivariate distributions</li>
+<li>Discrete distributions</li>
+<li>Summary statistics: descrube, gmean</li>
+<li>Frequency statistics: cumfreq</li>
+<li>Correlation functions</li>
+<li>Statistical tests</li>
+<li>Transformations</li>
+</ul>
+</li>
+</ul>
+<h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><ul>
+<li>bsr_matrix: block sparse row matrix<pre><code>- coo_matrix: coordinate format
+- csr_matrix,, csc_matrix: compressed sparse row matrix
+- dia_matrix: sparse matrix with disgonal storage
+- dok_matrix: dictionary of keys based sparse matrix
+- lil_matrix: row-based linked list sparse matrix
+- spmatrix: 以上的所有类型</code></pre></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eugene Wang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://augf.github.io/2019/09/12/spcipy-study/" title="spcipy study">https://augf.github.io/2019/09/12/spcipy-study/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/machinelearning/" rel="tag"><i class="fa fa-tag"></i> machinelearning</a>
+            
+              <a href="/tags/scipy/" rel="tag"><i class="fa fa-tag"></i> scipy</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/12/blog-todo/" rel="next" title="blog:todo">
+                  <i class="fa fa-chevron-left"></i> blog:todo
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/12/numpy-study/" rel="prev" title="numpy study">
+                  numpy study <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用"><span class="nav-number">2.</span> <span class="nav-text">常用</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/default-avatar.png"
+      alt="Eugene Wang">
+  <p class="site-author-name" itemprop="name">Eugene Wang</p>
+  <div class="site-description" itemprop="description">Quick notes</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="GitHub &rarr; https://github.com/AugF"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOnl1bnBhbndhbmdAZ21haWwuY29t" title="E-Mail &rarr; mailto:yunpanwang@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vSm9zd3hl" title="Weibo &rarr; https://weibo.com/Joswxe"><i class="fa fa-fw fa-weibo"></i>Weibo</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==" title="https://www.google.com">Google</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jbi5iaW5nLmNvbQ==" title="https://cn.bing.com">Bing</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">Baidu</span>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>
