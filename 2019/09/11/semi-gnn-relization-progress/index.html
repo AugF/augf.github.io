@@ -71,18 +71,18 @@
     })();
 </script>
 
-  <meta name="description" content="试图用numpy实现  主要问题  模拟自动微分这一块出现的问题  对于softmaxarg()函数来说目标即寻找一个平滑函数 https://deepnotes.io/softmax-crossentropy 一个softmax的非常好的做法 一些后记关于cs231n课程代码的一些借鉴  一个pipeline 123456789101112131415161718192021222324252">
-<meta name="keywords" content="numpy,gnn,matrix">
+  <meta name="description" content="试图用numpy实现  主要问题  模拟自动微分这一块出现的问题  对于softmaxarg()函数来说目标即寻找一个平滑函数 https://deepnotes.io/softmax-crossentropy 一个softmax的非常好的做法 soft-argmax https://bouthilx.wordpress.com/2013/04/21/a-soft-argmax/ 一些后记关于c">
+<meta name="keywords" content="gnn,numpy,matrix">
 <meta property="og:type" content="article">
 <meta property="og:title" content="semi-gnn, relization progress">
 <meta property="og:url" content="https://augf.github.io/2019/09/11/semi-gnn-relization-progress/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
-<meta property="og:description" content="试图用numpy实现  主要问题  模拟自动微分这一块出现的问题  对于softmaxarg()函数来说目标即寻找一个平滑函数 https://deepnotes.io/softmax-crossentropy 一个softmax的非常好的做法 一些后记关于cs231n课程代码的一些借鉴  一个pipeline 123456789101112131415161718192021222324252">
+<meta property="og:description" content="试图用numpy实现  主要问题  模拟自动微分这一块出现的问题  对于softmaxarg()函数来说目标即寻找一个平滑函数 https://deepnotes.io/softmax-crossentropy 一个softmax的非常好的做法 soft-argmax https://bouthilx.wordpress.com/2013/04/21/a-soft-argmax/ 一些后记关于c">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-11T13:28:25.039Z">
+<meta property="og:updated_time" content="2019-09-12T01:33:59.675Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="semi-gnn, relization progress">
-<meta name="twitter:description" content="试图用numpy实现  主要问题  模拟自动微分这一块出现的问题  对于softmaxarg()函数来说目标即寻找一个平滑函数 https://deepnotes.io/softmax-crossentropy 一个softmax的非常好的做法 一些后记关于cs231n课程代码的一些借鉴  一个pipeline 123456789101112131415161718192021222324252">
+<meta name="twitter:description" content="试图用numpy实现  主要问题  模拟自动微分这一块出现的问题  对于softmaxarg()函数来说目标即寻找一个平滑函数 https://deepnotes.io/softmax-crossentropy 一个softmax的非常好的做法 soft-argmax https://bouthilx.wordpress.com/2013/04/21/a-soft-argmax/ 一些后记关于c">
   <link rel="canonical" href="https://augf.github.io/2019/09/11/semi-gnn-relization-progress/">
 
 
@@ -312,11 +312,19 @@
                 
               
 
-              <time title="创建时间：2019-09-11 00:03:42 / 修改时间：21:28:25" itemprop="dateCreated datePublished" datetime="2019-09-11T00:03:42+08:00">2019-09-11</time>
+              <time title="创建时间：2019-09-11 00:03:42" itemprop="dateCreated datePublished" datetime="2019-09-11T00:03:42+08:00">2019-09-11</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-12 09:33:59" itemprop="dateModified" datetime="2019-09-12T09:33:59+08:00">2019-09-12</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -369,6 +377,8 @@
 <p>对于softmaxarg()函数来说<br>目标即寻找一个平滑函数</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9kZWVwbm90ZXMuaW8vc29mdG1heC1jcm9zc2VudHJvcHk=" title="https://deepnotes.io/softmax-crossentropy">https://deepnotes.io/softmax-crossentropy<i class="fa fa-external-link"></i></span></p>
 <p>一个softmax的非常好的做法</p>
+<p>soft-argmax</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ib3V0aGlseC53b3JkcHJlc3MuY29tLzIwMTMvMDQvMjEvYS1zb2Z0LWFyZ21heC8=" title="https://bouthilx.wordpress.com/2013/04/21/a-soft-argmax/">https://bouthilx.wordpress.com/2013/04/21/a-soft-argmax/<i class="fa fa-external-link"></i></span></p>
 <h2 id="一些后记"><a href="#一些后记" class="headerlink" title="一些后记"></a>一些后记</h2><p>关于cs231n课程代码的一些借鉴</p>
 <ol>
 <li><p>一个pipeline</p>
@@ -413,9 +423,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/numpy/" rel="tag"><i class="fa fa-tag"></i> numpy</a>
-            
               <a href="/tags/gnn/" rel="tag"><i class="fa fa-tag"></i> gnn</a>
+            
+              <a href="/tags/numpy/" rel="tag"><i class="fa fa-tag"></i> numpy</a>
             
               <a href="/tags/matrix/" rel="tag"><i class="fa fa-tag"></i> matrix</a>
             
