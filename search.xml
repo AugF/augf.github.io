@@ -11,6 +11,22 @@
         <content type="html"><![CDATA[<ol><li><p>文字加密访问</p></li><li><p>收录到百度</p></li><li><p>new 文章时，可选参数决定是否需要创建对应的文件夹</p><blockquote><p>ctrl+`, 打开终端</p></blockquote></li></ol>]]></content>
       
       
+      <categories>
+          
+          <category> todo </category>
+          
+          <category> hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> todo </tag>
+            
+            <tag> hexo </tag>
+            
+        </tags>
       
     </entry>
     
