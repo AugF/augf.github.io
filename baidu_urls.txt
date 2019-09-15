@@ -1,5 +1,5 @@
+https://augf.github.io/2019/09/15/python-pylint/
+https://augf.github.io/2019/09/12/deeplearning-dropout/
 https://augf.github.io/2019/09/12/vscode-using/
 https://augf.github.io/2019/09/12/numpy-study/
 https://augf.github.io/2019/09/12/spcipy-study/
-https://augf.github.io/2019/09/12/blog-todo/
-https://augf.github.io/2019/09/12/semi-paper-code-read/

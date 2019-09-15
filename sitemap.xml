@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://augf.github.io/2019/09/15/python-pylint/</loc>
+    
+    <lastmod>2019-09-15T05:15:55.700Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/12/deeplearning-dropout/</loc>
+    
+    <lastmod>2019-09-12T13:57:36.281Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/12/daily-thinking/</loc>
+    
+    <lastmod>2019-09-12T13:27:05.274Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://augf.github.io/2019/09/12/semi-paper-code-read/</loc>
     
     <lastmod>2019-09-12T13:08:13.918Z</lastmod>
@@ -47,13 +68,6 @@
     <loc>https://augf.github.io/2019/09/11/semi-gnn-relization-progress/</loc>
     
     <lastmod>2019-09-12T01:33:59.675Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/12/daily-thinking/</loc>
-    
-    <lastmod>2019-09-11T16:58:09.971Z</lastmod>
     
   </url>
   
