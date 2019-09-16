@@ -72,14 +72,14 @@
 </script>
 
   <meta name="description" content="快排  难分，易于归并eg: 第k个数  归并  易分，难合eg: 逆序对  二分：整数，浮点数  二分，多种场合，分治的取一情况。分割两种不同的性质  高精度,A+B, A-B, A*a, A/a  A+B, tmp临变量。 末尾存储，a[0]存个位。  前缀和差分  前缀和[;,r], s[r]-s[l-1]. 一维和二维。一维前缀和$a_l+a_{l+1}+…+a_r = S_r - S_{">
-<meta name="keywords" content="algorithm,acwing">
+<meta name="keywords" content="algorithm,acwing,basic">
 <meta property="og:type" content="article">
 <meta property="og:title" content="algorithm basic class">
 <meta property="og:url" content="https://augf.github.io/2019/09/16/algorithm-basic-class/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
 <meta property="og:description" content="快排  难分，易于归并eg: 第k个数  归并  易分，难合eg: 逆序对  二分：整数，浮点数  二分，多种场合，分治的取一情况。分割两种不同的性质  高精度,A+B, A-B, A*a, A/a  A+B, tmp临变量。 末尾存储，a[0]存个位。  前缀和差分  前缀和[;,r], s[r]-s[l-1]. 一维和二维。一维前缀和$a_l+a_{l+1}+…+a_r = S_r - S_{">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-16T02:07:23.409Z">
+<meta property="og:updated_time" content="2019-09-16T06:59:53.585Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="algorithm basic class">
 <meta name="twitter:description" content="快排  难分，易于归并eg: 第k个数  归并  易分，难合eg: 逆序对  二分：整数，浮点数  二分，多种场合，分治的取一情况。分割两种不同的性质  高精度,A+B, A-B, A*a, A/a  A+B, tmp临变量。 末尾存储，a[0]存个位。  前缀和差分  前缀和[;,r], s[r]-s[l-1]. 一维和二维。一维前缀和$a_l+a_{l+1}+…+a_r = S_r - S_{">
@@ -201,7 +201,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">23</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">27</span></a>
 
   </li>
       
@@ -214,7 +214,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">22</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">26</span></a>
 
   </li>
       
@@ -227,7 +227,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">16</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">18</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -312,7 +312,7 @@
                 
               
 
-              <time title="创建时间：2019-09-16 08:02:32 / 修改时间：10:07:23" itemprop="dateCreated datePublished" datetime="2019-09-16T08:02:32+08:00">2019-09-16</time>
+              <time title="创建时间：2019-09-16 08:02:32 / 修改时间：14:59:53" itemprop="dateCreated datePublished" datetime="2019-09-16T08:02:32+08:00">2019-09-16</time>
             </span>
           
             
@@ -339,7 +339,14 @@
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/sumarry/" itemprop="url" rel="index"><span itemprop="name">sumarry</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/sumarry/" itemprop="url" rel="index"><span itemprop="name">sumarry</span></a></span>
 
                 
                 
@@ -643,6 +650,71 @@
 <blockquote>
 <p>同时比较大小，请注意要学会进行比较。不考虑不变项，然后加上和减去一个无关的变量<br>此贪心的策略只会使最优解结果变小</p>
 </blockquote>
+<ul>
+<li><p>从数据范围反推算法复杂度以及算法内容（一般情况下，题目的时间为1s或者2s. 所以，C++代码中的操作次数控制在1e7最佳）</p>
+<ol>
+<li>n&lt;=30, 指数级别，dfs+剪枝，状态压缩dp</li>
+<li>n&lt;=100, O(n^3) floyd, dp</li>
+<li>n&lt;=1000, O(n^2) O(n^2 logn) dp,二分</li>
+<li>n&lt;=1e4, O(n sqrt(n)) 块状链表特别难写，用不到</li>
+<li>n&lt;=1e5, 最常见的是nlogn算法。线段树和树状数组特别复杂，没讲。 求凸包、求半平面交</li>
+<li>n&lt;=1e6, O(n): hash, 双指针扫描, kmp, ac自动机; 常数比较小的O(nlogn): sort(即前面的系数特别小), 树状数组，heap, ac自动机、线性筛素数<blockquote>
+<p>树状数组和线段树都是用来解决线段的</p>
+</blockquote>
+</li>
+<li>n&lt;=1e7, O(n)</li>
+<li>n&lt;=1e9, O(sqrt(n)) 判断质数，快速幂</li>
+<li>n&lt;=1e18, O(logn) 最大公约数</li>
+</ol>
+</li>
+<li><p>如何分析代码时间复杂度?</p>
+<ol>
+<li>纯循环，dp分析</li>
+<li>递归，主定理，套公式求即可, todo</li>
+<li>logn的分析，二分</li>
+<li>双指针！！ 内层循环只加不减,两层</li>
+<li>数据结构，单链表，删除和插入O(1); 栈，O(1); 单调栈，单调队列O(1）</li>
+<li>kmp内层循环最多执行n次 22:44</li>
+<li>并查集（!!!记住），find最坏logn的效率，加状态压缩；再加按秩合并，loglogn</li>
+<li>堆，插入和删除需要up和down, 走一遍，O(logn); 原始建堆 o(n)???</li>
+<li>hash表，碰撞的概率特别低，平均来说，增删改查都是O(1)<blockquote>
+<p>和快排类似，最坏情况下非常坏，但概率低</p>
+</blockquote>
+</li>
+<li>搜索和图论：从最基本的出发<ul>
+<li>排列： 最后一层输出答案O(n), 查看树的分支来计算n!n</li>
+<li>图的遍历：遍历所有的点，然后对每个点选择遍历所有的边。O(n+m)</li>
+<li>迪杰斯特拉:n^2  mlogm (m&lt;=n^2&gt;)</li>
+<li>bellsman-ford: nm</li>
+<li>spfa, 匈牙利算法，最大流算法；? 实际很快，分析很慢</li>
+<li>floyd, prim n^2  kruskal </li>
+</ul>
+</li>
+<li>数学<ul>
+<li>欧式筛法， 调和级数 n/1+n/2+n/3 nlogn的级别，自然数的和; 如果是质数， n/1+n/2+n/3+n/5+n/7+…  nloglogn的级别</li>
+<li>最大公约数，辗转相除法，logn</li>
+<li>快速幂 logk的级别</li>
+</ul>
+</li>
+<li>动态规划问题的计算量=状态数量*状态转移的计算量<ul>
+<li>树形DP: 每个点只会遍历一次，遍历其所有的边 O(m)</li>
+<li>滑雪： n^2 * 1</li>
+</ul>
+</li>
+<li>贪心： 排序+循环</li>
+</ol>
+</li>
+</ul>
+<p>1 Byte = 8 bit<br>1 KB = 1024 Byte<br>1 MB = 1024<em>1024 Byte<br>1 GB = 1024</em>1024 Byte</p>
+<p>int 4 Byte<br>char 1 Byte<br>double, long long 8 Byte<br>*point  4Byte(32位机器)  8Byte(64位机器)<br>bool 1 Byte</p>
+<p>64MB = 2^26 Byte<br>2^26 / 4 - 2^24,  1600 0000 1e7</p>
+<p>直接用代码算即可</p>
+<blockquote>
+<p>sizeof v + sizeof w + sizeof w  单位是字节<br>但注意有时算的时候开了很大的空间，但是没用是没事的，因为操作系统不会把数据一下子全部给你, 会一点一点给。 所以memset(), 只需要设计到要用的量即可<br>注意递归栈也需要空间， logn</p>
+</blockquote>
+<blockquote>
+<p>对于网速来说， 8M/s 指的是8M位， 实际上每秒最多只能下载1MB的数据； 对于流量来说是兆字节</p>
+</blockquote>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>数据结构的使用<br>最值，堆<br>区间和，区间数组，树状数组，线段树<br>有序链表，平衡树，set</p>
 <p>技巧：一维转为二维</p>
 <p>开始审题很重要，不要什么都没有就往前面跑，首先心理要有一个很好的思路<br>还有模板哪些步骤一开始只是套路，越到后面越没有必要去实实在在地在意它，这样是完全地浪费功夫的感觉</p>
@@ -691,6 +763,7 @@
 <p>二叉搜索树，父节点， 左孩子节点的函数值严格小于父节点， 右孩子节点的函数值严格大于父节点</p>
 </blockquote>
 <p>后序遍历： 左、右、中<br>前序遍历： 中，左，右<br>中序遍历： 左，中，右</p>
+<p>进一步总结</p>
 <h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>DFS两种框架</p>
 <p>第一种<br>起始点未定, 用层数来表明，子节点都很清晰</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int n;</span><br><span class="line">int path[]</span><br><span class="line">dfs(int i)&#123;</span><br><span class="line">    if(i==n)&#123;</span><br><span class="line">        collect path;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for(int i=0;i&lt;n;i++)</span><br><span class="line">        if(check(i))&#123;</span><br><span class="line">            p[i] = 1;  //  赋值</span><br><span class="line"></span><br><span class="line">            dfs(s);</span><br><span class="line"></span><br><span class="line">            p[i] = 0;  // 恢复</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dfs(0)</span><br></pre></td></tr></table></figure>
@@ -746,6 +819,8 @@
             
               <a href="/tags/acwing/" rel="tag"><i class="fa fa-tag"></i> acwing</a>
             
+              <a href="/tags/basic/" rel="tag"><i class="fa fa-tag"></i> basic</a>
+            
           </div>
         
 
@@ -763,6 +838,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/16/algorithm-improve-class/" rel="prev" title="algorithm improve class">
+                  algorithm improve class <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -836,7 +915,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -849,7 +928,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -862,7 +941,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
