@@ -311,11 +311,19 @@
                 
               
 
-              <time title="创建时间：2019-09-16 16:08:54 / 修改时间：18:51:55" itemprop="dateCreated datePublished" datetime="2019-09-16T16:08:54+08:00">2019-09-16</time>
+              <time title="创建时间：2019-09-16 16:08:54" itemprop="dateCreated datePublished" datetime="2019-09-16T16:08:54+08:00">2019-09-16</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-17 21:07:55" itemprop="dateModified" datetime="2019-09-17T21:07:55+08:00">2019-09-17</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -350,8 +358,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>代码整洁之道  Rober C.Martin著， 韩磊译 </p>
-<h3 id="I-概览"><a href="#I-概览" class="headerlink" title="I. 概览"></a>I. 概览</h3><ol>
+          <blockquote>
+<p>由于自己写的代码老是感觉像屎一样烂，所以觉得不学学这方面的东西，真的是自己都看不下去了</p>
+</blockquote>
+<p>代码整洁之道  Rober C.Martin著， 韩磊译 </p>
+<h2 id="I-概览"><a href="#I-概览" class="headerlink" title="I. 概览"></a>I. 概览</h2><ol>
 <li><p>什么是整洁代码</p>
 <ul>
 <li>Bjame (C++)<blockquote>
@@ -396,89 +407,15 @@
 </ul>
 </li>
 </ol>
-<h2 id="II-有意义的命名"><a href="#II-有意义的命名" class="headerlink" title="II. 有意义的命名"></a>II. 有意义的命名</h2><ol>
-<li><p>目标： 名副其实（不需要注释来补充）</p>
-</li>
-<li><p>注意</p>
-<ul>
-<li>避免误导<ol>
-<li>与平台相关的词 hp,axis,sco</li>
-<li>List等约定中的词</li>
-</ol>
-</li>
-<li>做有意义的区分!<ol>
-<li>a1, a2, aN 这种拒绝</li>
-<li>英语同义词 Info和Data名称不同，但是意义却差别不大<ul>
-<li>避免使用编码<blockquote>
-<p>匈牙利算法和成员前缀都不推荐; 一个例子，接口和实现，必须需要来表明一个，可以实现用XXXImpl</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>避免思维映射<blockquote>
-<p>思维映射就是不要占用读着已经很熟知的名词</p>
-</blockquote>
-</li>
-<li>别扮可爱</li>
-<li>别用双关语(如add)</li>
-</ul>
-</li>
-<li><p>具体操作</p>
-<ul>
-<li>具体<ul>
-<li>类名和对象名都应该是名词，或者名词性结构，如a+n. </li>
-<li>方法名，动词或动词短语，属性访问器get， 修改器set 和 断言 is<blockquote>
-<p>建议： 构造器使用参数的静态工厂方法</p>
-</blockquote>
-<ul>
-<li>使用读的出来的名称<blockquote>
-<p>避免使用的简写很难反映出来</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>使用可搜索出来的变量<blockquote>
-<p>当某个变量具有某种特别的用意的时候，避免使用常见单词，难以搜索的。比如，0表示START状态，那么就用START，不要用0</p>
-</blockquote>
-</li>
-<li>使用解决方案领域名称， 比如具体的代码实现部分，JobQueue, AccountVisitor访问者模式</li>
-<li>添加有意义的语境，也不要添加没用的语境， 变量搁在一块时，应该是具有某种含义的。<blockquote>
-<p>就是语境划分得越明确越清楚</p>
-</blockquote>
-</li>
-<li>每个抽象概念对应于一个词, 如controller, driver等词是重复的</li>
-</ul>
-</li>
-<li><p>良好的英语水平</p>
-</li>
-</ol>
-<h2 id="III-函数"><a href="#III-函数" class="headerlink" title="III. 函数"></a>III. 函数</h2><ol>
-<li>函数的第一规则是短小，第二规则是更短小<blockquote>
-<p>24行， 80列</p>
-</blockquote>
-</li>
-<li>只做一件事</li>
-<li>函数内容的组织<ul>
-<li>每个部分都应该是To do; 1. 2.  3. </li>
-<li>使用描述性的名称，命名方式保持一致</li>
-<li>函数参数，最优为零参数，然后一参数。<blockquote>
-<p>对参数考虑，转换为类；对于二参数，抽象为类的成员变量</p>
-</blockquote>
-</li>
-<li>动词与关键字，函数的名字应该能很好地解释函数的意图</li>
-<li>分隔指令与询问，要么做什么事，要么回答什么事</li>
-<li>避免使用错误码</li>
-<li>抽离try/catch 代码块，try，catch单独封装函数</li>
-<li>别重复自己</li>
-<li>结构化编程，函数应该有统一的样子，入口和出口应该标准化</li>
-</ul>
-</li>
-</ol>
-
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/16/clean-code-reading-note/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
