@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <link rel="alternate" href="/atom.xml" title="AugF's Notes" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <meta name="description" content="OO基础    - 抽象        &amp;gt; 基类，类的定义    - 继承        &amp;gt; 在设计模式中体现，父类和子类的多态    - 封装        &amp;gt; 类本身的定义，类封装或者函数封装    - 多态        &amp;gt; 参数，返回值多态        - 运算符多态 类代码可控制的点    - 访问控制        &amp;gt; 保护，公有，私有    - 单例方">
+<meta name="keywords" content="summary,java,design_pattern">
+<meta property="og:type" content="article">
+<meta property="og:title" content="design pattern summary">
+<meta property="og:url" content="https://augf.github.io/2019/09/18/design-pattern-summary/index.html">
+<meta property="og:site_name" content="AugF&#39;s Notes">
+<meta property="og:description" content="OO基础    - 抽象        &amp;gt; 基类，类的定义    - 继承        &amp;gt; 在设计模式中体现，父类和子类的多态    - 封装        &amp;gt; 类本身的定义，类封装或者函数封装    - 多态        &amp;gt; 参数，返回值多态        - 运算符多态 类代码可控制的点    - 访问控制        &amp;gt; 保护，公有，私有    - 单例方">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-18T10:53:05.282Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="design pattern summary">
+<meta name="twitter:description" content="OO基础    - 抽象        &amp;gt; 基类，类的定义    - 继承        &amp;gt; 在设计模式中体现，父类和子类的多态    - 封装        &amp;gt; 类本身的定义，类封装或者函数封装    - 多态        &amp;gt; 参数，返回值多态        - 运算符多态 类代码可控制的点    - 访问控制        &amp;gt; 保护，公有，私有    - 单例方">
+  <link rel="canonical" href="https://augf.github.io/2019/09/18/design-pattern-summary/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>design pattern summary | AugF's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AugF's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">33</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">33</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">22</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/18/design-pattern-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">design pattern summary
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-18 18:51:43 / 修改时间：18:53:05" itemprop="dateCreated datePublished" datetime="2019-09-18T18:51:43+08:00">2019-09-18</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/design-pattern/" itemprop="url" rel="index"><span itemprop="name">design_pattern</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/design-pattern/summary/" itemprop="url" rel="index"><span itemprop="name">summary</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>OO基础<br>    - 抽象<br>        &gt; 基类，类的定义<br>    - 继承<br>        &gt; 在设计模式中体现，父类和子类的多态<br>    - 封装<br>        &gt; 类本身的定义，类封装或者函数封装<br>    - 多态<br>        &gt; 参数，返回值多态<br>        - 运算符多态</p>
+<p>类代码可控制的点<br>    - 访问控制<br>        &gt; 保护，公有，私有<br>    - 单例方法，类的方法<br>        - 静态变量<br>        - 单件模式<br>    - 多态<br>        - 函数参数多态<br>        - 函数返回值多态<br>        - 操作符多态<br>    - 变量类型<br>        - 引用<br>        - 常量<br>        - setter, getter类 </p>
+<p>OO原则<br>    - 封装变化<br>    - 多用组合，少用继承<br>    - 针对接口编程，不针对实现编程<br>    - 为了松耦合而设计<br>    - 类应该对扩展开放，对修改关闭（开闭原则）<br>    - 要依赖抽象，不要依赖具体类（依赖倒置原则）<br>        &gt; 不要让高层组件依赖于低层组件<br>    - 最少知识原则，只和你的密友谈话，和Law of Demeter一样的意思<br>    - 好莱坞原则：别调用我们，我们会调用你们<br>    - 一个类应该只有一个引起变化的原因（单一原则）<br>        &gt; 还有一个概念叫内聚，用来度量一个类或者模块紧密地达到单一目的或责任。 单一原则要求高内聚</p>
+<blockquote>
+<p>原则总结<br>    - 类本身<br>        - 单一职责<br>        - 封装变化<br>        - 对扩展开放，对修改关闭<br>    - 类之间的关系的目标<br>        - 松耦合<br>        - 最少知识(和很少的类交互)<br>    - 类之间关系的设计<br>        - 思想<br>            - 多用组合，少用继承<br>            - 针对接口，不针对实现<br>        - 物理<br>            - 依赖抽象，不依赖具体类<br>            - 掌握主动性, 主动发出，而不是被动接受</p>
+</blockquote>
+<p>OO方法<br>    - 策略模式: 接口实现动态的方法<br>        &gt; 定义算法族，分别封装起来，让它们可以互相替换，此模式使得算法的变化独立于使用算法的客户. 委托即接口<br>    - 订阅者模式: 出版者和订阅者<br>        &gt; 在对象之间定义一对多的依赖，这样当一个对象改变状态时，依赖它的对象会收到通知，并自动更新<br>        &gt; 窗口添加监听对象<br>    - 装饰器模式: 开闭原则的唯一实现??<br>        &gt; 动态地将责任附加到对象上。想要扩展功能，装饰器提供有别于继承的另一种选择<br>        &gt; 永远都不会实例化对象<br>    - 工厂方法模式：完成多种类别的对象创建的封装<br>        &gt; 定义了一个创建对象的接口，但由子类来决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。<br>        &gt; 输入目标返回实例<br>    - 抽象工厂模式：创建一个家族<br>        &gt; 提供一个接口，用于创建相关或依赖对象的家族，而不需要明确指定具体类<br>    - 单件模式: 有益于随时随地地使用全局变量<br>        &gt; 确保一个类只有一个实例，并提供一个全局访问点<br>        &gt; 使用vilatile static Singleton uniqueInstance， vilatile关键字要求当uniqueInstance初始化为Singeleton时，多个线程需要正确处理它<br>    - 命令模式： 封装命令的具体形式, 日志的记录，其他的操作实际上就是写入文件, 面板的按钮引起操作<br>        &gt; 将“请求”封装成对象，以便使用不同的请求，队列或者日志来参数化其他对象，命令模式也支持可撤销操作<br>        &gt; 具体实现就是，User中, sendCommand(command), buttonPressed事件触发command.execute(); Command将对其他的一些复杂操作完全包括在自身execute中<br>        &gt; 单独将方法抽出来成为一个类<br>    - 适配器模式: 接口解耦<br>        &gt; 将一个类的接口，转换为客户期望的另一个接口。适配器让原本接口不兼容的类可以合作无间。<br>    - 外观模式：操作的简易化封装<br>        &gt; 提供了一个统一的接口，用来访问子系统的一群接口。外观定义了一个高层接口，让子系统更容易使用。<br>    - 模板方法模式： 封装算法<br>        &gt; 在一个方法中定义了一个算法的骨架，而将一些步骤延迟到子类中。模板方法可以在不改变算法结构的情况下，重新定义算法中的某些步骤<br>    - 迭代器模式： 封装集合，顺序访问接口<br>        &gt; 提供一种方法顺序访问聚合对象中的各个元素，而又不暴露其内部的表示。<br>    - 组合模式： 同等方式对待整体和部分中的每一个元素<br>        &gt; 允许你将对象组合为树形结构来表现“整体/部分”层次结构，组合能让客户以一致的方式处理个别对象以及对象组合。<br>        - 两个版本： 透明式和不透明式<br>    - 状态模式：通过引用不同的状态对象，将不同行为委托给所对应的（当前的）对象。<br>        &gt; 允许对象在内部状态改变时改变它的行为，对象看起来好像修改了它的类<br>        &gt; ! 内部状态改变时，改变它的行为实际是就是将将行为委托给状态。因为本身引用到多个不同的状态，所以可以来类好像产生了改变，实际上是由行为引起转向了不同的状态对象<br>    - 代理模式: 用于输入对象的过滤. Proxy代替RealSubject处理外界输入<br>        &gt; 为另一个对象提供一个替身或占位符以控制对这个对象的访问<br>        &gt; 使用代理模式创建代表对象，让代表对象控制某对象的访问。被代理的对象可以是远程的对象、创建开销大的对象或者需要安全控制的对象。<br>        &gt; transient A a; 声明类中a属性不用序列化<br>        &gt; 虚拟代理的例子中，加载图片涉及到新开一个线程<br>        - 特性<br>            &gt; 代表对象和以及处理相比于对象更多的东西<br>        &gt; 只允许访问部分接口<br>    - 复合模式<br>        &gt; 复合模式结合两个或两个以上的模型，组成一个解决方案，解决一再发生的一般性问题<br>        &gt; 注意！ 简单的叠加不叫复合模式，复合模式是一个对象同时参与到多个模式中。</p>
+<p>常见模式总结</p>
+<ol>
+<li>全局变量： 单件模式<blockquote>
+<p>实现： 变量标志，关键字控制多线程，即模板</p>
+</blockquote>
+<ul>
+<li>测试： 全局只有一个锅炉</li>
+</ul>
+</li>
+<li>接口不匹配： 适配器模式 <ul>
+<li>类适配器<blockquote>
+<p>原本的类没有，只有新类<br>Adapter实现目标类Duck的接口, Adapter构造参数为要替代的类Turkey, 然后实现Duck的接口<br>实际使用时用Adapter当做Duck使用</p>
+</blockquote>
+</li>
+<li>对象适配器<blockquote>
+<p>实现目标类的接口或抽象类，不过只需要覆盖方法即可</p>
+</blockquote>
+</li>
+<li>测试： 火鸡的接口来冒充鸭子的接口</li>
+</ul>
+</li>
+<li>可变子类太多： 装饰器模式<blockquote>
+<p>抽象接口, 两类扩展接口，一种是基本的元素类（必需品）, 一种是可扩充品，参数为该接口本身, 添加一些东西，对要计算的值再计算;</p>
+</blockquote>
+<ul>
+<li>测试： 面包的可加的料有很多，而且可加的次数不受限</li>
+</ul>
+</li>
+<li>类之间的通信： 订阅者模式 Java Observable<blockquote>
+<p>被订阅者拥有订阅者列表，可对该列表进行添加等操作, 当自身的某些东西改变时, 触发订阅者列表中的每个的set接口改变新的值<br>订阅者有统一的接口, 订阅者有被订阅者作为构造参数, 构造同时使用被订阅者方法加入自己。<br>订阅者根据被订阅者set自己的方法</p>
+</blockquote>
+<ul>
+<li>应用：窗口部件在初始化的同时注册许多</li>
+<li>测试： 温度计，被多个显示屏所订阅</li>
+</ul>
+</li>
+<li>要初始化的类太多,初始化太繁琐: 工厂模式<blockquote>
+<p>超级简单！<br>产品类接口，然后一些产品的实现。<br>工厂将接口作为参数，然后声明方法，通过指定的参数，即指示创建类的名称，然后拥有对应的动作</p>
+</blockquote>
+<ul>
+<li>测试： 工厂创建各种各样的面包</li>
+</ul>
+</li>
+<li>有多个功能相似（有重叠）的类： 抽象工厂模式<blockquote>
+<p>在工厂的基础上，工厂再作为接口，每个具体的工厂用于多个多个不同的产品。<br>User类在使用时，直接可选择性地创建工厂</p>
+</blockquote>
+<ul>
+<li>测试：不同的面包店，提供不一样的买的东西</li>
+</ul>
+</li>
+<li>接口太复杂： 外观模式<blockquote>
+<p>非常简单的事情<br>主体包含很多部分控件，封装主体的操作，每个操作对应到一组组件的动作</p>
+</blockquote>
+<ul>
+<li>应用：应用总窗口的创建操作</li>
+<li>测试：party房间绝对房间中的一切状态</li>
+</ul>
+</li>
+<li>方法的步骤很多，以及处理种类各异: 命令模式 Java<blockquote>
+<p>声明中间Command接口, 对应很多的实体, execute<br>命令方发出setCommand(), 动作然后对应的Command被触发<br>对应的Command实体可以是操纵一些方法，也可以是操纵一些类</p>
+</blockquote>
+<ul>
+<li>应用: 对于窗口部件的多个触发事件</li>
+<li>测试： 餐厅服务员的例子</li>
+</ul>
+</li>
+<li>算法的封装： 模板模式<blockquote>
+<p>抽象类作为高层, 写好了算法的绝大部分，只留下一小部分<br>实现方法，抽象类封装具体的算法过程，具体的一小部分由继承实现</p>
+</blockquote>
+<ul>
+<li>应用: Arrays.Sort()</li>
+<li>测试：不同的餐厅菜单，试图实现对应的问题</li>
+</ul>
+</li>
+<li>方法的多样性，选其一： 策略模式<blockquote>
+<p>User类的某个组件为接口，并且该接口会对应很多具体的实现</p>
+</blockquote>
+<ul>
+<li>测试：比如英雄可以选择多样的武器，并发出动作，每个武器的动作不一样</li>
+</ul>
+</li>
+<li>封装集合，不同的物理实现； 迭代器模式<blockquote>
+<p>首先迭代器一个接口，然后每种物理的储存抽象为迭代器，扩展自迭代器接口。<br>具体的迭代器实现传入目标类为构造参数。目标类有createIterator调用迭代的方法，创建迭代器<br>使用时直接使用迭代器接口即可</p>
+</blockquote>
+<ul>
+<li>测试: 建立多个不同物理集合方式的类，然后进行遍历</li>
+</ul>
+</li>
+<li>同等方式对待整体和个体的元素： 组合模式<blockquote>
+<p>首先具有统一的接口<br>对于方法，不过某些只能叶子实现，某些只能组合实现。<br>对于组合来说，会维护一个数组，表示其拥有的元素；每个组合，一个print可以完全展示其所有元素<br>扩展使用，组合+迭代器，如何实现的?<br>Iterator接口， CompositeIterator() 组合迭代器，本身会维护一个栈, 当new时，会push进入元素。<br>CompositeIterator()的next(),hasNext()实现有讲究； 取next时，会递归地将成分解析!!!, 当发现真正的叶子时，进行加入，并返回该元素; hasNext()的判断过程也是一个递归的过程<br>hard!!  menu createIterator(menuComponents.iterator) meanComponents为数组元素<br>NullIterator, false, null; 供叶子使用;</p>
+</blockquote>
+<ul>
+<li>测试： 由menu接口来做, menuComponent来共同生成，menu作为组合， menu可以添加menu, 或者menuItems, 测试遍历输出结果如何</li>
+</ul>
+</li>
+<li>对象更易于分割为各个状态，而且更简单： 状态模式<blockquote>
+<p>每个状态接口，不同状态进行扩展，每个状态会实现这些的方法，而且这些类中的这些方法一般会包含状态的转换<br>对于主类，常见的操作是这些各种类实际是组成部分，当然会有一些简易的初始化步骤</p>
+</blockquote>
+<ul>
+<li>测试： 完全一系列主类的动作，通过主类当前的状态的输出进行查看</li>
+</ul>
+</li>
+<li>对象的访问控制： 代理模式<ul>
+<li>远程代理<blockquote>
+<p>实际上是远程通信<br>实现一个远程代理接口(注意返回值和参数都是可序列化对象，并抛出异常)，该接口继承自具体的Remote;<br>实现远程代理接口的具体类（需要继承UnicastRemoteObject， 同时要求有个午餐的构造器），实际上是具体的服务。因为涉及到远程，所以这里首先注册rmi rmiregistry产生对应代理辅助对象<br>开启服务端，服务端创建一个对象，然后使用Naming.rebind(“name”, new MyRemoteImpl())注册。<br>服务端运行， 并且在存根产生目录rmiregistry运行辅助对象<br>客户端请求 直接使用MyRemote接口，然后使用Naming.lookup(“rmi://localhost” + name)得到远程对象。<br>然后得到的这个对象即可直接使用。</p>
+</blockquote>
+<ul>
+<li>测试：直接输出远程对象的方法</li>
+</ul>
+</li>
+<li>动态代理<blockquote>
+<p>使用java自带的Proxy<br>例子：实现一个类的访问权限控制。<br>首先，一个类接口，一个具体类<br>一个关于类的代理 implements InvocationHandler, 构造函数参数为类接口。<br>根据 Proxy.newProxyInstance(classloader, interfaces(), new Handler(a))方法返回一个原类<br>实现invoke()方法，即对可使用的方法进行过滤，对参数进行过滤；一起进行重新分配</p>
+</blockquote>
+<ul>
+<li>测试： 使用返回回来的原类进行测试，是否实现了过滤</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>如何能够更快速，简便地画图？<br>思考，现在打字只是为了记住一些东西，但是记录的东西意义性值得考虑</p>
+</blockquote>
+<p>复合模式之MVC</p>
+<blockquote>
+<p>MVC: model, view, control</p>
+</blockquote>
+<p>view和contrl都是view的观察者, model改变后会直接告诉contrl, control做出对应逻辑的改变，或许产生view的变化<br>contrl是view的策略模式<br>view内部的组件实际上是组合模式。控制器只要与顶层组件进行交互即可</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eugene Wang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://augf.github.io/2019/09/18/design-pattern-summary/" title="design pattern summary">https://augf.github.io/2019/09/18/design-pattern-summary/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/summary/" rel="tag"><i class="fa fa-tag"></i> summary</a>
+            
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+            
+              <a href="/tags/design-pattern/" rel="tag"><i class="fa fa-tag"></i> design_pattern</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/18/design-pattern-details/" rel="next" title="design pattern details">
+                  <i class="fa fa-chevron-left"></i> design pattern details
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/default-avatar.png"
+      alt="Eugene Wang">
+  <p class="site-author-name" itemprop="name">Eugene Wang</p>
+  <div class="site-description" itemprop="description">Quick notes</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="GitHub &rarr; https://github.com/AugF"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOnl1bnBhbndhbmdAZ21haWwuY29t" title="E-Mail &rarr; mailto:yunpanwang@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vSm9zd3hl" title="Weibo &rarr; https://weibo.com/Joswxe"><i class="fa fa-fw fa-weibo"></i>Weibo</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==" title="https://www.google.com">Google</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jbi5iaW5nLmNvbQ==" title="https://cn.bing.com">Bing</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">Baidu</span>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://augf.github.io/2019/09/18/design-pattern-summary/</loc>
+    <lastmod>2019-09-18</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/18/design-pattern-details/</loc>
+    <lastmod>2019-09-18</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/16/algorithm-basic-class/</loc>
+    <lastmod>2019-09-18</lastmod>
+  </url>  <url>
     <loc>https://augf.github.io/2019/09/18/study-todo/</loc>
     <lastmod>2019-09-18</lastmod>
   </url>  <url>
@@ -11,9 +20,6 @@
     <lastmod>2019-09-18</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/16/algorithm-improve-class/</loc>
-    <lastmod>2019-09-16</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/09/16/algorithm-basic-class/</loc>
     <lastmod>2019-09-16</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/15/python-pylint/</loc>

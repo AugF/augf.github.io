@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://augf.github.io/2019/09/18/design-pattern-summary/</loc>
+    
+    <lastmod>2019-09-18T10:53:05.282Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/18/design-pattern-details/</loc>
+    
+    <lastmod>2019-09-18T10:51:13.279Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/16/algorithm-basic-class/</loc>
+    
+    <lastmod>2019-09-18T09:13:38.319Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://augf.github.io/2019/09/18/study-todo/</loc>
     
     <lastmod>2019-09-18T08:45:03.920Z</lastmod>
@@ -26,13 +47,6 @@
     <loc>https://augf.github.io/2019/09/16/algorithm-improve-class/</loc>
     
     <lastmod>2019-09-16T07:07:57.182Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/16/algorithm-basic-class/</loc>
-    
-    <lastmod>2019-09-16T06:59:53.585Z</lastmod>
     
   </url>
   
