@@ -71,18 +71,18 @@
     })();
 </script>
 
-  <meta name="description" content="1. 设计模式入门知道封装、抽象、继承、多态这些概念，并不会马上让你变成好的面向对象设计者。设计大师关心的是建立弹性的设计，可以维护，可以应付改变 面向对象，鸭子对象。只要认为实现了鸭子对应的方法就是鸭子 首先，实现基类鸭子会叫，其他鸭子都是基于基类的继承某天出现了会飞的鸭子，怎么办？在基类中添加飞的接口，？但是，并非所有鸭子都会飞  使用继承，？代码量太大 使用飞和叫两个接口，每个鸭子基于接口的">
+  <meta name="description" content="参考书籍： head first 之设计模式 相关实现代码： https://github.com/AugF/DesignPatterns 1. 设计模式入门知道封装、抽象、继承、多态这些概念，并不会马上让你变成好的面向对象设计者。设计大师关心的是建立弹性的设计，可以维护，可以应付改变 面向对象，鸭子对象。只要认为实现了鸭子对应的方法就是鸭子 首先，实现基类鸭子会叫，其他鸭子都是基于基类的继承某天">
 <meta name="keywords" content="java,design_patterns,details">
 <meta property="og:type" content="article">
 <meta property="og:title" content="design pattern details">
 <meta property="og:url" content="https://augf.github.io/2019/09/18/design-pattern-details/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
-<meta property="og:description" content="1. 设计模式入门知道封装、抽象、继承、多态这些概念，并不会马上让你变成好的面向对象设计者。设计大师关心的是建立弹性的设计，可以维护，可以应付改变 面向对象，鸭子对象。只要认为实现了鸭子对应的方法就是鸭子 首先，实现基类鸭子会叫，其他鸭子都是基于基类的继承某天出现了会飞的鸭子，怎么办？在基类中添加飞的接口，？但是，并非所有鸭子都会飞  使用继承，？代码量太大 使用飞和叫两个接口，每个鸭子基于接口的">
+<meta property="og:description" content="参考书籍： head first 之设计模式 相关实现代码： https://github.com/AugF/DesignPatterns 1. 设计模式入门知道封装、抽象、继承、多态这些概念，并不会马上让你变成好的面向对象设计者。设计大师关心的是建立弹性的设计，可以维护，可以应付改变 面向对象，鸭子对象。只要认为实现了鸭子对应的方法就是鸭子 首先，实现基类鸭子会叫，其他鸭子都是基于基类的继承某天">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-18T10:51:13.279Z">
+<meta property="og:updated_time" content="2019-09-18T10:57:48.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="design pattern details">
-<meta name="twitter:description" content="1. 设计模式入门知道封装、抽象、继承、多态这些概念，并不会马上让你变成好的面向对象设计者。设计大师关心的是建立弹性的设计，可以维护，可以应付改变 面向对象，鸭子对象。只要认为实现了鸭子对应的方法就是鸭子 首先，实现基类鸭子会叫，其他鸭子都是基于基类的继承某天出现了会飞的鸭子，怎么办？在基类中添加飞的接口，？但是，并非所有鸭子都会飞  使用继承，？代码量太大 使用飞和叫两个接口，每个鸭子基于接口的">
+<meta name="twitter:description" content="参考书籍： head first 之设计模式 相关实现代码： https://github.com/AugF/DesignPatterns 1. 设计模式入门知道封装、抽象、继承、多态这些概念，并不会马上让你变成好的面向对象设计者。设计大师关心的是建立弹性的设计，可以维护，可以应付改变 面向对象，鸭子对象。只要认为实现了鸭子对应的方法就是鸭子 首先，实现基类鸭子会叫，其他鸭子都是基于基类的继承某天">
   <link rel="canonical" href="https://augf.github.io/2019/09/18/design-pattern-details/">
 
 
@@ -312,7 +312,7 @@
                 
               
 
-              <time title="创建时间：2019-09-18 18:49:38 / 修改时间：18:51:13" itemprop="dateCreated datePublished" datetime="2019-09-18T18:49:38+08:00">2019-09-18</time>
+              <time title="创建时间：2019-09-18 18:49:38 / 修改时间：18:57:48" itemprop="dateCreated datePublished" datetime="2019-09-18T18:49:38+08:00">2019-09-18</time>
             </span>
           
             
@@ -366,7 +366,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-设计模式入门"><a href="#1-设计模式入门" class="headerlink" title="1. 设计模式入门"></a>1. 设计模式入门</h2><p>知道封装、抽象、继承、多态这些概念，并不会马上让你变成好的面向对象设计者。设计大师关心的是建立弹性的设计，可以维护，可以应付改变</p>
+        <p>参考书籍： head first 之设计模式</p>
+<p>相关实现代码： <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvRGVzaWduUGF0dGVybnM=" title="https://github.com/AugF/DesignPatterns">https://github.com/AugF/DesignPatterns<i class="fa fa-external-link"></i></span></p>
+<h2 id="1-设计模式入门"><a href="#1-设计模式入门" class="headerlink" title="1. 设计模式入门"></a>1. 设计模式入门</h2><p>知道封装、抽象、继承、多态这些概念，并不会马上让你变成好的面向对象设计者。设计大师关心的是建立弹性的设计，可以维护，可以应付改变</p>
 <p>面向对象，鸭子对象。只要认为实现了鸭子对应的方法就是鸭子</p>
 <p>首先，实现基类鸭子会叫，其他鸭子都是基于基类的继承<br>某天出现了会飞的鸭子，怎么办？在基类中添加飞的接口，？但是，并非所有鸭子都会飞</p>
 <ol>
