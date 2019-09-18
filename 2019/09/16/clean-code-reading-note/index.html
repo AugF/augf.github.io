@@ -71,18 +71,18 @@
     })();
 </script>
 
-  <meta name="description" content="由于自己写的代码老是感觉像屎一样烂，所以觉得不学学这方面的东西，真的是自己都看不下去了  代码整洁之道  Rober C.Martin著， 韩磊译  I. 概览 什么是整洁代码  Bjame (C++) 缺陷难以隐藏；减少依赖；分层战略处理错误代码；性能调至最优；整洁的代码只做好一件事情   Grady 干净利落的抽象和直截了当的控制语句   Dave Thomas 单元测试和验收测试；明确定义">
+  <meta name="description" content="由于自己写的代码老是感觉像屎一样烂，所以觉得不学学这方面的东西，真的是自己都看不下去了  代码整洁之道  Rober C.Martin著， 韩磊译   就学习而言，自己尽可能去过了一遍知识点，以下记的内容多半是过细的内容。要真正掌握之， 还需要summary最重要的准则，牢记于大脑中，形成做事的准则。同时，并且还要加以实战，对实例进行了解才是  学习参考代码·https://github.com">
 <meta name="keywords" content="code,technology">
 <meta property="og:type" content="article">
 <meta property="og:title" content="clean code: reading note">
 <meta property="og:url" content="https://augf.github.io/2019/09/16/clean-code-reading-note/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
-<meta property="og:description" content="由于自己写的代码老是感觉像屎一样烂，所以觉得不学学这方面的东西，真的是自己都看不下去了  代码整洁之道  Rober C.Martin著， 韩磊译  I. 概览 什么是整洁代码  Bjame (C++) 缺陷难以隐藏；减少依赖；分层战略处理错误代码；性能调至最优；整洁的代码只做好一件事情   Grady 干净利落的抽象和直截了当的控制语句   Dave Thomas 单元测试和验收测试；明确定义">
+<meta property="og:description" content="由于自己写的代码老是感觉像屎一样烂，所以觉得不学学这方面的东西，真的是自己都看不下去了  代码整洁之道  Rober C.Martin著， 韩磊译   就学习而言，自己尽可能去过了一遍知识点，以下记的内容多半是过细的内容。要真正掌握之， 还需要summary最重要的准则，牢记于大脑中，形成做事的准则。同时，并且还要加以实战，对实例进行了解才是  学习参考代码·https://github.com">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-17T16:18:04.509Z">
+<meta property="og:updated_time" content="2019-09-18T04:53:51.425Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="clean code: reading note">
-<meta name="twitter:description" content="由于自己写的代码老是感觉像屎一样烂，所以觉得不学学这方面的东西，真的是自己都看不下去了  代码整洁之道  Rober C.Martin著， 韩磊译  I. 概览 什么是整洁代码  Bjame (C++) 缺陷难以隐藏；减少依赖；分层战略处理错误代码；性能调至最优；整洁的代码只做好一件事情   Grady 干净利落的抽象和直截了当的控制语句   Dave Thomas 单元测试和验收测试；明确定义">
+<meta name="twitter:description" content="由于自己写的代码老是感觉像屎一样烂，所以觉得不学学这方面的东西，真的是自己都看不下去了  代码整洁之道  Rober C.Martin著， 韩磊译   就学习而言，自己尽可能去过了一遍知识点，以下记的内容多半是过细的内容。要真正掌握之， 还需要summary最重要的准则，牢记于大脑中，形成做事的准则。同时，并且还要加以实战，对实例进行了解才是  学习参考代码·https://github.com">
   <link rel="canonical" href="https://augf.github.io/2019/09/16/clean-code-reading-note/">
 
 
@@ -201,7 +201,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">27</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -214,7 +214,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">26</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">28</span></a>
 
   </li>
       
@@ -227,7 +227,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">18</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">20</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -323,7 +323,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-18 00:18:04" itemprop="dateModified" datetime="2019-09-18T00:18:04+08:00">2019-09-18</time>
+                <time title="修改时间：2019-09-18 12:53:51" itemprop="dateModified" datetime="2019-09-18T12:53:51+08:00">2019-09-18</time>
               </span>
             
           
@@ -371,7 +371,11 @@
 <p>由于自己写的代码老是感觉像屎一样烂，所以觉得不学学这方面的东西，真的是自己都看不下去了</p>
 </blockquote>
 <p>代码整洁之道  Rober C.Martin著， 韩磊译 </p>
-<h2 id="I-概览"><a href="#I-概览" class="headerlink" title="I. 概览"></a>I. 概览</h2><ol>
+<blockquote>
+<p>就学习而言，自己尽可能去过了一遍知识点，以下记的内容多半是过细的内容。要真正掌握之， 还需要summary最重要的准则，牢记于大脑中，形成做事的准则。同时，并且还要加以实战，对实例进行了解才是</p>
+</blockquote>
+<p>学习参考代码·<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvQ2xlYW5Db2Rl" title="https://github.com/AugF/CleanCode">https://github.com/AugF/CleanCode<i class="fa fa-external-link"></i></span></p>
+<h2 id="A-概览"><a href="#A-概览" class="headerlink" title="A. 概览"></a>A. 概览</h2><ol>
 <li><p>什么是整洁代码</p>
 <ul>
 <li>Bjame (C++)<blockquote>
@@ -417,7 +421,7 @@
 </li>
 </ol>
 <a id="more"></a>
-<h2 id="II-有意义的命名"><a href="#II-有意义的命名" class="headerlink" title="II. 有意义的命名"></a>II. 有意义的命名</h2><ol>
+<h2 id="B-有意义的命名"><a href="#B-有意义的命名" class="headerlink" title="B. 有意义的命名"></a>B. 有意义的命名</h2><ol>
 <li><p>目标： 名副其实（不需要注释来补充）</p>
 </li>
 <li><p>注意</p>
@@ -477,7 +481,7 @@
 <li><p>良好的英语水平</p>
 </li>
 </ol>
-<h2 id="III-函数"><a href="#III-函数" class="headerlink" title="III. 函数"></a>III. 函数</h2><ol>
+<h2 id="C-函数"><a href="#C-函数" class="headerlink" title="C. 函数"></a>C. 函数</h2><ol>
 <li><p>函数的第一规则是短小，第二规则是更短小</p>
 <blockquote>
 <p>24行， 80列</p>
@@ -505,7 +509,7 @@
 </li>
 </ol>
 <p>大师级程序员把系统当作故事来讲，而不是当作程序来写。他们使用选定编程的工具构建一种更为丰富且更具表达力的语言。</p>
-<h2 id="IV-注释"><a href="#IV-注释" class="headerlink" title="IV 注释"></a>IV 注释</h2><p>能用重构代码来解决的事情，就不要考虑用注释来做</p>
+<h2 id="D-注释"><a href="#D-注释" class="headerlink" title="D. 注释"></a>D. 注释</h2><p>能用重构代码来解决的事情，就不要考虑用注释来做</p>
 <ol>
 <li><p>注释不能美化糟糕的代码；糟糕的代码最后进行重构</p>
 </li>
@@ -546,7 +550,7 @@
 </li>
 </ol>
 <p>如果注释都还需要解释的话，一定不是个好注释<br>能够通过看注释而省去看代码的时间就是好的注释</p>
-<h2 id="V-格式"><a href="#V-格式" class="headerlink" title="V. 格式"></a>V. 格式</h2><p>代码的格式对于代码的可读性非常重要。</p>
+<h2 id="E-格式"><a href="#E-格式" class="headerlink" title="E. 格式"></a>E. 格式</h2><p>代码的格式对于代码的可读性非常重要。</p>
 <blockquote>
 <p>一个好的格式最重要的其实就是能够满足人们从上到下很自然地阅读。自然地能够获取到整体的内容。</p>
 </blockquote>
@@ -586,7 +590,7 @@
 </li>
 </ol>
 <p>遵循团队规则！！！</p>
-<h2 id="VI-对象和数据结构"><a href="#VI-对象和数据结构" class="headerlink" title="VI. 对象和数据结构"></a>VI. 对象和数据结构</h2><ol>
+<h2 id="F-对象和数据结构"><a href="#F-对象和数据结构" class="headerlink" title="F. 对象和数据结构"></a>F. 对象和数据结构</h2><ol>
 <li><p>不愿以抽象形态表述数据</p>
 </li>
 <li><p>数据、对象的反对称性：</p>
@@ -645,7 +649,7 @@
 </blockquote>
 </li>
 </ol>
-<h2 id="VII-错误处理"><a href="#VII-错误处理" class="headerlink" title="VII. 错误处理"></a>VII. 错误处理</h2><p>错误处理很重要，但是如果它搞乱了代码逻辑，就是错误的做法。</p>
+<h2 id="I-错误处理"><a href="#I-错误处理" class="headerlink" title="I. 错误处理"></a>I. 错误处理</h2><p>错误处理很重要，但是如果它搞乱了代码逻辑，就是错误的做法。</p>
 <ol>
 <li><p>使用异常而非返回码</p>
 <blockquote>
@@ -679,7 +683,7 @@
 <li><p>不要返回null值和传递null值!!!</p>
 </li>
 </ol>
-<h2 id="VIII-边界"><a href="#VIII-边界" class="headerlink" title="VIII 边界"></a>VIII 边界</h2><p>使用第三方的代码，第三方程序包和框架提供普适性，往往存在着很大的张力。<br>作为使用者，一种建议是应该对代码进行一定程度的封装。</p>
+<h2 id="J-边界"><a href="#J-边界" class="headerlink" title="J. 边界"></a>J. 边界</h2><p>使用第三方的代码，第三方程序包和框架提供普适性，往往存在着很大的张力。<br>作为使用者，一种建议是应该对代码进行一定程度的封装。</p>
 <p>习惯</p>
 <ol>
 <li>学习性测试：也是自己常有的习惯<blockquote>
@@ -689,7 +693,7 @@
 <li>未来的属性： 考虑Adapter模式，封装为接口</li>
 <li>边界的代码需要清晰的分割和定义期望的测试，应该避免我们的代码过多地了解第三方代码中的特定信息。</li>
 </ol>
-<h2 id="IX-单元测试"><a href="#IX-单元测试" class="headerlink" title="IX 单元测试"></a>IX 单元测试</h2><p>单元测试非常重要， 测试应该像生产代码一样好好地维护</p>
+<h2 id="K-单元测试"><a href="#K-单元测试" class="headerlink" title="K. 单元测试"></a>K. 单元测试</h2><p>单元测试非常重要， 测试应该像生产代码一样好好地维护</p>
 <ol>
 <li><p>TDD三定律：</p>
 <ul>
@@ -737,7 +741,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="V-类"><a href="#V-类" class="headerlink" title="V. 类"></a>V. 类</h2><p>前面主要讨论的是代码语句及由代码语句构成的函数的表达力。</p>
+<h2 id="L-类"><a href="#L-类" class="headerlink" title="L. 类"></a>L. 类</h2><p>前面主要讨论的是代码语句及由代码语句构成的函数的表达力。</p>
 <blockquote>
 <p>注意静态变量和非静态变量的多种叫法；<br>非静态变量又称为实体变量，静态变量又称为类变量</p>
 </blockquote>
@@ -797,7 +801,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="X-系统"><a href="#X-系统" class="headerlink" title="X. 系统"></a>X. 系统</h2><blockquote>
+<h2 id="M-系统"><a href="#M-系统" class="headerlink" title="M. 系统"></a>M. 系统</h2><blockquote>
 <p>程序的设计实际上从某种方面都是从生活中进行学习。对于系统架构来说，学习的标准就是建筑行业</p>
 </blockquote>
 <p>复杂要人命，它消磨开发者的生命，让产品难以规划、构建和测试。<br>除去代码层次上的整洁，系统上的整洁同样重要</p>
@@ -877,6 +881,193 @@
 </ul>
 </li>
 </ol>
+<h2 id="N-迭进"><a href="#N-迭进" class="headerlink" title="N. 迭进"></a>N. 迭进</h2><blockquote>
+<p>这章题目有点晦涩，也就是教怎么做到整洁开发？</p>
+</blockquote>
+<p>整洁开发四个重要性由高到低的考虑顺序</p>
+<ul>
+<li>运行所有的测试<blockquote>
+<p>只有可验证才能保证可靠性</p>
+</blockquote>
+</li>
+<li>重构<ul>
+<li>不可重复：即指类不能重复，同时也可以指方法的实现应该避免重复。模板方法是重用的方法，把非重复的内容交给实际去做。</li>
+<li>表达力： 好名称、好类名和好函数名。 只有通过不断尝试才能达到</li>
+<li>尽可能少的类和方法<blockquote>
+<p>上面的概念不可过度使用；也不可因为教条主义使得类又大又长</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="O-并发编程"><a href="#O-并发编程" class="headerlink" title="O. 并发编程"></a>O. 并发编程</h2><p>对象是过程的抽象，线程是调度的抽象</p>
+<blockquote>
+<p>要认识到并发设计是一件超级难的事情</p>
+</blockquote>
+<blockquote>
+<p>私以为，多线程编程其实是想借助并行，即同时运行多个程序来提高效率。但是，者多个线程之间难免会涉及到临界区，临界区往往还会涉及到数量的问题，因此需要对临界区的互斥访问。</p>
+</blockquote>
+<ol>
+<li><p>为什么要并发？</p>
+<ul>
+<li>并发是什么？<ul>
+<li>并发也是一种解耦策略，它帮助我们把做什么（目的）和何时（时机）做分解开</li>
+<li>单线程应用中，目的与时机紧密耦合，只需要根据堆栈跟踪即可断定应用程序的状态</li>
+</ul>
+</li>
+<li>并发的目的<ul>
+<li>并发主要是解耦，解耦目的和时间主要是为了改变应用程序的吞吐量和结构，响应时间</li>
+</ul>
+</li>
+<li>并发的场景<ul>
+<li>Servlet, 一个页面请求的资源被多个所共享</li>
+<li>单线程聚合信息，需要访问多个web网点</li>
+<li>考虑某个解释大量数据集，但只在处理完全部数据后给出一个完整解决方案的系统。 数据集并行处理</li>
+</ul>
+</li>
+<li>注意<ul>
+<li>并发并不总是能改进性能。并发需要系统在多个CPU之间切换以及维护互斥访问的开销。所以相对来说，并发会在性能和编写额外代码上增加一些开销。同时，并发带来的好处只在多个线程或者处理器之间能够分享大量等待时间的时候，可以充分地利用等待时间。</li>
+<li>正确的并发是复杂的，对简单的问题同时如此</li>
+<li>并发常常需要对设计策略的根本性改变</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>理解并发的关键</p>
+<ul>
+<li>Just-In-Time 编译器如何对待生成的字节码?<blockquote>
+<p>Java字节码是Java虚拟机执行的一种指令格式。感觉上也就是指令吧</p>
+</blockquote>
+</li>
+<li>Java内存模型认为什么东西具有原子性？<blockquote>
+<p>区分原子性的东西，即多个线程会同时执行到。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>并发防御原则</p>
+<ul>
+<li>单一职责原则： 应该分离并发代码和非并发代码<blockquote>
+<p>一种可行的方案是在并发代码和非并发代码的边界使用POJO来封装，因此在测试时可以分离测试</p>
+</blockquote>
+</li>
+<li>限制数据作用域<blockquote>
+<p>在Java中唯一的解决方案就是采用synchronized关键字。 限制临界区的数量非常重要</p>
+</blockquote>
+<ul>
+<li>不好的后果<ul>
+<li>忘记保护一个或多个临界区</li>
+<li>花很多时间保证一切受到保护</li>
+<li>很难找到错误源，判断错误源</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>推论：使用数据副本<ul>
+<li>避免数据共享的好方法就是一开始就避免共享数据。复制对象只可以通过只读方式对待，如果需要修改对象，则从多个线程收集所有复本的结果，并在单线程中进行合并</li>
+<li>balance: 使用对象复本避免了锁定而省下的价值是否有可能补偿得上额外的创建成本和垃圾收集开销</li>
+</ul>
+</li>
+<li>线程应尽可能独立</li>
+<li>了解Java库 Java5<ul>
+<li>使用类库提供的安全群集</li>
+<li>使用executor框架执行无关任务</li>
+<li>尽可能使用非锁定解决方案</li>
+<li>有几个类是非线程并发的<blockquote>
+<p>获取、释放锁， 计数器锁， 指定数量事件发生锁</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>了解执行模型</p>
+<ul>
+<li>基础定义<ul>
+<li>限制资源，固定尺寸或数量的资源</li>
+<li>互斥： 每个时刻仅有一个线程能访问共享资源或共享数据</li>
+<li>线程饥饿： 一个或一组线程长时间内或者永久被禁止</li>
+<li>死锁：多个线程互相等待执行结束</li>
+<li>活锁： 多次尝试起步，却总是失败</li>
+</ul>
+</li>
+<li>执行模型<ul>
+<li>生产者-消费者模型： 固定数量的共享资源，一方提供，一方使用</li>
+<li>读者-写着模型： 共享数据， 读者读取使用， 写者进行数据更新<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhbmZlaXZpcDgvYXJ0aWNsZS9kZXRhaWxzLzEyNTI3MDQ3" title="https://blog.csdn.net/yanfeivip8/article/details/12527047">https://blog.csdn.net/yanfeivip8/article/details/12527047<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+<li>哲学家问题： 竞争式系统。 多个系统同时争夺共有资源<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU1JTkzJUIyJUU1JUFEJUE2JUU1JUFFJUI2JUU1JUIwJUIxJUU5JUE0JTkwJUU5JTk3JUFFJUU5JUEyJTk4" title="https://zh.wikipedia.org/wiki/%E5%93%B2%E5%AD%A6%E5%AE%B6%E5%B0%B1%E9%A4%90%E9%97%AE%E9%A2%98">https://zh.wikipedia.org/wiki/%E5%93%B2%E5%AD%A6%E5%AE%B6%E5%B0%B1%E9%A4%90%E9%97%AE%E9%A2%98<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>工具： <ul>
+<li>信号变量mutex, 专门负责互斥使用</li>
+<li>计数变量，对一定数量进行统计<blockquote>
+<p>一般地，对于共享资源的访问，以及计数变量的更改都要求使用信号变量; </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>设计关键： 对入口和出口的限制进行准确的分析</li>
+<li>实战： todo</li>
+</ul>
+</li>
+<li><p>警惕同步方法之间的依赖</p>
+<blockquote>
+<p>如果多个方法都是同步，并且产生依赖确实是一件头大的事。 建议使用一个共享对象的多个方法</p>
+</blockquote>
+<ul>
+<li>如何使用一个共享对象的多个方法?<ul>
+<li>基于客户端的锁定： 客户端代码在调用第一个方法前锁定服务端，确保锁的范围覆盖了调用最后一个方法的代码</li>
+<li>基于服务端的锁定，在服务端内创建服务端的方法，调用所有方法，然后解锁，让客户端代码调用新方法</li>
+<li>适配服务端： 创建执行锁定的中间层</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>保持同步区域微小</p>
+</li>
+<li><p>很难编写正确的关闭代码</p>
+<blockquote>
+<p>编写永久运行和编写运行一段时间后平静地关闭的系统是两码事<br>在多线程中，平静关闭往往很难做到，常见问题与死锁有关，线程一直等待永远不会到来的信号。</p>
+<ol>
+<li>一个系统从父进程中分出多个子进程，当某个子进程发生死锁时</li>
+<li>生产者消费者模型中，生产者已经按照父进程要求迅速关闭，然后消费者会一直迟迟地等待着资源不能关闭</li>
+</ol>
+</blockquote>
+</li>
+<li><p>测试线程代码</p>
+<blockquote>
+<p>编写最有潜力暴露问题的测试，在不同的编程配置、系统配置和负载条件下频繁运行。如果测试失败，跟踪错误。别因为后来测试通过后来的运行就忽略失败</p>
+</blockquote>
+<ul>
+<li>将偶然发生的失败看成线程失败</li>
+<li>先使非线程代码可工作</li>
+<li>编写可插拔的线程代码： 编写可在数个配置环境下运行的线程代码<ul>
+<li>单线程与多个线程在执行时不同的情况</li>
+<li>线程代码与实物或者测试替身互动</li>
+<li>用运行快速、缓慢或有变动的测试替身执行</li>
+<li>将测试配置为能运行一定数量的迭代</li>
+</ul>
+</li>
+<li>编写可调整的线程代码： 即线程的数量可调整</li>
+<li>运行多于处理器数量的线程</li>
+<li>在不同的平台上运行</li>
+<li>装置试错代码，试图用随机方法来测试平时无法覆盖的路径。 Object.wait(), sleep(), yield() 和 priority(), 改变代码的执行顺序。<ul>
+<li>如何装置？<ul>
+<li>硬编码：手工插入这些语句</li>
+<li>自动化： 使用Aspect-Oriented Framework, ASM之类工具通过编程来装置代码。 专门使用单个类来做。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="P-逐步改进：一个关于Args的实例"><a href="#P-逐步改进：一个关于Args的实例" class="headerlink" title="P. 逐步改进：一个关于Args的实例"></a>P. 逐步改进：一个关于Args的实例</h2><p>准则： 编程如同写作文，不可能一开始就写得非常好，是逐步进行迭代的。 对于程序来说，目标首先一开始是能工作，但是最后一个一定要是一个完美的状态。<br>一个好的demo见github地址</p>
 
     </div>
 
@@ -932,6 +1123,10 @@
 
             <div class="post-nav-prev post-nav-item">
               
+                <a href="/2019/09/18/study-todo/" rel="prev" title="study todo">
+                  study todo <i class="fa fa-chevron-right"></i>
+                </a>
+              
             </div>
           </div>
         
@@ -986,7 +1181,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-概览"><span class="nav-number">1.</span> <span class="nav-text">I. 概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-有意义的命名"><span class="nav-number">2.</span> <span class="nav-text">II. 有意义的命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-函数"><span class="nav-number">3.</span> <span class="nav-text">III. 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IV-注释"><span class="nav-number">4.</span> <span class="nav-text">IV 注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V-格式"><span class="nav-number">5.</span> <span class="nav-text">V. 格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VI-对象和数据结构"><span class="nav-number">6.</span> <span class="nav-text">VI. 对象和数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VII-错误处理"><span class="nav-number">7.</span> <span class="nav-text">VII. 错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VIII-边界"><span class="nav-number">8.</span> <span class="nav-text">VIII 边界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IX-单元测试"><span class="nav-number">9.</span> <span class="nav-text">IX 单元测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V-类"><span class="nav-number">10.</span> <span class="nav-text">V. 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X-系统"><span class="nav-number">11.</span> <span class="nav-text">X. 系统</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-概览"><span class="nav-number">1.</span> <span class="nav-text">A. 概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-有意义的命名"><span class="nav-number">2.</span> <span class="nav-text">B. 有意义的命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-函数"><span class="nav-number">3.</span> <span class="nav-text">C. 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D-注释"><span class="nav-number">4.</span> <span class="nav-text">D. 注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-格式"><span class="nav-number">5.</span> <span class="nav-text">E. 格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F-对象和数据结构"><span class="nav-number">6.</span> <span class="nav-text">F. 对象和数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-错误处理"><span class="nav-number">7.</span> <span class="nav-text">I. 错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J-边界"><span class="nav-number">8.</span> <span class="nav-text">J. 边界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K-单元测试"><span class="nav-number">9.</span> <span class="nav-text">K. 单元测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L-类"><span class="nav-number">10.</span> <span class="nav-text">L. 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#M-系统"><span class="nav-number">11.</span> <span class="nav-text">M. 系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#N-迭进"><span class="nav-number">12.</span> <span class="nav-text">N. 迭进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-并发编程"><span class="nav-number">13.</span> <span class="nav-text">O. 并发编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P-逐步改进：一个关于Args的实例"><span class="nav-number">14.</span> <span class="nav-text">P. 逐步改进：一个关于Args的实例</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -1004,7 +1199,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1017,7 +1212,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1030,7 +1225,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

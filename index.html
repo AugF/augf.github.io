@@ -200,7 +200,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">27</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -213,7 +213,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">26</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">28</span></a>
 
   </li>
       
@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">18</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">20</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -282,6 +282,287 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/18/git-using/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/18/git-using/" class="post-title-link" itemprop="url">git using</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-18 14:24:20 / 修改时间：14:38:36" itemprop="dateCreated datePublished" datetime="2019-09-18T14:24:20+08:00">2019-09-18</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>更全面的请参考<br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTUvMTIvZ2l0LWNoZWF0LXNoZWV0Lmh0bQ==" title="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.htm">http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.htm<i class="fa fa-external-link"></i></span></p>
+<h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>Workspace：工作区<br>Index / Stage：暂存区<br>Repository：仓库区（或本地仓库）<br>Remote：远程仓库</p>
+<p>git reflog 查看当前分支的最近几次提交<br>git log 查看所有commit的记录</p>
+<h2 id="开始git之旅"><a href="#开始git之旅" class="headerlink" title="开始git之旅"></a>开始git之旅</h2><ol>
+<li>github上新建reposity，假设仓库名为Inbox</li>
+<li>本地化 <ul>
+<li>配置 <br><br>git config –global user.name “yourname” <br><br>git config –global user.email “youremail” <br><br><font color="red">git config –global core.editor vim</font> <br><blockquote>
+<p>这一点很重要，可以摆出Git自带的愚蠢的GNO的困扰</p>
+</blockquote>
+<ul>
+<li>两种方式<ul>
+<li>git init <br><br>git remote add origin <code>http://website://repo.git</code> <br><blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvRGVzaWduUGF0dGVybnMuZ2l0" title="https://github.com/AugF/DesignPatterns.git">https://github.com/AugF/DesignPatterns.git<i class="fa fa-external-link"></i></span><br>git push -u origin master</p>
+</blockquote>
+</li>
+<li>git clone <code>http://website://repo.git</code><h2 id="多人开发思路："><a href="#多人开发思路：" class="headerlink" title="多人开发思路："></a>多人开发思路：</h2>git branch查看分支</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>git checkout -b fpm， 创建分支并转到分支<br>git checkout -d fpm,  删除分支</p>
+<p>所有的修改操作都在fpm分支上<br>master负责merge远程分支</p>
+<ol>
+<li>希望master分支更新fpm分支上的内容<ul>
+<li>git checkout master</li>
+<li>git merge fpm</li>
+<li>git branch 查看分支</li>
+<li><blockquote>
+<p>fpm 分支并不会消失</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>希望fpm更新到master分支上的内容<ul>
+<li>git checkout fpm</li>
+<li>git rebase master</li>
+</ul>
+</li>
+<li>希望能够显示本地分支的情况</li>
+<li>merge前和push前需要检查本地内容有没有提交，请注意一件事就是先提交</li>
+<li>更新本地分支<ul>
+<li>git pull注意不过不带参数是直接覆盖</li>
+<li>git pull origin next:master 取回origin主机的next分支与本地的master分支合并</li>
+</ul>
+</li>
+<li>远程分支操作<ul>
+<li>查看远程分支： git branch -r</li>
+<li>创建运程分支： git push origin [name]</li>
+<li>删除远程分支： git push origin :[name]<h2 id="对别人的项目做贡献"><a href="#对别人的项目做贡献" class="headerlink" title="对别人的项目做贡献"></a>对别人的项目做贡献</h2></li>
+</ul>
+</li>
+<li>非Collaborators<ul>
+<li>git remote add upstream </li>
+<li>git fetch upstream</li>
+<li>git merge upstream/master</li>
+</ul>
+</li>
+</ol>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 列出所有tag</span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"># 新建一个tag在当前commit</span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"># 删除本地tag</span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"># 查看tag信息</span><br><span class="line">$ git show [tag]</span><br></pre></td></tr></table></figure>
+
+<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><ol>
+<li><p>You have not concluded your merge (MERGE_HEAD exists). Exiting because of unfinished merge<br>之前的提交没有merge</p>
+<blockquote>
+<p>git reset –merge</p>
+</blockquote>
+</li>
+<li><p>无法推送一些引用到 ‘<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5dW5wYW4vbmxwLXpoLU5FUi5naXQmIzM5Ow==" title="https://github.com/wangyunpan/nlp-zh-NER.git&#39;">https://github.com/wangyunpan/nlp-zh-NER.git&#39;<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>git pull<br>git push</p>
+</blockquote>
+</li>
+<li><p>报错<br>fatal: 远程 origin 已经存在。</p>
+<blockquote>
+<p>git remote rm origin  删除远程分支</p>
+</blockquote>
+</li>
+<li><p>如果我本地一顿猛操作，然后需要更新文件，然后应该怎么办？ 不能直接git pull, 再git push, 这样会覆盖本地的文件？？</p>
+</li>
+<li><p>! [rejected]        master -&gt; master (non-fast-forward)<br>error: failed to push some refs to ‘<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvRGVzaWduUGF0dGVybnMuZ2l0JiMzOTs=" title="https://github.com/AugF/DesignPatterns.git&#39;">https://github.com/AugF/DesignPatterns.git&#39;<i class="fa fa-external-link"></i></span><br>hint: Updates were rejected because the tip of your current branch is behind</p>
+<blockquote>
+<p>git push origin master -f</p>
+</blockquote>
+</li>
+<li><p>OpenSSL: error:1409442E:SSL routines:ssl3_read_bytes:tlsv1 alert protocol version</p>
+<blockquote>
+<p>向pasa gitbucket提交出现该bug<br>按照stackoverflow上  <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTMxNTE0NTYvb3BlbnNzbC1lcnJvcjE0MDk0NDJlc3NsLXJvdXRpbmVzc3NsMy1yZWFkLWJ5dGVzdGxzdjEtYWxlcnQtcHJvdG9jb2wtdmVyc2lv" title="https://stackoverflow.com/questions/53151456/openssl-error1409442essl-routinesssl3-read-bytestlsv1-alert-protocol-versio">https://stackoverflow.com/questions/53151456/openssl-error1409442essl-routinesssl3-read-bytestlsv1-alert-protocol-versio<i class="fa fa-external-link"></i></span><br>修改  wget –secure-protocol=TLSv1_2 仍然未解决</p>
+</blockquote>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/18/study-todo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/18/study-todo/" class="post-title-link" itemprop="url">study todo</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-18 10:06:10 / 修改时间：10:06:52" itemprop="dateCreated datePublished" datetime="2019-09-18T10:06:10+08:00">2019-09-18</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/todo/" itemprop="url" rel="index"><span itemprop="name">todo</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/todo/study/" itemprop="url" rel="index"><span itemprop="name">study</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>日志，了解加使用</li>
+<li>命令行</li>
+<li>环境</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/16/clean-code-reading-note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -322,7 +603,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-18 00:18:04" itemprop="dateModified" datetime="2019-09-18T00:18:04+08:00">2019-09-18</time>
+                <time title="修改时间：2019-09-18 12:53:51" itemprop="dateModified" datetime="2019-09-18T12:53:51+08:00">2019-09-18</time>
               </span>
             
           
@@ -362,7 +643,11 @@
 <p>由于自己写的代码老是感觉像屎一样烂，所以觉得不学学这方面的东西，真的是自己都看不下去了</p>
 </blockquote>
 <p>代码整洁之道  Rober C.Martin著， 韩磊译 </p>
-<h2 id="I-概览"><a href="#I-概览" class="headerlink" title="I. 概览"></a>I. 概览</h2><ol>
+<blockquote>
+<p>就学习而言，自己尽可能去过了一遍知识点，以下记的内容多半是过细的内容。要真正掌握之， 还需要summary最重要的准则，牢记于大脑中，形成做事的准则。同时，并且还要加以实战，对实例进行了解才是</p>
+</blockquote>
+<p>学习参考代码·<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvQ2xlYW5Db2Rl" title="https://github.com/AugF/CleanCode">https://github.com/AugF/CleanCode<i class="fa fa-external-link"></i></span></p>
+<h2 id="A-概览"><a href="#A-概览" class="headerlink" title="A. 概览"></a>A. 概览</h2><ol>
 <li><p>什么是整洁代码</p>
 <ul>
 <li>Bjame (C++)<blockquote>
@@ -2031,354 +2316,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/12/blog-todo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/12/blog-todo/" class="post-title-link" itemprop="url">blog:todo</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-12 13:37:22 / 修改时间：13:43:35" itemprop="dateCreated datePublished" datetime="2019-09-12T13:37:22+08:00">2019-09-12</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/todo/" itemprop="url" rel="index"><span itemprop="name">todo</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/todo/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>文字加密访问</p>
-</li>
-<li><p>收录到百度</p>
-</li>
-<li><p>new 文章时，可选参数决定是否需要创建对应的文件夹</p>
-<blockquote>
-<p>ctrl+`, 打开终端</p>
-</blockquote>
-</li>
-<li><p>仿照博客园，添加日历</p>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/12/semi-paper-code-read/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/12/semi-paper-code-read/" class="post-title-link" itemprop="url">semi-paper code read</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-12 12:47:23 / 修改时间：21:08:13" itemprop="dateCreated datePublished" datetime="2019-09-12T12:47:23+08:00">2019-09-12</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/semi-gnn/" itemprop="url" rel="index"><span itemprop="name">semi-gnn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="论文1"><a href="#论文1" class="headerlink" title="论文1"></a>论文1</h2><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RraXBmL2djbg==" title="https://github.com/tkipf/gcn">https://github.com/tkipf/gcn<i class="fa fa-external-link"></i></span></p>
-<p>Data</p>
-<ul>
-<li>n<em>n   n</em>d  d=c:channels  e=f:classes</li>
-</ul>
-<ol>
-<li>gcn 文件组织结构<ul>
-<li>readme.md<ul>
-<li>data:  d=c: chanels   e=f:classes<ul>
-<li>citation network data:  cora, citeseer, pubmed</li>
-<li>nell:  revisiting semi-supervised learning with graph embedding</li>
-</ul>
-</li>
-<li>model: gcn,  gcn_cheby, dense</li>
-</ul>
-</li>
-<li>gcn<ul>
-<li>data<ul>
-<li>.tx  the feature vectors of test instances</li>
-<li>.ty  the one-hot labels</li>
-<li>.index   the indices of test instances in graph,   inductive setting</li>
-<li>.x :  the feature vectors of the labeled training instances </li>
-<li>.y :  the labeled</li>
-<li>.allx: all</li>
-<li>.ally</li>
-</ul>
-</li>
-<li>inits.py<ul>
-<li>uniform,  glorot: [input_dim, output_dim],  zeros, ones</li>
-</ul>
-</li>
-<li>metrics.py<ul>
-<li>cross_entropy + accuary</li>
-</ul>
-</li>
-<li>models.py<ul>
-<li>gcn: semi-superised </li>
-<li>gcn_cheby: convolutional</li>
-<li>dense: basic multi-layer perceptron</li>
-<li>Model<blockquote>
-<p>self.layers[0], 第一层的layer. 对第一层中的var的值，进行相加，这里的var只有weights, bias.  进行乘以固定系数相加<br>num_features_nonzero: dropout的方法也不同</p>
-</blockquote>
-<ul>
-<li>init<ul>
-<li>name, logging</li>
-<li>vars, placeholdres</li>
-<li>layers, activations</li>
-<li>inputs, outputs</li>
-<li>loss, accuary</li>
-<li>optimizer, opt_op</li>
-</ul>
-</li>
-<li>build:   tf.variable_scope(self.name)<ul>
-<li>build sequential layer model</li>
-<li>store model variables for easy access</li>
-<li>build metrics:  weight_decay: 5e-4: weight for L2 loss on embedding matrix. ???</li>
-</ul>
-</li>
-<li>predict</li>
-<li>_loss</li>
-<li>_accuracy</li>
-<li>save</li>
-<li>load</li>
-</ul>
-</li>
-<li>MLP<ul>
-<li><strong>init</strong>:  inputs: features,  input_dim, output_dim, placeholders, optimizer, build</li>
-<li>_loss: 变量的l2 loss???? += 交叉熵</li>
-<li>_build;  Dense</li>
-</ul>
-</li>
-<li>GCN<ul>
-<li>_build: GraphConvolution</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>utils.py<ul>
-<li>load_data</li>
-</ul>
-</li>
-<li>layers.py<ul>
-<li>get_layer_uid: 全场唯一uid</li>
-<li>sparse_dropout: dropout for sparse tensors????</li>
-<li>Layer<ul>
-<li>init: name, vars, logging, sparse_inputs</li>
-<li>_call: return inputs</li>
-<li>__call: add inputs, outputs ??? tf.summary.histogram()?// 为了方便展示直方图?</li>
-<li>_log_vars:  add vars in histogram</li>
-</ul>
-</li>
-<li>Dense(Layer)<ul>
-<li>__init:  input_dim, output_dim, placeholders, dropout=0., sparse_inputs, act, bias=false, featureless=false  glorot()</li>
-<li>_call<ul>
-<li>dropout:</li>
-<li>transform:  是否使用稀疏矩阵相乘</li>
-<li>bias:  self.vars[‘bias’] 没有输入的，只有输出，在隐藏层中，对结果产生影响</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>GraphConvolution: graph convolution layer(Layer)<ul>
-<li>act?  support?  bias?   featureless?  act: tensorflow activation</li>
-<li>init<ul>
-<li>support 变量的个数 weights_i:  glorot   bias=zeros</li>
-</ul>
-</li>
-<li>_call<ul>
-<li>convlve ??</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>train.py<ul>
-<li>flags<blockquote>
-<p>dataset, model, learning_rate, epochs,, hidden1-16, dropout</p>
-</blockquote>
-<ul>
-<li>weight_decay: weight for l2 loss on embedding matrix</li>
-<li>early_stopping</li>
-<li>max_degree:  Chebyshev 不等式的阶</li>
-</ul>
-</li>
-<li>placeholders<ul>
-<li>support: [preprocess_adj(adj)]<blockquote>
-<p>为什么要这么做? 因为gcn_cheby模型中每层的A实际上是不一样的</p>
-</blockquote>
-</li>
-<li>features: </li>
-<li>labels: </li>
-<li>labels_mask: </li>
-<li>dropout: 注意稀疏矩阵和稠密矩阵 dropout方法还不一样 </li>
-<li>num_feature_nonzero: </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>corn<br>    - x:  140,1433  tx: 1000,1433  ty: 1000, 7<br>    - allx: 1708  1433  ? 为何总数不相等</p>
-<pre><code>- (allx,tx) 说明这两个不相等 </code></pre><h3 id="论文2"><a href="#论文2" class="headerlink" title="论文2"></a>论文2</h3><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tpbWl5b3VuZy9wbGFuZXRvaWQ=" title="https://github.com/kimiyoung/planetoid">https://github.com/kimiyoung/planetoid<i class="fa fa-external-link"></i></span></p>
-<ul>
-<li>test_ind.py:  induce model 的测试</li>
-<li>test_trans.py:  transive model的测试</li>
-<li>ind_model.py:  model   add_data  build  gen_train_inst   gen_graph gen_lable_graph</li>
-</ul>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -2431,7 +2368,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2444,7 +2381,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -2457,7 +2394,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
