@@ -311,7 +311,7 @@
                 
               
 
-              <time title="创建时间：2019-09-18 14:24:20 / 修改时间：14:38:36" itemprop="dateCreated datePublished" datetime="2019-09-18T14:24:20+08:00">2019-09-18</time>
+              <time title="创建时间：2019-09-18 14:24:20 / 修改时间：14:48:53" itemprop="dateCreated datePublished" datetime="2019-09-18T14:24:20+08:00">2019-09-18</time>
             </span>
           
             
@@ -411,8 +411,15 @@
 </ul>
 </li>
 </ol>
-<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 列出所有tag</span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"># 新建一个tag在当前commit</span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"># 删除本地tag</span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"># 查看tag信息</span><br><span class="line">$ git show [tag]</span><br></pre></td></tr></table></figure>
+<h2 id="对远程分支操作"><a href="#对远程分支操作" class="headerlink" title="对远程分支操作"></a>对远程分支操作</h2><ol>
+<li>git remote show <code>&lt;主机名&gt;</code> : 查看远程主机，不包含地址</li>
+<li>git remote add <code>&lt;主机名&gt;</code>: 添加远程主机</li>
+<li>git remote rm <code>&lt;主机名&gt;</code>: 删除远程主机</li>
+<li>git remote rename <code>&lt;主机名&gt;</code>: 改名</li>
+<li>git remote -v: 连带查看地址<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 列出所有tag</span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"># 新建一个tag在当前commit</span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"># 删除本地tag</span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"># 查看tag信息</span><br><span class="line">$ git show [tag]</span><br></pre></td></tr></table></figure>
 
+</li>
+</ol>
 <h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><ol>
 <li><p>You have not concluded your merge (MERGE_HEAD exists). Exiting because of unfinished merge<br>之前的提交没有merge</p>
 <blockquote>
