@@ -1,5 +1,5 @@
-https://augf.github.io/2019/09/19/neu-ai-course/
-https://augf.github.io/2019/09/19/neu-algorithm-course/
-https://augf.github.io/2019/09/19/algorithm-course-np/
-https://augf.github.io/2019/09/19/algorithm-course-selecting/
-https://augf.github.io/2019/09/19/algorithm-course-searching/
+https://augf.github.io/2019/09/19/nju-course-cplus-lecture7/
+https://augf.github.io/2019/09/19/nju-course-cplus-lecture6-summary/
+https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/
+https://augf.github.io/2019/09/19/nju-course-cplus-lecture5-summary/
+https://augf.github.io/2019/09/19/nju-course-cplus-lecture5/

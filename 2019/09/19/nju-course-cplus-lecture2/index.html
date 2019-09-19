@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <link rel="alternate" href="/atom.xml" title="AugF's Notes" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <meta name="description" content="本节课重点1. 抽象和封装 抽象: 数据的使用者只需要知道数据能实施的操作以及这些操作之间的关系，不必知道数据的具体表示形式。 封装：将数据及其操作作为一个整体来进行实现。数据的具体表示对使用者是不可见的，对数据的访问只能通过封装体所提供的对外接口来完成。 案例比如，栈的使用，首先不能直接在程序中定义，一不小心手误就会出错；其次，采用面向过程的想法：struct Stack{};  void pu">
+<meta name="keywords" content="nju,course,cplus">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nju-course-cplus-lecture2">
+<meta property="og:url" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture2/index.html">
+<meta property="og:site_name" content="AugF&#39;s Notes">
+<meta property="og:description" content="本节课重点1. 抽象和封装 抽象: 数据的使用者只需要知道数据能实施的操作以及这些操作之间的关系，不必知道数据的具体表示形式。 封装：将数据及其操作作为一个整体来进行实现。数据的具体表示对使用者是不可见的，对数据的访问只能通过封装体所提供的对外接口来完成。 案例比如，栈的使用，首先不能直接在程序中定义，一不小心手误就会出错；其次，采用面向过程的想法：struct Stack{};  void pu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-19T01:47:41.734Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nju-course-cplus-lecture2">
+<meta name="twitter:description" content="本节课重点1. 抽象和封装 抽象: 数据的使用者只需要知道数据能实施的操作以及这些操作之间的关系，不必知道数据的具体表示形式。 封装：将数据及其操作作为一个整体来进行实现。数据的具体表示对使用者是不可见的，对数据的访问只能通过封装体所提供的对外接口来完成。 案例比如，栈的使用，首先不能直接在程序中定义，一不小心手误就会出错；其次，采用面向过程的想法：struct Stack{};  void pu">
+  <link rel="canonical" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>nju-course-cplus-lecture2 | AugF's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AugF's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">44</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">47</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">59</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">nju-course-cplus-lecture2
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:46:53 / 修改时间：09:47:41" itemprop="dateCreated datePublished" datetime="2019-09-19T09:46:53+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="本节课重点"><a href="#本节课重点" class="headerlink" title="本节课重点"></a>本节课重点</h1><h2 id="1-抽象和封装"><a href="#1-抽象和封装" class="headerlink" title="1. 抽象和封装"></a>1. 抽象和封装</h2><ul>
+<li>抽象: 数据的使用者只需要知道数据能实施的操作以及这些操作之间的关系，不必知道数据的具体表示形式。</li>
+<li>封装：将数据及其操作作为一个整体来进行实现。数据的具体表示对使用者是不可见的，对数据的访问只能通过封装体所提供的对外接口来完成。</li>
+<li>案例<br>比如，栈的使用，首先不能直接在程序中定义，一不小心手误就会出错；其次，采用面向过程的想法：<br>struct Stack{};  void push(Stack &amp;s);<br>当我在其他地方定义一个void f(Stack &amp;s), 会破坏Stack的数据；数据表示仍是公开的，可以对数据进行操作。</li>
+</ul>
+<p>所以引入面向对象。<br>public对外的接口， private隐藏的内容，外不可见<br>protect面向继承</p>
+<p>把程序构造成由若干个对象组成，每个对象是由一些数据以及对这些数据所能实施的操作构成的封装体。<br>一个雷所描述的对象的特征可以继承。</p>
+<blockquote>
+<p>这里特征指private中的成员。对象所定义的操作即是其接口</p>
+</blockquote>
+<h2 id="2-面向对象程序的执行过程"><a href="#2-面向对象程序的执行过程" class="headerlink" title="2. 面向对象程序的执行过程"></a>2. 面向对象程序的执行过程</h2><p>对象构成了面向对象程序的基本计算单位<br>对象间的消息传递是引起面向对象程序进行计算的唯一形式。</p>
+<blockquote>
+<p>从程序外部向程序中的某个对象发送第一条消息标志着程序的开始。该对象在处理这条消息的过程中又向其他对象发送消息，引起进一步的计算。当第一条消息处理结束后则程序的一次计算结束。消息处理可以分为同步和异步，这里显然只涉及到同步。</p>
+</blockquote>
+<h2 id="3-对比"><a href="#3-对比" class="headerlink" title="3. 对比"></a>3. 对比</h2><p>提高软件开发效率和保证软件质量的几个基本程序设计手段</p>
+<ul>
+<li>抽象（复杂度控制）</li>
+<li>封装（信息隐藏）</li>
+<li>模块化（组织大型程序）</li>
+<li>软件复用（延长开发周期）</li>
+<li>可维护性（延长软件寿命）</li>
+<li>软件模型的自然渡（缩小解题空间与问题空间的语义间隙）<blockquote>
+<p>最后一个方面可以思考到，实际上求解问题都可以划分各个状态。即通过状态空间来解题，所以可以看出来基于对象/类的解题方式与问题空间有很好的对应。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>面向过程是什么？强调的是过程即功能，数据和操作分离，数据没有保护，功能特定限定不可扩展。最后，与问题空间没啥关系。<br>最大的高手是能说出一堆东西还能找到准确的分类。</p>
+</blockquote>
+<h2 id="4-面向对象的基本内容"><a href="#4-面向对象的基本内容" class="headerlink" title="4. 面向对象的基本内容"></a>4. 面向对象的基本内容</h2><p>对象-值，类-类型。<br>多态：某一论域中的一个元素存在多种解释：</p>
+<ul>
+<li>一名多用：函数名、操作符重载</li>
+<li>类属性： <ul>
+<li>一函数可以对多种类型数据进行操作？</li>
+<li>一个类型可以描述多种类型的数据</li>
+</ul>
+</li>
+</ul>
+<p>绑定：确定对多态元素的某个使用是多态元素的哪种形式？</p>
+<ul>
+<li>静态绑定</li>
+<li>动态绑定</li>
+</ul>
+<p>面向对象程序特有的多态（继承）</p>
+<ol>
+<li>对象类型的多态: 子类对象可以属于子类，也可以属于父类</li>
+<li>对象标识的多态：父类的引用或指针可以引用或指向父亲对象，也可子类对象</li>
+<li>消息的多态：发给的消息可以发给子类，即，一个消息可以有多种解释（父类与子类有不同解释）</li>
+</ol>
+<p>多态带来的好处：</p>
+<ul>
+<li>易于实现程序高层代码的复用 ？</li>
+<li>使得程序扩充变得容易（只要增加底层的具体实现）</li>
+<li>增强语言的可扩充性（操作符重载）</li>
+</ul>
+<h4 id="类"><a href="#类" class="headerlink" title="类"></a>类</h4><p>对象构成了面向对象的基本计算单位，而对象的特征则是由相应的类来描述。因此，程序中首先要定义类。<br>注意：在C++中，也允许在结构和联合中定义函数，但成员的访问控制与类不同。</p>
+<blockquote>
+<p>结构和联合的成员默认为public,是否可以改我不知道？</p>
+</blockquote>
+<p>访问控制就是public,private,protected.</p>
+<p>public:公开<br>private:本类和友元的代码中访问，默认方式<br>protected:只能在本类、派生类和友元的代码中访问</p>
+<blockquote>
+<p>友元函数什么意思？</p>
+</blockquote>
+<p><strong>访问控制设置的建议</strong></p>
+<ol>
+<li>类的数据成员和在类的内部使用的成员函数应该指定为private,只有提供给外界使用的成员函数才指定为public. 具有public访问控制的成员构成了类与外界的一种接口，在一个类的外部只能访问该类接口中的成员 </li>
+</ol>
+<p><strong>数据类型定义时的注意</strong></p>
+<ol>
+<li><p>在说明一个数据成员的类型时，如果未见到相应类型的定义，或相应的类型未定义完，则该数据成员的类型只能是这些类型的指针或引用类型。</p>
+<blockquote>
+<p>因为实际类型是无法解释代码的。而指针类型是现在符号表中定义，然后再寻找答案的。</p>
+</blockquote>
+</li>
+<li><p>成员函数的实现可在内外定义，在内外定义要用类名受限，区别于全局函数。</p>
+</li>
+<li><p>类成员函数名是可以重载的，它遵循一般函数名的重载规则。</p>
+</li>
+</ol>
+<h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h4><p>对象是动态运行中构造，类型是静态的形式。</p>
+<p>对象可以分为全局对象、局部对象和成员对象？</p>
+<hr>
+<p>对象创建的两种方式</p>
+<ul>
+<li>直接，实体变量，使用实体，在静态区或栈中<blockquote>
+<p>静态区好像不可能？ 前面不说了吗？是这个意思吗？</p>
+</blockquote>
+</li>
+<li>间接，动态，使用指针<br>在堆中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">A *p;</span><br><span class="line">p=new A;  //创建</span><br><span class="line">*p,  p-&gt;  </span><br><span class="line">delete p;</span><br><span class="line"></span><br><span class="line">A *q;</span><br><span class="line">q=new A[100];</span><br><span class="line">q[i]   // *(q+i)</span><br><span class="line">delete []q;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>使用参数进行赋值<br>同类型一样，同类对象可以进行赋值，取对象地址之类的事情<br><code>Data b;</code></p>
+</li>
+<li><p>使用对象作为参数<br>使用对象做实参，不想函数在调用是创建一个大的元素又不想被修改<br>const Data &amp;d</p>
+<blockquote>
+<p>感觉上参数实际上就是一个地址</p>
+</blockquote>
+</li>
+<li><p>使用对象作为返回值</p>
+<blockquote>
+<p>务必注意一个事，如果想返回的是一个新对象返回值用Data；否则容易把参数中，原本函数中的值给改变。最重要的是自己到底是想还是不想被改变</p>
+</blockquote>
+</li>
+<li><p>每个对象，this指针</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 面向对象编程</span><br><span class="line">class A&#123;</span><br><span class="line">    public:</span><br><span class="line">        void g(int i)&#123;</span><br><span class="line">            x=i;</span><br><span class="line">            // 相当于this.x=i;</span><br><span class="line">        &#125;</span><br><span class="line">    private:</span><br><span class="line">        int x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 面向过程编程</span><br><span class="line">struct A&#123;</span><br><span class="line">    int x;</span><br><span class="line">&#125;</span><br><span class="line">void g(A *const this,int i)&#123;</span><br><span class="line">    this-&gt;x=i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a.g(1); 等价于 g(&amp;a,1);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>突然想到了，Python中编程，当初想要将 pub(x,y)变为x(y)的过程？ 具体怎么做还得看一下相关书上的东西。</p>
+</blockquote>
+<hr>
+<ul>
+<li>对象初始化<br>特有的东西，init(), 自动被调用，很好！<br>可重载<br>动态数组 默认 A();<br>常量和引用不能被初始化,为什么？<blockquote>
+<p>一旦被赋值了，那对象还要它干什么</p>
+</blockquote>
+</li>
+</ul>
+<p>初试话顺序按类定义顺序，很显然</p>
+<p>在构造函数中开辟的空间需要自己在析构函数中解决，特别是动态申请的空间。</p>
+<ul>
+<li>成员对象<br>数据成员可以是另一个类<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class A</span><br><span class="line">&#123;   int x;</span><br><span class="line">   public:</span><br><span class="line">	 A() &#123; x = 0; &#125;</span><br><span class="line">	 A(int i) &#123; x = i; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">class B</span><br><span class="line">&#123;   A a;</span><br><span class="line">     int y;</span><br><span class="line">   public:</span><br><span class="line">	  B() &#123; y = 0;&#125; //调用A的默认构造函数对a初始化。</span><br><span class="line">     B(int i) &#123; y = i; &#125; //调用A的默认构造函数对a初始化。  </span><br><span class="line">     B(int i, int j): a(j) &#123; y = i; &#125; //调用A(int)对a 初始化。  </span><br><span class="line">&#125;;</span><br><span class="line">B b0; //b0.y初始化为0，b0.a.x初始化为0</span><br><span class="line">B b1(1); //b1.y初始化为1，b1.a.x初始化为0</span><br><span class="line">B b2(1,2); //b2.y初始化为1，b2.a.x初始化为2</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>析构的顺序跟执行顺序相反。</p>
+<blockquote>
+<p>容易想到，析构函数 先调用本身类，再调用成员对象<br>应用场景：复杂的窗口调用关系时</p>
+</blockquote>
+<ul>
+<li>拷贝构造函数<br><code>A(const A&amp;a){}</code> ！<blockquote>
+<p>正如其名，在需要拷贝，即值传递的时候用到<br>比如说，构造函数就自定义的，那么拷贝构造函数？<br>?默认构造函数是什么？-&gt; 隐式拷贝构造函数</p>
+</blockquote>
+</li>
+</ul>
+<p>对于隐式拷贝构造函数：</p>
+<ol>
+<li>非对象成员逐个赋值</li>
+<li>对象成员优先选择构造函数，否则隐式<blockquote>
+<p>这里注意，当成员构造函数中申请了一片空间，可能会同时指向一片空间</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>p=new int[5]; 这样会指向一个空间吗？首先，要看它的第一步动作，如果是</p>
+</blockquote>
+<p>对于自定义拷贝构造函数，注意成员对象默认构造函数，否则显式指定</p>
+<blockquote>
+<p>这里比较麻烦，</p>
+</blockquote>
+<ol>
+<li>定义对象<br><code>A a，b; b=a;</code></li>
+<li>对象作为值参数和返回值</li>
+</ol>
+<ul>
+<li>const</li>
+</ul>
+<p>void f(const Date&amp; d){<br>    d.get_day(); //不可以，无法知道实际上是否进行了数据成员改变，所以统一禁止<br>}</p>
+<p>因此，将类的成员函数分为两类：</p>
+<ul>
+<li>获取对象状态<br>int get_day() const {}; //不能改变数据成员的值， 这下f中d.get_day()ok了</li>
+<li>改变对象状态</li>
+</ul>
+<hr>
+<ul>
+<li>同类对象共享数据（全局变量不行，不安全！）<blockquote>
+<p>问题如何引出？ static还有什么用？</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>采用静态对象，类直接可以获取。static int x; void f() {x++; }<br>// 工厂模式，进行计数， 类可直接访问，只有一个备份<br>应用：实现对某类对象的计数</p>
+</blockquote>
+<ul>
+<li>静态成员函数<br>静态成员函数只能访问类的静态成员。<br>静态成员函数没有隐藏的this<blockquote>
+<p>静态都可以通过对象和类两种方式来访问</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>在一些“纯”面向对象程序设计语言中，把类看作对象，用元类(meta class)来描述.<br>静态成员属于“类对象”</p>
+</blockquote>
+<ul>
+<li>友元<blockquote>
+<p>暴露的一个超级大的接口，为了应对其他方面的不足。<br>目的是为了提高在类的外部对类的数据成员的访问效率。</p>
+</blockquote>
+</li>
+</ul>
+<p>友元可以是全局函数、其它的类或其它类的某些成员函数。<br>class A<br>{<br>    ? // 感觉是public<br>    friend void func();<br>    friend class B;<br>    friend void C::f();<br>private:<br>    int x;<br>}</p>
+<p>友元关系具有不对称性。<br>友元也不具有传递性<br>友元是数据保护和数据访问效率之间的一种折中方案</p>
+<p>todo<br>用类来实现矩阵和向量类型<br>multipy的实现</p>
+<p>类作为模块</p>
+<ul>
+<li>类是一个自然的模块划分单位</li>
+<li>.h文件中存放的是类的定义</li>
+<li>.cpp文件中是类成员函数的实现</li>
+</ul>
+<p>一个模块一般有两个文件</p>
+<blockquote>
+<p>耦合性：模块与模块之间的依赖关系</p>
+</blockquote>
+<p>过程： 结构式</p>
+<p>面向对象：降低耦合</p>
+<blockquote>
+<p>Demeter法则，一个类的成员函数除了访问自身类结构的直接子结构外，不能以任何方式依赖于任何其他类的结构。<br>每个成员函数只应向某个有限集合中的对象发送消息。<br>仅与你的直接朋友联系。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eugene Wang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture2/" title="nju-course-cplus-lecture2">https://augf.github.io/2019/09/19/nju-course-cplus-lecture2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/nju/" rel="tag"><i class="fa fa-tag"></i> nju</a>
+            
+              <a href="/tags/course/" rel="tag"><i class="fa fa-tag"></i> course</a>
+            
+              <a href="/tags/cplus/" rel="tag"><i class="fa fa-tag"></i> cplus</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/19/nju-course-cplus-lecture1-summary/" rel="next" title="nju-course-cplus-lecture1-summary">
+                  <i class="fa fa-chevron-left"></i> nju-course-cplus-lecture1-summary
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/19/nju-course-cplus-lecture2-summary/" rel="prev" title="nju-course-cplus-lecture2-summary">
+                  nju-course-cplus-lecture2-summary <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本节课重点"><span class="nav-number">1.</span> <span class="nav-text">本节课重点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-抽象和封装"><span class="nav-number">1.1.</span> <span class="nav-text">1. 抽象和封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-面向对象程序的执行过程"><span class="nav-number">1.2.</span> <span class="nav-text">2. 面向对象程序的执行过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-对比"><span class="nav-number">1.3.</span> <span class="nav-text">3. 对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-面向对象的基本内容"><span class="nav-number">1.4.</span> <span class="nav-text">4. 面向对象的基本内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">对象</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/default-avatar.png"
+      alt="Eugene Wang">
+  <p class="site-author-name" itemprop="name">Eugene Wang</p>
+  <div class="site-description" itemprop="description">Quick notes</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="GitHub &rarr; https://github.com/AugF"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOnl1bnBhbndhbmdAZ21haWwuY29t" title="E-Mail &rarr; mailto:yunpanwang@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vSm9zd3hl" title="Weibo &rarr; https://weibo.com/Joswxe"><i class="fa fa-fw fa-weibo"></i>Weibo</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==" title="https://www.google.com">Google</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jbi5iaW5nLmNvbQ==" title="https://cn.bing.com">Bing</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">Baidu</span>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>
