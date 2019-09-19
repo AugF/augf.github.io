@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <link rel="alternate" href="/atom.xml" title="AugF's Notes" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <meta name="description" content="1. The Learning Problem1.1. Introductiontheory+technique多个角度概念what + why + how + better: 1.2. what is ML?1.2.1 definetionobservation-&amp;gt;learning-&amp;gt;skilldata-&amp;gt;ml-&amp;gt;skill  so data is more like o">
+<meta name="keywords" content="machinelearning,cornerstone">
+<meta property="og:type" content="article">
+<meta property="og:title" content="machinelearning cornerstone when can machines learn">
+<meta property="og:url" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/index.html">
+<meta property="og:site_name" content="AugF&#39;s Notes">
+<meta property="og:description" content="1. The Learning Problem1.1. Introductiontheory+technique多个角度概念what + why + how + better: 1.2. what is ML?1.2.1 definetionobservation-&amp;gt;learning-&amp;gt;skilldata-&amp;gt;ml-&amp;gt;skill  so data is more like o">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00001.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00002.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00003.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00004.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00005.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00006.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00013.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00007.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00008.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00009.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00010.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00011.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00012.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00014.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00015.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00016.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00017.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00018.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00019.png">
+<meta property="og:updated_time" content="2019-09-19T04:33:41.750Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="machinelearning cornerstone when can machines learn">
+<meta name="twitter:description" content="1. The Learning Problem1.1. Introductiontheory+technique多个角度概念what + why + how + better: 1.2. what is ML?1.2.1 definetionobservation-&amp;gt;learning-&amp;gt;skilldata-&amp;gt;ml-&amp;gt;skill  so data is more like o">
+<meta name="twitter:image" content="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/00001.png">
+  <link rel="canonical" href="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>machinelearning cornerstone when can machines learn | AugF's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AugF's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">59</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">65</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">84</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">machinelearning cornerstone when can machines learn
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:30:31 / 修改时间：12:33:41" itemprop="dateCreated datePublished" datetime="2019-09-19T12:30:31+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/" itemprop="url" rel="index"><span itemprop="name">machinelearning</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/cornerstone/" itemprop="url" rel="index"><span itemprop="name">cornerstone</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-The-Learning-Problem"><a href="#1-The-Learning-Problem" class="headerlink" title="1. The Learning Problem"></a>1. The Learning Problem</h1><h2 id="1-1-Introduction"><a href="#1-1-Introduction" class="headerlink" title="1.1. Introduction"></a>1.1. Introduction</h2><p>theory+technique<br>多个角度概念<br>what + why + how + better:</p>
+<h2 id="1-2-what-is-ML"><a href="#1-2-what-is-ML" class="headerlink" title="1.2. what is ML?"></a>1.2. what is ML?</h2><h3 id="1-2-1-definetion"><a href="#1-2-1-definetion" class="headerlink" title="1.2.1 definetion"></a>1.2.1 definetion</h3><p>observation-&gt;learning-&gt;skill<br>data-&gt;ml-&gt;skill</p>
+<blockquote>
+<p>so data is more like observation, will be better.<br>learning skill how to use in data</p>
+</blockquote>
+<p>learning:<br>ml:</p>
+<p>skill: improve some performance measure.</p>
+<h3 id="1-2-2-Application"><a href="#1-2-2-Application" class="headerlink" title="1.2.2 Application:"></a>1.2.2 Application:</h3><p>stock data-&gt;ML-&gt;more stock gain</p>
+<ul>
+<li>Tree Recognition<br>‘define’  trees and hand-program: difficult<br>learn from data(observations) and recognize</li>
+</ul>
+<h3 id="1-2-3-Use-Scenarios"><a href="#1-2-3-Use-Scenarios" class="headerlink" title="1.2.3 Use Scenarios"></a>1.2.3 Use Scenarios</h3><p>navigating on Mars<br>cannot’ define the solution</p>
+<blockquote>
+<p>一般世界人，都使用的是规则来判定一件事。<br>high-frequency trading<br>consumer-targeted marketing</p>
+</blockquote>
+<h3 id="1-2-4-key-essence-of-ml"><a href="#1-2-4-key-essence-of-ml" class="headerlink" title="1.2.4 key essence of ml"></a>1.2.4 key essence of ml</h3><ol>
+<li>some underlying pattern to be learned<br>exisits target<br>eg: predict whether the next cry of baby</li>
+<li>but no easy definition !<br>eg: determining whether a given graph contains a cycle</li>
+<li>this is data about the pattern<br>eg:whether the earth will be destoryed</li>
+</ol>
+<h2 id="1-3-Learning-Problem"><a href="#1-3-Learning-Problem" class="headerlink" title="1.3. Learning Problem"></a>1.3. Learning Problem</h2><ol>
+<li>Daily Needs<br>Food<br>Clothing<br>Housing<br>Transportation</li>
+<li>Education</li>
+<li>Entertainment</li>
+</ol>
+<h2 id="1-4-ML-vs-DM-AI-Statistics"><a href="#1-4-ML-vs-DM-AI-Statistics" class="headerlink" title="1.4 ML vs DM,AI,Statistics"></a>1.4 ML vs DM,AI,Statistics</h2><p>from f -&gt; ML -&gt; g.<br><img src="00001.png" alt> </p>
+<p>ML vs DM<br><img src="00002.png" alt><br>DM can help ML, and vice versa.<br>efficient computation</p>
+<p>ML vs AI<br><img src="00003.png" alt></p>
+<p>ML vs Statistics(inference )<br><img src="00004.png" alt>  </p>
+<h1 id="2-Learning-to-Answer-Yes-No"><a href="#2-Learning-to-Answer-Yes-No" class="headerlink" title="2. Learning to Answer Yes_No"></a>2. Learning to Answer Yes_No</h1><h2 id="2-1-Example"><a href="#2-1-Example" class="headerlink" title="2.1 Example"></a>2.1 Example</h2><h3 id="PLA算法设计"><a href="#PLA算法设计" class="headerlink" title="PLA算法设计"></a>PLA算法设计</h3><p><strong>设计思想</strong><br>知错能改，纠正错误的思想.<br>图形结合法来求解<br><strong>类别</strong><br>局部</p>
+<p><strong>步骤</strong><br>线性函数，感知机。<br>修正参数，w_{t+1}在错误案例上进行修正。</p>
+<blockquote>
+<p>知错能改法<br>Cyclic PLA,简单的检查是否还有错误。<br>对数据饶一圈，让这第100个人都没有犯错</p>
+</blockquote>
+<h3 id="PLA算法的正确性"><a href="#PLA算法的正确性" class="headerlink" title="PLA算法的正确性"></a>PLA算法的正确性</h3><p><strong>假设</strong></p>
+<ol>
+<li>问题具有最优解</li>
+<li>样本真实，没有噪声</li>
+</ol>
+<p><strong>收敛到最优解</strong></p>
+<p><strong>算法会停止（求迭代轮数）</strong></p>
+<p>PLA用图形的夹角来做。P8</p>
+<p>PLA是否可学习？<br>判断两个数是否接近？<br>做累积，两个向量内积越来越大</p>
+<p><img src="00005.png" alt></p>
+<p><img src="00006.png" alt></p>
+<blockquote>
+<p>资料是否是线性可分？资料这里是指D，还是实际分布</p>
+</blockquote>
+<blockquote>
+<p>从某种分布上来说，未知资料是否线性可分。</p>
+</blockquote>
+<blockquote>
+<p>理论这里对吗？就是是否线性可分</p>
+</blockquote>
+<h2 id="2-2-Learning-with-noisy-data"><a href="#2-2-Learning-with-noisy-data" class="headerlink" title="2.2 Learning with noisy data"></a>2.2 Learning with noisy data</h2><blockquote>
+<p>待测数据上有噪声<br>假设犯错率很低，那么假设没有犯错率</p>
+</blockquote>
+<p>假设没有噪声，但不知道是否可学习怎么办？<br>试图去找犯错误最小的。 NP-hard</p>
+<p>科学家的做法：找不到全局最好的解，所以考虑使用贪心。 Pocket Algorithm，在自己的口袋保留最好的算法，根据步长随机更新的思想。<br><img src="00013.png" alt></p>
+<p><img src="00007.png" alt></p>
+<blockquote>
+<p>因为是最优算法所以返回的结果必然都是最优的。对于算法的比较，记住一定从时间复杂度上看。 还有一旦是线性可分，那么就意味着算法都可以不犯错。</p>
+</blockquote>
+<h1 id="3-Types-of-Learning"><a href="#3-Types-of-Learning" class="headerlink" title="3. Types of Learning"></a>3. Types of Learning</h1><h2 id="v1-输出空间角度"><a href="#v1-输出空间角度" class="headerlink" title="v1 输出空间角度"></a>v1 输出空间角度</h2><ul>
+<li>binary classification</li>
+<li>mulitclass classification</li>
+<li>回归问题<blockquote>
+<p>对于有限的复杂的输出可以看作是多分类问题</p>
+</blockquote>
+</li>
+<li>结构学习问题：比如学习蛋白质的长相，讲的话的语法树（输出空间中具有某种结果）<blockquote>
+<p>其实从某种意义上也是划归到多分类上去。</p>
+</blockquote>
+<h2 id="v2-资料的角度"><a href="#v2-资料的角度" class="headerlink" title="v2 资料的角度"></a>v2 资料的角度</h2></li>
+</ul>
+<ol>
+<li>监督学习: 完全是有标记样本</li>
+<li>非监督学习: 未标记样本，分群<blockquote>
+<p>监督可以看作是没有答案<br>聚类，文章主题</p>
+</blockquote>
+<ul>
+<li>density estimation: {x_n}</li>
+<li>outlier detection:<blockquote>
+<p>难衡量好坏，因为没有目标</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>半监督学习：有标记样本+未标记样本。</li>
+<li>强化学习: 不断强化，给予惩罚和奖励；不断学得最终的目标。<blockquote>
+<p>喂给机器资料，对机器进行评价，好还是不好<br>partial/implicit information</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="00008.png" alt></p>
+<h2 id="v3-取得样本的方式，学习的角度"><a href="#v3-取得样本的方式，学习的角度" class="headerlink" title="v3 取得样本的方式，学习的角度"></a>v3 取得样本的方式，学习的角度</h2><ol>
+<li>Batch Learning</li>
+<li>Online learing</li>
+<li>active: “question asking” –query the yn of the chosen xn<blockquote>
+<p>有技巧地问问题，可以用很少的问题学习到很多的东西。标记很贵的情况。</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="00009.png" alt></p>
+<h2 id="v4-特征的角度"><a href="#v4-特征的角度" class="headerlink" title="v4 特征的角度"></a>v4 特征的角度</h2><p>二维向量：对称性、密度性</p>
+<ul>
+<li>concrete</li>
+<li>abstract 客户的编号，实际就是一种抽象了。</li>
+<li>raw<br><img src="00010.png" alt></li>
+</ul>
+<blockquote>
+<p>如何找一个最合适的特征</p>
+</blockquote>
+<blockquote>
+<p>至少可以从这些分类中寻找一个感兴趣的东西<br><img src="00011.png" alt></p>
+</blockquote>
+<h1 id="4-Feasibility-of-Learning"><a href="#4-Feasibility-of-Learning" class="headerlink" title="4. Feasibility of Learning"></a>4. Feasibility of Learning</h1><p><img src="00012.png" alt></p>
+<h2 id="4-1-Learning-is-impossible"><a href="#4-1-Learning-is-impossible" class="headerlink" title="4.1 Learning is impossible?"></a>4.1 Learning is impossible?</h2><p>adversarial teacher</p>
+<blockquote>
+<p>此时如何学习？<br>有什么问题？目标不唯一<br>这也是为什么<br>No free lunch, 我们坚持的是什么？如果我们坚持f不知道，我们要在D之外学到东西是不可能的。f一定是定下来的，否则是无法解决。再理解</p>
+</blockquote>
+<blockquote>
+<p>这个道理很常见，就像是猜数一样，一定要目标一定才可猜。</p>
+</blockquote>
+<blockquote>
+<p>这也是为什么要用机器学习算法的原因，一般地话，为什么要有测试集，就是试图用测试集来衡量训练误差。</p>
+</blockquote>
+<blockquote>
+<p>还有对于某些题的设定有问题，这其实就只是一种解释，需要更多的解释来完成这个问题</p>
+</blockquote>
+<h2 id="4-2-Inferring-Something-Unknown"><a href="#4-2-Inferring-Something-Unknown" class="headerlink" title="4.2 Inferring Something Unknown"></a>4.2 Inferring Something Unknown</h2><p>can we infer something unknown in other scenarios?</p>
+<blockquote>
+<p>随机采样，这就是为什么要用采样了？<br>参数估计，大数定理。<br>数学上的定理Hoeffding，相差很远的可能性很小；特别是当样本够大，得到的估计趋于真实的估计。<br>注意这里两个方面，看多个变量<br><img src="00014.png" alt></p>
+</blockquote>
+<blockquote>
+<p>从瓶子里去橙色球和其他颜色球，怎么知道原本中含有多少橙色球？一个想法就是通过对瓶子 的球进行采样一定数量，那么，根据采样的数量来就可以来估计真实的值。</p>
+</blockquote>
+<h2 id="4-3-Connection-to-Learning"><a href="#4-3-Connection-to-Learning" class="headerlink" title="4.3 Connection to Learning"></a>4.3 Connection to Learning</h2><p><img src="00015.png" alt></p>
+<p>注意，这里考虑了假设空间和问题空间是一致的。<br>与学习之间的联系。首先我们有一大堆的假设，并从这些假设中抽取一个假设作为真实的假设。 然后，根据这个假设我们就需要得到未来的函数。那么，想法就是从满足这些假设的数据中独立同分布地抽取多个数据。<br>首先，数据如果足够多，利用这些数据学得的假设，并且，我们有理由相信从这些东西中学得的假设。 在数据集特别大的情况下，来学习得到的假设会更好，更满足实际的情况。</p>
+<p>测试数据从某种意义上的设置就是想得到怎么样的数据？</p>
+<blockquote>
+<p>但是一般来说测试数据都是中肯的<br>还有一个方面就是用来纠正学习到的模型，因为学习到的模型有时候是过拟合的，即可解释为泛化能力。</p>
+</blockquote>
+<p><strong>Verification of One h</strong></p>
+<p><img src="00016.png" alt></p>
+<blockquote>
+<p>这里比较了real学习和根据经验误差来学习的差别。</p>
+</blockquote>
+<p>算法总是得到相同的假设，由此可以觉得该算法不好？</p>
+<blockquote>
+<p>假设空间小就意味着算法不好吗？<br>经验误差小就意味着算法好吗？从某个方面可以这样看</p>
+</blockquote>
+<p><img src="00017.png" alt></p>
+<p>ML学得的规则，不一定对过去有效，因为只是过去的抽样数据；不一定对将来有效，因为有一定误差的存在；在未来一百天中选规则也不成，因为构不成学习，不过是很多规则的累加</p>
+<h2 id="4-4-Connection-to-Real-Learning"><a href="#4-4-Connection-to-Real-Learning" class="headerlink" title="4.4 Connection to Real Learning"></a>4.4 Connection to Real Learning</h2><p>bad sample: E_in and E_out far away–can get worse when involving “choice”.</p>
+<blockquote>
+<p>注意，数据的合理性，即样本是否合理。从某种意义上来说，需要看样本是否满足一些基本的分布，详细见西瓜书。<br>就是说所选取的样本是不好的样本，从另一个角度来看，就是一个指导的感觉就是还是说的是独立同分布的问题，即是否满足独立同分布。</p>
+</blockquote>
+<blockquote>
+<p>训练的样本不是好的样本，这是一个检查的标准。</p>
+</blockquote>
+<p><strong>什么是Bad Sample</strong><br>这个和过拟合有关吗？<br>好的数据任意进行选择就可以。<br>但是坏的数据会使算法踩到雷，算法得到不好的结果。</p>
+<p>分析：假设对于每个假设都有bad example, 那么如何。</p>
+<p>就是需要选取某个数据集，所有假设基本上都不会踩到雷。</p>
+<p>评价，只要有一个不好就认为不好。<br>那么，不好的数据集的大小是多少？<br><img src="00018.png" alt></p>
+<p>M是假设的个数。</p>
+<blockquote>
+<p>结论：只有样例过多才能满足要求；<br>现实的指导意义：只有尽可能地将数据认为是正反例合理的情况，否则其他不合理。</p>
+</blockquote>
+<p>所以，当数据合理时，我们认为满足PAC，此时Ein=Eout, Eout就是在未知数据集上的表现情况；注意这里还未引入泛化误差的概念。那么，实际上就是选经验误差最小的，因为经验误差在这里认为是等于泛化的。</p>
+<p>而泛化误差是用来进行评价的。 </p>
+<p>到此为止，说明了假设空间为有限的情况，并未扩展到假设空间为无限的情况。</p>
+<p><img src="00019.png" alt></p>
+<blockquote>
+<p>理解！</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eugene Wang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/" title="machinelearning cornerstone when can machines learn">https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/machinelearning/" rel="tag"><i class="fa fa-tag"></i> machinelearning</a>
+            
+              <a href="/tags/cornerstone/" rel="tag"><i class="fa fa-tag"></i> cornerstone</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/19/machinelearning-cornerstone-summary/" rel="next" title="machinelearning cornerstone summary">
+                  <i class="fa fa-chevron-left"></i> machinelearning cornerstone summary
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/19/machinelearning-cornerstone-why-can-machines-learn/" rel="prev" title="machinelearning cornerstone why can machines learn">
+                  machinelearning cornerstone why can machines learn <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-The-Learning-Problem"><span class="nav-number">1.</span> <span class="nav-text">1. The Learning Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-what-is-ML"><span class="nav-number">1.2.</span> <span class="nav-text">1.2. what is ML?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-definetion"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 definetion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-Application"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 Application:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-Use-Scenarios"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 Use Scenarios</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-key-essence-of-ml"><span class="nav-number">1.2.4.</span> <span class="nav-text">1.2.4 key essence of ml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Learning-Problem"><span class="nav-number">1.3.</span> <span class="nav-text">1.3. Learning Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-ML-vs-DM-AI-Statistics"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 ML vs DM,AI,Statistics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Learning-to-Answer-Yes-No"><span class="nav-number">2.</span> <span class="nav-text">2. Learning to Answer Yes_No</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Example"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PLA算法设计"><span class="nav-number">2.1.1.</span> <span class="nav-text">PLA算法设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PLA算法的正确性"><span class="nav-number">2.1.2.</span> <span class="nav-text">PLA算法的正确性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Learning-with-noisy-data"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Learning with noisy data</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Types-of-Learning"><span class="nav-number">3.</span> <span class="nav-text">3. Types of Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#v1-输出空间角度"><span class="nav-number">3.1.</span> <span class="nav-text">v1 输出空间角度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v2-资料的角度"><span class="nav-number">3.2.</span> <span class="nav-text">v2 资料的角度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v3-取得样本的方式，学习的角度"><span class="nav-number">3.3.</span> <span class="nav-text">v3 取得样本的方式，学习的角度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v4-特征的角度"><span class="nav-number">3.4.</span> <span class="nav-text">v4 特征的角度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Feasibility-of-Learning"><span class="nav-number">4.</span> <span class="nav-text">4. Feasibility of Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Learning-is-impossible"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 Learning is impossible?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Inferring-Something-Unknown"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 Inferring Something Unknown</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-Connection-to-Learning"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 Connection to Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-Connection-to-Real-Learning"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 Connection to Real Learning</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/default-avatar.png"
+      alt="Eugene Wang">
+  <p class="site-author-name" itemprop="name">Eugene Wang</p>
+  <div class="site-description" itemprop="description">Quick notes</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="GitHub &rarr; https://github.com/AugF"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOnl1bnBhbndhbmdAZ21haWwuY29t" title="E-Mail &rarr; mailto:yunpanwang@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vSm9zd3hl" title="Weibo &rarr; https://weibo.com/Joswxe"><i class="fa fa-fw fa-weibo"></i>Weibo</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==" title="https://www.google.com">Google</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jbi5iaW5nLmNvbQ==" title="https://cn.bing.com">Bing</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">Baidu</span>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

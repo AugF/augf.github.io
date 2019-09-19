@@ -79,16 +79,16 @@
 <meta property="og:site_name" content="AugF&#39;s Notes">
 <meta property="og:description" content="重点Windows简介消息驱动的程序结构基于Windows API的过程式Window应用陈旭设计基于MFC和”文档-视”结构的面向对象Windows应用程序设计 Windows简介Window是一种基于图形界面的多任务操作系统  系统中可以同时运行多个应用程序 每个应用程序通过窗口与用户进行交互 用户通过鼠标的单击，双击，拖放，菜单选择以及键盘输入来进行操作  Windows功能以两种方式提供：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/asserts/00001.png">
-<meta property="og:image" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/asserts/00002.png">
-<meta property="og:image" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/asserts/00003.png">
-<meta property="og:image" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/asserts/00004.png">
-<meta property="og:image" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/asserts/00005.png">
-<meta property="og:updated_time" content="2019-09-19T01:57:09.563Z">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/00001.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/00002.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/00003.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/00004.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/00005.png">
+<meta property="og:updated_time" content="2019-09-19T04:21:39.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nju-course-cplus-lecture6">
 <meta name="twitter:description" content="重点Windows简介消息驱动的程序结构基于Windows API的过程式Window应用陈旭设计基于MFC和”文档-视”结构的面向对象Windows应用程序设计 Windows简介Window是一种基于图形界面的多任务操作系统  系统中可以同时运行多个应用程序 每个应用程序通过窗口与用户进行交互 用户通过鼠标的单击，双击，拖放，菜单选择以及键盘输入来进行操作  Windows功能以两种方式提供：">
-<meta name="twitter:image" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/asserts/00001.png">
+<meta name="twitter:image" content="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/00001.png">
   <link rel="canonical" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/">
 
 
@@ -207,7 +207,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">44</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">59</span></a>
 
   </li>
       
@@ -220,7 +220,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">47</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">65</span></a>
 
   </li>
       
@@ -233,7 +233,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">59</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">84</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -318,7 +318,7 @@
                 
               
 
-              <time title="创建时间：2019-09-19 09:56:10 / 修改时间：09:57:09" itemprop="dateCreated datePublished" datetime="2019-09-19T09:56:10+08:00">2019-09-19</time>
+              <time title="创建时间：2019-09-19 09:56:10 / 修改时间：12:21:39" itemprop="dateCreated datePublished" datetime="2019-09-19T09:56:10+08:00">2019-09-19</time>
             </span>
           
             
@@ -491,13 +491,13 @@
 </blockquote>
 </li>
 </ul>
-<p><img src="asserts/00001.png" alt></p>
+<p><img src="00001.png" alt></p>
 <blockquote>
 <p>由图可以看出，首先CObject分为了应用的框架Application Architecture, 异常Exceptions, 文件服务File Services, 基本类型Arrays, Lists, Maps, Internet Services, 以及Graphical Drawing, Control Support, Menus, ODBC Database Support, DAO Database Support, Synchronization, Windows Sockets等高级专题。<br>对于Application Architecture用可以分为CCmdTarget即能处理Windows消息的类，往下派生CWind,分为以下几类， Frame Windows, Control Bars, Property Sheets以及 Dialog Boxes 以及Views以及Controls等等。<br>还有一部分Class不是从CObject派生的，也就是说不是采用的面向对象范式。<br>Internet Server API, Run-time Object Model Support, Structures, Support Classes, Typed Template Collections, OLE Type Wrappers, OLE Automation Typesm Synchronization.</p>
 </blockquote>
-<p><img src="asserts/00002.png" alt></p>
+<p><img src="00002.png" alt></p>
 <blockquote>
-<p>可以看出CCmdTarget被分为了好几类，CWinThread, CWinApp 线程的， CDocument文档的， CDocTemplate文档类型的。<br><img src="asserts/00003.png" alt></p>
+<p>可以看出CCmdTarget被分为了好几类，CWinThread, CWinApp 线程的， CDocument文档的， CDocTemplate文档类型的。<br><img src="00003.png" alt></p>
 </blockquote>
 <h4 id="MFC提供的主要类"><a href="#MFC提供的主要类" class="headerlink" title="MFC提供的主要类"></a>MFC提供的主要类</h4><ul>
 <li>窗口类<ul>
@@ -566,7 +566,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="asserts/00004.png" alt></p>
+<p><img src="00004.png" alt></p>
 <ul>
 <li>绘图类<ul>
 <li>绘图环境类CDC<ul>
@@ -769,7 +769,7 @@
 <h5 id="坐标转换"><a href="#坐标转换" class="headerlink" title="坐标转换"></a>坐标转换</h5><p>CScrollView</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">void CScrollView::SetScrollSizes( </span><br><span class="line">  		int nMapMode, </span><br><span class="line">  		SIZE sizeTotal, </span><br><span class="line">  		const SIZE&amp; sizePage = sizeDefault, </span><br><span class="line">  		const SIZE&amp; sizeLine = sizeDefault );</span><br><span class="line">nMapMode：映射方式（坐标的逻辑单位，坐标轴方向）</span><br><span class="line">例如：MM_TEXT（逻辑单位为像素点，坐标原点位于左上角，x轴从左向右，y轴从上往下。</span><br><span class="line">sizeTotal：文档内容的大小</span><br><span class="line">sizePage：文档滚动页的大小</span><br><span class="line">sizeLine：文档滚动行的大小</span><br><span class="line">需要在CScrollView的OnUpdate和OnSize中调用。</span><br><span class="line"></span><br><span class="line">void CStudentsView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint) </span><br><span class="line">&#123; // TODO: Add your specialized code here and/or call the base class</span><br><span class="line">  CStudentsDoc* pDoc = GetDocument();</span><br><span class="line">  </span><br><span class="line">  // TODO: calculate the total size of this view</span><br><span class="line">  CSize sizeTotal,sizePage,sizeLine;   </span><br><span class="line">  sizeTotal.cx = 100; //文本宽度固定</span><br><span class="line">  sizeTotal.cy = pDoc-&gt;get_num_of_students()*20; //文本长度</span><br><span class="line">  RECT rect;</span><br><span class="line">  GetClientRect(&amp;rect); //获取视窗口的大小</span><br><span class="line">  sizePage.cx = rect.right-rect.left-8; //页宽度</span><br><span class="line">  sizePage.cy = rect.bottom-rect.top-20; //页长度</span><br><span class="line">  sizeLine.cx = 8; //行宽度</span><br><span class="line">  sizeLine.cy = 20; //行高度</span><br><span class="line"></span><br><span class="line">  SetScrollSizes(MM_TEXT,sizeTotal,sizePage,sizeLine);</span><br><span class="line"></span><br><span class="line">  Invalidate();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void CStudentsView::OnSize(UINT nType, int cx, int cy) </span><br><span class="line">&#123; CScrollView::OnSize(nType, cx, cy);</span><br><span class="line">	</span><br><span class="line">  // TODO: Add your message handler code here</span><br><span class="line">  CStudentsDoc* pDoc = GetDocument();</span><br><span class="line">  </span><br><span class="line"> // TODO: calculate the total size of this view</span><br><span class="line">  CSize sizeTotal, sizePage, sizeLine; </span><br><span class="line">  sizeTotal.cx = 100;</span><br><span class="line">  sizeTotal.cy = pDoc-&gt;get_num_of_students()*20;</span><br><span class="line">  sizePage.cx = cx-8;</span><br><span class="line">  sizePage.cy = cy-20;</span><br><span class="line">  sizeLine.cx = 8;</span><br><span class="line">  sizeLine.cy = 20;</span><br><span class="line">  </span><br><span class="line">  SetScrollSizes(MM_TEXT,sizeTotal,sizePage,sizeLine);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="asserts/00005.png" alt><br>坐标转换函数<br>OnPrepareDC(&amp;dc,NULL);<br>为ScrollView初始化dc<br>dc.DPtoLP(&amp;point);<br>从物理坐标转换到逻辑坐标<br>dc.LPtoDP(&amp;point);<br>从逻辑坐标转换到物理坐标</p>
+<p><img src="00005.png" alt><br>坐标转换函数<br>OnPrepareDC(&amp;dc,NULL);<br>为ScrollView初始化dc<br>dc.DPtoLP(&amp;point);<br>从物理坐标转换到逻辑坐标<br>dc.LPtoDP(&amp;point);<br>从逻辑坐标转换到物理坐标</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">void CStudentsView::OnLButtonDown(UINT nFlags,</span><br><span class="line">                                                       CPoint point) </span><br><span class="line">&#123;</span><br><span class="line">  // TODO: Add your message handler code here </span><br><span class="line">  // and/or call default</span><br><span class="line">  </span><br><span class="line">  CClientDC dc(this);</span><br><span class="line">  OnPrepareDC(&amp;dc,NULL); //transform dc to   </span><br><span class="line">                                        //scrollview</span><br><span class="line">  dc.DPtoLP(&amp;point); // 物理坐标转逻辑坐标</span><br><span class="line"></span><br><span class="line">  current_student = point.y/20;   </span><br><span class="line"> </span><br><span class="line">  Invalidate(); //重新显示视窗口内容，OnDraw将被调用</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="一点反思"><a href="#一点反思" class="headerlink" title="一点反思"></a>一点反思</h3><p>学习的几个过程</p>
@@ -912,7 +912,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">84</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -925,7 +925,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-count">65</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -938,7 +938,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

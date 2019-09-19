@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <link rel="alternate" href="/atom.xml" title="AugF's Notes" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <meta name="description" content="1. 快排123456789101112131415161718192021222324252627282930313233#include&amp;lt;iostream&amp;gt;#incldue&amp;lt;stdio.h&amp;gt;using namespace std;const int N=1e6+10;int n;int q[N];void swap(int &amp;amp;x,int &amp;amp;y)&amp;#123">
+<meta name="keywords" content="acwing,algorithm,basic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="algorithm acwing basic">
+<meta property="og:url" content="https://augf.github.io/2019/09/19/algorithm-acwing-basic/index.html">
+<meta property="og:site_name" content="AugF&#39;s Notes">
+<meta property="og:description" content="1. 快排123456789101112131415161718192021222324252627282930313233#include&amp;lt;iostream&amp;gt;#incldue&amp;lt;stdio.h&amp;gt;using namespace std;const int N=1e6+10;int n;int q[N];void swap(int &amp;amp;x,int &amp;amp;y)&amp;#123">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-19T04:16:58.711Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="algorithm acwing basic">
+<meta name="twitter:description" content="1. 快排123456789101112131415161718192021222324252627282930313233#include&amp;lt;iostream&amp;gt;#incldue&amp;lt;stdio.h&amp;gt;using namespace std;const int N=1e6+10;int n;int q[N];void swap(int &amp;amp;x,int &amp;amp;y)&amp;#123">
+  <link rel="canonical" href="https://augf.github.io/2019/09/19/algorithm-acwing-basic/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>algorithm acwing basic | AugF's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AugF's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">59</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">65</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">84</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">algorithm acwing basic
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:15:53 / 修改时间：12:16:58" itemprop="dateCreated datePublished" datetime="2019-09-19T12:15:53+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-快排"><a href="#1-快排" class="headerlink" title="1. 快排"></a>1. 快排</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#incldue&lt;stdio.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=1e6+10;</span><br><span class="line">int n;</span><br><span class="line">int q[N];</span><br><span class="line"></span><br><span class="line">void swap(int &amp;x,int &amp;y)&#123;</span><br><span class="line">    int t=x;</span><br><span class="line">    x=y;</span><br><span class="line">    y=t;</span><br><span class="line">&#125;</span><br><span class="line">void quick_sort(int q[], int l, int r)&#123;</span><br><span class="line">    if(l&gt;=r) return;  // 注意边界条件不可少</span><br><span class="line"></span><br><span class="line">    int x=q[l], i=l-1, j=r+1; // 或q[(1+r)/2], q[r]</span><br><span class="line">    // 这里赋初值是为了后面对称的情况</span><br><span class="line">    while(i&lt;j) &#123;</span><br><span class="line">        do i++; while(q[i]&lt;x);</span><br><span class="line">        do j--; while(q[i]&gt;x);</span><br><span class="line">        if(i&lt;j) swap(q[i],q[j]); // 注意这里要加一个判断</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    quick_sort(q, l, j);  // </span><br><span class="line">    quick_sort(q, j+1, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;n);</span><br><span class="line">    for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;, &amp;q[i]);</span><br><span class="line">    quick_sort(q,0,n-1);</span><br><span class="line">    for(int i=0;i&lt;n;i++) printf(&quot;%d&quot;, q[i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-归并"><a href="#2-归并" class="headerlink" title="2. 归并"></a>2. 归并</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=1e6+10;</span><br><span class="line">int n;</span><br><span class="line">int q[N], tmp[N];</span><br><span class="line"></span><br><span class="line">void merge_sort(int q[],int l, int r)&#123;</span><br><span class="line">    if(l&gt;=r) return;</span><br><span class="line">    int mid=l+r&gt;&gt;1;</span><br><span class="line">    merge(q, l, mid);</span><br><span class="line">    merge(q, mid+1,r);</span><br><span class="line"></span><br><span class="line">    int k=0, i=l, j=mid+1;</span><br><span class="line">    while(i&lt;=mid&amp;&amp;j&lt;=r)&#123;</span><br><span class="line">        if(q[i]&lt;q[j]) tmp[k++]=q[i++];</span><br><span class="line">        else tmp[k++]=q[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    while(i&lt;=mid) tmp[k++]=q[i++];</span><br><span class="line">    while(j&lt;=r) tmp[k++]=q[j++];</span><br><span class="line"></span><br><span class="line">    for(i=l,j=0;i&lt;=r;i++,j++) q[i]=tmp[j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;,&amp;q[i]);</span><br><span class="line">    merge_sort(q,0,n-1);</span><br><span class="line">    for(int i=0;i&lt;n;i++) printf(&quot;%d&quot;, q[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-二分"><a href="#3-二分" class="headerlink" title="3. 二分"></a>3. 二分</h2><h3 id="整数二分"><a href="#整数二分" class="headerlink" title="整数二分"></a>整数二分</h3><p>// 整数二分，有单调性一定可以二分；但是没有单调性也可以二分<br>// 在区间上定义上某种性质，将区间分为两部分，左边满足某种性质，右边不满足某种性质；二分法可以用来寻找不满足性质和满足性质的边界<br>？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">int bsearch_1(int l,int r)&#123;</span><br><span class="line">    while(l&lt;r)&#123;</span><br><span class="line">        int mid=l+r&gt;&gt;1; // 下取整</span><br><span class="line">        if(check(mid)) r=mid; // [l,mid]</span><br><span class="line">        else l=mid+1;</span><br><span class="line">    &#125;</span><br><span class="line">    return l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int bsearch_2(int l, int r)&#123;</span><br><span class="line">    while(l&lt;r)&#123;</span><br><span class="line">        int mid=l+r+1&gt;&gt;1;</span><br><span class="line">        if(check(mid)) l=mid;</span><br><span class="line">        else r=mid-1;</span><br><span class="line">    &#125;</span><br><span class="line">    return l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">如何判断死循环</span><br><span class="line">mid=l=r时，是否陷入死循环</span><br></pre></td></tr></table></figure>
+
+<p>整数二分的问题一定可以用这个模板来解决。<br>每次二分，能找到一个答案的区间；当区间的长度是1时，即是解</p>
+<p>二分能够包含解，然后用边界可以推出解。</p>
+<blockquote>
+<p>二分的退出条件一定是i=j吗？，这里知道快排的退出条件并不是l=r<br>对！！！！，二分一定能找到解，退出是i一定等于j</p>
+</blockquote>
+<blockquote>
+<p>性质的寻找， 如果a[mid] &lt; x, 怎么办？实际上就是看目标的数在a[mid]与x之间，比如靠近x最大的数， 此时l=mid; 如果是找x相等的左边界，在a[mid]<br>在a[mid] &gt; x, 比如<br>??? 有点模糊</p>
+</blockquote>
+<h3 id="浮点数二分simple"><a href="#浮点数二分simple" class="headerlink" title="浮点数二分simple"></a>浮点数二分simple</h3><blockquote>
+<p>这里就不用+1，-1<br>求平方根</p>
+</blockquote>
+<blockquote>
+<p>这里务必注意左右范围的选取问题。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()&#123;</span><br><span class="line">    double x;</span><br><span class="line">    cin&gt;&gt;x;</span><br><span class="line"></span><br><span class="line">    double l=0, r=x; // r=max(1,x);</span><br><span class="line">    while(r-l&gt;1e-8)&#123;  // 这里比要求的有效数字多2</span><br><span class="line">    // 这里用迭代次数来停止也可以，比如100，即除以2^100.</span><br><span class="line">        double mid=(1+r)/2;</span><br><span class="line">        if(mid*mid &gt;= x) r=mid;</span><br><span class="line">        else l=mid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printf(&quot;%lf\n&quot;,l); </span><br><span class="line">    // 这里l或者r</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-高精度"><a href="#4-高精度" class="headerlink" title="4. 高精度"></a>4. 高精度</h2><p>A+B： len(A)=1e6<br>A-B:<br>A*a 1e6  a-10000<br>A/a </p>
+<p>存储，倒序存储<br>在末位加上一位，下标为0的存个位。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">A+B</span><br><span class="line">int a[N],b[N],sum[N];</span><br><span class="line">int cnt=0;</span><br><span class="line">for(int i=0,j=0;i&lt;n&amp;&amp;j&lt;m;i++,j++)&#123;</span><br><span class="line">    sum[i]=(a[i]+b[j]+cnt)%10;</span><br><span class="line">    cnt=(a[i]+b[j]+cnt)&gt;10?1:0;</span><br><span class="line">&#125;</span><br><span class="line">if(cnt) a[n+1]=1;</span><br><span class="line"></span><br><span class="line">A-B</span><br><span class="line">len(A)&gt;=len(B)</span><br></pre></td></tr></table></figure>
+
+<p>如果A，B可能取正或负，那么一定可以转化为绝对值进行相加或者相减！</p>
+<p>高精度减法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">t=(t + A[i])/b;</span><br><span class="line">c.push_back(t%10);  //?</span><br><span class="line">t=A[i]%b;</span><br><span class="line"></span><br><span class="line">for (int i=A.size()-1;i&gt;=0;i--)</span><br><span class="line">t=10t+A[i];</span><br><span class="line">if((t/b)) c.push_back(t/b);  </span><br><span class="line">t %= b;</span><br><span class="line">t</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-前缀和和差分"><a href="#5-前缀和和差分" class="headerlink" title="5. 前缀和和差分"></a>5. 前缀和和差分</h2><ul>
+<li>前缀和<br>a1, a2, a3,…, an<br>S0, S1, S2,…, Sn<br>a_{i}= S_{i}- S_{i-1}<br>S0=0;<br>当S0=0时，特别好定义边界。<br>前缀和 Si = Si-S0. </li>
+</ul>
+<p>因此，可以很容易地求片段和。</p>
+<blockquote>
+<p>很厉害！可以统一了，不用预处理了</p>
+</blockquote>
+<blockquote>
+<p>scanf比cin快一倍<br>ios::sync_with_stdio(false);<br>cin和标准输入输出不同步，提高cin读取速度；不能使用scanf</p>
+</blockquote>
+<p>区间和<br>区域和<br>(x1,y1), (x2,y2)<br>Sx2y2-Sx1y2-Sx1y1+Sx1y1</p>
+<ul>
+<li>差分<br>前缀和的逆运算<blockquote>
+<p>作用：可以在O(n)时间内B-&gt;A<br>区间[1,r]+c<br>b[l]+c, b[r+1]-c</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="6-双指针算法"><a href="#6-双指针算法" class="headerlink" title="6. 双指针算法"></a>6. 双指针算法</h2><p>两类： 一个数组两个指针；两个数组同时处理。<br>代码框架</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for(i=0,j=0;i&lt;n;i++)&#123;</span><br><span class="line">    while(j&lt;i &amp;&amp; check(i,j)) j++;</span><br><span class="line">    res=max(res, j-i+1);</span><br><span class="line">    // 每道题的具体逻辑</span><br><span class="line">&#125;</span><br><span class="line">O(n+m) </span><br><span class="line">这里i和j具有单调性，i和j只向一个方向发展。</span><br></pre></td></tr></table></figure>
+
+<p>核心思想</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;n;i++)</span><br><span class="line">    for(int j=0;j&lt;n;j++)</span><br><span class="line">        O(n^2)</span><br></pre></td></tr></table></figure>
+
+<p>将上面朴素算法优化到O(n), 运用了某种性质</p>
+<p>维护两个窗口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">ad daa</span><br><span class="line">ad</span><br><span class="line">daa</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    char str[100];</span><br><span class="line">    gets(str);</span><br><span class="line">    int n=strlen(str);</span><br><span class="line">    </span><br><span class="line">    for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">        int j=i;</span><br><span class="line">        while(j&lt;n &amp;&amp; str[j]!=&apos; &apos;) j++; // i,j-1具体单词</span><br><span class="line">        for(int k=i;k&lt;j;k++)&#123;</span><br><span class="line">            cout&lt;&lt;str[k];</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;endl;</span><br><span class="line">        i=j;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 枚举起点和终点</span><br><span class="line">// 每个指针的位置都有意义</span><br><span class="line"> for(int i=0;i&lt;n;i++)</span><br><span class="line">    for(int j=0;j&lt;n;j++)</span><br><span class="line">        if(check(i,j))&#123;</span><br><span class="line">            res=max(res,i-j+1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">// 双指针算法 O(n)</span><br><span class="line">for(i=0,j=0;i&lt;n;i++)&#123;</span><br><span class="line">    while(j&lt;i &amp;&amp; check(i,j)) j++;</span><br><span class="line">    res=max(res, j-i+1);</span><br><span class="line">    // 每道题的具体逻辑</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 特殊情况的举例</p>
+<blockquote>
+<p>数组元素的目标和为什么限制为一个解，因为如果是多个解时。对于<br> <code>1 1 1 1 1, 1 1 1 1 , 2</code>本身就要O(n*m),算法必然为O(n^2)的。<br>????</p>
+</blockquote>
+<h2 id="7-位运算"><a href="#7-位运算" class="headerlink" title="7. 位运算"></a>7. 位运算</h2><p>从个位开始算,(11111)_2</p>
+<blockquote>
+<p>先把第k位移到最后一位<br>n&gt;&gt;k &amp; 1 看一下n的第k位是几？</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for(int k=3;k&gt;=0;k--)</span><br><span class="line">    cout&lt;&lt;(n&gt;&gt;k&amp;1)&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
+
+<p>lowbit(x): 返回x的最后一位1<br>x&amp;(~x+1)= x&amp;-x</p>
+<h2 id="8-离散化，整数的离散化"><a href="#8-离散化，整数的离散化" class="headerlink" title="8. 离散化，整数的离散化"></a>8. 离散化，整数的离散化</h2><p>10^9 稀疏的值域，映射到从0开始的自然数 10^5<br>注意这里映射的话的思想实际上就是按照个数索引来映射的感觉。</p>
+<p>a-&gt;b</p>
+<blockquote>
+<ol>
+<li>a[]可能中有重复元素：  去重</li>
+<li>如何算出a[i]离散化后的值：a是有序的，二分 </li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; alls;</span><br><span class="line">sort(alls.begin(), alls.end());</span><br><span class="line">alls.erase(unique(alls.begin(), alls.end()),alls.end()) // 去重</span><br><span class="line">&gt; ?这里unique返回的就是改变后的alls, 且alls后面的重复的元素都放在最后部分</span><br><span class="line"></span><br><span class="line">// 二分求出x对应的离散</span><br><span class="line">int find(int x)&#123; // 找第一个大于等于x的位置</span><br><span class="line">    int l=0, r=all.size()-1;</span><br><span class="line">    while(l&lt;r)&#123;</span><br><span class="line">        int mid=l+r&gt;&gt;1;</span><br><span class="line">        if(x&lt;=all[mid]) r=mid;</span><br><span class="line">        else l=mid+1;</span><br><span class="line">    &#125;</span><br><span class="line">    return r+1; // 这里是否加1都无所谓，这里从1开始映射；1,2,3,4,..,n</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，一般的离散化的目标就是所有会用到的坐标<br>区间和 n+2m(l,r)</p>
+<h2 id="9-合并区间"><a href="#9-合并区间" class="headerlink" title="9. 合并区间"></a>9. 合并区间</h2><ol>
+<li>按区间做变短排序</li>
+<li>总共有三种情况<br><code>ri&lt;ri+1, ri+1&lt;ri, ri&lt;li+1</code><br>一般是贪心，优先对左右端点进行排序</li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>java输入输出比较慢</p>
+<p>编译语言和即时编译<br>小数据 javascript,python快<br>大数据 go,c,c++快<br>javascript&gt;python&gt;go=C++&gt;java</p>
+<h3 id="错误类型"><a href="#错误类型" class="headerlink" title="错误类型"></a>错误类型</h3><ul>
+<li>Segmentation Fault<br>基本情况是否没有考虑<br>数组是否越界<br>没有输入</li>
+</ul>
+<ul>
+<li>Time Limit Exceeded<br>输入输出可能都存在着问题</li>
+</ul>
+<p>关键：把自己想的算法能够实现出来</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eugene Wang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://augf.github.io/2019/09/19/algorithm-acwing-basic/" title="algorithm acwing basic">https://augf.github.io/2019/09/19/algorithm-acwing-basic/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/acwing/" rel="tag"><i class="fa fa-tag"></i> acwing</a>
+            
+              <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+            
+              <a href="/tags/basic/" rel="tag"><i class="fa fa-tag"></i> basic</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/19/algorithm-acwing-math/" rel="next" title="algorithm acwing math">
+                  <i class="fa fa-chevron-left"></i> algorithm acwing math
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/19/algorithm-acwing-search-graph/" rel="prev" title="algorithm acwing search graph">
+                  algorithm acwing search graph <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-快排"><span class="nav-number">1.</span> <span class="nav-text">1. 快排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-归并"><span class="nav-number">2.</span> <span class="nav-text">2. 归并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-二分"><span class="nav-number">3.</span> <span class="nav-text">3. 二分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整数二分"><span class="nav-number">3.1.</span> <span class="nav-text">整数二分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数二分simple"><span class="nav-number">3.2.</span> <span class="nav-text">浮点数二分simple</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-高精度"><span class="nav-number">4.</span> <span class="nav-text">4. 高精度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-前缀和和差分"><span class="nav-number">5.</span> <span class="nav-text">5. 前缀和和差分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-双指针算法"><span class="nav-number">6.</span> <span class="nav-text">6. 双指针算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-位运算"><span class="nav-number">7.</span> <span class="nav-text">7. 位运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-离散化，整数的离散化"><span class="nav-number">8.</span> <span class="nav-text">8. 离散化，整数的离散化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-合并区间"><span class="nav-number">9.</span> <span class="nav-text">9. 合并区间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">10.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#错误类型"><span class="nav-number">10.1.</span> <span class="nav-text">错误类型</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/default-avatar.png"
+      alt="Eugene Wang">
+  <p class="site-author-name" itemprop="name">Eugene Wang</p>
+  <div class="site-description" itemprop="description">Quick notes</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="GitHub &rarr; https://github.com/AugF"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOnl1bnBhbndhbmdAZ21haWwuY29t" title="E-Mail &rarr; mailto:yunpanwang@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vSm9zd3hl" title="Weibo &rarr; https://weibo.com/Joswxe"><i class="fa fa-fw fa-weibo"></i>Weibo</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==" title="https://www.google.com">Google</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jbi5iaW5nLmNvbQ==" title="https://cn.bing.com">Bing</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">Baidu</span>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

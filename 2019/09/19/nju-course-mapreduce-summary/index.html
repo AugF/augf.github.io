@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <link rel="alternate" href="/atom.xml" title="AugF's Notes" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <meta name="description" content="ch1 大数据技术简介数据规模到底多大才叫大数据？大数据一词的重点不是在于数据规模的定义，而是指信息技术发展已经进入了一个新时代 大数据的特点：5V  Volume: 大容量：PB级规模 Varirty: 多样性：结构化/非结构化 Velocity: 时效性： 实时处理 Veracity： 准确性：结果准确 Value： 大价值：深度价值  大数据处理技术产生的背景  多核/多处理器并行计算 Ma">
+<meta name="keywords" content="nju,course,mapreduce">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nju-course mapreduce summary">
+<meta property="og:url" content="https://augf.github.io/2019/09/19/nju-course-mapreduce-summary/index.html">
+<meta property="og:site_name" content="AugF&#39;s Notes">
+<meta property="og:description" content="ch1 大数据技术简介数据规模到底多大才叫大数据？大数据一词的重点不是在于数据规模的定义，而是指信息技术发展已经进入了一个新时代 大数据的特点：5V  Volume: 大容量：PB级规模 Varirty: 多样性：结构化/非结构化 Velocity: 时效性： 实时处理 Veracity： 准确性：结果准确 Value： 大价值：深度价值  大数据处理技术产生的背景  多核/多处理器并行计算 Ma">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-19T04:06:51.147Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nju-course mapreduce summary">
+<meta name="twitter:description" content="ch1 大数据技术简介数据规模到底多大才叫大数据？大数据一词的重点不是在于数据规模的定义，而是指信息技术发展已经进入了一个新时代 大数据的特点：5V  Volume: 大容量：PB级规模 Varirty: 多样性：结构化/非结构化 Velocity: 时效性： 实时处理 Veracity： 准确性：结果准确 Value： 大价值：深度价值  大数据处理技术产生的背景  多核/多处理器并行计算 Ma">
+  <link rel="canonical" href="https://augf.github.io/2019/09/19/nju-course-mapreduce-summary/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>nju-course mapreduce summary | AugF's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AugF's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">59</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">65</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">84</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-mapreduce-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">nju-course mapreduce summary
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:05:54 / 修改时间：12:06:51" itemprop="dateCreated datePublished" datetime="2019-09-19T12:05:54+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/mapreduce/" itemprop="url" rel="index"><span itemprop="name">mapreduce</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="ch1-大数据技术简介"><a href="#ch1-大数据技术简介" class="headerlink" title="ch1 大数据技术简介"></a>ch1 大数据技术简介</h2><p>数据规模到底多大才叫大数据？<br>大数据一词的重点不是在于数据规模的定义，而是指信息技术发展已经进入了一个新时代</p>
+<p>大数据的特点：5V</p>
+<ul>
+<li>Volume: 大容量：PB级规模</li>
+<li>Varirty: 多样性：结构化/非结构化</li>
+<li>Velocity: 时效性： 实时处理</li>
+<li>Veracity： 准确性：结果准确</li>
+<li>Value： 大价值：深度价值</li>
+</ul>
+<p>大数据处理技术产生的背景</p>
+<ul>
+<li>多核/多处理器并行计算</li>
+<li>MapReduce大数据并行计算</li>
+<li>行业大数据应用需求</li>
+</ul>
+<p>大数据分析应用的ABCD关键要素<br>算法模型<br>业务场景<br>计算力<br>数据资源</p>
+<p>结构特征</p>
+<ul>
+<li>结构化数据</li>
+<li>半结构化数据</li>
+</ul>
+<p>获取和处理方式</p>
+<ul>
+<li>静态（线下数据）/非实时数据</li>
+<li>动态（流式/增量式/线上）/实时数据</li>
+</ul>
+<p>关联特征</p>
+<ul>
+<li>无关联/简单关联数据（键值记录型数据）</li>
+<li>复杂关联数据（图数据）</li>
+</ul>
+<p>大数据处理的主要技术问题</p>
+<p>存储：巨量数据如何存得下</p>
+<p>计算：巨量数据如何快速完成计算</p>
+<p>分析：如何返现大数据的深度价值</p>
+<p>大数据研究的基本途径</p>
+<ul>
+<li>降低尺度，寻找数据尺度无关近似算法</li>
+<li>新算法，寻找新算法降低计算复杂度</li>
+<li>并行化，分而治之，并行化处理</li>
+</ul>
+<h2 id="ch2-MapReduce简介"><a href="#ch2-MapReduce简介" class="headerlink" title="ch2 MapReduce简介"></a>ch2 MapReduce简介</h2><p>提高计算机硬件性能的而主要手段</p>
+<ul>
+<li>提高字长、流水式微体系结构技术</li>
+<li>提高集成度</li>
+<li>提高主频</li>
+</ul>
+<p>按照系统类型来分，并行计算系统通常包括</p>
+<ul>
+<li>多核/众核、对称多处理、大规模并行处理、集群、网格等不同类型</li>
+</ul>
+<p>按照程序设计模型/方法分类，并行计算主要可以分为</p>
+<ul>
+<li>共享内存变量程序设计方式</li>
+<li>消息传递程序设计方式</li>
+<li>MapReduce程序设计方式</li>
+</ul>
+<p>为什么需要大规模数据并行处理</p>
+<ul>
+<li>处理数据的能力大幅落后于数据增长</li>
+<li>海量数据隐含着更准确的事实</li>
+</ul>
+<p>什么是MapReduce</p>
+<ul>
+<li>基于集群的高性能并行计算平台</li>
+<li>并行程序开发与运行框架</li>
+<li>并行程序设计模型与方法</li>
+</ul>
+<p>为什么MapReduce如此重要？</p>
+<ul>
+<li>高效的大规模数据处理方法</li>
+<li>改变了大规模尺度上组织计算的方式</li>
+<li>第一个不同于冯洛依曼结构的、基于集群而非单机的计算方式的重大突破</li>
+<li>目前为止最为成功的基于大规模计算资源的并行计算抽象方法</li>
+</ul>
+<p>对付大数据处理——分而治之</p>
+<ul>
+<li>大数据分而治之的并行化计算</li>
+<li>大数据任务划分和并行计算模型</li>
+</ul>
+<p>构建抽象模型——Map和Reduce</p>
+<ul>
+<li>主要设计思想：为大数据处理过程中的两个主要处理操作提供一种抽象机制</li>
+<li>典型的流式大数据问题的特征</li>
+<li>Map和Reduce操作的抽象描述，提供一种抽象机制，把做什么和怎么做分开，程序员仅需要描述做什么，不需要关心怎么做</li>
+<li>基于Map和Reduce的并行计算模型和计算过程</li>
+</ul>
+<p>上升到框架——自动并行化并隐藏底层细节</p>
+<ul>
+<li>主要需求、目标和设计思想<ul>
+<li>实现自动并行化计算</li>
+<li>为程序员隐藏系统层细节</li>
+</ul>
+</li>
+<li>MapReduce提供统一的构建并完成以下的主要功能<ul>
+<li>任务调度</li>
+<li>数据/代码互定位</li>
+<li>出错处理</li>
+<li>分布式数据存储与文件管理</li>
+<li>Comibiner和Partitioner(设计目的和作用)</li>
+</ul>
+</li>
+</ul>
+<p>MapReduce的主要设计思想和特征</p>
+<ul>
+<li><p>向外横向扩展，而非向上纵向扩展</p>
+</li>
+<li><p>失效被认为是常态</p>
+</li>
+<li><p>吧计算处理向数据迁移</p>
+</li>
+<li><p>顺序处理数据、避免随机访问数据</p>
+</li>
+<li><p>为应用开发者隐藏系统层细节</p>
+</li>
+<li><p>平滑无缝的可扩展性</p>
+<p>MapReduce提供的主要功能</p>
+<ul>
+<li>任务调度：负责为划分后的就hi算任务分配和调度计算节点；同时负责监控这些节点的执行状态</li>
+<li>数据/代码互定位：为了减少数据通信，一个基本原则是本地化数据处理，即一个计算节点尽可能处理其本地磁盘上所分布存储的数据</li>
+<li>出错处理</li>
+<li>分布式数据存储与文件管理</li>
+<li>Combiner和Partitioner： 将中间结果数据进入reduce节点前需要进行合并处理，把具有同样主键的数据合并到一起避免重复传送，优化网络传输，在Map之后执行；而Partitioner的主要设计目的和作用是数据分区，将数据分配到合适的Reduce节点，避免不同Reduce节点上数据的相关性，在Reduce之前执行</li>
+</ul>
+</li>
+</ul>
+<h2 id="ch3-Google-Hadoop-MaqReduce基本构架"><a href="#ch3-Google-Hadoop-MaqReduce基本构架" class="headerlink" title="ch3. Google/Hadoop MaqReduce基本构架"></a>ch3. Google/Hadoop MaqReduce基本构架</h2><p>Google MapReduce的基本工作原理</p>
+<ul>
+<li>并行化处理的基本过程，系统中有一个负责调度的主节点，以及数据Map和Reduce工作节点（Worker）</li>
+<li>带宽优化（Combiner的设计目的和作用），优化到Reduce的结果</li>
+<li>用数据分区解决数据相关性问题（Partitioner的设计目的和作用），即根据一定的策略对Map输出的中间结果进行分区</li>
+<li>失效处理： 主节点失效checkpoinr,检查整个计算作业的执行情况；工作节点失效，直接终止</li>
+<li>计算优化，把一个计算任务让多个Map节点同时做，取最快完成者的计算结果。冗余节点</li>
+</ul>
+<p>分布式文件系统GFS的基本工作原理</p>
+<ul>
+<li>Google GFS的基本设计部原则<ul>
+<li>廉价本地磁盘分布存储</li>
+<li>多数据自动备份解决可靠性</li>
+<li>为上层的MapReduce计算框架提供支撑</li>
+</ul>
+</li>
+</ul>
+<p>Google GFS的基本构架和工作原理</p>
+<ul>
+<li>GFS Master的主要作用</li>
+<li>GFS ChuckServer的主要作用</li>
+<li>数据访问工作过程</li>
+<li>GFS的系统管理技术</li>
+</ul>
+<p>分布式结构化数据表BigTable</p>
+<ul>
+<li><p>BigTable设计动机和目标</p>
+<ul>
+<li>需要存储管理海量的结构化半结构化数据</li>
+<li>海量的服务请求</li>
+<li>商用数据库无法使用</li>
+</ul>
+</li>
+<li><p>BigTable数据模型——多维表</p>
+<ul>
+<li>行关键字、列关键字、时间戳</li>
+</ul>
+</li>
+<li><p>BigTable基本构架</p>
+<ul>
+<li>子表服务器</li>
+<li>子表存储结构SSTable（对应于GFS数据块）</li>
+<li>子表数据格式</li>
+<li>子表寻址</li>
+</ul>
+</li>
+</ul>
+<p>Hadoop MapReduce主要组件<br>NameNode相当于Google的MasterServer<br>DataNode–ChunckServer</p>
+<ul>
+<li><p>文件输入格式InputFormat <br><br>定义文件如何分割和读取，选择文件或者其它让对象，用来作为输入；定义InputSplits，将一个文件分为不同任务，mapred.min.split.size；为RecordReader提供一个工厂，用来读取这个文件。</p>
+<ul>
+<li>TextInputFormat, LineRecordReader</li>
+<li>KeyValueTextInputFormat</li>
+<li>SequenceFileInputFormat<br>一个MapReduce程序统称为一个Job，一个Job有许多个任务构成<br>JobConf.setInputFormat</li>
+</ul>
+</li>
+<li><p>Mapper <br><br>每一个Mapper类的实例生成了一个Java进程，负责处理某一个InputSplit上的数据，用Maper.Context</p>
+</li>
+<li><p>Combiner <br><br>conf.setCombinerClass(Reduce.class)</p>
+</li>
+<li><p>Partitioner &amp;&amp; Shuffle</p>
+</li>
+<li><p>Sort， 传输到每一个Reduce节点上的，将被所有的Reduce函数接收的Key,value会被hadoop自动排序</p>
+</li>
+<li><p>Reducer</p>
+</li>
+<li><p>OutputFormat <br><br>与InputFormat对应</p>
+</li>
+</ul>
+<p>Hadoop系统中，JobTracker的主要作用是 作业控制（作业分解、状态监控），资源管理，而TaskTracker的主要作用是 汇报心跳、执行JobTracker的命令，NameNode的作用是存储了所有文件元数据、文件与数据块的映射关系，以及文件属性等核心数据；DataNode的作用是存储具体的数据快</p>
+<h2 id="ch4-程序安装"><a href="#ch4-程序安装" class="headerlink" title="ch4 程序安装"></a>ch4 程序安装</h2><h2 id="ch5-MapReduce算法设计"><a href="#ch5-MapReduce算法设计" class="headerlink" title="ch5 MapReduce算法设计"></a>ch5 MapReduce算法设计</h2><p>MapReduce处理流程</p>
+<ol>
+<li>map</li>
+<li>shuffle and sort</li>
+<li>reduce</li>
+</ol>
+<p>可编程控制部分<br>Mapper： setup(), map(), cleanup()<br>Shuffle: Partitioner(划分均匀，查找快速)<br>Sort<br>Reduce: setup(), reduce(), cleanup()</p>
+<p>应用</p>
+<ol>
+<li>构建单词同现矩阵</li>
+<li>文档倒排索引，在map阶段单词在前，文档名在后，有效负载（如词频，只是需要在前一步进行统计即可）</li>
+<li>专利文献数据分析,统计被引文献，citing, cited</li>
+</ol>
+<h2 id="ch6-HBase-Hive"><a href="#ch6-HBase-Hive" class="headerlink" title="ch6 HBase Hive"></a>ch6 HBase Hive</h2><p>Hadoop HBase基本数据类型是一张多维表，该表的存储和检索有行关键字和列关键字、时间戳三个关键字组成，其数据操作访问是 通过JavaAPI和MapReduce接口编程实现，而Hive是一个分布式数据仓库，其数据操作访问编程是通过SQL实现</p>
+<h2 id="ch7-高级MapReduce编程技术"><a href="#ch7-高级MapReduce编程技术" class="headerlink" title="ch7 高级MapReduce编程技术"></a>ch7 高级MapReduce编程技术</h2><p>用户自定义Partitioner和Combiner<br>组合式</p>
+<h2 id="ch8-基于MapReduce的搜索引擎算法"><a href="#ch8-基于MapReduce的搜索引擎算法" class="headerlink" title="ch8 基于MapReduce的搜索引擎算法"></a>ch8 基于MapReduce的搜索引擎算法</h2><p>PageRank算法</p>
+<h2 id="ch9-数据挖掘基础算法"><a href="#ch9-数据挖掘基础算法" class="headerlink" title="ch9 数据挖掘基础算法"></a>ch9 数据挖掘基础算法</h2><h3 id="k-means算法"><a href="#k-means算法" class="headerlink" title="k-means算法"></a>k-means算法</h3><p>将给定的多个对象分成若干组，组内的各个对象是相似的，组间的对象是不相似的。<br>数据点的类型可以划分为欧氏和非欧<br>对于欧式空间，取各个数据点的平均值<br>对于非欧空间，取某个处于最中间的店，取若干个最具代表性的点</p>
+<p>k-means:<br>第一步，选区k个初始点,作为出事的cluster center<br>第二步，Loop {<br>    对输入中的每一个点p：<br>    {<br>        计算p到各个cluster的距离<br>        将p归入最近的cluster<br>    }<br>    重新计算各个cluster的中心<br>}<br>第三步，根据最终胜出的簇中心对所有数据元素进行划分聚类的工作</p>
+<p>问题：<br>样本数据有n个，预期生产k个cluster，则k-means算法t次迭代过程中的时间复杂度为O(nkt)</p>
+<p>并行化算法设计<br>思路： 在处理每一个数据点是，只需要知道cluster center的信息</p>
+<p>将所有数据分布到不同的MapReduce节点上，每个节点只对自己的数据进行计算<br>每个Map节点能够读取上一次迭代生成的cluster center<br>Reduce节点综合每个属于每个cluster的数据点，计算出新的cluster centers (Reducer的个数实际上就和聚类中心的个数相同)</p>
+<p>全局文件</p>
+<ul>
+<li><p>当前的迭代次数</p>
+</li>
+<li><p>K个不同聚类中心的数据结构（id, center, 数据点的个数）</p>
+<p>  class Mapper<br>  setup(){</p>
+<pre><code>读取全局的聚类中心数据 centers</code></pre><p>  }<br>  map(key, p) //p 为一个数据点<br>  {</p>
+<pre><code>minDis = Double.MAX_VALUE
+index = -1
+for i=0 to Centers.length
+{
+    dis = ComputeDist(p, Centers[i])
+    if (dis &lt; minDis&gt;)  // 替换k个点
+    {
+        minDis = dis;
+        index = i;
+    }
+}
+emit(Centers[i].ClusterID, (p,1)) 
+// 1表示数据点的个数</code></pre><p>  }</p>
+<p>  class Reducer<br>  reduce(ClusterID, value=[p(pm1, n1), (pm2, n2), ..])<br>  {</p>
+<pre><code>pm = 0.0, n=0;
+k = 数据点列表中数据项的总个数
+for i=0 to k
+{
+    pm += pm[i]*n[i]; n+=n[i];
+}
+pm = pm/n;
+emit(ClusterID, (pm,n));// 输出新的聚类中心的数据值</code></pre><p>  }</p>
+</li>
+</ul>
+<h3 id="基于MapReduce的分类并行化算法"><a href="#基于MapReduce的分类并行化算法" class="headerlink" title="基于MapReduce的分类并行化算法"></a>基于MapReduce的分类并行化算法</h3><p>从一组已经带有分类标记的训练样本数据集来预测一个测试样本的分类结果</p>
+<h4 id="kNN"><a href="#kNN" class="headerlink" title="kNN"></a>kNN</h4><p>k-NN: 计算测试样本到各训练样本的距离，取其中距离最小的K个，并根据这K个训练样本的标记进行投票得到测试样本的标记。</p>
+<p>并行化思路<br>全局变量：<br>样本数据和k个最近的样本</p>
+<p>对于每一个的样本数据，检查如果就hi算出来的值比目前大则替换，否则保留<br>根据所保留的k个最大的值得到最终的分类标记</p>
+<h4 id="朴素贝叶斯分类"><a href="#朴素贝叶斯分类" class="headerlink" title="朴素贝叶斯分类"></a>朴素贝叶斯分类</h4><p>关键：对于一个未知类别的样本X，可以先分别计算出X属于每一个类别Yi的概率P(X|Yi)P(Yi), 然后选择其中概率最大的Yi作为其类别<br>理解：因为分母都是一样的，所以实际上考虑的就是分子的情况</p>
+<p>并行化算法设计思路：<br>用MapReduce扫描数据集，计算每个类别Yi出现的频度FYi，以及每个属性值出现在Yi的频度FxYij</p>
+<p>训练集的并行化代码<br>    class Mapper<br>    map(key, tr)<br>    {<br>        tr: trid,A,y<br>        emit(y,1) // 类别<br>        for i=0 to A.length<br>        {<br>            emit(&lt;y, xni, xvi&gt;, 1)<br>        }<br>    }<br>    class Reducer<br>    reduce(key, value_lsit) // Key为分类标记y, 或者&lt;y, xni, xvi&gt;<br>    {<br>        sum = 0<br>        while(value_lsit.hasNext()) {<br>            sum += value_lsit.next().get()<br>        }<br>        emit(key, sum)<br>    }</p>
+<p>测试样本分类预测Mapper</p>
+<pre><code>class Mapper
+setup()
+{
+    读取从训练数据集中得到的频度数据
+    分类频度表 FY = {(Yi, 每个Yi的频度FYi)}
+    属性频度表 FxY = {(&lt;Yi, xnj, xvj&gt;, 出现频度FxYij)}}
+}
+map(key, ts) // ts为一个测试样本
+{
+    ts tsid, A
+    MaxF = MIN_VALUE; idx = -1
+    扫描每个表，找到类别最大的表所在的位置
+    emit(tsid, FY[idx].Yi)
+}</code></pre><h4 id="SVM短文本分类"><a href="#SVM短文本分类" class="headerlink" title="SVM短文本分类"></a>SVM短文本分类</h4><p>训练阶段，对于多类（480类）问题，为了提高多类精度，首先针对每个类做一个2class两类分类器<br>预测阶段，分别用480个分类其对每个待预测的样本进行分类并打分，选择分类为”是“且打分最高的类别作为该样本可能的预测类别，则将该测试样本判定为不属于480类的异类</p>
+<p>第一步，用训练数据产生480个2-class分类器模型<br>Map: 将每个训练样本的分类标签ClassID作为主键，输出（ClassID,  &lt;true/ false, 特征向量&gt;<br>Reduce： 具有相同ClassID的键值对进入同一个Reduce</p>
+<p>第二步，用480个2-Class分类器模型处理测试数据<br>Map： 将每个测试样本，以SampleID作为主键，输出（SampleID, &lt;LableID, 评分Score&gt;）<br>Reduce: SampleID</p>
+<h2 id="ch10-Spark系统及其编程技术"><a href="#ch10-Spark系统及其编程技术" class="headerlink" title="ch10 Spark系统及其编程技术"></a>ch10 Spark系统及其编程技术</h2><h3 id="Scala"><a href="#Scala" class="headerlink" title="Scala"></a>Scala</h3><ol>
+<li>val, var 不变引用和可变引用</li>
+<li>基于JVM、面向对象、函数式编程</li>
+<li>类是对象的抽象，对象是类的具体实现，占内存</li>
+</ol>
+<h3 id="Spark-vs-Hadoop"><a href="#Spark-vs-Hadoop" class="headerlink" title="Spark vs Hadoop"></a>Spark vs Hadoop</h3><p>Spark不足：<br>不擅长做以下计算：</p>
+<ol>
+<li>实时计算：Map Reduce无法在毫秒内或者秒级内返回结果</li>
+<li>流式计算：流式计算的输入数据是动态的，设计特点决定了数据源必须是静态的</li>
+<li>DAG计算：多个应用程序存在依赖关系，后一个应用程序的输入为前一个的输出。每个MapReduce的阿左也输出结果都会写道磁盘，会造成大量的磁盘IO，性能非常的地下。</li>
+<li>没有利用好内存资源，频繁第磁盘草坪做<br>Spark优点：</li>
+<li>Spark 把中间数据放到内存，迭代运算效率高。Spark支持DAG图的分布式并行计算的编程框架，减少了迭代过程中的数据的读写磁盘，提高了处理效率。（延迟加载）</li>
+<li>容错性高。Spark引进了弹性分布式数据集RDD的抽象，他是分布在一组节点的制度对象集合，这些集合式弹性的，如果数据集一部分丢失，则可以通过“血统：对它们进行重建。另外在RDD计算时可以通过CheckPoint来实现容错。</li>
+<li>更加通用。mapreduce只提供了map和reduce两种操作，而spark提供了很多种，大致分为Transformation和Action两大类</li>
+</ol>
+<h3 id="RDDs"><a href="#RDDs" class="headerlink" title="RDDs"></a>RDDs</h3><ol>
+<li>基于RDD之间的依赖关系组成lineage,重计算以及checkpoint等机制保证容错性</li>
+<li>只读、可分区，这个数据集的全部或部分可以缓存在内存中，在多次计算间重用，弹性指内存不够时可以与磁盘进行交换</li>
+</ol>
+<h3 id="Spark的基本构架和组件"><a href="#Spark的基本构架和组件" class="headerlink" title="Spark的基本构架和组件"></a>Spark的基本构架和组件</h3><p>Spark： mapreduce，rdd，function programing<br>本地运行模式，独立运行模式，mesos，yarn两套资源管理框架</p>
+<p>Spark集群的基本结构</p>
+<ul>
+<li>Master node： 集群部署式的概念，式整个集群的控制器，负责整个集群的正常运行，管理Worker node</li>
+<li>Worker node： 式计算节点，接收主节点命令与进行状态汇报</li>
+<li>Executors: 每个Worker上有一个Executor，负责完成Task程序的执行</li>
+<li>Spark集群部署后，需要在主从节点启动Master进程和Worker进程，对整个集群进行控制</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eugene Wang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://augf.github.io/2019/09/19/nju-course-mapreduce-summary/" title="nju-course mapreduce summary">https://augf.github.io/2019/09/19/nju-course-mapreduce-summary/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/nju/" rel="tag"><i class="fa fa-tag"></i> nju</a>
+            
+              <a href="/tags/course/" rel="tag"><i class="fa fa-tag"></i> course</a>
+            
+              <a href="/tags/mapreduce/" rel="tag"><i class="fa fa-tag"></i> mapreduce</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/19/nju-course-distributed-system/" rel="next" title="nju-course distributed system">
+                  <i class="fa fa-chevron-left"></i> nju-course distributed system
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/19/nju-course-mapreduce-experiment/" rel="prev" title="nju-course mapreduce experiment">
+                  nju-course mapreduce experiment <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ch1-大数据技术简介"><span class="nav-number">1.</span> <span class="nav-text">ch1 大数据技术简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ch2-MapReduce简介"><span class="nav-number">2.</span> <span class="nav-text">ch2 MapReduce简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ch3-Google-Hadoop-MaqReduce基本构架"><span class="nav-number">3.</span> <span class="nav-text">ch3. Google/Hadoop MaqReduce基本构架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ch4-程序安装"><span class="nav-number">4.</span> <span class="nav-text">ch4 程序安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ch5-MapReduce算法设计"><span class="nav-number">5.</span> <span class="nav-text">ch5 MapReduce算法设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ch6-HBase-Hive"><span class="nav-number">6.</span> <span class="nav-text">ch6 HBase Hive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ch7-高级MapReduce编程技术"><span class="nav-number">7.</span> <span class="nav-text">ch7 高级MapReduce编程技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ch8-基于MapReduce的搜索引擎算法"><span class="nav-number">8.</span> <span class="nav-text">ch8 基于MapReduce的搜索引擎算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ch9-数据挖掘基础算法"><span class="nav-number">9.</span> <span class="nav-text">ch9 数据挖掘基础算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#k-means算法"><span class="nav-number">9.1.</span> <span class="nav-text">k-means算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于MapReduce的分类并行化算法"><span class="nav-number">9.2.</span> <span class="nav-text">基于MapReduce的分类并行化算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#kNN"><span class="nav-number">9.2.1.</span> <span class="nav-text">kNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#朴素贝叶斯分类"><span class="nav-number">9.2.2.</span> <span class="nav-text">朴素贝叶斯分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SVM短文本分类"><span class="nav-number">9.2.3.</span> <span class="nav-text">SVM短文本分类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ch10-Spark系统及其编程技术"><span class="nav-number">10.</span> <span class="nav-text">ch10 Spark系统及其编程技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scala"><span class="nav-number">10.1.</span> <span class="nav-text">Scala</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark-vs-Hadoop"><span class="nav-number">10.2.</span> <span class="nav-text">Spark vs Hadoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDDs"><span class="nav-number">10.3.</span> <span class="nav-text">RDDs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark的基本构架和组件"><span class="nav-number">10.4.</span> <span class="nav-text">Spark的基本构架和组件</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/default-avatar.png"
+      alt="Eugene Wang">
+  <p class="site-author-name" itemprop="name">Eugene Wang</p>
+  <div class="site-description" itemprop="description">Quick notes</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="GitHub &rarr; https://github.com/AugF"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOnl1bnBhbndhbmdAZ21haWwuY29t" title="E-Mail &rarr; mailto:yunpanwang@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vSm9zd3hl" title="Weibo &rarr; https://weibo.com/Joswxe"><i class="fa fa-fw fa-weibo"></i>Weibo</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==" title="https://www.google.com">Google</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jbi5iaW5nLmNvbQ==" title="https://cn.bing.com">Bing</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">Baidu</span>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

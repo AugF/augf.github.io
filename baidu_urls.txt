@@ -1,5 +1,5 @@
-https://augf.github.io/2019/09/19/nju-course-cplus-lecture7/
-https://augf.github.io/2019/09/19/nju-course-cplus-lecture6-summary/
-https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/
-https://augf.github.io/2019/09/19/nju-course-cplus-lecture5-summary/
-https://augf.github.io/2019/09/19/nju-course-cplus-lecture5/
+https://augf.github.io/2019/09/19/daily-cplus-thinking/
+https://augf.github.io/2019/09/19/machinelearning-gradient-descent/
+https://augf.github.io/2019/09/19/spark-study-thinking-1/
+https://augf.github.io/2019/09/19/spark-study-thinking/
+https://augf.github.io/2019/09/19/deeplearning-learn/

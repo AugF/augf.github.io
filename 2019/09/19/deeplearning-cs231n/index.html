@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <link rel="alternate" href="/atom.xml" title="AugF's Notes" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <meta name="description" content="1. Introduction A brief history of computer vision creatures -&amp;gt; vision camera what is the vision processing Original picture differntiated picture Feature points selected   MIT research   Inpute im">
+<meta name="keywords" content="deeplearning,stanford,cs231n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deeplearning cs231n">
+<meta property="og:url" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/index.html">
+<meta property="og:site_name" content="AugF&#39;s Notes">
+<meta property="og:description" content="1. Introduction A brief history of computer vision creatures -&amp;gt; vision camera what is the vision processing Original picture differntiated picture Feature points selected   MIT research   Inpute im">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/1-stagesOfvisualRepresentation.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/2-1nn.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/2-knn.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/2-knn-distance_metric.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/2-k-cross-validation.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/2-hard-cases-for-alinearclassifier.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/3-regularization.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/3-gradient.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/3-gradient-ex.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/3-Jacobian.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/3-gradient-vectorized-ex.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/3-gradient-vectorized-ex-2.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/3-forward_backward-api.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/3-svm.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/3-summary.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/3-neural_networks.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/3-activation_functions.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/4-convolutional.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/4-output_size.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/4-outputsize-ex.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/4-outputsize_summary.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/5-sigmoid.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/5-sigmoid-pic.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/5-tanh.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/5-relu.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/5-relu-problem.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/5-prelu.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/5-erelu.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/5-max-neuron.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/5-practice.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/5-2_preprocess_data-1.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/5-2_pcaAndWhitening.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/5-2_preprocess_data-practice.png">
+<meta property="og:updated_time" content="2019-09-19T04:24:46.035Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="deeplearning cs231n">
+<meta name="twitter:description" content="1. Introduction A brief history of computer vision creatures -&amp;gt; vision camera what is the vision processing Original picture differntiated picture Feature points selected   MIT research   Inpute im">
+<meta name="twitter:image" content="https://augf.github.io/2019/09/19/deeplearning-cs231n/asserts/1-stagesOfvisualRepresentation.png">
+  <link rel="canonical" href="https://augf.github.io/2019/09/19/deeplearning-cs231n/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>deeplearning cs231n | AugF's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AugF's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">59</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">65</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">84</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/deeplearning-cs231n/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">deeplearning cs231n
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:23:33 / 修改时间：12:24:46" itemprop="dateCreated datePublished" datetime="2019-09-19T12:23:33+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/deeplearning/" itemprop="url" rel="index"><span itemprop="name">deeplearning</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/deeplearning/cs231n/" itemprop="url" rel="index"><span itemprop="name">cs231n</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><ol>
+<li>A brief history of computer vision<ul>
+<li>creatures -&gt; vision</li>
+<li>camera</li>
+<li>what is the vision processing<ul>
+<li>Original picture</li>
+<li>differntiated picture</li>
+<li>Feature points selected</li>
+</ul>
+</li>
+<li>MIT research<br>  <img src="asserts/1-stagesOfvisualRepresentation.png" alt><ul>
+<li>Inpute image<ul>
+<li>preceived intensities</li>
+</ul>
+</li>
+<li>Edge image<ul>
+<li>zero crossing, blobs, edges, bars, ends, virtual lines</li>
+</ul>
+</li>
+<li>2 1/2-D sketch<ul>
+<li>local surface orentation</li>
+</ul>
+</li>
+<li>3D </li>
+</ul>
+</li>
+<li>how to recognize and represent the world</li>
+<li>image segmentation: Jitendra Malik</li>
+<li>face detection</li>
+<li>1999-2000, momentum动量, ML,  adaBoost algorithm to do real-time face detection, 2001</li>
+<li>2006, digital camera a real-time face detector</li>
+<li>SIFT feature: match and the entire object   due to camera angles, occlusion, viewppoint, lighting</li>
+<li>Spatial pyramid matching: from different parts of the image and in different resolutions and put them together in a feature </li>
+<li>HoG Histogrm of Gradients</li>
+<li>imagenet</li>
+<li>SVM, AdaBoost,  overfiting: not enought training data, cannot generalize.  benchmarking  WordNet</li>
+<li>2009  ImageNet Large-Scale Visual Recognition Challenge</li>
+</ul>
+</li>
+<li>CS231n overview<ul>
+<li>Aims<ul>
+<li>image classification</li>
+<li>object detection</li>
+<li>action classification</li>
+<li>image captioning</li>
+</ul>
+</li>
+<li>Convolutional Neural Neteworks</li>
+<li>object relationships</li>
+<li>object attributes</li>
+<li>Our philosophy<ul>
+<li>Thorough and Detailed</li>
+<li>Practical</li>
+<li>State of the art</li>
+<li>Fun</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="2-Image-Classification-pipeline"><a href="#2-Image-Classification-pipeline" class="headerlink" title="2. Image Classification pipeline"></a>2. Image Classification pipeline</h1><p>python numpy tutorial</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NzMjMxbi9jczIzMW4uZ2l0aHViLmlvL2Jsb2IvbWFzdGVyL3B5dGhvbi1udW1weS10dXRvcmlhbC5tZA==" title="https://github.com/cs231n/cs231n.github.io/blob/master/python-numpy-tutorial.md">https://github.com/cs231n/cs231n.github.io/blob/master/python-numpy-tutorial.md<i class="fa fa-external-link"></i></span></p>
+<p>gce~tutoria ?<br>google compute engine</p>
+<ol>
+<li><p>cluster</p>
+</li>
+<li><p>attempts have been made</p>
+<ul>
+<li>find edges</li>
+<li>find corners -&gt;, &lt;-, <blockquote>
+<p>not scalerable</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>Neareast Neighbor</p>
+<ul>
+<li>train: memorize all data and labels O(1)</li>
+<li>predict: predict the label of the most similar training image O(N)<blockquote>
+<p>noisy  spurious<br><img src="asserts/2-1nn.png" alt><br>just training data, 把所有测试数据可能的分类填上去<br>k-nearest neighbors<br><img src="asserts/2-knn.png" alt><br>the white place 可能选哪个都可以，随机才</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<p>L1: coordinate system is important</p>
+<blockquote>
+<p>you know what the coordinate system meaning</p>
+</blockquote>
+<p><img src="asserts/2-knn-distance_metric.png" alt><br>numpy的基本运算</p>
+<p><span class="exturl" data-url="aHR0cDovL3Zpc2lvbi5zdGFuZm9yZC5lZHUvdGVhY2hpbmcvY3MyMzFuLWRlbW9zL2tubi8=" title="http://vision.stanford.edu/teaching/cs231n-demos/knn/">http://vision.stanford.edu/teaching/cs231n-demos/knn/<i class="fa fa-external-link"></i></span></p>
+<p>why 图像是那样的????</p>
+<blockquote>
+<p>PRML必读</p>
+</blockquote>
+<ul>
+<li>Setting Hyperparameters</li>
+</ul>
+<p>pick the best training hyperparameters performs on validation?<br>and run once on the test data, then write in the paper</p>
+<p>cross valildation<br>Useful for small datasets, but not used too frequently in deep learning</p>
+<p>有个点自己理解错了，其实是看交叉验证集上的损失怎么样？如果交叉验证集上的损失没有连续操作多少次上升？ 或者达到终止条件，则选择该超参数</p>
+<p>不过，k-cross-validation的意思是用同样的超参数训练多次，然后得到验证集的平均损失，然后更新一次吗？</p>
+<p>因为本身更新公式是作用在损失函数上的</p>
+<p>validation to check how well</p>
+<p>same methodology for collecting the data,  go and partition it randomly</p>
+<p>时间序列分割<br>shift the problem</p>
+<p><img src="asserts/2-k-cross-validation.png" alt></p>
+<p>L2 distance is really not doing a very good job</p>
+<p>cover space densely  exponential growth<br>traning examples?</p>
+<p>knn不适用与图像分类<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYWlwcDA2MDcvYXJ0aWNsZS9kZXRhaWxzLzc3OTE1Mjk4" title="https://blog.csdn.net/chaipp0607/article/details/77915298">https://blog.csdn.net/chaipp0607/article/details/77915298<i class="fa fa-external-link"></i></span></p>
+<ul>
+<li>很差的测试效率</li>
+<li>整个图像的水平距离度量可能非常不直观</li>
+</ul>
+<blockquote>
+<p>计算距离的对象不可能是像素值，因为他不能从本质上反映出人对图像的认知，比如把一张图进行位移，人觉得是一类，但是计算结果距离很大。<br>所以knn计算的应该是一些描述子生成的特征。</p>
+</blockquote>
+<p>knn总结</p>
+<ol>
+<li>对于样本不平均问题，knn相比于其他监督学习算法容忍度更低。</li>
+<li>计算和存储开销大，在线学习效率低。</li>
+</ol>
+<p>改进</p>
+<ol>
+<li>解决样本不平衡问题</li>
+<li>提高分类效率</li>
+</ol>
+<p><img src="asserts/2-hard-cases-for-alinearclassifier.png" alt></p>
+<p>mutlimodal data: different regions of space</p>
+<p>229</p>
+<h1 id="3-some-concepts"><a href="#3-some-concepts" class="headerlink" title="3. some concepts"></a>3. some concepts</h1><h2 id="3-1-loss"><a href="#3-1-loss" class="headerlink" title="3.1 loss"></a>3.1 loss</h2><ul>
+<li>SVM loss:  $L_i = \sum_{j \ne y_i} max(s_j - s_{y_i} +1)$<br>$L = \frac{1}{N} \sum_{i=1}^N L_i$</li>
+</ul>
+<p>$max(1-yf(x))$: 在分类分割线附近进行鼓励</p>
+<blockquote>
+<p>care the correct is much greater than the incorrect scores</p>
+</blockquote>
+<p>loss function; how bad are different mistakes<br>square:  bad, very, very bad<br>hinge:  a litte wrong,  a better wrong</p>
+<p>损失函数总结<br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81ODg4MzA5NQ==" title="https://zhuanlan.zhihu.com/p/58883095">https://zhuanlan.zhihu.com/p/58883095<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>设置W, 来查看Loss</p>
+</blockquote>
+<p>W, 2W  the zero loss</p>
+<h2 id="3-2-regularization-term-encourages-the-model-to-somehow-pick-a-simple-W-R-W"><a href="#3-2-regularization-term-encourages-the-model-to-somehow-pick-a-simple-W-R-W" class="headerlink" title="3.2 regularization term: encourages the model to somehow pick a simple W $R(W)$"></a>3.2 regularization term: encourages the model to somehow pick a simple W $R(W)$</h2><p><img src="asserts/3-regularization.png" alt></p>
+<p>L1 encouraging sparsity in this matrix W.<br>w1: 0.4, 0, 0.4, 0<br>w2: 0.2, 0.2, 0.2, 0.2<br>x:1,1,1,1</p>
+<p>L1:w1   L2:w2</p>
+<blockquote>
+<p>正则化项是在原本目标得到的函数的基础上，按照你想要的某种特性去构造</p>
+</blockquote>
+<p>minimize  -log P(Y=yi| X=xi)<br>multi-SVM: softmax loss </p>
+<blockquote>
+<p>min=zero,  max is infinity</p>
+</blockquote>
+<blockquote>
+<p>当出现错误的数据，如何处理？ 0应该处理为一个非常小的数<br>debuging:  minus log of one over C</p>
+</blockquote>
+<ul>
+<li>hinge-loss vs softmax loss<blockquote>
+<p>SVM-loss: margin  between different classes,  if the data point over the bar, they don’t care about it anymore if they are correct.<br>softmax-loss: drive probabiltity mass all the way to one, pile the all classes, because log loss, it tends to push correct class to 0,  imcorrect classes to infinity.<br>continually to improve the correct classes.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="3-3-Optimization"><a href="#3-3-Optimization" class="headerlink" title="3.3 Optimization"></a>3.3 Optimization</h2><ol>
+<li>A first very bad idea solution: Random search</li>
+</ol>
+<p>cifar-10  15.5%</p>
+<ol start="2">
+<li>fllow the slope<blockquote>
+<p>scalar 标量</p>
+</blockquote>
+</li>
+</ol>
+<p>如何计算梯度？</p>
+<ul>
+<li>前向传播，然后计算一个新值，然后得到  dW<br><img src="asserts/3-gradient.png" alt></li>
+</ul>
+<blockquote>
+<p>debugging </p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly92aXNpb24uc3RhbmZvcmQuZWR1L3RlYWNoaW5nL2NzMjMxbi1kZW1vcy9saW5lYXItY2xhc3NpZnk=" title="https://vision.stanford.edu/teaching/cs231n-demos/linear-classify">https://vision.stanford.edu/teaching/cs231n-demos/linear-classify<i class="fa fa-external-link"></i></span></p>
+<p>calclus 微分</p>
+<p><img src="asserts/3-gradient-ex.png" alt></p>
+<p>add gate: gradient distributor<br>max gate: gradient router<br>mul gate: gradient switcher</p>
+<p>back to a node is add</p>
+<p><img src="asserts/3-Jacobian.png" alt><br>4096*4096? Jacobian matrix:  diagonal matrix </p>
+<p>step 1<br><img src="asserts/3-gradient-vectorized-ex.png" alt></p>
+<p>step 2<br><img src="asserts/3-gradient-vectorized-ex-2.png" alt></p>
+<blockquote>
+<p>Always check: the gradient with respect to a variable should have the same shape as the variable.</p>
+</blockquote>
+<p><img src="asserts/3-forward_backward-api.png" alt><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JWTEMvY2FmZmUvYmxvYi9tYXN0ZXIvc3JjL2NhZmZlL2xheWVycy9jbGlwX2xheWVyLmNwcA==" title="https://github.com/BVLC/caffe/blob/master/src/caffe/layers/clip_layer.cpp">https://github.com/BVLC/caffe/blob/master/src/caffe/layers/clip_layer.cpp<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>caffer layers</p>
+</blockquote>
+<h2 id="3-4-layers-kinds"><a href="#3-4-layers-kinds" class="headerlink" title="3.4 layers kinds"></a>3.4 layers kinds</h2><p><span class="exturl" data-url="aHR0cDovL3R1dG9yaWFsLmNhZmZlLmJlcmtlbGV5dmlzaW9uLm9yZy90dXRvcmlhbC9sYXllcnMuaHRtbA==" title="http://tutorial.caffe.berkeleyvision.org/tutorial/layers.html">http://tutorial.caffe.berkeleyvision.org/tutorial/layers.html<i class="fa fa-external-link"></i></span></p>
+<ul>
+<li>vision layers<ul>
+<li>convolution</li>
+<li>pooling</li>
+<li>local response normalization(lrn)</li>
+<li>im2col</li>
+</ul>
+</li>
+<li>loss layers<ul>
+<li>softmax</li>
+<li>sum-of-squares/euclidean</li>
+<li>hinge/margin</li>
+<li>sigmoid cross-entropy</li>
+<li>accuracy and top-k</li>
+</ul>
+</li>
+<li>Activation/Neuron Layers<ul>
+<li>ReLU/Rectified-Linear and Leaky-ReLU</li>
+<li>Sigmoid  $y = \frac {1}{1 + e^{-x}}$<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JWTEMvY2FmZmUvYmxvYi9tYXN0ZXIvc3JjL2NhZmZlL2xheWVycy9zaWdtb2lkX2xheWVyLmNwcA==" title="https://github.com/BVLC/caffe/blob/master/src/caffe/layers/sigmoid_layer.cpp">https://github.com/BVLC/caffe/blob/master/src/caffe/layers/sigmoid_layer.cpp<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+<li>TanH/Hyperbolic Tangent</li>
+<li>Absolute Value</li>
+<li>Power</li>
+<li>BNLL</li>
+</ul>
+</li>
+<li>Data Layers<ul>
+<li>In-Memory</li>
+<li>HDF5 Input</li>
+<li>Images</li>
+<li>Windows</li>
+<li>Dummy</li>
+</ul>
+</li>
+<li>Common Layers<ul>
+<li>Innner Product</li>
+<li>Splitting</li>
+<li>Flattening</li>
+<li>Concatenation</li>
+<li>Slicing</li>
+<li>Elemetwise Oprations</li>
+<li>Argmax</li>
+<li>Softmax</li>
+<li>Mean-Variance Normalization</li>
+</ul>
+</li>
+</ul>
+<p>examples<br><img src="asserts/3-svm.png" alt></p>
+<p>summary<br><img src="asserts/3-summary.png" alt></p>
+<blockquote>
+<p>upstream gradient multipy local gradient</p>
+</blockquote>
+<blockquote>
+<p>左乘优先<br>non-linearities</p>
+</blockquote>
+<p>question: templates, in fact, you don’t have to care about it, the only thing you concerned is the scores</p>
+<p><img src="asserts/3-neural_networks.png" alt></p>
+<blockquote>
+<p>Assignment2: Writing a 2-layer net</p>
+</blockquote>
+<h2 id="3-5-Activation-functions"><a href="#3-5-Activation-functions" class="headerlink" title="3.5 Activation functions"></a>3.5 Activation functions</h2><p><img src="asserts/3-activation_functions.png" alt></p>
+<blockquote>
+<p>callled 2-layer neural net</p>
+</blockquote>
+<p>matrix form, matrix-vector form</p>
+<p>Summary</p>
+<ul>
+<li>arrange neurons into fully-connected layers</li>
+<li>the abstraction of layer has the nice property that it allows us to use efficient vectorized code(e.g. matrix multiplies)</li>
+<li>neural networks are not really neural</li>
+<li>next time: convolutional neural networks</li>
+</ul>
+<h1 id="4-Convolutional-Neural-Networks"><a href="#4-Convolutional-Neural-Networks" class="headerlink" title="4. Convolutional Neural Networks"></a>4. Convolutional Neural Networks</h1><p>Deep Learning history</p>
+<ul>
+<li>1957: Perceptron, Frank Rosenblatt</li>
+<li>1960: Adaline/Madaline<blockquote>
+<p>stack these linear layer to multi-layers, no back-propagation or other rules</p>
+</blockquote>
+</li>
+<li>1986: Rumelhart et al. First time back-propagation became popular</li>
+<li>2006: Reinvigorated research in Deep Learning<blockquote>
+<p>carefully-initialized   pre-training stage </p>
+</blockquote>
+</li>
+<li>2012, first strongest results using for speech recognition</li>
+</ul>
+<p>A bit of history: CNN</p>
+<ul>
+<li>1959 electrical signal from brain<blockquote>
+<p>topographical mapping 地形学</p>
+</blockquote>
+</li>
+<li>Hierarchical organization:<blockquote>
+<p>simple cells -&gt; complex cells -&gt; hypercomplex cells</p>
+</blockquote>
+</li>
+<li>1980 complex cells-&gt;perform pooling</li>
+<li>1998 gradient-base document recognition</li>
+<li>2012, AlexNet</li>
+<li>Detection, Segmentation  R-CNN<br>reinforcement learning</li>
+</ul>
+<p>notation<br>should rorate 180<br>how to slide this over all the spatial locations</p>
+<blockquote>
+<p>卷积层得到的结果是什么<br>3 filter??,  6 filters??<br>over the image spatially<br>we’re sampling the edges and corners less than the other localtions</p>
+</blockquote>
+<blockquote>
+<p>试图去理解每一步的过程还有每一个公式的含义</p>
+</blockquote>
+<p>one filter-&gt; one activation map</p>
+<p>we call these<br><img src="asserts/4-convolutional.png" alt></p>
+<p><img src="asserts/4-output_size.png" alt></p>
+<p>Output size:<br>(N-f)/stride + 1</p>
+<blockquote>
+<p>if we use common to zero pad the border, we will get 7*7 output</p>
+</blockquote>
+<p><img src="asserts/4-outputsize-ex.png" alt></p>
+<blockquote>
+<p>what will channels do?<br>5<em>5</em>3 + 1=76 params(+1 for bias) =&gt; 76*10=760 params</p>
+</blockquote>
+<p><img src="asserts/4-outputsize_summary.png" alt></p>
+<blockquote>
+<p>概念辨析</p>
+</blockquote>
+<ul>
+<li>向量的乘法<blockquote>
+<p>点集，标量积得到内积； 叉乘，结果为向量，向量积</p>
+</blockquote>
+</li>
+<li>矩阵乘法<blockquote>
+<p>multiply: 普通的乘法<br>Hadamard product, 逐点乘法<br>Kronecker product:  tensor product</p>
+</blockquote>
+</li>
+</ul>
+<p>conv layer in torch</p>
+<blockquote>
+<p>spatial convolution</p>
+</blockquote>
+<hr>
+<p>torch, pytorch</p>
+<blockquote>
+<p>torch能够放在GPU中加速计算，前提是有合适的GPU时，使用起来跟numpy来说差别不大</p>
+</blockquote>
+<ul>
+<li><p>torch<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvcmNoL25uL2Jsb2IvbWFzdGVyL2RvYy9jb252b2x1dGlvbi5tZCNubi5TcGF0aWFsQ29udm9sdXRpb24=" title="https://github.com/torch/nn/blob/master/doc/convolution.md#nn.SpatialConvolution">https://github.com/torch/nn/blob/master/doc/convolution.md#nn.SpatialConvolution<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p>caffe<br><span class="exturl" data-url="aHR0cDovL2NhZmZlLmJlcmtlbGV5dmlzaW9uLm9yZy90dXRvcmlhbC9sYXllcnMvY29udm9sdXRpb24uaHRtbA==" title="http://caffe.berkeleyvision.org/tutorial/layers/convolution.html">http://caffe.berkeleyvision.org/tutorial/layers/convolution.html<i class="fa fa-external-link"></i></span></p>
+</li>
+</ul>
+<hr>
+<h1 id="5-Training-Neural-Networks"><a href="#5-Training-Neural-Networks" class="headerlink" title="5. Training Neural Networks"></a>5. Training Neural Networks</h1><p>Overview:</p>
+<ol>
+<li>one time setup<ul>
+<li>activation functions</li>
+<li>preprocessing</li>
+<li>weight initilization</li>
+<li>regularization</li>
+<li>gradient checking</li>
+</ul>
+</li>
+<li>Training dynamics<ul>
+<li>babysitting the learning process<br>parameter updates</li>
+<li>hyperparameter optimization</li>
+</ul>
+</li>
+<li>Evaluation<ul>
+<li>model ensembles</li>
+</ul>
+</li>
+</ol>
+<h2 id="5-1-Activation-Functions"><a href="#5-1-Activation-Functions" class="headerlink" title="5.1 Activation Functions"></a>5.1 Activation Functions</h2><ol>
+<li>sigmoid <ul>
+<li>introduction<ul>
+<li>squashes numbers to range[0,1]<blockquote>
+<p>[-5, 5]变化明显，其他位置变化就有问题了 [-10, 10]=0<br>df = f(1-f)<br>梯度就是函数图像的直线，永远不要忘了最直观的理解</p>
+</blockquote>
+</li>
+<li>historycally popluar since they have nice interpretation as a saturating “firing rate” of a neuron</li>
+</ul>
+</li>
+<li>problem<ul>
+<li>Saturated neurons “kill” the gradients </li>
+<li>Sigmoid outputs are not zero-centered<blockquote>
+<p>因为对x的范围的限制，所以不对称，同理也不能在全positive的数据上表现的很好； always the sign of the upstream gradient coming down.  inefficient weight update</p>
+</blockquote>
+</li>
+<li>exp() is bit compute expensive</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="asserts/5-sigmoid.png" alt></p>
+<p><img src="asserts/5-sigmoid-pic.png" alt></p>
+<blockquote>
+<p>avoid allways a direction</p>
+</blockquote>
+<ol start="2">
+<li>tanh 1991</li>
+</ol>
+<ul>
+<li>Squashes numbers to range[-1,1]</li>
+<li>zero centered (nice)</li>
+<li>still kills when saturated :(<br><img src="asserts/5-tanh.png" alt></li>
+</ul>
+<ol start="3">
+<li>relu 2012  rectified linear unit</li>
+</ol>
+<p><img src="asserts/5-relu.png" alt></p>
+<ul>
+<li>not zero-center output</li>
+<li>any annoyance<br>hint: what is the gradient when x&lt;0 ?</li>
+</ul>
+<blockquote>
+<p>it is fine at the begining, then at some point, it became bad and it died.</p>
+</blockquote>
+<p><img src="asserts/5-relu-problem.png" alt></p>
+<blockquote>
+<p>data cloud is just your training data.<br>wx1 + wx2上进行影响啊<br>people like to initialize relu neurons with slightly positive biaes(e.g. 0.01)</p>
+</blockquote>
+<ol start="4">
+<li><p>leaky relu<br><img src="asserts/5-prelu.png" alt></p>
+</li>
+<li><p>elu<br><img src="asserts/5-erelu.png" alt> </p>
+<blockquote>
+<p>how the $\alpha$ is defined</p>
+</blockquote>
+</li>
+<li><p>Maxout Neuron<br><img src="asserts/5-max-neuron.png" alt></p>
+</li>
+</ol>
+<p><img src="asserts/5-practice.png" alt></p>
+<h2 id="5-2-data-preprocess"><a href="#5-2-data-preprocess" class="headerlink" title="5.2 data preprocess"></a>5.2 data preprocess</h2><p>original data -&gt; zero-centered data -&gt; normalized data</p>
+<blockquote>
+<p>to do at the test data, too<br><img src="asserts/5-2_preprocess_data-1.png" alt></p>
+</blockquote>
+<p><img src="asserts/5-2_pcaAndWhitening.png" alt></p>
+<p><img src="asserts/5-2_preprocess_data-practice.png" alt></p>
+<blockquote>
+<p>per-channel  RGB<br>do this for entire train data,  once before training. don’t do this per batch</p>
+</blockquote>
+<blockquote>
+<p>how sigmoid need the zero-centered data,  it only servers for the first layer.</p>
+</blockquote>
+<h2 id="5-3-Weight-Intilization"><a href="#5-3-Weight-Intilization" class="headerlink" title="5.3 Weight Intilization"></a>5.3 Weight Intilization</h2><p>Q: what will happen if W is zero?</p>
+<blockquote>
+<ol>
+<li>will disappear<br>!!they will all do the same thing</li>
+</ol>
+</blockquote>
+<ul>
+<li>First idea: small random numbers<br>(gaussian with zero mean and 1e-2 standard deviation)<br><code>W = 0.01 * np.random.randn(D, H)</code><blockquote>
+<p>works okay for small networks, but problems with deeper networks.</p>
+</blockquote>
+</li>
+</ul>
+<p>pic1 see the hidden data is<br>pic2: see the data distribution</p>
+<blockquote>
+<p>zero</p>
+</blockquote>
+<blockquote>
+<p>All activations become zero!!</p>
+</blockquote>
+<p>What will W look like?</p>
+<p>because X is small, so the W is getting more small, they’re basically not updating.</p>
+<ul>
+<li>forward doing</li>
+<li>have gradient flows coming down<blockquote>
+<p>for each line, we chain these weight</p>
+</blockquote>
+</li>
+</ul>
+<p>cs231n: 深度视觉识别课程P6</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eugene Wang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://augf.github.io/2019/09/19/deeplearning-cs231n/" title="deeplearning cs231n">https://augf.github.io/2019/09/19/deeplearning-cs231n/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/deeplearning/" rel="tag"><i class="fa fa-tag"></i> deeplearning</a>
+            
+              <a href="/tags/stanford/" rel="tag"><i class="fa fa-tag"></i> stanford</a>
+            
+              <a href="/tags/cs231n/" rel="tag"><i class="fa fa-tag"></i> cs231n</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/19/algorithm-acwing-search-graph/" rel="next" title="algorithm acwing search graph">
+                  <i class="fa fa-chevron-left"></i> algorithm acwing search graph
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/19/machinelearning-cornerstone-summary/" rel="prev" title="machinelearning cornerstone summary">
+                  machinelearning cornerstone summary <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Image-Classification-pipeline"><span class="nav-number">2.</span> <span class="nav-text">2. Image Classification pipeline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-some-concepts"><span class="nav-number">3.</span> <span class="nav-text">3. some concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-loss"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-regularization-term-encourages-the-model-to-somehow-pick-a-simple-W-R-W"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 regularization term: encourages the model to somehow pick a simple W $R(W)$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Optimization"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 Optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-layers-kinds"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 layers kinds</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-Activation-functions"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 Activation functions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Convolutional-Neural-Networks"><span class="nav-number">4.</span> <span class="nav-text">4. Convolutional Neural Networks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Training-Neural-Networks"><span class="nav-number">5.</span> <span class="nav-text">5. Training Neural Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-Activation-Functions"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 Activation Functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-data-preprocess"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 data preprocess</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-Weight-Intilization"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 Weight Intilization</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/default-avatar.png"
+      alt="Eugene Wang">
+  <p class="site-author-name" itemprop="name">Eugene Wang</p>
+  <div class="site-description" itemprop="description">Quick notes</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="GitHub &rarr; https://github.com/AugF"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOnl1bnBhbndhbmdAZ21haWwuY29t" title="E-Mail &rarr; mailto:yunpanwang@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vSm9zd3hl" title="Weibo &rarr; https://weibo.com/Joswxe"><i class="fa fa-fw fa-weibo"></i>Weibo</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==" title="https://www.google.com">Google</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jbi5iaW5nLmNvbQ==" title="https://cn.bing.com">Bing</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">Baidu</span>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

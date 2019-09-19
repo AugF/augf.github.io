@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <link rel="alternate" href="/atom.xml" title="AugF's Notes" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <meta name="description" content="[TOC] 1. 序言图有着复杂的关系和交互依赖 2D卷积: 邻居的决定由filter sizew = 平均， 邻居有序，可以按照一定的序列来看且有固定的尺寸 Graph卷积： 邻居无序，价值等同，数量不一 Random Walk??? 随机游走，有概率计算方法还有要理解？ 图网络表示：  编码 随机游走 矩阵因式分解  2. 框架Node-level:  MLP+softmax: 见poolin">
+<meta name="keywords" content="gnn,paper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gnn summary paper summary">
+<meta property="og:url" content="https://augf.github.io/2019/09/19/gnn-summary-paper-summary/index.html">
+<meta property="og:site_name" content="AugF&#39;s Notes">
+<meta property="og:description" content="[TOC] 1. 序言图有着复杂的关系和交互依赖 2D卷积: 邻居的决定由filter sizew = 平均， 邻居有序，可以按照一定的序列来看且有固定的尺寸 Graph卷积： 邻居无序，价值等同，数量不一 Random Walk??? 随机游走，有概率计算方法还有要理解？ 图网络表示：  编码 随机游走 矩阵因式分解  2. 框架Node-level:  MLP+softmax: 见poolin">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-19T05:01:06.606Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gnn summary paper summary">
+<meta name="twitter:description" content="[TOC] 1. 序言图有着复杂的关系和交互依赖 2D卷积: 邻居的决定由filter sizew = 平均， 邻居有序，可以按照一定的序列来看且有固定的尺寸 Graph卷积： 邻居无序，价值等同，数量不一 Random Walk??? 随机游走，有概率计算方法还有要理解？ 图网络表示：  编码 随机游走 矩阵因式分解  2. 框架Node-level:  MLP+softmax: 见poolin">
+  <link rel="canonical" href="https://augf.github.io/2019/09/19/gnn-summary-paper-summary/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>gnn summary paper summary | AugF's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AugF's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">59</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">65</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">84</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/gnn-summary-paper-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">gnn summary paper summary
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:59:16 / 修改时间：13:01:06" itemprop="dateCreated datePublished" datetime="2019-09-19T12:59:16+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/summary/" itemprop="url" rel="index"><span itemprop="name">summary</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[TOC]</p>
+<h1 id="1-序言"><a href="#1-序言" class="headerlink" title="1. 序言"></a>1. 序言</h1><p>图有着复杂的关系和交互依赖</p>
+<p>2D卷积: 邻居的决定由filter size<br>w = 平均， 邻居有序，可以按照一定的序列来看且有固定的尺寸</p>
+<p>Graph卷积： 邻居无序，价值等同，数量不一</p>
+<p>Random Walk??? 随机游走，有概率计算方法还有要理解？</p>
+<p>图网络表示：</p>
+<ol>
+<li>编码</li>
+<li>随机游走</li>
+<li>矩阵因式分解</li>
+</ol>
+<h1 id="2-框架"><a href="#2-框架" class="headerlink" title="2. 框架"></a>2. 框架</h1><p>Node-level:  MLP+softmax: 见pooling结构<br>Edge-level: 额外的函数将两个节点的表示作为边<br>Graph-level: 就是pooling</p>
+<p>半监督: 只能适用于node-level<br>监督学习: 适用于graph-level<br>无监督： graph-embedding</p>
+<blockquote>
+<p>编码器+译码器  负采样</p>
+</blockquote>
+<h1 id="3-正文"><a href="#3-正文" class="headerlink" title="3. 正文"></a>3. 正文</h1><h2 id="3-1-GCN"><a href="#3-1-GCN" class="headerlink" title="3.1 GCN:"></a>3.1 GCN:</h2><p>? stack多层可以学到更多的东西. 对！注意这里的输入是整个图<br>如果堆叠多层的话，实际上就可以不断的获得更远的信息</p>
+<p>basic</p>
+<blockquote>
+<p>这里每个的输出应该不会只是一个值吧？？<br>Relu修正线性函数：<br>当大于x时为本身，小于x时为0</p>
+</blockquote>
+<p><font color="red">ReLU</font><br>ReLU可以将模型实现稀疏话更好地挖掘相关特征<br>就激活函数而言，在深度网络中，由于非负区间的梯度为常数，所以不存在梯度消失问题，使得模型的收敛速度维持在一个稳定状态。<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZXJyeWx2bGVpL2FydGljbGUvZGV0YWlscy81MzE0OTM4MQ==" title="https://blog.csdn.net/cherrylvlei/article/details/53149381">https://blog.csdn.net/cherrylvlei/article/details/53149381<i class="fa fa-external-link"></i></span></p>
+<p>pooling</p>
+<p>一个图经过GCN加pooling得到一个子图，然后给下一个模型。如此最后不断地得到更高级别的表示，最后一层是MLP + softmax</p>
+<p><font color="red">MLP</font><br>MLP: 多层感知机 vs 支持向量机 SVM</p>
+<blockquote>
+<p>多层感知机其实就是多层网络结构，但是一般是向前的，不会有后退的，然后关键就是设定一个偏差评价函数，以及某种策略，当出现错误时可以向后调节参数</p>
+</blockquote>
+<p><font color="red">softmax</font><br>softmax函数：逻辑函数的推广，归一化指数函数。</p>
+<p>$$\delta(z)<em>j = \frac {e^{z_j}}{\sum</em>{k=1}^K e^{z_k}}$$</p>
+<blockquote>
+<p>将任何一个元素都压缩到了指数域，并满足归一化,并且保证了归一化结果在[0,1]之间<br>将原数压缩为指数来做有什么感觉</p>
+</blockquote>
+<p><font color="red">sigmoid</font><br>sigmoid函数，数学表达式<br>$$f(x) = \frac {1}{1 + e^{-x}}$$<br>优点：可以把任何值映射到[0,1]之间；导数的计算公式方便$f’(x) = f(x) (1-f(x))$<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhbHRyaXZlci9hcnRpY2xlL2RldGFpbHMvNTc1MzE5NjM=" title="https://blog.csdn.net/saltriver/article/details/57531963">https://blog.csdn.net/saltriver/article/details/57531963<i class="fa fa-external-link"></i></span></p>
+<p>扩展：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhbHRyaXZlci9hcnRpY2xlL2RldGFpbHMvNTUxMDUyODU=" title="https://blog.csdn.net/saltriver/article/details/55105285">指数分布族<i class="fa fa-external-link"></i></span></p>
+<h3 id="3-1-1-spectral-based"><a href="#3-1-1-spectral-based" class="headerlink" title="3.1.1 spectral-based"></a>3.1.1 spectral-based</h3><p>spectral CNN: 直接将filter设置为了参数<br>ChebySheve: 重新改进了公式，定义了filter的计算，并使得公式的更新的复杂度降低，而且只需要用到空间中的局部信息<br>1阶：沟通两类, 在batch-learning时会指数级增加开销<br>AGCN: 扩展了Laplacian矩阵的适用范围，为每个图重定义了一个剩余矩阵，即完成有向图到无向图的转换</p>
+<blockquote>
+<p>所以这里的黑盒实际上就是数学表达式计算</p>
+</blockquote>
+<p>原本2D卷积是filter设置的是尺寸，而这里的filter有什么含义呢？</p>
+<blockquote>
+<p>就是从信号的角度，过滤得程度吧？？</p>
+</blockquote>
+<p>所以说这里的GCN是有很多参数，然后反馈参数修正是当end时再来修正参数，对吗?</p>
+<p>filter为什么是domin dependent, 比如两个不同的domin,人和物品，显然感觉不能吧</p>
+<h3 id="3-1-2-spatial-based"><a href="#3-1-2-spatial-based" class="headerlink" title="3.1.2 spatial-based"></a>3.1.2 spatial-based</h3><p>GNNs,GRU, SSE<br>MMNN, GraphSage</p>
+<p>recurrent GCN全一样<br>composition GCN全不一样</p>
+<h4 id="1-recurrent"><a href="#1-recurrent" class="headerlink" title="1) recurrent"></a>1) recurrent</h4><p>GNNs: 每个GCN考虑当前节点的属性，相关边的属性，邻居在上一步的表示，邻居的属性<br>GRU: 每个GCN将上一步的状态和邻居节点当前的状态放在GNU中进行考虑<br>SSE： 每个GCN, 随机地选取t个节点，进行更新表示然后随机第选取P个已经更新？的节点来更新梯度</p>
+<ol>
+<li>GNNs 全是用的一个把所有因素都进行考虑的函数，唯一的点就是要保证这个函数收敛<br>循环神经网络</li>
+<li>GRU 门控神经网络： 循环神经网络在时间步数较大或时间步数较小时，循环神经网络的梯度会衰减和爆炸 </li>
+</ol>
+<p><font color="red">RNN</font><br>循环神经网络 RNN<br>神经网络可以看作任意函数的黑盒子，目的是为了解决时序数据中存在的对应关系。<br>中间因为出现循环，所以某个状态会对应T步，但是还是基本的权重更新公式</p>
+<blockquote>
+<p>这里待推导！！！<br>所以这里有个时间t原来是这么回事<br>这里的时间步数就是关联程度的感觉<br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zMDg0NDkwNQ==" title="https://zhuanlan.zhihu.com/p/30844905">https://zhuanlan.zhihu.com/p/30844905<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly96eWJ1bHVvLmNvbS9oYW5iaW5ndGFvL25vdGUvNTQxNDU4" title="https://zybuluo.com/hanbingtao/note/541458">https://zybuluo.com/hanbingtao/note/541458<i class="fa fa-external-link"></i></span></p>
+<p><font color="red">GRU</font><br>实际上的感觉就是认为RNN那样直接进行步长来更新（因为该步也要考自己来设置），这样可能导致问题，衰减或爆炸，所以这里的想法就是加入了门控，即在中间可以根据隐藏状态和当前出现的值来决定是否进一步计算还是改变当前值进行另一种计算。<br><span class="exturl" data-url="aHR0cHM6Ly96aC5kMmwuYWkvY2hhcHRlcl9yZWN1cnJlbnQtbmV1cmFsLW5ldHdvcmtzL2dydS5odG1s" title="https://zh.d2l.ai/chapter_recurrent-neural-networks/gru.html">https://zh.d2l.ai/chapter_recurrent-neural-networks/gru.html<i class="fa fa-external-link"></i></span></p>
+<ol start="3">
+<li>SSE</li>
+</ol>
+<p>随机异步更新节点的表示，考虑历史状态和所有新状态</p>
+<blockquote>
+<p>神奇？ 暂未涉猎， 直觉上会收敛</p>
+</blockquote>
+<blockquote>
+<p>这里统一的$h_v^t$是指v在第t个GCN所得到的值，注意这里的t是全局所设置的网络结构</p>
+</blockquote>
+<h4 id="2-Composition-Based"><a href="#2-Composition-Based" class="headerlink" title="2) Composition Based"></a>2) Composition Based</h4><p>MPNN： 每一步的GCN综合上一步的信息和邻居节点的更新操作集合的信息<br>GraphSage: one batch在线学习的特点，根据域，聚集当前的邻居信息，使一个点成为最终状态；然后，为每个邻居进行更新；最后，知道所有的节点都成为了最终状态</p>
+<ul>
+<li>MPNN</li>
+</ul>
+<p>message passing: 信息函数，信息更新函数<br>这里的信息函数考虑到了上一步的信息，和关于邻居节点的所有更新操作<br>更新函数考虑到了自己的上一步的表示，邻居节点的表示和边的权重<br>readout<br>关于最后的值的读取函数</p>
+<ul>
+<li>GraphSage<br>看公式的话是每个位置有个权重，并且将上一次的点的状态和邻居节点的状态进行了考虑。</li>
+</ul>
+<p>过程？？ 不是很清楚？<br>一种观点：</p>
+<p>这里的节点是怎么选取的？ </p>
+<blockquote>
+<p>它说的是保证各种聚集参数是对的，但是并未说其他的啊？？</p>
+</blockquote>
+<p>首先对一个节点进行更新，然后根据邻居节点产生该节点的状态，然后使用中间节点的最终状态来预测和反馈错误。</p>
+<p>也就是说先考虑一个点，然后传递错误到其他点，但是我会进行标记这个点已经不可再取。 而且当新的数据来临时，也可以采用直接训练的想法</p>
+<h4 id="3-杂项"><a href="#3-杂项" class="headerlink" title="3) 杂项"></a>3) 杂项</h4><p>DCNN(缩小图的转移举证)<br>PATCHY-SAN(先全局排序，CNN)<br>LGCN(得到邻接节点的特征矩阵处理排序后，CNN+子图搜索)<br>MMN(建议考虑边的权重，使用高斯核来学习)</p>
+<ul>
+<li>DCNN<br>模拟压缩图的扩散过程，所以这里除了权重，函数f应该具有缩小尺寸的功能<br>但是需要存储转移矩阵，耗费内存</li>
+<li>PATCHY-SAN<br>先将节点排序，然后后面的所有做法就是选取特定的值，然后使用标准的CNN来做</li>
+<li>LGCN *<br>node level<br>在每次做的时候，对特征矩阵进行分析，选取特征矩阵的前多少行来做。<br>子图训练</li>
+<li>MMN</li>
+</ul>
+<p>*考虑了空间位置关系，即便的权重，建议使用标准的高斯核来学习参数调节边的权重 </p>
+<blockquote>
+<p>绝大部分采用CNN,也有用GCN的</p>
+</blockquote>
+<h3 id="3-1-3-总结"><a href="#3-1-3-总结" class="headerlink" title="3.1.3 总结"></a>3.1.3 总结</h3><p>recurrent 节点的稳定状态<br>composition 可能获得高级别的信息</p>
+<p>但是要放隐藏状态，内存</p>
+<p>子图训练： GraphSage确定一个的最终状态先,SSE完全随机的思想</p>
+<p>复杂的网络结构取得成果</p>
+<ol>
+<li>增加深度和宽度</li>
+<li>多图维护信息</li>
+<li>超参数学习接收域的大小</li>
+</ol>
+<h3 id="3-1-4-池化"><a href="#3-1-4-池化" class="headerlink" title="3.1.4 池化"></a>3.1.4 池化</h3><p>chebNet首先进行池化，使得一开始的结构得到了改进，进一步取得了更好的效果<br>DGCNN 池化进行预处理排序<br>DIFFPOOL 使用两个GCN, 一个embed, 一个pool, 用来整合异质的GCN。</p>
+<p>基于空间的在效率上可以使用batch和smapling提高效率，在泛化性上可以共享权重;在灵活性上，可以处理多源输入</p>
+<h2 id="3-2-GAN"><a href="#3-2-GAN" class="headerlink" title="3.2 GAN"></a>3.2 GAN</h2><ul>
+<li><p>GAT<br>就是考虑所有邻居节点的表示和考虑邻居节点的权重</p>
+<blockquote>
+<p>不同的子空间是指的，随着当前所处的不同位置，可能得到的数据不同，所以就把所有子空间的邻居节点的位置堆叠吗。感觉是这样的<br>这里的子空间也可以看做是某个模型</p>
+</blockquote>
+</li>
+<li><p>GAAN<br>在聚集不同子空间中的信息时，考虑不同的权重</p>
+</li>
+<li><p>GAM<br>不考虑所有的情况，考虑其中一段一段的状态，因为LSTM非常好用，就用它</p>
+</li>
+<li><p>AW<br>目标是node embedding, 即为了学习转移矩阵。操作的想法是，构造转移矩阵，并且当前的共现矩阵为所有转移矩阵之和的某种表示</p>
+<blockquote>
+<p>? 如何体现，应该是转移矩阵的参数体现吧</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>总结</strong></p>
+<ul>
+<li>注意力为邻居赋予权重</li>
+<li>整合多个模型</li>
+<li>指导random walks</li>
+</ul>
+<p>GCN每个聚集时，直接按照某种特定的属性进行聚集<br>GAN: 首先会通过一个神经网络结构来获得权重指派，等于说多加了一层网络结构</p>
+<h2 id="3-3-GAE"><a href="#3-3-GAE" class="headerlink" title="3.3 GAE"></a>3.3 GAE</h2><p>编码：得到最终的编码结果</p>
+<p>GAE: GCNs, 评价调节<br>AGRA: GCN产生，GAN训练<br>NetRA: 序列到序列，random walks<br>DNGR: 堆叠矩阵+噪声，基于统计数据<br>SDNE: 使用指标，评价邻居，评价结果，正则化项<br>DRNE: 重建节点，LSTM聚集函数</p>
+<ul>
+<li><p>GAE<br>GCNs, 然后定义评价函数</p>
+</li>
+<li><p>AGRA<br>GCN产生，GAN评价<br>产生时服从某一先验分布，评价时选出服从分布的</p>
+</li>
+<li><p>混合变体</p>
+<ul>
+<li>NetRA: 通过序列到序列结构的random walks来重建序列</li>
+<li>DNGR: 用堆叠的降噪的自动编码器来重建矩阵。具体做法是通过统计同时出现的数量与单独出现数量的比值的最大值来决定最终的共现矩阵的值。因为是直接根据数据特性来统计，所以所学得的东西应该是非线性的。另外一点就是，在做的时候随机增加了噪声</li>
+<li>SDNE: 使用了两个指标，一个是隐藏节点表示与邻居节点隐藏表示之间的距离；一个是节点的输入与重新构造之间的距离（这里考虑了惩罚项）；最后，优化目标即为三个项+正则化项</li>
+<li>DRNE: 直接考虑重建节点，设置损失函数，定义为所有邻居节点表示值与聚集函数(LSTM)的差</li>
+</ul>
+</li>
+</ul>
+<p>DNGR+SDNE：仅考虑拓扑结构<br>邻接矩阵的稀疏性：<br>GAE: 重新赋予权重； NetRA线性化；DNGR密集矩阵; SDNE: 惩罚</p>
+<p>A+X经过Encoder, 再经过GCN, 得到一种简单的表示，然后经过非线性激活函数？ 就可以由decoder重构出邻接举证吗？</p>
+<blockquote>
+<p>这前后是不是应该有严格的数学来做？加一层GCN，训练得到的参数是否还满足性质</p>
+</blockquote>
+<h2 id="3-4-GGN"><a href="#3-4-GGN" class="headerlink" title="3.4 GGN"></a>3.4 GGN</h2><p>重新生成图</p>
+<ul>
+<li><p>MolGAN<br>分布-&gt;Generator-&gt;密集邻接矩阵tensor(张量)-&gt;sample产生Graph-&gt; GCN-&gt; Disciminator产生反馈和进行调节</p>
+<blockquote>
+<p>需要预知分布，共同产生边和节点</p>
+</blockquote>
+</li>
+<li><p>DGMG<br>采用加点和边的方式，有一个停止的标准；当decision为假时，加边；为真时，评估将加入的节点连接到已存在的节点的可能分布，然后随机选择一个点。当一个新的节点和它的连接都被加入图中，更新图的表示。</p>
+<blockquote>
+<p>需要预知分布，采用序列化的方式来做<br>图的表示用来计算前面的decision, 所以该方法又称为根据图的表示产生图的节点和边</p>
+</blockquote>
+</li>
+<li><p>杂项</p>
+<ul>
+<li>GraphRNN<br>两个RNN，对于graph和level，操作在二进制序列上。如何添加根据假设分布来做。对于graph为了训练，用BFS线性化为序列<blockquote>
+<p>采用序列化的方式来做，利用了统计数据？</p>
+</blockquote>
+</li>
+<li>NetGAN<br>产生器LSTM产生合理的random walks, 测试器GAN挑选，最后获得共现矩阵<blockquote>
+<p>利用统计数据？ 同时产生节点和边</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>序列化的方式在于，长序列会带来问题？？<br>其他方式维护全局属性难<br>最近的采用变化的自动编码器做，增加输出空间<br>没有方法有很好的大规模可扩展性</p>
+<p>产生+训练</p>
+<h2 id="3-5-GSN"><a href="#3-5-GSN" class="headerlink" title="3.5 GSN"></a>3.5 GSN</h2><p>目标：可以预测未来的节点的value和值</p>
+<ul>
+<li>DCRNN<br>扩散的卷积，出度入度来反映空间性。 DCGRU来统计上一步和邻居节点的卷积信息来反映瞬时性<blockquote>
+<p>??,可能是因为这里用的循环结构，可以循环多次，所以就可以考虑反映了瞬时性</p>
+</blockquote>
+</li>
+<li>CNN-GCN<br>GCN空间信息， 1DCNN来捕捉每个节点的瞬时信息，最终产生每个节点的一个预测</li>
+<li>ST-GCN<br>考虑瞬时流作为节点的边（因此认为兼顾了空间结构，因为考虑了边），所以可以用一个GCN来统计两种信息。用一个标记为两个节点之间的距离。最终每个节点的值为邻接矩阵的求和</li>
+<li>杂项<ul>
+<li>Strutual-RNN<br>预测节点在每个时间步骤的标记<br>用语义组来划分，每个语义组使用不同的RNN模型；这里是考虑了瞬时信息；对于空间信息的考虑，nodeRNN将edgeRNN的输出作为输入认为是考虑了空间性</li>
+</ul>
+</li>
+</ul>
+<p>DCRNN能处理长时间<br>CNN-GCN有效取决于1DCNN<br>ST-CNN考虑瞬时流作为节点的边，导致邻接矩阵平方增长，会导致计算图卷积层的开销增大，但是要堆叠很多次<br>Strutural-RNN需要先验知识来分割语义组</p>
+<p>空间+瞬时</p>
+<h1 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h1><h2 id="4-1-建议"><a href="#4-1-建议" class="headerlink" title="4.1 建议"></a>4.1 建议</h2><p>go deep<br>感受野<br>扩展性： 什么时候具有扩展性？？ 快采样（在线算法）和子图训练。不够<br>动力学和异质性：图的结构固定，节点和边不一定来源相同</p>
+<h2 id="4-2-batch-learning-vs-stochastic-learning"><a href="#4-2-batch-learning-vs-stochastic-learning" class="headerlink" title="4.2 batch learning vs stochastic learning"></a>4.2 batch learning vs stochastic learning</h2><p>batch learning: 批量学习，是一种离线的学习方法</p>
+<blockquote>
+<p>离线学习，输入数据时不处理数据；训练数据时才处理数据<br>总是全局最优的，但是耗时</p>
+</blockquote>
+<p>stochastic learning: 随机学习，在线学习</p>
+<blockquote>
+<p>每输入一种数据都进行修正，这里默认的单位为1，即有一个样本时就进行修正<br>那么问题的关键就在于这个样本是否有问题，即该模型就容易搜到噪声的影响，有问题的数据称为噪声； 但也有好处，能够节省时间。<br>易陷入局部最优</p>
+</blockquote>
+<p>深度网络的实现中都采用了两种方法的结合，即每次训练使用10个或者别的合适数目的样本，即可以稍微消除噪声的影响，又可以进行在线学习</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0J1eWlfU2hpemkvYXJ0aWNsZS9kZXRhaWxzLzUxNDU0NTQ5" title="https://blog.csdn.net/Buyi_Shizi/article/details/51454549">https://blog.csdn.net/Buyi_Shizi/article/details/51454549<i class="fa fa-external-link"></i></span></p>
+<h2 id="4-3-无结构化数据-vs-结构化数据"><a href="#4-3-无结构化数据-vs-结构化数据" class="headerlink" title="4.3 无结构化数据 vs 结构化数据"></a>4.3 无结构化数据 vs 结构化数据</h2><p>结构化数据即数据能够用二维表结构来逻辑表达实现的数据，通常每行和每列都有具体的含义</p>
+<p>无结构数据即不能用数据二维逻辑来表现的数据，比如所有格式的办公文档、文本、图片、HTML等等</p>
+<p>无结构化数据更难被计算机理解</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yOTg1NjY0NQ==" title="https://zhuanlan.zhihu.com/p/29856645">https://zhuanlan.zhihu.com/p/29856645<i class="fa fa-external-link"></i></span></p>
+<h2 id="4-4-dropout"><a href="#4-4-dropout" class="headerlink" title="4.4 dropout"></a>4.4 dropout</h2><p>为了解决过拟合现象，也就是用小数据集训练过于复杂的网络<br>训练深度神经网络，总会遇到两大问题：过拟合+费时，一定程度可以达到正则化的效果。</p>
+<p>dropout就是在训练深度神经网络中，每次训练中，忽略一半的特征检测器（让一半的隐层节点值为0），这样可以明显地减少过拟合现象。</p>
+<p>简单地说就是让某个神经元以一定的概率停止工作<br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zODIwMDk4MA==" title="https://zhuanlan.zhihu.com/p/38200980">https://zhuanlan.zhihu.com/p/38200980<i class="fa fa-external-link"></i></span></p>
+<h2 id="4-5-cross-entropy-loss"><a href="#4-5-cross-entropy-loss" class="headerlink" title="4.5 cross entropy loss"></a>4.5 cross entropy loss</h2><p>回归问题常用的损失函数是均方误差MSE<br>分类问题常用的损失函数是交叉熵</p>
+<blockquote>
+<p>描述了两个概率分布之间的距离<br>预测函数得出的结果应该是分为每一类的概率</p>
+</blockquote>
+<p>在得到概率之前，softmax函数经常在交叉熵前面，用于把结果处理为[0,1]之间的概率</p>
+<p>首先，如果用实际分类错误率来做，太粗略<br>为什么不用MSE？因为softmax + MSE会产生非凸函数，不具有好的性质。</p>
+<blockquote>
+<p>这里自己可以进行分析</p>
+</blockquote>
+<p>所以最终用的是交叉熵，softmax+交叉熵会产生凸函数，结果具有凸函数的性质。</p>
+<blockquote>
+<p>损失函数也会参与反馈传递误差的过程吗？</p>
+</blockquote>
+<p>$$H_y(y) = - \sum_i y’_i log(y_i)$$<br>为什么回归问题不用交叉熵?<br>因为<code>log-1.5</code>没有意义。</p>
+<blockquote>
+<p>MSE是在欧式距离为误差度量的情况下，由系数矩阵所张成的向量空间内对于观测向量的最佳逼近点</p>
+</blockquote>
+<p>结论：<br>traning中需要用最反映实际情况的，即分类问题用交叉熵</p>
+<blockquote>
+<p>交叉熵用在training这里是体现训练误差的，损失函数的设置是用来指导如何进行梯度下降的。</p>
+</blockquote>
+<p>validation/testing中，关注的就是分类的错误率，所以用分类错误率即可。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hnMTIzMzIxMTIzL2FydGljbGUvZGV0YWlscy84MDc4MTYxMQ==" title="https://blog.csdn.net/xg123321123/article/details/80781611">https://blog.csdn.net/xg123321123/article/details/80781611<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vcGluYXJkL3AvNTk3MDUwMy5odG1s" title="https://www.cnblogs.com/pinard/p/5970503.html">https://www.cnblogs.com/pinard/p/5970503.html<i class="fa fa-external-link"></i></span></p>
+<h1 id="5-简要"><a href="#5-简要" class="headerlink" title="5. 简要"></a>5. 简要</h1><h2 id="5-1-GCNS"><a href="#5-1-GCNS" class="headerlink" title="5.1. GCNS"></a>5.1. GCNS</h2><h3 id="5-1-1-spectral-based"><a href="#5-1-1-spectral-based" class="headerlink" title="5.1.1 spectral-based"></a>5.1.1 spectral-based</h3><p>spectral CNN: 直接将filter设置为了参数<br>ChebySheve: 重新改进了公式，定义了filter的计算，并使得公式的更新的复杂度降低，而且只需要用到空间中的局部信息<br>1阶：沟通两类, 在batch-learning时会指数级增加开销<br>AGCN: 扩展了Laplacian矩阵的适用范围，为每个图重定义了一个剩余矩阵，即完成有向图到无向图的转换</p>
+<h3 id="5-1-2-spatial-based"><a href="#5-1-2-spatial-based" class="headerlink" title="5.1.2 spatial-based"></a>5.1.2 spatial-based</h3><ul>
+<li><p>recurrent<br>GNNs: 每个GCN考虑当前节点的属性，相关边的属性，邻居在上一步的表示，邻居的属性<br>GRU: 每个GCN将上一步的状态和邻居节点当前的状态放在GNU中进行考虑<br>SSE： 每个GCN, 随机地选取t个节点，进行更新表示然后随机地选取P个已经更新？的节点来更新梯度</p>
+</li>
+<li><p>Composition Based<br>MPNN： 每一步的GCN综合上一步的信息和邻居节点的更新操作集合的信息<br>GraphSage: one batch在线学习的特点，根据域，聚集当前的邻居信息，使一个点成为最终状态；然后，为每个邻居进行更新；最后，知道所有的节点都成为了最终状态</p>
+</li>
+<li><p>杂项<br>DCNN(缩小图的转移举证)<br>PATCHY-SAN(先全局排序，CNN)<br>LGCN(得到邻接节点的特征矩阵处理排序后，CNN+子图搜索)<br>MMN(建议考虑边的权重，使用高斯核来学习)</p>
+</li>
+</ul>
+<h3 id="5-1-3-池化"><a href="#5-1-3-池化" class="headerlink" title="5.1.3 池化"></a>5.1.3 池化</h3><p>chebNet首先进行池化，使得一开始的结构得到了改进，进一步取得了更好的效果<br>DGCNN 池化进行预处理排序<br>DIFFPOOL 使用两个GCN, 一个embed, 一个pool, 用来整合异质的GCN。</p>
+<h2 id="5-2-GAN"><a href="#5-2-GAN" class="headerlink" title="5.2. GAN"></a>5.2. GAN</h2><p>GAT: 考虑邻居及诶点的表示和邻居节点的权重。并且考虑子空间，不过每个子空间都是相同的权重<br>GAAN: 不同的权重<br>GAM: 考虑用的因素不再全部，而是一段一段<br>AM: 目标是node embedding, 直接学习转移矩阵，由注意力指导random walks</p>
+<h2 id="5-3-GAE"><a href="#5-3-GAE" class="headerlink" title="5.3. GAE"></a>5.3. GAE</h2><p>GAE: GCNs, 评价调节<br>AGRA: GCN产生，GAN训练<br>NetRA: 序列到序列，random walks<br>DNGR: 堆叠矩阵+噪声，基于统计数据, 统计出来的结果<br>SDNE: 使用指标，评价邻居，评价结果，正则化项<br>DRNE: 重建节点，LSTM聚集函数</p>
+<h2 id="5-4-GGN"><a href="#5-4-GGN" class="headerlink" title="5.4. GGN"></a>5.4. GGN</h2><p>MolGAN: 基于分布 ，产生图和点，然后产生Graph,GCN,再调节<br>DGMG: 获得一个图的表示后，做一个决定，根据决定来加边，或从分布中加点,操作在序列上<br>GraphRNN: 两个RNN, 一个graph训练，一个edge由分布来做<br>NetGAN: LSTM产生合理的random walks, 测试器筛选，最终获得共现矩阵</p>
+<h2 id="5-5-GSN"><a href="#5-5-GSN" class="headerlink" title="5.5. GSN"></a>5.5. GSN</h2><p>DCRNN: 出度入度-空， DCGRU-瞬时<br>CNN-GNN: GCN空间，1DCNN-瞬时<br>ST-CNN: 瞬时流作为边，同时考虑。用邻接举证距离的和作为最终接地那的值<br>Strutual-RNN: 语义组，GCN瞬时；nodeRNN接edgeRNN输出空间</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eugene Wang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://augf.github.io/2019/09/19/gnn-summary-paper-summary/" title="gnn summary paper summary">https://augf.github.io/2019/09/19/gnn-summary-paper-summary/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/gnn/" rel="tag"><i class="fa fa-tag"></i> gnn</a>
+            
+              <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/19/gnn-semi-gnn-paper-read/" rel="next" title="gnn semi-gnn paper read">
+                  <i class="fa fa-chevron-left"></i> gnn semi-gnn paper read
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/19/deeplearning-learn/" rel="prev" title="deeplearning learn">
+                  deeplearning learn <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-序言"><span class="nav-number">1.</span> <span class="nav-text">1. 序言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-框架"><span class="nav-number">2.</span> <span class="nav-text">2. 框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-正文"><span class="nav-number">3.</span> <span class="nav-text">3. 正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-GCN"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 GCN:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-spectral-based"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 spectral-based</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-spatial-based"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 spatial-based</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-recurrent"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">1) recurrent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Composition-Based"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">2) Composition Based</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-杂项"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">3) 杂项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-总结"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-4-池化"><span class="nav-number">3.1.4.</span> <span class="nav-text">3.1.4 池化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-GAN"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 GAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-GAE"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 GAE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-GGN"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 GGN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-GSN"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 GSN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-其他"><span class="nav-number">4.</span> <span class="nav-text">4. 其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-建议"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 建议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-batch-learning-vs-stochastic-learning"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 batch learning vs stochastic learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-无结构化数据-vs-结构化数据"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 无结构化数据 vs 结构化数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-dropout"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 dropout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-cross-entropy-loss"><span class="nav-number">4.5.</span> <span class="nav-text">4.5 cross entropy loss</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-简要"><span class="nav-number">5.</span> <span class="nav-text">5. 简要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-GCNS"><span class="nav-number">5.1.</span> <span class="nav-text">5.1. GCNS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1-spectral-based"><span class="nav-number">5.1.1.</span> <span class="nav-text">5.1.1 spectral-based</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-2-spatial-based"><span class="nav-number">5.1.2.</span> <span class="nav-text">5.1.2 spatial-based</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-3-池化"><span class="nav-number">5.1.3.</span> <span class="nav-text">5.1.3 池化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-GAN"><span class="nav-number">5.2.</span> <span class="nav-text">5.2. GAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-GAE"><span class="nav-number">5.3.</span> <span class="nav-text">5.3. GAE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-GGN"><span class="nav-number">5.4.</span> <span class="nav-text">5.4. GGN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-GSN"><span class="nav-number">5.5.</span> <span class="nav-text">5.5. GSN</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/default-avatar.png"
+      alt="Eugene Wang">
+  <p class="site-author-name" itemprop="name">Eugene Wang</p>
+  <div class="site-description" itemprop="description">Quick notes</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="GitHub &rarr; https://github.com/AugF"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOnl1bnBhbndhbmdAZ21haWwuY29t" title="E-Mail &rarr; mailto:yunpanwang@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vSm9zd3hl" title="Weibo &rarr; https://weibo.com/Joswxe"><i class="fa fa-fw fa-weibo"></i>Weibo</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==" title="https://www.google.com">Google</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jbi5iaW5nLmNvbQ==" title="https://cn.bing.com">Bing</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">Baidu</span>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

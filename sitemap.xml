@@ -2,6 +2,188 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://augf.github.io/2019/09/19/daily-cplus-thinking/</loc>
+    
+    <lastmod>2019-09-19T05:14:31.930Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/machinelearning-gradient-descent/</loc>
+    
+    <lastmod>2019-09-19T05:12:05.905Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/spark-study-thinking-1/</loc>
+    
+    <lastmod>2019-09-19T05:10:05.096Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/spark-study-thinking/</loc>
+    
+    <lastmod>2019-09-19T05:07:36.895Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/deeplearning-learn/</loc>
+    
+    <lastmod>2019-09-19T05:05:41.716Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/gnn-summary-paper-summary/</loc>
+    
+    <lastmod>2019-09-19T05:01:06.606Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/gnn-semi-gnn-paper-read/</loc>
+    
+    <lastmod>2019-09-19T04:57:15.675Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/gnn-summary-paper-read/</loc>
+    
+    <lastmod>2019-09-19T04:56:13.206Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/english-pronuncation/</loc>
+    
+    <lastmod>2019-09-19T04:46:24.435Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/TOEFL-word-overview/</loc>
+    
+    <lastmod>2019-09-19T04:42:04.022Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/python-thinking/</loc>
+    
+    <lastmod>2019-09-19T04:37:05.210Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/machinelearning-cornerstone-why-can-machines-learn/</loc>
+    
+    <lastmod>2019-09-19T04:34:12.744Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/</loc>
+    
+    <lastmod>2019-09-19T04:33:41.750Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/machinelearning-cornerstone-summary/</loc>
+    
+    <lastmod>2019-09-19T04:33:17.462Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/deeplearning-cs231n/</loc>
+    
+    <lastmod>2019-09-19T04:24:46.035Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/</loc>
+    
+    <lastmod>2019-09-19T04:21:39.276Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-search-graph/</loc>
+    
+    <lastmod>2019-09-19T04:18:38.728Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-basic/</loc>
+    
+    <lastmod>2019-09-19T04:16:58.711Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-math/</loc>
+    
+    <lastmod>2019-09-19T04:15:20.373Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-greedy/</loc>
+    
+    <lastmod>2019-09-19T04:14:10.708Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-dp/</loc>
+    
+    <lastmod>2019-09-19T04:12:54.843Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-data-struture/</loc>
+    
+    <lastmod>2019-09-19T04:11:00.553Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/nju-course-mapreduce-experiment/</loc>
+    
+    <lastmod>2019-09-19T04:08:22.778Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/nju-course-mlt/</loc>
+    
+    <lastmod>2019-09-19T04:07:42.517Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/nju-course-distributed-system/</loc>
+    
+    <lastmod>2019-09-19T04:07:27.912Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/nju-course-mapreduce-summary/</loc>
+    
+    <lastmod>2019-09-19T04:06:51.147Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://augf.github.io/2019/09/18/TOEFL-word/</loc>
     
     <lastmod>2019-09-19T02:52:26.862Z</lastmod>
@@ -33,13 +215,6 @@
     <loc>https://augf.github.io/2019/09/19/nju-course-cplus-lecture6-summary/</loc>
     
     <lastmod>2019-09-19T01:58:12.339Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/</loc>
-    
-    <lastmod>2019-09-19T01:57:09.563Z</lastmod>
     
   </url>
   
