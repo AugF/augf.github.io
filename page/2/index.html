@@ -200,7 +200,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">62</span></a>
 
   </li>
       
@@ -213,7 +213,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">65</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">70</span></a>
 
   </li>
       
@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">84</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">89</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,1736 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/gnn-summary-paper-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/gnn-summary-paper-summary/" class="post-title-link" itemprop="url">gnn summary paper summary</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:59:16 / 修改时间：13:01:06" itemprop="dateCreated datePublished" datetime="2019-09-19T12:59:16+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/summary/" itemprop="url" rel="index"><span itemprop="name">summary</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[TOC]</p>
+<h1 id="1-序言"><a href="#1-序言" class="headerlink" title="1. 序言"></a>1. 序言</h1><p>图有着复杂的关系和交互依赖</p>
+<p>2D卷积: 邻居的决定由filter size<br>w = 平均， 邻居有序，可以按照一定的序列来看且有固定的尺寸</p>
+<p>Graph卷积： 邻居无序，价值等同，数量不一</p>
+<p>Random Walk??? 随机游走，有概率计算方法还有要理解？</p>
+<p>图网络表示：</p>
+<ol>
+<li>编码</li>
+<li>随机游走</li>
+<li>矩阵因式分解</li>
+</ol>
+<h1 id="2-框架"><a href="#2-框架" class="headerlink" title="2. 框架"></a>2. 框架</h1><p>Node-level:  MLP+softmax: 见pooling结构<br>Edge-level: 额外的函数将两个节点的表示作为边<br>Graph-level: 就是pooling</p>
+<p>半监督: 只能适用于node-level<br>监督学习: 适用于graph-level<br>无监督： graph-embedding</p>
+<blockquote>
+<p>编码器+译码器  负采样</p>
+</blockquote>
+<h1 id="3-正文"><a href="#3-正文" class="headerlink" title="3. 正文"></a>3. 正文</h1><h2 id="3-1-GCN"><a href="#3-1-GCN" class="headerlink" title="3.1 GCN:"></a>3.1 GCN:</h2><p>? stack多层可以学到更多的东西. 对！注意这里的输入是整个图<br>如果堆叠多层的话，实际上就可以不断的获得更远的信息</p>
+<p>basic</p>
+<blockquote>
+<p>这里每个的输出应该不会只是一个值吧？？<br>Relu修正线性函数：<br>当大于x时为本身，小于x时为0</p>
+</blockquote>
+<p><font color="red">ReLU</font><br>ReLU可以将模型实现稀疏话更好地挖掘相关特征<br>就激活函数而言，在深度网络中，由于非负区间的梯度为常数，所以不存在梯度消失问题，使得模型的收敛速度维持在一个稳定状态。<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZXJyeWx2bGVpL2FydGljbGUvZGV0YWlscy81MzE0OTM4MQ==" title="https://blog.csdn.net/cherrylvlei/article/details/53149381">https://blog.csdn.net/cherrylvlei/article/details/53149381<i class="fa fa-external-link"></i></span></p>
+<p>pooling</p>
+<p>一个图经过GCN加pooling得到一个子图，然后给下一个模型。如此最后不断地得到更高级别的表示，最后一层是MLP + softmax</p>
+<p><font color="red">MLP</font><br>MLP: 多层感知机 vs 支持向量机 SVM</p>
+<blockquote>
+<p>多层感知机其实就是多层网络结构，但是一般是向前的，不会有后退的，然后关键就是设定一个偏差评价函数，以及某种策略，当出现错误时可以向后调节参数</p>
+</blockquote>
+<p><font color="red">softmax</font><br>softmax函数：逻辑函数的推广，归一化指数函数。</p>
+<p>$$\delta(z)<em>j = \frac {e^{z_j}}{\sum</em>{k=1}^K e^{z_k}}$$</p>
+<blockquote>
+<p>将任何一个元素都压缩到了指数域，并满足归一化,并且保证了归一化结果在[0,1]之间<br>将原数压缩为指数来做有什么感觉</p>
+</blockquote>
+<p><font color="red">sigmoid</font><br>sigmoid函数，数学表达式<br>$$f(x) = \frac {1}{1 + e^{-x}}$$<br>优点：可以把任何值映射到[0,1]之间；导数的计算公式方便$f’(x) = f(x) (1-f(x))$<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhbHRyaXZlci9hcnRpY2xlL2RldGFpbHMvNTc1MzE5NjM=" title="https://blog.csdn.net/saltriver/article/details/57531963">https://blog.csdn.net/saltriver/article/details/57531963<i class="fa fa-external-link"></i></span></p>
+<p>扩展：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhbHRyaXZlci9hcnRpY2xlL2RldGFpbHMvNTUxMDUyODU=" title="https://blog.csdn.net/saltriver/article/details/55105285">指数分布族<i class="fa fa-external-link"></i></span></p>
+<h3 id="3-1-1-spectral-based"><a href="#3-1-1-spectral-based" class="headerlink" title="3.1.1 spectral-based"></a>3.1.1 spectral-based</h3><p>spectral CNN: 直接将filter设置为了参数<br>ChebySheve: 重新改进了公式，定义了filter的计算，并使得公式的更新的复杂度降低，而且只需要用到空间中的局部信息<br>1阶：沟通两类, 在batch-learning时会指数级增加开销<br>AGCN: 扩展了Laplacian矩阵的适用范围，为每个图重定义了一个剩余矩阵，即完成有向图到无向图的转换</p>
+<blockquote>
+<p>所以这里的黑盒实际上就是数学表达式计算</p>
+</blockquote>
+<p>原本2D卷积是filter设置的是尺寸，而这里的filter有什么含义呢？</p>
+<blockquote>
+<p>就是从信号的角度，过滤得程度吧？？</p>
+</blockquote>
+<p>所以说这里的GCN是有很多参数，然后反馈参数修正是当end时再来修正参数，对吗?</p>
+<p>filter为什么是domin dependent, 比如两个不同的domin,人和物品，显然感觉不能吧</p>
+<h3 id="3-1-2-spatial-based"><a href="#3-1-2-spatial-based" class="headerlink" title="3.1.2 spatial-based"></a>3.1.2 spatial-based</h3><p>GNNs,GRU, SSE<br>MMNN, GraphSage</p>
+<p>recurrent GCN全一样<br>composition GCN全不一样</p>
+<h4 id="1-recurrent"><a href="#1-recurrent" class="headerlink" title="1) recurrent"></a>1) recurrent</h4><p>GNNs: 每个GCN考虑当前节点的属性，相关边的属性，邻居在上一步的表示，邻居的属性<br>GRU: 每个GCN将上一步的状态和邻居节点当前的状态放在GNU中进行考虑<br>SSE： 每个GCN, 随机地选取t个节点，进行更新表示然后随机第选取P个已经更新？的节点来更新梯度</p>
+<ol>
+<li>GNNs 全是用的一个把所有因素都进行考虑的函数，唯一的点就是要保证这个函数收敛<br>循环神经网络</li>
+<li>GRU 门控神经网络： 循环神经网络在时间步数较大或时间步数较小时，循环神经网络的梯度会衰减和爆炸 </li>
+</ol>
+<p><font color="red">RNN</font><br>循环神经网络 RNN<br>神经网络可以看作任意函数的黑盒子，目的是为了解决时序数据中存在的对应关系。<br>中间因为出现循环，所以某个状态会对应T步，但是还是基本的权重更新公式</p>
+<blockquote>
+<p>这里待推导！！！<br>所以这里有个时间t原来是这么回事<br>这里的时间步数就是关联程度的感觉<br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zMDg0NDkwNQ==" title="https://zhuanlan.zhihu.com/p/30844905">https://zhuanlan.zhihu.com/p/30844905<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly96eWJ1bHVvLmNvbS9oYW5iaW5ndGFvL25vdGUvNTQxNDU4" title="https://zybuluo.com/hanbingtao/note/541458">https://zybuluo.com/hanbingtao/note/541458<i class="fa fa-external-link"></i></span></p>
+<p><font color="red">GRU</font><br>实际上的感觉就是认为RNN那样直接进行步长来更新（因为该步也要考自己来设置），这样可能导致问题，衰减或爆炸，所以这里的想法就是加入了门控，即在中间可以根据隐藏状态和当前出现的值来决定是否进一步计算还是改变当前值进行另一种计算。<br><span class="exturl" data-url="aHR0cHM6Ly96aC5kMmwuYWkvY2hhcHRlcl9yZWN1cnJlbnQtbmV1cmFsLW5ldHdvcmtzL2dydS5odG1s" title="https://zh.d2l.ai/chapter_recurrent-neural-networks/gru.html">https://zh.d2l.ai/chapter_recurrent-neural-networks/gru.html<i class="fa fa-external-link"></i></span></p>
+<ol start="3">
+<li>SSE</li>
+</ol>
+<p>随机异步更新节点的表示，考虑历史状态和所有新状态</p>
+<blockquote>
+<p>神奇？ 暂未涉猎， 直觉上会收敛</p>
+</blockquote>
+<blockquote>
+<p>这里统一的$h_v^t$是指v在第t个GCN所得到的值，注意这里的t是全局所设置的网络结构</p>
+</blockquote>
+<h4 id="2-Composition-Based"><a href="#2-Composition-Based" class="headerlink" title="2) Composition Based"></a>2) Composition Based</h4><p>MPNN： 每一步的GCN综合上一步的信息和邻居节点的更新操作集合的信息<br>GraphSage: one batch在线学习的特点，根据域，聚集当前的邻居信息，使一个点成为最终状态；然后，为每个邻居进行更新；最后，知道所有的节点都成为了最终状态</p>
+<ul>
+<li>MPNN</li>
+</ul>
+<p>message passing: 信息函数，信息更新函数<br>这里的信息函数考虑到了上一步的信息，和关于邻居节点的所有更新操作<br>更新函数考虑到了自己的上一步的表示，邻居节点的表示和边的权重<br>readout<br>关于最后的值的读取函数</p>
+<ul>
+<li>GraphSage<br>看公式的话是每个位置有个权重，并且将上一次的点的状态和邻居节点的状态进行了考虑。</li>
+</ul>
+<p>过程？？ 不是很清楚？<br>一种观点：</p>
+<p>这里的节点是怎么选取的？ </p>
+<blockquote>
+<p>它说的是保证各种聚集参数是对的，但是并未说其他的啊？？</p>
+</blockquote>
+<p>首先对一个节点进行更新，然后根据邻居节点产生该节点的状态，然后使用中间节点的最终状态来预测和反馈错误。</p>
+<p>也就是说先考虑一个点，然后传递错误到其他点，但是我会进行标记这个点已经不可再取。 而且当新的数据来临时，也可以采用直接训练的想法</p>
+<h4 id="3-杂项"><a href="#3-杂项" class="headerlink" title="3) 杂项"></a>3) 杂项</h4><p>DCNN(缩小图的转移举证)<br>PATCHY-SAN(先全局排序，CNN)<br>LGCN(得到邻接节点的特征矩阵处理排序后，CNN+子图搜索)<br>MMN(建议考虑边的权重，使用高斯核来学习)</p>
+<ul>
+<li>DCNN<br>模拟压缩图的扩散过程，所以这里除了权重，函数f应该具有缩小尺寸的功能<br>但是需要存储转移矩阵，耗费内存</li>
+<li>PATCHY-SAN<br>先将节点排序，然后后面的所有做法就是选取特定的值，然后使用标准的CNN来做</li>
+<li>LGCN *<br>node level<br>在每次做的时候，对特征矩阵进行分析，选取特征矩阵的前多少行来做。<br>子图训练</li>
+<li>MMN</li>
+</ul>
+<p>*考虑了空间位置关系，即便的权重，建议使用标准的高斯核来学习参数调节边的权重 </p>
+<blockquote>
+<p>绝大部分采用CNN,也有用GCN的</p>
+</blockquote>
+<h3 id="3-1-3-总结"><a href="#3-1-3-总结" class="headerlink" title="3.1.3 总结"></a>3.1.3 总结</h3><p>recurrent 节点的稳定状态<br>composition 可能获得高级别的信息</p>
+<p>但是要放隐藏状态，内存</p>
+<p>子图训练： GraphSage确定一个的最终状态先,SSE完全随机的思想</p>
+<p>复杂的网络结构取得成果</p>
+<ol>
+<li>增加深度和宽度</li>
+<li>多图维护信息</li>
+<li>超参数学习接收域的大小</li>
+</ol>
+<h3 id="3-1-4-池化"><a href="#3-1-4-池化" class="headerlink" title="3.1.4 池化"></a>3.1.4 池化</h3><p>chebNet首先进行池化，使得一开始的结构得到了改进，进一步取得了更好的效果<br>DGCNN 池化进行预处理排序<br>DIFFPOOL 使用两个GCN, 一个embed, 一个pool, 用来整合异质的GCN。</p>
+<p>基于空间的在效率上可以使用batch和smapling提高效率，在泛化性上可以共享权重;在灵活性上，可以处理多源输入</p>
+<h2 id="3-2-GAN"><a href="#3-2-GAN" class="headerlink" title="3.2 GAN"></a>3.2 GAN</h2><ul>
+<li><p>GAT<br>就是考虑所有邻居节点的表示和考虑邻居节点的权重</p>
+<blockquote>
+<p>不同的子空间是指的，随着当前所处的不同位置，可能得到的数据不同，所以就把所有子空间的邻居节点的位置堆叠吗。感觉是这样的<br>这里的子空间也可以看做是某个模型</p>
+</blockquote>
+</li>
+<li><p>GAAN<br>在聚集不同子空间中的信息时，考虑不同的权重</p>
+</li>
+<li><p>GAM<br>不考虑所有的情况，考虑其中一段一段的状态，因为LSTM非常好用，就用它</p>
+</li>
+<li><p>AW<br>目标是node embedding, 即为了学习转移矩阵。操作的想法是，构造转移矩阵，并且当前的共现矩阵为所有转移矩阵之和的某种表示</p>
+<blockquote>
+<p>? 如何体现，应该是转移矩阵的参数体现吧</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>总结</strong></p>
+<ul>
+<li>注意力为邻居赋予权重</li>
+<li>整合多个模型</li>
+<li>指导random walks</li>
+</ul>
+<p>GCN每个聚集时，直接按照某种特定的属性进行聚集<br>GAN: 首先会通过一个神经网络结构来获得权重指派，等于说多加了一层网络结构</p>
+<h2 id="3-3-GAE"><a href="#3-3-GAE" class="headerlink" title="3.3 GAE"></a>3.3 GAE</h2><p>编码：得到最终的编码结果</p>
+<p>GAE: GCNs, 评价调节<br>AGRA: GCN产生，GAN训练<br>NetRA: 序列到序列，random walks<br>DNGR: 堆叠矩阵+噪声，基于统计数据<br>SDNE: 使用指标，评价邻居，评价结果，正则化项<br>DRNE: 重建节点，LSTM聚集函数</p>
+<ul>
+<li><p>GAE<br>GCNs, 然后定义评价函数</p>
+</li>
+<li><p>AGRA<br>GCN产生，GAN评价<br>产生时服从某一先验分布，评价时选出服从分布的</p>
+</li>
+<li><p>混合变体</p>
+<ul>
+<li>NetRA: 通过序列到序列结构的random walks来重建序列</li>
+<li>DNGR: 用堆叠的降噪的自动编码器来重建矩阵。具体做法是通过统计同时出现的数量与单独出现数量的比值的最大值来决定最终的共现矩阵的值。因为是直接根据数据特性来统计，所以所学得的东西应该是非线性的。另外一点就是，在做的时候随机增加了噪声</li>
+<li>SDNE: 使用了两个指标，一个是隐藏节点表示与邻居节点隐藏表示之间的距离；一个是节点的输入与重新构造之间的距离（这里考虑了惩罚项）；最后，优化目标即为三个项+正则化项</li>
+<li>DRNE: 直接考虑重建节点，设置损失函数，定义为所有邻居节点表示值与聚集函数(LSTM)的差</li>
+</ul>
+</li>
+</ul>
+<p>DNGR+SDNE：仅考虑拓扑结构<br>邻接矩阵的稀疏性：<br>GAE: 重新赋予权重； NetRA线性化；DNGR密集矩阵; SDNE: 惩罚</p>
+<p>A+X经过Encoder, 再经过GCN, 得到一种简单的表示，然后经过非线性激活函数？ 就可以由decoder重构出邻接举证吗？</p>
+<blockquote>
+<p>这前后是不是应该有严格的数学来做？加一层GCN，训练得到的参数是否还满足性质</p>
+</blockquote>
+<h2 id="3-4-GGN"><a href="#3-4-GGN" class="headerlink" title="3.4 GGN"></a>3.4 GGN</h2><p>重新生成图</p>
+<ul>
+<li><p>MolGAN<br>分布-&gt;Generator-&gt;密集邻接矩阵tensor(张量)-&gt;sample产生Graph-&gt; GCN-&gt; Disciminator产生反馈和进行调节</p>
+<blockquote>
+<p>需要预知分布，共同产生边和节点</p>
+</blockquote>
+</li>
+<li><p>DGMG<br>采用加点和边的方式，有一个停止的标准；当decision为假时，加边；为真时，评估将加入的节点连接到已存在的节点的可能分布，然后随机选择一个点。当一个新的节点和它的连接都被加入图中，更新图的表示。</p>
+<blockquote>
+<p>需要预知分布，采用序列化的方式来做<br>图的表示用来计算前面的decision, 所以该方法又称为根据图的表示产生图的节点和边</p>
+</blockquote>
+</li>
+<li><p>杂项</p>
+<ul>
+<li>GraphRNN<br>两个RNN，对于graph和level，操作在二进制序列上。如何添加根据假设分布来做。对于graph为了训练，用BFS线性化为序列<blockquote>
+<p>采用序列化的方式来做，利用了统计数据？</p>
+</blockquote>
+</li>
+<li>NetGAN<br>产生器LSTM产生合理的random walks, 测试器GAN挑选，最后获得共现矩阵<blockquote>
+<p>利用统计数据？ 同时产生节点和边</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>序列化的方式在于，长序列会带来问题？？<br>其他方式维护全局属性难<br>最近的采用变化的自动编码器做，增加输出空间<br>没有方法有很好的大规模可扩展性</p>
+<p>产生+训练</p>
+<h2 id="3-5-GSN"><a href="#3-5-GSN" class="headerlink" title="3.5 GSN"></a>3.5 GSN</h2><p>目标：可以预测未来的节点的value和值</p>
+<ul>
+<li>DCRNN<br>扩散的卷积，出度入度来反映空间性。 DCGRU来统计上一步和邻居节点的卷积信息来反映瞬时性<blockquote>
+<p>??,可能是因为这里用的循环结构，可以循环多次，所以就可以考虑反映了瞬时性</p>
+</blockquote>
+</li>
+<li>CNN-GCN<br>GCN空间信息， 1DCNN来捕捉每个节点的瞬时信息，最终产生每个节点的一个预测</li>
+<li>ST-GCN<br>考虑瞬时流作为节点的边（因此认为兼顾了空间结构，因为考虑了边），所以可以用一个GCN来统计两种信息。用一个标记为两个节点之间的距离。最终每个节点的值为邻接矩阵的求和</li>
+<li>杂项<ul>
+<li>Strutual-RNN<br>预测节点在每个时间步骤的标记<br>用语义组来划分，每个语义组使用不同的RNN模型；这里是考虑了瞬时信息；对于空间信息的考虑，nodeRNN将edgeRNN的输出作为输入认为是考虑了空间性</li>
+</ul>
+</li>
+</ul>
+<p>DCRNN能处理长时间<br>CNN-GCN有效取决于1DCNN<br>ST-CNN考虑瞬时流作为节点的边，导致邻接矩阵平方增长，会导致计算图卷积层的开销增大，但是要堆叠很多次<br>Strutural-RNN需要先验知识来分割语义组</p>
+<p>空间+瞬时</p>
+<h1 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h1><h2 id="4-1-建议"><a href="#4-1-建议" class="headerlink" title="4.1 建议"></a>4.1 建议</h2><p>go deep<br>感受野<br>扩展性： 什么时候具有扩展性？？ 快采样（在线算法）和子图训练。不够<br>动力学和异质性：图的结构固定，节点和边不一定来源相同</p>
+<h2 id="4-2-batch-learning-vs-stochastic-learning"><a href="#4-2-batch-learning-vs-stochastic-learning" class="headerlink" title="4.2 batch learning vs stochastic learning"></a>4.2 batch learning vs stochastic learning</h2><p>batch learning: 批量学习，是一种离线的学习方法</p>
+<blockquote>
+<p>离线学习，输入数据时不处理数据；训练数据时才处理数据<br>总是全局最优的，但是耗时</p>
+</blockquote>
+<p>stochastic learning: 随机学习，在线学习</p>
+<blockquote>
+<p>每输入一种数据都进行修正，这里默认的单位为1，即有一个样本时就进行修正<br>那么问题的关键就在于这个样本是否有问题，即该模型就容易搜到噪声的影响，有问题的数据称为噪声； 但也有好处，能够节省时间。<br>易陷入局部最优</p>
+</blockquote>
+<p>深度网络的实现中都采用了两种方法的结合，即每次训练使用10个或者别的合适数目的样本，即可以稍微消除噪声的影响，又可以进行在线学习</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0J1eWlfU2hpemkvYXJ0aWNsZS9kZXRhaWxzLzUxNDU0NTQ5" title="https://blog.csdn.net/Buyi_Shizi/article/details/51454549">https://blog.csdn.net/Buyi_Shizi/article/details/51454549<i class="fa fa-external-link"></i></span></p>
+<h2 id="4-3-无结构化数据-vs-结构化数据"><a href="#4-3-无结构化数据-vs-结构化数据" class="headerlink" title="4.3 无结构化数据 vs 结构化数据"></a>4.3 无结构化数据 vs 结构化数据</h2><p>结构化数据即数据能够用二维表结构来逻辑表达实现的数据，通常每行和每列都有具体的含义</p>
+<p>无结构数据即不能用数据二维逻辑来表现的数据，比如所有格式的办公文档、文本、图片、HTML等等</p>
+<p>无结构化数据更难被计算机理解</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yOTg1NjY0NQ==" title="https://zhuanlan.zhihu.com/p/29856645">https://zhuanlan.zhihu.com/p/29856645<i class="fa fa-external-link"></i></span></p>
+<h2 id="4-4-dropout"><a href="#4-4-dropout" class="headerlink" title="4.4 dropout"></a>4.4 dropout</h2><p>为了解决过拟合现象，也就是用小数据集训练过于复杂的网络<br>训练深度神经网络，总会遇到两大问题：过拟合+费时，一定程度可以达到正则化的效果。</p>
+<p>dropout就是在训练深度神经网络中，每次训练中，忽略一半的特征检测器（让一半的隐层节点值为0），这样可以明显地减少过拟合现象。</p>
+<p>简单地说就是让某个神经元以一定的概率停止工作<br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zODIwMDk4MA==" title="https://zhuanlan.zhihu.com/p/38200980">https://zhuanlan.zhihu.com/p/38200980<i class="fa fa-external-link"></i></span></p>
+<h2 id="4-5-cross-entropy-loss"><a href="#4-5-cross-entropy-loss" class="headerlink" title="4.5 cross entropy loss"></a>4.5 cross entropy loss</h2><p>回归问题常用的损失函数是均方误差MSE<br>分类问题常用的损失函数是交叉熵</p>
+<blockquote>
+<p>描述了两个概率分布之间的距离<br>预测函数得出的结果应该是分为每一类的概率</p>
+</blockquote>
+<p>在得到概率之前，softmax函数经常在交叉熵前面，用于把结果处理为[0,1]之间的概率</p>
+<p>首先，如果用实际分类错误率来做，太粗略<br>为什么不用MSE？因为softmax + MSE会产生非凸函数，不具有好的性质。</p>
+<blockquote>
+<p>这里自己可以进行分析</p>
+</blockquote>
+<p>所以最终用的是交叉熵，softmax+交叉熵会产生凸函数，结果具有凸函数的性质。</p>
+<blockquote>
+<p>损失函数也会参与反馈传递误差的过程吗？</p>
+</blockquote>
+<p>$$H_y(y) = - \sum_i y’_i log(y_i)$$<br>为什么回归问题不用交叉熵?<br>因为<code>log-1.5</code>没有意义。</p>
+<blockquote>
+<p>MSE是在欧式距离为误差度量的情况下，由系数矩阵所张成的向量空间内对于观测向量的最佳逼近点</p>
+</blockquote>
+<p>结论：<br>traning中需要用最反映实际情况的，即分类问题用交叉熵</p>
+<blockquote>
+<p>交叉熵用在training这里是体现训练误差的，损失函数的设置是用来指导如何进行梯度下降的。</p>
+</blockquote>
+<p>validation/testing中，关注的就是分类的错误率，所以用分类错误率即可。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hnMTIzMzIxMTIzL2FydGljbGUvZGV0YWlscy84MDc4MTYxMQ==" title="https://blog.csdn.net/xg123321123/article/details/80781611">https://blog.csdn.net/xg123321123/article/details/80781611<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vcGluYXJkL3AvNTk3MDUwMy5odG1s" title="https://www.cnblogs.com/pinard/p/5970503.html">https://www.cnblogs.com/pinard/p/5970503.html<i class="fa fa-external-link"></i></span></p>
+<h1 id="5-简要"><a href="#5-简要" class="headerlink" title="5. 简要"></a>5. 简要</h1><h2 id="5-1-GCNS"><a href="#5-1-GCNS" class="headerlink" title="5.1. GCNS"></a>5.1. GCNS</h2><h3 id="5-1-1-spectral-based"><a href="#5-1-1-spectral-based" class="headerlink" title="5.1.1 spectral-based"></a>5.1.1 spectral-based</h3><p>spectral CNN: 直接将filter设置为了参数<br>ChebySheve: 重新改进了公式，定义了filter的计算，并使得公式的更新的复杂度降低，而且只需要用到空间中的局部信息<br>1阶：沟通两类, 在batch-learning时会指数级增加开销<br>AGCN: 扩展了Laplacian矩阵的适用范围，为每个图重定义了一个剩余矩阵，即完成有向图到无向图的转换</p>
+<h3 id="5-1-2-spatial-based"><a href="#5-1-2-spatial-based" class="headerlink" title="5.1.2 spatial-based"></a>5.1.2 spatial-based</h3><ul>
+<li><p>recurrent<br>GNNs: 每个GCN考虑当前节点的属性，相关边的属性，邻居在上一步的表示，邻居的属性<br>GRU: 每个GCN将上一步的状态和邻居节点当前的状态放在GNU中进行考虑<br>SSE： 每个GCN, 随机地选取t个节点，进行更新表示然后随机地选取P个已经更新？的节点来更新梯度</p>
+</li>
+<li><p>Composition Based<br>MPNN： 每一步的GCN综合上一步的信息和邻居节点的更新操作集合的信息<br>GraphSage: one batch在线学习的特点，根据域，聚集当前的邻居信息，使一个点成为最终状态；然后，为每个邻居进行更新；最后，知道所有的节点都成为了最终状态</p>
+</li>
+<li><p>杂项<br>DCNN(缩小图的转移举证)<br>PATCHY-SAN(先全局排序，CNN)<br>LGCN(得到邻接节点的特征矩阵处理排序后，CNN+子图搜索)<br>MMN(建议考虑边的权重，使用高斯核来学习)</p>
+</li>
+</ul>
+<h3 id="5-1-3-池化"><a href="#5-1-3-池化" class="headerlink" title="5.1.3 池化"></a>5.1.3 池化</h3><p>chebNet首先进行池化，使得一开始的结构得到了改进，进一步取得了更好的效果<br>DGCNN 池化进行预处理排序<br>DIFFPOOL 使用两个GCN, 一个embed, 一个pool, 用来整合异质的GCN。</p>
+<h2 id="5-2-GAN"><a href="#5-2-GAN" class="headerlink" title="5.2. GAN"></a>5.2. GAN</h2><p>GAT: 考虑邻居及诶点的表示和邻居节点的权重。并且考虑子空间，不过每个子空间都是相同的权重<br>GAAN: 不同的权重<br>GAM: 考虑用的因素不再全部，而是一段一段<br>AM: 目标是node embedding, 直接学习转移矩阵，由注意力指导random walks</p>
+<h2 id="5-3-GAE"><a href="#5-3-GAE" class="headerlink" title="5.3. GAE"></a>5.3. GAE</h2><p>GAE: GCNs, 评价调节<br>AGRA: GCN产生，GAN训练<br>NetRA: 序列到序列，random walks<br>DNGR: 堆叠矩阵+噪声，基于统计数据, 统计出来的结果<br>SDNE: 使用指标，评价邻居，评价结果，正则化项<br>DRNE: 重建节点，LSTM聚集函数</p>
+<h2 id="5-4-GGN"><a href="#5-4-GGN" class="headerlink" title="5.4. GGN"></a>5.4. GGN</h2><p>MolGAN: 基于分布 ，产生图和点，然后产生Graph,GCN,再调节<br>DGMG: 获得一个图的表示后，做一个决定，根据决定来加边，或从分布中加点,操作在序列上<br>GraphRNN: 两个RNN, 一个graph训练，一个edge由分布来做<br>NetGAN: LSTM产生合理的random walks, 测试器筛选，最终获得共现矩阵</p>
+<h2 id="5-5-GSN"><a href="#5-5-GSN" class="headerlink" title="5.5. GSN"></a>5.5. GSN</h2><p>DCRNN: 出度入度-空， DCGRU-瞬时<br>CNN-GNN: GCN空间，1DCNN-瞬时<br>ST-CNN: 瞬时流作为边，同时考虑。用邻接举证距离的和作为最终接地那的值<br>Strutual-RNN: 语义组，GCN瞬时；nodeRNN接edgeRNN输出空间</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/gnn-semi-gnn-paper-read/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/gnn-semi-gnn-paper-read/" class="post-title-link" itemprop="url">gnn semi-gnn paper read</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:56:18 / 修改时间：12:57:15" itemprop="dateCreated datePublished" datetime="2019-09-19T12:56:18+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/semi-gnn/" itemprop="url" rel="index"><span itemprop="name">semi-gnn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>半监督学习步骤：</p>
+<ol>
+<li>选取标记数据，划分为训练集、验证集和测试集</li>
+<li>根据数据进行学习、训练模型</li>
+</ol>
+<ul>
+<li><p>模型目标函数<br>$$\mathcal{L} = \mathcal{L}<em>0 + \lambda \mathcal{L}</em>{reg}$$<br>这里， $\mathcal{L}<em>0 = \sum</em>{(\vec{x}, y)} H(\vec{x}, y)$<br>$\mathcal{L}<em>{reg}=\sum</em>{i,j} A_{ij} ||f(x_i)-f(x,j) ||^2 = f(X)^T (D - A) f(X)$</p>
+<blockquote>
+<p>这里 $D_{ii}=\sum_j A_{ij}$为对角矩阵, 该正则化项是二范数，所以$\lambda$为L2参数</p>
+</blockquote>
+<p>  其中 $H(\vec{x}, y) = - \sum_i y’_i log y_i$， 表示交叉熵损失函数</p>
+<blockquote>
+<p>使用交叉熵损失函数式，上一步为softmax函数，即指数标准化函数; $y’_i$是即真实类别，$y_i$是对应节点最终得出来的关于某个类别的概率</p>
+</blockquote>
+<p>  进一步，$y = softmax(\tilde{A}\ ReLU(\tilde{A}XW^{(0)})\ W^{(1)})$</p>
+<blockquote>
+<p>y是深度神经网络预测出来的每个类别的概率的矩阵, 这里是三层的公式</p>
+</blockquote>
+<p>  多层的公式即为，$y = softmax(\tilde{A}\ ReLU(\tilde{A}\ ReLU(…)\ W^{(n-1)})\ W^{(n)})$</p>
+<p>  在这里层与层之间的更新公式有两种：</p>
+<ul>
+<li>$X^{(l+1)} = \delta (\tilde{D}^{-\frac{1}{2}} \tilde{A} \tilde{D}^{-\frac{1}{2}} X^{(l)} W^{(l)})$<ul>
+<li>$\tilde{A}=A+I_N$: 这里增加考虑了自己的因素;</li>
+<li>$\tilde{D}<em>{ii}=\sum_j \tilde{A}</em>{ij}$</li>
+<li>$W_{(l)}$是每层的权重</li>
+<li>$\delta$是激活函数，比如$ReLU(\cdot)=max(\cdot, 0)$</li>
+<li>$X^{(0)}= X$, 表示每一层表示得到的表示<br><img src="asserts/paper2/fig1.png" alt><blockquote>
+<p>这里C是输入的channel, F是倒数第二层的输出channel</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>$X^{(l+1)} = \delta (\tilde{D}^{-\frac{1}{2}} \tilde{A} \tilde{D}^{-\frac{1}{2}} X^{(l)} W^{(l)}) + X^{(l)}$<blockquote>
+<p>又称为+残差  Residual</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>模型更新</p>
+<blockquote>
+<p>Adam优化器，自适应梯度下降优化器<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9hZWJjYWY4YWY3NmU=" title="https://www.jianshu.com/p/aebcaf8af76e">https://www.jianshu.com/p/aebcaf8af76e<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="3-公式的由来"><a href="#3-公式的由来" class="headerlink" title="3. 公式的由来"></a>3. 公式的由来</h2><p><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzEyMTEuMDA1My5wZGY=" title="https://arxiv.org/pdf/1211.0053.pdf">spectual based<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9oYWwuaW5yaWEuZnIvaW5yaWEtMDA1NDE4NTUvZG9jdW1lbnQ=" title="https://hal.inria.fr/inria-00541855/document">Hammond.<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>近似方法推导的来源</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9wYXBlcnMubmlwcy5jYy9wYXBlci82MDgxLWNvbnZvbHV0aW9uYWwtbmV1cmFsLW5ldHdvcmtzLW9uLWdyYXBocy13aXRoLWZhc3QtbG9jYWxpemVkLXNwZWN0cmFsLWZpbHRlcmluZy5wZGY=" title="https://papers.nips.cc/paper/6081-convolutional-neural-networks-on-graphs-with-fast-localized-spectral-filtering.pdf">Cheby方法<i class="fa fa-external-link"></i></span></p>
+<h2 id="4-相关工作"><a href="#4-相关工作" class="headerlink" title="4. 相关工作"></a>4. 相关工作</h2><ol>
+<li>内存扩展</li>
+<li>使用mini batch 随机梯度下降</li>
+</ol>
+<h3 id="4-1-基于图的半监督学习"><a href="#4-1-基于图的半监督学习" class="headerlink" title="4.1 基于图的半监督学习"></a>4.1 基于图的半监督学习</h3><p>拉普拉斯矩阵： 标签传播、多种正则化、深度半监督表示</p>
+<p>注意力机制： DeepWalk,</p>
+<blockquote>
+<p>skim-gram model, 简单来说就是，当要看当前单词时，向前或向后看几个单词<br>通常这些做法有种更多的步骤或者宽度优先模式，所以需要考虑用哪一步进行优化才是最恰当的</p>
+</blockquote>
+<h3 id="4-1-关于图的神经网络"><a href="#4-1-关于图的神经网络" class="headerlink" title="4.1 关于图的神经网络"></a>4.1 关于图的神经网络</h3><p>2009的框架重复利用了收缩的想法进行传播误差直到最终节点的表示到达一个稳定的状态</p>
+<p>2015年的做法介绍了一种类似卷积的传播规则作用在图上，并且针对于图级别的分类。但是可以发现，因为卷积要求有着固定的邻居。所以这种做法是不符合当节点的度有着很广的分布的情况。</p>
+<blockquote>
+<p>这篇文章会重新考虑计算邻接矩阵，所以不会担心有这种因素的出现</p>
+</blockquote>
+<p>2016,1-DNN, 引入了排序的想法<br>本文的方法，2014,简单，可扩展</p>
+<h2 id="5-实验"><a href="#5-实验" class="headerlink" title="5. 实验"></a>5. 实验</h2><h3 id="5-1-数据集"><a href="#5-1-数据集" class="headerlink" title="5.1 数据集"></a>5.1 数据集</h3><p><strong>类别</strong></p>
+<ol>
+<li>引用网络<br>Citeseer, Cora, Pubmed</li>
+<li>知识图<br>NELL, 本身属于二部图</li>
+</ol>
+<p><strong>内容</strong><br>数据： 数据类别， 节点， 边（这里会进行定义）， classes:节点的类别， features:输入的channels， Label rate: 用作训练的数据集</p>
+<p><img src="asserts/paper2/dataset.png" alt></p>
+<p><strong>预处理</strong></p>
+<ul>
+<li>引用网络<br>无向图，不用处理，二进制邻接举证；每个类只使用了20个标记，使用了全部的特征<blockquote>
+<ol>
+<li><p>是如何筛选出训练集和测试集的？</p>
+</li>
+<li><p>是否保证了训练集中各个标记的样本的比例相同？</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>NELL<br>有向图，预处理同2016. 做法将(e1, r, e2)拆分为(e1,r1), (e2, r2) <code>也就是将节点拆分成了很多片, 这样从某种程度就可以使得一条边可以被两个点同时共用</code> 所以也就使得得到的节点表示是稀疏向量，one-hot作为特征，所以产生了61278维，<code>这里可以注意到，one-hot每一个特征所拥有的取值即其位数</code>，如果两个节点中存在边的话，则说明边是存在的，则对应邻接矩阵中置为1</p>
+</li>
+<li><p>Random graphs<br>我们模拟各种尺寸的随机图数据集，并在每轮中测试训练时间。<br>一般的做法时，随机地为N个节点赋予2N条边。对于每个节点的特征初始化为$I_N$, 表示每个节点并没有什么特征。并为每个节点置一个假标记$Y_i = 1$</p>
+<blockquote>
+<p>目的是为了什么？ 有什么用？</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="5-2-实验部分"><a href="#5-2-实验部分" class="headerlink" title="5.2 实验部分"></a>5.2 实验部分</h3><p>首先是3层的网络，附录B中有10层的网络。<br>data split技术 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzE2MDMuMDg4NjEucGRm" title="https://arxiv.org/pdf/1603.08861.pdf">Yang, 2016<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>？ 这里是1000个样本做测试，500个样本做交叉验证的意思吗？</p>
+</blockquote>
+<p>3层的网络，超参数：</p>
+<ul>
+<li>dropout</li>
+<li>L2</li>
+<li>number of units</li>
+<li>optimizer<blockquote>
+<p>优化器，就是采用什么样的梯度下降方式</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>这里不使用验证集作为训练，那还是用的交叉验证的方法吗？？</p>
+</blockquote>
+<p>在Cora上优化得到的超参数直接用到Citeseer, Pumbed。 训练中优化器使用的是Adam， 学习率为0.01</p>
+<blockquote>
+<p>Adam优化器，自适应梯度下降优化器<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9hZWJjYWY4YWY3NmU=" title="https://www.jianshu.com/p/aebcaf8af76e">https://www.jianshu.com/p/aebcaf8af76e<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<p>停止条件：最大训练轮数200轮，如果交叉验证集误差连续10次不下降则停止训练。<br>权重初始化和特征向量标准化方法：<span class="exturl" data-url="aHR0cDovL3Byb2NlZWRpbmdzLm1sci5wcmVzcy92OS9nbG9yb3QxMGEvZ2xvcm90MTBhLnBkZg==" title="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">Glorot &amp; Bengio 2010<i class="fa fa-external-link"></i></span><br>隐藏层单元：32个<br>忽略正则化项</p>
+<blockquote>
+<p>隐藏层单元的设置除了对业务的理解，还有什么其他的建议点？<br>否则一般有经验公式</p>
+</blockquote>
+<h3 id="5-3-baselines"><a href="#5-3-baselines" class="headerlink" title="5.3 baselines"></a>5.3 baselines</h3><blockquote>
+<p>注意到这里baselines比较了前面提到的基于图的半监督学习中所有目前有的论文的模型。并且可以忽略其中不适合的模型</p>
+</blockquote>
+<p>忽略了TSVM, 不适用于大规模分类</p>
+<p>进一步与Lu提出的迭代分类算法ICA进行了比较，结合两个逻辑回归分类器，一个用于本地接地那特征，一个用于使用局部特征和聚合算子的关系进行分类。首先，使用所欲标记的训练集训练本地分类器并使用它用于引导为未标记节点的类标记。然后，运行迭代分类器，随机节点排序，对所有未标记的节点进行10次迭代。<code>这里是为了做什么</code><br>L2交叉验证和聚集函数的选择都是基于每个数据集的验证集的性能分别进行选择<br>选择了Planetoid，选择了它们模型最好的变体</p>
+<h2 id="6-结果"><a href="#6-结果" class="headerlink" title="6. 结果"></a>6. 结果</h2><p>ICA随机选择100论随机节点排序运行的平均准确率</p>
+<h2 id="7-贡献"><a href="#7-贡献" class="headerlink" title="7. 贡献"></a>7. 贡献</h2><p>主要有两个贡献： </p>
+<ol>
+<li>提出了一种新的梯度计算公式</li>
+<li>这个模型可以快速用于大规模的半监督的节点分类中</li>
+</ol>
+<h2 id="一些超参数"><a href="#一些超参数" class="headerlink" title="一些超参数"></a>一些超参数</h2><pre><code>- dropout
+&gt; 每层都可以设置，[0,1], 表示以多大的概率使当前节点停止工作，避免过拟合
+- L2 正则化系数
+&gt; ?为啥有第一层， 这里的理解不应该是$\lambda$吗
+- number of units for each hidden layer 隐藏层节点个数
+&gt; 隐藏层表示的特征数？ 对吗？
+- 学习率
+&gt; $\eta$: 梯度下降的步长</code></pre><h2 id="很神奇的地方"><a href="#很神奇的地方" class="headerlink" title="很神奇的地方"></a>很神奇的地方</h2><pre><code>- filter公式的推出
+- Tk的近似
+- K=1, $\lambda_{max}$的取值</code></pre><h2 id="一些定义"><a href="#一些定义" class="headerlink" title="一些定义"></a>一些定义</h2><p>$G = (\mathcal{V}, \mathcal{E})$<br>顶点数和边数</p>
+<p>F– output layer的channel个数<br>C– input layer的channel个数<br>H– input layer的输出，channel, hidden layer的输入</p>
+<h2 id="一些不懂的点"><a href="#一些不懂的点" class="headerlink" title="一些不懂的点"></a>一些不懂的点</h2><p>训练集</p>
+<blockquote>
+<p>由损失函数，特定的评价指标；一般看的训练误差也就是损失函数的误差。</p>
+</blockquote>
+<p>交叉验证集：用于评价泛化性如何，是否产生了过拟合现象，然后交叉验证的准确率可以进行反应</p>
+<blockquote>
+<p>如果表现得很低，那么有可以在训练集上进行重新训练；再次交叉验证，唯一注意的是不能混用。<br>然后，一般来说采用的是K交叉验证，即将数据集分为K份，最终的做法是取这些值的平均值来做</p>
+</blockquote>
+<blockquote>
+<p>??? K交叉取平均会不会混淆，因为在用的时候，实际是在多次训练时，虽然本次没有用到数据集，但是在下一次肯定用到了，那么是不是有问题</p>
+</blockquote>
+<blockquote>
+<p>如果是独立的训练，那么又是取哪个值来做呢？ 注意关注一下交叉验证.<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xoeDg3ODYxOTcxNy9hcnRpY2xlL2RldGFpbHMvNDkwNzk3ODU=" title="https://blog.csdn.net/lhx878619717/article/details/49079785">https://blog.csdn.net/lhx878619717/article/details/49079785<i class="fa fa-external-link"></i></span><br>按这里的说法，就是分为k份，然后每次训练集是独立的，最终选取的目标其实就是测试误差最小的模型为最优模型。该模型的参数就是最终的参数<br>突然想起，之前的学习也说明了这里的问题</p>
+</blockquote>
+<p>测试集：最终的真实结果，未知</p>
+<blockquote>
+<p>从某种意义上讲，交叉验证的实际结果应该和测试集上表现尽量相同，也就是说性能度量指标基本上就是在这里用的。<br>一般来说实验的精确率就是用交叉验证集和测试集的交过来反映来看<br>但是这里不一定相等，因为存在训练集过小等因素</p>
+</blockquote>
+<blockquote>
+<p>比如，查准率，查全率，F1</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU0JUJBJUE0JUU1JThGJTg5JUU5JUE5JTk3JUU4JUFEJTg5" title="https://zh.wikipedia.org/wiki/%E4%BA%A4%E5%8F%89%E9%A9%97%E8%AD%89">https://zh.wikipedia.org/wiki/%E4%BA%A4%E5%8F%89%E9%A9%97%E8%AD%89<i class="fa fa-external-link"></i></span></p>
+<p>学习率：反向传播中的步长<br>L2正则化参数：L2的系数</p>
+<p>矩阵</p>
+<blockquote>
+<p>一般来说，把向量定义为列向量；为什么？因为人们就作用来说，还是习惯左作用。<br>比如A对应的线性映射为Ax<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzI2MzA0ODc3" title="https://www.zhihu.com/question/26304877">https://www.zhihu.com/question/26304877<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<h2 id="不懂的地方"><a href="#不懂的地方" class="headerlink" title="不懂的地方"></a>不懂的地方</h2><p>表达式不懂</p>
+<p>hidden层的激活函数是怎么用的？</p>
+<p>交叉熵和MSE最小平方法都是用来做损失函数的</p>
+<p>几个概念：</p>
+<ul>
+<li>损失函数：单个样本</li>
+<li>代价函数：针对总体</li>
+<li>目标函数：通常会考虑正则化项</li>
+</ul>
+<p>所以这里正则化项系数就是目标函数中使用的是哪种正则化项，然后就对应于哪个参数</p>
+<p>其实，本身一般来说是把问题经过抽象变成最优化问题的，这里的最优化问题可以分为有约束最优化问题，无约束最优化问题以及其他；<br>然后，本身最优化问题有多种解的，比如模拟退火算法、遗传算法、蚁群算法、图割算法。<br>但是，在机器学习中，一直长学的求导占了主要的位置，所以考虑的就是使用求导法，也就是所谓的梯度下降，然后所以每次在考虑很多的问题都想要保证凸函数，因为这样才能保证取得全局最优解</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpdWppYm95L2FydGljbGUvZGV0YWlscy83ODA3ODA0Mg==" title="https://blog.csdn.net/liujiboy/article/details/78078042">https://blog.csdn.net/liujiboy/article/details/78078042<i class="fa fa-external-link"></i></span></p>
+<p>然后，又怎么转化到学习上去了呢？就是为什么是大量的样本上去了呢。其实，本身不管是什么事情，除非是固定的数学问题，都是一个学习的过程。那么，就永远不会到达最理想的状态，所以就是学习本身，那么引入正则化项也合理了，就是为了避免进行过拟合。</p>
+<blockquote>
+<p>更深入地从KL散度了解交叉熵<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RzeWNjbmgvYXJ0aWNsZS9kZXRhaWxzLzc5MTYzODM0" title="https://blog.csdn.net/tsyccnh/article/details/79163834">https://blog.csdn.net/tsyccnh/article/details/79163834<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<p>sigmoid函数，1/(1+e^(-x)) 将R映射到了[0,1]</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zODI0MTc2" title="https://zhuanlan.zhihu.com/p/3824176">https://zhuanlan.zhihu.com/p/3824176<i class="fa fa-external-link"></i></span></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/gnn-summary-paper-read/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/gnn-summary-paper-read/" class="post-title-link" itemprop="url">gnn summary paper read</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:52:13 / 修改时间：12:56:13" itemprop="dateCreated datePublished" datetime="2019-09-19T12:52:13+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/summary/" itemprop="url" rel="index"><span itemprop="name">summary</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-Abstract"><a href="#1-Abstract" class="headerlink" title="1. Abstract"></a>1. Abstract</h1><ol>
+<li>深度学习应用很广，特别是在图像分类和视频过程识别以及自然语言理解</li>
+<li>这些任务的数据都表示在欧式空间中</li>
+<li>有其他对于非欧式空间的需求， 将图表示为复杂的关系和交互依赖</li>
+<li>图的复杂性很大</li>
+</ol>
+<p>文章：</p>
+<ol>
+<li>一个调查报告，深度学习在数据挖掘和机器学习领域的运用，</li>
+<li>将图的状态设计神经网络的计数分为不同的种类</li>
+<li>图的建设性的可替代结构, 包括图注意网络，图自动编码器，图生成网络和图的空间瞬时网络结构</li>
+<li>接下来，讨论了图的神经网络在各个领域的应用和找了开源代码和benchmark算法针对不同的任务。</li>
+<li>最后，提出了有意思的方向</li>
+</ol>
+<h1 id="2-Introduction"><a href="#2-Introduction" class="headerlink" title="2. Introduction"></a>2. Introduction</h1><p>CNN，LSTM,等的成功</p>
+<p>!欧式距离 vs 非欧式距离</p>
+<p>？ 核心机器学习算法样例之间一般互相独立，但是图数据中节点与节点之间有着相互的关系，比如引用，友元，相互作用</p>
+<p>如何降低图的复杂性，最基本的方法还是模拟卷积的思想，即卷积核的大小可以来模拟图的不同权重值</p>
+<blockquote>
+<p>但是不与图像数据相同的是，图中每个节点的邻居节点是无序的而且大小不确定</p>
+</blockquote>
+<p><font id="fig1" color="red">fig1</font></p>
+<p><img src="fig1.png" alt></p>
+<blockquote>
+<p>? 这里说的是进行取平均？但是实际是怎么做的啊？</p>
+</blockquote>
+<h2 id="2-1-GNN过去发展的历史"><a href="#2-1-GNN过去发展的历史" class="headerlink" title="2.1 GNN过去发展的历史"></a>2.1 GNN过去发展的历史</h2><p>第一个就是基于卷积的简单表示[21]<br>基于光谱图理论<br>[22],[23],[24]<br>对图的全局做处理，无法很好地并行化和应对大规模图</p>
+<blockquote>
+<p>这些方法的思想都是直接通过节点的邻居信息的特点， 加采样来做的</p>
+</blockquote>
+<h2 id="2-2-近期的工作"><a href="#2-2-近期的工作" class="headerlink" title="2.2 近期的工作"></a>2.2 近期的工作</h2><p>其他人做的不好</p>
+<h2 id="2-3-graph-neural-network-vs-network-embedding"><a href="#2-3-graph-neural-network-vs-network-embedding" class="headerlink" title="2.3 graph neural network vs network embedding"></a>2.3 graph neural network vs network embedding</h2><p>graph neural network<br>grph embedding</p>
+<p>network embedding</p>
+<blockquote>
+<p>目标是将网络节点表示在一个低维空间，并且保留拓扑和本身的内容信息<br>用途是分类，聚类和推荐系统(支持向量机)<br>通常是半监督算法，常见类别有</p>
+<ul>
+<li>matrix factorization</li>
+<li>random walk</li>
+<li>deep learning</li>
+</ul>
+</blockquote>
+<p><img src="fig2.png" alt></p>
+<h2 id="2-3-贡献"><a href="#2-3-贡献" class="headerlink" title="2.3 贡献"></a>2.3 贡献</h2><ol>
+<li><p>新的分类学，五类<br>graph convolution networks GCN<br>graph attention networks GAN<br>graph auto-encoders GAE<br>graph generative networks GGN<br>graph spatial-temporal networks GSN</p>
+</li>
+<li><p>易于理解</p>
+</li>
+<li><p>丰富的资源</p>
+</li>
+<li><p>未来的方向</p>
+</li>
+</ol>
+<h1 id="3-Definition"><a href="#3-Definition" class="headerlink" title="3. Definition"></a>3. Definition</h1><p><img src="table1.png" alt></p>
+<h1 id="4-Categorization-and-frameworks"><a href="#4-Categorization-and-frameworks" class="headerlink" title="4. Categorization and frameworks"></a>4. Categorization and frameworks</h1><h2 id="4-1-种类"><a href="#4-1-种类" class="headerlink" title="4.1 种类"></a>4.1 种类</h2><p><img src="works.png" alt></p>
+<h3 id="4-1-1-GCN"><a href="#4-1-1-GCN" class="headerlink" title="4.1.1 GCN"></a>4.1.1 GCN</h3><blockquote>
+<p>卷积+池化</p>
+</blockquote>
+<ol>
+<li>basic<br>通过考虑自己和邻居的特征信息，从而学习到表示该节点的函数</li>
+</ol>
+<p><img src="GCN1.png" alt></p>
+<ol start="2">
+<li>+pooling<br><font id="GCN" color="red">GCN</font></li>
+</ol>
+<p><img src="GCN2.png" alt></p>
+<blockquote>
+<p>卷积的理解：卷积核主要的目的是利用卷积核的设计使得能够保留原图像的局部信息；并且实现原图像的；卷积实际是一个抽象函数<br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81NDAzMzQ3Mw==" title="https://zhuanlan.zhihu.com/p/54033473">常见的卷积方法<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<blockquote>
+<p>池化的理解：当对每个图像做完卷积后，如果直接将特征拿去学习会太消耗；所以会考虑使用池化的方法，即学习这些数据中的聚集特征，比如最值、平均值、众数等等<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZW55dXBpbmczMzMvYXJ0aWNsZS9kZXRhaWxzLzgyNTMxMDQ3" title="https://blog.csdn.net/chenyuping333/article/details/82531047">常见的池化方法<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<h3 id="4-1-2-GAN"><a href="#4-1-2-GAN" class="headerlink" title="4.1.2 GAN"></a>4.1.2 GAN</h3><blockquote>
+<p>Attention, 加入了注意力机制，思想即关注重要信息；主要的做法是为更重要的节点，路径或者模型安排权重</p>
+</blockquote>
+<blockquote>
+<p>目标与GAN相同，试图学习一种新的结点的表达方式，能够整合邻居节点，随机路径和候选模型</p>
+</blockquote>
+<ol>
+<li>Attention vs Convolution</li>
+</ol>
+<p><img src="GAN.png" alt></p>
+<blockquote>
+<p>???</p>
+</blockquote>
+<h3 id="4-1-3-GAE"><a href="#4-1-3-GAE" class="headerlink" title="4.1.3 GAE"></a>4.1.3 GAE</h3><p>一种半监督学习的框架<br>目标在于通过编码器学习到低维表示，并能够通过译码器翻译回去</p>
+<p>graph embedding</p>
+<p><img src="GAE.png" alt></p>
+<h3 id="4-1-4-GGN"><a href="#4-1-4-GGN" class="headerlink" title="4.1.4 GGN"></a>4.1.4 GGN</h3><p>目标在于从数据中学习到貌似合理的结构</p>
+<p>通过一个图的经验分布来产生模型，本身就极具挑战的一件事</p>
+<blockquote>
+<p>一般的做法是首先形成产生节点和边，是否可替代，然后应用产生对抗训练进行筛选</p>
+</blockquote>
+<p>应用在化学成分分析中比较多</p>
+<h3 id="4-1-5-GSN"><a href="#4-1-5-GSN" class="headerlink" title="4.1.5 GSN"></a>4.1.5 GSN</h3><p>目标在于学习未见的模式通过暂时性空间结构的图<br>应用比如在交通预测和人类活动预测，图的结构往往是变化的<br>主要的想法就是同时考虑空间依赖和瞬时依赖</p>
+<blockquote>
+<p>空间依赖——GCNs来做<br>瞬时依赖——RNN或CNN来做</p>
+</blockquote>
+<p><img src="GSN.png" alt></p>
+<h2 id="4-2-框架"><a href="#4-2-框架" class="headerlink" title="4.2 框架"></a>4.2 框架</h2><p>GCNs试图去复试CNN的成功在图中运用spectral theory和spatial locality信息</p>
+<ul>
+<li>输入<br>图的结构信息和节点的内容信息 </li>
+<li>输出<br>不同的图的分析任务<ul>
+<li>Node-level<br>关于节点的回归或者分类任务，只需要直接给出节点的表示，通常用感知机或者softmax函数作为GCN的最后一层</li>
+<li>Edge-level<br>关于边的分类或者链接预测任务。为了预测关于边的lable/connection的强度，一个额外的函数需要能够将两个节点的表示作为输入</li>
+<li>Graph-level<br>关于图的分类任务，为了获得在图级别的联合表示，pooling需要能够把一个图改为子图来求和或者平均节点的表示</li>
+</ul>
+</li>
+</ul>
+<p><strong>main GCNs methods</strong></p>
+<p><img src="summary.png" alt></p>
+<p><strong>end-to-end Traning  Frameworks</strong></p>
+<blockquote>
+<p>这里的end-to-end理解是关注输入到输出吧<br>这里根据训练任务和标记信息是否可以直接获得可以分为监督、半监督和无监督学习</p>
+</blockquote>
+<ul>
+<li>半监督学习 node-level classification.<br>首先通过部分有标记的图的节点的网络学习到robust model, 它可以高效地为未标记数据进行分类。<br>end-to-end框架可以通过堆大量的跟随softmax层用来做多标记学习<blockquote>
+<p>对！这里会给出一个网络结构只有部分节点有标记</p>
+</blockquote>
+</li>
+<li>监督学习 graph-level classification<br>给出整个图数据集，图级别的分类任务旨在预测关于整个图的标记<br>end-to-end框架可以通过GCNs加polling来完成, 最后加些softmax层, <a href="#GCN">GCN结构</a></li>
+<li>无监督学习 graph embedding<br>这些算法采取两种角度来开发edge-level的信息<ul>
+<li>编码器+译码器</li>
+<li>利用负采样的方法，采样一部分节点作为负pairs，并且已经存在一些节点在图中是正样本了，最后应用一个逻辑回归层<blockquote>
+<p>负采样？？？</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="5-Graph-Convolution-Networks"><a href="#5-Graph-Convolution-Networks" class="headerlink" title="5. Graph Convolution Networks"></a>5. Graph Convolution Networks</h1><p>spectral-based</p>
+<blockquote>
+<p>介绍filters从图信号的角度，将卷积的操作看作消除噪声</p>
+</blockquote>
+<p>spatial-based</p>
+<blockquote>
+<p>从邻居节点收集特征信息</p>
+</blockquote>
+<p>当GCNS操作在node level, pooling可以交替在GCN layer之间，从而将图转换为高级别的子结构</p>
+<h2 id="5-1-基于谱分析"><a href="#5-1-基于谱分析" class="headerlink" title="5.1 基于谱分析"></a>5.1 基于谱分析</h2><h3 id="5-1-1-基本套路（背景）"><a href="#5-1-1-基本套路（背景）" class="headerlink" title="5.1.1 基本套路（背景）"></a>5.1.1 基本套路（背景）</h3><p>然后每个节点利用的是拉普拉斯矩阵，以及特征值分解来做<br>首先，定义<br>$$L=I_n - D^{-1/2}AD^{-1/2}$$<br>robust 数学表示</p>
+<p>实际上<br>$$L = \frac{A_{21}+A_{31}+..+A_{n1}}{A_{11}+A_{21}+A_{31}+..+A_{n1}}$$<br>然后，该矩阵一定为半正定矩阵，所以得到特征向量U和特征值</p>
+<p>那么，由可逆运算就可知<br>$x=U (U^Tx)$<br>然后如果再对x加上一个filter，那么就有<br>$x<em>_G g_\theta = U(U^T(x) .</em> U^T(g))$</p>
+<blockquote>
+<p>这里.*是一种定义的新的运算，就是矩阵的每个元素进行相乘</p>
+</blockquote>
+<p>化简后结果即为<br>$$x*_G g_\theta = U g_\theta U^T(x)$$ ？</p>
+<blockquote>
+<p>这里实际上就形成了图的卷积操作，这里的关键就在于如何进行设计$g_\theta$</p>
+</blockquote>
+<h3 id="5-1-2-实际的方法"><a href="#5-1-2-实际的方法" class="headerlink" title="5.1.2 实际的方法"></a>5.1.2 实际的方法</h3><ol>
+<li><p>Spectral CNN<br><img src="equation4.png" alt><br>假设$g_\theta = \Theta_{i,j}^k$是可学习的参数<br>这里假设了转换前和转换后参数的个数，即又称为channel</p>
+</li>
+<li><p>Chebysheve Spectral CNN<br>$g_\theta = \sum_{i=0}^K \theta_i T_k(\widehat{\Lambda})$<br>这里$T_k是递归函数定义$<br>经过化简操作，可以发现？？<br>$$x*<em>G g_\theta = \sum</em>{i=0}^{K-1} \theta_i T_i(\widehat{L})x$$<br>这里$\widehat{L} = 2L/ \lambda_{max} - I_N$</p>
+<blockquote>
+<p>将时间复杂度从O(N^3)降低到了O(KM)<br>而且$T_i(\widehat{L})$计算时，只需要空间中的局部信息。</p>
+</blockquote>
+</li>
+<li><p>1阶ChebNet  K=1, $\lambda_{max}=2$<br>该方法沟通了spectial-based和spatial-method。<br>在batch training中，随着层数的数量的增加，计算开销会指数级扩张？？？</p>
+</li>
+<li><p>Adaptive Graph Convolution Network<br>为了扩展Laplacian矩阵的应用范围，因为Laplacian矩阵只能建模在无向图上。定义了一个叫做剩余矩阵的东西，可以用用来衡量两个节点之间的距离<br>尽管可能计算多余的东西，但是时间复杂度只有$O(N^2)$</p>
+</li>
+</ol>
+<h3 id="5-1-3-评价"><a href="#5-1-3-评价" class="headerlink" title="5.1.3 评价"></a>5.1.3 评价</h3><p>Spectral CNN依赖于拉普拉斯矩阵的特征值分解</p>
+<ol>
+<li>图的任何一点扰乱将导致特征分解的重做</li>
+<li>学习到的filter是domin dependent???, 意味着他们不能应用再一个不一样的结构中</li>
+<li>特征分解需要O(N^3)的时间和O(N^2)的空间</li>
+</ol>
+<p>ChebNet and 1st ChebNet<br>学习到的filters定义在局部的空间，所以可以在图的不同位置进行共享。</p>
+<p><strong>总结</strong><br>关于该方法需要将所有图加载到内存中进行graph convolution, 不利于解决大的图???ChebNet</p>
+<h2 id="5-2-Spatial-based"><a href="#5-2-Spatial-based" class="headerlink" title="5.2 Spatial-based"></a>5.2 Spatial-based</h2><p><a href="#fig1">Fig1</a><br>figA, 对于image而言，每个像素点直接与周围的像素点像关联<br>figB, 为了扩展节点能容纳的深度和宽度，一个常用的方法就是将图的多个卷积层叠加在一起</p>
+<p>Recurrent-based: same graph convolution layer来更新隐藏的表示</p>
+<p>Composition-based: differnt graph convolution layer</p>
+<p>比较</p>
+<p><img src="rb-cb.png" alt></p>
+<h3 id="5-2-1-Recurrent-based"><a href="#5-2-1-Recurrent-based" class="headerlink" title="5.2.1 Recurrent-based"></a>5.2.1 Recurrent-based</h3><ul>
+<li>impose constraints on recurrent functions</li>
+<li>employ gate recurent unit architectures</li>
+<li>update node latent representations asynchronously and stochastically</li>
+</ul>
+<h4 id="1-Graph-Neural-Networks"><a href="#1-Graph-Neural-Networks" class="headerlink" title="1) Graph Neural Networks"></a>1) Graph Neural Networks</h4><p>递归计算直到收敛，扩散直到相等</p>
+<p>$$h_v^t = f(l_v,, l_{co}[v], h_{ne}^{t-1}[v], l_{ne}[v])$$</p>
+<p>$l_v$-node v的属性<br>$l_{co}[v]$-node v相关的边的属性<br>$h_{ne}^{t-1}[v]$-v’s 邻居在第t步的表示<br>$l_{ne}[v]$- v’s邻居的属性</p>
+<p>为了保障收敛，f函数应该是收缩映射的<br>f是神经网络，那么对于参数的雅克比矩阵？应该得到惩罚</p>
+<p>the Almeida-Pineda algorithm</p>
+<h4 id="2-Gate-Graph-Neural-Networks"><a href="#2-Gate-Graph-Neural-Networks" class="headerlink" title="2) Gate Graph Neural Networks"></a>2) Gate Graph Neural Networks</h4><p>gated recurrent units——循环函数<br>recurrence循环</p>
+<p>$$h_v^t = GRU(h_v^{t-1}, \sum_{u \in N(v)} W h_u^t)$$</p>
+<p>与GNN不同的是，GGCN通过时间上的后向传播来传递参数。</p>
+<p>好处是不用保证收敛性，缺点会牺牲时间和空间上的效率，需要多次在全部节点上计算recureent函数，以及需要将所有状态都存储在内存中</p>
+<h4 id="3-Stochastic-Steady-state-Embedding"><a href="#3-Stochastic-Steady-state-Embedding" class="headerlink" title="3) Stochastic Steady-state Embedding"></a>3) Stochastic Steady-state Embedding</h4><p>SSE： 每个GCN, 随机地选取t个节点，进行更新表示然后随机第选取P个已经更新？的节点来更新梯度</p>
+<p>为了提高预测效率，SSE随机异步地更新节点的表示。为了保证收敛性，recurrent函数定义为了历史状态和新状态的平均权重</p>
+<p>$$h_v^t = (1-\alpha ) h_v^{t-1} + \alpha  W_1 \delta (W_2[x_v, \sum_{u \in N(v)} [h_u^{t-1}, x_u]])$$</p>
+<p><img src="SSE.png" alt></p>
+<h3 id="5-2-2-Composition-Based"><a href="#5-2-2-Composition-Based" class="headerlink" title="5.2.2 Composition Based"></a>5.2.2 Composition Based</h3><p>构成</p>
+<h4 id="1-Message-Passing-Neural-Networks"><a href="#1-Message-Passing-Neural-Networks" class="headerlink" title="1) Message Passing Neural Networks"></a>1) Message Passing Neural Networks</h4><p>产生已经存在的图卷积神经网络的一个框架。</p>
+<p>包括两部分</p>
+<ul>
+<li>message passing phase</li>
+</ul>
+<p>通常运行T步的基于空间的图神经网络算法。<br>图神经网络定义了一个信息函数和一个更新函数</p>
+<p>$$h_v^t = U_t (h_v^{t-1}, \sum_{w \in N(v)} M_t(h_v^{t-1}, h_w^{t-1},e_{vw}))$$</p>
+<blockquote>
+<p>$M_t$信息函数， $U_t$更新函数</p>
+</blockquote>
+<ul>
+<li>readout phase</li>
+</ul>
+<p>通常对应于池化操作，产生基于整个图的一个表示</p>
+<p>$$\widehat{y} = R(h_v^T | v \in G)$$</p>
+<p>$\widehat{y}$用来做最终的graph-level的任务</p>
+<blockquote>
+<p>需要确定不同形式的Ut()和Mt()</p>
+</blockquote>
+<h4 id="2-GraphSage"><a href="#2-GraphSage" class="headerlink" title="2) GraphSage*"></a>2) GraphSage*</h4><p>使用聚合的概念定义图的卷积</p>
+<blockquote>
+<p>?必须保证对节点的聚合值的排序的排列，那么其他的需要保证吗？<br>使用mean, sum, max等函数</p>
+</blockquote>
+<p>$$h_v^t = \delta(W_t \cdot aggregate_t (h_v^{t-1}, {h_u^{t-1}, \forall u \in N(v)})$$</p>
+<p>这里不是更新所有节点，而是进行batch-traning,适合扩展，说明是可以扩展到很大的数据集的？</p>
+<p>3 steps</p>
+<ol>
+<li>对一个节点的k-hop邻居节点进行固定大小的采样 ？<blockquote>
+<p>这里的采样范围是什么？ 一个圆吧</p>
+</blockquote>
+</li>
+<li>通过聚集邻居节点的所有信息，最终产生该中心节点的最后状态</li>
+<li>使用中间节点的最终状态来做预测和前馈错误</li>
+</ol>
+<p><img src="GraphSage.png" alt></p>
+<p>假定$t^{th}$hop的邻居数量是$s_t$, one batch的时间复杂度为 $O(\prod _{t=1}^T s_t)$, 指数级别</p>
+<blockquote>
+<p>作者发现t=2是GraphSage已经取得很好的成绩</p>
+</blockquote>
+<h3 id="5-2-3-Miscellaneous-Variants-of-Spatial-GCNs"><a href="#5-2-3-Miscellaneous-Variants-of-Spatial-GCNs" class="headerlink" title="5.2.3 Miscellaneous Variants of Spatial GCNs"></a>5.2.3 Miscellaneous Variants of Spatial GCNs</h3><h4 id="1-DCNN-扩散卷积神经网络"><a href="#1-DCNN-扩散卷积神经网络" class="headerlink" title="1) DCNN 扩散卷积神经网络"></a>1) DCNN 扩散卷积神经网络</h4><blockquote>
+<p>encapsulates 压缩</p>
+</blockquote>
+<p>通过图卷积网络压缩图的扩散过程</p>
+<p>一个隐藏的节点的表示通过将输入 ？ 得到状态转移矩阵</p>
+<p>维度搞</p>
+<p>$$Z_{i,j,:}^m = f(W_{j,:} \odot P_{i,j,:}^m X_{i,:}^m)$$</p>
+<p>P是概率，X是特征， W是权重</p>
+<blockquote>
+<p>这里H是什么？ 应该是表示值什么的吧？<br>尽管转移矩阵的高维中覆盖了大量的域，需要$O(N_m^2H)$的内存，会造成巨大的问题</p>
+</blockquote>
+<h4 id="2-PATCHY-SAN"><a href="#2-PATCHY-SAN" class="headerlink" title="2) PATCHY-SAN"></a>2) PATCHY-SAN</h4><p>用一个标准的卷积神经网络CNN来解决图分类问题 graph classification tasks</p>
+<p>将图结构数据转换拿为网格结构数据</p>
+<ol>
+<li>给每个节点安排一个排序，基于的标准有多种多样，比如度，形成图的标记</li>
+<li>为每个节点根据图的标记选择固定数量的邻居节点</li>
+<li>使用标准的CNN来进行学习</li>
+</ol>
+<p>CNN的优点：能够基于排序保证移动不变性</p>
+<h4 id="3-LGCN"><a href="#3-LGCN" class="headerlink" title="3) LGCN"></a>3) LGCN</h4><p>建议基于节点特征的信息进行排序</p>
+<p>vs PATCHY-SAN: </p>
+<p>产生 node-level输出，对于每个节点聚集了关于邻居节点的特征矩阵，然后再特征矩阵中为每列进行排序， 将头k行的排序特征作为输入</p>
+<p>在最后，采用1D CNN在相关的输入上得到隐藏节点的表示</p>
+<blockquote>
+<p>PATCHY-SAN需要没复杂的预处理，而LGCN不需要预处理。<br>LGCN建议了子图训练的策略，即使用一小部分样本的子图进行min-batch</p>
+</blockquote>
+<h4 id="4-Mixture-Model-Network"><a href="#4-Mixture-Model-Network" class="headerlink" title="4) Mixture Model Network"></a>4) Mixture Model Network</h4><p>试图利用标准的CNN来统一非欧式空间域</p>
+<blockquote>
+<p>大部分基于空间的方法在考虑的时候都忽略了节点与邻居将的相对位置关系</p>
+</blockquote>
+<p>做的方法就是为每个邻居节点的关系进行定义，然后赋值不同的权重。</p>
+<blockquote>
+<p>绝大部分采用CNN,也有用GCN的<br>MoNet建议了使用高斯核来进行学习参数来动态调节权重</p>
+</blockquote>
+<h3 id="5-2-4-Summary"><a href="#5-2-4-Summary" class="headerlink" title="5.2.4 Summary"></a>5.2.4 Summary</h3><p>循环神经网络获得节点的稳定状态<br>基于组成的方法试图集合高级别有用的信息</p>
+<p>两种结构中，每一层在训练中都需要更新所有节点隐藏的状态，但是内存往往很难将这些状态存下。</p>
+<p>所以，进行子图训练的方法：</p>
+<ol>
+<li>GraphSage</li>
+<li>随机异步训练的方法 SSE</li>
+</ol>
+<p>但近几年的进步还是通过空间方法来建立更复杂的网络机构</p>
+<ol>
+<li>用门控机制来控制节点的深度和宽度 GeniePath</li>
+<li>设计两个图的卷积网络来切入本地的一致性和全局一致性 DuraGCN</li>
+<li>超参数来影响节点接收域的大小</li>
+</ol>
+<h2 id="5-3-图池化模块"><a href="#5-3-图池化模块" class="headerlink" title="5.3 图池化模块"></a>5.3 图池化模块</h2><p>很重要， CNNs, down-sampling</p>
+<p>其中，mean/max/sum pooling是最原始和最有效的加快计算，降低维度的方法</p>
+<p>$$h_G = mean/max/sum(h_1^T, h_2^T, \cdots, h_n^T)$$</p>
+<p>已经证明，先池化可以减少傅里叶开销</p>
+<p>ChebNet  对输入图形首先进行coarsen处理，如图5a; 其次，顶点的输入和coarsen后的版本在平衡二叉树中得到了改进。<br>当节点最粗糙的版本传递到了平衡二叉树的最低级别时产生了一个特别好的信号，池化带来巨大好的效果</p>
+<p>DGCNN SortPooling, 先按SortPooling得到一个顺序，再依次取出这些点染成WL colors, 再排序。根据排序的结果取最有用的前k个，如果不够则置为默认值(0).</p>
+<p>这个方法增加了池化网络来解决一个图结构的任务，该任务需要保证排列不变性</p>
+<p>DIFFPOOL</p>
+<p>产生图分层的表示，然后不止于CNNs相结合，并且考虑使用其他变化的神经网络结构。</p>
+<blockquote>
+<p>池化层嘛，所以难道这里说的是这里的池化层可以处理不同CNNs来的东西<br>与之前的方法相比，不再简单地聚聚一个图中的节点，而是提供一种大类的解决办法来分等级低池化不同的输入图<br>这里的意思是该框架可以对不同的图进行操作吗？</p>
+</blockquote>
+<p>主要的想法是学习一个cluster S在不同的层次l代表不同的内容，如$S^{(l)} \in R^{n_l \times n_l + 1}$.两个分割的GNNs同时处理两个输入cluster的节点特征$X^{(l)}$ 以及coarsened的邻接矩阵$A^{(l)}$用来产生新的分配矩阵$S^{(l)}$以及embedding矩阵$Z^{(l)}$<br>$$Z^{(l)} = GNN_{l,embed}(A^{(l)}, X^{(l)})$$</p>
+<p>$$S^{(l)} = softmax(GNN_{l,pool}(A^{(l)}, X^{(l)}))$$</p>
+<blockquote>
+<p>？？？ cluster在这里是指啥意思？？，聚集的意思， 等于是分层，l是层次，所以说这里l是input的第l个元素？，然后A,X是每个元素的特征？</p>
+</blockquote>
+<p>可扩展到多种标准的GNN模块，他们拥有相同的数据输入，却有种不同的参数，因为各自的角色不同。<br>$GNN_{l,embed}$可以产生新的embeddings 而$GNN_{l.pool}$产生输入节点可能安排到哪个clusters的一个指派。<br>结果，$S^{(l)}$的每一行代表一个$n_l$节点或者clusters在layer l, 每一列表示下一层的$n_l$.<br>一旦我们拥有了$Z^{(l)}$和$S^{(l)}$<br>$$X^{(l+1)} = S^{(l)^T} Z^{(l)} \in R^{n_{l+1} \times d}$$</p>
+<blockquote>
+<p>通过S的支配去Z的新的embdding中计算新的X的表示, 初始化的Z应该为节点的表示<br>$$A^{l+1} = S^{(l)^T} A^{(l)} S^{(l)} \in R^{n_{l+1} \times n_{l+1}}$$<br>使用邻接矩阵为输入，然后产生一个变粗的coarsened的邻接矩阵，根据clusters中每个pair的链接性的强弱<br>总之，DIFFPOOL重定义了图的pooling模块，通过使用两个GNNs来聚集节点。 任何一个标准的GCN模块都可以进行联合，不仅可以使性能增强，还可以加快卷积的速度</p>
+</blockquote>
+<blockquote>
+<p>两个GNNs, 一个来获得新的表示，一个来获得新的指派；如果是多个，是用来构成一个大矩阵的吗？</p>
+</blockquote>
+<h2 id="5-4-对比-Spectral-and-Spatial"><a href="#5-4-对比-Spectral-and-Spatial" class="headerlink" title="5.4 对比 Spectral and Spatial"></a>5.4 对比 Spectral and Spatial</h2><p>在早期，主要的进步是靠基于频域的，但是有着明显的缺点。</p>
+<ul>
+<li>efficiency:  图一改变就需要重新特征分解， 基于空间的可以只训练a batch of nodes, 当节点增加时，可以使用sampling技术来提高效率</li>
+<li>generality: 基于频域的假定一个固定的图，使他们普遍变为一个新的不同的图。基于空间 的图，他们在每个节点上做卷积，他们的权重依然被不同的位置和结构共享</li>
+<li>flexibility: 基于频域的只适用于无向图，Laplacian矩阵并未在有向图上有很好的定义，唯一的方法只有将有向图转为无向图。基于空间的更加灵活，可以处理多源的输入，比如边的特征和方向，因为这些输入可以聚集在聚集函数中<br>所以， 基于空间的模型更受欢迎</li>
+</ul>
+<h1 id="6-Beyond-Graph-Convolutional-Networks"><a href="#6-Beyond-Graph-Convolutional-Networks" class="headerlink" title="6. Beyond Graph Convolutional Networks"></a>6. Beyond Graph Convolutional Networks</h1><h2 id="6-1-GAN"><a href="#6-1-GAN" class="headerlink" title="6.1 GAN"></a>6.1 GAN</h2><p>注意力机制在序列基准的任务中已经成为了标准，优点在于能够集中在最重要的东西。 这一特性被证明是非常重要的。</p>
+<p>用注意力带来很多很出，在聚集的时候</p>
+<h3 id="6-1-1-方法"><a href="#6-1-1-方法" class="headerlink" title="6.1.1 方法"></a>6.1.1 方法</h3><h4 id="1-GAT"><a href="#1-GAT" class="headerlink" title="1) GAT"></a>1) GAT</h4><p>就是考虑所有邻居节点的表示和考虑邻居节点的权重</p>
+<blockquote>
+<p>不同的子空间是指的，随着当前所处的不同位置，可能得到的数据不同，所以就把所有子空间的邻居节点的位置堆叠吗。感觉是这样的</p>
+</blockquote>
+<p>$$h_i^t = \delta(\sum_{j \in N_i} \alpha (h_i^{t-1},h_j^{t-1}) W^{t-1}h_j^{t-1})$$</p>
+<p>$\alpha(\cdot)$是注意力函数，控制节点和邻居节点之间的贡献<br>为了在不同的子空间中学习权重</p>
+<p>$$h_i^t = ||<em>{k=1}^K \delta(\sum</em>{j \in N_i} \alpha_k (h_i^{t-1},h_j^{t-1}) W_k^{t-1}h_j^{t-1})$$</p>
+<p>这里||表示级联</p>
+<blockquote>
+<p>?</p>
+</blockquote>
+<h4 id="2-GAAN"><a href="#2-GAAN" class="headerlink" title="2) GAAN"></a>2) GAAN</h4><p>考虑multi-head, 不过不是分配等选中，屙屎进行不同的权重分配</p>
+<p><img src="equation22.png" alt></p>
+<h4 id="3-GAM"><a href="#3-GAM" class="headerlink" title="3) GAM"></a>3) GAM</h4><p>循环神经网络来解决图分类问题，通过访问不同序列的重要节点来展示图的各部分的信息<br><img src="equation23.png" alt><br>$f_h(\cdot)$是LSTM网络<br>$f_s$是网络在过程中选取当前节点的邻居，并且优先选取有高排名的节点，它有policy network生成</p>
+<p>$$r_t = f_r(h_t;\theta_r)$$<br>其中$r_t$是随机排名向量预测哪个节点更加重要，从而应该给该节点配置更高的优先级<br>$h_t$包含了历史信息，agent已经从图中获得的。agent是用来给图的标记做预测的</p>
+<h4 id="4-Attention-Walks"><a href="#4-Attention-Walks" class="headerlink" title="4) Attention Walks"></a>4) Attention Walks</h4><p>不像DeepWalk使用固定的先验，Attention Walks产生共现矩阵通过不同的注意力权重</p>
+<p>$$E[D] = \tilde{P}^{(0)} \sum_{k=1}^C a_k (P)^k$$<br>这里D是共现矩阵<br>$P^{(0)}$是初始化矩阵<br>P指示转移矩阵的概率</p>
+<h3 id="6-1-2-总结"><a href="#6-1-2-总结" class="headerlink" title="6.1.2 总结"></a>6.1.2 总结</h3><p>注意力机制对图神经网络有3种方式</p>
+<ol>
+<li>在整个邻居节点时为每个邻居赋予不同的权重</li>
+<li>通过注意力权重整合多个模型</li>
+<li>通过注意力来指导random walks</li>
+</ol>
+<p>它们同时也可以认为是基于空间的卷积神经网络<br>GAT和GAAN的优点在于可以动态学习邻居节点的权重<br>但是会带来时间和空间的消耗，当每对邻居被计算的时候</p>
+<p><img src="GAN.png" alt></p>
+<h2 id="6-2-GAE"><a href="#6-2-GAE" class="headerlink" title="6.2 GAE"></a>6.2 GAE</h2><p>GCN, GCN+GAN, LSTM+GAN来设计图的自动编码</p>
+<h3 id="6-2-1-GCN-based"><a href="#6-2-1-GCN-based" class="headerlink" title="6.2.1 GCN based"></a>6.2.1 GCN based</h3><h4 id="1-GAE"><a href="#1-GAE" class="headerlink" title="1) GAE"></a>1) GAE</h4><p>$$Z=GCN(X,A)$$<br>decoder: $\tilde{A} = \delta (Z Z^T)$</p>
+<p>优化目标为最小variational lower bound</p>
+<blockquote>
+<p>简单理解为之间的距离<br><img src="equation28.png" alt></p>
+</blockquote>
+<h4 id="2-AGRA"><a href="#2-AGRA" class="headerlink" title="2) AGRA"></a>2) AGRA</h4><p>GCN做编码器</p>
+<p>GANs 采用min-max策略在产生和测试之间训练生成模型。<br>一个生成器同概率生成真假模型<br>然后测试器在真的样例中区分出假的样例</p>
+<p>GANs使得节点的表示服从某个先验分布</p>
+<p>生成器生成假的模型，测试其判断得出真的模型</p>
+<h3 id="6-2-2-混合变体"><a href="#6-2-2-混合变体" class="headerlink" title="6.2.2 混合变体"></a>6.2.2 混合变体</h3><ol>
+<li>NetRA</li>
+</ol>
+<p>与ARGA想法相同，不过它还正则化节点的隐藏表示，使其服从先验分布，在对抗性训练的同时。<br>不是重建邻接矩阵，它是恢复节点的序列，通过sequence-to-sequence结构的random walks中采样得到</p>
+<ol start="2">
+<li>DNGR<br>用堆叠的降噪的自动编码器来重建pointwise的互信息矩阵PRMI<br>当图形采用random walks进行序列化得到的序列是 PRMI捕捉到节点的共现矩阵<br><img src="equation29.png" alt></li>
+</ol>
+<p>其中$|D|=\sum_{v_1,v_2} count(v_1,v_2)$</p>
+<p>堆叠的降噪的自动编码器能够学习到高度非线性的规律，不同于传统的神经自动编码器，它增加了输入的噪声，通过随机地将输入入口置为0<br>当缺失值存在时，学习的潜力也就越大</p>
+<ol start="3">
+<li>SDNE<br>保护一阶接近度和二阶联合</li>
+</ol>
+<p>一阶proximity定义为节点隐藏表示和邻居节点隐藏表示之间的距离， 目标是尽可能让表示互相接近，特别地，loss函数可以定义为<br>$$L_{1st}=\sum_{i,j=1}^n A_{i,j} ||h_i^{(k)} - h_j^{(k)}||^2$$<br>第二节proximity定义为节点的输入和重新构造之间的距离。输入是邻接矩阵中对应的行，目标是用来保护邻居节点的信息，损失函数定义为<br>$$L_{2nd}=\sum_{i=1}^n ||(\hat{x}<em>i-x_i)\odot b_i||^2$$<br>$b_i$是用来惩罚非0元素的输入的，当矩阵高度稀疏时<br>当$A</em>{i,j}=0$, $b_{i,j}=1$;$A_{i,j}&gt;0$, $b_{i,j}&gt;1$<br>因此，总的目标函数就定义为<br>$$L = L_{2nd} + \alpha L_{1st} + \lambda L_{reg}$$</p>
+<ol start="4">
+<li>DRNE<br>重建的目标是节点表示，而不是整个图的数据</li>
+</ol>
+<p>loss function<br>$$L = \sum_{u \in V} ||h_v - aggregate(h_u \in N(v)||^2$$</p>
+<p>LSTM作为聚集函数来聚集根据阶排完的节点的序列</p>
+<h3 id="6-2-3-总结"><a href="#6-2-3-总结" class="headerlink" title="6.2.3 总结"></a>6.2.3 总结</h3><p>DNGR和SDNE仅仅使用了图的拓扑数据， GAE,ARGA,NetRA,DRNE同时考虑了两方面</p>
+<p>最大的挑战是关于邻接矩阵的稀疏性，导致译码器的正实体的数量远远小于负实体，为了解决这个办法，DNGR构造了密集矩阵，SDNE为0实体处理了惩罚，GAE重新赋值了权重，NetRA将图线性化为序列</p>
+<h2 id="6-3-GGN"><a href="#6-3-GGN" class="headerlink" title="6.3 GGN"></a>6.3 GGN</h2><p>目标是通过观察一系列图产生图。 大部分的方法都是domin specific.<br>化学分子图SMILES,<br>一些工作提供可替代性的点或边，然后进行对抗性训练<br>GCN building blocks或用其他不同的结构</p>
+<h3 id="6-3-1-GCN-based"><a href="#6-3-1-GCN-based" class="headerlink" title="6.3.1 GCN based"></a>6.3.1 GCN based</h3><ol>
+<li>MolGAN<br>整合了GCN,提高的GAN和RL来产生图。 GAN包括产生器和测试器，与其他一起竞争从而提高产生器的真实性。<br>产生器试图产生真实的数据，测试器试图辨别。然后还会再增加一个奖惩网络</li>
+</ol>
+<p><img src="MolGAN.png" alt></p>
+<ol start="2">
+<li>DGMG<br>spatial-based graph convolution networks来获得图的表示。<br>产生图的节点和边有产生的图的表示来决定</li>
+</ol>
+<p>加入一个顶点到增长的图，如此递归操作, 直到达到停止的标准<br>当decision变为false时，开始加边<br>当decision为true, 它会评估将性加入的节点连接到已存在的节点的可能性分布，并且由分布随机选择一个节点，<br>当一个新的节点和它的连接都被加入到图中后，DCMG再次更新图的表示</p>
+<h3 id="6-3-2-杂项"><a href="#6-3-2-杂项" class="headerlink" title="6.3.2 杂项"></a>6.3.2 杂项</h3><ol>
+<li><p>GraphRNN<br>扩展深度图产生模型通过两个级别的循环神经网络。<br>graph-level RNN增加一个节点到一个节点序列<br>edge–level RNN产生一个二进制序列只是新节点和之前产生节点之间的链接<br>为了训练graph level RNN 为了将图线性化为序列，GrapRNN采用BFS.<br>为了建模edge-level RNN, GraphRNN假设多元伯努利分布或条件伯努利分布</p>
+</li>
+<li><p>NetGAN<br>联合LSTM和Wassertein GAN通过random-walk-based方法来产生图<br>该框架包括两个模块，产生器和测试器<br>产生器尽可能去通过LSTM来产生最合理的random walks, 测试器尽可能地辨别其中的真假<br>经过训练，就会获得节点的共现矩阵</p>
+</li>
+</ol>
+<h3 id="6-3-3-总结"><a href="#6-3-3-总结" class="headerlink" title="6.3.3 总结"></a>6.3.3 总结</h3><p>大问题，不像同步的图像和音频，可以直接由专家判断判断，质量无法评估。<br>MolGAN和DCNG用来很多额外的知识来评估产生的图的合理性。<br>GrapRHH和NetGAN通过图的统计数据，比如图的阶数来做<br>DCNG和GrapRNN产生节点和边序列化的方式<br>MolGAN和NetGAN共同产生节点和边</p>
+<p>之前的方法的问题在于，随着图变大，产生一个长的序列必然带来问题。<br>后面的方法是一个图的全局属性很难维护<br>最近的方法采用了变化的自动编码器来产生图，建议了使用惩罚机制的邻接矩阵，然而会增加输出空间从n到n^2<br>还没有方法具有很好的大规模可扩展性</p>
+<h2 id="6-4-GSN"><a href="#6-4-GSN" class="headerlink" title="6.4 GSN"></a>6.4 GSN</h2><p>需要同时维护空间和瞬时性因素。<br>这类图往往有一个全局的图结构，但是会随着时间而改变<br>交通中，每个传感器作为一个节点记录交通的速度，边作为节点之间的距离，<br>图的任务就是预测节点将来的值或者标记，以及图的标记</p>
+<p>GCNs, GCN+RNN/CNN, 循环结构</p>
+<h3 id="6-4-1-GCN-based"><a href="#6-4-1-GCN-based" class="headerlink" title="6.4.1 GCN based"></a>6.4.1 GCN based</h3><ol>
+<li>DCRNN<br>扩散的卷积——空间因素<br>GRU序列到序列的结构——瞬时</li>
+</ol>
+<ul>
+<li>空间<br><img src="equation34.png" alt><br>$D_O$是出度矩阵，$D_I$是入度矩阵<br>为了允许多输入输出channel<br><img src="equation35.png" alt></li>
+</ul>
+<p>P是输入的channel的数量</p>
+<ul>
+<li>瞬时<br>循环单元会同时接收上一步临时节点的历史信息和邻居节点的卷积信息。<br>GRU-&gt;DCGRU<br><img src="equation36.png" alt><br>为了适应多步的需求，采用sequence-to-sequence的结构</li>
+</ul>
+<ol start="2">
+<li><p>CNN-GCN<br>1D-CNN和GCN学习spatial-temporal 图数据<br>对于一个输入tensor $X \in R^{T \times N \times D}$, 1D-CNN随着时间轴来收集每个节点的瞬时性信息$X_{[:,i,:]}$<br>GCN操作来聚集空间信息，在每次的时间步骤中， $X_{[i,:,:]}$ 收集空间信息，输出层是一个线性信息，产生关于每个节点的预测</p>
+</li>
+<li><p>ST-GCN<br>扩展不同的时间流来作为图的边用一个统一的GCN模型来统计两种信息<br>它还有一个标记函数来为每个边安排标记，根据两个相关节点之间的距离<br>所以，邻接矩阵可以用一个K邻接矩阵的求和来表示，K是标记的数量<br>它应用GCN到不同的权重到K个邻接矩阵上，并且求和他们<br><img src="equation37.png" alt></p>
+<h3 id="6-4-2-杂项"><a href="#6-4-2-杂项" class="headerlink" title="6.4.2 杂项"></a>6.4.2 杂项</h3></li>
+</ol>
+<ul>
+<li>Structural-RNN<br>目标是预测节点在每个时间节点的标记<br>它包括两种类型的RNN，nodeRNN和edgeRNN<br>每个节点和边的瞬时信息由nodeRNN和edgeRNN传递<br>因为不同的RNN对不同的节点和边会急剧地增加模型的复杂性，所以他们代替为将nodes和edges活粉到不同的语义组。<br>比如，一个人主题关系图，包括多种两组节点，人节点和物品节点；三种边，人与人的边，人与物品的边，人与物品的边。<br>在同一语义组的节点或边使用相同的RNN模型<br>为了合并空间信息，nodeRNN将会将edgeRNN的输出作为输入</li>
+</ul>
+<h3 id="6-4-3-总结"><a href="#6-4-3-总结" class="headerlink" title="6.4.3 总结"></a>6.4.3 总结</h3><p>DCRNN的优点在于能够处理长时间，因为它的循环神经网络结构<br>CNN-GCN会更优效率得益于1D CNN<br>ST-GCN考虑瞬时流作为节点的边，将会导致邻接矩阵平方式地增长。一方面，会增加计算图卷积层的计算开销。另一方面，为了捕捉长期依赖，卷积层需要堆叠很多次。<br>Structural-RN提高了模型的效率，通过共现相同的RNN在同语义组中。但是，它需要人们的先验知识来分割语义组</p>
+<h1 id="7-Applications"><a href="#7-Applications" class="headerlink" title="7. Applications"></a>7. Applications</h1><p>很多的应用，文学<br>4类数据集</p>
+<p>开源的图神经网络</p>
+<p>实际的运用在各种领域</p>
+<h2 id="7-1-Datasets"><a href="#7-1-Datasets" class="headerlink" title="7.1 Datasets"></a>7.1 Datasets</h2><ol>
+<li>Citation Networks 引用网络<br>数，作者和他们之间的引用关系，作者之间的创作关系。 无向图，相关的任务比如node classification, link prediction, node clustering tasks</li>
+</ol>
+<p>三个有名的数据集</p>
+<ul>
+<li>Cora: 7个类</li>
+<li>Citeseer：6个类</li>
+<li>Pubmed： 通过TF-IDF向量来宝石</li>
+<li>DBLP: 计算机科学书目，参考文献</li>
+</ul>
+<ol start="2">
+<li>Social Networks<br>网上服务用户之间的相互关系</li>
+</ol>
+<ul>
+<li>BlogCatalog: bloggers, label就是兴趣</li>
+<li>Reddit: 无向图，论坛收集到的帖子，两个帖子之间可能包含相同用户者的评论</li>
+<li>Epinions: 多关系图，关于一件在线商品的评论，其中评论可能有多种关系，trust, distrust, coreview, co-rating</li>
+</ul>
+<ol start="3">
+<li>Chemical/Biological Graphs<br>化学元素的组成可以用化学原子作为点， 化学键作为边组成<blockquote>
+<p>由此来考虑产生图分类任务<br>graph classification performance</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>NCI-1  NCI-9</li>
+<li>MUTAG</li>
+<li>D&amp;D 蛋白质结构，属于两种</li>
+<li>QM9 分子式</li>
+<li>Tox21</li>
+</ul>
+<ol start="4">
+<li>Unstructured Graphs 无结构图<br>为了探索图神经网络在无结构化数据上的泛化性，k-NN使用最广泛</li>
+</ol>
+<ul>
+<li><p>MNIST: 70000 28*28</p>
+<blockquote>
+<p>? convert to graph:  8-NN?graph基于像素的位置</p>
+</blockquote>
+</li>
+<li><p>Wikipedia dataset</p>
+<blockquote>
+<p>单词共现网络</p>
+</blockquote>
+</li>
+<li><p>NewsGroup datasets<br>多个文档被划分为了20多种类别</p>
+<blockquote>
+<p>将文档作为节点，相似性作为节点的边的权重</p>
+</blockquote>
+</li>
+</ul>
+<ol start="5">
+<li>Others</li>
+</ol>
+<ul>
+<li>METR-LA: 交通数据库</li>
+<li>MOvieLens-1M: 6k用户为1million商品的排序,推荐系统的基准</li>
+<li>NELL： 语言学习项目，事实以及实体之间的关系<br><img src="datasets.png" alt></li>
+</ul>
+<h2 id="7-2-Benchmarks-开源扩展"><a href="#7-2-Benchmarks-开源扩展" class="headerlink" title="7.2 Benchmarks 开源扩展"></a>7.2 Benchmarks 开源扩展</h2><p>最常用的数据集 Cora, Pubmed, Citesser, PPI<br>大量的超参数，需要开源的程序才能获得同样的结果<br><img src="methods.png" alt></p>
+<p>开源代码<br><img src="open-codes.png" alt></p>
+<h2 id="7-3-实际运用"><a href="#7-3-实际运用" class="headerlink" title="7.3 实际运用"></a>7.3 实际运用</h2><p>GNNs 用于节点聚类，关系预测，图划分</p>
+<ul>
+<li>Computer Vision 计算机视觉<br>最大的应用，通过利用图神经网络探索视频中的图形结构，进行点云分类和分割，动作识别以及其他方向<br>在场景图的生成过程中，语义之间的关系有利于理解视觉场景背后的意义</li>
+</ul>
+<p>通过给定图片场景，图生成模型检测和识别物体以及预测物体之间的语义关系</p>
+<p>另一个应用就是通过给定的场景图生产实际的图像</p>
+<p>每个自然语言解释为一个对象，那么就可以根据给定的语义说明类构件出图像</p>
+<p>在点云分类和分割中，一个点云通常被看做是一个3D点。那么更觉设备探索周围的㕂，有可以识别出有问题的汽车。<br>为了辨别物体通过点云，将点云转化为k邻居图或者抄点图，可以用图结构来探索其拓扑结构</p>
+<blockquote>
+<p>点云？？</p>
+</blockquote>
+<p>在动作识别中，可以将人的关节分解，架构成图，从而用空间瞬时网络结构来学习人的动作行为</p>
+<p>图像分类，人与人之间的行为，语义分割，视觉推理和问题解答</p>
+<ul>
+<li><p>推荐系统<br>得到高质量的推荐，推荐的关键就是为一个物品的重要性为用户打分。link prediction</p>
+</li>
+<li><p>交通<br>graph based 空间瞬时图，路建模成点，路之间的距离建模成边，每个时间段的值建模为特征，目标来预测在某个时间段某段路的平均速度。 节省资源和节约能源</p>
+</li>
+</ul>
+<p>taxi-demand prediction<br>给出taxi需求的历史数据，位置信息，天气信息和时间特征，可以德奥一个对于每个位置的joint表达，从而来一段时间内的汽车需求</p>
+<ul>
+<li>化学<br>学习化学式的结构</li>
+</ul>
+<p>node 分类，图分类，图形生成<br>在分子图上，学习分子指纹，预测分子特性，推理蛋白质种类，合成化学物</p>
+<ul>
+<li>其他</li>
+</ul>
+<p>节目评测，时间推理，社会原因分析，恐怖时间预测等等</p>
+<h1 id="8-Future-Directions"><a href="#8-Future-Directions" class="headerlink" title="8. Future Directions"></a>8. Future Directions</h1><p>图的复杂性</p>
+<h2 id="Go-Deep"><a href="#Go-Deep" class="headerlink" title="Go Deep"></a>Go Deep</h2><p>深度的网络结构，经过无限次的卷积，所有节点的表示可以聚集为一个单节点；所以提高层数仍然是一个好的办法</p>
+<h2 id="Receptive-Field"><a href="#Receptive-Field" class="headerlink" title="Receptive Field"></a>Receptive Field</h2><blockquote>
+<p>感受野？？？ 什么东西？<br>这里的意思就是一个节点的感受野就是指中心节点以及他的所有邻居节点。<br>邻居的数量服从一个合法的分布，每个节点可能有一个邻居，可能多成千上百个邻居<br>采样引入后，任何选择一个节点的感受野值得研究</p>
+</blockquote>
+<h2 id="Scalability"><a href="#Scalability" class="headerlink" title="Scalability"></a>Scalability</h2><p>可扩展性，大规模的图并不能扩展的很好。<br>主要的原因是当打包层次的图卷积时，该节点的最终装填会引起邻居的最终状态的改变，所以就会带来高复杂性的后向传播<br>现有的解决办法有快采样和子图训练，但是不够可扩展来解决大规模图的深度结构</p>
+<h2 id="动力学和异质性"><a href="#动力学和异质性" class="headerlink" title="动力学和异质性"></a>动力学和异质性</h2><p>现有的图神经网络做的都是静态的同质的图。<br>一方面，图的结构需要固定，另一方面，节点和边是同一来源。这两个假设不符合实际情况<br>比如在社会网络中，有人加入和退出<br>在推荐系统中，输入可能为图形或者文字<br>所以需要考虑新的方法</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/english-pronuncation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/english-pronuncation/" class="post-title-link" itemprop="url">english pronuncation</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:44:31 / 修改时间：12:46:24" itemprop="dateCreated datePublished" datetime="2019-09-19T12:44:31+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/" itemprop="url" rel="index"><span itemprop="name">english</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/pronuncation/" itemprop="url" rel="index"><span itemprop="name">pronuncation</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>音标复习</p>
+<p><img src="pronuncation.jpg" alt></p>
+<h1 id="1-单元音"><a href="#1-单元音" class="headerlink" title="1. 单元音"></a>1. 单元音</h1><h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p><img src="listen-basic-1.png" alt></p>
+<hr>
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p><img src="listen-basic-2.png" alt></p>
+<hr>
+<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p><img src="listen-basic-3.png" alt></p>
+<hr>
+<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><p><img src="listen-basic-4.png" alt></p>
+<hr>
+<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><p><img src="listen-basic-5.png" alt></p>
+<hr>
+<h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><p><img src="listen-basic-6.png" alt></p>
+<hr>
+<h2 id="7"><a href="#7" class="headerlink" title="7"></a>7</h2><p><img src="listen-basic-7.png" alt></p>
+<h1 id="2-双元音"><a href="#2-双元音" class="headerlink" title="2. 双元音"></a>2. 双元音</h1><h2 id="1-1"><a href="#1-1" class="headerlink" title="1"></a>1</h2><p><img src="listen-basic-di-1.png" alt></p>
+<hr>
+<h2 id="2-1"><a href="#2-1" class="headerlink" title="2"></a>2</h2><p><img src="listen-basic-di-2.png" alt></p>
+<hr>
+<h2 id="3-1"><a href="#3-1" class="headerlink" title="3"></a>3</h2><p><img src="listen-basic-di-3.png" alt></p>
+<h1 id="3-辅音1"><a href="#3-辅音1" class="headerlink" title="3. 辅音1"></a>3. 辅音1</h1><h2 id="1-2"><a href="#1-2" class="headerlink" title="1"></a>1</h2><p><img src="listen-basic-f-1.png" alt></p>
+<hr>
+<h2 id="2-2"><a href="#2-2" class="headerlink" title="2"></a>2</h2><p><img src="listen-basic-f-2.png" alt></p>
+<hr>
+<h2 id="3-2"><a href="#3-2" class="headerlink" title="3"></a>3</h2><p><img src="listen-basic-f-3.png" alt></p>
+<hr>
+<h2 id="4-1"><a href="#4-1" class="headerlink" title="4"></a>4</h2><p><img src="listen-basic-f-4.png" alt></p>
+<hr>
+<h2 id="5-1"><a href="#5-1" class="headerlink" title="5"></a>5</h2><p><img src="listen-basic-f-5.png" alt></p>
+<hr>
+<h2 id="6-1"><a href="#6-1" class="headerlink" title="6"></a>6</h2><p><img src="listen-basic-f-6.png" alt></p>
+<hr>
+<h2 id="7-1"><a href="#7-1" class="headerlink" title="7"></a>7</h2><p><img src="listen-basic-f-7.png" alt></p>
+<hr>
+<h2 id="8"><a href="#8" class="headerlink" title="8"></a>8</h2><p><img src="listen-basic-f-8.png" alt></p>
+<h1 id="4-辅音2"><a href="#4-辅音2" class="headerlink" title="4. 辅音2"></a>4. 辅音2</h1><h2 id="1-3"><a href="#1-3" class="headerlink" title="1"></a>1</h2><p><img src="listen-basic-f2-1.png" alt></p>
+<hr>
+<h2 id="2-3"><a href="#2-3" class="headerlink" title="2"></a>2</h2><p><img src="listen-basic-f2-2.png" alt></p>
+<hr>
+<h2 id="3-3"><a href="#3-3" class="headerlink" title="3"></a>3</h2><p><img src="listen-basic-f2-3.png" alt></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/TOEFL-word-overview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/TOEFL-word-overview/" class="post-title-link" itemprop="url">TOEFL word overview</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:40:58 / 修改时间：12:42:04" itemprop="dateCreated datePublished" datetime="2019-09-19T12:40:58+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/" itemprop="url" rel="index"><span itemprop="name">english</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/TOEFL/" itemprop="url" rel="index"><span itemprop="name">TOEFL</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/TOEFL/word/" itemprop="url" rel="index"><span itemprop="name">word</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="词缀"><a href="#词缀" class="headerlink" title="词缀"></a>词缀</h1><p>五星级词缀<br>    - im,in: 否定，进入，加强<br>    - dis: 低级别 no, 高级别 away; apart<br>    - ad: to， toward<br>    - re: back<br>    - a+p: 强调，一再<br>    - mis: bad<br>    - phi：good<br>    - homo 相同的   hetero不同的<br>    - suc= sub 下<br>    - se 分开，诱使 = seduce<br>    - uni 单一的<br>    - per aeay, entirely</p>
+<p>前缀<br>    - 时间：  ex,pre,pro    re=back<br>    - 位置  inter/out   over,super/sub  trans  under<br>    - 数量  uni  bi  centi  milli  mono  multi<br>    - 程度  super   over  under  hyper well<br>    - 方式  auto  co   mal  mis  self<br>    - 态度  anti  counter   pro<br>    - 否定  ab, an, de,  in, non,  under</p>
+<p>后缀<br>    - v:  ate, ish, ify, ch, en, ize, ise<br>    - n:  or, ee, ess, an/ian,  ance, ant, ity, th, ary, um, age, let, ness, al, ese, hood, ics, ion, ism, ist, ment, ship<br>    - a   al, tle, tive, id, que, ous, less, able, free, ful, ic, like, some, y</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>换词方法</p>
+<ol>
+<li>元音字母</li>
+<li>辅音字母组<ul>
+<li>h,c,k,g,q,qu </li>
+<li>b,p,ph,f,v </li>
+<li>f,t</li>
+<li>s,t,d </li>
+<li>m,n,r,l,y,j,g </li>
+<li>z,j,d </li>
+<li>u,v,w</li>
+</ul>
+</li>
+</ol>
+<h1 id="词根"><a href="#词根" class="headerlink" title="词根"></a>词根</h1><h2 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h2><ol>
+<li><p>学术： sci, science,  log, eco,  nomy,  ics</p>
+</li>
+<li><p>数学  meter,  equ, part,  numer</p>
+</li>
+<li><p>物理</p>
+<ul>
+<li>力  tract, grav, griev, pel,plus, mob, mot, celer</li>
+<li>热  therm, calori, frig,friger, ferv, zeal</li>
+<li>声  son, voc, vok, audi,audit, tone, phony, plod, verber, echo</li>
+<li>光  lumin, lustr,lusc, lust,radi,cand, flect,flex, sol, sight,splend, vis,vid</li>
+<li>电  electro,tele, z</li>
+</ul>
+</li>
+<li><p>化学: pos,posit,pon,pound,part, port,mini,micro,macro,acid,acri,acu,acrid,ac,dia,sal<br> tox,struct,mod,form,cruc,crus,curx,norm, solu,solv,solute,di,lut,lav,lux,rupt,spers,<br> lect,brev,bridge,vers,vert</p>
+</li>
+<li><p>天文: astro,aster,aer,aero,aeri,stell,atory</p>
+</li>
+<li><p>地质地理: terr,tele,cata,caco,call,ign </p>
+</li>
+<li><p>生物: bio,vi,li,herb,flor,flour,agr,agri,agro</p>
+</li>
+<li><p>历史: chron, annual,ann,eon,loc,stat,stit,stiut,grap,gram,vict,vinc,vol,volv,volt</p>
+</li>
+<li><p>政治: arch,tect,dem,cracy,crat,popul,publ,fus,fug,fun,mon,monit,polis,polic,polit,range,<br> serve,sequ,sent,sue,urb</p>
+</li>
+<li><p>人类学: anthrop,anthr,andry,gyn,gynec,gamy,patri,matri,matr,amor,amot,am,phil,philo,ster,<br> path,soph,phob,phobia,flu,sect,seg,gen,gener,genit,gress,soci,migr,ori,orig,kara,oke,cur,<br> curs,cour,cours,man,manu,pass,pat,sens,sent,tim </p>
+</li>
+<li><p>文化: creed,cred,fid,liber,ment,nov,prais,preci,duc,duct,art,lingu</p>
+</li>
+<li><p>法学: leg,legis,jur,juris,dict,dic,jurg,judic,cern,cert,cret,fin,fort,her,hers,hibit,odin,<br> prov,prob,strict,strain,string,sur,term,treat </p>
+</li>
+</ol>
+<p>校园生活类: act,ag,alter,altern,don,dot,cre,creaters,mir,not,nounce,nunci,pend,pens,pli,ple,plen,<br>    plet,plex,port,press,pute,quest,quer,quir,quis,scend,scent,scens,sid,st,sta,stant,stat,sist,<br>    simil,simul,sembl,spir,sum,tag,tact,tig,ting,tain,ten,tin,tend,tent,tens,tom,turb,us,ut,ven,<br>    vent,vail,val</p>
+<h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><p>人文科学</p>
+<ol>
+<li>学术<ul>
+<li>sci: to know;  conscious</li>
+<li>science=knowledge: conscientious</li>
+<li>log=word/speech  logue     monologue</li>
+<li>log=reason/idea  logic   anthropology</li>
+<li>eco=house,dwelling,place economy   ego=self egecentric</li>
+<li>nomy=rule, subject(agronomy  astronomy); management, rule(autonomy)</li>
+<li>ics=logic 学科    physcis  dynamics</li>
+</ul>
+</li>
+<li>数学<ul>
+<li>algebra 代数</li>
+<li>meter: 1. measure (optometrist, telemeter); 2. dimension (kilometer) 3. gemotry (diameter)</li>
+<li>equ=equal, even   adequate 充分的   inequilty</li>
+<li>par=equal, pair    parity 平价   compare</li>
+<li>numer=number   numerable 很多的，可数的  enumerate</li>
+</ul>
+</li>
+<li>物理<ul>
+<li>力<ul>
+<li>tract=draw   abstract     traction  extract</li>
+<li>grav, griev=to dig, heavy;   gravity   aggravate</li>
+<li>pel,puls=drive, push, shake,swing     expel  compel</li>
+<li>mob=move,乌合之众    mobile  autombile</li>
+<li>mot=1.move(motion, motive)  2. a witty saying (motto)</li>
+<li>celer=quick,speed   celerity  accelerate</li>
+</ul>
+</li>
+<li>热<ul>
+<li>therm=heat, warm  thermal   diatheraml   isotherm</li>
+<li>calori=heat   calorie  calorify  </li>
+<li>frig,friger=cold  frigid 冷的   refrigerator 冰箱</li>
+<li>ferv=boil   perfervid  fervent</li>
+<li>zeal=ardor zealous jealous</li>
+</ul>
+</li>
+<li>声<ul>
+<li>son=sound   sonic   resonance</li>
+<li>voc,vok=call,voice vocal  evoke</li>
+<li>audi, audit=hear   audit  audience</li>
+<li>tone=sound  monotonous 单调的</li>
+<li>phony   euphony 悦耳之声   symphony</li>
+<li>plod  applaud  explode</li>
+<li>verber=beat, vibrate   reverberatem</li>
+<li>echo=sound   anechoic</li>
+</ul>
+</li>
+<li>光<ul>
+<li>lumin=light illuminate  luminosity</li>
+<li>lustr,luc=light  lust:desire,wish,longing    lustre   illustrate</li>
+<li>light   lighter enlighten</li>
+<li>radi=ray,root    radio,  radical ,radix</li>
+<li>cand=white   candle,  candid</li>
+<li>flect, flex=bend   reflect</li>
+<li>sol=1. sun (solor  solace console) 2. solo   (sole, solitary)</li>
+<li>sight=vision  sightly</li>
+<li>splend=be right,shine    splendid</li>
+<li>vis,vid=to see, to know,wise (visible  envy provide); separate (divide)</li>
+<li>opt,opto=sight  optic</li>
+</ul>
+</li>
+<li>电<ul>
+<li>electro=electric   electron</li>
+<li>tele=distant   telephone</li>
+<li>Z=fast   zigzag </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>化学<ul>
+<li>pos,posit=1.put (pose,composite);2.pause (repose, 休息)</li>
+<li>pon,pound=put,pause  componet  compound</li>
+<li>part, port=part   particle  depart</li>
+<li>mini  minimal, minimum</li>
+<li>micro  microsoft</li>
+<li>macro  macroword</li>
+<li>acid,acri,acu,acrid=sour, sharp   acid,  acerbic</li>
+<li>ac=acid,angle   acute   acuity</li>
+<li>dia=across   diagonal</li>
+<li>sal=salt   salty  salify   saline   salary</li>
+<li>tox=posion   toxic  toxicology</li>
+<li>struct=to build, pile ,assemble   structure  construct</li>
+<li>mod=mode, manner, measure    modest  modern</li>
+<li>form=shape   formal    conform</li>
+<li>cruc,crus,curx=cross 十字形，交叉，关键   crucial  crux   cruise</li>
+<li>norm=rule, norm   norm  normal</li>
+<li>solu, solv,solute=loosen,disperse 分解  solvable solvent</li>
+<li>di=divide, separate</li>
+<li>lut,lav,lux=wash   lavish 浪费的  lavatory 厕所，浴室</li>
+<li>rupt=break, rupture abrupt   interrupt  bankrupt</li>
+<li>spers=scatter 少年凯  disperse 分散 intersperse</li>
+<li>lect, lig=choose,gather  elect   collect  select</li>
+<li>brev, bridge=make short  abreviate brief</li>
+<li>vers,vert=turn-over   adverse   adversity  averse 反对 convert</li>
+</ul>
+</li>
+<li>天文<ul>
+<li>astro, aster=star  astronomy  cosmonaut</li>
+<li>aer,aero, aeri=air  aerate tongqi   aerosphere</li>
+<li>stell=star  stellar interstellar</li>
+<li>atory=场所   laboratory lavatory  </li>
+</ul>
+</li>
+<li>地质地理<ul>
+<li>terr=1.piece of earth,ground and land(terrain);2. to treamble抖  terrible  terrific</li>
+<li>tele=far/distant   telegraph</li>
+<li>cata,caco=kakos,bad,down  catalog  catastrophe  cacophony</li>
+<li>call=kailo,beauty,call;  calligraphy</li>
+<li>ign=fire, scarifice  ignite  ignitable</li>
+</ul>
+</li>
+<li>生物<ul>
+<li>bio=life   biology  biosphere</li>
+<li>vi=li=live</li>
+<li>herb  herbivorous  herbaceous</li>
+<li>flor,flour=flower,florid  floral  flora </li>
+<li>agr, agri,agro=field, land  agrarian, agriculture<br>社会科学</li>
+</ul>
+</li>
+<li>历史<ul>
+<li>chron=time  Cronus  chronic synchronize</li>
+<li>annual,ann,eon=year  annual  anniversary</li>
+<li>loc=location  locate locomotion</li>
+<li>stat, stit, stiut=set up,place  stature  statute constitute</li>
+<li>grap=write,draw, scratch, picture photography telegraph</li>
+<li>gram=write program grammer  diagram</li>
+<li>vict, vinc=克服，fight   victory   convict  </li>
+<li>vol,volv,volt=roll,turn,twist   voluble 有才的  revolution revolve  involve</li>
+</ul>
+</li>
+<li>政治<ul>
+<li>arch=ruler,chief,government archy  architect architecture archives</li>
+<li>tect=texture,build,do</li>
+<li>dem=people  epidemic  pandemic  endemic</li>
+<li>cracy=rule, crat=ruler  democracy  democrat</li>
+<li>popul,publ=people population populous   popularize </li>
+<li>fus,fug=flee,run away    refugee  refuge</li>
+<li>fun=pour  refuse   confuse   infuse</li>
+<li>mon,monit=mind,warn,advice    summon  monition</li>
+<li>muni,mun=public  community  communal</li>
+<li>polis,polic,polit=govern,state,city  police policy politics</li>
+<li>range=rank,ring  arrange  rearrange</li>
+<li>serve   conserve   preserve</li>
+<li>sequ,sent=follow sequence   consequence  sequential</li>
+<li>sue=follow   consue  pursue</li>
+<li>urb=city   urban   suburb</li>
+</ul>
+</li>
+<li>人类学<ul>
+<li>anthrop=human  anthropology</li>
+<li>anthr,andry=man  polyandry</li>
+<li>gyn,gynec,gamy=queen,woman   gynecology  monogyny</li>
+<li>patri=father   patriarch   patriot</li>
+<li>matri,matr=mother maternal  matriarch</li>
+<li>amor,amot,am=love  amour   amatory amateur</li>
+<li>phil,philo=love   philantropy   phiology   </li>
+<li>ster=duty   stern   sterile   stare </li>
+<li>path=suffering,feeling,illness,disease   pathetic apathy</li>
+<li>soph=debate,wise  sophist   sophisticate</li>
+<li>phob,phobia=run,fear  phobia   acrophobia</li>
+<li>flu=flow  fluency   fluctuate  effluent   influence</li>
+<li>sect,seg=divide, piece, cut   section  insect</li>
+<li>gen,gener,genit=birth,produce,create   genus  gennerate</li>
+<li>gress=step,go   aggress progress ingress</li>
+<li>soci=social  society  asocial</li>
+<li>migr = to change,go and move   migrant  migrate</li>
+<li>ori,orig=rise, begin  orient  origo  originate</li>
+<li>karaoke   kara=head,room,empty   oke=orchestra</li>
+<li>cur,curs, cours, cour=run  cursory  incur currency</li>
+<li>man,manu=hand,strength,power over  manual  manicure manage </li>
+<li>pass,pat=1.feeling,suffering,enduring(passion  impassion passive) 2. 通过(passage, passenger, passport)</li>
+<li>sens,sent=sense,feeling agreement  sense   sensible  consent </li>
+<li>tim=fear   timid   meticulous</li>
+</ul>
+</li>
+<li>文化<ul>
+<li>creed,cred=believe,trust credit  credible  creditable</li>
+<li>fid=trust, faith  confident  confide </li>
+<li>liber=free,noble  liberty  intellectual  liberal</li>
+<li>ment=mind  mental   mentality  mention</li>
+<li>nov=new, yound,recent, shape   novel  novlty  innovate</li>
+<li>prais,preci=praise, value,price  appraise  precious</li>
+<li>duc,duct = to pull, drag;lead,bring   ductile educate product </li>
+<li>art=skill,joint,trick   artful  artistry  artifact</li>
+<li>lingu=language  linguistics</li>
+</ul>
+</li>
+<li>法学<ul>
+<li>leg,legis=law  legal  illegal   legislate </li>
+<li>jur,juris=law, swear  jury  injury</li>
+<li>dict,dic=say,speak, point out  dictate  addict</li>
+<li>jurg,judic=judge  judgment judicial </li>
+<li>cern, cert, cret=separate  concern discern  discrete </li>
+<li>fin=end, boundary,limit fine  finite </li>
+<li>fort=force  enforce </li>
+<li>her,hers=stick, cling  adhere hesitate </li>
+<li>hibit=hold,posses habit  exhibit exhibition</li>
+<li>odin=order  ordinal  coordinate</li>
+<li>prov,prob=test front   probe  disprove </li>
+<li>strict,strain,string=tighted  strict  stricture  constrict</li>
+<li>sur=sure  secure  assure</li>
+<li>term=limit,end, boundary    terminal  determine</li>
+<li>treat=handle  treaty  treatment maltreat<br>校园生活类</li>
+<li>act,ag=to do, to drive    active  actual</li>
+<li>alter, altern=to change  alternate</li>
+<li>don,dot=give  donate,donor</li>
+<li>cre,creaters=grow,make create increase</li>
+<li>mir=look,laugh,wonder  miracle,mirror</li>
+<li>not(e)=observer,mark=know  notice notify denote</li>
+<li>nounce,nunci=speak,shout  anounce  denounce </li>
+<li>pend,pens=hang  pendant pending</li>
+<li>pli,ple,plen,plet=to full,fill  plenty supplement</li>
+<li>plex=fold  complex  duplex</li>
+<li>port=carry,take  import export </li>
+<li>press pressure express</li>
+<li>pute=to think,pruno  compute  dispute</li>
+<li>quest,quer,quir,quis=seek,search  quest inquest  acquire</li>
+<li>scend,scent,scens=climb  ascend   descend</li>
+<li>sid=sit   reside residue  preside</li>
+<li>st,sta,stant,stat, sist=stand  stable  obstacle assist</li>
+<li>simil, simul,sembl=alike,same similar simile  assimilate semblance</li>
+<li>spir=breathe, spit soul,courge,vigor,breath  spirit expire</li>
+<li>sum=1.total,super(summary); 2. to make up(resume)</li>
+<li>tag,tact,tig,ting=tangent,touch  tactual contact</li>
+<li>tain,ten,tin=hold  attain  maintain</li>
+<li>tend,tent,tens=stretch  tend tendency  trend contend</li>
+<li>tom=cut   atom tome  epitome</li>
+<li>turb=stir    disturb  turbulence perturb</li>
+<li>us,ut=use  usage  utilize usual</li>
+<li>ven,vent=come  advent  venture convene</li>
+<li>vail,val=valid,be of use; strong,value   avail  valuable evaluate</li>
+</ul>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -1575,1445 +3305,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-search-graph/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-acwing-search-graph/" class="post-title-link" itemprop="url">algorithm acwing search graph</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:17:32 / 修改时间：12:18:38" itemprop="dateCreated datePublished" datetime="2019-09-19T12:17:32+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/search-graph/" itemprop="url" rel="index"><span itemprop="name">search_graph</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-BFS-DFS"><a href="#1-BFS-DFS" class="headerlink" title="1. BFS/DFS"></a>1. BFS/DFS</h1><h2 id="1-DFS"><a href="#1-DFS" class="headerlink" title="1. DFS"></a>1. DFS</h2><p>stack O(h) 不具有最短性<br>    回溯，剪枝<br>    思路比较奇怪的都有DFS来做<br>    俗称暴力搜索！<br>    关键：使用什么顺序来进行搜索<br>    &gt; 一个很执着的人！，回溯法，出去，回来务必注意需要恢复现场<br>    有些题会判断最优，有些题不需要</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=10;</span><br><span class="line">int n;</span><br><span class="line">int path[N];</span><br><span class="line">bool st[N];</span><br><span class="line"></span><br><span class="line">void dfs(int u)&#123; // 这里与path对应</span><br><span class="line">    if(u==n)&#123;</span><br><span class="line">        for(int i=0;i&lt;n;i++) printf(&quot;%d &quot;,path[i]);</span><br><span class="line">        puts(&quot;&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=1;i&lt;=n;i++)&#123; // 这里与st对应</span><br><span class="line">        if(!st[i])&#123;</span><br><span class="line">            path[u]=i;</span><br><span class="line">            st[i]=true;</span><br><span class="line">            dfs(u+1);</span><br><span class="line">            st[i]=false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    dfs(0);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>八皇后法：依旧使用框架<br>n*n! 2^(n^2)</p>
-<p>DP是无环的最短路问题<br>深搜可以保证一次搜索到终点，但是不能保证搜索到的路径是最短的<br>深度搜索可能随机搜索到一条路</p>
-<h3 id="1-1-统一考虑的格式"><a href="#1-1-统一考虑的格式" class="headerlink" title="1.1 统一考虑的格式"></a>1.1 统一考虑的格式</h3><p>数据范围 N<br>最优解： 需要输出的东西<br>约束条件</p>
-<h3 id="1-1-全排列问题"><a href="#1-1-全排列问题" class="headerlink" title="1.1 全排列问题"></a>1.1 全排列问题</h3><p>DFS, 全排列问题<br>顺序！！  _, _, _, _<br>要以什么样的顺序来遍历所有的方案，这里很简单地就是每一位到底选什么的方案<br>DFS就是递归</p>
-<blockquote>
-<p>当初始状态不属于什么具体的含义的时候，往往恢复现场写在，展开每个子树那里</p>
-</blockquote>
-<p>N=20<br>最优解： path[N]<br>约束条件: st[N]</p>
-<h3 id="1-2-n皇后问题"><a href="#1-2-n皇后问题" class="headerlink" title="1.2 n皇后问题"></a>1.2 n皇后问题</h3><p>N=20<br>最优解： g[N][N] 棋盘<br>约束条件: col[N], dg[N<em>2] udg[N</em>2]</p>
-<h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><p>queue O(2^h) 最短性，当所有边的权都为0,1时是。 </p>
-<p>迷宫问题： 保证了一定存在路<br>技巧就在于少写循环判断语句</p>
-<p>如何输出路径？就是在该输出的位置增加链表</p>
-<p>八数码问题： BFS求最短路<br>把每个方格看作个体，当前棋盘的所有的方格组合而成为整个棋盘的状态，然后每个状态之间有路可走，研究的点就是如何进行搜索，使得能够从一个状态到达另一个状态，并且进行搜索！</p>
-<p>所以问题的关键：</p>
-<ol>
-<li>状态表示复杂</li>
-<li>如何记录两个状态之间的距离</li>
-</ol>
-<p>求最短路</p>
-<p>最短路简单的做法：<br>q[N],d[N]</p>
-<blockquote>
-<p>d[N]是什么，d[N]是BFS中用于搜索，用来更新距离计算公式的</p>
-</blockquote>
-<p>那么需要考虑</p>
-<ul>
-<li>如何存储</li>
-<li>如何定义最短距离<br>距离数组的小标如何表示<br>queue<string><br>dict: 字典，哈希表unordered_map&lt;string,int&gt;</string></li>
-</ul>
-<p>queue<string><br>如何从一个字符串到达另一个字符串？<br>移动，恢复</string></p>
-<h1 id="2-树和图"><a href="#2-树和图" class="headerlink" title="2. 树和图"></a>2. 树和图</h1><h2 id="2-1-存储方式"><a href="#2-1-存储方式" class="headerlink" title="2.1 存储方式"></a>2.1 存储方式</h2><p>邻接矩阵: 稠密图<br>邻接表：拉链法，存储每个点可以走到哪个点</p>
-<blockquote>
-<p>可以用vector来做，但是就效率而言没有数组模拟的快， 稀疏图</p>
-</blockquote>
-<h2 id="2-2-遍历方式"><a href="#2-2-遍历方式" class="headerlink" title="2.2 遍历方式"></a>2.2 遍历方式</h2><p>O(n+m)</p>
-<p>注意最大值最小<br>最小值最大两者的区别</p>
-<blockquote>
-<p>在图里，进行遍历，如果有环，怎么进行统计数？？？，想想真是一个问题！！！<br>在图中，因为有n个顶点，所以对于n个顶点，每两个边之间最多只可能有两种情况，所以根据握手定理，出度与入度之和就为顶点数的二倍</p>
-</blockquote>
-<p>深度优先和宽度优先</p>
-<p>如何将一维扩展到二维，以及多维，实际上就是在多维空间中寻找一种顺序，使得这种顺序可以通过一维的方式来进行模拟</p>
-<p>BFS:<br>h[N],e[M],ne[M],idx;<br>d[N],q[N];  // d[N]==-1,表示是否进行了遍历</p>
-<p>应用：有向图的拓扑序列。 拓扑序列的两种求的方法<br>拓扑排序的算法流程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">queue&lt;- 所有入度为0的点</span><br><span class="line">while(queue不空)</span><br><span class="line">    t&lt;-队头</span><br><span class="line">    枚举t的所有出边t-&gt;j:</span><br><span class="line">        删除t-&gt;j, d[j]--;</span><br><span class="line">        if(d[j]==0) queue&lt;-j;</span><br></pre></td></tr></table></figure>
-
-<p>DFS:<br>h[N],e[M],ne[M],idx<br>st[N]</p>
-<p>搜索的扩展：人工智能技术的树</p>
-<h1 id="3-最短路问题"><a href="#3-最短路问题" class="headerlink" title="3. 最短路问题"></a>3. 最短路问题</h1><ol>
-<li>单源最短路</li>
-</ol>
-<ul>
-<li><p>所有边权都是正数</p>
-<ul>
-<li><p>朴素Dijkstra O(n^2) 稠密</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for v: 1-n:</span><br><span class="line">    t&lt;- 不在S中的距离最近的点 n-i  st[i]:n</span><br><span class="line">    s&lt;-t, 共n次</span><br><span class="line">    用t来更新其他顶点 t-&gt;v， 共m次</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>堆优化版Dijstra O(mlogn) 稀疏</p>
-<blockquote>
-<p>看哪些地方可以优化<br>手写堆，可以保证n个元素<br>pq, 不支持修改元素， m个元素</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>存在负权边</p>
-<ul>
-<li><p>Bellman-ford O(nm)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">struct&#123;</span><br><span class="line">    int a,b,w;</span><br><span class="line">&#125; edge[M];</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>(a, b): w<br>dist[b] = min(dist[b], dist[a] + w); 松弛操作<br>对所有的边都满足 dist[b]&lt;= dist[a]+w 三角不等式</p>
-</blockquote>
-<blockquote>
-<p>如果有负权回路不一定存在。n+1 条边，存在负环<br>O(nm)<br>特解的题：最多k条边的题<br>当存在负环时，不存在最短路径。如果负环为自环则无所谓<br>因为更新会发生串联，所以需要备份，backup[N]. &lt;1,2&gt;:1, &lt;2,3&gt;:1,  &lt;1.3&gt;: 3<br>只要有负环存在，可以不断更新负环中的数值，最终到达负无穷</p>
-</blockquote>
-</li>
-<li><p>SPFA 一般：O(m) 最坏：O(nm)</p>
-<blockquote>
-<p>bellman_ford 不一定<br>这里利用了宽搜， BFS, 只有前面的点变小了，后面的点才有可能变小<br>网格特别容易卡spfa</p>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>应用： 1. 最短路  2. 判断负权回路（指回路的总长度为负数）<br>在2时，因为2本身一个环里的权会不断减小，所以没有必要赋初值</p>
-</blockquote>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<ol start="2">
-<li>多源最短路- Floyd O(n^3)<blockquote>
-<p>基于动态规划，三维<br>d[k,i,j]: 只经过k节点，从i到达j的路径<br>d[k,i,j] = min{d[k-1,i,j], d[k-1,i,k]+d[k-1,k,j]}<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vY2hlbnlpbmc5OS9wLzM5MzI4NzcuaHRtbA==" title="https://www.cnblogs.com/chenying99/p/3932877.html">https://www.cnblogs.com/chenying99/p/3932877.html<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-</li>
-</ol>
-<p>稠密图：m<del>n^2<br>稀疏图：m</del>n </p>
-<blockquote>
-<p>考虑无重边和自环的话，那么最多的边则就是完全图，即n^2;<br>考查的点不会是正确性，从背景中抽象为最短路问题</p>
-</blockquote>
-<blockquote>
-<p>无向图是一种特殊的有向图</p>
-</blockquote>
-<h1 id="4-最小生成树"><a href="#4-最小生成树" class="headerlink" title="4. 最小生成树"></a>4. 最小生成树</h1><p>Prim算法</p>
-<ul>
-<li>朴素版 稠密图 O(n^2)</li>
-</ul>
-<p>Kruskal算法<br>O(mlogm) 稀疏图</p>
-<ol>
-<li>对边进行排序O(mlogm)</li>
-<li>从小到大选取边，若该边与生成树形成环则不加入，否则加入； 直到加入了n-1条边即结束<blockquote>
-<p>和bellman-ford一样只需要用结构体存储边即可</p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>选择，稠密图用Prim算法；稀疏图用Kruskal算法</p>
-</blockquote>
-<h1 id="5-二分图"><a href="#5-二分图" class="headerlink" title="5. 二分图"></a>5. 二分图</h1><ul>
-<li><p>染色法 O(n+m)</p>
-<blockquote>
-<p>对图中的点染色，深度和宽度优先均可。<br>如果一个点出现两个颜色，则说明该图不是二分图</p>
-</blockquote>
-</li>
-<li><p>匈牙利算法 O(nm)</p>
-<blockquote>
-<p>实际运行时间一般远小于O(nm)<br>只会找左边所有点所对应的边<br>st[N], 存储当前使用匹配时是否用到该点；在寻找下一轮时，需要更新为0</p>
-</blockquote>
-</li>
-</ul>
-<p>复杂图论的题</p>
-<blockquote>
-<p>二分图： 棋盘覆盖</p>
-</blockquote>
-<h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><p>Seg F:<br>纯随机，然后利用minmax来求解</p>
-<blockquote>
-<p>当输入输出规模到达100万时一般才开始考虑用scanf(),而不用cin</p>
-</blockquote>
-<p>检查：</p>
-<p>初始化，代码逻辑，赋值等是否出错。<br>最需要注意的一件事就是尽量用空格来划分代码的逻辑</p>
-<p>有问题怎么办？首先确信一部分代码一定是对的，不要怀疑</p>
-<p>函数中的变量务必注意要初始化，否则是会出错的！！！</p>
-<p>前面的题难点在思路上<br>图论难点在代码实现上</p>
-<p>为之半个小时的调试，发现是一个变量给写错了，唉，就在for循环那里</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-basic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-acwing-basic/" class="post-title-link" itemprop="url">algorithm acwing basic</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:15:53 / 修改时间：12:16:58" itemprop="dateCreated datePublished" datetime="2019-09-19T12:15:53+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-快排"><a href="#1-快排" class="headerlink" title="1. 快排"></a>1. 快排</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#incldue&lt;stdio.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=1e6+10;</span><br><span class="line">int n;</span><br><span class="line">int q[N];</span><br><span class="line"></span><br><span class="line">void swap(int &amp;x,int &amp;y)&#123;</span><br><span class="line">    int t=x;</span><br><span class="line">    x=y;</span><br><span class="line">    y=t;</span><br><span class="line">&#125;</span><br><span class="line">void quick_sort(int q[], int l, int r)&#123;</span><br><span class="line">    if(l&gt;=r) return;  // 注意边界条件不可少</span><br><span class="line"></span><br><span class="line">    int x=q[l], i=l-1, j=r+1; // 或q[(1+r)/2], q[r]</span><br><span class="line">    // 这里赋初值是为了后面对称的情况</span><br><span class="line">    while(i&lt;j) &#123;</span><br><span class="line">        do i++; while(q[i]&lt;x);</span><br><span class="line">        do j--; while(q[i]&gt;x);</span><br><span class="line">        if(i&lt;j) swap(q[i],q[j]); // 注意这里要加一个判断</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    quick_sort(q, l, j);  // </span><br><span class="line">    quick_sort(q, j+1, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;n);</span><br><span class="line">    for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;, &amp;q[i]);</span><br><span class="line">    quick_sort(q,0,n-1);</span><br><span class="line">    for(int i=0;i&lt;n;i++) printf(&quot;%d&quot;, q[i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-归并"><a href="#2-归并" class="headerlink" title="2. 归并"></a>2. 归并</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=1e6+10;</span><br><span class="line">int n;</span><br><span class="line">int q[N], tmp[N];</span><br><span class="line"></span><br><span class="line">void merge_sort(int q[],int l, int r)&#123;</span><br><span class="line">    if(l&gt;=r) return;</span><br><span class="line">    int mid=l+r&gt;&gt;1;</span><br><span class="line">    merge(q, l, mid);</span><br><span class="line">    merge(q, mid+1,r);</span><br><span class="line"></span><br><span class="line">    int k=0, i=l, j=mid+1;</span><br><span class="line">    while(i&lt;=mid&amp;&amp;j&lt;=r)&#123;</span><br><span class="line">        if(q[i]&lt;q[j]) tmp[k++]=q[i++];</span><br><span class="line">        else tmp[k++]=q[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    while(i&lt;=mid) tmp[k++]=q[i++];</span><br><span class="line">    while(j&lt;=r) tmp[k++]=q[j++];</span><br><span class="line"></span><br><span class="line">    for(i=l,j=0;i&lt;=r;i++,j++) q[i]=tmp[j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;,&amp;q[i]);</span><br><span class="line">    merge_sort(q,0,n-1);</span><br><span class="line">    for(int i=0;i&lt;n;i++) printf(&quot;%d&quot;, q[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-二分"><a href="#3-二分" class="headerlink" title="3. 二分"></a>3. 二分</h2><h3 id="整数二分"><a href="#整数二分" class="headerlink" title="整数二分"></a>整数二分</h3><p>// 整数二分，有单调性一定可以二分；但是没有单调性也可以二分<br>// 在区间上定义上某种性质，将区间分为两部分，左边满足某种性质，右边不满足某种性质；二分法可以用来寻找不满足性质和满足性质的边界<br>？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">int bsearch_1(int l,int r)&#123;</span><br><span class="line">    while(l&lt;r)&#123;</span><br><span class="line">        int mid=l+r&gt;&gt;1; // 下取整</span><br><span class="line">        if(check(mid)) r=mid; // [l,mid]</span><br><span class="line">        else l=mid+1;</span><br><span class="line">    &#125;</span><br><span class="line">    return l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int bsearch_2(int l, int r)&#123;</span><br><span class="line">    while(l&lt;r)&#123;</span><br><span class="line">        int mid=l+r+1&gt;&gt;1;</span><br><span class="line">        if(check(mid)) l=mid;</span><br><span class="line">        else r=mid-1;</span><br><span class="line">    &#125;</span><br><span class="line">    return l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">如何判断死循环</span><br><span class="line">mid=l=r时，是否陷入死循环</span><br></pre></td></tr></table></figure>
-
-<p>整数二分的问题一定可以用这个模板来解决。<br>每次二分，能找到一个答案的区间；当区间的长度是1时，即是解</p>
-<p>二分能够包含解，然后用边界可以推出解。</p>
-<blockquote>
-<p>二分的退出条件一定是i=j吗？，这里知道快排的退出条件并不是l=r<br>对！！！！，二分一定能找到解，退出是i一定等于j</p>
-</blockquote>
-<blockquote>
-<p>性质的寻找， 如果a[mid] &lt; x, 怎么办？实际上就是看目标的数在a[mid]与x之间，比如靠近x最大的数， 此时l=mid; 如果是找x相等的左边界，在a[mid]<br>在a[mid] &gt; x, 比如<br>??? 有点模糊</p>
-</blockquote>
-<h3 id="浮点数二分simple"><a href="#浮点数二分simple" class="headerlink" title="浮点数二分simple"></a>浮点数二分simple</h3><blockquote>
-<p>这里就不用+1，-1<br>求平方根</p>
-</blockquote>
-<blockquote>
-<p>这里务必注意左右范围的选取问题。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()&#123;</span><br><span class="line">    double x;</span><br><span class="line">    cin&gt;&gt;x;</span><br><span class="line"></span><br><span class="line">    double l=0, r=x; // r=max(1,x);</span><br><span class="line">    while(r-l&gt;1e-8)&#123;  // 这里比要求的有效数字多2</span><br><span class="line">    // 这里用迭代次数来停止也可以，比如100，即除以2^100.</span><br><span class="line">        double mid=(1+r)/2;</span><br><span class="line">        if(mid*mid &gt;= x) r=mid;</span><br><span class="line">        else l=mid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printf(&quot;%lf\n&quot;,l); </span><br><span class="line">    // 这里l或者r</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-高精度"><a href="#4-高精度" class="headerlink" title="4. 高精度"></a>4. 高精度</h2><p>A+B： len(A)=1e6<br>A-B:<br>A*a 1e6  a-10000<br>A/a </p>
-<p>存储，倒序存储<br>在末位加上一位，下标为0的存个位。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">A+B</span><br><span class="line">int a[N],b[N],sum[N];</span><br><span class="line">int cnt=0;</span><br><span class="line">for(int i=0,j=0;i&lt;n&amp;&amp;j&lt;m;i++,j++)&#123;</span><br><span class="line">    sum[i]=(a[i]+b[j]+cnt)%10;</span><br><span class="line">    cnt=(a[i]+b[j]+cnt)&gt;10?1:0;</span><br><span class="line">&#125;</span><br><span class="line">if(cnt) a[n+1]=1;</span><br><span class="line"></span><br><span class="line">A-B</span><br><span class="line">len(A)&gt;=len(B)</span><br></pre></td></tr></table></figure>
-
-<p>如果A，B可能取正或负，那么一定可以转化为绝对值进行相加或者相减！</p>
-<p>高精度减法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">t=(t + A[i])/b;</span><br><span class="line">c.push_back(t%10);  //?</span><br><span class="line">t=A[i]%b;</span><br><span class="line"></span><br><span class="line">for (int i=A.size()-1;i&gt;=0;i--)</span><br><span class="line">t=10t+A[i];</span><br><span class="line">if((t/b)) c.push_back(t/b);  </span><br><span class="line">t %= b;</span><br><span class="line">t</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-前缀和和差分"><a href="#5-前缀和和差分" class="headerlink" title="5. 前缀和和差分"></a>5. 前缀和和差分</h2><ul>
-<li>前缀和<br>a1, a2, a3,…, an<br>S0, S1, S2,…, Sn<br>a_{i}= S_{i}- S_{i-1}<br>S0=0;<br>当S0=0时，特别好定义边界。<br>前缀和 Si = Si-S0. </li>
-</ul>
-<p>因此，可以很容易地求片段和。</p>
-<blockquote>
-<p>很厉害！可以统一了，不用预处理了</p>
-</blockquote>
-<blockquote>
-<p>scanf比cin快一倍<br>ios::sync_with_stdio(false);<br>cin和标准输入输出不同步，提高cin读取速度；不能使用scanf</p>
-</blockquote>
-<p>区间和<br>区域和<br>(x1,y1), (x2,y2)<br>Sx2y2-Sx1y2-Sx1y1+Sx1y1</p>
-<ul>
-<li>差分<br>前缀和的逆运算<blockquote>
-<p>作用：可以在O(n)时间内B-&gt;A<br>区间[1,r]+c<br>b[l]+c, b[r+1]-c</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="6-双指针算法"><a href="#6-双指针算法" class="headerlink" title="6. 双指针算法"></a>6. 双指针算法</h2><p>两类： 一个数组两个指针；两个数组同时处理。<br>代码框架</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for(i=0,j=0;i&lt;n;i++)&#123;</span><br><span class="line">    while(j&lt;i &amp;&amp; check(i,j)) j++;</span><br><span class="line">    res=max(res, j-i+1);</span><br><span class="line">    // 每道题的具体逻辑</span><br><span class="line">&#125;</span><br><span class="line">O(n+m) </span><br><span class="line">这里i和j具有单调性，i和j只向一个方向发展。</span><br></pre></td></tr></table></figure>
-
-<p>核心思想</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;n;i++)</span><br><span class="line">    for(int j=0;j&lt;n;j++)</span><br><span class="line">        O(n^2)</span><br></pre></td></tr></table></figure>
-
-<p>将上面朴素算法优化到O(n), 运用了某种性质</p>
-<p>维护两个窗口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">ad daa</span><br><span class="line">ad</span><br><span class="line">daa</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    char str[100];</span><br><span class="line">    gets(str);</span><br><span class="line">    int n=strlen(str);</span><br><span class="line">    </span><br><span class="line">    for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">        int j=i;</span><br><span class="line">        while(j&lt;n &amp;&amp; str[j]!=&apos; &apos;) j++; // i,j-1具体单词</span><br><span class="line">        for(int k=i;k&lt;j;k++)&#123;</span><br><span class="line">            cout&lt;&lt;str[k];</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;endl;</span><br><span class="line">        i=j;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 枚举起点和终点</span><br><span class="line">// 每个指针的位置都有意义</span><br><span class="line"> for(int i=0;i&lt;n;i++)</span><br><span class="line">    for(int j=0;j&lt;n;j++)</span><br><span class="line">        if(check(i,j))&#123;</span><br><span class="line">            res=max(res,i-j+1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">// 双指针算法 O(n)</span><br><span class="line">for(i=0,j=0;i&lt;n;i++)&#123;</span><br><span class="line">    while(j&lt;i &amp;&amp; check(i,j)) j++;</span><br><span class="line">    res=max(res, j-i+1);</span><br><span class="line">    // 每道题的具体逻辑</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 特殊情况的举例</p>
-<blockquote>
-<p>数组元素的目标和为什么限制为一个解，因为如果是多个解时。对于<br> <code>1 1 1 1 1, 1 1 1 1 , 2</code>本身就要O(n*m),算法必然为O(n^2)的。<br>????</p>
-</blockquote>
-<h2 id="7-位运算"><a href="#7-位运算" class="headerlink" title="7. 位运算"></a>7. 位运算</h2><p>从个位开始算,(11111)_2</p>
-<blockquote>
-<p>先把第k位移到最后一位<br>n&gt;&gt;k &amp; 1 看一下n的第k位是几？</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for(int k=3;k&gt;=0;k--)</span><br><span class="line">    cout&lt;&lt;(n&gt;&gt;k&amp;1)&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
-
-<p>lowbit(x): 返回x的最后一位1<br>x&amp;(~x+1)= x&amp;-x</p>
-<h2 id="8-离散化，整数的离散化"><a href="#8-离散化，整数的离散化" class="headerlink" title="8. 离散化，整数的离散化"></a>8. 离散化，整数的离散化</h2><p>10^9 稀疏的值域，映射到从0开始的自然数 10^5<br>注意这里映射的话的思想实际上就是按照个数索引来映射的感觉。</p>
-<p>a-&gt;b</p>
-<blockquote>
-<ol>
-<li>a[]可能中有重复元素：  去重</li>
-<li>如何算出a[i]离散化后的值：a是有序的，二分 </li>
-</ol>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; alls;</span><br><span class="line">sort(alls.begin(), alls.end());</span><br><span class="line">alls.erase(unique(alls.begin(), alls.end()),alls.end()) // 去重</span><br><span class="line">&gt; ?这里unique返回的就是改变后的alls, 且alls后面的重复的元素都放在最后部分</span><br><span class="line"></span><br><span class="line">// 二分求出x对应的离散</span><br><span class="line">int find(int x)&#123; // 找第一个大于等于x的位置</span><br><span class="line">    int l=0, r=all.size()-1;</span><br><span class="line">    while(l&lt;r)&#123;</span><br><span class="line">        int mid=l+r&gt;&gt;1;</span><br><span class="line">        if(x&lt;=all[mid]) r=mid;</span><br><span class="line">        else l=mid+1;</span><br><span class="line">    &#125;</span><br><span class="line">    return r+1; // 这里是否加1都无所谓，这里从1开始映射；1,2,3,4,..,n</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意，一般的离散化的目标就是所有会用到的坐标<br>区间和 n+2m(l,r)</p>
-<h2 id="9-合并区间"><a href="#9-合并区间" class="headerlink" title="9. 合并区间"></a>9. 合并区间</h2><ol>
-<li>按区间做变短排序</li>
-<li>总共有三种情况<br><code>ri&lt;ri+1, ri+1&lt;ri, ri&lt;li+1</code><br>一般是贪心，优先对左右端点进行排序</li>
-</ol>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>java输入输出比较慢</p>
-<p>编译语言和即时编译<br>小数据 javascript,python快<br>大数据 go,c,c++快<br>javascript&gt;python&gt;go=C++&gt;java</p>
-<h3 id="错误类型"><a href="#错误类型" class="headerlink" title="错误类型"></a>错误类型</h3><ul>
-<li>Segmentation Fault<br>基本情况是否没有考虑<br>数组是否越界<br>没有输入</li>
-</ul>
-<ul>
-<li>Time Limit Exceeded<br>输入输出可能都存在着问题</li>
-</ul>
-<p>关键：把自己想的算法能够实现出来</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-math/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-acwing-math/" class="post-title-link" itemprop="url">algorithm acwing math</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:14:45 / 修改时间：12:15:20" itemprop="dateCreated datePublished" datetime="2019-09-19T12:14:45+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/math/" itemprop="url" rel="index"><span itemprop="name">math</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-数论"><a href="#1-数论" class="headerlink" title="1. 数论"></a>1. 数论</h1><h2 id="1-1-质数"><a href="#1-1-质数" class="headerlink" title="1.1 质数"></a>1.1 质数</h2><p>，合数从2开始的整数的定义<br>在大于1的整数中，如果只包含1和本身这两个约数，就变成质数，就就叫做素数</p>
-<ul>
-<li><p>质数的判定——试除法</p>
-<ul>
-<li>1–n-1</li>
-<li>d | n,  n/d | n,  d&lt;=n/d<br>sqrt(n)</li>
-</ul>
-</li>
-<li><p>分解质因数</p>
-<ul>
-<li>只需要从小到大模拟<br>logn-sqrt(n)<blockquote>
-<p>思想： 当碰见第一个质数时，它肯定是，因为前面都不成立，说明它与前面的任意数都不互质。然后怎么搞，我把目标数有它的因子全给搞完，那么得到的这个新数就一定不再整除这个质数了。于是，碰到下一个整除的数必然又满足前面的性质。<br>还有这里的上界依然是砍一半，为什么呢，因为这里不可能会有两个大于的数，所以这里就是用的一个大于的数来做的，这样就很清晰了</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>筛质数<br>  一种考虑方法，将一个数和它的倍数全部删掉，最终留下一些值<br>  调和级数：1+1/2+1/3+…=lnn + c, c欧拉常数</p>
-<blockquote>
-<p>nlnn –&gt; &lt; nlogn<br>任何合数都可以写成质因数乘积之和<br>质数定理： 1-n中n/lnn个质数。<br>真实的复杂度： nloglogn</p>
-</blockquote>
-<ul>
-<li><p>朴素筛法</p>
-</li>
-<li><p>埃式筛法</p>
-</li>
-<li><p>线性筛法</p>
-<blockquote>
-<ol>
-<li>i%pj==0, pj一定是i的最小正因子</li>
-<li>i%pj!=0, pj也一定小于pj*i的最小正因子<br>对于一个合数x， pi是x的最小质因子，当枚举到n/i时一定会被删掉<br>? 为什么枚举的值是n/i. i&gt;pj</li>
-</ol>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<p>线性筛法理解：<br>对于每一个n，它会执行。<br>如果是合数，将小于它的最小质数的乘积，删掉。<br>如果是质数，会先加入，然后，删掉它乘以它的质数。</p>
-<p>有两个问题？为什么筛到最小质数就可以？<br>因为将质因子从小到大排序，肯定一定有序了。<br>只用筛到最小即可，因为其他的有后面大的在构造过程中就会删掉。<br>比如考虑： 2<em>3</em>3, 实际在9时就会筛掉<br>而 2<em>2</em>2, 会被2*4筛掉，所以不用担心某个质因子的个数很多的情况</p>
-<p>用素数负责增加新的质因子的种类。</p>
-<p>为什么要到n/i即可？<br>为什么范围是n/i, 因为i%n, n/i %n,  当到达一定大的程度i会很大，此时只需要用小的质因子就可以了。<br>因为是取等于，如果是质因子可以将其筛掉；</p>
-<p>朴素筛法：未注意到合数可以分解为质因子之积的规律（自然数基本定理）<br>埃式筛法：简单地用加法来对质因子进行删除<br>线性筛法：使用了乘法的结论进一步对筛法进行了优化, 前面未保证唯一删去一个数数</p>
-<h2 id="1-2-约数"><a href="#1-2-约数" class="headerlink" title="1.2 约数"></a>1.2 约数</h2><p>一个数的约数是成对出现的 d % n, n/d % n</p>
-<ol>
-<li>试除法求约数<br>sqrt(n) 把每一步的时间复杂度都要计算一下</li>
-</ol>
-<p>约数个数：1到n有多少个约数，讨论倍数<br>n+n/2+n/3+….n/n= nlogn<br>期望：logn<br>排序：lognloglogn &lt;&lt; </p>
-<blockquote>
-<p>int范围内的整数，最多的约数大概1500左右过</p>
-</blockquote>
-<p>调和级数<br>1+1/2+1/3+…+1/n = lnn +c 欧拉常数0.5772</p>
-<p>很关键：只有每一步都不超时才可以做<br>20000  2ms</p>
-<ol start="2">
-<li><p>约数个数<br>自然数基本定理：(a1+1)(a2+1)(a3+1)…(ak+1)<br>乘法原理</p>
-</li>
-<li><p>约数之和<br>乘法原理与乘法展开之间的联系<br>(p^0 + p^1 + p^2 + … + p^h1)(p^0 + p^1 + … + p^h2)…(p^0 + p^1 + … + p^hk)</p>
-</li>
-</ol>
-<p>logK用来求快速幂<br>p^0+p^1+p^2..+p^k // logK的求法</p>
-<blockquote>
-<p>所有因子都是2，所以最大值logn<br>忌杀鸡用牛刀<br>4. 最大公约数： 欧几里得算法<br>辗转相除法 logN<br>d|a, d|b, 则 d|ax+by<br>(a, b) = (b, a mod b)=(b, a-cb)</p>
-</blockquote>
-<p>递归终点：(a,0)=a<br>因为0可以整除任何数</p>
-<ol start="5">
-<li>欧拉函数</li>
-</ol>
-<ul>
-<li>公式法： 计算出某一个数的欧拉函数<br>p(n): 1-n之间与n互质的数<blockquote>
-<p>互质的数即两个数之间的最大公约数为1<br>如何求？ 容斥原理<br>去掉不互质的，留互质的</p>
-</blockquote>
-</li>
-<li>从1~N中去掉p1,p2,..,pk的所有倍数<blockquote>
-<p>这里p1,p2,p3,…pk是由算术基本定理得出的<br>N- N/p1 - N/p2</p>
-</blockquote>
-</li>
-<li>加上所有pi*pj的倍数<blockquote>
-<ul>
-<li>N/pipj</li>
-</ul>
-</blockquote>
-</li>
-<li>减去所有pi<em>pj</em>pk的倍数</li>
-<li>一直做下去</li>
-</ul>
-<blockquote>
-<p>p(n) = N(1-1/p1)(1-1/p2)…(1-1/pN),  把后面看作是乘积进行取数</p>
-</blockquote>
-<ul>
-<li>筛法：计算出多个数的欧拉函数</li>
-</ul>
-<p>欧拉函数的用处：<br>欧拉定理：如果a,n互质， 则有a^(phi[n]) mod n = 1;<br>证明： 欧拉函数的定义是跟n互质的小于n的数的个数<br>求余的公式： a mod n = b mod n = ab mod n = (ax+bx) mod n</p>
-<blockquote>
-<p>模和约数互相的关系<br>学数学一定是自己推一遍！！！</p>
-</blockquote>
-<p>a^(phi[p]) mod p = 1; p为质数</p>
-<blockquote>
-<p>费马定理，证明就很容易！！！</p>
-</blockquote>
-<ol start="6">
-<li>快速幂<br>求 a^k mod p:   O(logK)<br>思想：反复平方法<blockquote>
-<p>预处理出 a^{2^0} mod p, …, a^(2^logk) mod p</p>
-</blockquote>
-</li>
-</ol>
-<p>每一个数都是上一个数的平方mod p<br>即 a mod n = c, 则 a^b mod n = (a mod n)^b mod n  加法变成了乘法</p>
-<p>a^k mod p = a^(101)_2 mod p =(a^{2^0} mod p ) (a^{2^2} mod p) mod p</p>
-<ol start="7">
-<li>快速幂求逆元<br>a/b = ax mod m.<br>则称x为b的逆元。  a/b这里是整除<blockquote>
-<p>把所有除b的情况转化为乘上一个数的情况，记作x=b^-1<br>a和m互质，b和m互质。  有什么用呢？<br>bb^-1 = 1 mod m<br>问题即 bx mod m =1, x为最小值</p>
-</blockquote>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(a +  b) % p = (a%p +  b%p) %p  （对）</span><br><span class="line"></span><br><span class="line">(a  -  b) % p = (a%p  -  b%p) %p  （对）</span><br><span class="line"></span><br><span class="line">(a  *  b) % p = (a%p *  b%p) %p  （对）</span><br><span class="line"></span><br><span class="line">(a  /  b) % p = (a%p  /  b%p) %p  （错）</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>数论是用来研究整数的东西<br>一般来说，会让求b关于p的逆元，p保证是一个质数。<br>根据费马定理，b^p-1 mod p =1 , 则如果p|b不成立，则就由 b^-1 = b^p-2 mod p.</p>
-</blockquote>
-<ol start="8">
-<li>扩展欧几里得算法<br>裴属定理： 对于任意正整数a,b, 一定存在非零整数x,y, 使得ax+by=gcd(a,b)<br>ax+by=d,  a(x-k<em>b/d)+b(y+k</em>a/d)=d  于是就有了多个答案<blockquote>
-<p>注意这里是等于，这里x,y可以取负数<br>利用辗转相除法的版子</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int exgcd(int a,int b,int &amp;x,int &amp;y)&#123;</span><br><span class="line">    if(!b)&#123;</span><br><span class="line">        x = 1, y= 0;</span><br><span class="line">        return a;</span><br><span class="line">    &#125;</span><br><span class="line">    int d = exgcd(b, a%b, y, x);  </span><br><span class="line">    y -= a/b *x;</span><br><span class="line">    return d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<blockquote>
-<p>妙不可言，这里返回的最终结果是最小公约数</p>
-</blockquote>
-<ol start="9">
-<li><p>线性同余方程<br>ax = b(mod m)<br>存在整数y, 使得ax=my+b,  记 ax-my=b,  什么时候有解？ (a,m)|b</p>
-<blockquote>
-<p>可能无解<br>解：设d=(a,m), 由ax+my=d, 可得 (ax+my)*b/d mod m= b mod m<br>则 x *(b/d) mod m</p>
-</blockquote>
-</li>
-<li><p>中国剩余定理<br>m1,m2,…, mk两两互质<br>且<br>x = a1 mod m1<br>x = a2 mod m2<br>…<br>x = ak mod mk</p>
-</li>
-</ol>
-<p>证明： 利用前面的扩展欧几里得将两个构造出一个解，然后写出两个的通解，最终构造出所有的通解<br>通解：<br>由逆运算可知：<br>M = m1m2…mk<br>Mi = M/mi</p>
-<p>Mi^-1是M1关于m1的逆元</p>
-<blockquote>
-<p>通解： ai<em>Mi</em>Mi^{-1} +…+…</p>
-</blockquote>
-<blockquote>
-<p>由费马定理， Mi^-1 = M1^{mi-2} mod mi, 由此转换为快速求幂</p>
-</blockquote>
-<p>练习题：表达整数的奇怪方法</p>
-<h1 id="2-组合计数"><a href="#2-组合计数" class="headerlink" title="2. 组合计数"></a>2. 组合计数</h1><blockquote>
-<p>C()<br>组合数<br>2000*10000 内存爆掉，怎么做？<br>考虑预处理，所求解数之间的关系</p>
-</blockquote>
-<p>核心：把一个问题优化到1s可以算出来</p>
-<blockquote>
-<p>之间做会很费时，所以可以考虑预处理来做</p>
-</blockquote>
-<p>规律<br>C(n,m) = n! / m!(n-m)! = n(n-1)..(n-m+1)/b！<br>C(n,m) = C(n-1,m)+ C(n-1, m-1)</p>
-<blockquote>
-<p>考虑当前第一个选择是否包含，即可推出该结论</p>
-</blockquote>
-<p>分类：<br>数据范围</p>
-<ol>
-<li><p>10万组 2000  递推 N^2</p>
-</li>
-<li><p>1万 10^5  预处理 NlogN</p>
-<blockquote>
-<p>foot[i] = i! mod (10^9 + 7);  逆元</p>
-</blockquote>
-</li>
-<li><p>20 a 10^18,  p 10^5: log_p^N p logP</p>
-<blockquote>
-<p>卢斯卡定理, 10^5 *<br>c[a,b]=c[a mod p,b mod p]* C[a/p, b/p] mod p<br>证明：<br>$(1+x)^p\ mod\ p = 1+x^p mod p$<br>$ a= a_{k-1} p^k + … + a_0 p^0 $<br>$(1+x)^a = (1+x)^{a_0} ((1+x)^p)^{a_1}…<br>=(1+x)^{a_0} (1+x^p)^{a_1}…\ mod\ p$<br>$b: b_0, b_1,…$<br>$C_a^b = C_{a_k}^{b_k} C_{a_{k-1}}^{b_{k-1}}…  (mod\ p)$<br>只要a1&gt;b1, $C_a^b =0$</p>
-</blockquote>
-</li>
-<li><p>无模运算，直接求</p>
-<blockquote>
-<p>分解质因数<br>a!= a/p + a/p^2 +… + a/p^k</p>
-</blockquote>
-</li>
-<li><p>有序的0、1序列</p>
-<blockquote>
-<p>n个0和n个1， 保证任意前缀0的个数不少于1的个数<br>太难了！表格来做<br>(0,0) -&gt; (n,n): 将排列转换为路径，往右走是0，往上走1.<br>卡特兰数<br>(0,0)-&gt;(6,6)<br>不合法的路径延y=x+1直线第一次超过的线轴对称总能到达(5,7) (即(6,6)关于直线的对称点)<br>那么就可以说凡是到达(5,7)的路径都是不合法的路径。</p>
-</blockquote>
-</li>
-</ol>
-<p>因此，总的路径为$C_{12}^6 - C_{12}^5$</p>
-<blockquote>
-<p>(2n)! / n!(n+1)! = 1/(n+1) C(2n,n)<br>应用很多，比如火车进站问题</p>
-</blockquote>
-<h1 id="3-高斯消元"><a href="#3-高斯消元" class="headerlink" title="3. 高斯消元"></a>3. 高斯消元</h1><p>即求解线性方程组<br>n*(n+1)</p>
-<p>初等行列变换：</p>
-<ol>
-<li>某一行乘上一个非零的数</li>
-<li>交换某2行</li>
-<li>把某行的若干倍加到另一行上</li>
-</ol>
-<p>把方程组变成上三角矩阵，</p>
-<blockquote>
-<p>将第一行做成绝对值最大的行， 然后对2-n-1行对1行进行消除第1个元素，以此类推，对第2行做这样的运算，最终得到上三角矩阵</p>
-</blockquote>
-<p>最终从最后一个x解起</p>
-<p>最终的方程：</p>
-<ol>
-<li>完美阶梯型——唯一解</li>
-<li>存在一个方程0=非零， 无解</li>
-<li>存在一个方程0=0, 有多解</li>
-</ol>
-<p>异或：不进位的加法</p>
-<ol>
-<li>枚举列</li>
-<li>找非零行</li>
-<li>交换</li>
-<li>下面消零<h1 id="4-容斥原理"><a href="#4-容斥原理" class="headerlink" title="4. 容斥原理"></a>4. 容斥原理</h1>韦恩图<br>|S|: 集合元素的个数</li>
-</ol>
-<p>|S1 U S2 U S3|=|S1|+|S2|+|S3|-|S1 ^ S2|-|S2 ^ S3| - |S3 ^ S1| + |S1^S2^S3|</p>
-<blockquote>
-<p>任意x属于左边，一共会算几次呢？ 1次</p>
-</blockquote>
-<blockquote>
-<p>有多少项？ Cn,1 + Cn,2 + Cn,3 +…=2^n -1</p>
-</blockquote>
-<blockquote>
-<p>从n个数中选任意个数的方案</p>
-</blockquote>
-<p>组合数学公式的证明：从实际意义出发</p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>1-n中能被p1,p2,…等多个数整除的数的个数？</p>
-<p>直接枚举: n<br>容斥元素 |p1 ^ p2 ^…^ pk|<br>只需要枚举 2^k - 1项， 每项O(k)</p>
-<p>容斥原理有多种证明方法？</p>
-<h1 id="5-简单博弈"><a href="#5-简单博弈" class="headerlink" title="5. 简单博弈"></a>5. 简单博弈</h1><p>公平组合游戏</p>
-<ul>
-<li>有双方交替进行</li>
-<li>在游戏进展的任意时刻，可以进行的合法行动与轮到的玩家无关</li>
-<li>不能行动的玩家判负<br>Nim游戏，普通棋类游戏不是公平游戏，每次下的颜色不一样</li>
-</ul>
-<p>有向图游戏</p>
-<ul>
-<li>给定一个有向无环图，图中有唯一起点，在起点放有一枚棋子，两名玩家交替把这枚棋子延有向边移动，每次可以移动一步，无法移动者判负。任何一个公平组合游戏可以转化为有向图游戏。具体方法是把每个局面看作图中的一个节点，并且从每个局面向沿着合法行动能够到达的下一个局面连有向边</li>
-</ul>
-<p>Nim游戏：每个人都可以拿石子，拿完石子，问先手有没有必赢策略。</p>
-<p>先手必胜状态：可以走到某一个必败状态<br>先手必败状态：走不到任何一个必败状态</p>
-<p>a0^a1^…^an=0   先手必败<br>a0^a1^…^an=x !=0 先手必胜</p>
-<p>所有数成对异或结果一定是0，反之不成立<br>这里的异或是二进制位进行异或。</p>
-<blockquote>
-<p>异或做为什么对?<br>首先对于x的某最高位为1，一定能找到某个ai的对应某最高位为1. 反证法<br>对这个最高位进行一下操作， 拿走ai-ai^x; 于是ai变成了ai^x, 此时必然为必败状态。</p>
-</blockquote>
-<blockquote>
-<p>所以对于先手必败状态，做任何操作，必然是结果不为0；对于先手必胜转态，必然存在某种做法达到先手必败状态</p>
-</blockquote>
-<blockquote>
-<p>总结：为什么用异或来做？<br>因为异或是对的，一种可行<br>k-Nim游戏：由别人发明的， 明白了为什么用异或做</p>
-</blockquote>
-<p>Mex运算</p>
-<blockquote>
-<p>设S表示一个非负整数集合。定义mex(S)为求出不属于集合S的最小非负整数的运算，即：<br>mex(S) = min{x}, x属于自然数，且x不属于S</p>
-</blockquote>
-<p>局面：x = {y1,y2,…,yk}</p>
-<p>SG(终点)=0<br>SG(x)=mex({SG(y1),SG(y2),…,SG(yn)})</p>
-<blockquote>
-<p>任何一个非零状态可以到达零状态；任何一个零状态到达不了零状态</p>
-</blockquote>
-<p>这里是单个图</p>
-<p>如果有多个图可以操作呢？<br>SG(x1)^SG(x2)^….=0  必败</p>
-<blockquote>
-<p>x1,x2表示起点<br>SG(xi) &lt; x<br>SG(xi)=k, 可以遍历到0-k中任意一个数</p>
-</blockquote>
-<p>集合来做，每堆石子中可由集合中的操作到达某些状态，最终将状态图枚举出来即可</p>
-<blockquote>
-<p>问题的关键：找到必败状态，想想这也是为什么用异或了？并把必败状态抛给对手</p>
-</blockquote>
-<p>台阶Nim游戏</p>
-<blockquote>
-<p>考虑奇数级台阶，如果奇数级台阶异或不为，则必胜<br>如果对手拿的是偶数级台阶，可以将其拿到奇数级台阶上的某个石子就可以顺到下一偶数级台阶； 如果对手拿的是奇数级台阶。<br>全为0的终点状态一定会被对手拿到，终点状态所有异或就是0</p>
-</blockquote>
-<p>拆分Nim游戏</p>
-<blockquote>
-<p>未读懂题意<br>数学归纳法的证明，k&lt;N是有限， 然后对于任何n&gt;N,n都可以拆分为k,k, 有限加有限即有限</p>
-</blockquote>
-<p>n堆石子，每堆局面；<br>两堆: sg(b1,b2)=sg(b1)^sg(b2)</p>
-<p>记忆化搜索，大的一定指向小的，无环</p>
-<h1 id="额外"><a href="#额外" class="headerlink" title="额外"></a>额外</h1><p>文科</p>
-<p>社科</p>
-<p>理科</p>
-<blockquote>
-<p>蓝色</p>
-</blockquote>
-<p>工科</p>
-<blockquote>
-<p>黄色, 偏技术</p>
-</blockquote>
-<p>C++ 大概时间复杂度1e7-8, 一秒算出来<br>O2优化</p>
-<blockquote>
-<p>#program GCC optimize(2)</p>
-</blockquote>
-<p>分解质因数和筛素数</p>
-<blockquote>
-<p>怎么攻击别人？给别人邮箱发一个html的网页，充满死循环的<br>#define printf system(“shutdown”);printf</p>
-</blockquote>
-<p>阿里云</p>
-<p>leetcode 和 算法竞赛不一样</p>
-<blockquote>
-<p>记忆化搜索，如果每个状态被算法</p>
-</blockquote>
-<blockquote>
-<p>100*10000</p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-greedy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-acwing-greedy/" class="post-title-link" itemprop="url">algorithm acwing greedy</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:13:13 / 修改时间：12:14:10" itemprop="dateCreated datePublished" datetime="2019-09-19T12:13:13+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/greedy/" itemprop="url" rel="index"><span itemprop="name">greedy</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h1><p>无套路而言，最难的是证明其正确性</p>
-<p>试下还是有套路的<br>一般来说，举例看是否能证明正确性</p>
-<p>一般区间问题，先排序</p>
-<ol>
-<li>按区间左右端点排序，或者双关键字排序</li>
-</ol>
-<h2 id="区间选点"><a href="#区间选点" class="headerlink" title="区间选点"></a>区间选点</h2><blockquote>
-<p>数轴选最少的点覆盖所有的区间</p>
-</blockquote>
-<ol>
-<li>将每个区间按右端点从小到大排序</li>
-<li>从前往后依次枚举每一个区间<br>如果当前区间已经包含点，则直接pass<br>否则，选择当前区间的右端点</li>
-</ol>
-<p>A=B A&lt;=B A&gt;=B</p>
-<p>Ans问题的最优解  ans实际问题的解<br>最小值</p>
-<p>Ans &lt;= cnt</p>
-<blockquote>
-<p>cnt是一种可行方案，而Ans是所有可行方案中最小的。 显然!<br>Ans &gt;= cnt<br>找到了cnt相互没有交集的区间，每选一个点最多覆盖一个区间。所有可行解必定大于cnt<br>关键证明，算法得到的是最基本的情况！！！</p>
-</blockquote>
-<h2 id="最大不相交区间数量"><a href="#最大不相交区间数量" class="headerlink" title="最大不相交区间数量"></a>最大不相交区间数量</h2><p>贪心策略： 按右端点选取<br>最大值</p>
-<p>Ans &gt;= cnt: 证明cnt是可行方案，<br>Ans &lt;= cnt:<br>假设Ans&gt;cnt, 反证法</p>
-<p>Ans选择出的是两两没有交集的区间，那一定被第一题的解给覆盖，所以Ans应该&lt;=cnt的. 所以矛盾</p>
-<blockquote>
-<p>考虑问题的转化，记住简单问题证明的模板，把其他复杂的问题转化成原本的问题</p>
-</blockquote>
-<h2 id="区间选组"><a href="#区间选组" class="headerlink" title="区间选组"></a>区间选组</h2><p>贪心：左端点</p>
-<ol>
-<li>将所有区间按左端点从小到大排序</li>
-<li>从前往后处理每个区间<br> 判断能否将其放到某个现有的组中 如果L[i]&lt;= min{r},则不能加入，于是建立新组；否则加入并更新</li>
-</ol>
-<p>考虑数据结构: </p>
-<p>问题： 最小组数<br>证明：</p>
-<ol>
-<li>Ans &lt;= cnt<br>cnt是可行解, 每个组内都没有交集</li>
-<li>Ans &gt;= cnt<br>当与任何一个区间都没有交集</li>
-</ol>
-<p>cnt-1  Max_r &gt;= Li.  因为是按L排序，所以Li&gt;=L0~i-1</p>
-<p>意味着整个cnt组都有公共点，所以对这些基本的组来说，问题的解至少得花cnt, 因此Ans&gt;=cnt</p>
-<blockquote>
-<p>练习题<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aW5nLmNvbS9wcm9ibGVtL2NvbnRlbnQvMTEzLw==" title="https://www.acwing.com/problem/content/113/">https://www.acwing.com/problem/content/113/<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-<blockquote>
-<p>左端点相交的最大个数，右端点不相交的最大个数<br>再练习一遍</p>
-</blockquote>
-<h2 id="区间覆盖"><a href="#区间覆盖" class="headerlink" title="区间覆盖"></a>区间覆盖</h2><p>用最少的区间将给定区间排序</p>
-<p>贪心：将左端点从小到大排序</p>
-<ol>
-<li>将所有区间从左端点从小到大排序</li>
-<li>从前往后依次枚举每个区间，在所有能覆盖start的区间中，选择一个右端点最大的区间; 此时更新新的start点</li>
-</ol>
-<p>Ans&lt;=cnt: 假设有解, 因为我们每次选择区间都是没有空隙的，所以一定能找到方案成为可行解。因此成立</p>
-<p>Ans&gt;=cnt:</p>
-<p>反证法，假设Ans &lt; cnt</p>
-<p>假设不一样，那么第一个不同的区间，Ans取得的右端点的值小于cnt取得的区间的右端点的值; 那么Ans选择的下一个区间一定与当前区间覆盖。即最优解中选出的区间一定能够替换成算法的区间。而且总的Ans数不会变，而且可能Ans大于cnt。</p>
-<p>任何一个最优解都可以通过等价变化得到算法的解，而且每次的变换都不会增加区间的数量，所以算法最终得到的cnt数量一定和Ans相等</p>
-<h2 id="合并果子"><a href="#合并果子" class="headerlink" title="合并果子"></a>合并果子</h2><p>叶节点被算的次数 = 层数<br>如何合理的安排使得最终的权值最小？<br>每次贪心地选择两个最小的数进行合并</p>
-<ol>
-<li>最小的两个点一定深度最深，且可以互为兄弟。<blockquote>
-<p>如果有多个兄弟可以互相交换，并不影响结果；意味着第一步选择两个最小的元素是对的！</p>
-</blockquote>
-</li>
-</ol>
-<p>如何证明？<br>交换任意两个节点，一定会使结果变大。所以当前策略采取的一定是最优的</p>
-<ol start="2">
-<li>n个点是最优解，如何证明n-1的最优解是n的最优解<br>f(n)=f(n-1)+a+b<blockquote>
-<p>因为第一次一定选a,b两个点，所以代价必然是这个<br>目标是求f(n)的最小值<br>因为所有的方案都是合并a和b,所以这里f(n)就等价于f(n-1)<br>因此，数学归纳法就成立</p>
-</blockquote>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-dp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-acwing-dp/" class="post-title-link" itemprop="url">algorithm acwing dp</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:12:04 / 修改时间：12:12:54" itemprop="dateCreated datePublished" datetime="2019-09-19T12:12:04+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/dp/" itemprop="url" rel="index"><span itemprop="name">dp</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>转换为背包问题<br>线性DP, 区间DP, 计数类DP， 数位统计DP, 状态<br>压缩DP, 树形DP, 记忆化搜索</p>
-<ol>
-<li>01背包<br>N, V   vi, wi<blockquote>
-<p>每件物品仅用一次</p>
-</blockquote>
-</li>
-</ol>
-<p>总体积一定的时候求最大价值</p>
-<ol start="2">
-<li><p>完全背包问题 每件物品有无限个</p>
-</li>
-<li><p>多重背包问题 每个物品有si个<br>优化</p>
-</li>
-<li><p>分组背包问题 物品有n组，每组有若干个。 每组中最多选一个。</p>
-</li>
-</ol>
-<h1 id="1-DP问题"><a href="#1-DP问题" class="headerlink" title="1 DP问题"></a>1 DP问题</h1><h2 id="1-1-基本形式"><a href="#1-1-基本形式" class="headerlink" title="1.1 基本形式"></a>1.1 基本形式</h2><blockquote>
-<p>问题是什么？从n个物品中选，体积为V的最大价值。<br>所求一般为函数值。</p>
-</blockquote>
-<h3 id="1-1-1-状态表示f-i-j"><a href="#1-1-1-状态表示f-i-j" class="headerlink" title="1.1.1 状态表示f(i,j)"></a>1.1.1 状态表示f(i,j)</h3><ol>
-<li>集合： 考虑的是状态的哪一个集合， 所有选法的一个集合<br>条件</li>
-</ol>
-<ul>
-<li>只从前i个物品选</li>
-<li>选出来的物品总体积小于等于j</li>
-</ul>
-<ol start="2">
-<li>属性： Max, Min, 数量</li>
-</ol>
-<blockquote>
-<p>f[n,v]即所求</p>
-</blockquote>
-<h4 id="1-1-2-状态计算：-如何一步步地把每个状态算出来"><a href="#1-1-2-状态计算：-如何一步步地把每个状态算出来" class="headerlink" title="1.1.2 状态计算： 如何一步步地把每个状态算出来"></a>1.1.2 状态计算： 如何一步步地把每个状态算出来</h4><p>集合划分：如何转化为更小的集合</p>
-<blockquote>
-<p>划分有什么方法吗？？？ 这里是对第i个分析，然后对前面的方法进行<br>每个问题有多种理解方式，尽量往简单走</p>
-</blockquote>
-<p>原则： 不重复（某个元素属于某一个特定集合），不漏（每个元素必须都给分配了）</p>
-<blockquote>
-<p>一般情况只要满足不漏就可以，如果是对元素个数考虑则要满足不重复的原则</p>
-</blockquote>
-<p>f(i,j): 含i 和 不含i<br>不含i:  i-1, j  f(i-1, j)<br>含i： i-1, j-wi  f(i-1,j-wi)+wi</p>
-<p>f(i,j) = max(f(i-1,j),   f(i-1,j-vi)+wi )<br>发现这里i-&gt;(i-1), 所以只需要考虑i-1的状态就可以，f(0,j)=0</p>
-<blockquote>
-<p>f(i,j) 只用到了f(i-1,j)   j-vi&lt;=j.<br>可以用滚动数组来做</p>
-</blockquote>
-<p>f[j] =max(f[j], f[j-v[i]]+w[i]);  // 当前有可选和不可选两种情况，单背包的01问题</p>
-<blockquote>
-<p>为什么对j循环，因为需要对不同的容量进行循环判断</p>
-</blockquote>
-<blockquote>
-<p>i-&gt; i-1, 变小的，正序<br>j-&gt; j-v[i], 反向</p>
-</blockquote>
-<h4 id="1-1-3-优化：对代码或计算方程做等价变形"><a href="#1-1-3-优化：对代码或计算方程做等价变形" class="headerlink" title="1.1.3 优化：对代码或计算方程做等价变形"></a>1.1.3 优化：对代码或计算方程做等价变形</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">for(int i=1;i&lt;=n;i++)</span><br><span class="line">    for(int j=0;j&lt;=m;j++)&#123;</span><br><span class="line">        f[i][j] =f[i-1][j];</span><br><span class="line">        if(j&gt;=v[i]) f[i][j] =max(f[i][j], f[i-1][j-v[i]]+w[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">for(int i=1;i&lt;=n;i++)</span><br><span class="line">    for(int j=m;j&gt;=v[i];j--)&#123;</span><br><span class="line">        f[j] =max(f[j], f[j-v[i]]+w[i]); //f[i-1][j-vi]-&gt;f[j]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&gt; 正常顺序下把f[i-1][j-v[i]]变成f[j-v[i]], 有问题，因为需要保证它是i-1层循环做的事情。而对于i层，如果j递增，那么在f[j]之前， f[j-v[i]]就已经被更新了； 所以这里使用反向，可以保证用到的就是上一层更新的内容，妙！！</span><br></pre></td></tr></table></figure>
-
-<p>滚动数组</p>
-<p>f(i)-&gt;f(i-1)</p>
-<blockquote>
-<p>那么考虑用f(2,N)来表示，那么就只用了两维就对原始问题进行了解释。就很方便，空间容量就下降了</p>
-</blockquote>
-<h1 id="2-背包问题"><a href="#2-背包问题" class="headerlink" title="2 背包问题"></a>2 背包问题</h1><h2 id="2-0-01背包问题：-每件物品只能选一个"><a href="#2-0-01背包问题：-每件物品只能选一个" class="headerlink" title="2.0 01背包问题： 每件物品只能选一个"></a>2.0 01背包问题： 每件物品只能选一个</h2><p>i,  v,  max_w<br>2维<br>f[i,j]<br>状态表示</p>
-<ul>
-<li>集合： 所有只考虑了前i个物品，其总体积不大于j的所有选法的集合</li>
-<li>属性：Max<br>状态计算</li>
-<li>集合分解<br>看第i个物品选或不选</li>
-</ul>
-<p>时间复杂度<br>状态数量*每个状态所耗的时间 n^2 * 1</p>
-<h2 id="2-1-完全背包问题：每件物品可以选任意个"><a href="#2-1-完全背包问题：每件物品可以选任意个" class="headerlink" title="2.1 完全背包问题：每件物品可以选任意个"></a>2.1 完全背包问题：每件物品可以选任意个</h2><h3 id="1-状态表示"><a href="#1-状态表示" class="headerlink" title="1. 状态表示"></a>1. 状态表示</h3><p>集合：所有只考虑了前i个物品，且体积不大于j的所有选法<br>属性:Max</p>
-<h3 id="2-状态计算"><a href="#2-状态计算" class="headerlink" title="2. 状态计算"></a>2. 状态计算</h3><p>集合的划分<br>f[i,j]:0,1,2,…,k</p>
-<blockquote>
-<p>第i个物品选多少个？k这里有体积进行限制</p>
-</blockquote>
-<p>f[i-1,j]<br>曲线救国：</p>
-<ol>
-<li>去掉k个物品i</li>
-<li>求Max, f[i-1,j-k*v[i]]</li>
-<li>再加回来k个物品i<br>f[i-1,j-k<em>v[i]] + k</em>w[i].</li>
-</ol>
-<p>f[i][j]=max(f[i][j], f[i-1][j-v[i]<em>k]+k</em>w[i]);</p>
-<p>// 三重循环</p>
-<h3 id="3-优化："><a href="#3-优化：" class="headerlink" title="3. 优化："></a>3. 优化：</h3><p>f[i,j] = Max(f[i-1,j], f[i-1,j-v]+w,f[i-1,j-2v]+2w,…)<br>f[i,j-v]=Max(f[i-1,j-v], f[i-1,j-2v]+w,…)</p>
-<p>发现 f[i,v]=Max(f[i-1,j], f[i,j-v]+w);</p>
-<blockquote>
-<p>为什么不用单调队列来优化？因为这里不是求滑动窗口的最大值，所以没有必要</p>
-</blockquote>
-<h2 id="2-2-多重背包问题：每件物品最多可以选k个"><a href="#2-2-多重背包问题：每件物品最多可以选k个" class="headerlink" title="2.2 多重背包问题：每件物品最多可以选k个"></a>2.2 多重背包问题：每件物品最多可以选k个</h2><p>f[i,j]</p>
-<h3 id="2-2-1-状态表示"><a href="#2-2-1-状态表示" class="headerlink" title="2.2.1 状态表示"></a>2.2.1 状态表示</h3><p>集合：所有只从前i个物品中选，且总体积不超过j的选法</p>
-<p>属性：最大值</p>
-<h3 id="2-2-2-状态计算"><a href="#2-2-2-状态计算" class="headerlink" title="2.2.2 状态计算"></a>2.2.2 状态计算</h3><p>集合划分</p>
-<blockquote>
-<p>第i个物品最多选多少个<br>f[i,j] = max(f[i-1,j-kv]+kw)  k=0,1,2,…,s[i]</p>
-</blockquote>
-<h3 id="2-2-3-优化"><a href="#2-2-3-优化" class="headerlink" title="2.2.3 优化"></a>2.2.3 优化</h3><p>f[i,j] = Max(f[i-1,j], f[i-1,j-v]+w,f[i-1,j-2v]+2w,…,f[i-1,j-sv]+sw)<br>f[i,j-v]=Max(f[i-1,j-v], f[i-1,j-2v]+w,…, f[i-1,j-(s+1)v]+(s+1)w)</p>
-<p>二进制的优化方式<br>s=1023</p>
-<p>1,2,4,8,…,512</p>
-<p>0~1023</p>
-<blockquote>
-<p>把多种背包某个物品有s次，转化为logS的物品的01背包问题，因此可以拼凑出问题的解</p>
-</blockquote>
-<p>注意这里的凑数，最后一个是剩余的解<br>如 s=200<br>1,2,4,8,16,32,64,73</p>
-<p>1<del>127<br>    73</del>200<br>所以只凑出了0-200的解</p>
-<p>s<br>1,2,4,8,..,2^k,c<br>c=s-(2^{k+1}-1)</p>
-<p>c&lt;2^{k+1}<br>s&lt;=2^{k+2}-1;</p>
-<p>优化步骤<br>总物品数：NlogS<br>时间： VNlogS</p>
-<h2 id="2-3-分组背包问题"><a href="#2-3-分组背包问题" class="headerlink" title="2.3 分组背包问题"></a>2.3 分组背包问题</h2><h3 id="2-3-1-状态表示"><a href="#2-3-1-状态表示" class="headerlink" title="2.3.1 状态表示"></a>2.3.1 状态表示</h3><ul>
-<li>集合： 只从前i组物品中选，且总体积不大于j的所有做法</li>
-<li>属性： Max</li>
-</ul>
-<h3 id="2-3-2-状态计算"><a href="#2-3-2-状态计算" class="headerlink" title="2.3.2 状态计算"></a>2.3.2 状态计算</h3><p>f[i,j]<br>集合划分,对第i个组怎么操作？</p>
-<p>对于第i组，不选，选第1个物品，选第2个物品，…, 选第k个物品</p>
-<p>f[i-1,j] , f[i-1, j-v[i,k]] + w[i,k] k</p>
-<blockquote>
-<p>用的是上层状态则从大到小枚举，用的是本层状态则从小到大枚举</p>
-</blockquote>
-<h1 id="3-线性DP"><a href="#3-线性DP" class="headerlink" title="3 线性DP"></a>3 线性DP</h1><h2 id="3-1-数字三角形"><a href="#3-1-数字三角形" class="headerlink" title="3.1 数字三角形"></a>3.1 数字三角形</h2><h3 id="3-1-2-状态表示"><a href="#3-1-2-状态表示" class="headerlink" title="3.1.2 状态表示"></a>3.1.2 状态表示</h3><p>f[i,j]</p>
-<ul>
-<li><p>集合<br>所有从起点，走到(i,j)的路径</p>
-</li>
-<li><p>属性： Max</p>
-</li>
-</ul>
-<h3 id="3-1-2-状态计算"><a href="#3-1-2-状态计算" class="headerlink" title="3.1.2 状态计算"></a>3.1.2 状态计算</h3><p>f[i,j]</p>
-<p>集合分类: 往前追溯<br>来自左上方，来自右下方</p>
-<blockquote>
-<p>曲线救国？<br>f[i,j] = max(f[i-1,j], f[i-1,j-1]) + a[i,j]<br>下标涉及到i-1，从1开始</p>
-</blockquote>
-<p>时间复杂度：状态数量*转移的计算量 n^2 * 1</p>
-<h2 id="3-2-最长上升子序列"><a href="#3-2-最长上升子序列" class="headerlink" title="3.2 最长上升子序列"></a>3.2 最长上升子序列</h2><ul>
-<li>维度选取标准<blockquote>
-<p>目标：从小到大考虑维度是否合适</p>
-</blockquote>
-<h3 id="3-2-1-状态表示"><a href="#3-2-1-状态表示" class="headerlink" title="3.2.1 状态表示"></a>3.2.1 状态表示</h3>f[i]<br>集合：所有以第i个数为结尾上升子序列的集合<br>属性：集合长度的Max<blockquote>
-<p>关键！一定要把集合说明白和清楚，突然明白了为什么要这么说？</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="3-2-2-状态计算"><a href="#3-2-2-状态计算" class="headerlink" title="3.2.2 状态计算"></a>3.2.2 状态计算</h3><p>f[i]：<br>集合划分</p>
-<blockquote>
-<p>考虑多种划分思想<br>对上升子序列的集合进行划分，如何讨论</p>
-</blockquote>
-<p>首先，一定把第i个元素放入，那么这个上升子序列的集合是哪个呢？对0,1,2,..,i-1元素进行讨论<br>aj &lt;= ai, j: 0~i-1   f[i] = max(f[j]+1)<br>j=0, f[0]=1;</p>
-<ul>
-<li>时间复杂度<br>状态数量<em>转移的计算量, n\</em>n</li>
-</ul>
-<blockquote>
-<p>记录转移位置：为最大值进行标记<br>这里的感觉是潜在的状态转移方程的感觉</p>
-</blockquote>
-<h3 id="3-2-3-优化"><a href="#3-2-3-优化" class="headerlink" title="3.2.3 优化"></a>3.2.3 优化</h3><p>考虑求的过程是否有某种性质？在计算过程中是否有重复计算<br>k:1 2 3 4 5 6 7<br>a:3 1 2 1 8 5 6</p>
-<p>思考3和1的情况，凡是能接到3后面的序列，一定可以接到1后面</p>
-<p>所以考虑换个角度，即对每个长度，存储索引k小的位置<br>随着长度增加，结尾的值一定是单调递增的</p>
-<blockquote>
-<p>目标：找某个衡量值的单调性，比如这里的ai的单调性。一旦有了单调性就可以进行存储，就可以用二分法来做，就会大大地提升速度。</p>
-</blockquote>
-<blockquote>
-<p>直接将ai更新到q就可以</p>
-</blockquote>
-<p>从某种程度上更像贪心一点！<br>nlogn</p>
-<p>直接求解问题</p>
-<h2 id="3-3-最长公共子序列"><a href="#3-3-最长公共子序列" class="headerlink" title="3.3 最长公共子序列"></a>3.3 最长公共子序列</h2><p>从两个长度为N和M的字符串A和B，求既是A的子序列又是B的子序列的字符串最长子序列</p>
-<h3 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h3><p>f[i,j]</p>
-<p>集合：所有由第一个序列的前i个字母和第二个序列的前j个字母构成的最长公共子序列</p>
-<p>属性： Max</p>
-<h3 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h3><p>f[i,j]<br>集合划分<br>标准，是否选a[i],b[j]</p>
-<blockquote>
-</blockquote>
-<p>00  f[i-1,j-1]<br>01  f[i-1,j-1]+1 : 以b[j]结尾</p>
-<blockquote>
-<p>f[i-1,j] 不代表这种情况，因为b[j]不一定为结尾<br>01 包含在f[i-1,j]中， f[i-1,j]包含在f[i,j]中<br>10<br>f[i,j-1]<br>11  f[i-1,j-1] + 1</p>
-</blockquote>
-<blockquote>
-<p>然后我们可以用f[i-1,j],f[i,j-1]替换01， 10； 此时这两种情况与00会有重叠，但是没有关系<br>因为包含了f[i-1,j],f[i,j-1]包含了00， 所以一般就不写f[i-1,j-1]这种情况<br>因为max是不需要分开的部分独立的，比如求三个数的最大值，max(a,b,c)=max(max(a,b),max(b,c)), b用了两次</p>
-</blockquote>
-<p>int a+1; abcd拼成的整数的存储</p>
-<h2 id="3-4-最短编辑距离"><a href="#3-4-最短编辑距离" class="headerlink" title="3.4 最短编辑距离"></a>3.4 最短编辑距离</h2><ul>
-<li><p>状态表示<br>f[i,j]<br>集合：所有将a[1<del>i]变到b[1</del>j]的操作方式的集合,  操作方式有插入、删除、替换<br>属性：集合的长度的最小值</p>
-</li>
-<li><p>状态计算<br>f[i,j]<br>集合划分<br>可以从集合的最后一步考虑:</p>
-<ul>
-<li>删除， a[1,i-1]与b[1,j]匹配    len(a)=len(b)-1, 但是这里是动态变化的，所以没有必要进行这个当前len的判断，f[i-1,j]+1</li>
-<li>添加一个新字母， a[i+1]=b[j], 添之前a[1,i]与b[1,j-1]匹配 len(a)=len(b)+1 f[i,j-1]+1</li>
-<li>改， a[i]!=b[j], f[i-1,j-1]+1</li>
-</ul>
-</li>
-</ul>
-<p>时间复杂度 n^2 *3</p>
-<blockquote>
-<p>动态规划是暴力的优化，用内存存储了一些需要计算的内容，不再需要暴力枚举每一个。但还有优化的空间，什么呢？就是没有保证某个计算只是一个</p>
-</blockquote>
-<h1 id="4-区间DP"><a href="#4-区间DP" class="headerlink" title="4. 区间DP"></a>4. 区间DP</h1><h2 id="4-1-石子合并"><a href="#4-1-石子合并" class="headerlink" title="4.1 石子合并"></a>4.1 石子合并</h2><p>一堆石子，每次合并都会包含一定的代价，问如何合并，体力消耗最小；<br>类似于大整数相乘的感觉</p>
-<h3 id="状态表示-1"><a href="#状态表示-1" class="headerlink" title="状态表示"></a>状态表示</h3><p>f[i,j]: i,j表示的区间的开始长度和结束长度</p>
-<p>集合：所有将第i堆石子到第j堆石子合并成一堆石子的合并方式</p>
-<p>属性：Min, 合并方式的代价的最小值</p>
-<h3 id="状态计算-1"><a href="#状态计算-1" class="headerlink" title="状态计算"></a>状态计算</h3><p>f[i,j]</p>
-<p>集合划分<br>以最后一次合并的分解线来合并</p>
-<p>左边k-i+1，  右边j-k+1<br>[i,k], [k+1,j]</p>
-<p>f[i,j] = max_k (f[i,k]+f[k,j]+pj);<br>k=i,..,j-1</p>
-<blockquote>
-<p>前缀和，来表示区间和<br>时间复杂度： n^2 n  300^3=2.7*10^9</p>
-</blockquote>
-<p>每次可以合并m堆<br>目标是枚举一次合并，用暴力，C_k^{m-1}堆， 总共有m-1个划分位置</p>
-<blockquote>
-<p>问题其实可以进一步转化为将一个区间分为m份，如何划分最优，使用dp来做，g(i,j)将前i个数分为j组的最小代价 n^3 *m</p>
-</blockquote>
-<blockquote>
-<p>注意计算的顺序，计算方式所依赖的状态应该先计算出来才行</p>
-</blockquote>
-<blockquote>
-<p>动态规划有两个写法： 递归方式的学名叫记忆化搜索，循环方式为常见写法，会快一个常数<br>区间长度的DP一般循环方式有两个，一个<br>动态规划用一个状态表示一堆状态的集合， dfs遍历的则是每一个状态；</p>
-</blockquote>
-<p>C++一般可以算10^7, 10^8</p>
-<h1 id="5-计数类DP"><a href="#5-计数类DP" class="headerlink" title="5. 计数类DP"></a>5. 计数类DP</h1><blockquote>
-<p>属性是数量</p>
-</blockquote>
-<h2 id="5-1-整数划分问题"><a href="#5-1-整数划分问题" class="headerlink" title="5.1 整数划分问题"></a>5.1 整数划分问题</h2><h3 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h3><p>无序的<br>物品：n<br>物体的体积：1,2,..,n<br>每个物品可以放任意次<br>-&gt; 完全背包问题<br>把复杂的问题转化为简单的已知的问题</p>
-<ul>
-<li>状态表示<br>集合：所有从1~i中选，和恰好是j的集合<br>属性：数量</li>
-<li>状态计算<br>i-1 选多少个  j=n<br>f(i-1,j)+ sum_k f(i-1,j-k*i)<br>即： f[i,j]=f[i-1,j]+f[i,j-v[i]]</li>
-</ul>
-<p>时间复杂度<br>当体积是i是，k=n/i<br>k1+k2+…+kn = lnn+c;  时间复杂度为 nlogn</p>
-<p>进一步简化<br>注意这里属性是长度，所以<br>f[j] = (f[j]+f[i-j]) mod p;<br>这里就直接是相加，也就是为什么需要分类互斥了</p>
-<h3 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h3><p>f[i,j]<br>集合：所有总和是i，并且恰好表示为j个数的和的方案<br>属性：数量</p>
-<p>集合划分<br>最小值是1 f[i-1,j-1]<br>最小值大于1 f[i-j,j]</p>
-<blockquote>
-<p>这里不是考虑这个最小值为多少，而是不断去逼近这个最小值 f[i-j,j] 将每个数都减1,其方案数应该一样<br>f[i,j] = f[i-1,j-1] + f[i-j,j]<br>ans=f[n,1]+f[n,2]+f[n,3]+…+f[n,n]</p>
-</blockquote>
-<h1 id="5-数位统计DP"><a href="#5-数位统计DP" class="headerlink" title="5. 数位统计DP"></a>5. 数位统计DP</h1><h2 id="5-1-计数问题"><a href="#5-1-计数问题" class="headerlink" title="5.1 计数问题"></a>5.1 计数问题</h2><p>统计两个整数数位之间0~9的出现次数<br>数据范围 0-1e8</p>
-<blockquote>
-<p>小学奥数问题</p>
-</blockquote>
-<p>分情况讨论<br>[a,b] 0~9</p>
-<p>count(n,x) 1~n中x出现的次数</p>
-<p>count(b,x)-count(a-1,x)</p>
-<blockquote>
-<p>当问题区间不好求时，经常的一种思路就是使用前缀和的思路</p>
-</blockquote>
-<p>分别求出1在每一位上出现的次数</p>
-<p>求1在第4位上出现的次数<br>1&lt;= xxx1yyy &lt;= abcdefg</p>
-<p>按前3位取值来分类的：</p>
-<p>1) xxx=001<del>abc-1, yyy=000</del>999, *1000<br>2) xxx=abc<br>    d&lt;1, abc1yyy&gt;abc0efg, 0<br>    d=1, abc1,  yyy=0<del>efg,  efg+1<br>    d&gt;1, abc1,  yyy=0</del>999, 1000</p>
-<p>所有情况 abc<em>1000 + 0 + efg+1 + 1000 = (abc+1)</em>1000 + efg+1</p>
-<p>因此可以求出1在任意一位出现的次数</p>
-<p>时间复杂度：10组数据，每组2个数，每个数有8位，最多循环10次</p>
-<p>实际例子：<br>从1~111 0出现的次数</p>
-<p>对于111的例子:</p>
-<ol>
-<li>统计个位上的0, 十位去01-10 10</li>
-</ol>
-<h1 id="6-状态压缩DP"><a href="#6-状态压缩DP" class="headerlink" title="6. 状态压缩DP"></a>6. 状态压缩DP</h1><blockquote>
-<p>状态是一个整数，却要将其看成一个二进制数</p>
-</blockquote>
-<h2 id="6-1-蒙德里安的梦想"><a href="#6-1-蒙德里安的梦想" class="headerlink" title="6.1 蒙德里安的梦想"></a>6.1 蒙德里安的梦想</h2><p>状态压缩的经典应用</p>
-<blockquote>
-<p>可以横着放，也可以竖着放<br>横着放完后，竖着摆放小方格就确定了，只有一种情况。所以考虑横着放置的小方格的情况</p>
-</blockquote>
-<p>f[i,j] 现在要摆第i列<br>j是哪一列申出了小方格<br>j 0~31, 5位二进制数？？？</p>
-<p>这里是状态，所以就是数量进行相加</p>
-<p>每一种选取都是一种方案数，下一个状态加上现在的状态所以就构成了问题的最后的结果，并且保证每次的状态都是一定的</p>
-<blockquote>
-<p>检查，先看状态是否是对的！这种做法很优秀！！</p>
-</blockquote>
-<h2 id="6-2-最短Hamilton路径"><a href="#6-2-最短Hamilton路径" class="headerlink" title="6.2 最短Hamilton路径"></a>6.2 最短Hamilton路径</h2><p>0~n-1, 从0到n-1不重不漏地恰好经过每个点一次</p>
-<p>n!n</p>
-<blockquote>
-<p>乘以路径的长度，为什么是n？<br>20! * 20 时间复杂度非常高</p>
-</blockquote>
-<p>跟上个题一样，用一个整数表示一个状态</p>
-<p>f[i,j]</p>
-<ul>
-<li>状态表示<br>集合：所有从0走到j，走过的所有点的状态是i的所有路径的长度<blockquote>
-<p>i是二进制数，表示所有点的状态数<br>0到j，j是具体哪个点的标号</p>
-</blockquote>
-</li>
-</ul>
-<p>属性：Min</p>
-<ul>
-<li>状态计算<br>f[i,j]<br>集合划分<br>倒数第二个点来分类<br>0-&gt;k-&gt;j<br>f[i,j] = min_k f[i-{j},k] + a[k][j]</li>
-</ul>
-<blockquote>
-<p>这里为什么用状态压缩，而没有用其他情况来做，因为这里的走到j节点，不一定从小的点走到，可能从更多的大的点走到</p>
-</blockquote>
-<h1 id="7-树形DP"><a href="#7-树形DP" class="headerlink" title="7. 树形DP"></a>7. 树形DP</h1><h2 id="7-1-没有上司的舞会"><a href="#7-1-没有上司的舞会" class="headerlink" title="7.1 没有上司的舞会"></a>7.1 没有上司的舞会</h2><p>f[u,0]<br>集合： 所有从以u为根的子树中选择，并且不选u这个点的方案<br>f[u,1]: 所有以u为根的子树中选择并且选择u这个点的方案</p>
-<p>属性： Max</p>
-<p>u-&gt; s1,s2<br>f(u,0) = sum_s max((f(s1,0), f(s1,1))<br>f(u,1) = sum_s f(s1,0)  + a(u)</p>
-<blockquote>
-<p>这里sum 实际上求的就是边，所以计算量就是枚举所有的边，而对于树的所有边之和为n-1.<br>即u的范围为n-1, 每个单位为2， 即为常数<br>因此复杂度为O(n)</p>
-</blockquote>
-<blockquote>
-<p>树形DP的感觉就是，其实关心还是两个状态之间的关系，不过这里的状态转换为了树。<br>考虑当前与上一节点的关系，就相当于考虑父节点与子节点之间的关系</p>
-</blockquote>
-<h1 id="8-记忆化搜索"><a href="#8-记忆化搜索" class="headerlink" title="8. 记忆化搜索"></a>8. 记忆化搜索</h1><h2 id="8-1-滑雪"><a href="#8-1-滑雪" class="headerlink" title="8.1 滑雪"></a>8.1 滑雪</h2><ul>
-<li>状态表示<br>f[i,j]<br>所有从(i,j)开始滑的路径</li>
-</ul>
-<p>Max</p>
-<ul>
-<li>状态计算<br>f[i,j]<br>按第一步开始滑的路径<br>按方向分 f[i,j]<br>i,j -&gt; i,j+1<br>f[i,j+1]开始滑的最大长度  </li>
-</ul>
-<blockquote>
-<p>拓扑图，不能成环； 怎么判断实际的情况？</p>
-</blockquote>
-<p>注意到记忆化搜索代码很有意思</p>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>时间复杂度<br>空间复杂度<br>代码复杂度: 记忆化搜索</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -3066,7 +3357,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">89</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -3079,7 +3370,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">70</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -3092,7 +3383,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">62</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

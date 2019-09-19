@@ -200,7 +200,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">62</span></a>
 
   </li>
       
@@ -213,7 +213,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">65</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">70</span></a>
 
   </li>
       
@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">84</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">89</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,3566 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/course-algorithm-lecture2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/course-algorithm-lecture2/" class="post-title-link" itemprop="url">course-algorithm lecture2</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 08:43:05 / 修改时间：08:48:39" itemprop="dateCreated datePublished" datetime="2019-09-19T08:43:05+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="L2-Asympototic"><a href="#L2-Asympototic" class="headerlink" title="L2. Asympototic"></a>L2. Asympototic</h2><h3 id="1-growth-rate-of-functions"><a href="#1-growth-rate-of-functions" class="headerlink" title="1. growth rate of functions"></a>1. growth rate of functions</h3><ol>
+<li>用关键操作的数量来进行衡量</li>
+</ol>
+<p><img src="C:%5CUsers%5CDell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1558515224097.png" alt="1558515224097"></p>
+<blockquote>
+<ol>
+<li><p>$f \in O(g) \Leftrightarrow f(n) \leq kg(n)$</p>
+<blockquote>
+<p>这里 $lim_{n \rightarrow \infty} \frac{f(n)}{g(n)} &lt; \infty$  注意可以<strong>不存在</strong>或者等于0</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<p><font color="red">注意对于O来说，极限可以不存在；对于\omega来说可以为无穷大</font></p>
+<ol start="2">
+<li>增长率级别的一个概念</li>
+</ol>
+<blockquote>
+<p>由小到大：$logn, n, nlogn, n^k, 2^n, n!$</p>
+</blockquote>
+<ol start="3">
+<li>一些经验数据，数量级与时间和空间的感觉</li>
+</ol>
+<h3 id="2-Brute-Force的思考"><a href="#2-Brute-Force的思考" class="headerlink" title="2. Brute Force的思考"></a>2. Brute Force的思考</h3><p>例子1： Swapping array elements: 交换数组中的所有元素</p>
+<p>&lt;time, space&gt;</p>
+<ol>
+<li><p>BF1 &lt;O(n^2), O(1)&gt;</p>
+<blockquote>
+<p> 冒泡的思想，即把第一个元素不断冒泡冒泡到最后一个元素去。</p>
+</blockquote>
+</li>
+<li><p>BF2 &lt;O(n), O(n)&gt;</p>
+<blockquote>
+<p>对辅助空间进行处理</p>
+</blockquote>
+</li>
+<li><p>？ &lt;O(n), O(1)&gt;</p>
+<blockquote>
+<p>不断对元素进行交换的思想</p>
+</blockquote>
+</li>
+</ol>
+<p>例子2： Maximum subsequence sum: 寻找最大子序列和</p>
+<ol>
+<li><p>BF1 $O(n^3)$</p>
+<blockquote>
+<p>最朴素的思想： 定最左边的限度，在动态寻找右边的限度，再计算片段和</p>
+<p><img src="C:%5CUsers%5CDell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1558538541074.png" alt="1558538541074"></p>
+</blockquote>
+</li>
+<li><p>BF2 $O(n^2)$</p>
+<blockquote>
+<p>定左边的限度后，对于右边实际上不用定完限寻找片段和。</p>
+<p><img src="C:%5CUsers%5CDell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1558538558913.png" alt="1558538558913"></p>
+</blockquote>
+</li>
+<li><p>分治 $O(n\log{n})$</p>
+<p><img src="C:%5CUsers%5CDell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1558538619802.png" alt="1558538619802"></p>
+</li>
+<li><p>线性</p>
+<p><img src="C:%5CUsers%5CDell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1558538654841.png" alt="1558538654841"></p>
+</li>
+</ol>
+<h2 id="L3-Recursion"><a href="#L3-Recursion" class="headerlink" title="L3. Recursion"></a>L3. Recursion</h2><h3 id="1-Recursion"><a href="#1-Recursion" class="headerlink" title="1. Recursion"></a>1. Recursion</h3><p>特别想说明的就是，通过学习了计算模型导引后的感觉就是对于任何的函数都可以写成递归式，如以下几种方式：</p>
+<ol>
+<li>本原函数：零函数、后继函数、投影函数</li>
+<li>复合算子，减法，u算子，max算子</li>
+</ol>
+<p>最终写成带参递归方式，即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h(x,0) = f(x)</span><br><span class="line">h(x,y+1)=g(x,y,h(x,y))</span><br><span class="line">// 其中x可以为向量</span><br></pre></td></tr></table></figure>
+
+<p>但是在算法中的常见形式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">M(1) = 1</span><br><span class="line">M(n) = 2M(n-1)+1</span><br></pre></td></tr></table></figure>
+
+<p>然后对于该算法分析就可以用解生成函数的方法来解。</p>
+<h3 id="2-Divide-and-Conquer"><a href="#2-Divide-and-Conquer" class="headerlink" title="2 . Divide and Conquer"></a>2 . Divide and Conquer</h3><ul>
+<li><p>Divide: Divide the “big” problem to smaller ones</p>
+</li>
+<li><p>Conquer: Solve the “small” problems by recursion</p>
+</li>
+<li><p>Combine: Combine results of small problems, and solve the original problem</p>
+<blockquote>
+<p><font color="red">对于我来说，这块常常是我的难点。问题在于务必请想清楚这里原问题的解和这里合并的解是否相同</font></p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">divectlySolve(I) &#123;&#125;</span><br><span class="line"></span><br><span class="line">combine(S1，..., Sk) &#123;&#125; // 时间复杂度为f(n)</span><br><span class="line"></span><br><span class="line">// k--- the number of divide parts, 设为c</span><br><span class="line">// the number of subquestions: size(I)/size(Ii)，设为b</span><br><span class="line"></span><br><span class="line">solve(I) &#123;</span><br><span class="line">	n = size(I)</span><br><span class="line">	if (n &lt;= smallSize)</span><br><span class="line">		solution = directlySolve(I);</span><br><span class="line">	else</span><br><span class="line">		divide I into I1, ..., Ik</span><br><span class="line">		for each i \in &#123;1, ..., k&#125;</span><br><span class="line">			Si = solve(Ii);</span><br><span class="line">		solution = combine(S1, ..., Sk)</span><br><span class="line">	return solution</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>算法分析的常见形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">T(n) = bT(n/c) + f(n)</span><br><span class="line">T(1)可以在常数时间解决</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-对比"><a href="#3-对比" class="headerlink" title="3. 对比"></a>3. 对比</h3><ul>
+<li><p>Recursion,</p>
+<blockquote>
+<p>粒度： n, n-1, n-2,…</p>
+</blockquote>
+</li>
+<li><p>Divide and Coqueer</p>
+<blockquote>
+<p>粒度： n, n/2, n/4, …</p>
+</blockquote>
+</li>
+</ul>
+<p>递归形式都可以统一为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">T(n) = bT(n/c) + f(n)</span><br><span class="line">T(1)可以在常数时间解决0</span><br></pre></td></tr></table></figure>
+
+<p>求解时间复杂度：</p>
+<ol>
+<li>解递归方程</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最小阶看作0，其余看作x的多少次方，然后待定系数法。再根据常数时间做出来。</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>先猜，然后数学归纳法进行证明。</li>
+</ol>
+<p>特别地，<font color="red">Master定理</font>, 令$E = log_c b$</p>
+<p><img src="C:%5CUsers%5CDell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1558532639381.png" alt="1558532639381"></p>
+<h3 id="4-Examples"><a href="#4-Examples" class="headerlink" title="4. Examples"></a>4. Examples</h3><ul>
+<li>Maxima 找最大的数</li>
+<li>Frequent element 找出现次数最多的数</li>
+<li>Multiplication 大整数相乘</li>
+<li>Nearest point pair 最邻接点</li>
+</ul>
+<p>Recursion vs Induction 归纳与演绎</p>
+<p>Smooth functions: 非负非减函数，对于此类函数满足$f(bn) \in O(f(n))$</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/course-algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/course-algorithm/" class="post-title-link" itemprop="url">course-algorithm lecture 1</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 08:37:38 / 修改时间：08:41:39" itemprop="dateCreated datePublished" datetime="2019-09-19T08:37:38+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h2><p><img src="C:%5CUsers%5CDell%5CPictures%5CQQ%E6%88%AA%E5%9B%BE20190522162200.png" alt></p>
+<p>算法课上的问题有两种：</p>
+<ol>
+<li>Order 涉及到序列的问题</li>
+<li>Graph 可以建模为图的问题</li>
+</ol>
+<p>常见的策略主要有两种：</p>
+<ol>
+<li><p>Traversal: 即可以理解为穷举，对每种情况都进行考虑;</p>
+<blockquote>
+<p>a. Order: Brute Force, 暴力遍历，如排序，选择，查找等问题</p>
+<p>b. Graph: DFS和BFS </p>
+</blockquote>
+</li>
+<li><p>Optimization: 使用某些优化策略</p>
+<blockquote>
+<p>a. Order:  Divide &amp; Conquer</p>
+<p>b. Graph: Greedy &amp; Dynamic Programming</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="对Computer和Computing的理解"><a href="#对Computer和Computing的理解" class="headerlink" title="对Computer和Computing的理解"></a>对Computer和Computing的理解</h2><p>Computer的强大之处在于能够高效地计算简单、程序式的工作</p>
+<p>Computing 就三步：</p>
+<ol>
+<li>encoding to 0,1</li>
+<li>operations</li>
+<li>decoding the ‘1’s and ‘0’s</li>
+</ol>
+<p>Turning machine</p>
+<h2 id="Algorithm的理解"><a href="#Algorithm的理解" class="headerlink" title="Algorithm的理解"></a>Algorithm的理解</h2><p>Algorithm is the spirit of computing. </p>
+<p>注意是用来解决某个特定的问题</p>
+<p>Essential issues:</p>
+<ul>
+<li><p>Model of computation:</p>
+<blockquote>
+<ol>
+<li><p>默认采用的就是RAM Model.</p>
+</li>
+<li><p>注意<font color="red">simple opreation，这里认为基本的存储、加减、乘除都是单位1， 而实际上加减和乘法的实现的时间并不一样</font></p>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p>Algorithm design</p>
+<blockquote>
+<ol>
+<li><p>分析问题、建模问题到具体的框架、解决问题、优化问题</p>
+</li>
+<li><p>正确性证明</p>
+</li>
+<li><p>例子：最小公约数证明——数学归纳法</p>
+<blockquote>
+<p><font color="blue">输入、输出和结果类比证明</font></p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p>Algorithm analysis</p>
+<blockquote>
+<ol>
+<li><p>Criteria, 关键操作，注意看定义的是什么</p>
+<p><img src="C:%5CUsers%5CDell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1558514755914.png" alt="1558514755914"></p>
+</li>
+<li><p>时间复杂度</p>
+<p>最好、平均、最坏</p>
+</li>
+<li><p>空间复杂度</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="图涉及问题以及算法总结"><a href="#图涉及问题以及算法总结" class="headerlink" title="图涉及问题以及算法总结"></a>图涉及问题以及算法总结</h2><p><img src="1.png" alt></p>
+<h2 id="一些好的例子"><a href="#一些好的例子" class="headerlink" title="一些好的例子"></a>一些好的例子</h2><ol>
+<li>Job scheduling</li>
+<li>Matrix chain multiplication</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/TOEFL-word-details/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/TOEFL-word-details/" class="post-title-link" itemprop="url">TOEFL word details</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 08:27:16 / 修改时间：10:52:06" itemprop="dateCreated datePublished" datetime="2019-09-19T08:27:16+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/" itemprop="url" rel="index"><span itemprop="name">english</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/TOEFL/" itemprop="url" rel="index"><span itemprop="name">TOEFL</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/TOEFL/word/" itemprop="url" rel="index"><span itemprop="name">word</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="总课程"><a href="#总课程" class="headerlink" title="总课程"></a>总课程</h1><h2 id="2-词汇"><a href="#2-词汇" class="headerlink" title="2. 词汇"></a>2. 词汇</h2><p>按规则出牌</p>
+<h3 id="2-2-词缀"><a href="#2-2-词缀" class="headerlink" title="2.2 词缀"></a>2.2 词缀</h3><h4 id="2-2-1-前缀"><a href="#2-2-1-前缀" class="headerlink" title="2.2.1 前缀"></a>2.2.1 前缀</h4><p><img src="vlcsnap-2019-05-13-15h48m17s024.png" alt></p>
+<img src="/2019/09/19/TOEFL-word-details/vlcsnap-2019-05-13-15h48m17s024.png" title="this is an image">
+<ul>
+<li><p>时间 ex,pre,pro/re 前/后</p>
+</li>
+<li><p>位置 </p>
+<ul>
+<li>inter/out 里/外</li>
+<li>over,super/sub 上/下</li>
+<li>trans 变化  transformer</li>
+<li>under</li>
+</ul>
+</li>
+<li><p>数量</p>
+<ul>
+<li>uni 1</li>
+<li>bi, di(divide),twi(two,twi-light黎明，暮光之城), du(?) 2</li>
+<li>centil 100</li>
+<li>milli 1000</li>
+<li>mono 单一</li>
+<li>multi 多</li>
+</ul>
+</li>
+<li><p>程度</p>
+<ul>
+<li>super, over, under ,hyper, well</li>
+</ul>
+</li>
+<li><p>方式</p>
+<ul>
+<li>auto 自动的</li>
+<li>co 合作  cooperate, cooperation</li>
+<li>mal 坏的</li>
+<li>mis 错的</li>
+<li>self 自己</li>
+</ul>
+</li>
+<li><p>态度</p>
+<ul>
+<li>anti </li>
+<li>counter n. 反击，对立面  counter strike cs游戏</li>
+<li>pro 支持</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-2-后缀"><a href="#2-2-2-后缀" class="headerlink" title="2.2.2 后缀"></a>2.2.2 后缀</h4><p> <img src="vlcsnap-2019-05-13-16h27m44s962.png" alt></p>
+<ol>
+<li>动词 </li>
+</ol>
+<blockquote>
+<p>-ate create</p>
+<p>-ish fish  finish identify watch harden realize surprise</p>
+</blockquote>
+<ol start="2">
+<li>名词</li>
+</ol>
+<blockquote>
+<p>-ant servant pedant挂坠</p>
+<p>-ary anniversary</p>
+<p>-let 小的东西 toilet</p>
+</blockquote>
+<h3 id="换词方法"><a href="#换词方法" class="headerlink" title="换词方法"></a>换词方法</h3><p>过去的英语体系对现在英语产生了影响</p>
+<p><img src="vlcsnap-2019-05-13-16h46m21s713.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-16h48m28s450.png" alt></p>
+<blockquote>
+<p> wrack, wreck 残骸</p>
+<ol>
+<li>时间越靠后，越靠后出现</li>
+<li>任意的字母都可以滑动， bat bet bit bot but ? </li>
+</ol>
+</blockquote>
+<p><img src="vlcsnap-2019-05-13-16h50m57s819.png" alt></p>
+<blockquote>
+<p>check cheque 支票，组织</p>
+<p>发音重点</p>
+</blockquote>
+<p><img src="vlcsnap-2019-05-13-16h53m54s165.png" alt></p>
+<h3 id="不按规则出牌的"><a href="#不按规则出牌的" class="headerlink" title="不按规则出牌的"></a>不按规则出牌的</h3><p><img src="vlcsnap-2019-05-13-16h55m02s009.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-16h56m31s884.png" alt></p>
+<p>gossip : sip 闲聊</p>
+<p>camouflage 伪装</p>
+<p>sanguine 乐观的，满怀希望的，面色红润的</p>
+<p>abracadabra 咒语  bra, brag吹牛</p>
+<h3 id="不可拆单词"><a href="#不可拆单词" class="headerlink" title="不可拆单词"></a>不可拆单词</h3><h4 id><a href="#" class="headerlink" title></a><img src="vlcsnap-2019-05-13-17h02m33s624.png" alt></h4><p>nicotine 尼古丁 oratorio 宗教中的歌唱曲 maverick 与众不同的人 utopian 乌托邦 meander 蜿蜒，曲折</p>
+<p>sihouette 法国财政部部长， 吝啬，短期任职 </p>
+<p>serendipitous 偶然的</p>
+<p><img src="vlcsnap-2019-05-13-17h10m11s134.png" alt></p>
+<p>latte 有奶的</p>
+<p>instant 速溶咖啡</p>
+<p><img src="vlcsnap-2019-05-13-17h10m57s878.png" alt></p>
+<p>Narcissus</p>
+<p>Nemesis</p>
+<p><img src="vlcsnap-2019-05-13-17h11m38s291.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-17h12m02s367.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-17h12m25s522.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-17h12m57s834.png" alt></p>
+<blockquote>
+<p>parachute 降落伞</p>
+</blockquote>
+<p><img src="vlcsnap-2019-05-13-17h14m35s244.png" alt></p>
+<h3 id="记单词的过程"><a href="#记单词的过程" class="headerlink" title="记单词的过程"></a>记单词的过程</h3><p><img src="vlcsnap-2019-05-13-17h17m39s853.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-17h17m53s620.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-17h18m52s967.png" alt></p>
+<h2 id="3-学科词汇"><a href="#3-学科词汇" class="headerlink" title="3. 学科词汇"></a>3. 学科词汇</h2><h3 id="3-1-学术词根"><a href="#3-1-学术词根" class="headerlink" title="3.1 学术词根"></a>3.1 学术词根</h3><p><img src="vlcsnap-2019-05-13-17h22m50s335.png" alt></p>
+<blockquote>
+<p>conscience 良知</p>
+<p>prescience 预知</p>
+<p>pseudoscience 伪科学  </p>
+</blockquote>
+<p><img src="vlcsnap-2019-05-13-17h26m27s978.png" alt></p>
+<p> <img src="vlcsnap-2019-05-13-17h32m58s743.png" alt></p>
+<blockquote>
+<p>ego 自私，自理， ecology eco表示house</p>
+</blockquote>
+<p><img src="vlcsnap-2019-05-13-17h36m14s246.png" alt></p>
+<blockquote>
+<p>nomy</p>
+<ol>
+<li>物资–规则，学科 agronomy, astronmy</li>
+<li>管理、法律  autonomy autonomous</li>
+</ol>
+</blockquote>
+<ul>
+<li>背词怎么背？<ul>
+<li>两方面共同记忆</li>
+</ul>
+</li>
+</ul>
+<p><img src="vlcsnap-2019-05-13-17h38m42s444.png" alt></p>
+<p>ics表示学科</p>
+<p><img src="vlcsnap-2019-05-13-17h40m08s812.png" alt></p>
+<h3 id="3-2-数学类词根"><a href="#3-2-数学类词根" class="headerlink" title="3.2 数学类词根"></a>3.2 数学类词根</h3><p><img src="vlcsnap-2019-05-13-17h41m43s405.png" alt></p>
+<p>mathematics 注意e不发音</p>
+<p><img src="vlcsnap-2019-05-13-17h42m40s927.png" alt></p>
+<p>人名，记汉语拼音</p>
+<p>algebra 代数</p>
+<p>arithmetic  ars/art + metrica(to measure)</p>
+<p>algorithm 算术法则</p>
+<p> <img src="vlcsnap-2019-05-13-17h46m56s700.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-17h49m15s187.png" alt></p>
+<blockquote>
+<p>equilibrium 平衡状态</p>
+</blockquote>
+<p><img src="vlcsnap-2019-05-13-17h51m37s590.png" alt></p>
+<blockquote>
+<p>parity 公平, nonpareil无与伦比的， parable 可以修理的</p>
+</blockquote>
+<p><img src="vlcsnap-2019-05-13-17h52m02s047.png" alt></p>
+<blockquote>
+<p>numerable 可数的</p>
+<p>innumerable 不可数的</p>
+</blockquote>
+<p><img src="vlcsnap-2019-05-13-17h53m41s866.png" alt></p>
+<p>link, correlation,connection </p>
+<h3 id="3-3-物理类词根"><a href="#3-3-物理类词根" class="headerlink" title="3.3 物理类词根"></a>3.3 物理类词根</h3><h4 id="3-3-1-力"><a href="#3-3-1-力" class="headerlink" title="3.3.1 力"></a>3.3.1 力</h4><p><img src="vlcsnap-2019-05-13-17h55m39s911.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-18h00m24s168.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-18h02m50s129.png" alt></p>
+<blockquote>
+<p>cradle-to-grave 从生到死</p>
+</blockquote>
+<p><img src="vlcsnap-2019-05-13-18h03m19s383.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-18h04m36s183.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-18h05m15s210.png" alt></p>
+<blockquote>
+<p>B motto 格言， motif 主题</p>
+</blockquote>
+<p><img src="vlcsnap-2019-05-13-18h07m41s292.png" alt></p>
+<h4 id="3-3-2-热学类词根"><a href="#3-3-2-热学类词根" class="headerlink" title="3.3.2 热学类词根"></a>3.3.2 热学类词根</h4><p><img src="vlcsnap-2019-05-13-18h11m43s637.png" alt></p>
+<blockquote>
+<p>isotherm 等温线</p>
+<p>endothermic 里面， 吸热的，恒温动物</p>
+<p>exothermic 发热的</p>
+</blockquote>
+<p><img src="vlcsnap-2019-05-13-18h14m10s300.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-18h16m27s803.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-18h17m29s861.png" alt></p>
+<blockquote>
+<p>per- 全， -esece 散</p>
+</blockquote>
+<p><img src="QQ%E6%88%AA%E5%9B%BE20190513182006.png" alt></p>
+<h4 id="3-3-3-声学类词汇"><a href="#3-3-3-声学类词汇" class="headerlink" title="3.3.3 声学类词汇"></a>3.3.3 声学类词汇</h4><p><img src="vlcsnap-2019-05-13-18h20m59s556.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-18h22m09s724.png" alt></p>
+<blockquote>
+<p>-ferous 带有什么的</p>
+</blockquote>
+<p><img src="vlcsnap-2019-05-13-18h24m31s074.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-18h25m35s306.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-19h30m51s888.png" alt></p>
+<p><img src="vlcsnap-2019-05-13-19h32m16s890.png" alt></p>
+<blockquote>
+<p>eu 好的，优秀的； caco 不好</p>
+</blockquote>
+<ul>
+<li><p>plod 砰地一声 diligently and dull  勤奋的，迟钝的 plaudit 喝彩，赞美</p>
+<ul>
+<li>大声，拟声词<blockquote>
+<p>applaud</p>
+</blockquote>
+</li>
+<li>plod 沉重的脚步，沉重的走，辛勤工作<blockquote>
+<p>explode 外爆    implode内爆</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>verber = beat, vibrate  wipe, wag</p>
+<blockquote>
+<p>reverberate 反响<br>  vervain 马鞭草</p>
+</blockquote>
+</li>
+<li><p>echo 回声 = sound</p>
+<blockquote>
+<p>anechoic 没有回声的</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="3-3-4-光学类词根"><a href="#3-3-4-光学类词根" class="headerlink" title="3.3.4 光学类词根"></a>3.3.4 光学类词根</h4><ul>
+<li><p>lumin=light &lt;- lumen 光通量单位. 启发，充满，单指光</p>
+<blockquote>
+<p>illuminate 阐明  luminary 只是渊博的人 // ary 后缀<br>  luminous 发光的，明亮的   luminosity 发光度<br>  luminescent 发光度<br>  unilluminating  unenlightening 无启发性的，没有作用的</p>
+</blockquote>
+</li>
+<li><p>lustr, luc=light, lustrum古罗马驱魔意识 lust 欲望 desire, wish,longing  光亮的，明亮的</p>
+<blockquote>
+<p>lustre(luster) 光彩 lustrous 有光泽的  lackluster无光泽的<br>  illustrate 说明!!  illustrious 杰出的 //il 表示什么意思<br>  elusive 难懂的，逃避的 //?<br>  lucent 光亮的<br>  lucid 清晰的<br>  elucidate 阐明，说明!!<br>  translucent 半透明的<br>  noctilucent 夜间发光的<br>  lusty 健壮的，精力旺盛的</p>
+</blockquote>
+</li>
+</ul>
+<p>leuk -&gt; light<br>luc,  lust,  lustr, lumin</p>
+<ul>
+<li><p>light</p>
+<blockquote>
+<p>lighter 点火者，打火机    lightproof 防光的<br>  enlighten 启发  twilight 微明的，黎明<br>  != delight 高兴，不是一个词源  delicious, delicate</p>
+</blockquote>
+</li>
+<li><p>radi = ray 光线  radius 散射的感觉</p>
+<blockquote>
+<p>radio 无线电   radioactive 放射的  radiant 发光的  irradiate 照射</p>
+</blockquote>
+<ul>
+<li>root, 树根也是发射的感觉<blockquote>
+<p>radical 根本的，激进的   radicle 跟 article //cle?<br>  eradicate 根除   radix 根，基数</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>cand=white, glow  来自于candle蜡烛  kindle发光 </p>
+<blockquote>
+<p>candle candela 烛光   candid 坦率的<br>  candescent 白热的   incandescent 白热的//in加强<br>  incendiary 纵火犯  incense: make angry让你发光，让你生气; sweet-smelling substance 香味剂</p>
+</blockquote>
+</li>
+<li><p>flect, flex=bend 弯曲</p>
+<blockquote>
+<p>reflect 反射, 沉思 //往回弯  reflection relective<br>  refraction 折射 frac=break<br>  deflect turn aside偏转    inflect 使弯曲<br>  deflex turned abruptly  downward 使向下弯曲<br>  inflex 使弯曲 vs inflexible不可以弯曲的!!!    flexible可以弯曲的 //!!</p>
+</blockquote>
+</li>
+<li><p>sol=sun只有一个太阳</p>
+<ul>
+<li>阳光<blockquote>
+<p>solor 太阳的   solarize 晒，曝光  parasol 阳伞<br>  solarium 日光浴  insolate暴晒  solace 安慰  // 阳光<br>  console 慰藉 // 大家一起用阳光  obsolete 过时的 //ob过去</p>
+</blockquote>
+</li>
+<li>孤独<br>  sole 单独的，唯一的   solitary 孤独的<br>  soliloquy 独白//loqu=speak  solo 独奏曲<br>  insolence //in 傲慢，无礼    desolate 荒凉的<br>  desolation 荒废</li>
+</ul>
+</li>
+<li><p>sight=vision 眼光</p>
+<blockquote>
+<p>sightly  attractive 养眼的  long-sighted 远视眼的<br>  farsighted: to see a great distance, good judgment,sagacious睿智的，有远见的，有洞察力的<br>  insight 洞察力    oversight 失误</p>
+</blockquote>
+</li>
+<li><p>splend=be right,shine,gleam, glisten辉煌，闪耀</p>
+<blockquote>
+<p>splendid 辉煌的，闪耀的<br>  splendor 光彩，壮丽<br>  resplendent 辉煌的</p>
+</blockquote>
+</li>
+<li><p>vis, vid=to see, to know,  wise眼光看到的</p>
+<blockquote>
+<p>visible 看得见的    vision 实例<br>  visionary 幻想的   visual  视觉的<br>  visualize 形象化   advise  advisory<br>  previse 预知    revise 修改<br>  supervise 监督//super在上面 evident 显然的，正确的  invidious 嫉妒的 //in一直盯着看<br>  envy (envious) 嫉妒的<br>  provide 提供   provident 有远见的  providence 远见<br>  providential  幸运的  Providence普鲁维登斯 providential fate:good guided,forethought,precaution<br>  visage 想象;  television电视   envisage 正视，想象</p>
+</blockquote>
+</li>
+<li><p>vis,vid =separate 看得清的，可以区分的</p>
+<blockquote>
+<p>divide 划分   dividend 被除数，股息   devise 设计，发明</p>
+</blockquote>
+</li>
+<li><p>opt, opto=sight  eye  oqw  opt,opto</p>
+<blockquote>
+<p>optic 光的   optometrist 验光师  synopsis摘要，大纲<br>  optics 光学  optometer 视力计  opthalmologist 眼科专家</p>
+</blockquote>
+<h4 id="3-3-5-电学类词根"><a href="#3-3-5-电学类词根" class="headerlink" title="3.3.5 电学类词根"></a>3.3.5 电学类词根</h4></li>
+</ul>
+<p><img src="vlcsnap-2019-05-21-22h52m56s543.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h11m46s139.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h12m16s668.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h12m45s009.png" alt></p>
+<h3 id="3-4-化学类词根"><a href="#3-4-化学类词根" class="headerlink" title="3.4 化学类词根"></a>3.4 化学类词根</h3><p><img src="vlcsnap-2019-06-05-08h14m16s044.png" alt></p>
+<h4 id="3-4-1-组成性质"><a href="#3-4-1-组成性质" class="headerlink" title="3.4.1 组成性质"></a>3.4.1 组成性质</h4><p><img src="vlcsnap-2019-06-05-08h14m49s967.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h17m05s962.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h19m38s673.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h21m50s219.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h22m48s624.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h23m53s885.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h26m09s645.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h27m03s914.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h27m44s115.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h29m11s367.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h32m12s073.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h33m01s737.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h33m41s614.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h35m33s534.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h35m20s050.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h36m41s627.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h37m16s956.png" alt></p>
+<h4 id="3-4-2-结构"><a href="#3-4-2-结构" class="headerlink" title="3.4.2 结构"></a>3.4.2 结构</h4><p><img src="vlcsnap-2019-06-05-08h40m01s912.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h40m55s882.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h41m36s333.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h42m32s841.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h42m58s764.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h43m57s100.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h45m23s272.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h45m37s979.png" alt></p>
+<h4 id="3-4-3-变化规律"><a href="#3-4-3-变化规律" class="headerlink" title="3.4.3 变化规律"></a>3.4.3 变化规律</h4><p><img src="vlcsnap-2019-06-05-08h47m34s632.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h49m27s739.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h50m11s429.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h51m18s580.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h52m01s163.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h52m31s298.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h54m00s376.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h54m24s462.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h54m53s509.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h55m37s867.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h56m27s111.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h57m14s042.png" alt></p>
+<p><img src="vlcsnap-2019-06-05-08h57m14s042-1559696280619.png" alt></p>
+<h3 id="3-5-天文学词根"><a href="#3-5-天文学词根" class="headerlink" title="3.5 天文学词根"></a>3.5 天文学词根</h3><p><img src="vlcsnap-2019-06-08-20h45m20s879.png" alt></p>
+<p>cata 灾难</p>
+<p><img src="vlcsnap-2019-06-08-20h47m07s936.png" alt></p>
+<p><img src="vlcsnap-2019-06-08-20h51m58s307.png" alt></p>
+<p><img src="vlcsnap-2019-06-08-20h53m57s963.png" alt></p>
+<p><img src="vlcsnap-2019-06-08-20h54m48s060.png" alt></p>
+<p>purge 清洗，洗涤</p>
+<p>purity 纯净</p>
+<p><img src="vlcsnap-2019-06-10-16h20m18s576.png" alt></p>
+<p><img src="vlcsnap-2019-06-10-16h21m15s342.png" alt></p>
+<h3 id="3-6-地质地理类词根"><a href="#3-6-地质地理类词根" class="headerlink" title="3.6 地质地理类词根"></a>3.6 地质地理类词根</h3><h4 id="3-6-1-希娜神话相关"><a href="#3-6-1-希娜神话相关" class="headerlink" title="3.6.1 希娜神话相关"></a>3.6.1 希娜神话相关</h4><ol>
+<li>大地女神Gaea<br>geo,ge</li>
+</ol>
+<ul>
+<li>earth, land; soil, world<blockquote>
+<p>geology 地质学：板块运动，岩石化学机理，数理基础；本质<br>  geological 地质学的<br>geography 地理学: 文科，地理表层；表面的<br>  geophysics 地球物理学<br>  geochemistry 地球化学</p>
+</blockquote>
+</li>
+</ul>
+<ol start="2">
+<li><p>父亲 混沌 chaos<br>cosmo 表示秩序<br>cosmos 宇宙</p>
+<blockquote>
+<p>空虚中产生， 有大地女神，爱神，地狱神，黑夜神，黑暗神</p>
+</blockquote>
+</li>
+<li><p>长子兼丈夫  Uranus 天王星， 天父</p>
+<blockquote>
+<p>没有男神相助下，生出了天空，然后再结合饿到</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>Titans 巨神族 6 men 6 women<blockquote>
+<p>titanic: having great magnitude, force or power</p>
+</blockquote>
+<ul>
+<li>带头：时间之神 Cronus （Chronos??）  chron 慢性的， 加入h<blockquote>
+<p>chronic 慢性的<br>chronology 年代学</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Cyclopes 独目众神 3人<blockquote>
+<p>cynosure 注意的焦点，小熊星座，北极星<br>  lope 大步慢跑<br>  elope 私奔</p>
+</blockquote>
+</li>
+<li>Giants 巨人众神族 100只手 100个脑袋 3人</li>
+</ul>
+<ol start="4">
+<li>Gaea + Cronus<ul>
+<li>Furies 复仇女神<blockquote>
+<p>fury</p>
+</blockquote>
+<ul>
+<li>Nemesis</li>
+</ul>
+</li>
+<li>Typhon:  100个头， 海上信号器：大喇叭 typhoon 台风</li>
+<li>Zeus</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-6-2-词根"><a href="#3-6-2-词根" class="headerlink" title="3.6.2 词根"></a>3.6.2 词根</h4><ol>
+<li><p>terr</p>
+<ul>
+<li>piece of earth, ground and land; ters; to dry, opposed to sea;<blockquote>
+<p> terrain 地形<br>terrace 梯田<br>terrritory 领土，版图<br>Mediterranean 地中海 // 中间<br>subterranean 地下的<br>terra firma 陆地（威尼斯人统治的意大利领土）</p>
+</blockquote>
+</li>
+<li>tres,  to treamble 抖<blockquote>
+<p>terrible 害怕<br>terrify 恐吓<br>terrific 极好的，激动地都<br>terrorist 恐怖份子</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>inter = in + terr 埋葬</p>
+<blockquote>
+<p>disinter=dis + inter 挖掘<br>extraterritoriality:</p>
+<blockquote>
+<p>exemption from the application or jurisdiction of local law or tribunals. </p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>tele: far/distant</p>
+<blockquote>
+<p>telegraph 电报<br> telephone 电话<br> telemeter 测距计<br> telescope scope看得远，望远镜</p>
+</blockquote>
+</li>
+</ol>
+<p>Geology Earth Science</p>
+<ol start="4">
+<li><p>地质学</p>
+<ul>
+<li>Tectonic/Structures 大构造</li>
+<li>Lithology 岩石学</li>
+<li>Paleontology // pale部分， onto?生物， 古生物学</li>
+<li>Remote Sensing 遥感，卫星</li>
+<li>Mineralogy 矿物学</li>
+</ul>
+</li>
+<li><p>Tectonic/Strutures<br>寒武纪时代，生命大爆发</p>
+</li>
+</ol>
+<p>Ordovician 寒武纪</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Animals with hard-shells appeared in great numbers for the first time during Cambrian. The continents were flooded by the shallow seas. The supercontinent of Gondwana冈瓦纳大陆 had just formed and was located near the South Pole.</span><br><span class="line">During the Ordovician ancient oceans separated the barren continents of Laurentia, Baltica, Siberia and Gondwana. The end of the Ordovician was one of the coldest times in Earth history. Ice coverd much of the southern region of Gondwana.</span><br></pre></td></tr></table></figure>
+
+<p>Jurassic 侏罗纪   晚侏罗纪 </p>
+<p>Convergent boundary 收敛型板块边界<br>converge thrust(推) compress<br>mountain 陆上：range</p>
+<p>Divergent boundaries 离散型边界<br>split extend<br>mountain 海里:ridge</p>
+<p>Transform boundaries 走滑型边界<br>strike-slip compression-shear 压减型, 不是水平的力，所以有力的分解<br>strike打   slip滑</p>
+<p>分界质</p>
+<ul>
+<li><p>塑性介质，如果橡皮泥， fold</p>
+</li>
+<li><p>刚性介质，三角板  fault 断层</p>
+</li>
+<li><p>小的层面碰撞, crack, rift</p>
+<blockquote>
+<p>rif分开的意思 river. 东非大裂谷 rift</p>
+</blockquote>
+</li>
+</ul>
+<ol start="6">
+<li><p>地质灾害 cataclysm</p>
+<blockquote>
+<p>cata  down &lt;= caco  clysm&lt;- klyzein &lt;- to wash</p>
+</blockquote>
+<ul>
+<li>kakos=”bad,evil”-&gt;down 希腊语前缀，直接引入英语<br>cacophony 刺耳的声音<br>cacography 拼写错误，书法很差<br>catalog 下降的原木 目录<br>catastrophe 大灾祸，不幸</li>
+<li>kallo=beauty -&gt; call<blockquote>
+<p>calligraphy 书法</p>
+</blockquote>
+</li>
+<li>常见的地质灾害<ul>
+<li>earthquake // quake 震动的感觉， 地震本身</li>
+<li>seismology 人工地震, 比如鞭炮，炸弹 &lt;- seismic &lt;- shake 地震学</li>
+<li>magnitude 地震级别，提高一级，实际提高30倍</li>
+<li>epicenter 地震中心 epi=upon, among (e<del>u, i</del>on)</li>
+<li>tsunaml 海啸 tsu=harbor  nami=waves 日语源</li>
+<li>Tidal潮汐 wave 海啸</li>
+</ul>
+</li>
+<li>The Power of Nature<ul>
+<li>typhoon 台风</li>
+<li>sandstorm 沙尘暴</li>
+<li>flood 洪水</li>
+<li>earthquake 地震</li>
+<li>tornade 飓风  torn=turn</li>
+<li>snowstorm 暴雪</li>
+<li>landslide 滑坡 </li>
+<li>cyclone 龙卷风</li>
+<li>hailstorm hail 冰雹 hailform</li>
+<li>valcano 火山</li>
+<li>hurricane 飓风</li>
+<li>tsunami 海啸</li>
+<li>drought 干旱 dry</li>
+<li>lightning/thunder 闪电/雷</li>
+<li>mud-rock flow 泥石流  mud+rock+flow </li>
+</ul>
+</li>
+<li>picture<ul>
+<li>台风，根据左旋还是右旋来判断是上升期还是下降期</li>
+<li>沙尘暴，沿着风的切线方向走</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>岩石学</p>
+<ul>
+<li>igneous rock 火成岩, 喷火形成的岩石<blockquote>
+<p>ign 希腊语 &lt;- fire, scarifice fire<br>  ignite 点燃;  ignitable可以着火的 ignition 点火装置</p>
+</blockquote>
+<ul>
+<li>granite 花岗岩  谷物和颗粒<blockquote>
+<p>granite &lt;- grain  -&gt; granulate 使成粒状</p>
+</blockquote>
+</li>
+<li>geyser 天然热喷泉 gush喷出</li>
+<li>火山爆发相关<ul>
+<li>Vulcan 火神    <blockquote>
+<p>valcano-eruption  rupt破 e=out<br>Boliing rock erupts from the crater; the lava flows slowly down the mountain.</p>
+</blockquote>
+</li>
+<li>magma chamber 岩浆</li>
+<li>crater 火山口 //cra-&gt;kera=to mix  bowl for mixing wine with water</li>
+<li>lava  熔岩 // lav 冲洗 </li>
+<li>ash cloud/ volcanic ash 冲上去的东西 火山灰 </li>
+</ul>
+</li>
+<li>火山分类<ul>
+<li>active volcano 活火山</li>
+<li>dormant volcano  // dorm=to sleep  dormitory /..ory表示场所 寝室</li>
+<li>extinct volcano 死火山</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>sedimentary rock 沉积岩<blockquote>
+<p>shale 页岩<br>  limestone 石灰岩  碳酸钙</p>
+</blockquote>
+</li>
+<li>metamorphic rock 变质岩<blockquote>
+<p>marble 大理石，石灰岩经过高温高压作用下的结果</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>古生物学</p>
+<blockquote>
+<p>fossil 化石 New Concept 4 Lesson 1</p>
+</blockquote>
+</li>
+<li><p>Remote Sensing</p>
+</li>
+<li><p>Mineralogy 矿物学</p>
+<blockquote>
+<p>孔雀石，金刚石<br>ore 矿物<br>quartz 石英<br>aluminum 铝</p>
+</blockquote>
+</li>
+<li><p>Earth’s sphere structure</p>
+<ul>
+<li>内部圈层 interior sphere/ 外部圈层 outer sphere<blockquote>
+<p>The Earth environment is composed of the interacting subsystems of air(大气), water（水）, living things（生物）,earth’s crust地壳, mantle地幔 and core地核.</p>
+</blockquote>
+<ul>
+<li>atmosphere // atmo大气  大气圈</li>
+<li>hydrosphere // hydro水 水圈</li>
+<li>biosphere //bio 生命 生物圈</li>
+<li>crust</li>
+<li>matle</li>
+<li>outer core/ inner core</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>地质作用</p>
+<ul>
+<li>external process<ul>
+<li>weathering 风化</li>
+<li>erosion 侵蚀</li>
+<li>sendimentation 沉积 sand=&gt;send</li>
+</ul>
+</li>
+<li>internal process<ul>
+<li>metamorphic 变质，变形作用 //mor形状<blockquote>
+<p>meta</p>
+<pre><code>1. int he midst of , along with , after
+2. changed, altered
+3. higher, beyond, behind</code></pre></blockquote>
+</li>
+<li>magmatic 岩浆作用</li>
+<li>deformation 变形破坏作用  //forma<h3 id="3-7-生物类词根"><a href="#3-7-生物类词根" class="headerlink" title="3.7 生物类词根"></a>3.7 生物类词根</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="vlcsnap-2019-06-10-16h22m27s594.png" alt></p>
+<p>vi- li- 活的</p>
+<p>bo 植物学</p>
+<p><img src="vlcsnap-2019-06-10-16h26m30s023.png" alt></p>
+<p><img src="vlcsnap-2019-06-10-16h27m32s579.png" alt></p>
+<p><img src="vlcsnap-2019-06-10-16h29m08s025.png" alt></p>
+<p><img src="vlcsnap-2019-06-10-16h30m08s492.png" alt></p>
+<h3 id="3-8-历史类词根"><a href="#3-8-历史类词根" class="headerlink" title="3.8 历史类词根"></a>3.8 历史类词根</h3><p>when, where, who, what</p>
+<blockquote>
+<p>历史研究的是什么时候，谁在哪里做了一件事</p>
+</blockquote>
+<ul>
+<li>chron: 表示时间， Cronus时间之神</li>
+</ul>
+<p>chronic 慢性的 chronicle编年史</p>
+<p>synchronize 同步，同时的 </p>
+<p>c和ch可以替换</p>
+<ul>
+<li><p>annual，ann,eon=year 表示时间</p>
+<p>annual每年的  anniversary周年  biannual 每年两次 annuity养老金</p>
+</li>
+<li><p>loc = location 表示地点</p>
+<p>locate, locomotion, dislocate 使混乱</p>
+</li>
+<li><p>stat, stit,stitut = set up</p>
+<p><img src="vlcsnap-2019-06-21-18h12m10s352.png" alt></p>
+<p><img src="vlcsnap-2019-06-21-18h13m34s539.png" alt></p>
+</li>
+<li><p>表示写的词根</p>
+<blockquote>
+<ul>
+<li>graph, gram=write, draw, scratch, picturesque独特的</li>
+</ul>
+<p>photography</p>
+<p>telegraphy 电报  topography top地点-&gt;地形  geography</p>
+<p>autography   auto表示自己  亲笔署名、手稿</p>
+<p>monography 争论</p>
+<p>lexicograph = lect  graphy 词典编著 </p>
+<p>steno=narrow  +graphy 速记</p>
+<p>dict书 + graphy 助听器</p>
+<p>demo 人民，人物 + ~ 人口统计学</p>
+<p>epi 外面 +~  铭文</p>
+<p>calli 好 书写</p>
+<p>typo 刷  印刷术</p>
+<p>bibli书目    数目摘要</p>
+<ul>
+<li>gram 写， smal weight课</li>
+</ul>
+<p><img src="vlcsnap-2019-06-21-18h23m40s312.png" alt></p>
+</blockquote>
+</li>
+<li><p>其他类词根</p>
+<blockquote>
+<p>vict, vinc 克服，战胜  fight</p>
+<p>victory 胜利 convict 定罪 conviction</p>
+<p>evict 驱逐expel   eviction</p>
+<p>invincible 不能征服的，无敌的</p>
+<p>convince 使确信</p>
+<p>convincing</p>
+</blockquote>
+<blockquote>
+<p>vol,volv,volt = roll, turn, twist</p>
+<p>voluble 有才的  volubility 健谈</p>
+<p>revolution 革命 revolve 旋转</p>
+<p>evolve 进展 evolution</p>
+<p>involve 限于 involvement</p>
+<p>convolve 盘旋</p>
+<p>volume 旋转， 卷，册</p>
+<p>voluminous 多产的</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="3-9-政治学类词根"><a href="#3-9-政治学类词根" class="headerlink" title="3.9 政治学类词根"></a>3.9 政治学类词根</h3><ul>
+<li>arch = ruler, chief,government</li>
+</ul>
+<blockquote>
+<p>archy 拱形的， architect 建筑  architecture 建筑学  anarchy 无政府状态 anarchic 无政府的 monarch 君王 mon 单一  </p>
+<p>archives 档案 patriarch 父权制  matriarch 母权统治</p>
+<p>tect=texture;build;do;pie up</p>
+</blockquote>
+<ul>
+<li>democracy</li>
+</ul>
+<blockquote>
+<p>demos n. 古希腊人民  people</p>
+<p>epidemic 流行的  pandemic  大范围的   endemic 地方的 demagogue 煽动者</p>
+<p>demography 人口统计学 </p>
+<p>cracy = rule ,  crat=ruler</p>
+<p>democracy -&gt; democrat 民主</p>
+<p>autocracy-&gt; autocrat 独立</p>
+<p>bureaucracy 官僚</p>
+<p>pluto 钱 cracy 财阀政治</p>
+<p>theocracy 神</p>
+<p>mono单一 独裁</p>
+<p>mob 暴民</p>
+</blockquote>
+<ul>
+<li>population</li>
+</ul>
+<blockquote>
+<p>popul,publ=people </p>
+<p>populous 人口稠密的  popularize 普及 depopulate 减少人口 copulation 交尾，交配</p>
+<p>public publish publication publicity 出版</p>
+</blockquote>
+<ul>
+<li>fus, fug = flee ,run away</li>
+</ul>
+<blockquote>
+<p>refugee 难民  fugitive 逃亡的  refuge 避难所</p>
+<p>fugacious 转瞬即是的</p>
+<p>centrifugal 离心的</p>
+<p>insectifuge 驱虫剂</p>
+<p>subterfuge 托词</p>
+<p>lucifuge 避光</p>
+</blockquote>
+<ul>
+<li>fun=pour 流、泻</li>
+</ul>
+<blockquote>
+<p>refuse -&gt; refusal</p>
+<p>confuse -&gt; confusion 困惑</p>
+<p>diffuse -&gt; diffusion 扩散</p>
+<p>effuse -&gt; effusion 流出</p>
+<p>infuse -&gt; infusion 灌输</p>
+<p>profuse -&gt; profusion  丰富</p>
+<p>suffuse 充满 transfuse 注入  refute 驳斥</p>
+</blockquote>
+<ul>
+<li>mind- mon, monit; warn,advis</li>
+</ul>
+<blockquote>
+<p>monument 让你思考的人    monitor   monition  admoish ad=together</p>
+<p>premonish 预先警告  summon 号召 summon 传票</p>
+</blockquote>
+<ul>
+<li>community   muni,mun=public</li>
+</ul>
+<blockquote>
+<p> community service 志愿者  communal 公共的  communize 公有化</p>
+<p>municipal 市政的  municipality 市政当局 immunity 免疫</p>
+<p>communicate =communicative  沟通</p>
+<p>munificent genorosity and liborality 宽宏大量的，慷慨的</p>
+</blockquote>
+<ul>
+<li>polis 古希腊城邦</li>
+</ul>
+<blockquote>
+<p>polis,polic,polit=govern,state,city</p>
+<p>police, policy, politics politician 政治学的</p>
+<p>cosmpolis 国际化都市</p>
+<p>metropolis 计划</p>
+<p>mother + pols : 首都</p>
+<p>metro 地铁  法语</p>
+<p>underground</p>
+<p>subway</p>
+</blockquote>
+<ul>
+<li>range</li>
+</ul>
+<blockquote>
+<p>arrange  arrangement  rearragne disarrange 打乱  misarrange 安排错误 derange 使错乱，使发狂</p>
+<p>range &lt;- rank ring</p>
+<p>conserve 节约使用、保护某物 conserve strength/health/energy/water/resources</p>
+<p>preserve 保持原样，但保护时，比conserve正式</p>
+<p>reserve 保存，留存</p>
+</blockquote>
+<ul>
+<li>sequ, sent- follow</li>
+</ul>
+<blockquote>
+<p>second-&gt;sec-&gt;sequu</p>
+<p>sequence次序 consequence结果 subsequence顺序 sequential连续的 sequacious盲从的 obsequious奉承的 consecutive连续的 consecution连贯</p>
+<p>sue 跟随，恐告     consue 继而发生  pursue 追赶</p>
+<p>prosecute   to follow till the end,perform执行</p>
+<p>persecute 迫害</p>
+</blockquote>
+<ul>
+<li>urb=city</li>
+</ul>
+<blockquote>
+<p>urban urbane优雅的  exurban城市外面  suburb 郊区 suburbanite 郊区人民</p>
+</blockquote>
+<h3 id="3-10-人类学词根"><a href="#3-10-人类学词根" class="headerlink" title="3.10 人类学词根"></a>3.10 人类学词根</h3><h4 id="男女相关"><a href="#男女相关" class="headerlink" title="男女相关"></a>男女相关</h4><ul>
+<li><p>anthrop 人</p>
+<blockquote>
+<p>anthr &lt;- andry &lt;- man</p>
+<p> op &lt;- optic &lt;- eye,face</p>
+<p>polyandry  </p>
+<p>polygamy</p>
+<p>polygyny</p>
+<p>gamy, ginny &lt;- queen</p>
+<p><img src="vlcsnap-2019-06-21-20h33m54s596.png" alt></p>
+</blockquote>
+</li>
+<li><p>gyn, gynec, gamy = queen, woman</p>
+<blockquote>
+<p><img src="vlcsnap-2019-06-21-20h34m48s586.png" alt></p>
+</blockquote>
+</li>
+<li><p>patri &lt;- father</p>
+<blockquote>
+<p><img src="vlcsnap-2019-06-21-20h38m12s959.png" alt></p>
+</blockquote>
+<blockquote>
+<p>patriarch  patriarchy patron patronize patronage patriot</p>
+<p>patriotism  patrilineal  society    expatriate banish,exile</p>
+</blockquote>
+</li>
+<li><p>matri, matr- mother</p>
+<blockquote>
+<p><img src="vlcsnap-2019-06-21-20h40m15s745.png" alt></p>
+</blockquote>
+<blockquote>
+<p>matrix 子宫</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="情感"><a href="#情感" class="headerlink" title="情感"></a>情感</h4><ul>
+<li><p>love</p>
+<blockquote>
+<p><img src="vlcsnap-2019-06-21-20h42m54s826.png" alt></p>
+<p>希腊，罗马</p>
+<p>amateur 业余爱好者</p>
+<p>amicable 和善的   amiable 亲切的</p>
+<p>amity 友好</p>
+<p>Eros 丘比特的小名 = the good of love.   rose 代表爱情</p>
+<p>erosion  erotic 腐蚀的   corrsion </p>
+</blockquote>
+</li>
+<li><p>phil, philo = love</p>
+<blockquote>
+<p><img src="vlcsnap-2019-06-21-20h53m01s124.png" alt></p>
+<p>philology  爱哲学</p>
+</blockquote>
+<p><img src="vlcsnap-2019-06-21-20h55m38s313.png" alt></p>
+<p><img src="vlcsnap-2019-06-21-21h14m21s009.png" alt></p>
+</li>
+</ul>
+<ul>
+<li><p>path=suffering, feeling, illness, disease</p>
+<p><img src="vlcsnap-2019-06-24-16h30m35s385.png" alt></p>
+<blockquote>
+<p>又痛苦又激情， 耶稣为人类受难的感情</p>
+<p>pathetic 悲惨的</p>
+<p>antipathy 反感，延误</p>
+<p>apathy 冷漠</p>
+<p>apthetic 冷漠的，缺乏兴趣的，无动于衷的</p>
+<p>sympathy  sym=same, 同情心</p>
+<p>path  logy </p>
+<p>psy cho poth 精神</p>
+</blockquote>
+</li>
+<li><p>soph=debate 善辫, wise</p>
+<p><img src="vlcsnap-2019-06-24-16h37m16s340.png" alt></p>
+</li>
+<li><p>phobia 恐惧， 以ia结尾的可以表示病</p>
+<p><img src="vlcsnap-2019-06-24-16h38m54s427.png" alt></p>
+<blockquote>
+<p>phobia,   acrophobia,  hydrophobia,  sinophobe  sino中国; 任何单词加上phob, 就是恐惧的意思。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="行为"><a href="#行为" class="headerlink" title="行为"></a>行为</h4><ol>
+<li>flu=flow, 作名词“流感”</li>
+</ol>
+<p><img src="vlcsnap-2019-06-24-16h43m48s872.png" alt></p>
+<p>fluency,   effluent, influence, influenza, fluid, fluidity, flux, infulx</p>
+<p>fluctuate, mellifuous, confluence, superfluous  过，多余的, affluent, effluvium</p>
+<p>refluent</p>
+<ol start="3">
+<li>sect, seg = divide, piece, cut</li>
+</ol>
+<p><img src="vlcsnap-2019-06-24-16h46m24s020.png" alt></p>
+<p>segment a,b;  intersect, bisect,   vivisect :  vivi活的</p>
+<p>dissect解剖， transect 横截</p>
+<blockquote>
+<p>为什么可以替换，因为发音特别相似，ct和g发音相似</p>
+</blockquote>
+<ol start="4">
+<li>gen,gener,genit,birth,produce,create, beget,race,kind</li>
+</ol>
+<p><img src="vlcsnap-2019-06-24-16h53m39s450.png" alt></p>
+<p>genus, genetic,general,generate,generation,regenerate,degenerate.</p>
+<p> genius, ingenuous, ingenious 我，机灵的。 generous</p>
+<p><img src="vlcsnap-2019-06-24-17h01m42s500.png" alt></p>
+<p>homo(相同的)geneous,   hetero(不同的)geneous  genre </p>
+<p>indigenous, indigence  gentle, genteel, engende, progeny</p>
+<p>indi = in, within      gence=egere   be in need,want</p>
+<ol start="5">
+<li>gress=step,go</li>
+</ol>
+<p><img src="vlcsnap-2019-06-24-17h07m02s793.png" alt></p>
+<p>gress, grad</p>
+<ol start="6">
+<li>soci=social</li>
+</ol>
+<p><img src="vlcsnap-2019-06-24-17h08m58s877.png" alt></p>
+<ol start="7">
+<li>migr-&gt;move</li>
+</ol>
+<p><img src="vlcsnap-2019-06-24-17h10m16s091.png" alt></p>
+<p>hemikrania &lt;- hemi+kranion half+skull</p>
+<ol start="8">
+<li>orig,ori—rise</li>
+</ol>
+<p><img src="vlcsnap-2019-06-24-17h12m17s060.png" alt></p>
+<p><img src="vlcsnap-2019-06-24-17h13m12s472.png" alt></p>
+<p><img src="vlcsnap-2019-06-24-17h14m24s632.png" alt></p>
+<p><img src="vlcsnap-2019-06-24-17h15m20s709.png" alt></p>
+<p><img src="vlcsnap-2019-06-24-17h16m58s812.png" alt></p>
+<p><img src="vlcsnap-2019-06-24-17h18m00s176.png" alt></p>
+<p><img src="vlcsnap-2019-06-24-17h18m04s599.png" alt></p>
+<p>manu =hand,   mainfacture , mainfest,</p>
+<p><img src="vlcsnap-2019-06-24-17h19m35s895.png" alt></p>
+<p><img src="vlcsnap-2019-06-24-17h20m36s820.png" alt></p>
+<p>impasse 僵局</p>
+<p><img src="vlcsnap-2019-06-24-17h21m31s883.png" alt></p>
+<p><img src="vlcsnap-2019-06-24-17h24m33s615.png" alt></p>
+<h3 id="3-11-文化类词根"><a href="#3-11-文化类词根" class="headerlink" title="3.11 文化类词根"></a>3.11 文化类词根</h3><ul>
+<li>creed,cred = believe,trust</li>
+</ul>
+<p>credit 信任，信用卡，电影片头字幕</p>
+<p>credible 可信的</p>
+<p>creditable 可靠的</p>
+<blockquote>
+<p>able 能够的</p>
+</blockquote>
+<p>accredit 信任, a表示强调</p>
+<p>credence 信任</p>
+<p>credential 证明书</p>
+<p>credo 信条</p>
+<p>discredit 怀疑</p>
+<p>credulous 轻信的</p>
+<p>quack doctors charming money out of the pockets of credulous health-hungry citizens. </p>
+<blockquote>
+<p>charm 骗别人</p>
+</blockquote>
+<p><img src="vlcsnap-2019-06-28-12h50m52s843.png" alt></p>
+<ul>
+<li>fid = trust, faith</li>
+</ul>
+<p>confident 自信的</p>
+<p>self-confident</p>
+<p>confidant 心腹知己</p>
+<blockquote>
+<p>ant 表示人</p>
+</blockquote>
+<p>confidential 机密的，秘密的</p>
+<p>diffident 缺乏自信的</p>
+<p>confide 信任</p>
+<p>fidelity 忠实</p>
+<p>infidel 不心焦的</p>
+<p>perfidy 背叛 perfidious 背信弃义的</p>
+<blockquote>
+<p>per全部，贬义</p>
+</blockquote>
+<p>affidavit 宣誓书</p>
+<p>fiduciary 信任的</p>
+<ul>
+<li>liber=free</li>
+</ul>
+<p>noble, generous people</p>
+<p>liber(l狮子+ i我+ ber高贵)</p>
+<p>liberty = people 人   liberal arts 文科</p>
+<p>liberty people 扩大  man男性特征 </p>
+<p>intellectual  enlargement   mechanical</p>
+<p>liberty 自由</p>
+<blockquote>
+<p>ty名词后缀</p>
+</blockquote>
+<p>liberal   liberate   illiberal  libertine</p>
+<p><img src="vlcsnap-2019-06-28-12h59m09s027.png" alt></p>
+<blockquote>
+<p>girl  中世纪统称男性，词义缩小， 女性；</p>
+<p>bird 特指一种鸟，词义扩大，广义鸟</p>
+</blockquote>
+<ul>
+<li>ment = mind， 元音互换，把e换为了i，所以就这样</li>
+</ul>
+<p>mental 精神的   mentality 智力  mention comment com=together</p>
+<p>commentate 评论，解说    demented 发狂的，精神错乱的</p>
+<p>remind    amentia 智力缺陷</p>
+<ul>
+<li>nov= new,yound,recent,shape,unusual</li>
+</ul>
+<p>novel  小说  </p>
+<p>novelty 新奇</p>
+<p>nova 新星</p>
+<p>novation 更新</p>
+<p>novice 新手</p>
+<p>innovate   innovation 内在的革新</p>
+<blockquote>
+<p>in 让你变新</p>
+</blockquote>
+<p>renovate 反省</p>
+<p><img src="vlcsnap-2019-06-28-13h06m54s217.png" alt></p>
+<ul>
+<li>prais,preci = praise, value.  price字母顺序不变，意思不变</li>
+</ul>
+<p>appraise 评价   appraisal 评价，骨架</p>
+<p>precious 宝贵的</p>
+<p>appreciate 赏识，涨价</p>
+<p>appreciative 欣赏的</p>
+<p>appreciable 可感知的，可评价的</p>
+<p>depreciate 变低，轻视</p>
+<ul>
+<li>duc, duct=lead, bring</li>
+</ul>
+<p>duck 公爵，手，拳头</p>
+<blockquote>
+<p>Duck University.  Knowledge and Faith 贵族学习，引导</p>
+</blockquote>
+<p>to pull, drag</p>
+<blockquote>
+<p>因为首先作为贵族，具有权力。然后leader，然后引申为pull,drag. 最后引申为a kind of animal</p>
+</blockquote>
+<p><img src="vlcsnap-2019-06-28-13h11m38s882.png" alt></p>
+<p>duct这里主要是作为引导的意思。</p>
+<p>duct 管道</p>
+<p>ductile 展开的</p>
+<p>aqueduct 导水管</p>
+<blockquote>
+<p>aque 水</p>
+</blockquote>
+<p>educate 教育</p>
+<p>educe 唤起</p>
+<blockquote>
+<p>e=out</p>
+</blockquote>
+<p>abduc  绑架</p>
+<blockquote>
+<p>ab不好的方向</p>
+</blockquote>
+<p>deduce 推论</p>
+<blockquote>
+<p>向下</p>
+</blockquote>
+<p>induce 劝诱</p>
+<blockquote>
+<p>加强</p>
+</blockquote>
+<p>induct 引导</p>
+<p>introduce 介绍</p>
+<blockquote>
+<p>intro开始</p>
+</blockquote>
+<p>produce 产生</p>
+<blockquote>
+<p>pro向前</p>
+</blockquote>
+<p>product 生产</p>
+<p>productivity 生产力</p>
+<p>reduce 减少</p>
+<blockquote>
+<p>re 往回</p>
+</blockquote>
+<p>conduct 引导 con=together</p>
+<p>conductor 领导，经理</p>
+<p>seduce  se分开  诱使</p>
+<p>traduce  tra横着  诽谤</p>
+<p>vioduct  vio路 高架桥</p>
+<p>ventiduct   vent 过去?， 通风管道</p>
+<ul>
+<li>art=skill, joint,trick!!!</li>
+</ul>
+<p>article 文章， 物品，项目，条款，清楚说出</p>
+<blockquote>
+<p>art+ cle 变成名词， article表示任何有技巧的东西。</p>
+</blockquote>
+<p>artless 朴实的</p>
+<p>artful 狡猾的</p>
+<p>artistry  艺术技巧</p>
+<p>artificial 人造的</p>
+<blockquote>
+<p>人做出来的技巧</p>
+</blockquote>
+<p>artisan</p>
+<p>artifact fact=do  做艺术</p>
+<p><img src="vlcsnap-2019-06-28-13h30m32s576.png" alt></p>
+<ul>
+<li>lingu=language</li>
+</ul>
+<p>lingu = language     l和d互换   tongue 舌头  dingua  lingua</p>
+<p>linguist 语言学家  linguistics 语言学</p>
+<p>bilingual , unilingual,</p>
+<p><img src="vlcsnap-2019-06-28-13h34m17s854.png" alt></p>
+<h3 id="3-12法学类词根"><a href="#3-12法学类词根" class="headerlink" title="3.12法学类词根"></a>3.12法学类词根</h3><ol>
+<li><p>leg, legis = law</p>
+<blockquote>
+<p>legal 法律的<br>legality<br>illegal 违反的<br>illegitimate 私生的<br>legislate 立法<br>legislation n. 立法<br>legislature 立法机构<br>privilege  特权  pri在前面<br>  lect log.   privi(privita)+leg(law)<br>delegate 代表<br>relegate 驱逐 banish 委托，丢弃</p>
+</blockquote>
+<p> 本身来源于log-&gt;lect, 学科, 从学科中选择出来的东西</p>
+</li>
+<li><p>jur, juris=law, swear</p>
+<blockquote>
+<p>just 公平，公正； 公正，法律引申<br>jury 陪审团<br>injury 伤害<br>injurious 有害的<br>perjury 伪证  per: away, entirely<br>jurisdiction 权限<br>GRE<br>conjure together+swear 祈求<br>abjure 放弃宣誓<br>adjure 郑重选址</p>
+</blockquote>
+</li>
+<li><p>dict, dic=say, speak, point out , show, teach</p>
+<blockquote>
+<p>dictate 口述<br>dictator 独裁者 说这个话的人<br>diction 用词<br>dictionary 字典  ary名词后缀 vocabulary<br>dictum 格言<br>benediction 祝福<br>malediction 诅咒 male坏<br>contradict 驳斥 反<br>contradictory 反驳的<br>jurisdiction 权限 juris 公平，说公平<br>predict 预测 pre在前面<br>addict 上瘾 ad=toward 一直<br>predicament 困境 pre在前面说出来的话<br>indict 起诉 in加强<br>abdicate 放弃 ab否定前缀，不的意思<br>predicate 断言<br>dedicate 献身 de向里面给<br>indicate 暗示 in加强<br>edict 法令，公告 e=out</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>dictatorship 独裁政治<br>indite 写，创作   in 下来<br>vindicate win赢的,  平反<br>vindictive(vin&lt;-win)<br>verdict  ver 真实的  裁决<br>valediction 告别 val&lt;- be well, 说好话  farewell 再见  valiant 勇敢的</p>
+</blockquote>
+<ol start="4">
+<li><p>jur,jurth=law, swear;  dic, dict=say, speak =&gt; judg, judic=judge</p>
+<blockquote>
+<p>judgment 判断<br>judicial 司法的，公正的<br>adjudge 宣判 ad=toword<br>judiciary 司法的，审判的<br>adjudicate 审判，裁定<br>prejudice 偏见<br>prejudge 预先判断</p>
+</blockquote>
+</li>
+<li><p>cern, cert, cret=separate, sure 分开<br>sift/sieve; perceive, comprehend 一种感知<br>crisis: 危机<br>concern 关注<br>discern 识别  cern  可以分开，即识别<br>discernible 可辨别的  dis=away<br>certainty 确定   可以被分开的东西，即确定<br>certificate 证书， 直接用的是上面的引申义，即确定<br>certitude 确信<br>discretion 判断力<br>discrete 分立的,   e被t给分立了<br>disceet 谨慎的<br>secret 秘密<br>secrete 隐藏，即秘密用来隐藏的</p>
+</li>
+<li><p>fin = end, boudary, limit 边界，线，最终引申为钱， 因为钱可以解决任何事情</p>
+<blockquote>
+<p>fine 精巧的，罚金，变细-&gt;  通过钱就可以结束<br>finance 财政， 付罚金后就免罪或对伤者补偿了，结束了<br>finish 结束<br>finale 结局<br>finality 结尾，最终<br>confine 限制<br>define 定义<br>finite 游侠的<br>infinite 无限的<br>infinitesimal 吴强小的<br>affinity 亲密的关系（能进入范围内的）af强调，进入这个边界即亲密</p>
+</blockquote>
+</li>
+<li><p>fort 原义为剑身上最坚硬的部分，-&gt;最强的,优点,强音（弦乐器的F音）</p>
+<blockquote>
+<p>force 力量<br>forceful 有力量的<br>enforce 强迫，执行   en<br>reinforce 加强，增援<br>fortress 要塞  fort墙堡<br>fortify 加强<br>foritude 坚韧<br>effort 努力<br>comfort 舒适  com=together<br>discomfort 不适</p>
+</blockquote>
+</li>
+<li><p>her, hes=stick, cling</p>
+<blockquote>
+<p>adhere 粘附，坚持 ad=toward 某种去向 adhere to 对什么的坚持<br>adherence 忠诚<br>adhesive 粘性的<br>cohere 粘着  co=together<br>coherent 粘在一起的，连贯的<br>inherent 内在的，与生聚来的<br>hesitate 犹豫 ? 抓住，不是很果断的<br>hesitation 犹豫</p>
+</blockquote>
+</li>
+<li><p>hibit=hold, possess &lt;- habit 来自于习惯。 一直习惯的东西即拥有</p>
+<blockquote>
+<p>exhibit 展出，陈列  ex + hold 拥有的向外，即展出，陈列<br>exhibition 展览会，显示 n.<br>inhibit 抑制，约束  in在里面， hibit<br>inhibition 抑制<br>uninhibited 放荡不羁的, 不受抑制的<br>prohibit 禁止，阻止   向前拥有<br>prohibition 阻止<br>prohibitive 禁止的</p>
+</blockquote>
+</li>
+<li><p>odin=order</p>
+<blockquote>
+<p>ordinal 顺序的，依次的<br>ordinary 平常的<br>ordinary 平常<br>ordinance 法令，布告<br>inordinate 紊乱的  in 没有顺序的, in有时表示否定<br>extraordinary 非常的，特别的  extra 特别的<br>coordinate 同等的，调整，整理<br>ordain 规定，颁布<br>subordinate 次要的，附属的<br>adorn 装饰<br>ornate 装饰的，华丽的<br>disorder 扰乱<br>coordinate 同等的，调整，整理</p>
+</blockquote>
+</li>
+<li><p>prov,prob = test   front &lt;- pro<br>v,b可以替换</p>
+<blockquote>
+<p>probable 可能的  可以测试<br>probe 探针，侦查  可以测试<br>probability 可能性<br>probity 正直  随便怎么测试<br>approve 赞成，通过  可以加强测试<br>probation 查验，鉴定<br>approval 赞成<br>probative 检验的<br>disapporval 不赞成<br>reprobate 责难  re, 再次测试，re从某种意义上是具有否定意义的<br>disprove 反驳<br>reprove 责备</p>
+</blockquote>
+</li>
+<li><p>strict, strain, string=tighten<br>structl stretch  收敛</p>
+<blockquote>
+<p>绷紧的意思，凡是有str都可以看作有这种意思</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>strict<br>stricture 责难  在精神上的<br>constrict 压缩<br>constriction<br>stringency 严格，紧绷<br>stringent 严厉的<br>constringe 使收缩<br>strain 疲劳 // 换掉了a字母和i字母，所谓的元音替换意思不变<br>constrain 抑制，拘束<br>constraint 抑制<br>overstain 过度紧张<br>restrain 反复地拉，阻止<br>restrict 限制<br>restraint 克制   // constraint 直接加t变为名词</p>
+</blockquote>
+<p>The Motion Picture Association of America</p>
+<ul>
+<li>G  General</li>
+<li>M  Middle</li>
+<li>R Restricted 色情，暴力</li>
+<li>X 严加限制级，来自于罗马数字10</li>
+</ul>
+<ol start="13">
+<li>sur=sure 确定<blockquote>
+<p>sur=sure &lt;- secure &lt;- se(sed)+cure(care)</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>assure 保证，使确信  // a, 有种使动的感觉<br>reassure 使安心<br>surety 担保，保证<br>insurance 保险<br>assurance 确信<br>censure 责难  // cen集中，大家一块来<br>assuredly 确实地，确信的</p>
+</blockquote>
+<ol start="14">
+<li><p>term=limit, end, boundary</p>
+<blockquote>
+<p>terminal 终点站<br>terminate 终止，结束<br>termination 终止<br>terminer 判决，终止<br>terminus 终点，界标<br>terminology 术语学 // 范围内的东西，边界<br>determine 决定  // de? 去的感觉<br>determined 坚决的<br>interminable 无限的 // inter在什么里面，不终结的？？<br>exterminate 消除 // ex=out</p>
+</blockquote>
+</li>
+<li><p>treat=handle</p>
+<blockquote>
+<p>tract 物理中有讲过，可以拉的意思，所以为处理</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>treaty 条约<br>treatment 对待，处理<br>maltreat 虐待  // mal表示坏的<br>retreat 撤退  // re=back, 往回对待<br>entreat 祈求 // en=to<br>entreaty 祈求<br>treatise 论文 // -ise名词后缀</p>
+</blockquote>
+<h3 id="3-13-校园生活类词根"><a href="#3-13-校园生活类词根" class="headerlink" title="3.13 校园生活类词根"></a>3.13 校园生活类词根</h3><ol>
+<li>act = to do, to drive<blockquote>
+<p>g=ct  -&gt;  ag,act=to act, to drive</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>active, activity,<br>activate, inactivity<br>actual真实的  actualize 实现，实施<br>exact 精确的 ex+act, force out,   demanding, right<br>interact // 在里面动， 相互的<br>react  起反应 //<br>enact 颁布 //en=do<br>transact 交易，办理 // trans变化 + change<br>counteract 中和 // count 反,  act=to do<br>agenda: things to be done<br>agile 敏捷的 // ag=to do, ile名词后缀<br>agitate agitating 煽动<br>agent 机构，试剂, agency coagent 合作者，帮手</p>
+</blockquote>
+<ol start="2">
+<li><p>alter, altern = other = o(al=beyond) + t(h)er = to change</p>
+<blockquote>
+<p>alter , alterable可以改变的, alteration<br>alternate 轮流，记忆<br>alternative 选择性的， 可供选择的选项 // ive结尾的名词， detective<br>alien 外来的 The night sounds grew louder</p>
+</blockquote>
+</li>
+<li><p>don, dot=give</p>
+<blockquote>
+<p>donate 捐赠<br>donor 捐赠<br>condone 宽恕 // 给你一些权力<br>antidote 解毒药<br>condition 条件<br>tradition 习惯<br>edit 编辑<br>editorial 编辑（人）<br>extradite 引渡<br>extradition 引渡<br>pardon 原谅 // pardon? 有什么问题吗 par,per-through, thoroughly<br>anecdote = an+ex+dote = not + out + give =  secret to private stories<br>rendition 表演，演唱，翻译 // render=re+der=give back, yield, present,deliver</p>
+</blockquote>
+</li>
+<li><p>cre,creates=grow, make</p>
+<blockquote>
+<p>create<br>procreate procreative 有生育能力的，生产的 // pro=pre 向前<br>increase increment 增加 // in 里面增加<br>decrease decrement 减少  // de 不增加<br>recreate // re 再次产生 娱乐，消遣<br>concrete 具体的，（引申为具体的名词）混泥土<br>crescent  新月形的，逐渐增加的 // cre像月亮的<br>decrescent 逐渐减少的</p>
+</blockquote>
+</li>
+<li><p>mir=look, laugh, wonder</p>
+<blockquote>
+<p>mir=look, laugh, wonder&lt;- s(mile)</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>miracle 奇迹 // wondered<br>miraculous 神奇的<br>mirror<br>mirage 海市蜃楼，幻想<br>mirth 收集，高兴<br>admire admiration 钦佩</p>
+</blockquote>
+<ol start="6">
+<li><p>not(e)=obeserve, mark=know</p>
+<blockquote>
+<p>notable 著名的，值得注意的<br>notice 通知，布告<br>notify 通报<br>notion 概念，想法，一件<br>denote 附录<br>denotation 指示</p>
+</blockquote>
+</li>
+<li><p>nounce, nunci=speak, shout</p>
+<blockquote>
+<p>nounce, nunci=speak,shout // un-&gt;ou<br>announce // 说出来<br>announcement<br>announcer<br>enunciate 阐明 // en=out<br>annunciate 通告<br>pronounce 宣告<br>pronounced 明确的，显著的<br>renounce = give up 断绝关系 // out<br>denounce = accuse 谴责 // back</p>
+</blockquote>
+</li>
+<li><p>pend, pens=hang 挂坠</p>
+<blockquote>
+<p>pendant 垂饰<br>pending 悬而未决的<br>inpending 迫近的<br>perpendicular 垂直的<br>depend 依赖<br>dependent 依靠的<br>dependant // ! n. 侍从，食客<br>independent 独立的<br>suspend -&gt; suspense -&gt; suspension老的时候赖以生存的东西<br>append 增加<br>appendage<br>appendix 附录</p>
+</blockquote>
+</li>
+<li><p>pend, pens, pond = (s)pend; to pull, stretch, weight, expend</p>
+<blockquote>
+<p>expend -&gt; expenditure 支出<br>pension 养老金<br>compensate 偿还, 补偿<br>recompense 报偿<br>dispense 分配<br>dispensable 可有可无的<br>dispensary 诊所，花钱的地方<br>pensive 问题进行延展  沉思的<br>perpend 向前延展 仔细考虑<br>ponder 思考<br>ponderance 平展<br>ponderous 笨重的 // 胖的要死<br>propensity 热身</p>
+</blockquote>
+</li>
+<li><p>pli, ple, plen, plet=to be full, fill; p  ly-&gt; ply</p>
+<blockquote>
+<p>plenary plen多 完全的，绝对的<br>plenty 丰富、大量<br>plentitude 充分<br>complement 补足物 // com 一块<br>supplement 补充 // sup 下<br>implement 工具，实现 // im=in 往里面<br>deplete 耗尽 // de=not<br>replenish 补充<br>replete 充满的 //<br>accomplish 达到 // ac补充</p>
+</blockquote>
+</li>
+<li><p>pli, ple, ply=fold; pl-it-&gt;pli 来自于辫子</p>
+<blockquote>
+<p>ply: 不断地做，折叠，层 eg1: The market traders noisily ply their wares.  eg2: three ply recycled paper<br>complicate  // 一起折 复杂<br>complication  // 并发症， 有多种名词化的方式，各自有什么选择的余地  tion,  ity, cacy, ary, or, er<br>explicate 说明 // ex=out<br>explicable<br>explicit 清楚的，直率的<br>implicit 含蓄的 // im=in<br>implicate 暗示，牵连<br>replicate 复制<br>replica 复制品<br>pliable 易弯的<br>supplicant 恳求者 // sup向下的<br>accompice 帮凶 // ac强调<br>complicity 同谋  // 注意末尾为ity和ation是不一样的，是否变形也不一样？？<br>duplicity 狡猾，奸诈</p>
+</blockquote>
+</li>
+<li><p>plex=fold</p>
+<blockquote>
+<p>complex 复杂的<br>duplex 两倍的，双重的<br>composed of two parts du=duo=two<br>complextion 肤色，局面<br>e.g. The American complexion visibly darkened in the 1980s.<br>perplex 困惑 // per=total<br>perplexed 困惑的</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="3-13-8"><a href="#3-13-8" class="headerlink" title="3.13.8"></a>3.13.8</h4><ol>
+<li>port<ul>
+<li>carry<blockquote>
+<p>import 进口<br>export 出口<br>support 支持<br>transport // trans=ver  交通<br>purport v. 标榜 n. 主旨大意</p>
+</blockquote>
+</li>
+<li>take<blockquote>
+<p>protable 轻便的<br>portage 搬运<br>porter 守门人<br>comport 表现，水果盘<br>comportment 举止，行为<br>disport 向四面八方带 玩耍<br>deport 1. 驱逐 deportation 2. 举止 deportment sym. comportment<br>apportion 分配<br>portfolio 投资组合，部长职务 // port=take</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>press<blockquote>
+<p>pressure<br> express 往外面压 表达，快速的  expression 高速公路<br> compress  压缩 compressible compression // ible, able 可以什么的<br> depress 沮丧 depressed depression<br> impress 盖印<br> oppress // 加强  压迫，压抑<br> repress 再压 抑制，镇压<br> suppress -&gt; suppression 镇压</p>
+</blockquote>
+</li>
+<li>pute=to think,  pruno梅干？，修剪 变体得到pute<blockquote>
+<p>compute 计算<br> computable<br> computer // +r也可以变成名词<br> dispute  // 向四面八方不停地想  dis=away<br> disputable<br> disputatious 争论<br> impute //im有种强加于某人身上的感觉  指责。归因于<br> repute 再次想 名气<br> reputation 名誉，名声<br> disrepute 坏名声  // dis=坏</p>
+</blockquote>
+</li>
+<li>quest, quer, quir, quis=seek,search<blockquote>
+<p>quest 请求<br> question<br> query 询问，怀疑<br> inquest 审讯（不能将自己的想法强加于人）<br> inquire(enquire 变体) 询问<br> inquiry 调查，质询<br> acquire -&gt; acquired -&gt; acquistive -&gt; acquirement 获得<br> require 要求，命令<br> request 要求<br> requisite 必备的，必需品<br> prerequisite 先决条件<br> conquer 克服，展示<br> conquest 克服，战胜<br> disquisition 专题论文, 对一个问题的寻求</p>
+</blockquote>
+</li>
+<li>scend,scent, scens=climb<blockquote>
+<p>ascend 攀登，上升  //cend??<br> descend 下降<br> descent 降下，出生，猛攻<br> condescent 屈尊，谦逊 to yield deferentially<br> transcend 超越，胜过<br> descendant 子孙，后代 // de向下 ant表示人</p>
+</blockquote>
+</li>
+<li>sid=sit<blockquote>
+<p>reside 居住<br> residence 住处<br> residue 残余<br> preside 在前面坐, 主持<br> president 主题<br> presidium 主席团<br> subside // 用于保证生活的 补贴金<br> subsidiary 下沉<br> subsidy 辅助的<br> dissidence 意见不同<br> dissident 唱反调者<br> consider 考虑<br> considerate 体贴的<br> insidious 隐藏轨迹的<br> assiduous 勤奋的<br> sedate 镇静<br> sedulous 坚韧不拔的<br> supersede 取代 // sup在上面坐<br> sedentary  久坐的</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="3-13-9"><a href="#3-13-9" class="headerlink" title="3.13.9"></a>3.13.9</h4><p>stand<br>    - st, sta<br>        &gt; stable 稳定的<br>        obstacle 障碍<br>    - stant, stat, stan<br>        &gt; instant 立即的<br>        instantaneous 瞬间的<br>        stature 雕像<br>        status 身份<br>        stationery 文具，信纸<br>        stationary 固定的<br>        state 描述，国家<br>    - sist<br>        &gt; assit 协助<br>        desist 终止<br>        exist 存在<br>        insist 坚持  // 短期坚持<br>        persist 坚持 // per, 全部的，时间较长<br>        resist 抵抗 // re再一次，反</p>
+<ol>
+<li><p>st,sta = stand</p>
+<blockquote>
+<p>stable 稳定的<br>stabilty<br>stabilization 稳定性<br>obstacle 障碍<br>stamina 体力，耐力<br>steadfast 坚定的<br>homestead 家园，田产</p>
+</blockquote>
+</li>
+<li><p>stant, sta,stan</p>
+<blockquote>
+<p>instant 立即的<br>instance 情况<br>instantaneous 瞬间的<br>state<br>stateliness 威严，庄重<br>statement<br>stationary 固定的<br>stationery 文具，信纸<br>statue 雕像<br>status 身份，地位<br>statute 法令，条例<br>constant 衡量，不变的<br>substance 物质<br>substantial 坚固的，真实的<br>substantive 独立存在的<br>distant 远的<br>distance 距离<br>equidistance 等距离<br>circumstance 情况，环境  // 绕着圈站<br>estate 房地产，财产<br>static 静态的<br>statistics 统计学<br>obstinate 顽固的<br>obstinacy 固执  // ob反<br>stagnant 停滞的，迟钝的<br>withstand 抵挡，经受住<br>apostate 变节者，背叛者 // ap=off, 远离<br>apostasy 脱党，背叛</p>
+</blockquote>
+</li>
+<li><p>sist=stand</p>
+<blockquote>
+<p>assist<br>assistant 助手 //!, 注意是a<br>assitance 援助<br>consist 一致<br>consistence 连贯<br>desist 终止<br>exist<br>existence 存在<br>insist<br>insistence 坚持<br>persist<br>persisitence 坚持<br>resist<br>resistance 反抗 // 注意名词是a<br>irresistible 不可抵抗的<br>subsist 坚持下去，存在</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="3-13-10-simil-simul-sembl-spects-spic-spir"><a href="#3-13-10-simil-simul-sembl-spects-spic-spir" class="headerlink" title="3.13.10 simil,simul,sembl,spects,spic,spir"></a>3.13.10 simil,simul,sembl,spects,spic,spir</h4><ol>
+<li><p>simil, simul, sembl=alike, same // 只是将same对应的原因位置的单词进行了替换，如此而已</p>
+<blockquote>
+<p>similar 相似的<br>similarity<br>simile 明喻<br>similitude 相似<br>dissimilar 不同的<br>assimilate 吸收 // as强调<br>facsimile 募写，传真 // fac=do<br>verisimilar 好像真实的<br>simulate<br>simulation 模拟<br>simultaneous 同时发生的<br>simulaneity 同时的<br>semblance 外表<br>resemble 相似<br>assemble 组装<br>dissemble 掩饰</p>
+</blockquote>
+</li>
+<li><p>spect, spic</p>
+<ul>
+<li><p>look, see,scope</p>
+<blockquote>
+<p>expect 期待<br>   aspect 面貌，外表<br>   inspect 检查<br>   respect 尊敬<br>   respectable 可敬的 //-able sb 值得被<br>   respectful 尊重人的 //-ful sb是一个  sb.的人<br>   respective 分别的，各自的<br>   prospect 期望<br>   prospective 预期的<br>   prospectus 间接<br>   retrospect 回顾<br>   retrospective 回顾的<br>   suspect 怀疑 // 往下面看<br>   suspicion 怀疑<br>   suspicious 可疑的<br>   specious 华而不实的 // 看得好的<br>   spectate 观看<br>   spectator 观众<br>   spectacular 壮观的<br>   speculate 推测，思索，投机<br>   auspice 吉兆<br>   auspicious 幸运的  awi(bird)+spec  aviary<br>   conspicuous 显著的<br>   despise 轻视<br>   despicable 可鄙的<br>   perspective 透视法<br>   perspicacious 具有洞察力的<br>   circumspect 慎重的  // cascade 小瀑布</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Olympics Rehearsal</span><br><span class="line">Fireworks cascade above the Olympic National Stadium in Beijing, July 16, 2008. The Olympic National Stadium is known as the &quot;Bird&apos;s Nest&quot;. Red is an auspicious color in China, associated with protection and prosperity.</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>kind</p>
+<blockquote>
+<p>special // 具体某个种类后<br>   specialize 专门研究 // ize动词化<br>   speciality 特性 // ity<br>   specific 特别的<br>   specification 规范，说明书<br>   species 种类<br>   specimen 范例，样本<br>   consepcific 同种的</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>spir=breathe, spit-&gt; spirit=soul, courage, vigor, breath</p>
+<blockquote>
+<p>spirit<br> spirited 有精神的<br> spiritual<br> dispirit<br> aspire 热望<br> aspiring 积极的<br> aspiration 渴望<br> conspire<br> conspiracy 阴谋<br> expire<br> expiration 期满 // 信用卡上<br> inspire<br> inspiration 灵感<br> perspire 出汗<br> respire<br> respiration 呼吸<br> transpire // trans=vert  蒸发</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="3-13-11-sum-tain-ten-tin-turb"><a href="#3-13-11-sum-tain-ten-tin-turb" class="headerlink" title="3.13.11 sum, tain, ten, tin, turb"></a>3.13.11 sum, tain, ten, tin, turb</h4><ol>
+<li><p>sum</p>
+<ul>
+<li>total super<blockquote>
+<p>sum 总和<br>  summary 概要。摘要<br>  summation 总和，合计<br>  summit 顶点<br>  summon 号召，召唤<br>  summa corn laude 享有最高荣誉<br>  super with laude</p>
+</blockquote>
+</li>
+<li>to take up 占据<blockquote>
+<p>exempt   exempt(sum)  不再占据，豁免<br>  sumptuous 奢侈的 // ous的感觉，一种程度加多的感觉，添加一种程度<br>  sumptuary 禁止奢侈的 //-ary !!!!<br>  assume 假定，承担 // 加强占据<br>  assumption 假定，假设<br>  consume // 一块占据，消费<br>  consumer 消费者 // 有e直接加r<br>  resume 恢复，重新占用<br>  presume 假定<br>  presumption 假定</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>tag, tac(t), tig, ting = tangent, touch</p>
+<blockquote>
+<p>tactual 触觉的<br> tactility 触感<br> attach 联系<br> attached<br> attachment<br> contact 联系<br> contagion 传染  // tagi-<br> contagious 传染性的  // i<br> contiguous 毗邻的，接近的  // tigu-<br> contingent 视具体情况而定的<br> contingency 可能性<br> intact 完整的，未动过的 // 在里面<br> tactics 战术，策略<br> tangible 可触摸的<br> intangible 感觉不到的</p>
+</blockquote>
+</li>
+<li><p>tain, ten, tin=tangent -&gt; hold</p>
+<blockquote>
+<p>attain 达到<br> attainment<br> attainable<br> maintain // main手，用手握住<br> maintence 保持<br> sustain 支撑<br> sustenance  // sus在下面<br> tenable 可坚持的<br> tenacity 坚韧的<br> untenable 站不住脚的<br> content 满意的 // 一起hold<br> discontent 不满的<br> pertinent 有关的<br> impertinent 无关的，鲁莽的<br> tenant 顾客<br> tenancy 租赁<br> tenure 任期<br> detain 拘留<br> pertain 适合。，属于<br> countenance 面容，表情<br> retain 保持<br> retention 记忆力<br> abstinence away from hold 放弃，禁绝</p>
+</blockquote>
+</li>
+<li><p>tend, tent, tens=stretch</p>
+<blockquote>
+<p>tend 趋势<br> tendency 倾向<br> trend 倾向<br> attend 参加<br> attendant 服务员<br> attentive 留心的<br> extend 延展<br> extensive 广阔的<br> intense 强烈的<br> intension 紧张的<br> intensify 加强，强化 //ify 动词<br> pretend 在前面拉，假装的 假装<br> pretension 借口，自负<br> pretentious 自命不凡的<br> distend 扩大 //dis=away<br> contend 斗争</p>
+</blockquote>
+</li>
+<li><p>tom=cut</p>
+<blockquote>
+<p>atom 不能切 原子<br> tome 卷，册<br> epitome 摘要<br> epitomize 摘要<br> anatomy 解剖  // ana &lt;- animal<br> anthropotomy 人体解剖 // anthro 人</p>
+</blockquote>
+</li>
+<li><p>turb=stir 搅拌的;  turb=stir &lt;- turb = turmoil 乱</p>
+<blockquote>
+<p>disturb 扰乱<br> disturbance 扰乱<br> turbulence 骚乱，紊乱<br> turbulent 狂暴的<br> turbid 浑浊的<br> turbine 涡轮<br> perturb 使烦恼  // per 全都<br> perturbative 不安的</p>
+</blockquote>
+</li>
+<li><p>us, ut=use</p>
+<blockquote>
+<p>usage 使用<br> utilize 利用<br> usual 通常的   -&gt; unusual<br> abuse // ab=not,  滥用<br> abusive<br> disabuse 纠正<br> misuse 误用<br> utilize 利用<br> utility 有用<br> utilitarian 功利的 //-ian<br> utensil 器具<br> usurp 篡夺  usu(use) + rp(rape) 使用强权</p>
+</blockquote>
+</li>
+<li><p>ven, vent=come;  venue=a place for event -&gt; come</p>
+<blockquote>
+<p>advent 来临，出现<br> adventure 冒险<br> adventurous 冒险的 //去e加ous<br> adventurer 冒险家<br> venture 冒险，投机<br> venturesome 冒险的<br> convene 召集，集合<br> convention 打会，协定<br> conventionality 常规，老套<br> event 时间<br> eventful<br> eventual 最后的<br> eventuality 可能性的<br> invent //快来   发明<br> inventive 创造的<br> convene 召集<br> convenience 方便<br> revenue 收入<br> avenue 大街 // 用来走路的大街<br> contravene // contra 反  违反<br> convenant 契约<br> intervene 干涉 // inter 在里面<br> inventory 详细目录，存货清单</p>
+</blockquote>
+</li>
+<li><p>vail,val</p>
+<ul>
+<li>valid: be of use<blockquote>
+<p>avail 有助 eg; My daughter did not avail herself of my advice. avail of = take advantage of<br>  available<br>  invalid 病人<br>  invalidate 使..无效</p>
+</blockquote>
+</li>
+<li>strong<blockquote>
+<p>prevail 盛行<br>  prevailing 流行的<br>  prevalence 流行<br>  valor 英勇<br>  valiant 勇敢的</p>
+</blockquote>
+</li>
+<li>value<blockquote>
+<p>valuable 有价值的<br>  evaluate 评价<br>  devaluate 贬值<br>  undervalue 低估<br>  equivalence 等值<br>  equivalent 相等的<br>  invaluable 无价的  indispensable 不可缺少的</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/18/TOEFL-word/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/18/TOEFL-word/" class="post-title-link" itemprop="url">TOEFL word</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-18 19:51:50" itemprop="dateCreated datePublished" datetime="2019-09-18T19:51:50+08:00">2019-09-18</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-19 10:52:26" itemprop="dateModified" datetime="2019-09-19T10:52:26+08:00">2019-09-19</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/" itemprop="url" rel="index"><span itemprop="name">english</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/TOEFL/" itemprop="url" rel="index"><span itemprop="name">TOEFL</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/TOEFL/word/" itemprop="url" rel="index"><span itemprop="name">word</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-词汇发音"><a href="#1-词汇发音" class="headerlink" title="1. 词汇发音"></a>1. 词汇发音</h2><p>如何发重音<br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80ODI1MTM4Ng==" title="https://zhuanlan.zhihu.com/p/48251386">https://zhuanlan.zhihu.com/p/48251386<i class="fa fa-external-link"></i></span></p>
+<h2 id="2-词汇记忆"><a href="#2-词汇记忆" class="headerlink" title="2. 词汇记忆"></a>2. 词汇记忆</h2><h3 id="2-1-问题"><a href="#2-1-问题" class="headerlink" title="2.1. 问题"></a>2.1. 问题</h3><p>单词记忆的频率问题<br>单词记忆的手段问题：</p>
+<ol>
+<li>单词书：不符合大脑记忆方式</li>
+<li>英语教材： 单一的媒介</li>
+</ol>
+<p>单词记忆的心理问题：广为流传的50%，60%理论，信心</p>
+<h3 id="2-2-解决办法"><a href="#2-2-解决办法" class="headerlink" title="2.2. 解决办法"></a>2.2. 解决办法</h3><p>物质层面<br>精神层面</p>
+<blockquote>
+<p>一开始造词时，词语的意思往往都是物质层面的意思。所以需要我们进行扩展，引申和联想到精神层面的意思去<br>例子: constraction</p>
+</blockquote>
+<p>频率——战术：多量多次记忆，等差数列记忆法<br>单词什么时候复习？ 隔等差数列的天数后进行复习（0,1,3,4,5)<br>字典：韦式字典<br>参考书选定一本</p>
+<p>战术——重复+一次性记忆特征足够明显的单词+多媒体爆炸</p>
+<blockquote>
+<p>di=not, away<br>digress 物质上离开； 精神上涣散<br>词根记忆法<br>典故法： narcissus 自恋，水仙话<br>分类法，词以类记</p>
+</blockquote>
+<h2 id="3-单词分类"><a href="#3-单词分类" class="headerlink" title="3. 单词分类"></a>3. 单词分类</h2><blockquote>
+<p>必须认识到单词具有以下几种情况：</p>
+</blockquote>
+<ol>
+<li>可拆分单词，很容易地可以通过词根、词缀来判断出单词的意思</li>
+<li>不可拆分单词，很难拆分，按照死记硬背的方法</li>
+</ol>
+<h2 id="4-按规则出牌-词根"><a href="#4-按规则出牌-词根" class="headerlink" title="4. 按规则出牌- 词根"></a>4. 按规则出牌- 词根</h2><h3 id="4-1-学术生活类"><a href="#4-1-学术生活类" class="headerlink" title="4.1 学术生活类"></a>4.1 学术生活类</h3><ul>
+<li><p>例子</p>
+<ul>
+<li>meter<ul>
+<li>measure: 测量<blockquote>
+<p>optometer; //opt表示光  视力计<br>  optometrist 验光师  //ist表示人<br>  dromometer // dromo速度 速度计<br>  odometer // odo距离,里程  里程表<br>  telemeter // tele距离 测距计<br>  densimeter  密度集<br>  altimeter // alt &lt;- tall(词源法) 高度计<br>  thermometer // ther温度 温度计 ？？？中间o是干什么的？元音起到的作用：元音连字符，为了使单词读起来是连贯的；可有可无<br>  barometer //baro阻止  气压计</p>
+</blockquote>
+</li>
+<li>dimension 尺度<blockquote>
+<p>kilometer // kil=mil 千;  千米<br>  hectometer 百米 100 // hect=cent<br>  decameter 十米  //deca  Decemeber十二月，农历每年3月为第一个月<br>  decimeter  分米 // deci<br>  centimeter 厘米 1/100 century<br>  millimeter // 毫米  million</p>
+</blockquote>
+</li>
+<li>geometry 几何学<blockquote>
+<p>几何学引入测量<br>  perimeter  // re=repeat,back; di,dis=no,away,apart; per=thoroughly,贬义（为后面的词根产生贬义色彩）; 全部测量 周长<br>  diameter  // dia穿过去  直径  dialog 对话   /di’amter/</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>bar 物质层面——杆，精神层面——阻止，阻拦<blockquote>
+<p>baritone // tone声音  男中音<br>  barrister //er表示对应的人，阻止坏事情发生的人 律师，诉讼律师<br>  embarrassed 尴尬的    </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>学术类词根</p>
+<ul>
+<li>sci=to know<ul>
+<li>sci = to know:  conscious // con+sci 有意识的 deliberate, intentional<blockquote>
+<p>subconscious  潜意识的<br>  nescient 无知的  // ne-no<br>  omniscient 博识的 // omn=over 全部知道</p>
+</blockquote>
+</li>
+<li>science = knowledge: conscientious //有良心和道德的 diligently  1. sense of moral goodness; 2. meticulous, careful;<blockquote>
+<p>conscience 良心<br> prescience 预知<br> pseudoscience 伪科学 // pseudo 假的，错误的</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>log=Greek word”logos”<ul>
+<li>word/speech-&gt; logue<blockquote>
+<p>eulogy //eu优  说好话 赞词<br>  monologue 独白<br>  neologism // neu new新 新语</p>
+</blockquote>
+</li>
+<li>reason/idea-&gt; logic<blockquote>
+<p>anthropology // anthr人 人类学  sociology 社会学  geneology基因学   theology // the神， 神学<br>  psychology //psy心理 心理学   chronology 年代学  physiology // phy身体的 生理学<br>  histology 组织学  neurolog y 神经学  embryology 胚胎学</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>nomy<blockquote>
+<p>economy</p>
+<pre><code>- eco:  house, dwelling, place, habitation: village, villa, weik -&gt; eko -&gt; eco //w不发音，两个元音去掉</code></pre><p>ego  egocentric 以自我为中心 egoist 自私自利的人  // ego 自己</p>
+<pre><code>    ecosysytem, ecology //eco 房子
+- nomy: numismatics(coin, currency 货币，现金) // matics表示学科  numi 表示货币</code></pre><p>sanctioned by custom, usage and law; managed; 规则，传统，法律，管理，一个学科的知识 a field of knowledge</p>
+<pre><code>- 物质层面 具体： 规则，学科</code></pre><p>agronomy 农学 // agriculture 农业  agr 表示农业</p>
+<pre><code>    astronomy  天文学 // astr  star
+- 精神层面 抽象： 管理，法律</code></pre><p>autonomy 自治 // auto ? 自动的，也可以引申为自己的</p>
+<pre><code>autonomous a.</code></pre><p>任何词的记忆需要记住两个意思</p>
+<pre><code>abstract 摘要， 抽象  absent 缺席的，心不在焉的  surprise 突袭， 吃惊  
+dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 易感染的， 易影响的</code></pre></blockquote>
+</li>
+<li>ics : logic 学科<blockquote>
+<p>physics物理学  metaphysics形而上学  dynamics动力学  eugenics优生学  linguistics语言学 aeronautics航空学 optics光学<br>  phonetics语音学 politics政治学  statistics统计学 aesthetics美学  homiletics同性恋学  didactics教学法学<br>  pediatrics小儿科学  athletics竞技学  genetics遗传学  logistics物流学（logic 逻辑学）  dietetics营养学  mechanics力学</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>数学</p>
+<ul>
+<li>简介<ul>
+<li>mathematics  //注意这里的e不发音<blockquote>
+<p>读音时可以考虑不发音啊，还有直接通过汉语拼音来读不也是一样的吗</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>algebra代数学（等式右边的东西可以移动到左边去，等式性质不变）, arithmetric // ars/art+metrica(to measure)<blockquote>
+<p>artithmetric 算数  algebra + arithmetric = algrorithm </p>
+</blockquote>
+</li>
+<li>meter</li>
+<li>equ: equal, even相等的，偶数  balance<blockquote>
+<p>adequate  //ad加强+equ 充分的，充足的<br>  equate // ate使等于 equal  equation //等式 equator赤道<br>  equivalent// equ + val=value 等价的 equilibrium 平衡状态<br>  inequity //不平等的  equine 似马的，马的   equitation 骑术 equivocate 支吾///equ+voc=voice<br>  equanimity 沉着，镇静 // equ+animal(活的东西) 稳定的活的东西</p>
+</blockquote>
+</li>
+<li>par： equal, even  pair&lt;-paar 变成词根去掉多余的音节<blockquote>
+<p>parity 平价，相等 imparity // im否定，进入，加强 不平等<br>  compare 比较   comparison // ! 注意是ison 比较<br>  nonpareil // 不平的，无法匹及的，无与伦比的   parable 可以比较的<br>  reparable 可以修理的</p>
+</blockquote>
+</li>
+<li>numer=number<blockquote>
+<p>numerable 很多的，可数的   innumerable 很多的，不可数的  numerous 很多的，注意ous跟able修饰词的方法不同<br>  enumerate //e=out, 列举，枚举<br>  <code>Numerous studies have shown that there is a correlation between career and financial sucess and powerful precise vocabulary.</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>物理</p>
+<ul>
+<li>力<ul>
+<li>tract !!! 拉力=draw<blockquote>
+<p>traction 牵引力   tractor 拖拉机  tractable 可以拉的，(精神)可管教的   attract // a表示强调，后面词根首字母双写 吸引<br>  abstract （物质）摘要，抽象  contract // con+tract一块拉，合约，缩短<br>  detract // de=down  divert=转向(物质）；  diminish=减少，贬损（精神）<br>  distracted // dis: 低级别单词no, 高级别单词away;  divert=分散，转移 (物质)  puzzle=困惑（精神）<br>  extract 要求，拔出   protract 延长 retract 取消，缩回  subtract 减少</p>
+</blockquote>
+</li>
+<li>grav, griev=to dig, heavy; carve雕刻 c-&gt;g // 词源，所以也可以表示沉重的，坟墓等意思<blockquote>
+<p>gravity 重力  gravitate 加重<br>  aggravate 使严重  grave重<br>  grief 痛苦   grievous 痛苦的<br>  aggrieve 使痛苦 grievance 不平，委屈<br>  grave 1. 沉重的；阴沉的 2. 坟墓 3. 雕刻<br>  cradle-to-grave cradle摇篮，人出生的   一生一世，时间长久<br>  gravid(pregnant) 怀孕的 -&gt;gravida 孕妇</p>
+</blockquote>
+</li>
+<li>pel, puls=drive, push, shake, swing<blockquote>
+<p>expel 驱逐 impel 推进 dispel 消散  repel 击退  propel 推进，驱使<br>  compel 强迫 appellant 上诉的，上诉人 //a+pp  ant人<br>  expulse 开出  impulse 冲动 repulse 拒绝，反驳，击退 complusion 强迫 propulsion 推进<br>  pulse 脉搏，脉冲  pulsate 有规律的跳动</p>
+</blockquote>
+</li>
+<li>mob move; disorderly part of the population,rabble乌合之众<blockquote>
+<p>mobile 可移动的  automobile 汽车//bile弱化 demobilize 复员</p>
+</blockquote>
+</li>
+<li>mot<ul>
+<li>move<blockquote>
+<p>motion 运动 locomotion 移动 motive 动机   motivation 动机<br>  remote 遥远  commotion 骚动，暴乱 // con+mot一块动  promote 促进，促销  demote 降级，降职<br>  emotion 感情//e=out momentum 动力，要素   moment 瞬间，片刻的</p>
+</blockquote>
+</li>
+<li>a witty saying //witty 诙谐的<blockquote>
+<p>motto 格言   motif 主题</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>celer=quick, speed, swift    c=k,  kel=to drive,set in swift motion(gallop) kelt凯尔特人，狂热的战争爱好者<blockquote>
+<p>celerity  速度    accelerate 加速   decelerate </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>热<ul>
+<li>therm=heat, ghwerm, warm<blockquote>
+<p>thermal thrmos 热水瓶   thermometer 温度计  diathermal  //dia穿过  透热的<br>  isotherm //iso相同 等温线  endothermic 吸热的，恒温动物  exothermic 放热的</p>
+</blockquote>
+</li>
+<li>calori=heat <blockquote>
+<p>calorie 卡路里  calorify 加热   calorifacient 发热的   caldron 大锅  coddles 溺爱<br>  scald 烫伤 //s对意思影响不大,slow  chafe 恼火   nonchalance  冷淡</p>
+</blockquote>
+</li>
+<li>frig,friger=cold <blockquote>
+<p>frigid 冷的，冷淡的    refrigerator 冰箱  refrigerate 让…变冷的 refrigerant 制冷的，冷却剂 frost 霜，冻</p>
+</blockquote>
+</li>
+<li>ferv!! = boil 沸、热 &lt;- brew -&gt; frew -&gt;ferv <blockquote>
+<p>fervid (sym: impassioned)  热心的 perfervid 非常热心的  fervent 炽热的  fervor 热情<br>  fervescent:growing hot  defervesce 退热   effervesce 冒泡，兴奋</p>
+</blockquote>
+</li>
+<li>zeal： ardor<blockquote>
+<p>zeal 热情，热心   zealous热心的   zealot 狂热者  jealous 嫉妒的，质疑的</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>声<ul>
+<li>son=sound<blockquote>
+<p>sonic 音速的   supersonic 超音速的  sony 索尼  dissonance 不和谐 // 有着不的声音<br>  consonance  调和   resonance 回声   sonata 奏鸣去  sonnet 十四行</p>
+</blockquote>
+</li>
+<li>voc, vok!! = call, voice<blockquote>
+<p>vocal(vocalist) 有声的（声乐家）  vocation   （vacation假期）/ avocation 职业，号召/副业<br>  vocabulary 词汇   vociferous 大声叫的，喊叫的 //ferous带有什么的  advocate  advocator 提倡 // ad=to, voc=voice<br>  convoke  convocation召集   revoke 废除，取消<br>  revocable irrevocable<br>  evoke 唤起  vouch担保，证明<br>  equivoke 双关语 wordplay   equivocate  使模糊，欺骗lie     invoke(request)–invocatory<br>  provoke 激怒，煽动  provocative 煽动的</p>
+</blockquote>
+</li>
+<li>audi,audit=hear<blockquote>
+<p>audit 审计，旁听   audible 听得见的 audience 听众的  audition 试听，听</p>
+</blockquote>
+</li>
+<li>tone=sound tongue tungue<blockquote>
+<p>monotonous 单调的，无音调的   baritone 男中音  tenet:a principle ,belief,or doctrine generally, hold to be true原则</p>
+</blockquote>
+</li>
+<li>phony=fame 名词后缀，常用来形容声音怎么样<blockquote>
+<p>euphony 悦耳之声//eu好的  cacophony caco: kakos  bad,evil  symphony</p>
+</blockquote>
+</li>
+<li>plod 砰地一声 大声，喝彩<blockquote>
+<p>applaud  explode  implode 沉重的脚步</p>
+</blockquote>
+</li>
+<li>verber=beat,vibrate振动，wipe擦，wag摇<blockquote>
+<p>reverberatem  vervain</p>
+</blockquote>
+</li>
+<li>echo=sound<blockquote>
+<p>anechoic 没有回声的</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>光<ul>
+<li>lumin=light lumen光通量单位  启发，单指光<blockquote>
+<p>illuminate  阐明,  luminary 知识渊博的人,  luminous 发光的  luminosity发光度  luminescent发光度</p>
+</blockquote>
+</li>
+<li>lustr,luc=light  lust:desire,wish,longing<blockquote>
+<p>lustre 光彩  lustrous  lackluster   illustrate 说明  illustrious 接触的 lucid清晰<br>  elucidate 阐明  translucent 半透明的</p>
+</blockquote>
+</li>
+<li>light<blockquote>
+<p>lighter   lightproof   enlighten  twilight</p>
+</blockquote>
+</li>
+<li>radi=ray,  radius-&gt; root<blockquote>
+<p>radio, radioactive  radiat; radical, radicle, radix</p>
+</blockquote>
+</li>
+<li>cand=white, glow 烛光<blockquote>
+<p>candle, candid  candescent  incendiary   incense</p>
+</blockquote>
+</li>
+<li>flect,flex=bend弯曲<blockquote>
+<p>reflect,  reflract \frac=break;  deflex</p>
+</blockquote>
+</li>
+<li>sol=sun,  sole<blockquote>
+<p>solor太阳的 solarize 晒 solace 安慰 console; sole, solitary 孤独的</p>
+</blockquote>
+</li>
+<li>sight=vision<blockquote>
+<p>sightly=attractive   long-sighted   insight  oversight</p>
+</blockquote>
+</li>
+<li>splend=be right,shine, gleam, glisten<blockquote>
+<p>splendid,  splendor</p>
+</blockquote>
+</li>
+<li>vis,vid=to see, to know, wise; separate<blockquote>
+<p>visible vision visualize supervise  envy  provide; divide, dividend  devise</p>
+</blockquote>
+</li>
+<li>opt,opto=sight eye oqw<blockquote>
+<p>optic,  optometrist   synopsis optics</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>电<ul>
+<li>electro=electric, electricity<blockquote>
+<p>electron, hydroelectric  electrocution<br>  -on表示微粒, neutron 中子 photon 光子  proton 质子 radion 放射微粒</p>
+</blockquote>
+</li>
+<li>tele=distant <blockquote>
+<p>telephone, telegraph, telescope,  telemeter</p>
+</blockquote>
+</li>
+<li>Z 闪电 快<blockquote>
+<p>zigzag  zag  zenith天顶  zephyr西风  zipppy qucikly, strikingly fresh,lively<br>  zip=move rapidly, 拉链<br>  zombie  omb 降起物  tomb 坟墓  bomb 炸弹  comb 梳子  womb梳子</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>化学</p>
+<ul>
+<li>组成性质<ul>
+<li>pos, posit = put, pause ???<blockquote>
+<p>pose  position   purpose  positive  opposite  composite复合 composure沉着<br>  discompose分解</p>
+</blockquote>
+<ul>
+<li>down-de   depose: 1. dethrone;  2. put down, deposit沉积 3. testify</li>
+<li>apart-dis dispose: 1. put in place放置 2. give a tendency,being leaning倚 toward</li>
+<li>apposite  ap+pos 一再； 特别地</li>
+<li>repose: 1.repose 安置，依靠; 2. repose(pause) 休息，睡眠</li>
+</ul>
+</li>
+<li>pon,pound=put, pause ?<blockquote>
+<p>component 成分  compound 混合物  opponent 对手  propone 提议<br>  propone 提议</p>
+</blockquote>
+</li>
+<li>part, port=part<blockquote>
+<p>particle 例子  partisan  partisanship   biparisan<br>  divide portion  apportion  proportion  disproportion<br>  depart   department   apartment   partner    partial</p>
+</blockquote>
+</li>
+<li>mini <blockquote>
+<p>minimal , minimum,  minister部长  administer管理 minion minor </p>
+</blockquote>
+</li>
+<li>micro<blockquote>
+<p>microsoft   microscope   microbiology  microfilm</p>
+</blockquote>
+</li>
+<li>macro 宏观<blockquote>
+<p>macroword  macroclimate  macroscale</p>
+</blockquote>
+</li>
+<li>acid, acri, acu, acrid = sour, sharp 急剧的，尖头<blockquote>
+<p>acid, acidity, acidulous 带酸味的，尖刻的  acidify<br>  subacid   acrid, acrimony  acerbic</p>
+</blockquote>
+</li>
+<li>ac: acid =angle 尖 ?<blockquote>
+<p>acute严重的 acuity敏锐  acumen acme acupuncture  acrophobia acronym acrobat</p>
+</blockquote>
+</li>
+<li>oxy, oxi=氧<blockquote>
+<p>paroxysm   oxy-ac=sharp  oxygen sharp, generate, acidic<br>  dioxide   di-2  dilemma diplomat  diplomacy<br>  dia-穿过  diagonal  diabetes<br>  egg- 蛋， 刺激</p>
+</blockquote>
+</li>
+<li>sal = salt <blockquote>
+<p>salty 咸的  salify 使成盐  saline 含盐的 \ -line    salinity 含盐量<br>  salad  色拉，用盐做的食品  saltern 盐田<br>  salary 工资  salient 显著的 ?<br>  insul 岛屿 = in + sal<br>  insul, isol, isl=island, sole   insular</p>
+</blockquote>
+</li>
+<li>tox=poison<blockquote>
+<p>toxin 毒素  toxic 有毒的   toxication中毒  toxicology毒物学 intoxicate醉人<br>  intoxicant 醉人的   detoxify 解毒  toxophily 射箭</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>结构<ul>
+<li>struct= to build, pile堆, assemble  to spread, to stretch out, strew散播<blockquote>
+<p>structure   destructible   construct  destruct毁坏  reconstruct<br>  instruct 交道   obstruct 妨碍  instrument 工具  substructure 下部结构 supstructure 上部结构</p>
+</blockquote>
+</li>
+<li>mod=mode, manner, measure<blockquote>
+<p>modest 谦虚  modern 现代化  modify修改  commode 梳妆台<br>  acommodate: 1. provide  2. make fit 3. give consideration to</p>
+</blockquote>
+</li>
+<li>form=shape<blockquote>
+<p>formal 形式上的  formalism 形式主义 //ism什么主义的  formality 礼仪，理解<br>  formation形成，构成  formala 公式  formalate 用公式表达<br>  confom 符合   deform 变形  inform通知 twiformed 有两种形式的<br>  reform  改革  transform 转变  perform 表现</p>
+</blockquote>
+</li>
+<li>cruc, crus, crux=cross 十字形，交叉<blockquote>
+<p>crucial 关键的  crux 难点，关键（十字路口-&gt; 关键)<br>  excruciate 拷打  cruise 巡航，徘徊  crucify 钉在十字架上，折磨   crusade 改革运动</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>变化规律<ul>
+<li>norm=rule, norm<blockquote>
+<p>norm 标准  normal 正常的  abnormal 异常的  enormous 巨大的<br>  subnormal 低于正常的 transnormal 超出一般的<br>  normalization 标准化  formalism 形式主义  formality 礼仪，礼节</p>
+</blockquote>
+</li>
+<li>solve 宏观变化<ul>
+<li>solu, solv, solute=loosen, disperse分散, dissipate消散<blockquote>
+<p>so=sed,   separate=apart  solu   lu=lose<br>  absolute 绝对的  absolutism<br>  absolve 免除  absolution赦免  exculpate 赦免<br>  solvable 可以解决  solvent 溶剂，有偿付能力的  solvency 溶解力，偿付能力</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>lut, lav, luv<blockquote>
+<p>dilute</p>
+<pre><code>- di divide, separate &lt;- bi
+- lute lut,lav,luv=lave洗澡?  - wave - wash</code></pre><p>dilute 稀释  dilution</p>
+<pre><code>lavish 浪费的，奢侈的，滥用   lavatory 厕所，浴室</code></pre></blockquote>
+</li>
+<li>rupt=break, rupture<blockquote>
+<p>abrupt 猝  erupt   corrupt   interrupt 大段<br>  bankrupt 银行破产  disrupt 破坏  irrupt  冲入</p>
+</blockquote>
+</li>
+<li>spers=scatter散开  sparse稀少的<blockquote>
+<p>disperse 分散   asperse 散布坏的东西   intersperse 点缀，散布</p>
+</blockquote>
+</li>
+<li>lect,lig– 微观变换    lect,lig=chosse,  gather  lect =log<blockquote>
+<p>elect  collect    select<br>  intelligence 智力   neglect 忽视    recollect 回想  legible 清晰的，易读的<br>  eligible 合格的  elegant 优雅的 elite 精华，精英</p>
+</blockquote>
+</li>
+<li>brev, bridge=make short<blockquote>
+<p>abreviate 缩写  brief=summary   abridge 删节，精简</p>
+</blockquote>
+</li>
+<li>vers, vert=turn-over 周转  versus<blockquote>
+<p>adverse 不利的  adversity 灾难   averse 反对的  aversion厌恶<br>  avert 转移  obverse 正面，正面的   versatile 多才多艺的  version<br>  convert 变换   controvert:deny the truth of something<br>  invert 倒置，点到  revert还原  diverse 多种</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>天文</p>
+<ul>
+<li>astro, aster=star <blockquote>
+<p>astronomy    astrospace   astronaut   cosmonaut<br>  tailonaut   astrophysics   disaster灾难  disastrous<br>  catastrophe灾难</p>
+</blockquote>
+<ul>
+<li>solor system<ul>
+<li>Mercury 水星 商神、辩神、狡猾神、其他神的信史</li>
+<li>Venus  金星 美与爱神</li>
+<li>Earth 地球 土神</li>
+<li>Mars 火星 战神</li>
+<li>Jupiter 木星 主神</li>
+<li>Saturn 土星  农业神</li>
+<li>Uranus 天王星 最早神</li>
+<li>Nepture 海王星 海神</li>
+<li>Pluto 冥王星 地府之神</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>aer,aero,aeri=air, i/e互换<blockquote>
+<p>aerate 通气  aerology 气象学  aerial 天线  aerosphere大气<br>  aerospace 航天</p>
+</blockquote>
+</li>
+<li>stell=star 星星<blockquote>
+<p>stellar 恒星  interstellar 星际穿越  constellate 星座</p>
+</blockquote>
+</li>
+<li>atory:  observatory 表示场所或者地点<blockquote>
+<p>laboratory   conservatory  lavatory  purge 清洗，洗涤  purity 纯净<br>  emulsion 乳化   promulgate 发布，公布 </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>地质地理</p>
+<ul>
+<li>Chaos-&gt;Gaea-+&gt;Uranus-&gt;Titans(Cronus,chron慢性的 chronic),Cyclopes(cynosure, lope),Giants -+Chronos-&gt; Furies(Fury),Typhon, Zeus</li>
+<li>terr<ul>
+<li>piece of earth, ground and land;ters;to dry,opposed to sed;<blockquote>
+<p>terrain 地形  terrace 梯田  territory 淋雨</p>
+</blockquote>
+</li>
+<li>tres, to treamble 抖<blockquote>
+<p>terrible,  terrify,  terrific, terriorist<br>inter=in+terr;  disinter=dis+inter挖掘</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>tele: far/distant<blockquote>
+<p>telegraph, telephone, telemeter, telescope</p>
+</blockquote>
+</li>
+<li>kinds<ul>
+<li>Tectonic/Structures<ul>
+<li>Ordovician寒武纪， Jurassic 侏罗纪</li>
+<li>Convergent boundary/ Divergent boundary/ Transform boundary</li>
+<li>fold; fault;  crack, rift;</li>
+<li>cataclysm<blockquote>
+<p>cata = kakos: bad,down;  kailo=beauty,call;<br>cacophony, cacography, catalog, catastrophe, calligraphy</p>
+</blockquote>
+<ul>
+<li>earthquake<blockquote>
+<p>seismology,&lt;- seismic=shake, magnitude, epicenter(epi=upon,among) Tidal wave tsunaml</p>
+</blockquote>
+</li>
+<li>typhoon</li>
+<li>sandstorm</li>
+<li>flood</li>
+<li>tornade torn=trun </li>
+<li>snowstorm</li>
+<li>landslide</li>
+<li>cyclone</li>
+<li>hailstorm hail </li>
+<li>valcano</li>
+<li>hurricane</li>
+<li>tsunami</li>
+<li>drought</li>
+<li>lightning/thunder</li>
+<li>mud-rock flow</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Lithology 岩石学<ul>
+<li>igneous rock:  ign希腊语 fire, scarifice fire<blockquote>
+<p>ignite, ignitable, ignition<br>  grainite 花岗岩 &lt;- grain 谷物<br>  geyser 喷泉  gush 喷出</p>
+</blockquote>
+<ul>
+<li>components<ul>
+<li>Valcan 火神,  valcano-eruption</li>
+<li>magma chamber 岩浆</li>
+<li>crater 火山口</li>
+<li>lava 熔岩</li>
+<li>ash cloud/ volcanic ash 火山灰</li>
+</ul>
+</li>
+<li>kinds<ul>
+<li>active volcano</li>
+<li>dormant volcano // dorm=to sleep dormitory</li>
+<li>extinct volcano</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>sedimentary rock 沉积岩 shale 页岩</li>
+<li>metamorphic rock 变质岩 marble 大理石</li>
+</ul>
+</li>
+<li>Palenotology： fossil</li>
+<li>Remote Sensing</li>
+<li>Mineralogy 矿物学 ore, quartz, aluminum</li>
+</ul>
+</li>
+<li>Earth’s sphere structure<ul>
+<li>outer sphere<ul>
+<li>atmosphere  air </li>
+<li>hydrosphere water</li>
+<li>biosphere living things</li>
+</ul>
+</li>
+<li>interior sphere<ul>
+<li>crust 地壳</li>
+<li>matle 地幔</li>
+<li>outer core/ inner core </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>地质作用<ul>
+<li>external process: weathering风化, erosion侵蚀, sendimentation&lt;-sand风化</li>
+<li>internal process: metamorphic变质变形 mor; magmatic岩浆作用; deformation 变形破坏作用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>生物</p>
+<ul>
+<li>biology  bio-life  bi-对称的，两条腿，两条胳膊<blockquote>
+<p>biology  biosphere   biochemistry  agrobiology  biocide<br>  vi-  li- 活的 bo 植物学</p>
+</blockquote>
+</li>
+<li>herb<blockquote>
+<p>herbivorous 食草的  vor=to eat     herbaceous 草本植物的</p>
+</blockquote>
+</li>
+<li>Flora 花神   flor, flour=flower, florid 如花的<blockquote>
+<p>floral 有花的   flora 植物群  fauna 动物群<br>  floret 小花  flourish 繁荣兴旺  effloresce 开花  defloration 摘花，玷污  noctiflorous 夜间开花的</p>
+</blockquote>
+</li>
+<li>grain 粮食  acre亩 land c=g  agr,agri,agro=field, land<blockquote>
+<p>agrarian 荼毒的  agriculture 农业，农学  agronomy 农艺学</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-社会科学类-leg-script"><a href="#4-3-社会科学类-leg-script" class="headerlink" title="4.3 社会科学类 leg, script"></a>4.3 社会科学类 leg, script</h3><ul>
+<li>例子<ul>
+<li>leg 物理层面——腿，精神层面——法律<blockquote>
+<p>legal 合法的 illegal // i表示否定+双鞋<br>  legislate // 使合法<br>  illegitimate 违法的，私生的<br>  relegate 降级，流放 //repeat, back!<br>  delegate 代表 //de:down</p>
+</blockquote>
+</li>
+<li>script 写<blockquote>
+<p>manuscript 手稿  //man男人，手<br>  scripture 经文，原件 // ture名词后缀<br>  ascribe 归功于 // a强调<br>  inscribe 记下<br>  circumscribe 限制  // circum圈<br>  conscribe 强行征召 // con=together<br>  describe 描写<br>  prescribe 规定，开药 //pre=before   n. prescription 药方<br>  subscribe 捐款，订阅<br>  transcribe 抄写，转录 // transcript 成绩单</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>历史<ul>
+<li>when, where, who, what 历史研究的是什么时候，谁在哪里做了一件事</li>
+<li>chron 表示时间  Cronus 时间之神<blockquote>
+<p>chronic 慢性的  Cronus 时间之神  synchronize 同步，同时的</p>
+</blockquote>
+</li>
+<li>annual, ann, eon=year 表示时间<blockquote>
+<p>annual 每年的 anniversary 周年  biannual 每年两次  annuity 养老金</p>
+</blockquote>
+</li>
+<li>loc = location 表示地点<blockquote>
+<p>locate, locomotion ,dislocate 使混乱</p>
+</blockquote>
+</li>
+<li>stat, stit, stitut=set up,place<blockquote>
+<p>stature (物)身材，身高 (精神)精神高度  statute 法令，条例   constitute 注册呢个，建成<br>  constitution 宪法，章程  reconstitute 重新组成  institute 创立，学院，规定<br>  substitute 替代  restitute 偿还   destitute 贫困，频繁  prostitute 妓女  superstition 迷信</p>
+</blockquote>
+</li>
+<li>grap=write, draw,scratch, picture<blockquote>
+<p>photography    telegraph电报  topography地形 geography   autography<br>  monigraphy 争论   lexicography=lect graphy 词典编著  stenography //steno narrow 速记<br>  dictgraphy 助听器   demography 人口统计学  epigraphy 铭文  calligraphy 书法<br>  bibligraphy 参考书目</p>
+</blockquote>
+</li>
+<li>gram=write  letter of the alphabet  small weight 克<blockquote>
+<p>program 项目  grammer 语法   diagram 图表，图解  epigram 格言，警句</p>
+</blockquote>
+</li>
+<li>vict,vinc 克服，战胜 fight<blockquote>
+<p>victory 胜利  convict 定罪  conviction<br>  evict 驱逐  expel eviction invincible 不能征服的，无敌的<br>  convince 使确信  convincing </p>
+</blockquote>
+</li>
+<li>vol, volv, volt = roll, turn, twist<blockquote>
+<p>voluble 有才的  volubility 健谈<br>  revolution 革命  revolve 旋转  evolve 进展 evolution<br>  involve 限于  involvement convolve 盘旋<br>  volume 旋转，卷，册   voluminous 多产的</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>政治<ul>
+<li>arch=ruler, chief首席,government<blockquote>
+<p>archy 拱形的   architect 建筑   architecture 建筑学  anarchy 无政府状态<br>  anarchic 无政府的  monarch 君王  // mona单一<br>  archives 档案   patriarch 父权制 matriarch 母权统治</p>
+</blockquote>
+</li>
+<li>tect=texture;build,do,pie up ?</li>
+<li>democracy  <ul>
+<li>demos n. 古希腊人民 people <blockquote>
+<p>epidemic 流行的  pandemic 大范围的 endemic 地方的  demagogue 煽动者<br>  demography 统计学家</p>
+</blockquote>
+</li>
+<li>cracy=rule, crat=ruler<blockquote>
+<p>democracy  democrat 民主  autocracy  autocrat 民主<br>  bureacucarcy 官僚   plutocracy 财阀政治   theocracy 神学<br>  monocarcy 独裁政治  mobcracy 暴政</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>popul, publ=people <blockquote>
+<p>population    populous 人口稠密的  popularize 普及<br>  depopulate 减少人口  copulation 交配<br>  public   publish  publication  publicity 出版</p>
+</blockquote>
+</li>
+<li>fus, fug=flee, run away ? 使…逃离的感觉<blockquote>
+<p>refugee 难民  fugitive 逃亡的 refuge 避难所<br>  centrifugal 离心的  fugacious 转瞬即是  insectifuge 驱虫剂<br>  subterfuge 托词   lucifuge 避光</p>
+</blockquote>
+</li>
+<li>fun=pour 流，泻<blockquote>
+<p>refuse   refusal   confuse  confusion<br>  diffuse diffusion 扩散   effuse  effusion 流出<br>  infuse infusion 灌输   profuse  profusion 丰富<br>  suffuse 充满  transfuse 注入  refute 驳斥</p>
+</blockquote>
+</li>
+<li>mon,  monit=mind; warn, advice;<blockquote>
+<p>monument 让你思考的人   monitor  monition  admoish //ad=together<br>  premonish 预先警告  summon 号召  summon 传票</p>
+</blockquote>
+</li>
+<li>muni, mun=public<blockquote>
+<p>community service 志愿者   communal 公共的  communize 公邮话<br>  municipal 市政的   municipality 市政当局  immunity 免疫<br>  communicate = communicative 沟通<br>  munificent  genorosity and liborality 宽宏大量的，慷慨的</p>
+</blockquote>
+</li>
+<li>polis 古希腊城邦, polic, polit=govern ,state, city <blockquote>
+<p>police  policy  politics politician 政治学的<br>  cosmpolis 国际化都市  metropolis 计划  metro 地铁  underground  subway</p>
+</blockquote>
+</li>
+<li>range?  rank ring<blockquote>
+<p>arrange  arrangement  rearrange  disarragne<br>  misarrange 安排错误 derange 使错乱</p>
+</blockquote>
+</li>
+<li>serve <blockquote>
+<p>conserve 节约使用，保护某物 strength/ health/energy/water/resources<br>  preserve  保护原样，比conserve正式<br>  reserve 保存，留存</p>
+</blockquote>
+</li>
+<li>sequ, sent =follow<blockquote>
+<p>second-&gt;sec-&gt; sequ<br>  sequence 次序  consequence 结果  subsequence 顺序  sequential 连续的<br>  sequacious 盲从的 obsequious 奉承的  consecutive 连续的 consecution 连贯</p>
+</blockquote>
+</li>
+<li>sue 跟随，恐告<blockquote>
+<p>consue 继而发生 pursue 追赶<br>  prosecute =to follow till the end; perform 实行，起诉</p>
+</blockquote>
+</li>
+<li>urb=city<blockquote>
+<p>urban  urbane 优雅的   exuraban 城市外面  suburb 郊区  suburbanite 郊区人民</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>人类学<ul>
+<li>男女相关<ul>
+<li>anthrop human   anthr,andry,man<blockquote>
+<p>op  optic  eye,face<br>  polyandry 一夫多妻的   polygamy 一夫多妻制<br>  polygyny 一夫多妻制<br>  anthropology 人类学   paleoanthropology 古人类学<br>  anthropophagus 人体解剖学  anthroposociology 人类社会学</p>
+</blockquote>
+</li>
+<li>gyn, gynec, gamy =queen, woman<blockquote>
+<p>gynecology 妇科医生  gynarchy 女人政治  androgyny 半男半女<br>  monogyny 一妻制  monandry 一夫制  monogamy 一夫一妻制<br>  misogynist 厌恶女人的人  philogynist 喜爱女人的人</p>
+</blockquote>
+</li>
+<li>patri=father<blockquote>
+<p>patriarch 家长，创办者  patriot 爱国者  patriarchy 家长同志<br>  patriotism 爱国心   patron 赞助人  patrilineal society 父系社会<br>  patronize 资助  expatriate 外籍  banish放逐 exile 流亡 patronge 保护</p>
+</blockquote>
+</li>
+<li>matri, matr-= mother<blockquote>
+<p>maternal 母亲的  matriarch 女家长  matriarchy 女家长制<br>  metropolis 首都   matrix 子宫，矩阵  matron 主妇，老妇人 </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>情感<ul>
+<li>amor,amot,am=love<blockquote>
+<p>amour 恋爱的， 情人的，奸情  amatory  恋爱的  amorous 多情的<br>  paramour 情妇，情夫  amateur 业余爱好者  amicable 和善的  amiable 亲切的</p>
+</blockquote>
+</li>
+<li>phil, philo=love (ph-v, vilo-love)<blockquote>
+<p>philanthropy 慈善事业    philology 与文学  zoophilous 爱护动物的<br>  philosophy 哲学 philo+soph   philately 集邮  phil爱+a无+tel(tax)税<br>  bibliophilist 书籍收藏学家   neophilia 具有强烈好奇感的，喜欢新奇的</p>
+</blockquote>
+</li>
+<li>differt kinds of love<ul>
+<li>eros: sexual love  男女  欲望</li>
+<li>phileo: have affection for 友谊 友谊</li>
+<li>stergo：love of parents and children or a ruler and his subjects 有责任的爱 偏爱</li>
+<li>agapao：have regard for 大爱，最高境界的爱 尊敬</li>
+</ul>
+</li>
+<li>ster=duty(l)<blockquote>
+<p>strong, stiff, rigid, strict, serere,little<br>  stern 严厉的，苛刻的  thorn(st<del>th) 荆棘、刺、戳<br>  sterile 贫瘠的（少）  starve 饿死    strand 困境<br>  starch 淀粉，古板的   stark(ch</del>k) 刻板的，十足的  torpor 迟钝[(s)ter 刻板的]<br>  stare 盯着看，凝视  strut 大步快走</p>
+</blockquote>
+</li>
+<li>path=suffering, feeling, illness, disease 表示又痛苦又激情，耶稣为人类受难的感情<blockquote>
+<p>pathetic 悲惨的   antipathy 反感，厌恶  apathy 冷漠  apathetic 冷漠的，缺乏兴趣的，无动于衷的<br>  sympathy 同情、同情心  pathology 病理学  psychopath 精神病患者</p>
+</blockquote>
+</li>
+<li>soph=debate 善辫，wise 古代人们认为善辫的人是智者<blockquote>
+<p>sophist 诡辩这  sophism 诡辩  sophisticate 世故的，世故，复杂，精巧<br>  sophisticated 诡辩的，久经世故的  philosophy 哲学<br>  sophomore 大学二年级学生 wise more</p>
+</blockquote>
+</li>
+<li>phob, phobia=run, fear恐惧，以ia结尾的可以表示病<blockquote>
+<p>phobia 恐惧症  acrophobia 恐高症(acro=angle)  hydrophobia 恐水症狂犬症<br>  sinophobe 厌恶中国的人</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>行为<ul>
+<li>flu=flow  流感<blockquote>
+<p>fluency 流利    fluctuate 波动     effluent 流出的，污水<br>  mellifluous 流畅的  influence 影响   confluence 汇合<br>  influenza 流行性感冒  superfluous 多余的、过量的  fluid 流动性，流动的<br>  affluent 丰富的  fluidity 流动性  effluvium 臭气  flux 变迁,融化，通量<br>  refluent 回流，退潮  influx 流入</p>
+</blockquote>
+</li>
+<li>sect,seg=divide, piece,cut<blockquote>
+<p>section 部分  insect 昆虫  segment 段，分割  intersect 交叉<br>  bisect 切成两半  vivisect 活体解剖  dissect 解剖，把…切成碎片<br>  transect 横截</p>
+</blockquote>
+</li>
+<li>gen,gener, genit, birth,produce, create,beget,race,kind<blockquote>
+<p>genus 种，类，属  eugenics 优生学   genetic 遗传的  genuine 真实的，诚恳的 sincere, authentic<br>  general 一般的  genius 天才，天赋  generate 产生  ingenuous 产自内心的，坦白的，正直的<br>  generation 产生，一代人  ingenious 机灵，创造性的  regenerate 新生，革新  generous 慷慨的，大方的<br>  degenerate 退化的<br>  homogeneous 均匀的  genial 亲切的   heterogeneous 异质的 indigenous 本土的<br>  genre 类型、流派   indigence 贫乏  pathogeny 生病、病原   gentle 温和的，文雅的<br>  congential 天赋的  genteel 绅士风度的   primogenitor 始祖、祖先  engende 产生、造成 progeny 后裔</p>
+</blockquote>
+</li>
+<li>gress=step,go<blockquote>
+<p>aggress 攻击，侵犯    aggressive 好斗的   digress 离题   digression 离题<br>  congress 大会，国会   progress 前进   egress 出口  ingress 入口  retrogress 退步<br>  trangress 违反，犯罪</p>
+</blockquote>
+</li>
+<li>soci=social<blockquote>
+<p>society 社会    socialism 社会主义   sociality 社会性、社交   socialite 社会精英<br>  socialist 社会主义者    asocial 自私、缺乏社交的   sociology 社会学  consociate 使结合、联盟<br>  associate 联系   dissociate 分离  association 联想、结交  sociopath 反社会者，不喜欢社交的人<br>  sociable 好交际的，友善的</p>
+</blockquote>
+</li>
+<li>migr – *mei = to change, go and move – mutable<blockquote>
+<p>migrant 候鸟，移居者    migrate 使移动     migratory  迁移的，流浪的<br>  emigrate 移居（出境）   immigrate 移居（入境）  transmigrate 移居，宗教之轮回<br>  migraine 偏头痛</p>
+</blockquote>
+</li>
+<li>ori,orig = rise, begin<blockquote>
+<p>orient 东方的  origo 起点   oriental 东方的，东方人   originate 引发，发明<br>  occident 西方的（cid）   aboriginal 土著居民   orientation 方向   abortion 堕胎，流产<br>  disorient 使失去方向  abortive 夭折  origin 起源   original 最初的</p>
+</blockquote>
+</li>
+<li>karaoke 卡拉ok<blockquote>
+<p>kara head; room,empty    oke orchestra</p>
+</blockquote>
+</li>
+<li>orchestra 管弦乐队<blockquote>
+<p>or(ori:rise,begin)  ches(box)  tra(denoting place)</p>
+</blockquote>
+</li>
+<li>cur,curs,cour, cours=run   kelt=kers to run?<blockquote>
+<p>cursory 草率的   concur 同时发生   cursive 草书的  current 水流<br>  incur 招惹  currency 流通  occur 发生，出现  curriculum 课程  occurrence 出现，事件<br>  recur 复发，重现  recurrent 再发生的，周期性发生的  excurse 远足，短程旅行<br>  excursive 离题的，散漫的  course 路线，过程，急行   courser 猎人，猎狗<br>  precursor 先驱   recourse 求助   scour 冲洗，快走，腹泻   succour 救援者 coarse 粗糙的</p>
+</blockquote>
+</li>
+<li>man, manu=hand, strength, power over<blockquote>
+<p>manual 手册，指南   manacle 手铐    manicure  修指甲   manage 管理<br>  manuscript 手稿  manufacture 制造，加工   maintain 维持，维修，供养   mandate 指令，要求<br>  maneuver 操纵   manifest 表明，显然的  // fest=打击 struck,seized<br>  manumit 解放，释放    manipulate 操纵，控制   pul=plenary poly  man=power over 权力无限的</p>
+</blockquote>
+</li>
+<li>pass,pat=1.feeling(suffering,enduring) 2.通过<blockquote>
+<p>passion 激情  impassion 激动   passive 被动的  impassive 冷漠的<br>  compassion 同情，怜悯   patience 耐心   compatible 协调的，一致的  compatibility 兼容性;<br>  passage 通过   passenger 乘客   passport 护照  impasse 僵局  surpass 超越<br>  trespass 侵入，过失(terr=land,earth)  compass 罗盘  encompass 包围，环绕</p>
+</blockquote>
+</li>
+<li>sens,sent=sense,feeling agreement<blockquote>
+<p>sense 感觉  sensible 可感知的  sensibility敏感性   sensitive 敏感的<br>  sensory 感觉的  sentiment 情感  sentimental 不理智的  nonsense 胡说<br>  assent 赞成，同意(~ascend 上升)   consent 同意   consentient 同意的 consensus 意见一致的<br>  dissent 不同意  resent 怨恨  present 陈述</p>
+</blockquote>
+</li>
+<li>tim=fear<blockquote>
+<p>timid 胆小的  timidity 胆怯   timorous 胆小的  intimidate 胁迫<br>  intimidation   meticulous 细心的  meticu+tim  小心翼翼的，一丝不苟的<br>  methodical   method  有条不紊的</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>文化<ul>
+<li>creed, cred=believe,trust<blockquote>
+<p>credit  credible可信的   creditable可靠的   accredit 信任<br>  credential  证明书  credo 信条  discredit 怀疑  credulous 轻信的 (charm骗人)</p>
+</blockquote>
+</li>
+<li>fid=trust, faith<blockquote>
+<p>confident   self-confident   confidant 心腹知己  confidential 机密的<br>  diffdent 缺乏自信的    confide 信任  fidelity忠实   infidel 不心焦的 perfidy 背叛<br>  perfidious 背信弃义的 affidavit 宣誓书  fiduciary 信任的</p>
+</blockquote>
+</li>
+<li>liber=free  noble高贵的 generous people;  l+i+ber<blockquote>
+<p>liberty 自由   liberal arts 文科   intellectual知识分子 enlargement放大<br>  liberal 自由的   liberate 解放，释放    libertine 放荡不羁者(自由过度)</p>
+</blockquote>
+</li>
+<li>ment=mind<blockquote>
+<p>mental 精神的  mentality 智力   mention   comment   commentate 评论，解说<br>  demented 发狂的，精神错乱的  remind   amentia 智力缺陷</p>
+</blockquote>
+</li>
+<li>nov=new,yound,recent, shape,unuaual<blockquote>
+<p>novel 小说  novelty 新奇   nova 新星     novation 更新   novice 新手<br>  innovate 革新  innovation  内在的革新   renovate renovation 翻新</p>
+</blockquote>
+</li>
+<li>prais,preci=praise,value,price <blockquote>
+<p>appraise 评价   appraisal 评论，骨架  precious 宝贵的  appreciate 赏识，涨价<br>  appreciative 欣赏的  appreciable 可感知的，可评价的  depreciate 变低，轻视(duc, duct=lead,bring)</p>
+</blockquote>
+</li>
+<li>duc, duct=to pull, drag; lead, bring  领导，引起<ul>
+<li>duck 公爵，手，拳头<blockquote>
+<p>duct 管道  ductile 展开的   aqueduct 导水管  educate 教育   educe 唤起<br>abduc 绑架   deduce 推论  induce 劝诱   induct 引导   introduce 介绍 produce 产生<br>product   productivity 生产力  reduce 减少  conduct 引导  conductor 领导，经理<br>seduce 分开   traduce 横着，诽谤  vioduct  高架桥 </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>art=skill, joint, trick<blockquote>
+<p>article 文章，物品，项目  //cle变成名词  artless朴实的<br>  artful 狡猾的  artistry 艺术技巧  artificial 人造的,假的  artisan 技工<br>  artifact 人造物品 (fact=do)</p>
+</blockquote>
+</li>
+<li>lingu=language<blockquote>
+<p>linguist 语言学家   linguistics 语言学  bilingual 说两种语言的<br>  unilingual 一种语言的  multilingual 多种语言的  sublingual舌下的</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>法学 <ul>
+<li>leg, legis=law<blockquote>
+<p>legal 法律   illegal 违法的  legislate 立法 legislation 立法  legislature 立法机构<br>  privilege 特权  delegate 代表  relegate 驱逐  banish 委托，丢弃</p>
+</blockquote>
+</li>
+<li>jur,juris=law, swear<ul>
+<li>just 公平，工作<blockquote>
+<p>jury 陪审团  injury 伤害   injurious 有害的   perjury 伪证<br>conjure 祈求  abjure 放弃宣誓  adjure 郑重宣誓</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>dict, dic = say, speak, point out, show, teach <blockquote>
+<p>dictate 口述  dictionary 字典 vocabulary  contradict 反驳<br>  perdict 预测  addict 上瘾  perdicament 困境  indict 起诉<br>  abdicate 放弃  predicate 断言   dedicate 献身 edict 法令<br>  indite 写，创作</p>
+</blockquote>
+</li>
+<li>jurg,judic=judge<blockquote>
+<p>judgment 判断    judicial 司法的，公正的   adjudge 宣判<br>  judiciary 司法的，审判的   adjudicate 审判，裁定  prejudice 偏见</p>
+</blockquote>
+</li>
+<li>cern,cert, cret=separate,sure分开<blockquote>
+<p>sift/sieve:perceive,comprehend 一种感知  crisis 危机<br>  concern 关注   discern 识别   discernible 可识别的  certainty 确定<br>  certificate 证书  certitude 确信  discrete 分立的  secret 秘密</p>
+</blockquote>
+</li>
+<li>fin=end,boudary,limit <blockquote>
+<p>fine 精巧的， 罚款   finance  finish finale  finality<br>  finite 有限的   infinite 无限的 affinity 亲密的关系</p>
+</blockquote>
+</li>
+<li>fort 原义指剑上最坚硬的部分，最强的，优点<blockquote>
+<p>force   forceful   enforce 强迫  reinforce 加强  fortify 加强<br>  foritude坚韧   effort 努力  comfort 舒适  discomfort 不适</p>
+</blockquote>
+</li>
+<li>her, hers=stick,cling<blockquote>
+<p>adhere 粘附，坚持   adherence 忠诚   adhesive 粘性的   cohere 粘着<br>  coherent 粘在一起的  inherent 内在的  hesitate 犹豫   hesitaion </p>
+</blockquote>
+</li>
+<li>hibit=hold,possess  habit<blockquote>
+<p>exhibit 展出，陈列   exhibition 展览会 inhibit 抑制   prohibiit 禁止</p>
+</blockquote>
+</li>
+<li>odin=order  <blockquote>
+<p> ordinal 顺序的  ordinary 平常的  ordinance 法令<br>  extraordinary 非常的，特别的  coordinate 同等的，调整  ordain 规定<br>  ornate 装饰的  disorder 扰乱</p>
+</blockquote>
+</li>
+<li>prov,prob=test front<blockquote>
+<p>provbable 可能的  probe 侦查  probability   approve 赞成<br>  probation 查验，坚定  approval 赞成  disprove 反驳  reprove 责备</p>
+</blockquote>
+</li>
+<li>strict, strain, string=tighten, stretch<blockquote>
+<p>strict   stricture 责难  constrict 压缩   stringency 严格，紧绷<br>  constringe 使收缩  strain 疲劳  constrain 抑制，拘束  constraint 抑制<br>  overstain 过度紧张  restrain 反复地拉，组织  restrict 限制  restraint 可知</p>
+</blockquote>
+</li>
+<li>sur=sure<blockquote>
+<p>secure  assure 保证   reassure 使安心  surety 担保，保证<br>  insurance 保险    assurance 却行   censure 责难  assuredly 确信地</p>
+</blockquote>
+</li>
+<li>term=limit, end, boundary<blockquote>
+<p>terminal 终点站 terminate   termination 终止    terminier 判决<br>  terminology 术语学   determine 决定  determined 坚决的  interminable 无限的<br>  exterminate 消除</p>
+</blockquote>
+</li>
+<li>treat=handle<blockquote>
+<p>treaty 条约   treatment 对待，处理   maltreat 虐待  retreat 撤退<br>  entreat 祈求   treatise 论文</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-校园生活类"><a href="#4-2-校园生活类" class="headerlink" title="4.2 校园生活类"></a>4.2 校园生活类</h3><ul>
+<li>例子<ul>
+<li>pute: think<blockquote>
+<p>compute<br>  dispute // dis=away分开想，争论<br>  impute 归罪<br>  repute 名气</p>
+</blockquote>
+</li>
+<li>vis, vid: see<blockquote>
+<p>visible<br>  envious // 一直盯着看 羡慕</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>实际<ul>
+<li>act,ag = to do, to drive<blockquote>
+<p>active, actual, react</p>
+</blockquote>
+</li>
+<li>alter, altern=other=to change <blockquote>
+<p>alternate</p>
+</blockquote>
+</li>
+<li>don, dot=give<blockquote>
+<p>donate, donor, condition</p>
+</blockquote>
+</li>
+<li>cre, creates=grow, make<blockquote>
+<p>create,  increase, decrease, concrete</p>
+</blockquote>
+</li>
+<li>mir=look,laugh,wonder<blockquote>
+<p>miracle, mirror</p>
+</blockquote>
+</li>
+<li>not(e)=observer,mark=know<blockquote>
+<p>notice,  notify, denote, denotation</p>
+</blockquote>
+</li>
+<li>nounce, nunci=speak, shout<blockquote>
+<p>anounce, annunciate, denounce</p>
+</blockquote>
+</li>
+<li>pend, pens=hang<blockquote>
+<p>pendant, pending, inpending, depend</p>
+</blockquote>
+</li>
+<li>pend, pens, pond = (s)pend, to pull,stretch, weight, expend<blockquote>
+<p>expend, pension</p>
+</blockquote>
+</li>
+<li>pli,ple,plen,plet=to full, fill;<blockquote>
+<p>plenary, plenty, supplement</p>
+</blockquote>
+</li>
+<li>pli,ple,ply=fold <blockquote>
+<p>complicate, explicate, implicit, implicate, replicate </p>
+</blockquote>
+</li>
+<li>plex=fold<blockquote>
+<p>complex, duplex, complextion</p>
+</blockquote>
+</li>
+<li>port=carry,take<blockquote>
+<p>import, export, support, portable, portage, disport</p>
+</blockquote>
+</li>
+<li>press<blockquote>
+<p>pressure, express, oppress</p>
+</blockquote>
+</li>
+<li>pute=to think,pruno<blockquote>
+<p>compute, dispute, impute, repute</p>
+</blockquote>
+</li>
+<li>quest,quer,quir,quis=seek,search<blockquote>
+<p>quest, question, inquest, inquire, inquiry, acquire, require, request, conquer</p>
+</blockquote>
+</li>
+<li>scend, scent, scens=climb<blockquote>
+<p>ascend,  descend, condescent</p>
+</blockquote>
+</li>
+<li>sid=sit<blockquote>
+<p>reside,  residue, preside, subside, subsidy</p>
+</blockquote>
+</li>
+<li>st, sta, stant, stat, stan, sist=stand<blockquote>
+<p>stable, obstacle, stature, instant, stationary, assist, assistant, consist, exist, insist, persist, subsist</p>
+</blockquote>
+</li>
+<li>simil, simul, sembl=alike, same<blockquote>
+<p>similar, simile, similitude, assimilate, simulate, semblance, resemble, assemble</p>
+</blockquote>
+</li>
+<li>spect, spic=look, see, scope;kind<blockquote>
+<p>expect, aspect,inspect, respect, prospect, spectate,auspicious; special, speciality, species, consepcific</p>
+</blockquote>
+</li>
+<li>spir=breathe, spit-&gt;spirit=soul, courage, vigor, breath<blockquote>
+<p>spirit, spiritual, aspire, expire, respire</p>
+</blockquote>
+</li>
+<li>sum=total,super;to make up <blockquote>
+<p>summary, summit; assume, consumer, resume, exempt;</p>
+</blockquote>
+</li>
+<li>tag, tac(t), tig, ting=tangent, touch<blockquote>
+<p>tactual, attach, contact, contagion, intact, tangible</p>
+</blockquote>
+</li>
+<li>tain, ten, tin=tangent, hold<blockquote>
+<p>attain, maintain, tenable, tenacity, content, discontent,tenant, detain, pertain, retain</p>
+</blockquote>
+</li>
+<li>tend, tent, tens=stretch<blockquote>
+<p>tend, tendency, trend, distend, contend</p>
+</blockquote>
+</li>
+<li>tom=cut<blockquote>
+<p>atom, tome, epitome</p>
+</blockquote>
+</li>
+<li>turb=stir;<blockquote>
+<p>disturb,  turbulence, perturb</p>
+</blockquote>
+</li>
+<li>us,ut=use<blockquote>
+<p>usage, utilize, usual, abuse, disabuse, utilize, usurp</p>
+</blockquote>
+</li>
+<li>ven, vent=come; venue=a place for event-&gt;come<blockquote>
+<p>advent, adventure, venture, convene, event, reveneue, avenue</p>
+</blockquote>
+</li>
+<li>vail, val=valid:be of use;strong;value <blockquote>
+<p>avail, invaild, prevail, prevalence, valor, valuable, evaluate</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-按规则出牌-词缀"><a href="#5-按规则出牌-词缀" class="headerlink" title="5. 按规则出牌- 词缀"></a>5. 按规则出牌- 词缀</h2><blockquote>
+<p>词缀不能表示单词的实际意义</p>
+</blockquote>
+<ul>
+<li>前缀：方向、强度<ul>
+<li>时间<ul>
+<li>前： <ul>
+<li>ex  expect在前面  期望</li>
+<li>pre presend</li>
+<li>pro process</li>
+</ul>
+</li>
+<li>后： re=back</li>
+</ul>
+</li>
+<li>位置<ul>
+<li>inter 里面  internal</li>
+<li>out 外面 outlet</li>
+<li>over 上面  overlook</li>
+<li>sub 下面 subscribe</li>
+<li>super 上面 superior</li>
+<li>trans 变化位置 transform 变形  transfer</li>
+<li>under 在什么下面 undertake</li>
+</ul>
+</li>
+<li>数量<ul>
+<li>uni 1  uniform unique独一无二的</li>
+<li>bi(bicycle), di(divide划分，本身对称), twi(two, twice,twin, twilight黎明, i和o发生变化，即元音发生替换), du(发音的问题？ duet二重唱，决斗)  2</li>
+<li>centi 100  century</li>
+<li>milli 1000  million millimeter</li>
+<li>mono 单一  Monday  monopoly</li>
+<li>multi 多 multiply</li>
+</ul>
+</li>
+<li>程度<ul>
+<li>super 超级，过分 superman</li>
+<li>over  overestimate 高估</li>
+<li>under 未达到 underestimate</li>
+<li>hyper 过分 hypertension 高血压</li>
+<li>well 好地， 受过好的教育 well-educated</li>
+</ul>
+</li>
+<li>方式<ul>
+<li>auto 自动 automatic</li>
+<li>co 合作 cooperate, cooperation</li>
+<li>mal 坏的,  maltreat 虐待  </li>
+<li>mis 错的 mistake错误 // 注意错的事情不一定是坏的</li>
+<li>self 自己的 selfish  selfless</li>
+</ul>
+</li>
+<li>态度<ul>
+<li>anti 反对  antibody 抗体 antibiotic抗生素</li>
+<li>counter n. 反击，对立面; counter strike cs游戏 counterpart</li>
+<li>pro 支持  propose</li>
+</ul>
+</li>
+<li>否定<ul>
+<li>ab   abuse  abnormal</li>
+<li>an anticipate?</li>
+<li>de decline</li>
+<li>in individual 个人的</li>
+<li>non nonsense 废话</li>
+<li>under underestimate低估</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>后缀：状态、词性<ul>
+<li>动词<ul>
+<li>ate:  create</li>
+<li>ish:  finish fish</li>
+<li>ify satisify classify</li>
+<li>ch  watch reach</li>
+<li>en strengthen weaken</li>
+<li>ize realize</li>
+<li>ise surprise</li>
+</ul>
+</li>
+<li>名词<ul>
+<li>or  actor</li>
+<li>ee  employee 雇员</li>
+<li>ess actress</li>
+<li>an/ian  historian 历史学家</li>
+<li>ance balance 平衡</li>
+<li>ant //!!!!, servant 服务员, pedant 挂坠</li>
+<li>ity creativity 创造力，创造性</li>
+<li>th width</li>
+<li>ary //!!!, anniversary 周年庆 </li>
+<li>um mum 妈妈  lum 烟囱</li>
+<li>age usage 使用</li>
+<li>let //!!!,小的东西  toilet </li>
+<li>try entry,  country, chemistry</li>
+<li>ness sadness  vividness 抽象形式的单词</li>
+<li>al  offical  arrival  proposal  terminal</li>
+<li>ese Japanese Chinese</li>
+<li>hood 时期 childhood neighborhood  brotherhood likelihood adulthood</li>
+<li>ics physics academics athletics classics economics</li>
+<li>ion function motion action education</li>
+<li>ism 什么主义，什么论 Dadaism  criticism sadism radicalism 激进主义</li>
+<li>ist 什么主义者，从事…的专家 socialist scientist physicist notionist</li>
+<li>ment development, implement工具, movement 动作 agreement 统一 management管理</li>
+<li>ship 表示某种特定关系  friendship relationship fellowship schoarship奖学金</li>
+</ul>
+</li>
+<li>形容词<ul>
+<li>al  normal formal eventual actual </li>
+<li>tle little  settle  battle ???</li>
+<li>tive relative  active informative selective creative</li>
+<li>id  candid 坦白的  avid 渴望的 afraid 害怕的 acid 酸的</li>
+<li>que  clique 团？</li>
+<li>ous  拥有充满的意思 delicious  envious  anxious desirous ambiguous</li>
+<li>less =without worthless没有价值的 jobless fearless homeless</li>
+<li>able 能.., 可以…, 值得…,  reliable drinkable eatable movable</li>
+<li>free carefree无忧不虑的</li>
+<li>ful colorful  beautiful wonderful</li>
+<li>ic energetic, ehthusiastic fantastic  scientific classic historic</li>
+<li>like 像..  childlike, fishilike</li>
+<li>some awesome 令人敬佩的 adventuresome 冒险的 battlesome 好斗的</li>
+<li>y noisy lively lovely timely及时的  manly 男子气概的 friendly 友好的 lowly 备件的 monthly 每月的</li>
+</ul>
+</li>
+<li>副词<ul>
+<li>ward backward 反向地 forward向前地 frontward朝前地</li>
+<li>ly slowly  carelessly carefully quickly manly</li>
+<li>wise likewise同样地 otherwise否则 cockwise 顺时针地</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>单词的形成过程就是搭积木的过程，那么<br>meter -&gt; metrical  -&gt; symmetrical对称的 -&gt; asymmetrical不对称的<br>为什么要去掉e？ 名词或者英文缩略与规则</p>
+<h2 id="6-按规则出牌——词源"><a href="#6-按规则出牌——词源" class="headerlink" title="6. 按规则出牌——词源"></a>6. 按规则出牌——词源</h2><blockquote>
+<p>什么时候用？当按照常见方法无法分析出所包含的词根词缀时，此时就考虑使用这种方法来探究它原本对应的是什么</p>
+</blockquote>
+<p>顺序问题</p>
+<p>承认两个原则：</p>
+<ul>
+<li>所有的单词都可以通过一个最简单的单词得到</li>
+<li>某些其他体系的英语会对现代的英语产生影响，这是无法排除的</li>
+</ul>
+<p>词源法，主要用于那些隐藏较深的词汇，无法一眼识别出来<br>dingy 肮脏的，褪色的 -&gt; dung 大便<br>dinghy 小船 trough 水槽 </p>
+<p>古英语到现代英语， 复杂词汇到简单词汇, 常用的三种换词方法</p>
+<h3 id="6-1-元音字母替换，单词含义不变或细微变化"><a href="#6-1-元音字母替换，单词含义不变或细微变化" class="headerlink" title="6.1. 元音字母替换，单词含义不变或细微变化"></a>6.1. 元音字母替换，单词含义不变或细微变化</h3><p>a, e, i, o, u, y 降序,连续</p>
+<blockquote>
+<p>谁更重要，谁在前面（古英语）<br>元音可以连续下进行替换<br>wrack, wreck 残骸<br>bat, bet, bit, bot, but</p>
+</blockquote>
+<h3 id="6-2-辅音字母替换，单词含义不变或细微变化"><a href="#6-2-辅音字母替换，单词含义不变或细微变化" class="headerlink" title="6.2. 辅音字母替换，单词含义不变或细微变化"></a>6.2. 辅音字母替换，单词含义不变或细微变化</h3><blockquote>
+<p>组内进行替换，单词含义不变</p>
+</blockquote>
+<ul>
+<li>h,c,k,g,q,qu<blockquote>
+<p>发音相近   check cheque 机票和组织</p>
+</blockquote>
+</li>
+<li>b,p,ph,f,v <blockquote>
+<p>fracture,  break 破裂</p>
+</blockquote>
+</li>
+<li>f,t </li>
+<li>s,t,d </li>
+<li>m,n,r,l,y,j,g </li>
+<li>z,j,d<blockquote>
+<p>day, journal 每天</p>
+</blockquote>
+</li>
+<li>u,v,w <blockquote>
+<p>went开口  vent出去 </p>
+</blockquote>
+</li>
+</ul>
+<h3 id="6-3-英文字母的位置与谐音变化，单词含义不变或细微变化"><a href="#6-3-英文字母的位置与谐音变化，单词含义不变或细微变化" class="headerlink" title="6.3. 英文字母的位置与谐音变化，单词含义不变或细微变化"></a>6.3. 英文字母的位置与谐音变化，单词含义不变或细微变化</h3><ul>
+<li>位置变化<blockquote>
+<p>star ,  astr  astronaut 宇航员<br>  alt &lt;- tall</p>
+</blockquote>
+</li>
+<li>谐音变化*<blockquote>
+<p>OIC,  Oh, I see!</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="7-不按规则出牌"><a href="#7-不按规则出牌" class="headerlink" title="7. 不按规则出牌"></a>7. 不按规则出牌</h2><p>谐音法，联想记忆法，拼音法，拆分法</p>
+<h2 id="8-不可拆"><a href="#8-不可拆" class="headerlink" title="8. 不可拆"></a>8. 不可拆</h2><p>文化背景法， 典故法，分类法， 形近意近归纳法，例句法，诵读法</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/18/TOEFL-listening/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/18/TOEFL-listening/" class="post-title-link" itemprop="url">TOEFL listening</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-18 19:43:45" itemprop="dateCreated datePublished" datetime="2019-09-18T19:43:45+08:00">2019-09-18</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-19 10:51:50" itemprop="dateModified" datetime="2019-09-19T10:51:50+08:00">2019-09-19</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/" itemprop="url" rel="index"><span itemprop="name">english</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/TOEFL/" itemprop="url" rel="index"><span itemprop="name">TOEFL</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/TOEFL/listening/" itemprop="url" rel="index"><span itemprop="name">listening</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>书籍推荐： 林强新托福听力真经之TPO超详解析</p>
+<h2 id="1-1-考试"><a href="#1-1-考试" class="headerlink" title="1.1 考试"></a>1.1 考试</h2><ol>
+<li><p>题型<br>30： 1 conversation + 2 lecturers<br>2*30<br>英语加试 1+2</p>
+</li>
+<li><p>时间<br>20 mins听力+10 mins做题(5+6+6=17)</p>
+<blockquote>
+<p>30s 一题, 计时！</p>
+</blockquote>
+</li>
+<li><p>具体的题<br>要点: </p>
+</li>
+</ol>
+<ul>
+<li>名词专业化，学术化 stack 书架</li>
+<li>一词多义</li>
+</ul>
+<p>5 mins 文章<br>题未知！！<br>答题，next，题不可逆！！</p>
+<ol start="4">
+<li>内容</li>
+</ol>
+<ul>
+<li><p>对话</p>
+<ul>
+<li>office hours 多 老师！</li>
+<li>service encounters 遭遇 多</li>
+<li>students interaction 0.1比例 !!!<blockquote>
+<p>女尊男悲， ！女</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>讲座</p>
+<ul>
+<li>独白，互动，问答出题</li>
+<li>kinds<ul>
+<li>Arts</li>
+<li>Life Science<blockquote>
+<p>动物</p>
+</blockquote>
+</li>
+<li>Physical Science 自然科学！</li>
+<li>Social Science</li>
+</ul>
+</li>
+<li>main domins<ul>
+<li>Mosaics 马赛克，镶嵌</li>
+<li>Ceramics陶瓷</li>
+<li>Physioloy of sensory organs 感知器官生命机能</li>
+<li>Food foraging 觅食</li>
+<li>Astronomy and cosmology 天文学，物理学</li>
+<li>Particle physics 粒子物理</li>
+<li>Seismology 地震学</li>
+<li>Optics 光学</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>考试题型</p>
+</li>
+</ul>
+<ol>
+<li>Basic comprehension<ul>
+<li>Gist question 主旨题</li>
+<li>Detail</li>
+</ul>
+</li>
+<li>Pragmatic understanding<ul>
+<li>Purpose !<blockquote>
+<p>不要过度推断 tpo27, 直接！！ </p>
+</blockquote>
+</li>
+<li>Attitude</li>
+</ul>
+</li>
+<li>Connecting information<ul>
+<li>Organization !<blockquote>
+<p>不要过度推断，记住细节问体现了什么，落实到组织上</p>
+</blockquote>
+</li>
+<li>Inference</li>
+</ul>
+</li>
+</ol>
+<p>做题原则！！</p>
+<h2 id="1-2-23分以上"><a href="#1-2-23分以上" class="headerlink" title="1.2 23分以上"></a>1.2 23分以上</h2><ol>
+<li>六大误区：</li>
+</ol>
+<ul>
+<li>词汇量大，分就高</li>
+<li>tpo刷2次</li>
+<li>真实题难</li>
+<li>笔记</li>
+<li>走神</li>
+<li>多练难</li>
+</ul>
+<ol start="2">
+<li>词汇<br>5000 80+<br>6500 90+<br>8000 100+<br>13000 110+</li>
+</ol>
+<p>0.7 基础<br>0.2 专业<br>0.1 超托福, 放弃！</p>
+<p>基础词汇1s反映不过来，不合格，听不准</p>
+<p>语速 190~210<br>单词反映力</p>
+<ol>
+<li>revolvtion? 天文学? v. 中乱</li>
+<li>deceive 欺骗</li>
+<li>not seriously? 未必，否定</li>
+<li>incoperate 吸收，纳入,合作</li>
+<li>suite  ! sw:t  套房，套件</li>
+</ol>
+<p>怎么背?</p>
+<ol>
+<li>重复！多次</li>
+<li>时差, 练抢答<blockquote>
+<p>记录?</p>
+</blockquote>
+</li>
+<li>音差, 跟读</li>
+</ol>
+<blockquote>
+<p>出声，快速抢答; 早晚40min<br>tpo提高的手段<br>每道题做到很好, 难度没有绝对之分</p>
+</blockquote>
+<p>tpo哪三个学科出现频率最高？</p>
+<blockquote>
+<p>生物，艺术，天文宇宙</p>
+</blockquote>
+<p>背书的专业词汇</p>
+<p>记笔记</p>
+<blockquote>
+<p>听，优先值是是否听懂!</p>
+</blockquote>
+<p>2h录音，分开，一次不超过40min</p>
+<h2 id="1-3-听力推荐"><a href="#1-3-听力推荐" class="headerlink" title="1.3 听力推荐"></a>1.3 听力推荐</h2><ol>
+<li>Step by Step 3000: 2或4<blockquote>
+<p>题材多，题型多，口音多； 细节把握</p>
+</blockquote>
+</li>
+<li>Listen to this 经典 !!!<blockquote>
+<p>题材多，题型多，练英音 </p>
+</blockquote>
+</li>
+<li>新概念2（语法）， 3（词汇）<blockquote>
+<p>方便自学</p>
+</blockquote>
+</li>
+<li>空中英语教室，中级别 泛听   </li>
+</ol>
+<p>听写吗?</p>
+<blockquote>
+<p>只注意局部，而忘记了整体<br>没有用！</p>
+</blockquote>
+<p>为什么第一遍听不懂，第二遍可以？</p>
+<blockquote>
+<p>精听不够，没办法梳理大意</p>
+</blockquote>
+<p>tpo听力词汇，词频词汇！</p>
+<blockquote>
+<p>精准备考</p>
+</blockquote>
+<p>语法不好怎么办？</p>
+<blockquote>
+<p>无敌英语高中语法 1<del>63, 1</del>128</p>
+</blockquote>
+<p>校园生活</p>
+<blockquote>
+<p>That’s why I chose Yale? !<br><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj10R24zLVJXOEFqaw==" title="https://www.youtube.com/watch?v=tGn3-RW8Ajk">https://www.youtube.com/watch?v=tGn3-RW8Ajk<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<ul>
+<li>debate： a serious discussion of a subject in which many people take part<blockquote>
+<p>Education is the current focus of public debate.</p>
+</blockquote>
+</li>
+<li>matriculate: to be formally admited to study at a university or college<blockquote>
+<p>where to matriculate</p>
+</blockquote>
+</li>
+<li>hail  <ul>
+<li>v. (formal) to call someone in order to attract their attention<blockquote>
+<p>shall we hail a taxi</p>
+</blockquote>
+</li>
+<li>n. small, hard balls of ice that fall from the sky like rain.<blockquote>
+<p>a hail of bullets</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>quintessential: being the most typical example or most important part of something.<blockquote>
+<p>Sheep’s milk  cheese is the quintessential Corsican cheese.</p>
+</blockquote>
+</li>
+<li>residential   reside<ol>
+<li>a residential road, area. has only private houses, not ofices and factories.</li>
+<li>a residential job, position,course, etc, is one for which you live at the same place where you work or study</li>
+<li>relating to where you live or have lived.<blockquote>
+<p>It was not safe to locate the chemicals factory in a residential area.</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li>liberal  ~ arts 文科<ol>
+<li>society: respecting and allowing many different types or beliefs or behaviour<blockquote>
+<p>a liberal society.</p>
+</blockquote>
+</li>
+<li>politics: believing in or allowing more personal freedom and deveplopment  towards a fairer sharing of wealth and power within society</li>
+<li>generous: giving or given in generous way</li>
+<li>not exact: without attention to or interest in detail</li>
+</ol>
+</li>
+<li>thrive: to grow, to develop, or be successful 好的，成长的趋势<blockquote>
+<p>she seems to thrive on stress</p>
+</blockquote>
+</li>
+<li>thread<ul>
+<li>fibre:  (a length of )a very thin fibre线<blockquote>
+<p>losse threads</p>
+</blockquote>
+</li>
+<li>connection: main thinking way</li>
+<li>v. put something long and thin such as string or through a narraow ole or into a small space<br>  穿线， 除毛</li>
+</ul>
+</li>
+<li>Shakespeare Studies and Pre-Med   </li>
+<li>common  ground 共同点</li>
+<li>grill: 烤架，烧烤店</li>
+<li>fill: v. 填充，充满; n. 需要的量</li>
+<li>buttery: n. 饮食店; 涂了黄油的土豆</li>
+<li>right down to: 就连…也包括在内</li>
+<li>work out: 锻炼身体</li>
+<li>below: 在较低处，在什么之下，小于</li>
+<li>rehearsal: 排练，彩排</li>
+<li>hone: 使…变锋利；磨炼  hone the skill</li>
+<li>chill: to become cold 冷却，使变冷</li>
+<li>dorms 宿舍</li>
+<li>suite 套房</li>
+<li>sheets 床单</li>
+<li>couch 沙发，以某种方式表达</li>
+<li>lava熔岩 lamp灯</li>
+<li>awhile=for a short time. <blockquote>
+<p>stay awhile</p>
+</blockquote>
+</li>
+<li>master<ul>
+<li>n. 主人; 船长; 大师; 杰出画家; 男中学教师; 少爷： 原版</li>
+<li>v. 精通，掌握</li>
+<li>a. 技术娴熟的</li>
+</ul>
+</li>
+<li>dean<ul>
+<li>n. 系主任；元老；牧师</li>
+</ul>
+</li>
+<li>suffice足够 to be enough</li>
+<li>Broadway （纽约）百老汇剧场，音乐剧</li>
+<li>subsidize: to pay part of the cost of something</li>
+<li>harmonize: 为什么配和声，使协调</li>
+<li>cheer for 欢呼，喝彩；鼓舞，振奋</li>
+<li>prevail v. 占优势，流行，盛行<blockquote>
+<p>7.09</p>
+</blockquote>
+</li>
+</ul>
+<p>天文学</p>
+<blockquote>
+<p>Journey to the Edge of the Universe, 2遍 !<br><span class="exturl" data-url="aHR0cHM6Ly93d3cudm9pY2V0dWJlLmNvbS92aWRlb3MvMTc5MzE=" title="https://www.voicetube.com/videos/17931">https://www.voicetube.com/videos/17931<i class="fa fa-external-link"></i></span><br>多做TPO, 关键在细抠</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -2256,1010 +5816,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/18/study-todo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/18/study-todo/" class="post-title-link" itemprop="url">study todo</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-18 10:06:10 / 修改时间：16:45:03" itemprop="dateCreated datePublished" datetime="2019-09-18T10:06:10+08:00">2019-09-18</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/todo/" itemprop="url" rel="index"><span itemprop="name">todo</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/todo/study/" itemprop="url" rel="index"><span itemprop="name">study</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>日志，了解加使用</p>
-</li>
-<li><p>命令行</p>
-</li>
-<li><p>环境</p>
-</li>
-<li><p>计算机基础4本经典书籍</p>
-<ul>
-<li>编译原理龙书</li>
-<li>深入理解计算机系统</li>
-<li>计算网络：自顶向下</li>
-<li>现代操作系统</li>
-</ul>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/16/clean-code-reading-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/16/clean-code-reading-note/" class="post-title-link" itemprop="url">clean code: reading note</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-16 16:08:54" itemprop="dateCreated datePublished" datetime="2019-09-16T16:08:54+08:00">2019-09-16</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-18 16:14:31" itemprop="dateModified" datetime="2019-09-18T16:14:31+08:00">2019-09-18</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/code/" itemprop="url" rel="index"><span itemprop="name">code</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/code/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>由于自己写的代码老是感觉像屎一样烂，所以觉得不学学这方面的东西，真的是自己都看不下去了</p>
-</blockquote>
-<p>代码整洁之道  Rober C.Martin著， 韩磊译 </p>
-<blockquote>
-<p>就学习而言，自己尽可能去过了一遍知识点，以下记的内容多半是过细的内容。要真正掌握之， 还需要summary最重要的准则，牢记于大脑中，形成做事的准则。同时，并且还要加以实战，对实例进行了解才是</p>
-</blockquote>
-<p>学习参考代码·<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvQ2xlYW5Db2Rl" title="https://github.com/AugF/CleanCode">https://github.com/AugF/CleanCode<i class="fa fa-external-link"></i></span></p>
-<h2 id="A-概览"><a href="#A-概览" class="headerlink" title="A. 概览"></a>A. 概览</h2><ol>
-<li><p>什么是整洁代码</p>
-<ul>
-<li>Bjame (C++)<blockquote>
-<p>缺陷难以隐藏；减少依赖；分层战略处理错误代码；性能调至最优；整洁的代码只做好一件事情</p>
-</blockquote>
-</li>
-<li>Grady<blockquote>
-<p>干净利落的抽象和直截了当的控制语句</p>
-</blockquote>
-</li>
-<li>Dave Thomas<blockquote>
-<p>单元测试和验收测试；明确定义和提供清晰、尽量少的API</p>
-</blockquote>
-</li>
-<li>Ron<blockquote>
-<p>消除重复和提高表达力，提早构建简单抽象</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>重点： !!! 童子军军规：让你的营地比你来时更干净。 每次签入时，都比签出干净</p>
-</li>
-<li><p>后续阅读： 敏捷软件开发：原则、模式与实践</p>
-</li>
-<li><p>章节安排</p>
-<ul>
-<li>有意义的命名</li>
-<li>函数</li>
-<li>注释</li>
-<li>格式</li>
-<li>对象和数据结构</li>
-<li>错误处理</li>
-<li>单元测试</li>
-<li>类</li>
-<li>系统</li>
-<li>迭进</li>
-<li>并发编程</li>
-<li>逐步改进</li>
-<li>JUnit内幕</li>
-<li>重构SerialDate</li>
-<li>味道与启发 ???</li>
-</ul>
-</li>
-</ol>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/09/16/clean-code-reading-note/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/16/algorithm-improve-class/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/16/algorithm-improve-class/" class="post-title-link" itemprop="url">algorithm improve class</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-16 14:57:57 / 修改时间：15:07:57" itemprop="dateCreated datePublished" datetime="2019-09-16T14:57:57+08:00">2019-09-16</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/improve/" itemprop="url" rel="index"><span itemprop="name">improve</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>算法学习分为这几类：</p>
-<ul>
-<li>level 1 语法课, 直接题库搜索”语法课”即可进行练习<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aW5nLmNvbS9wcm9ibGVtL3NlYXJjaC8xLz9jc3JmbWlkZGxld2FyZXRva2VuPW1zVUpKNUx0eFJ2SWxkQmxzc2x2Y2hZU3c4R3JuOFVkSU0zMkYyV3RwTnMxV2l0TlRqc3ZMem5UVkZvZjhjVzImYW1wO3NlYXJjaF9jb250ZW50PSVFOCVBRiVBRCVFNiVCMyU5NSVFOSVBMiU5OA==" title="https://www.acwing.com/problem/search/1/?csrfmiddlewaretoken=msUJJ5LtxRvIldBlsslvchYSw8Grn8UdIM32F2WtpNs1WitNTjsvLznTVFof8cW2&amp;search_content=%E8%AF%AD%E6%B3%95%E9%A2%98">https://www.acwing.com/problem/search/1/?csrfmiddlewaretoken=msUJJ5LtxRvIldBlsslvchYSw8Grn8UdIM32F2WtpNs1WitNTjsvLznTVFof8cW2&amp;search_content=%E8%AF%AD%E6%B3%95%E9%A2%98<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-</li>
-<li>level 2 算法基础课</li>
-<li>level 3 算法提高课 算法的应用<ul>
-<li>题目–&gt; 模型 —&gt; 相似的题目(因为整理的人太少，所以这里暂时以题目为主) 题谱</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>dp</p>
-<ul>
-<li>23:06</li>
-</ul>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/16/algorithm-basic-class/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/16/algorithm-basic-class/" class="post-title-link" itemprop="url">algorithm basic class</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-16 08:02:32" itemprop="dateCreated datePublished" datetime="2019-09-16T08:02:32+08:00">2019-09-16</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-18 17:13:38" itemprop="dateModified" datetime="2019-09-18T17:13:38+08:00">2019-09-18</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/summary/" itemprop="url" rel="index"><span itemprop="name">summary</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>快排</p>
-<blockquote>
-<p>难分，易于归并<br>eg: 第k个数</p>
-</blockquote>
-<p>归并</p>
-<blockquote>
-<p>易分，难合<br>eg: 逆序对</p>
-</blockquote>
-<p>二分：整数，浮点数</p>
-<blockquote>
-<p>二分，多种场合，分治的取一情况。分割两种不同的性质</p>
-</blockquote>
-<p>高精度,A+B, A-B, A*a, A/a</p>
-<blockquote>
-<p>A+B, tmp临变量。 末尾存储，a[0]存个位。</p>
-</blockquote>
-<p>前缀和差分</p>
-<blockquote>
-<p>前缀和[;,r], s[r]-s[l-1]. 一维和二维。<br>一维前缀和<br>$a_l+a_{l+1}+…+a_r = S_r - S_{l-1}$<br>一次O(n),后面线性时间查询<br>差分: 多次为某个区间中的数进行操作，单位时间即可解决</p>
-</blockquote>
-<p>双指针</p>
-<blockquote>
-<p>模板很好用，找单调性</p>
-</blockquote>
-<p>位运算：<br>怎么析取每一位1，怎么找到最低位1</p>
-<blockquote>
-<p>位操作才是</p>
-</blockquote>
-<p>离散化</p>
-<blockquote>
-<p>在一个小的区间上反复做操作和查询</p>
-</blockquote>
-<p>区间合并</p>
-<blockquote>
-<p>为后面做准备。 怎么处理特殊情况？让情况考虑完全！</p>
-</blockquote>
-<p>单链表和双链表</p>
-<blockquote>
-<p>单： e[N],ne[N],idx,head=-1;   e[idx++]=x;  注意！删除头元素！ 数组中自然下标对应的是按顺序插入的值，不考虑删除的情况;</p>
-<blockquote>
-<p>注意节点的值存储在e[i]中<br>常用在图和hash表的存储中<br>双： e[N],l[N],r[N],idx,r[0]=1,l[1]=0;  e[idx++]=x; 从2开始计数，删除时直接用指针即可</p>
-</blockquote>
-</blockquote>
-<p>栈和队列</p>
-<blockquote>
-<p>栈: st[N],tt   st[++tt]=x;  tt?No:Empty<br>队列：q[N],hh,tt=-1  q[++tt]=x  hh&lt;=tt ? No: Empty</p>
-</blockquote>
-<p>单调栈和单调队列（滑动窗口）</p>
-<blockquote>
-<p>首先给出暴力做法，然后去掉没有用的元素，发现剩余的元素具有单调性。 没有用的元素考虑使用栈或者队列将其抛弃，剩余的元素则进行保留。<br>对单调性的东西，可以考虑用栈来访问最近最值元素，队列来访问全局最近最小元素？，另外由于单调性还可以用二分法进行模拟。<br>实现：<br>单调栈： 队中存储的就是元素<br>滑动窗口： 队中存储的是元素的下标<br>时间复杂度优化： 每个元素最多进栈和出栈一次，优化为了O(n);<br>? 二元关系的下界知道，怎么知道一个问题的下界是多少？</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">单调栈</span><br><span class="line">st[N], tt=0;</span><br><span class="line">for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">    int x;</span><br><span class="line">    while(tt &amp;&amp; st[tt]&gt;=x) tt--;</span><br><span class="line">    if(tt) puts(&quot;-1&quot;);</span><br><span class="line">    else printf(&quot;%d&quot;,st[tt]);</span><br><span class="line">    st[++tt]=x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">单调队列</span><br><span class="line">a[N], q[N], hh, tt=-1;</span><br><span class="line">for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">    if(hh&lt;=tt &amp;&amp; q[tt]&lt;i-k+1) hh++;</span><br><span class="line">    while(hh&lt;=tt &amp;&amp; a[q[tt]]&lt;=a[i]) tt--;</span><br><span class="line">    q[++tt]=i;</span><br><span class="line">    if(i&gt;=k-1)&#123;</span><br><span class="line">        cout&lt;&lt;q[hh]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>KMP</p>
-<blockquote>
-<p>用于搜索模板串在子串上出现的位置，思想是提前对模板串做信息标志，即利用最大后缀。<br>next[i]: 以i为终点的，最长连续后缀的长度。  next[1]=0; // 初始化<br>关键为next数组, 时间复杂度, 匹配的时候while不执行和while执行时均摊可以知道，while最多减m次 ？？？</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">for(int i=2, j=0;i&lt;=n;i++)&#123;</span><br><span class="line">    while(j &amp;&amp; p[i]!=p[j+1]) j=next[j]; //j=0,表示一个都还没成功匹配</span><br><span class="line">    if(p[i]==p[j+1]) j++;</span><br><span class="line">    next[i]=j;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for(int i=1,j=0;i&lt;=m;i++)&#123;</span><br><span class="line">    while(j &amp;&amp; s[i]!=p[j+1]) j=next[j];</span><br><span class="line">    if(s[i]==p[j+1]) j++;</span><br><span class="line">    if(j==n)&#123;</span><br><span class="line">        printf(&quot;%d&quot;,i-j+1); // 返回从1开始的s的下标</span><br><span class="line">        j=next[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Trie树</p>
-<blockquote>
-<p>利用相同的前缀，进行搜索；将每个字母当做一个节点。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">son[N][26],cnt[M],idx; // 这里M应该是最多出现的节点的个数，因为这里M是节点的计数</span><br><span class="line">这里的N是最大出现的层数，即字符串的最大长度。</span><br><span class="line">str[N];</span><br><span class="line"></span><br><span class="line">int add(char str[N])&#123;</span><br><span class="line">    p=0;</span><br><span class="line">    for(int i=0;str[i];i++)&#123;</span><br><span class="line">        int u=str[i]-&apos;a&apos;;</span><br><span class="line">        if(!son[p][u]) son[p][u]=idx++;</span><br><span class="line">        p=son[p][u];</span><br><span class="line">    &#125;</span><br><span class="line">    cnt[p]++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">时间复杂度 插入O(n),查找O(n); 可用于在大批的字符串中进行查找</span><br></pre></td></tr></table></figure>
-
-<p>并查集</p>
-<blockquote>
-<p>将两个元素合并，询问两个元素是否在一起; 用树来模拟</p>
-<ol>
-<li>如何判断根 2. 如何求x的集合编号  3. 如何合并<br>可用于一切集合合并的问题</li>
-</ol>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int find(int x)&#123;</span><br><span class="line">    if(p[x]!=x) p[x]=find(p[x]);</span><br><span class="line">    return p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for(int i=1;i&lt;=n;i++) p[i]=i;</span><br><span class="line"></span><br><span class="line">M: p[find(a)]=find(b);</span><br><span class="line">Q: find(a)==find(b);</span><br></pre></td></tr></table></figure>
-
-<p>堆</p>
-<blockquote>
-<p>down(i), up(i); i从1开始， 变小往上走，变大往下走<br>堆排序，建堆O(n), 修复一个元素O(n). O(klogk):找前k个元素？？<br>模拟堆，额外维护一个第几个插入与堆中元素的链表</p>
-</blockquote>
-<p>哈希表</p>
-<blockquote>
-<p>注意区别离散化，离散化是借助前缀和来做<br>如何哈希？ 如何解决冲突？ 开放寻址法+拉链法<br>无序性，O(1)</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">关键find函数，找到元素或者找到该插入元素的位置</span><br><span class="line">拉链法</span><br><span class="line">h[N],e[N],ne[N],idx;</span><br><span class="line">int insert(int x)&#123;</span><br><span class="line">    int k=(x%N+N)%N;</span><br><span class="line">    e[idx]=x;</span><br><span class="line">    ne[idx]=h[k];</span><br><span class="line">    h[k]=idx++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int find(int x)&#123;</span><br><span class="line">    int k=(x%N+N)%N;</span><br><span class="line">    for(int i=h[k];i!=-1;i=ne[i])&#123;</span><br><span class="line">        if(e[i]==x) return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">memset(h,-1,sizeof(h));</span><br><span class="line"></span><br><span class="line">开放寻址法：找坑法</span><br><span class="line">如何填满了会出问题，所以经验上会用2-3倍空间</span><br><span class="line">const int N=200003,null=0x3f3f3f3f;</span><br><span class="line">int find(int x)&#123;</span><br><span class="line">    int k=(x%N+N)%N;</span><br><span class="line">    while(h[k]==null &amp;&amp; h[k] != x)&#123;</span><br><span class="line">        k++;</span><br><span class="line">        if(k==N) k=0;</span><br><span class="line">    &#125;</span><br><span class="line">    return k;</span><br><span class="line">&#125;</span><br><span class="line">memeset(h,0x3f,sizeof(h)); // 关键null要大于x数值的范围</span><br></pre></td></tr></table></figure>
-
-<p>字符串哈希</p>
-<blockquote>
-<p>前缀哈希，正常按高到低来。由p进制来转换为十进制数。<br>经验值： p=131,13331, Q: 2^64;<br>[l,r]的哈希值h[r]-h[l-1]*p[r-l+1]<br>所以只需要比较两个哈希值是否相等就能知道两个字符串是否相等。如果h和p提前计算好就是O(1),作用快速比较两个字符串是否相等</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ULL h[N],p[N];</span><br><span class="line">char str[N];</span><br><span class="line"></span><br><span class="line">ULL get(int l, int r)&#123;</span><br><span class="line">    return h[r]-h[l-1]*p[r-l+1];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">p[0]=1;</span><br><span class="line">for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">    p[i]=p[i-1]*p;</span><br><span class="line">    h[i]=h[i-1]*p+str[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>STL初步<br>vector 变长数组，倍增思想 size()<br>dequeue 特别慢<br>string 可用作模拟栈, pair<br>queue(), priorityqueue<br>stack<br>set有序序列，基于平衡树实现 O(logN)<br>map a[“adad”]=1, a.count()? 好用！<br>unorder_set,.._map,哈希，O(1), 单独头文件<br>bitset(): bitset&lt;10000&gt; s; ~,&amp;,|,^</p>
-<p>DFS: 回溯，暴力搜索，恢复现场</p>
-<ol>
-<li><p>简单的框架</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 回溯法: u代表了每一层</span><br><span class="line">int dfs(int u)&#123;</span><br><span class="line">    if(u==n)&#123;</span><br><span class="line">        //print</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">        if(!st[i])&#123;</span><br><span class="line">            st[i]=true;</span><br><span class="line">            dfs(u+1);</span><br><span class="line">            st[i]=false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>树和图的框架</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">h[N],e[N],ne[N],idx;</span><br><span class="line">st[N];</span><br><span class="line"></span><br><span class="line">void add(int x,int y)&#123;</span><br><span class="line">    e[idx]=y,ne[idx]=h[x],h[x]=idx++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 注意这里是图的遍历框架，所以跟前面的不一样，考虑的不是到达某一显示的层；而是将图中所有节点搜索完得到结果</span><br><span class="line">void dfs(int u)&#123;</span><br><span class="line">    st[u]=true;</span><br><span class="line"></span><br><span class="line">    for(int i=h[u];i!=-1;i=ne[i])&#123;</span><br><span class="line">        int j=e[i];</span><br><span class="line">        if(!st[j])&#123;</span><br><span class="line">            // 预处理</span><br><span class="line">            int t = dfs(j);</span><br><span class="line">            // 后处理</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>BFS: 最短路的性质</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">h[N],e[N],ne[N],idx;</span><br><span class="line">int d[N],q[N];</span><br><span class="line"></span><br><span class="line">void bfs()&#123;</span><br><span class="line">    // 声明数组</span><br><span class="line"></span><br><span class="line">    // 初始化加入第一个元素</span><br><span class="line"></span><br><span class="line">    while(queue不空)：</span><br><span class="line">        t&lt;-队头</span><br><span class="line">        枚举所有出边：</span><br><span class="line">            if(constraint(x))&#123;</span><br><span class="line">                更新d[j];</span><br><span class="line">                入队；</span><br><span class="line">            &#125;</span><br><span class="line">    </span><br><span class="line">    // 队列中的元素就是拓扑序列</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最短路问题</p>
-<ul>
-<li>单源最短路<ul>
-<li>正权边<blockquote>
-<p>Dijkstra算法 O(n^3)<br>d[i]=0;  for(i:1-n) min, S&lt;-t, update min<br>堆优化的Dijkstra算法 O(mlogN)</p>
-</blockquote>
-</li>
-<li>负权边<blockquote>
-<p>Bellman_ford()<br>spfa()</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>多源最短路 floyd, 动态规划</li>
-</ul>
-<p>最小生成树<br>Prim算法<br>朴素版 算法思想<br>d[1]=0, d[2..n]=INF<br>while(q.size())<br>(t=q.min()  for v: t-v: if(!st[v]) d[v]=min(d[v],d[t][v]);)<br>O(n^2): n轮，每轮1-m<br>Kruskal O(mlogm)<br>从小到大选边， mlogm进行排序  </p>
-<p>二分图<br>染色法 O(n+m):对所有边和点进行遍历<br>匈牙利算法O(nm)<br>找最大匹配</p>
-<p>数论<br>质数<br>从2开始具有某种性质的整数；<br>判定方法：试除法：d|n, n/d |n,  d&lt;=n/d<br>分解n的质因数：不断砍质数 &lt;=n/i<br>筛质数：筛选出2~n之间的所有质数</p>
-<ul>
-<li>从小到大筛数的倍数</li>
-<li>筛素数的倍数： 埃式筛法</li>
-<li>利用乘积来筛：线性筛法 &lt;=n</li>
-</ul>
-<p>约数<br>试除法求约数：成对出现。然后在排序，可以计算出排序的时间复杂度远小于一般情况<br>约数个数：自然数基本定理 a=p1^a1 p2^a2 … pk^ak<br>约数之和：(p1^0+…+p1^a1)(p2^0+…+p2^a2)…  (利用了组合数学)</p>
-<p>最大公约数<br>辗转相除法</p>
-<p>欧拉函数 p(n): 1~n之间与n互质的数<br>如何求？容斥原理，去掉不互质的 N-N/p1-N/p1+..进行统计 N(1-1/p1-1/p2-… + 1/p1p2)<br>然后公式改写可以得到 N(1-1/p1)(1-1/p2)…(1-1/pk)</p>
-<ul>
-<li>公式法：计算出某一个数的欧拉函数</li>
-<li>筛法：计算多个数的欧拉函数<br>phi[primes[j]<em>i]=primes[j]</em>phi[i]  // primes[j]是i的第一个质因数<br>分为质数<br>最小质因数是该数的因子<br>最小质因数不是该数的因子<br>使用线性筛法的模板来解题</li>
-</ul>
-<p>费马定理 a^(phi[p]) mod p = 1</p>
-<p>a^k mod p的快速幂: 将等比数列，等差数列之类的东西很容易用循环结构来写，这样从某种程度就会让问题的难度降低很多</p>
-<p>快速幂求逆元： aa^-1 mod p = 1  根据费马定理 a^(p-1) mod p=1, 所以逆元为a^(p-2) logP</p>
-<p>扩展欧几里得算法 ax+by=gcd(a,b)  求x和y：本身其实是有多个解的，注意这里的循环结构是非常妙的！</p>
-<p>线性同余方程 ax =b mod m,  转化为ax-my mod m=b, 然后再扩充解，如果(a,m)|b不成立的话，无解</p>
-<p>中国剩余定理： 第一种方法：使用公式法来做；第二种做法：使用线性同余方程的合并来做</p>
-<p>组合计数</p>
-<ul>
-<li>10万组 2000  递推 C(n,m)=C(n-1,m)+C(n-1,m-1) O(n^2)</li>
-<li>1万组 10^5 运用逆元的思想  fib[a] infib[b] infib[a-b] mod n, N*logN</li>
-<li>20组  10^18 使用卢斯卡定理 C(a,b)=C(a mod p, b mod p)*C(a/p, b/p) mod p  后面mod p 必须有否则不成立, p这里一般不会太大</li>
-<li>无模运算：直接求a!中p的个数, 用大整数乘法来做</li>
-</ul>
-<p>有序的01序列<br>卡特兰数，转化为图形，数轴翻转进行理解<br>(2n)! / n!(n+1)! = 1/(n+1) C(2n,n)<br>应用很多，如栈的顺序</p>
-<p>高斯消元<br>手动模拟人工计算的工程</p>
-<ol>
-<li>对列进行循环</li>
-<li>寻找首元素最大的行</li>
-<li>如果为不存在或为0， continue</li>
-<li>交换最大行和首元素行</li>
-<li>将当前行首元素置为1，从后往前循环</li>
-<li>将后面的行的首元素变为0</li>
-<li>对有多组解、无解、唯一解情况进行判断</li>
-</ol>
-<p>异或：不进位的加法</p>
-<ol>
-<li>枚举列</li>
-<li>找非零行</li>
-<li>交换</li>
-<li>消零</li>
-</ol>
-<p>容斥原理<br>韦恩图<br>有什么用？能减少枚举的数量的个数？如果找到某种性质的话<br>比如：1~n之间能被p1,p2,…等多个数整除的数的个数？使用容斥原理 k(2^k-1) 复杂度</p>
-<p>简单博弈<br>公平组合游戏<br>Nim游戏： 必败状态=0和必胜状态!=0, 自然数的异或<br>Nex游戏，sg(x)终止状态为0状态，反推最小非负整数的运算，每一个都是到不了状态</p>
-<blockquote>
-<p>每个可以根据形成一个单独图，sg(b1,b2)=sg(b1)^sg(b2)<br>实例： Nim游戏、台阶-Nim游戏、集合-Nim游戏、拆分Nim游戏</p>
-</blockquote>
-<p>背包问题</p>
-<ul>
-<li>01背包 i v max(w) 每个物品选或不选<br>f[i][v]=w: 所有只使用前i个物品且总体积小于v的取法的权重的Max  根据最后一个元素i放或不放进行拆分 f[i][v]=max(f[i][v], f[i-1][v-v[i]]+w[i])<br>N*V *1  N</li>
-<li>完全背包 每个物品可以选任意次<br>f[i][v]=w 所有只使用前i个物品且总体积小于v的取法的权重的Max  根据最后一个元素i取多少次进行限制 由容量大小确定取的次数 根据递推关系可以简单写成 f[i][v]=max(f[i][v], f[i][v-w]+w)<br>N<em>V</em>1 N</li>
-<li>多重背包问题 每个物品有si个<blockquote>
-<p>思路将0~si,用1,2,4,..,2^k,c枚举转化为01背包问题<br>NlogS<em>V</em>1 NlogS</p>
-</blockquote>
-</li>
-<li>分组背包问题 每组物品中只能选一个或不选<br>f[i][v]= N 所有只从前i组中选择且总体积不小于v的取法的权重的最大 根据每组选哪个元素来分类 f[i][v] = max(f[i][v], f[i][v-v[i][k]]+w[i][k]) // k=0~k-1<br>N<em>V</em>K N*K<blockquote>
-<p>这里用组的概念代替了单个背包，所以也多出了多种选择</p>
-</blockquote>
-</li>
-</ul>
-<p>线性DP</p>
-<blockquote>
-<p>考虑的方式都是线性的</p>
-</blockquote>
-<ul>
-<li><p>数字三角形 从上到下的权重最长的路径<br>f[i][j] 所有从起点走到(i,j)的路径的权重和的最大值 根据前一方向的来源，左上方还是右下方 f[i][j]=max(f[i-1][j], f[i-1][j-1]) + a[i][j]<br>n^2*1 n^2</p>
-<blockquote>
-<p>因为出口有多条路，所以数据结构不可缩减</p>
-</blockquote>
-</li>
-<li><p>最长上升子序列</p>
-<blockquote>
-<p>注意发现的话，可以看出这里的做法是很妙的<br>f[i] 所有以第i个数为结尾的上升子序列的结合长度的最大值 考虑上升子序列中上一元素的位置 f[i]=max(f[j]+1) j:0~i-1   n<em>n n<br>非DP,优化  n</em>logn<br>发现长度的最后一个位置具有递增关系，可以用二分法搜索进行优化<br>代码！！！</p>
-</blockquote>
-</li>
-</ul>
-<p>最长公共子序列<br>f[i][j] 所有由第一个序列的前i个字母和第二个序列的前j个字母构成的最长公共子序列的Max 根据第i个和第j个字母是最长公共子序列的结尾元素，优化后可得  f[i][j]=max(f[i-1][j],f[i][j-1], f[i-1][j-1]+1)<br>N<em>M</em>1  N*M</p>
-<p>最短编辑距离<br>f[i,j] 将a[1,i]编辑成b[1,j]的所有操作方式的集合，操作方式有插入、删除、替换 根据最后一次属于哪种操作方式进行分类 f[i,j]=min(f[i-1,j], f[i,j-1], f[i-1,j-1]+(a[i]!=b[j]))</p>
-<p>区间DP</p>
-<blockquote>
-<p>二维的i,j一般为区间的起始和终点坐标<br>石子合并 前缀和的运用 大整数相乘<br>f[i][j] 所有将第i堆石子和第j堆石子合并成一堆石子的合并方式的代价的最小值 按最后一次合并的位置进行划分<br>f[i,j] = max_k (f[i,k]+f[k,j]+pj) k=i,..,j-1 n*n n^2<br>这里循环用了len和i，值得借鉴</p>
-</blockquote>
-<p>计数类DP<br>属性为数量，直接相加得到最终结果<br>整数划分<br>f[i,j] 从0~i中选择整数，组成恰好是j的所有方式的集合的总数量 按i加入的次数进行分类 完全背包问题<br>f[i,j] = f[i-1,j] + f[i,j-v[i]]<br>ans = f[i,i]</p>
-<p>f[i,j] 使用j个元素构成的数恰好是j的所有方式的集合的数量 最小的元素是否是1<br>f[i,j] = f[i-1,j-1] + f[i-j, j]<br>ans = sum_i f[n,i]</p>
-<p>数位统计DP<br>比如计数问题，对数位上出现的数进行统计</p>
-<p>状态压缩DP<br>f[i][j], 某一个位使用二进制位来表示整体的状态方程<br>蒙德里安的梦想</p>
-<blockquote>
-<p>非常妙的一种做法，想到每个小格进行递推得到方程式<br>矩形可以有多少中1*2的小矩形的填充方法，首先考虑横着的矩形，竖着放的矩形就唯一确定了。<br>对于横着放的矩形，总共的方案数，研究每列上每个状态的情况！！ 多加理解<br>最短Hamilton路径<br>为什么要用这个？<br>f[i][j] 所以从0走到j，走过的所有点的状态是i的所有路径的长度<br>用状态压缩是因为这里的路径不是按自然序来的，可能有多种组合方式</p>
-</blockquote>
-<p>树形DP<br>没有上司的舞会<br>容易，直接用父子关系即可建立DP关系</p>
-<blockquote>
-<p>注意最大值这里可能会犯错</p>
-</blockquote>
-<p>记忆化搜索<br>滑雪</p>
-<blockquote>
-<p>非常妙的一个东西！对于方格型DP,想到了用方向来分类做，非常好</p>
-</blockquote>
-<p>贪心<br>证明<br>A=B: A&lt;=B &amp;&amp; A&gt;=B<br>区间问题</p>
-<ul>
-<li>右端点排序</li>
-</ul>
-<ol>
-<li><p>区间选点问题，数轴选最少的点覆盖所有的区间</p>
-<blockquote>
-<p>排序，从前到后枚举每个区间，ed=-2e9,如果当前区间被覆盖，即区间的左端点小于ed,下一个；否则，更新ed<br>证明：最小不用; cnt&lt;=Ans, cnt覆盖了所有不相交的点，是基本情况</p>
-</blockquote>
-</li>
-<li><p>最大不相交区间数量</p>
-<blockquote>
-<p>同上<br>证明：最大不用；cnt&gt;=Ans, Ans选择的是两两没有交集的区间，那么是点覆盖区间的基本情况，所以必然点的数量大于区间的数量</p>
-</blockquote>
-</li>
-</ol>
-<ul>
-<li>左端点排序</li>
-</ul>
-<ol>
-<li><p>区间选组，选择每组内部不相交组的，所分的最小组数</p>
-<blockquote>
-<p>排序， 一定是左端点最大的（意味着不可替换性）L[i] &lt;= 所有组的Max_r，则要开辟一个新的组；否则，选择其中r最小的组进行加入，并更新该组的r<br>正确性：最小不用；Ans&gt;=cnt  L[i] 成为新组前一定是形成了cnt+1个相交的区间，这些相交的区间必然花费等量的组，于是得证</p>
-</blockquote>
-</li>
-<li><p>区间覆盖，给定区间，如何用最少的相交区间将其覆盖，也就是怎么安排可以使得任务量最少</p>
-<blockquote>
-<p>排序，在所有能覆盖某一点start,选择最大右端点的，作为新的start，依次类推得到最优解<br>正确性：Ans&lt;=cnt显然， Ans&gt;cnt, 如果与该算法不同，即选择的不是最右的，那么任何最优的算法均能转换为该算法得到的结果，因此大于。</p>
-</blockquote>
-</li>
-</ol>
-<p>Huffman树，合并n组东西，如何合并才能使总代价最小。 Huffman树的结构，用层数来解决。</p>
-<p>贪心算法</p>
-<ul>
-<li>排队打水问题<blockquote>
-<p>贪心题一般是猜一个做法，然后思考为什么是对的。调整法和反对法</p>
-</blockquote>
-</li>
-</ul>
-<p>调整法，对于其实要满足某种顺序，比如正序或者降序的序列，可以假定有两个不满足该序列，然后从而推出矛盾（因为有目标值的存在）</p>
-<p>如果不是按照从小到大的顺序排序，必然存在两个逆序的数。此时得出的结果必然小于交换这两个数得出的结果</p>
-<ul>
-<li><p>货仓选址</p>
-<blockquote>
-<p>用数学和用函数来进行建模<br>f(x) = |x_1-x| + |x_2 - x| + ..<br>猜是中位数<br>考虑进行分组<br>二维，基于随机的思路；如果总和变小就有情况获取</p>
-</blockquote>
-</li>
-<li><p>推公式</p>
-<blockquote>
-<p>贪心某种常用的做法其实是推公式，然后使用不等式从而得到最优解<br>均值不等式，调和不等死，柯西不等式，绝对值不等式，几何不等式<br>贪心大多问题都是数学上研究过的问题</p>
-</blockquote>
-</li>
-</ul>
-<p>贪心得到的答案 &gt;= 最优解<br>贪心得到的答案 &lt;= 最优解</p>
-<blockquote>
-<p>同时比较大小，请注意要学会进行比较。不考虑不变项，然后加上和减去一个无关的变量<br>此贪心的策略只会使最优解结果变小</p>
-</blockquote>
-<ul>
-<li><p>从数据范围反推算法复杂度以及算法内容（一般情况下，题目的时间为1s或者2s. 所以，C++代码中的操作次数控制在1e7最佳）</p>
-<ol>
-<li>n&lt;=30, 指数级别，dfs+剪枝，状态压缩dp</li>
-<li>n&lt;=100, O(n^3) floyd, dp</li>
-<li>n&lt;=1000, O(n^2) O(n^2 logn) dp,二分</li>
-<li>n&lt;=1e4, O(n sqrt(n)) 块状链表特别难写，用不到</li>
-<li>n&lt;=1e5, 最常见的是nlogn算法。线段树和树状数组特别复杂，没讲。 求凸包、求半平面交</li>
-<li>n&lt;=1e6, O(n): hash, 双指针扫描, kmp, ac自动机; 常数比较小的O(nlogn): sort(即前面的系数特别小), 树状数组，heap, ac自动机、线性筛素数<blockquote>
-<p>树状数组和线段树都是用来解决线段的</p>
-</blockquote>
-</li>
-<li>n&lt;=1e7, O(n)</li>
-<li>n&lt;=1e9, O(sqrt(n)) 判断质数，快速幂</li>
-<li>n&lt;=1e18, O(logn) 最大公约数</li>
-</ol>
-</li>
-<li><p>如何分析代码时间复杂度?</p>
-<ol>
-<li>纯循环，dp分析</li>
-<li>递归，主定理，套公式求即可, todo</li>
-<li>logn的分析，二分</li>
-<li>双指针！！ 内层循环只加不减,两层</li>
-<li>数据结构，单链表，删除和插入O(1); 栈，O(1); 单调栈，单调队列O(1）</li>
-<li>kmp内层循环最多执行n次 22:44</li>
-<li>并查集（!!!记住），find最坏logn的效率，加状态压缩；再加按秩合并，loglogn</li>
-<li>堆，插入和删除需要up和down, 走一遍，O(logn); 原始建堆 o(n)???</li>
-<li>hash表，碰撞的概率特别低，平均来说，增删改查都是O(1)<blockquote>
-<p>和快排类似，最坏情况下非常坏，但概率低</p>
-</blockquote>
-</li>
-<li>搜索和图论：从最基本的出发<ul>
-<li>排列： 最后一层输出答案O(n), 查看树的分支来计算n!n</li>
-<li>图的遍历：遍历所有的点，然后对每个点选择遍历所有的边。O(n+m)</li>
-<li>迪杰斯特拉:n^2  mlogm (m&lt;=n^2&gt;)</li>
-<li>bellsman-ford: nm</li>
-<li>spfa, 匈牙利算法，最大流算法；? 实际很快，分析很慢</li>
-<li>floyd, prim n^2  kruskal </li>
-</ul>
-</li>
-<li>数学<ul>
-<li>欧式筛法， 调和级数 n/1+n/2+n/3 nlogn的级别，自然数的和; 如果是质数， n/1+n/2+n/3+n/5+n/7+…  nloglogn的级别</li>
-<li>最大公约数，辗转相除法，logn</li>
-<li>快速幂 logk的级别</li>
-</ul>
-</li>
-<li>动态规划问题的计算量=状态数量*状态转移的计算量<ul>
-<li>树形DP: 每个点只会遍历一次，遍历其所有的边 O(m)</li>
-<li>滑雪： n^2 * 1</li>
-</ul>
-</li>
-<li>贪心： 排序+循环</li>
-</ol>
-</li>
-</ul>
-<p>1 Byte = 8 bit<br>1 KB = 1024 Byte<br>1 MB = 1024<em>1024 Byte<br>1 GB = 1024</em>1024 Byte</p>
-<p>int 4 Byte<br>char 1 Byte<br>double, long long 8 Byte<br>*point  4Byte(32位机器)  8Byte(64位机器)<br>bool 1 Byte</p>
-<p>64MB = 2^26 Byte<br>2^26 / 4 - 2^24,  1600 0000 1e7</p>
-<p>直接用代码算即可</p>
-<blockquote>
-<p>sizeof v + sizeof w + sizeof w  单位是字节<br>但注意有时算的时候开了很大的空间，但是没用是没事的，因为操作系统不会把数据一下子全部给你, 会一点一点给。 所以memset(), 只需要设计到要用的量即可<br>注意递归栈也需要空间， logn</p>
-</blockquote>
-<blockquote>
-<p>对于网速来说， 8M/s 指的是8M位， 实际上每秒最多只能下载1MB的数据； 对于流量来说是兆字节</p>
-</blockquote>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>数据结构的使用<br>最值，堆<br>区间和，区间数组，树状数组，线段树<br>有序链表，平衡树，set</p>
-<p>技巧：一维转为二维</p>
-<p>开始审题很重要，不要什么都没有就往前面跑，首先心理要有一个很好的思路<br>还有模板哪些步骤一开始只是套路，越到后面越没有必要去实实在在地在意它，这样是完全地浪费功夫的感觉</p>
-<ul>
-<li>高精度压位<br>int 2<em>10^10<br>加法一般压9位<br>乘法一般压4位 10000</em>10000=1e<blockquote>
-<p>实际上的想法就是在进行高精度计算的时候，一位一位用char来做太费时间和内存了；可以考虑用int来做，<br>加法9位9位地压，乘法4位4位地压</p>
-</blockquote>
-</li>
-</ul>
-<p>从高位开始读数： 整个数一直左移</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">char str[7]=&apos;121213&apos;</span><br><span class="line">for(int i=0, t=0;i &lt; n;i++)&#123;</span><br><span class="line">    s= s*10 + str[i]-&apos;0&apos;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>从低位开始读数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">char str[7]=&apos;121212&apos;</span><br><span class="line">for(int i=0, s=0,t=1;i&lt;n;i++)&#123; // t表示每一位的进制，每位的数乘以每位的进制</span><br><span class="line">    s += (a[i]-&apos;0&apos;)*t;</span><br><span class="line">    t*=10;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>DP的属性可以有布尔值之间的传递，长度，最值</p>
-<p>DFS 递归<br>BFS 队列 循环</p>
-<h1 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h1><ul>
-<li>Segmelut Flait<br>数组，全局变量局部不可访问<br>数组长度未开够<br>使用删代码法</li>
-</ul>
-<p>将函数return false; 如果问题未改变，则说明不是该函数的问题</p>
-<ul>
-<li>TLE时间受限<br>算法出错<br>局部变量初试为初始化<br>循环变量名抄错</li>
-</ul>
-<p>c++<br>inline 编译器在执行不会将其转化为函数调用，少了函数栈的空间，一般适用于简单的函数<br>register int 将变量保存在寄存器中 </p>
-<p>遍历想想也就两大类啊，深度优先和宽度优先<br>宽度优先就是层次遍历</p>
-<p>宽度优先具有最小的性质，一定能够得出到根节点的最短性。但是宽度优先需要耗费很大的空间，至少存储两层的节点，所以极其耗费空间</p>
-<p>深度优先虽然没有最小的性质，但是空间复杂度低，只需要空间复杂度为树的高度的空间</p>
-<p>书上的公式是书面语，不是大白话，讲究优美性，实际理解时往往需要抽象我们所理解的大白话。</p>
-<p>讲题的境界： 怎么想出来的？正确性</p>
-<p>动作记忆！！！</p>
-<p>C++中0，NULL，nullptr是一个东西</p>
-<p>声音越小越有气势，更重要的是听别人的东西，把别人的东西听懂</p>
-<h2 id="待做"><a href="#待做" class="headerlink" title="待做"></a>待做</h2><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTc3ODU3MC9hcnRpY2xlL2RldGFpbHMvODY0ODQwMjA=" title="https://blog.csdn.net/weixin_39778570/article/details/86484020">https://blog.csdn.net/weixin_39778570/article/details/86484020<i class="fa fa-external-link"></i></span><br>基本算法篇</p>
-<ul>
-<li>模拟</li>
-<li>枚举</li>
-<li>排序</li>
-<li>分治</li>
-<li>二分</li>
-<li>倍增</li>
-<li>贪心</li>
-</ul>
-<p>链表<br>指针<br>二叉树<br>二叉搜索树</p>
-<blockquote>
-<p>二叉搜索树，父节点， 左孩子节点的函数值严格小于父节点， 右孩子节点的函数值严格大于父节点</p>
-</blockquote>
-<p>后序遍历： 左、右、中<br>前序遍历： 中，左，右<br>中序遍历： 左，中，右</p>
-<p>进一步总结</p>
-<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>DFS两种框架</p>
-<p>第一种<br>起始点未定, 用层数来表明，子节点都很清晰</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int n;</span><br><span class="line">int path[]</span><br><span class="line">dfs(int i)&#123;</span><br><span class="line">    if(i==n)&#123;</span><br><span class="line">        collect path;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for(int i=0;i&lt;n;i++)</span><br><span class="line">        if(check(i))&#123;</span><br><span class="line">            p[i] = 1;  //  赋值</span><br><span class="line"></span><br><span class="line">            dfs(s);</span><br><span class="line"></span><br><span class="line">            p[i] = 0;  // 恢复</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dfs(0)</span><br></pre></td></tr></table></figure>
-
-<p>第二种</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int st[N];</span><br><span class="line">int path[N];  //?</span><br><span class="line"></span><br><span class="line">dfs(int v)&#123;</span><br><span class="line">    st[v] = true; // 保证遍历不重复，不需要恢复</span><br><span class="line">    path[i] = f;</span><br><span class="line"></span><br><span class="line">    if(end)  collect</span><br><span class="line">    for(w: vw)</span><br><span class="line">        if(!st)  dfs(w);</span><br><span class="line"></span><br><span class="line">    path[i] = -1; // 其他变量需要恢复</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>BFS的写法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int fun( )&#123;</span><br><span class="line"></span><br><span class="line">    q.push(v);</span><br><span class="line">    while(q.size()) &#123;</span><br><span class="line">        auto t=q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        </span><br><span class="line">        for(int i=0;i&lt;4;i++)</span><br><span class="line">            if(check(i)) q.push(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"> // ? 层次怎么体现？？</span><br></pre></td></tr></table></figure>
-
-<p>DP的写法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f[0][0] = ?</span><br><span class="line">for(i:1~n)</span><br><span class="line">    for(j:1~m)</span><br><span class="line">        f[i][j] = f[i-1][j-1]</span><br><span class="line"></span><br><span class="line">cout&lt;&lt;f[n][m]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int f(int i,int j)&#123;</span><br><span class="line">    if(f[i][j]!=-1) return f[i][j];</span><br><span class="line">    if(base) &#123;</span><br><span class="line">        初值</span><br><span class="line">    &#125;</span><br><span class="line">    res=?</span><br><span class="line"></span><br><span class="line">    for(i:1~n)</span><br><span class="line">        for(j:1~m)</span><br><span class="line">            res=f(i-1,j-1);</span><br><span class="line">    return f[i][j]=res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dfs(0,0)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dp[0][0]</span><br><span class="line"></span><br><span class="line">bool dp(int i,int j)&#123;</span><br><span class="line">    if(f[x][y]!=-1) return f[x][y];</span><br><span class="line">    if(base) &#123;</span><br><span class="line">        return ; // 这里一般是f[i][j]具有某种具体含义的，比如两个字符串匹配，A的前i个字母和B的前j个字母这类极大值情况具有意义的</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dp[x][y] = dp[x+1][y+2] // 看这里的状态是否好推演</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>DP集合划分的方式总结</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/15/python-pylint/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/15/python-pylint/" class="post-title-link" itemprop="url">python pylint</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-15 13:15:11 / 修改时间：13:15:55" itemprop="dateCreated datePublished" datetime="2019-09-15T13:15:11+08:00">2019-09-15</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/coding-reference/" itemprop="url" rel="index"><span itemprop="name">coding_reference</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/coding-reference/pylint/" itemprop="url" rel="index"><span itemprop="name">pylint</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0phc29uX0xld2lzL2FydGljbGUvZGV0YWlscy83NTM4NjU5OA==" title="https://blog.csdn.net/Jason_Lewis/article/details/75386598">https://blog.csdn.net/Jason_Lewis/article/details/75386598<i class="fa fa-external-link"></i></span></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -3312,7 +5868,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">89</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -3325,7 +5881,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">70</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -3338,7 +5894,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">62</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

@@ -200,7 +200,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">62</span></a>
 
   </li>
       
@@ -213,7 +213,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">65</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">70</span></a>
 
   </li>
       
@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">84</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">89</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,1445 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-search-graph/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/algorithm-acwing-search-graph/" class="post-title-link" itemprop="url">algorithm acwing search graph</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:17:32 / 修改时间：12:18:38" itemprop="dateCreated datePublished" datetime="2019-09-19T12:17:32+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/search-graph/" itemprop="url" rel="index"><span itemprop="name">search_graph</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-BFS-DFS"><a href="#1-BFS-DFS" class="headerlink" title="1. BFS/DFS"></a>1. BFS/DFS</h1><h2 id="1-DFS"><a href="#1-DFS" class="headerlink" title="1. DFS"></a>1. DFS</h2><p>stack O(h) 不具有最短性<br>    回溯，剪枝<br>    思路比较奇怪的都有DFS来做<br>    俗称暴力搜索！<br>    关键：使用什么顺序来进行搜索<br>    &gt; 一个很执着的人！，回溯法，出去，回来务必注意需要恢复现场<br>    有些题会判断最优，有些题不需要</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=10;</span><br><span class="line">int n;</span><br><span class="line">int path[N];</span><br><span class="line">bool st[N];</span><br><span class="line"></span><br><span class="line">void dfs(int u)&#123; // 这里与path对应</span><br><span class="line">    if(u==n)&#123;</span><br><span class="line">        for(int i=0;i&lt;n;i++) printf(&quot;%d &quot;,path[i]);</span><br><span class="line">        puts(&quot;&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=1;i&lt;=n;i++)&#123; // 这里与st对应</span><br><span class="line">        if(!st[i])&#123;</span><br><span class="line">            path[u]=i;</span><br><span class="line">            st[i]=true;</span><br><span class="line">            dfs(u+1);</span><br><span class="line">            st[i]=false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    dfs(0);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>八皇后法：依旧使用框架<br>n*n! 2^(n^2)</p>
+<p>DP是无环的最短路问题<br>深搜可以保证一次搜索到终点，但是不能保证搜索到的路径是最短的<br>深度搜索可能随机搜索到一条路</p>
+<h3 id="1-1-统一考虑的格式"><a href="#1-1-统一考虑的格式" class="headerlink" title="1.1 统一考虑的格式"></a>1.1 统一考虑的格式</h3><p>数据范围 N<br>最优解： 需要输出的东西<br>约束条件</p>
+<h3 id="1-1-全排列问题"><a href="#1-1-全排列问题" class="headerlink" title="1.1 全排列问题"></a>1.1 全排列问题</h3><p>DFS, 全排列问题<br>顺序！！  _, _, _, _<br>要以什么样的顺序来遍历所有的方案，这里很简单地就是每一位到底选什么的方案<br>DFS就是递归</p>
+<blockquote>
+<p>当初始状态不属于什么具体的含义的时候，往往恢复现场写在，展开每个子树那里</p>
+</blockquote>
+<p>N=20<br>最优解： path[N]<br>约束条件: st[N]</p>
+<h3 id="1-2-n皇后问题"><a href="#1-2-n皇后问题" class="headerlink" title="1.2 n皇后问题"></a>1.2 n皇后问题</h3><p>N=20<br>最优解： g[N][N] 棋盘<br>约束条件: col[N], dg[N<em>2] udg[N</em>2]</p>
+<h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><p>queue O(2^h) 最短性，当所有边的权都为0,1时是。 </p>
+<p>迷宫问题： 保证了一定存在路<br>技巧就在于少写循环判断语句</p>
+<p>如何输出路径？就是在该输出的位置增加链表</p>
+<p>八数码问题： BFS求最短路<br>把每个方格看作个体，当前棋盘的所有的方格组合而成为整个棋盘的状态，然后每个状态之间有路可走，研究的点就是如何进行搜索，使得能够从一个状态到达另一个状态，并且进行搜索！</p>
+<p>所以问题的关键：</p>
+<ol>
+<li>状态表示复杂</li>
+<li>如何记录两个状态之间的距离</li>
+</ol>
+<p>求最短路</p>
+<p>最短路简单的做法：<br>q[N],d[N]</p>
+<blockquote>
+<p>d[N]是什么，d[N]是BFS中用于搜索，用来更新距离计算公式的</p>
+</blockquote>
+<p>那么需要考虑</p>
+<ul>
+<li>如何存储</li>
+<li>如何定义最短距离<br>距离数组的小标如何表示<br>queue<string><br>dict: 字典，哈希表unordered_map&lt;string,int&gt;</string></li>
+</ul>
+<p>queue<string><br>如何从一个字符串到达另一个字符串？<br>移动，恢复</string></p>
+<h1 id="2-树和图"><a href="#2-树和图" class="headerlink" title="2. 树和图"></a>2. 树和图</h1><h2 id="2-1-存储方式"><a href="#2-1-存储方式" class="headerlink" title="2.1 存储方式"></a>2.1 存储方式</h2><p>邻接矩阵: 稠密图<br>邻接表：拉链法，存储每个点可以走到哪个点</p>
+<blockquote>
+<p>可以用vector来做，但是就效率而言没有数组模拟的快， 稀疏图</p>
+</blockquote>
+<h2 id="2-2-遍历方式"><a href="#2-2-遍历方式" class="headerlink" title="2.2 遍历方式"></a>2.2 遍历方式</h2><p>O(n+m)</p>
+<p>注意最大值最小<br>最小值最大两者的区别</p>
+<blockquote>
+<p>在图里，进行遍历，如果有环，怎么进行统计数？？？，想想真是一个问题！！！<br>在图中，因为有n个顶点，所以对于n个顶点，每两个边之间最多只可能有两种情况，所以根据握手定理，出度与入度之和就为顶点数的二倍</p>
+</blockquote>
+<p>深度优先和宽度优先</p>
+<p>如何将一维扩展到二维，以及多维，实际上就是在多维空间中寻找一种顺序，使得这种顺序可以通过一维的方式来进行模拟</p>
+<p>BFS:<br>h[N],e[M],ne[M],idx;<br>d[N],q[N];  // d[N]==-1,表示是否进行了遍历</p>
+<p>应用：有向图的拓扑序列。 拓扑序列的两种求的方法<br>拓扑排序的算法流程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">queue&lt;- 所有入度为0的点</span><br><span class="line">while(queue不空)</span><br><span class="line">    t&lt;-队头</span><br><span class="line">    枚举t的所有出边t-&gt;j:</span><br><span class="line">        删除t-&gt;j, d[j]--;</span><br><span class="line">        if(d[j]==0) queue&lt;-j;</span><br></pre></td></tr></table></figure>
+
+<p>DFS:<br>h[N],e[M],ne[M],idx<br>st[N]</p>
+<p>搜索的扩展：人工智能技术的树</p>
+<h1 id="3-最短路问题"><a href="#3-最短路问题" class="headerlink" title="3. 最短路问题"></a>3. 最短路问题</h1><ol>
+<li>单源最短路</li>
+</ol>
+<ul>
+<li><p>所有边权都是正数</p>
+<ul>
+<li><p>朴素Dijkstra O(n^2) 稠密</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for v: 1-n:</span><br><span class="line">    t&lt;- 不在S中的距离最近的点 n-i  st[i]:n</span><br><span class="line">    s&lt;-t, 共n次</span><br><span class="line">    用t来更新其他顶点 t-&gt;v， 共m次</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>堆优化版Dijstra O(mlogn) 稀疏</p>
+<blockquote>
+<p>看哪些地方可以优化<br>手写堆，可以保证n个元素<br>pq, 不支持修改元素， m个元素</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>存在负权边</p>
+<ul>
+<li><p>Bellman-ford O(nm)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">struct&#123;</span><br><span class="line">    int a,b,w;</span><br><span class="line">&#125; edge[M];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>(a, b): w<br>dist[b] = min(dist[b], dist[a] + w); 松弛操作<br>对所有的边都满足 dist[b]&lt;= dist[a]+w 三角不等式</p>
+</blockquote>
+<blockquote>
+<p>如果有负权回路不一定存在。n+1 条边，存在负环<br>O(nm)<br>特解的题：最多k条边的题<br>当存在负环时，不存在最短路径。如果负环为自环则无所谓<br>因为更新会发生串联，所以需要备份，backup[N]. &lt;1,2&gt;:1, &lt;2,3&gt;:1,  &lt;1.3&gt;: 3<br>只要有负环存在，可以不断更新负环中的数值，最终到达负无穷</p>
+</blockquote>
+</li>
+<li><p>SPFA 一般：O(m) 最坏：O(nm)</p>
+<blockquote>
+<p>bellman_ford 不一定<br>这里利用了宽搜， BFS, 只有前面的点变小了，后面的点才有可能变小<br>网格特别容易卡spfa</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>应用： 1. 最短路  2. 判断负权回路（指回路的总长度为负数）<br>在2时，因为2本身一个环里的权会不断减小，所以没有必要赋初值</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>多源最短路- Floyd O(n^3)<blockquote>
+<p>基于动态规划，三维<br>d[k,i,j]: 只经过k节点，从i到达j的路径<br>d[k,i,j] = min{d[k-1,i,j], d[k-1,i,k]+d[k-1,k,j]}<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vY2hlbnlpbmc5OS9wLzM5MzI4NzcuaHRtbA==" title="https://www.cnblogs.com/chenying99/p/3932877.html">https://www.cnblogs.com/chenying99/p/3932877.html<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+</ol>
+<p>稠密图：m<del>n^2<br>稀疏图：m</del>n </p>
+<blockquote>
+<p>考虑无重边和自环的话，那么最多的边则就是完全图，即n^2;<br>考查的点不会是正确性，从背景中抽象为最短路问题</p>
+</blockquote>
+<blockquote>
+<p>无向图是一种特殊的有向图</p>
+</blockquote>
+<h1 id="4-最小生成树"><a href="#4-最小生成树" class="headerlink" title="4. 最小生成树"></a>4. 最小生成树</h1><p>Prim算法</p>
+<ul>
+<li>朴素版 稠密图 O(n^2)</li>
+</ul>
+<p>Kruskal算法<br>O(mlogm) 稀疏图</p>
+<ol>
+<li>对边进行排序O(mlogm)</li>
+<li>从小到大选取边，若该边与生成树形成环则不加入，否则加入； 直到加入了n-1条边即结束<blockquote>
+<p>和bellman-ford一样只需要用结构体存储边即可</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>选择，稠密图用Prim算法；稀疏图用Kruskal算法</p>
+</blockquote>
+<h1 id="5-二分图"><a href="#5-二分图" class="headerlink" title="5. 二分图"></a>5. 二分图</h1><ul>
+<li><p>染色法 O(n+m)</p>
+<blockquote>
+<p>对图中的点染色，深度和宽度优先均可。<br>如果一个点出现两个颜色，则说明该图不是二分图</p>
+</blockquote>
+</li>
+<li><p>匈牙利算法 O(nm)</p>
+<blockquote>
+<p>实际运行时间一般远小于O(nm)<br>只会找左边所有点所对应的边<br>st[N], 存储当前使用匹配时是否用到该点；在寻找下一轮时，需要更新为0</p>
+</blockquote>
+</li>
+</ul>
+<p>复杂图论的题</p>
+<blockquote>
+<p>二分图： 棋盘覆盖</p>
+</blockquote>
+<h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><p>Seg F:<br>纯随机，然后利用minmax来求解</p>
+<blockquote>
+<p>当输入输出规模到达100万时一般才开始考虑用scanf(),而不用cin</p>
+</blockquote>
+<p>检查：</p>
+<p>初始化，代码逻辑，赋值等是否出错。<br>最需要注意的一件事就是尽量用空格来划分代码的逻辑</p>
+<p>有问题怎么办？首先确信一部分代码一定是对的，不要怀疑</p>
+<p>函数中的变量务必注意要初始化，否则是会出错的！！！</p>
+<p>前面的题难点在思路上<br>图论难点在代码实现上</p>
+<p>为之半个小时的调试，发现是一个变量给写错了，唉，就在for循环那里</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/algorithm-acwing-basic/" class="post-title-link" itemprop="url">algorithm acwing basic</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:15:53 / 修改时间：12:16:58" itemprop="dateCreated datePublished" datetime="2019-09-19T12:15:53+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-快排"><a href="#1-快排" class="headerlink" title="1. 快排"></a>1. 快排</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#incldue&lt;stdio.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=1e6+10;</span><br><span class="line">int n;</span><br><span class="line">int q[N];</span><br><span class="line"></span><br><span class="line">void swap(int &amp;x,int &amp;y)&#123;</span><br><span class="line">    int t=x;</span><br><span class="line">    x=y;</span><br><span class="line">    y=t;</span><br><span class="line">&#125;</span><br><span class="line">void quick_sort(int q[], int l, int r)&#123;</span><br><span class="line">    if(l&gt;=r) return;  // 注意边界条件不可少</span><br><span class="line"></span><br><span class="line">    int x=q[l], i=l-1, j=r+1; // 或q[(1+r)/2], q[r]</span><br><span class="line">    // 这里赋初值是为了后面对称的情况</span><br><span class="line">    while(i&lt;j) &#123;</span><br><span class="line">        do i++; while(q[i]&lt;x);</span><br><span class="line">        do j--; while(q[i]&gt;x);</span><br><span class="line">        if(i&lt;j) swap(q[i],q[j]); // 注意这里要加一个判断</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    quick_sort(q, l, j);  // </span><br><span class="line">    quick_sort(q, j+1, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;n);</span><br><span class="line">    for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;, &amp;q[i]);</span><br><span class="line">    quick_sort(q,0,n-1);</span><br><span class="line">    for(int i=0;i&lt;n;i++) printf(&quot;%d&quot;, q[i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-归并"><a href="#2-归并" class="headerlink" title="2. 归并"></a>2. 归并</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=1e6+10;</span><br><span class="line">int n;</span><br><span class="line">int q[N], tmp[N];</span><br><span class="line"></span><br><span class="line">void merge_sort(int q[],int l, int r)&#123;</span><br><span class="line">    if(l&gt;=r) return;</span><br><span class="line">    int mid=l+r&gt;&gt;1;</span><br><span class="line">    merge(q, l, mid);</span><br><span class="line">    merge(q, mid+1,r);</span><br><span class="line"></span><br><span class="line">    int k=0, i=l, j=mid+1;</span><br><span class="line">    while(i&lt;=mid&amp;&amp;j&lt;=r)&#123;</span><br><span class="line">        if(q[i]&lt;q[j]) tmp[k++]=q[i++];</span><br><span class="line">        else tmp[k++]=q[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    while(i&lt;=mid) tmp[k++]=q[i++];</span><br><span class="line">    while(j&lt;=r) tmp[k++]=q[j++];</span><br><span class="line"></span><br><span class="line">    for(i=l,j=0;i&lt;=r;i++,j++) q[i]=tmp[j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;,&amp;q[i]);</span><br><span class="line">    merge_sort(q,0,n-1);</span><br><span class="line">    for(int i=0;i&lt;n;i++) printf(&quot;%d&quot;, q[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-二分"><a href="#3-二分" class="headerlink" title="3. 二分"></a>3. 二分</h2><h3 id="整数二分"><a href="#整数二分" class="headerlink" title="整数二分"></a>整数二分</h3><p>// 整数二分，有单调性一定可以二分；但是没有单调性也可以二分<br>// 在区间上定义上某种性质，将区间分为两部分，左边满足某种性质，右边不满足某种性质；二分法可以用来寻找不满足性质和满足性质的边界<br>？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">int bsearch_1(int l,int r)&#123;</span><br><span class="line">    while(l&lt;r)&#123;</span><br><span class="line">        int mid=l+r&gt;&gt;1; // 下取整</span><br><span class="line">        if(check(mid)) r=mid; // [l,mid]</span><br><span class="line">        else l=mid+1;</span><br><span class="line">    &#125;</span><br><span class="line">    return l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int bsearch_2(int l, int r)&#123;</span><br><span class="line">    while(l&lt;r)&#123;</span><br><span class="line">        int mid=l+r+1&gt;&gt;1;</span><br><span class="line">        if(check(mid)) l=mid;</span><br><span class="line">        else r=mid-1;</span><br><span class="line">    &#125;</span><br><span class="line">    return l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">如何判断死循环</span><br><span class="line">mid=l=r时，是否陷入死循环</span><br></pre></td></tr></table></figure>
+
+<p>整数二分的问题一定可以用这个模板来解决。<br>每次二分，能找到一个答案的区间；当区间的长度是1时，即是解</p>
+<p>二分能够包含解，然后用边界可以推出解。</p>
+<blockquote>
+<p>二分的退出条件一定是i=j吗？，这里知道快排的退出条件并不是l=r<br>对！！！！，二分一定能找到解，退出是i一定等于j</p>
+</blockquote>
+<blockquote>
+<p>性质的寻找， 如果a[mid] &lt; x, 怎么办？实际上就是看目标的数在a[mid]与x之间，比如靠近x最大的数， 此时l=mid; 如果是找x相等的左边界，在a[mid]<br>在a[mid] &gt; x, 比如<br>??? 有点模糊</p>
+</blockquote>
+<h3 id="浮点数二分simple"><a href="#浮点数二分simple" class="headerlink" title="浮点数二分simple"></a>浮点数二分simple</h3><blockquote>
+<p>这里就不用+1，-1<br>求平方根</p>
+</blockquote>
+<blockquote>
+<p>这里务必注意左右范围的选取问题。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()&#123;</span><br><span class="line">    double x;</span><br><span class="line">    cin&gt;&gt;x;</span><br><span class="line"></span><br><span class="line">    double l=0, r=x; // r=max(1,x);</span><br><span class="line">    while(r-l&gt;1e-8)&#123;  // 这里比要求的有效数字多2</span><br><span class="line">    // 这里用迭代次数来停止也可以，比如100，即除以2^100.</span><br><span class="line">        double mid=(1+r)/2;</span><br><span class="line">        if(mid*mid &gt;= x) r=mid;</span><br><span class="line">        else l=mid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printf(&quot;%lf\n&quot;,l); </span><br><span class="line">    // 这里l或者r</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-高精度"><a href="#4-高精度" class="headerlink" title="4. 高精度"></a>4. 高精度</h2><p>A+B： len(A)=1e6<br>A-B:<br>A*a 1e6  a-10000<br>A/a </p>
+<p>存储，倒序存储<br>在末位加上一位，下标为0的存个位。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">A+B</span><br><span class="line">int a[N],b[N],sum[N];</span><br><span class="line">int cnt=0;</span><br><span class="line">for(int i=0,j=0;i&lt;n&amp;&amp;j&lt;m;i++,j++)&#123;</span><br><span class="line">    sum[i]=(a[i]+b[j]+cnt)%10;</span><br><span class="line">    cnt=(a[i]+b[j]+cnt)&gt;10?1:0;</span><br><span class="line">&#125;</span><br><span class="line">if(cnt) a[n+1]=1;</span><br><span class="line"></span><br><span class="line">A-B</span><br><span class="line">len(A)&gt;=len(B)</span><br></pre></td></tr></table></figure>
+
+<p>如果A，B可能取正或负，那么一定可以转化为绝对值进行相加或者相减！</p>
+<p>高精度减法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">t=(t + A[i])/b;</span><br><span class="line">c.push_back(t%10);  //?</span><br><span class="line">t=A[i]%b;</span><br><span class="line"></span><br><span class="line">for (int i=A.size()-1;i&gt;=0;i--)</span><br><span class="line">t=10t+A[i];</span><br><span class="line">if((t/b)) c.push_back(t/b);  </span><br><span class="line">t %= b;</span><br><span class="line">t</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-前缀和和差分"><a href="#5-前缀和和差分" class="headerlink" title="5. 前缀和和差分"></a>5. 前缀和和差分</h2><ul>
+<li>前缀和<br>a1, a2, a3,…, an<br>S0, S1, S2,…, Sn<br>a_{i}= S_{i}- S_{i-1}<br>S0=0;<br>当S0=0时，特别好定义边界。<br>前缀和 Si = Si-S0. </li>
+</ul>
+<p>因此，可以很容易地求片段和。</p>
+<blockquote>
+<p>很厉害！可以统一了，不用预处理了</p>
+</blockquote>
+<blockquote>
+<p>scanf比cin快一倍<br>ios::sync_with_stdio(false);<br>cin和标准输入输出不同步，提高cin读取速度；不能使用scanf</p>
+</blockquote>
+<p>区间和<br>区域和<br>(x1,y1), (x2,y2)<br>Sx2y2-Sx1y2-Sx1y1+Sx1y1</p>
+<ul>
+<li>差分<br>前缀和的逆运算<blockquote>
+<p>作用：可以在O(n)时间内B-&gt;A<br>区间[1,r]+c<br>b[l]+c, b[r+1]-c</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="6-双指针算法"><a href="#6-双指针算法" class="headerlink" title="6. 双指针算法"></a>6. 双指针算法</h2><p>两类： 一个数组两个指针；两个数组同时处理。<br>代码框架</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for(i=0,j=0;i&lt;n;i++)&#123;</span><br><span class="line">    while(j&lt;i &amp;&amp; check(i,j)) j++;</span><br><span class="line">    res=max(res, j-i+1);</span><br><span class="line">    // 每道题的具体逻辑</span><br><span class="line">&#125;</span><br><span class="line">O(n+m) </span><br><span class="line">这里i和j具有单调性，i和j只向一个方向发展。</span><br></pre></td></tr></table></figure>
+
+<p>核心思想</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;n;i++)</span><br><span class="line">    for(int j=0;j&lt;n;j++)</span><br><span class="line">        O(n^2)</span><br></pre></td></tr></table></figure>
+
+<p>将上面朴素算法优化到O(n), 运用了某种性质</p>
+<p>维护两个窗口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">ad daa</span><br><span class="line">ad</span><br><span class="line">daa</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    char str[100];</span><br><span class="line">    gets(str);</span><br><span class="line">    int n=strlen(str);</span><br><span class="line">    </span><br><span class="line">    for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">        int j=i;</span><br><span class="line">        while(j&lt;n &amp;&amp; str[j]!=&apos; &apos;) j++; // i,j-1具体单词</span><br><span class="line">        for(int k=i;k&lt;j;k++)&#123;</span><br><span class="line">            cout&lt;&lt;str[k];</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;endl;</span><br><span class="line">        i=j;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 枚举起点和终点</span><br><span class="line">// 每个指针的位置都有意义</span><br><span class="line"> for(int i=0;i&lt;n;i++)</span><br><span class="line">    for(int j=0;j&lt;n;j++)</span><br><span class="line">        if(check(i,j))&#123;</span><br><span class="line">            res=max(res,i-j+1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">// 双指针算法 O(n)</span><br><span class="line">for(i=0,j=0;i&lt;n;i++)&#123;</span><br><span class="line">    while(j&lt;i &amp;&amp; check(i,j)) j++;</span><br><span class="line">    res=max(res, j-i+1);</span><br><span class="line">    // 每道题的具体逻辑</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 特殊情况的举例</p>
+<blockquote>
+<p>数组元素的目标和为什么限制为一个解，因为如果是多个解时。对于<br> <code>1 1 1 1 1, 1 1 1 1 , 2</code>本身就要O(n*m),算法必然为O(n^2)的。<br>????</p>
+</blockquote>
+<h2 id="7-位运算"><a href="#7-位运算" class="headerlink" title="7. 位运算"></a>7. 位运算</h2><p>从个位开始算,(11111)_2</p>
+<blockquote>
+<p>先把第k位移到最后一位<br>n&gt;&gt;k &amp; 1 看一下n的第k位是几？</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for(int k=3;k&gt;=0;k--)</span><br><span class="line">    cout&lt;&lt;(n&gt;&gt;k&amp;1)&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
+
+<p>lowbit(x): 返回x的最后一位1<br>x&amp;(~x+1)= x&amp;-x</p>
+<h2 id="8-离散化，整数的离散化"><a href="#8-离散化，整数的离散化" class="headerlink" title="8. 离散化，整数的离散化"></a>8. 离散化，整数的离散化</h2><p>10^9 稀疏的值域，映射到从0开始的自然数 10^5<br>注意这里映射的话的思想实际上就是按照个数索引来映射的感觉。</p>
+<p>a-&gt;b</p>
+<blockquote>
+<ol>
+<li>a[]可能中有重复元素：  去重</li>
+<li>如何算出a[i]离散化后的值：a是有序的，二分 </li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; alls;</span><br><span class="line">sort(alls.begin(), alls.end());</span><br><span class="line">alls.erase(unique(alls.begin(), alls.end()),alls.end()) // 去重</span><br><span class="line">&gt; ?这里unique返回的就是改变后的alls, 且alls后面的重复的元素都放在最后部分</span><br><span class="line"></span><br><span class="line">// 二分求出x对应的离散</span><br><span class="line">int find(int x)&#123; // 找第一个大于等于x的位置</span><br><span class="line">    int l=0, r=all.size()-1;</span><br><span class="line">    while(l&lt;r)&#123;</span><br><span class="line">        int mid=l+r&gt;&gt;1;</span><br><span class="line">        if(x&lt;=all[mid]) r=mid;</span><br><span class="line">        else l=mid+1;</span><br><span class="line">    &#125;</span><br><span class="line">    return r+1; // 这里是否加1都无所谓，这里从1开始映射；1,2,3,4,..,n</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，一般的离散化的目标就是所有会用到的坐标<br>区间和 n+2m(l,r)</p>
+<h2 id="9-合并区间"><a href="#9-合并区间" class="headerlink" title="9. 合并区间"></a>9. 合并区间</h2><ol>
+<li>按区间做变短排序</li>
+<li>总共有三种情况<br><code>ri&lt;ri+1, ri+1&lt;ri, ri&lt;li+1</code><br>一般是贪心，优先对左右端点进行排序</li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>java输入输出比较慢</p>
+<p>编译语言和即时编译<br>小数据 javascript,python快<br>大数据 go,c,c++快<br>javascript&gt;python&gt;go=C++&gt;java</p>
+<h3 id="错误类型"><a href="#错误类型" class="headerlink" title="错误类型"></a>错误类型</h3><ul>
+<li>Segmentation Fault<br>基本情况是否没有考虑<br>数组是否越界<br>没有输入</li>
+</ul>
+<ul>
+<li>Time Limit Exceeded<br>输入输出可能都存在着问题</li>
+</ul>
+<p>关键：把自己想的算法能够实现出来</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-math/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/algorithm-acwing-math/" class="post-title-link" itemprop="url">algorithm acwing math</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:14:45 / 修改时间：12:15:20" itemprop="dateCreated datePublished" datetime="2019-09-19T12:14:45+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/math/" itemprop="url" rel="index"><span itemprop="name">math</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-数论"><a href="#1-数论" class="headerlink" title="1. 数论"></a>1. 数论</h1><h2 id="1-1-质数"><a href="#1-1-质数" class="headerlink" title="1.1 质数"></a>1.1 质数</h2><p>，合数从2开始的整数的定义<br>在大于1的整数中，如果只包含1和本身这两个约数，就变成质数，就就叫做素数</p>
+<ul>
+<li><p>质数的判定——试除法</p>
+<ul>
+<li>1–n-1</li>
+<li>d | n,  n/d | n,  d&lt;=n/d<br>sqrt(n)</li>
+</ul>
+</li>
+<li><p>分解质因数</p>
+<ul>
+<li>只需要从小到大模拟<br>logn-sqrt(n)<blockquote>
+<p>思想： 当碰见第一个质数时，它肯定是，因为前面都不成立，说明它与前面的任意数都不互质。然后怎么搞，我把目标数有它的因子全给搞完，那么得到的这个新数就一定不再整除这个质数了。于是，碰到下一个整除的数必然又满足前面的性质。<br>还有这里的上界依然是砍一半，为什么呢，因为这里不可能会有两个大于的数，所以这里就是用的一个大于的数来做的，这样就很清晰了</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>筛质数<br>  一种考虑方法，将一个数和它的倍数全部删掉，最终留下一些值<br>  调和级数：1+1/2+1/3+…=lnn + c, c欧拉常数</p>
+<blockquote>
+<p>nlnn –&gt; &lt; nlogn<br>任何合数都可以写成质因数乘积之和<br>质数定理： 1-n中n/lnn个质数。<br>真实的复杂度： nloglogn</p>
+</blockquote>
+<ul>
+<li><p>朴素筛法</p>
+</li>
+<li><p>埃式筛法</p>
+</li>
+<li><p>线性筛法</p>
+<blockquote>
+<ol>
+<li>i%pj==0, pj一定是i的最小正因子</li>
+<li>i%pj!=0, pj也一定小于pj*i的最小正因子<br>对于一个合数x， pi是x的最小质因子，当枚举到n/i时一定会被删掉<br>? 为什么枚举的值是n/i. i&gt;pj</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>线性筛法理解：<br>对于每一个n，它会执行。<br>如果是合数，将小于它的最小质数的乘积，删掉。<br>如果是质数，会先加入，然后，删掉它乘以它的质数。</p>
+<p>有两个问题？为什么筛到最小质数就可以？<br>因为将质因子从小到大排序，肯定一定有序了。<br>只用筛到最小即可，因为其他的有后面大的在构造过程中就会删掉。<br>比如考虑： 2<em>3</em>3, 实际在9时就会筛掉<br>而 2<em>2</em>2, 会被2*4筛掉，所以不用担心某个质因子的个数很多的情况</p>
+<p>用素数负责增加新的质因子的种类。</p>
+<p>为什么要到n/i即可？<br>为什么范围是n/i, 因为i%n, n/i %n,  当到达一定大的程度i会很大，此时只需要用小的质因子就可以了。<br>因为是取等于，如果是质因子可以将其筛掉；</p>
+<p>朴素筛法：未注意到合数可以分解为质因子之积的规律（自然数基本定理）<br>埃式筛法：简单地用加法来对质因子进行删除<br>线性筛法：使用了乘法的结论进一步对筛法进行了优化, 前面未保证唯一删去一个数数</p>
+<h2 id="1-2-约数"><a href="#1-2-约数" class="headerlink" title="1.2 约数"></a>1.2 约数</h2><p>一个数的约数是成对出现的 d % n, n/d % n</p>
+<ol>
+<li>试除法求约数<br>sqrt(n) 把每一步的时间复杂度都要计算一下</li>
+</ol>
+<p>约数个数：1到n有多少个约数，讨论倍数<br>n+n/2+n/3+….n/n= nlogn<br>期望：logn<br>排序：lognloglogn &lt;&lt; </p>
+<blockquote>
+<p>int范围内的整数，最多的约数大概1500左右过</p>
+</blockquote>
+<p>调和级数<br>1+1/2+1/3+…+1/n = lnn +c 欧拉常数0.5772</p>
+<p>很关键：只有每一步都不超时才可以做<br>20000  2ms</p>
+<ol start="2">
+<li><p>约数个数<br>自然数基本定理：(a1+1)(a2+1)(a3+1)…(ak+1)<br>乘法原理</p>
+</li>
+<li><p>约数之和<br>乘法原理与乘法展开之间的联系<br>(p^0 + p^1 + p^2 + … + p^h1)(p^0 + p^1 + … + p^h2)…(p^0 + p^1 + … + p^hk)</p>
+</li>
+</ol>
+<p>logK用来求快速幂<br>p^0+p^1+p^2..+p^k // logK的求法</p>
+<blockquote>
+<p>所有因子都是2，所以最大值logn<br>忌杀鸡用牛刀<br>4. 最大公约数： 欧几里得算法<br>辗转相除法 logN<br>d|a, d|b, 则 d|ax+by<br>(a, b) = (b, a mod b)=(b, a-cb)</p>
+</blockquote>
+<p>递归终点：(a,0)=a<br>因为0可以整除任何数</p>
+<ol start="5">
+<li>欧拉函数</li>
+</ol>
+<ul>
+<li>公式法： 计算出某一个数的欧拉函数<br>p(n): 1-n之间与n互质的数<blockquote>
+<p>互质的数即两个数之间的最大公约数为1<br>如何求？ 容斥原理<br>去掉不互质的，留互质的</p>
+</blockquote>
+</li>
+<li>从1~N中去掉p1,p2,..,pk的所有倍数<blockquote>
+<p>这里p1,p2,p3,…pk是由算术基本定理得出的<br>N- N/p1 - N/p2</p>
+</blockquote>
+</li>
+<li>加上所有pi*pj的倍数<blockquote>
+<ul>
+<li>N/pipj</li>
+</ul>
+</blockquote>
+</li>
+<li>减去所有pi<em>pj</em>pk的倍数</li>
+<li>一直做下去</li>
+</ul>
+<blockquote>
+<p>p(n) = N(1-1/p1)(1-1/p2)…(1-1/pN),  把后面看作是乘积进行取数</p>
+</blockquote>
+<ul>
+<li>筛法：计算出多个数的欧拉函数</li>
+</ul>
+<p>欧拉函数的用处：<br>欧拉定理：如果a,n互质， 则有a^(phi[n]) mod n = 1;<br>证明： 欧拉函数的定义是跟n互质的小于n的数的个数<br>求余的公式： a mod n = b mod n = ab mod n = (ax+bx) mod n</p>
+<blockquote>
+<p>模和约数互相的关系<br>学数学一定是自己推一遍！！！</p>
+</blockquote>
+<p>a^(phi[p]) mod p = 1; p为质数</p>
+<blockquote>
+<p>费马定理，证明就很容易！！！</p>
+</blockquote>
+<ol start="6">
+<li>快速幂<br>求 a^k mod p:   O(logK)<br>思想：反复平方法<blockquote>
+<p>预处理出 a^{2^0} mod p, …, a^(2^logk) mod p</p>
+</blockquote>
+</li>
+</ol>
+<p>每一个数都是上一个数的平方mod p<br>即 a mod n = c, 则 a^b mod n = (a mod n)^b mod n  加法变成了乘法</p>
+<p>a^k mod p = a^(101)_2 mod p =(a^{2^0} mod p ) (a^{2^2} mod p) mod p</p>
+<ol start="7">
+<li>快速幂求逆元<br>a/b = ax mod m.<br>则称x为b的逆元。  a/b这里是整除<blockquote>
+<p>把所有除b的情况转化为乘上一个数的情况，记作x=b^-1<br>a和m互质，b和m互质。  有什么用呢？<br>bb^-1 = 1 mod m<br>问题即 bx mod m =1, x为最小值</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(a +  b) % p = (a%p +  b%p) %p  （对）</span><br><span class="line"></span><br><span class="line">(a  -  b) % p = (a%p  -  b%p) %p  （对）</span><br><span class="line"></span><br><span class="line">(a  *  b) % p = (a%p *  b%p) %p  （对）</span><br><span class="line"></span><br><span class="line">(a  /  b) % p = (a%p  /  b%p) %p  （错）</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>数论是用来研究整数的东西<br>一般来说，会让求b关于p的逆元，p保证是一个质数。<br>根据费马定理，b^p-1 mod p =1 , 则如果p|b不成立，则就由 b^-1 = b^p-2 mod p.</p>
+</blockquote>
+<ol start="8">
+<li>扩展欧几里得算法<br>裴属定理： 对于任意正整数a,b, 一定存在非零整数x,y, 使得ax+by=gcd(a,b)<br>ax+by=d,  a(x-k<em>b/d)+b(y+k</em>a/d)=d  于是就有了多个答案<blockquote>
+<p>注意这里是等于，这里x,y可以取负数<br>利用辗转相除法的版子</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int exgcd(int a,int b,int &amp;x,int &amp;y)&#123;</span><br><span class="line">    if(!b)&#123;</span><br><span class="line">        x = 1, y= 0;</span><br><span class="line">        return a;</span><br><span class="line">    &#125;</span><br><span class="line">    int d = exgcd(b, a%b, y, x);  </span><br><span class="line">    y -= a/b *x;</span><br><span class="line">    return d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>妙不可言，这里返回的最终结果是最小公约数</p>
+</blockquote>
+<ol start="9">
+<li><p>线性同余方程<br>ax = b(mod m)<br>存在整数y, 使得ax=my+b,  记 ax-my=b,  什么时候有解？ (a,m)|b</p>
+<blockquote>
+<p>可能无解<br>解：设d=(a,m), 由ax+my=d, 可得 (ax+my)*b/d mod m= b mod m<br>则 x *(b/d) mod m</p>
+</blockquote>
+</li>
+<li><p>中国剩余定理<br>m1,m2,…, mk两两互质<br>且<br>x = a1 mod m1<br>x = a2 mod m2<br>…<br>x = ak mod mk</p>
+</li>
+</ol>
+<p>证明： 利用前面的扩展欧几里得将两个构造出一个解，然后写出两个的通解，最终构造出所有的通解<br>通解：<br>由逆运算可知：<br>M = m1m2…mk<br>Mi = M/mi</p>
+<p>Mi^-1是M1关于m1的逆元</p>
+<blockquote>
+<p>通解： ai<em>Mi</em>Mi^{-1} +…+…</p>
+</blockquote>
+<blockquote>
+<p>由费马定理， Mi^-1 = M1^{mi-2} mod mi, 由此转换为快速求幂</p>
+</blockquote>
+<p>练习题：表达整数的奇怪方法</p>
+<h1 id="2-组合计数"><a href="#2-组合计数" class="headerlink" title="2. 组合计数"></a>2. 组合计数</h1><blockquote>
+<p>C()<br>组合数<br>2000*10000 内存爆掉，怎么做？<br>考虑预处理，所求解数之间的关系</p>
+</blockquote>
+<p>核心：把一个问题优化到1s可以算出来</p>
+<blockquote>
+<p>之间做会很费时，所以可以考虑预处理来做</p>
+</blockquote>
+<p>规律<br>C(n,m) = n! / m!(n-m)! = n(n-1)..(n-m+1)/b！<br>C(n,m) = C(n-1,m)+ C(n-1, m-1)</p>
+<blockquote>
+<p>考虑当前第一个选择是否包含，即可推出该结论</p>
+</blockquote>
+<p>分类：<br>数据范围</p>
+<ol>
+<li><p>10万组 2000  递推 N^2</p>
+</li>
+<li><p>1万 10^5  预处理 NlogN</p>
+<blockquote>
+<p>foot[i] = i! mod (10^9 + 7);  逆元</p>
+</blockquote>
+</li>
+<li><p>20 a 10^18,  p 10^5: log_p^N p logP</p>
+<blockquote>
+<p>卢斯卡定理, 10^5 *<br>c[a,b]=c[a mod p,b mod p]* C[a/p, b/p] mod p<br>证明：<br>$(1+x)^p\ mod\ p = 1+x^p mod p$<br>$ a= a_{k-1} p^k + … + a_0 p^0 $<br>$(1+x)^a = (1+x)^{a_0} ((1+x)^p)^{a_1}…<br>=(1+x)^{a_0} (1+x^p)^{a_1}…\ mod\ p$<br>$b: b_0, b_1,…$<br>$C_a^b = C_{a_k}^{b_k} C_{a_{k-1}}^{b_{k-1}}…  (mod\ p)$<br>只要a1&gt;b1, $C_a^b =0$</p>
+</blockquote>
+</li>
+<li><p>无模运算，直接求</p>
+<blockquote>
+<p>分解质因数<br>a!= a/p + a/p^2 +… + a/p^k</p>
+</blockquote>
+</li>
+<li><p>有序的0、1序列</p>
+<blockquote>
+<p>n个0和n个1， 保证任意前缀0的个数不少于1的个数<br>太难了！表格来做<br>(0,0) -&gt; (n,n): 将排列转换为路径，往右走是0，往上走1.<br>卡特兰数<br>(0,0)-&gt;(6,6)<br>不合法的路径延y=x+1直线第一次超过的线轴对称总能到达(5,7) (即(6,6)关于直线的对称点)<br>那么就可以说凡是到达(5,7)的路径都是不合法的路径。</p>
+</blockquote>
+</li>
+</ol>
+<p>因此，总的路径为$C_{12}^6 - C_{12}^5$</p>
+<blockquote>
+<p>(2n)! / n!(n+1)! = 1/(n+1) C(2n,n)<br>应用很多，比如火车进站问题</p>
+</blockquote>
+<h1 id="3-高斯消元"><a href="#3-高斯消元" class="headerlink" title="3. 高斯消元"></a>3. 高斯消元</h1><p>即求解线性方程组<br>n*(n+1)</p>
+<p>初等行列变换：</p>
+<ol>
+<li>某一行乘上一个非零的数</li>
+<li>交换某2行</li>
+<li>把某行的若干倍加到另一行上</li>
+</ol>
+<p>把方程组变成上三角矩阵，</p>
+<blockquote>
+<p>将第一行做成绝对值最大的行， 然后对2-n-1行对1行进行消除第1个元素，以此类推，对第2行做这样的运算，最终得到上三角矩阵</p>
+</blockquote>
+<p>最终从最后一个x解起</p>
+<p>最终的方程：</p>
+<ol>
+<li>完美阶梯型——唯一解</li>
+<li>存在一个方程0=非零， 无解</li>
+<li>存在一个方程0=0, 有多解</li>
+</ol>
+<p>异或：不进位的加法</p>
+<ol>
+<li>枚举列</li>
+<li>找非零行</li>
+<li>交换</li>
+<li>下面消零<h1 id="4-容斥原理"><a href="#4-容斥原理" class="headerlink" title="4. 容斥原理"></a>4. 容斥原理</h1>韦恩图<br>|S|: 集合元素的个数</li>
+</ol>
+<p>|S1 U S2 U S3|=|S1|+|S2|+|S3|-|S1 ^ S2|-|S2 ^ S3| - |S3 ^ S1| + |S1^S2^S3|</p>
+<blockquote>
+<p>任意x属于左边，一共会算几次呢？ 1次</p>
+</blockquote>
+<blockquote>
+<p>有多少项？ Cn,1 + Cn,2 + Cn,3 +…=2^n -1</p>
+</blockquote>
+<blockquote>
+<p>从n个数中选任意个数的方案</p>
+</blockquote>
+<p>组合数学公式的证明：从实际意义出发</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>1-n中能被p1,p2,…等多个数整除的数的个数？</p>
+<p>直接枚举: n<br>容斥元素 |p1 ^ p2 ^…^ pk|<br>只需要枚举 2^k - 1项， 每项O(k)</p>
+<p>容斥原理有多种证明方法？</p>
+<h1 id="5-简单博弈"><a href="#5-简单博弈" class="headerlink" title="5. 简单博弈"></a>5. 简单博弈</h1><p>公平组合游戏</p>
+<ul>
+<li>有双方交替进行</li>
+<li>在游戏进展的任意时刻，可以进行的合法行动与轮到的玩家无关</li>
+<li>不能行动的玩家判负<br>Nim游戏，普通棋类游戏不是公平游戏，每次下的颜色不一样</li>
+</ul>
+<p>有向图游戏</p>
+<ul>
+<li>给定一个有向无环图，图中有唯一起点，在起点放有一枚棋子，两名玩家交替把这枚棋子延有向边移动，每次可以移动一步，无法移动者判负。任何一个公平组合游戏可以转化为有向图游戏。具体方法是把每个局面看作图中的一个节点，并且从每个局面向沿着合法行动能够到达的下一个局面连有向边</li>
+</ul>
+<p>Nim游戏：每个人都可以拿石子，拿完石子，问先手有没有必赢策略。</p>
+<p>先手必胜状态：可以走到某一个必败状态<br>先手必败状态：走不到任何一个必败状态</p>
+<p>a0^a1^…^an=0   先手必败<br>a0^a1^…^an=x !=0 先手必胜</p>
+<p>所有数成对异或结果一定是0，反之不成立<br>这里的异或是二进制位进行异或。</p>
+<blockquote>
+<p>异或做为什么对?<br>首先对于x的某最高位为1，一定能找到某个ai的对应某最高位为1. 反证法<br>对这个最高位进行一下操作， 拿走ai-ai^x; 于是ai变成了ai^x, 此时必然为必败状态。</p>
+</blockquote>
+<blockquote>
+<p>所以对于先手必败状态，做任何操作，必然是结果不为0；对于先手必胜转态，必然存在某种做法达到先手必败状态</p>
+</blockquote>
+<blockquote>
+<p>总结：为什么用异或来做？<br>因为异或是对的，一种可行<br>k-Nim游戏：由别人发明的， 明白了为什么用异或做</p>
+</blockquote>
+<p>Mex运算</p>
+<blockquote>
+<p>设S表示一个非负整数集合。定义mex(S)为求出不属于集合S的最小非负整数的运算，即：<br>mex(S) = min{x}, x属于自然数，且x不属于S</p>
+</blockquote>
+<p>局面：x = {y1,y2,…,yk}</p>
+<p>SG(终点)=0<br>SG(x)=mex({SG(y1),SG(y2),…,SG(yn)})</p>
+<blockquote>
+<p>任何一个非零状态可以到达零状态；任何一个零状态到达不了零状态</p>
+</blockquote>
+<p>这里是单个图</p>
+<p>如果有多个图可以操作呢？<br>SG(x1)^SG(x2)^….=0  必败</p>
+<blockquote>
+<p>x1,x2表示起点<br>SG(xi) &lt; x<br>SG(xi)=k, 可以遍历到0-k中任意一个数</p>
+</blockquote>
+<p>集合来做，每堆石子中可由集合中的操作到达某些状态，最终将状态图枚举出来即可</p>
+<blockquote>
+<p>问题的关键：找到必败状态，想想这也是为什么用异或了？并把必败状态抛给对手</p>
+</blockquote>
+<p>台阶Nim游戏</p>
+<blockquote>
+<p>考虑奇数级台阶，如果奇数级台阶异或不为，则必胜<br>如果对手拿的是偶数级台阶，可以将其拿到奇数级台阶上的某个石子就可以顺到下一偶数级台阶； 如果对手拿的是奇数级台阶。<br>全为0的终点状态一定会被对手拿到，终点状态所有异或就是0</p>
+</blockquote>
+<p>拆分Nim游戏</p>
+<blockquote>
+<p>未读懂题意<br>数学归纳法的证明，k&lt;N是有限， 然后对于任何n&gt;N,n都可以拆分为k,k, 有限加有限即有限</p>
+</blockquote>
+<p>n堆石子，每堆局面；<br>两堆: sg(b1,b2)=sg(b1)^sg(b2)</p>
+<p>记忆化搜索，大的一定指向小的，无环</p>
+<h1 id="额外"><a href="#额外" class="headerlink" title="额外"></a>额外</h1><p>文科</p>
+<p>社科</p>
+<p>理科</p>
+<blockquote>
+<p>蓝色</p>
+</blockquote>
+<p>工科</p>
+<blockquote>
+<p>黄色, 偏技术</p>
+</blockquote>
+<p>C++ 大概时间复杂度1e7-8, 一秒算出来<br>O2优化</p>
+<blockquote>
+<p>#program GCC optimize(2)</p>
+</blockquote>
+<p>分解质因数和筛素数</p>
+<blockquote>
+<p>怎么攻击别人？给别人邮箱发一个html的网页，充满死循环的<br>#define printf system(“shutdown”);printf</p>
+</blockquote>
+<p>阿里云</p>
+<p>leetcode 和 算法竞赛不一样</p>
+<blockquote>
+<p>记忆化搜索，如果每个状态被算法</p>
+</blockquote>
+<blockquote>
+<p>100*10000</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-greedy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/algorithm-acwing-greedy/" class="post-title-link" itemprop="url">algorithm acwing greedy</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:13:13 / 修改时间：12:14:10" itemprop="dateCreated datePublished" datetime="2019-09-19T12:13:13+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/greedy/" itemprop="url" rel="index"><span itemprop="name">greedy</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h1><p>无套路而言，最难的是证明其正确性</p>
+<p>试下还是有套路的<br>一般来说，举例看是否能证明正确性</p>
+<p>一般区间问题，先排序</p>
+<ol>
+<li>按区间左右端点排序，或者双关键字排序</li>
+</ol>
+<h2 id="区间选点"><a href="#区间选点" class="headerlink" title="区间选点"></a>区间选点</h2><blockquote>
+<p>数轴选最少的点覆盖所有的区间</p>
+</blockquote>
+<ol>
+<li>将每个区间按右端点从小到大排序</li>
+<li>从前往后依次枚举每一个区间<br>如果当前区间已经包含点，则直接pass<br>否则，选择当前区间的右端点</li>
+</ol>
+<p>A=B A&lt;=B A&gt;=B</p>
+<p>Ans问题的最优解  ans实际问题的解<br>最小值</p>
+<p>Ans &lt;= cnt</p>
+<blockquote>
+<p>cnt是一种可行方案，而Ans是所有可行方案中最小的。 显然!<br>Ans &gt;= cnt<br>找到了cnt相互没有交集的区间，每选一个点最多覆盖一个区间。所有可行解必定大于cnt<br>关键证明，算法得到的是最基本的情况！！！</p>
+</blockquote>
+<h2 id="最大不相交区间数量"><a href="#最大不相交区间数量" class="headerlink" title="最大不相交区间数量"></a>最大不相交区间数量</h2><p>贪心策略： 按右端点选取<br>最大值</p>
+<p>Ans &gt;= cnt: 证明cnt是可行方案，<br>Ans &lt;= cnt:<br>假设Ans&gt;cnt, 反证法</p>
+<p>Ans选择出的是两两没有交集的区间，那一定被第一题的解给覆盖，所以Ans应该&lt;=cnt的. 所以矛盾</p>
+<blockquote>
+<p>考虑问题的转化，记住简单问题证明的模板，把其他复杂的问题转化成原本的问题</p>
+</blockquote>
+<h2 id="区间选组"><a href="#区间选组" class="headerlink" title="区间选组"></a>区间选组</h2><p>贪心：左端点</p>
+<ol>
+<li>将所有区间按左端点从小到大排序</li>
+<li>从前往后处理每个区间<br> 判断能否将其放到某个现有的组中 如果L[i]&lt;= min{r},则不能加入，于是建立新组；否则加入并更新</li>
+</ol>
+<p>考虑数据结构: </p>
+<p>问题： 最小组数<br>证明：</p>
+<ol>
+<li>Ans &lt;= cnt<br>cnt是可行解, 每个组内都没有交集</li>
+<li>Ans &gt;= cnt<br>当与任何一个区间都没有交集</li>
+</ol>
+<p>cnt-1  Max_r &gt;= Li.  因为是按L排序，所以Li&gt;=L0~i-1</p>
+<p>意味着整个cnt组都有公共点，所以对这些基本的组来说，问题的解至少得花cnt, 因此Ans&gt;=cnt</p>
+<blockquote>
+<p>练习题<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aW5nLmNvbS9wcm9ibGVtL2NvbnRlbnQvMTEzLw==" title="https://www.acwing.com/problem/content/113/">https://www.acwing.com/problem/content/113/<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<blockquote>
+<p>左端点相交的最大个数，右端点不相交的最大个数<br>再练习一遍</p>
+</blockquote>
+<h2 id="区间覆盖"><a href="#区间覆盖" class="headerlink" title="区间覆盖"></a>区间覆盖</h2><p>用最少的区间将给定区间排序</p>
+<p>贪心：将左端点从小到大排序</p>
+<ol>
+<li>将所有区间从左端点从小到大排序</li>
+<li>从前往后依次枚举每个区间，在所有能覆盖start的区间中，选择一个右端点最大的区间; 此时更新新的start点</li>
+</ol>
+<p>Ans&lt;=cnt: 假设有解, 因为我们每次选择区间都是没有空隙的，所以一定能找到方案成为可行解。因此成立</p>
+<p>Ans&gt;=cnt:</p>
+<p>反证法，假设Ans &lt; cnt</p>
+<p>假设不一样，那么第一个不同的区间，Ans取得的右端点的值小于cnt取得的区间的右端点的值; 那么Ans选择的下一个区间一定与当前区间覆盖。即最优解中选出的区间一定能够替换成算法的区间。而且总的Ans数不会变，而且可能Ans大于cnt。</p>
+<p>任何一个最优解都可以通过等价变化得到算法的解，而且每次的变换都不会增加区间的数量，所以算法最终得到的cnt数量一定和Ans相等</p>
+<h2 id="合并果子"><a href="#合并果子" class="headerlink" title="合并果子"></a>合并果子</h2><p>叶节点被算的次数 = 层数<br>如何合理的安排使得最终的权值最小？<br>每次贪心地选择两个最小的数进行合并</p>
+<ol>
+<li>最小的两个点一定深度最深，且可以互为兄弟。<blockquote>
+<p>如果有多个兄弟可以互相交换，并不影响结果；意味着第一步选择两个最小的元素是对的！</p>
+</blockquote>
+</li>
+</ol>
+<p>如何证明？<br>交换任意两个节点，一定会使结果变大。所以当前策略采取的一定是最优的</p>
+<ol start="2">
+<li>n个点是最优解，如何证明n-1的最优解是n的最优解<br>f(n)=f(n-1)+a+b<blockquote>
+<p>因为第一次一定选a,b两个点，所以代价必然是这个<br>目标是求f(n)的最小值<br>因为所有的方案都是合并a和b,所以这里f(n)就等价于f(n-1)<br>因此，数学归纳法就成立</p>
+</blockquote>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-dp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/algorithm-acwing-dp/" class="post-title-link" itemprop="url">algorithm acwing dp</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:12:04 / 修改时间：12:12:54" itemprop="dateCreated datePublished" datetime="2019-09-19T12:12:04+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/dp/" itemprop="url" rel="index"><span itemprop="name">dp</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>转换为背包问题<br>线性DP, 区间DP, 计数类DP， 数位统计DP, 状态<br>压缩DP, 树形DP, 记忆化搜索</p>
+<ol>
+<li>01背包<br>N, V   vi, wi<blockquote>
+<p>每件物品仅用一次</p>
+</blockquote>
+</li>
+</ol>
+<p>总体积一定的时候求最大价值</p>
+<ol start="2">
+<li><p>完全背包问题 每件物品有无限个</p>
+</li>
+<li><p>多重背包问题 每个物品有si个<br>优化</p>
+</li>
+<li><p>分组背包问题 物品有n组，每组有若干个。 每组中最多选一个。</p>
+</li>
+</ol>
+<h1 id="1-DP问题"><a href="#1-DP问题" class="headerlink" title="1 DP问题"></a>1 DP问题</h1><h2 id="1-1-基本形式"><a href="#1-1-基本形式" class="headerlink" title="1.1 基本形式"></a>1.1 基本形式</h2><blockquote>
+<p>问题是什么？从n个物品中选，体积为V的最大价值。<br>所求一般为函数值。</p>
+</blockquote>
+<h3 id="1-1-1-状态表示f-i-j"><a href="#1-1-1-状态表示f-i-j" class="headerlink" title="1.1.1 状态表示f(i,j)"></a>1.1.1 状态表示f(i,j)</h3><ol>
+<li>集合： 考虑的是状态的哪一个集合， 所有选法的一个集合<br>条件</li>
+</ol>
+<ul>
+<li>只从前i个物品选</li>
+<li>选出来的物品总体积小于等于j</li>
+</ul>
+<ol start="2">
+<li>属性： Max, Min, 数量</li>
+</ol>
+<blockquote>
+<p>f[n,v]即所求</p>
+</blockquote>
+<h4 id="1-1-2-状态计算：-如何一步步地把每个状态算出来"><a href="#1-1-2-状态计算：-如何一步步地把每个状态算出来" class="headerlink" title="1.1.2 状态计算： 如何一步步地把每个状态算出来"></a>1.1.2 状态计算： 如何一步步地把每个状态算出来</h4><p>集合划分：如何转化为更小的集合</p>
+<blockquote>
+<p>划分有什么方法吗？？？ 这里是对第i个分析，然后对前面的方法进行<br>每个问题有多种理解方式，尽量往简单走</p>
+</blockquote>
+<p>原则： 不重复（某个元素属于某一个特定集合），不漏（每个元素必须都给分配了）</p>
+<blockquote>
+<p>一般情况只要满足不漏就可以，如果是对元素个数考虑则要满足不重复的原则</p>
+</blockquote>
+<p>f(i,j): 含i 和 不含i<br>不含i:  i-1, j  f(i-1, j)<br>含i： i-1, j-wi  f(i-1,j-wi)+wi</p>
+<p>f(i,j) = max(f(i-1,j),   f(i-1,j-vi)+wi )<br>发现这里i-&gt;(i-1), 所以只需要考虑i-1的状态就可以，f(0,j)=0</p>
+<blockquote>
+<p>f(i,j) 只用到了f(i-1,j)   j-vi&lt;=j.<br>可以用滚动数组来做</p>
+</blockquote>
+<p>f[j] =max(f[j], f[j-v[i]]+w[i]);  // 当前有可选和不可选两种情况，单背包的01问题</p>
+<blockquote>
+<p>为什么对j循环，因为需要对不同的容量进行循环判断</p>
+</blockquote>
+<blockquote>
+<p>i-&gt; i-1, 变小的，正序<br>j-&gt; j-v[i], 反向</p>
+</blockquote>
+<h4 id="1-1-3-优化：对代码或计算方程做等价变形"><a href="#1-1-3-优化：对代码或计算方程做等价变形" class="headerlink" title="1.1.3 优化：对代码或计算方程做等价变形"></a>1.1.3 优化：对代码或计算方程做等价变形</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">for(int i=1;i&lt;=n;i++)</span><br><span class="line">    for(int j=0;j&lt;=m;j++)&#123;</span><br><span class="line">        f[i][j] =f[i-1][j];</span><br><span class="line">        if(j&gt;=v[i]) f[i][j] =max(f[i][j], f[i-1][j-v[i]]+w[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">for(int i=1;i&lt;=n;i++)</span><br><span class="line">    for(int j=m;j&gt;=v[i];j--)&#123;</span><br><span class="line">        f[j] =max(f[j], f[j-v[i]]+w[i]); //f[i-1][j-vi]-&gt;f[j]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&gt; 正常顺序下把f[i-1][j-v[i]]变成f[j-v[i]], 有问题，因为需要保证它是i-1层循环做的事情。而对于i层，如果j递增，那么在f[j]之前， f[j-v[i]]就已经被更新了； 所以这里使用反向，可以保证用到的就是上一层更新的内容，妙！！</span><br></pre></td></tr></table></figure>
+
+<p>滚动数组</p>
+<p>f(i)-&gt;f(i-1)</p>
+<blockquote>
+<p>那么考虑用f(2,N)来表示，那么就只用了两维就对原始问题进行了解释。就很方便，空间容量就下降了</p>
+</blockquote>
+<h1 id="2-背包问题"><a href="#2-背包问题" class="headerlink" title="2 背包问题"></a>2 背包问题</h1><h2 id="2-0-01背包问题：-每件物品只能选一个"><a href="#2-0-01背包问题：-每件物品只能选一个" class="headerlink" title="2.0 01背包问题： 每件物品只能选一个"></a>2.0 01背包问题： 每件物品只能选一个</h2><p>i,  v,  max_w<br>2维<br>f[i,j]<br>状态表示</p>
+<ul>
+<li>集合： 所有只考虑了前i个物品，其总体积不大于j的所有选法的集合</li>
+<li>属性：Max<br>状态计算</li>
+<li>集合分解<br>看第i个物品选或不选</li>
+</ul>
+<p>时间复杂度<br>状态数量*每个状态所耗的时间 n^2 * 1</p>
+<h2 id="2-1-完全背包问题：每件物品可以选任意个"><a href="#2-1-完全背包问题：每件物品可以选任意个" class="headerlink" title="2.1 完全背包问题：每件物品可以选任意个"></a>2.1 完全背包问题：每件物品可以选任意个</h2><h3 id="1-状态表示"><a href="#1-状态表示" class="headerlink" title="1. 状态表示"></a>1. 状态表示</h3><p>集合：所有只考虑了前i个物品，且体积不大于j的所有选法<br>属性:Max</p>
+<h3 id="2-状态计算"><a href="#2-状态计算" class="headerlink" title="2. 状态计算"></a>2. 状态计算</h3><p>集合的划分<br>f[i,j]:0,1,2,…,k</p>
+<blockquote>
+<p>第i个物品选多少个？k这里有体积进行限制</p>
+</blockquote>
+<p>f[i-1,j]<br>曲线救国：</p>
+<ol>
+<li>去掉k个物品i</li>
+<li>求Max, f[i-1,j-k*v[i]]</li>
+<li>再加回来k个物品i<br>f[i-1,j-k<em>v[i]] + k</em>w[i].</li>
+</ol>
+<p>f[i][j]=max(f[i][j], f[i-1][j-v[i]<em>k]+k</em>w[i]);</p>
+<p>// 三重循环</p>
+<h3 id="3-优化："><a href="#3-优化：" class="headerlink" title="3. 优化："></a>3. 优化：</h3><p>f[i,j] = Max(f[i-1,j], f[i-1,j-v]+w,f[i-1,j-2v]+2w,…)<br>f[i,j-v]=Max(f[i-1,j-v], f[i-1,j-2v]+w,…)</p>
+<p>发现 f[i,v]=Max(f[i-1,j], f[i,j-v]+w);</p>
+<blockquote>
+<p>为什么不用单调队列来优化？因为这里不是求滑动窗口的最大值，所以没有必要</p>
+</blockquote>
+<h2 id="2-2-多重背包问题：每件物品最多可以选k个"><a href="#2-2-多重背包问题：每件物品最多可以选k个" class="headerlink" title="2.2 多重背包问题：每件物品最多可以选k个"></a>2.2 多重背包问题：每件物品最多可以选k个</h2><p>f[i,j]</p>
+<h3 id="2-2-1-状态表示"><a href="#2-2-1-状态表示" class="headerlink" title="2.2.1 状态表示"></a>2.2.1 状态表示</h3><p>集合：所有只从前i个物品中选，且总体积不超过j的选法</p>
+<p>属性：最大值</p>
+<h3 id="2-2-2-状态计算"><a href="#2-2-2-状态计算" class="headerlink" title="2.2.2 状态计算"></a>2.2.2 状态计算</h3><p>集合划分</p>
+<blockquote>
+<p>第i个物品最多选多少个<br>f[i,j] = max(f[i-1,j-kv]+kw)  k=0,1,2,…,s[i]</p>
+</blockquote>
+<h3 id="2-2-3-优化"><a href="#2-2-3-优化" class="headerlink" title="2.2.3 优化"></a>2.2.3 优化</h3><p>f[i,j] = Max(f[i-1,j], f[i-1,j-v]+w,f[i-1,j-2v]+2w,…,f[i-1,j-sv]+sw)<br>f[i,j-v]=Max(f[i-1,j-v], f[i-1,j-2v]+w,…, f[i-1,j-(s+1)v]+(s+1)w)</p>
+<p>二进制的优化方式<br>s=1023</p>
+<p>1,2,4,8,…,512</p>
+<p>0~1023</p>
+<blockquote>
+<p>把多种背包某个物品有s次，转化为logS的物品的01背包问题，因此可以拼凑出问题的解</p>
+</blockquote>
+<p>注意这里的凑数，最后一个是剩余的解<br>如 s=200<br>1,2,4,8,16,32,64,73</p>
+<p>1<del>127<br>    73</del>200<br>所以只凑出了0-200的解</p>
+<p>s<br>1,2,4,8,..,2^k,c<br>c=s-(2^{k+1}-1)</p>
+<p>c&lt;2^{k+1}<br>s&lt;=2^{k+2}-1;</p>
+<p>优化步骤<br>总物品数：NlogS<br>时间： VNlogS</p>
+<h2 id="2-3-分组背包问题"><a href="#2-3-分组背包问题" class="headerlink" title="2.3 分组背包问题"></a>2.3 分组背包问题</h2><h3 id="2-3-1-状态表示"><a href="#2-3-1-状态表示" class="headerlink" title="2.3.1 状态表示"></a>2.3.1 状态表示</h3><ul>
+<li>集合： 只从前i组物品中选，且总体积不大于j的所有做法</li>
+<li>属性： Max</li>
+</ul>
+<h3 id="2-3-2-状态计算"><a href="#2-3-2-状态计算" class="headerlink" title="2.3.2 状态计算"></a>2.3.2 状态计算</h3><p>f[i,j]<br>集合划分,对第i个组怎么操作？</p>
+<p>对于第i组，不选，选第1个物品，选第2个物品，…, 选第k个物品</p>
+<p>f[i-1,j] , f[i-1, j-v[i,k]] + w[i,k] k</p>
+<blockquote>
+<p>用的是上层状态则从大到小枚举，用的是本层状态则从小到大枚举</p>
+</blockquote>
+<h1 id="3-线性DP"><a href="#3-线性DP" class="headerlink" title="3 线性DP"></a>3 线性DP</h1><h2 id="3-1-数字三角形"><a href="#3-1-数字三角形" class="headerlink" title="3.1 数字三角形"></a>3.1 数字三角形</h2><h3 id="3-1-2-状态表示"><a href="#3-1-2-状态表示" class="headerlink" title="3.1.2 状态表示"></a>3.1.2 状态表示</h3><p>f[i,j]</p>
+<ul>
+<li><p>集合<br>所有从起点，走到(i,j)的路径</p>
+</li>
+<li><p>属性： Max</p>
+</li>
+</ul>
+<h3 id="3-1-2-状态计算"><a href="#3-1-2-状态计算" class="headerlink" title="3.1.2 状态计算"></a>3.1.2 状态计算</h3><p>f[i,j]</p>
+<p>集合分类: 往前追溯<br>来自左上方，来自右下方</p>
+<blockquote>
+<p>曲线救国？<br>f[i,j] = max(f[i-1,j], f[i-1,j-1]) + a[i,j]<br>下标涉及到i-1，从1开始</p>
+</blockquote>
+<p>时间复杂度：状态数量*转移的计算量 n^2 * 1</p>
+<h2 id="3-2-最长上升子序列"><a href="#3-2-最长上升子序列" class="headerlink" title="3.2 最长上升子序列"></a>3.2 最长上升子序列</h2><ul>
+<li>维度选取标准<blockquote>
+<p>目标：从小到大考虑维度是否合适</p>
+</blockquote>
+<h3 id="3-2-1-状态表示"><a href="#3-2-1-状态表示" class="headerlink" title="3.2.1 状态表示"></a>3.2.1 状态表示</h3>f[i]<br>集合：所有以第i个数为结尾上升子序列的集合<br>属性：集合长度的Max<blockquote>
+<p>关键！一定要把集合说明白和清楚，突然明白了为什么要这么说？</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="3-2-2-状态计算"><a href="#3-2-2-状态计算" class="headerlink" title="3.2.2 状态计算"></a>3.2.2 状态计算</h3><p>f[i]：<br>集合划分</p>
+<blockquote>
+<p>考虑多种划分思想<br>对上升子序列的集合进行划分，如何讨论</p>
+</blockquote>
+<p>首先，一定把第i个元素放入，那么这个上升子序列的集合是哪个呢？对0,1,2,..,i-1元素进行讨论<br>aj &lt;= ai, j: 0~i-1   f[i] = max(f[j]+1)<br>j=0, f[0]=1;</p>
+<ul>
+<li>时间复杂度<br>状态数量<em>转移的计算量, n\</em>n</li>
+</ul>
+<blockquote>
+<p>记录转移位置：为最大值进行标记<br>这里的感觉是潜在的状态转移方程的感觉</p>
+</blockquote>
+<h3 id="3-2-3-优化"><a href="#3-2-3-优化" class="headerlink" title="3.2.3 优化"></a>3.2.3 优化</h3><p>考虑求的过程是否有某种性质？在计算过程中是否有重复计算<br>k:1 2 3 4 5 6 7<br>a:3 1 2 1 8 5 6</p>
+<p>思考3和1的情况，凡是能接到3后面的序列，一定可以接到1后面</p>
+<p>所以考虑换个角度，即对每个长度，存储索引k小的位置<br>随着长度增加，结尾的值一定是单调递增的</p>
+<blockquote>
+<p>目标：找某个衡量值的单调性，比如这里的ai的单调性。一旦有了单调性就可以进行存储，就可以用二分法来做，就会大大地提升速度。</p>
+</blockquote>
+<blockquote>
+<p>直接将ai更新到q就可以</p>
+</blockquote>
+<p>从某种程度上更像贪心一点！<br>nlogn</p>
+<p>直接求解问题</p>
+<h2 id="3-3-最长公共子序列"><a href="#3-3-最长公共子序列" class="headerlink" title="3.3 最长公共子序列"></a>3.3 最长公共子序列</h2><p>从两个长度为N和M的字符串A和B，求既是A的子序列又是B的子序列的字符串最长子序列</p>
+<h3 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h3><p>f[i,j]</p>
+<p>集合：所有由第一个序列的前i个字母和第二个序列的前j个字母构成的最长公共子序列</p>
+<p>属性： Max</p>
+<h3 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h3><p>f[i,j]<br>集合划分<br>标准，是否选a[i],b[j]</p>
+<blockquote>
+</blockquote>
+<p>00  f[i-1,j-1]<br>01  f[i-1,j-1]+1 : 以b[j]结尾</p>
+<blockquote>
+<p>f[i-1,j] 不代表这种情况，因为b[j]不一定为结尾<br>01 包含在f[i-1,j]中， f[i-1,j]包含在f[i,j]中<br>10<br>f[i,j-1]<br>11  f[i-1,j-1] + 1</p>
+</blockquote>
+<blockquote>
+<p>然后我们可以用f[i-1,j],f[i,j-1]替换01， 10； 此时这两种情况与00会有重叠，但是没有关系<br>因为包含了f[i-1,j],f[i,j-1]包含了00， 所以一般就不写f[i-1,j-1]这种情况<br>因为max是不需要分开的部分独立的，比如求三个数的最大值，max(a,b,c)=max(max(a,b),max(b,c)), b用了两次</p>
+</blockquote>
+<p>int a+1; abcd拼成的整数的存储</p>
+<h2 id="3-4-最短编辑距离"><a href="#3-4-最短编辑距离" class="headerlink" title="3.4 最短编辑距离"></a>3.4 最短编辑距离</h2><ul>
+<li><p>状态表示<br>f[i,j]<br>集合：所有将a[1<del>i]变到b[1</del>j]的操作方式的集合,  操作方式有插入、删除、替换<br>属性：集合的长度的最小值</p>
+</li>
+<li><p>状态计算<br>f[i,j]<br>集合划分<br>可以从集合的最后一步考虑:</p>
+<ul>
+<li>删除， a[1,i-1]与b[1,j]匹配    len(a)=len(b)-1, 但是这里是动态变化的，所以没有必要进行这个当前len的判断，f[i-1,j]+1</li>
+<li>添加一个新字母， a[i+1]=b[j], 添之前a[1,i]与b[1,j-1]匹配 len(a)=len(b)+1 f[i,j-1]+1</li>
+<li>改， a[i]!=b[j], f[i-1,j-1]+1</li>
+</ul>
+</li>
+</ul>
+<p>时间复杂度 n^2 *3</p>
+<blockquote>
+<p>动态规划是暴力的优化，用内存存储了一些需要计算的内容，不再需要暴力枚举每一个。但还有优化的空间，什么呢？就是没有保证某个计算只是一个</p>
+</blockquote>
+<h1 id="4-区间DP"><a href="#4-区间DP" class="headerlink" title="4. 区间DP"></a>4. 区间DP</h1><h2 id="4-1-石子合并"><a href="#4-1-石子合并" class="headerlink" title="4.1 石子合并"></a>4.1 石子合并</h2><p>一堆石子，每次合并都会包含一定的代价，问如何合并，体力消耗最小；<br>类似于大整数相乘的感觉</p>
+<h3 id="状态表示-1"><a href="#状态表示-1" class="headerlink" title="状态表示"></a>状态表示</h3><p>f[i,j]: i,j表示的区间的开始长度和结束长度</p>
+<p>集合：所有将第i堆石子到第j堆石子合并成一堆石子的合并方式</p>
+<p>属性：Min, 合并方式的代价的最小值</p>
+<h3 id="状态计算-1"><a href="#状态计算-1" class="headerlink" title="状态计算"></a>状态计算</h3><p>f[i,j]</p>
+<p>集合划分<br>以最后一次合并的分解线来合并</p>
+<p>左边k-i+1，  右边j-k+1<br>[i,k], [k+1,j]</p>
+<p>f[i,j] = max_k (f[i,k]+f[k,j]+pj);<br>k=i,..,j-1</p>
+<blockquote>
+<p>前缀和，来表示区间和<br>时间复杂度： n^2 n  300^3=2.7*10^9</p>
+</blockquote>
+<p>每次可以合并m堆<br>目标是枚举一次合并，用暴力，C_k^{m-1}堆， 总共有m-1个划分位置</p>
+<blockquote>
+<p>问题其实可以进一步转化为将一个区间分为m份，如何划分最优，使用dp来做，g(i,j)将前i个数分为j组的最小代价 n^3 *m</p>
+</blockquote>
+<blockquote>
+<p>注意计算的顺序，计算方式所依赖的状态应该先计算出来才行</p>
+</blockquote>
+<blockquote>
+<p>动态规划有两个写法： 递归方式的学名叫记忆化搜索，循环方式为常见写法，会快一个常数<br>区间长度的DP一般循环方式有两个，一个<br>动态规划用一个状态表示一堆状态的集合， dfs遍历的则是每一个状态；</p>
+</blockquote>
+<p>C++一般可以算10^7, 10^8</p>
+<h1 id="5-计数类DP"><a href="#5-计数类DP" class="headerlink" title="5. 计数类DP"></a>5. 计数类DP</h1><blockquote>
+<p>属性是数量</p>
+</blockquote>
+<h2 id="5-1-整数划分问题"><a href="#5-1-整数划分问题" class="headerlink" title="5.1 整数划分问题"></a>5.1 整数划分问题</h2><h3 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h3><p>无序的<br>物品：n<br>物体的体积：1,2,..,n<br>每个物品可以放任意次<br>-&gt; 完全背包问题<br>把复杂的问题转化为简单的已知的问题</p>
+<ul>
+<li>状态表示<br>集合：所有从1~i中选，和恰好是j的集合<br>属性：数量</li>
+<li>状态计算<br>i-1 选多少个  j=n<br>f(i-1,j)+ sum_k f(i-1,j-k*i)<br>即： f[i,j]=f[i-1,j]+f[i,j-v[i]]</li>
+</ul>
+<p>时间复杂度<br>当体积是i是，k=n/i<br>k1+k2+…+kn = lnn+c;  时间复杂度为 nlogn</p>
+<p>进一步简化<br>注意这里属性是长度，所以<br>f[j] = (f[j]+f[i-j]) mod p;<br>这里就直接是相加，也就是为什么需要分类互斥了</p>
+<h3 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h3><p>f[i,j]<br>集合：所有总和是i，并且恰好表示为j个数的和的方案<br>属性：数量</p>
+<p>集合划分<br>最小值是1 f[i-1,j-1]<br>最小值大于1 f[i-j,j]</p>
+<blockquote>
+<p>这里不是考虑这个最小值为多少，而是不断去逼近这个最小值 f[i-j,j] 将每个数都减1,其方案数应该一样<br>f[i,j] = f[i-1,j-1] + f[i-j,j]<br>ans=f[n,1]+f[n,2]+f[n,3]+…+f[n,n]</p>
+</blockquote>
+<h1 id="5-数位统计DP"><a href="#5-数位统计DP" class="headerlink" title="5. 数位统计DP"></a>5. 数位统计DP</h1><h2 id="5-1-计数问题"><a href="#5-1-计数问题" class="headerlink" title="5.1 计数问题"></a>5.1 计数问题</h2><p>统计两个整数数位之间0~9的出现次数<br>数据范围 0-1e8</p>
+<blockquote>
+<p>小学奥数问题</p>
+</blockquote>
+<p>分情况讨论<br>[a,b] 0~9</p>
+<p>count(n,x) 1~n中x出现的次数</p>
+<p>count(b,x)-count(a-1,x)</p>
+<blockquote>
+<p>当问题区间不好求时，经常的一种思路就是使用前缀和的思路</p>
+</blockquote>
+<p>分别求出1在每一位上出现的次数</p>
+<p>求1在第4位上出现的次数<br>1&lt;= xxx1yyy &lt;= abcdefg</p>
+<p>按前3位取值来分类的：</p>
+<p>1) xxx=001<del>abc-1, yyy=000</del>999, *1000<br>2) xxx=abc<br>    d&lt;1, abc1yyy&gt;abc0efg, 0<br>    d=1, abc1,  yyy=0<del>efg,  efg+1<br>    d&gt;1, abc1,  yyy=0</del>999, 1000</p>
+<p>所有情况 abc<em>1000 + 0 + efg+1 + 1000 = (abc+1)</em>1000 + efg+1</p>
+<p>因此可以求出1在任意一位出现的次数</p>
+<p>时间复杂度：10组数据，每组2个数，每个数有8位，最多循环10次</p>
+<p>实际例子：<br>从1~111 0出现的次数</p>
+<p>对于111的例子:</p>
+<ol>
+<li>统计个位上的0, 十位去01-10 10</li>
+</ol>
+<h1 id="6-状态压缩DP"><a href="#6-状态压缩DP" class="headerlink" title="6. 状态压缩DP"></a>6. 状态压缩DP</h1><blockquote>
+<p>状态是一个整数，却要将其看成一个二进制数</p>
+</blockquote>
+<h2 id="6-1-蒙德里安的梦想"><a href="#6-1-蒙德里安的梦想" class="headerlink" title="6.1 蒙德里安的梦想"></a>6.1 蒙德里安的梦想</h2><p>状态压缩的经典应用</p>
+<blockquote>
+<p>可以横着放，也可以竖着放<br>横着放完后，竖着摆放小方格就确定了，只有一种情况。所以考虑横着放置的小方格的情况</p>
+</blockquote>
+<p>f[i,j] 现在要摆第i列<br>j是哪一列申出了小方格<br>j 0~31, 5位二进制数？？？</p>
+<p>这里是状态，所以就是数量进行相加</p>
+<p>每一种选取都是一种方案数，下一个状态加上现在的状态所以就构成了问题的最后的结果，并且保证每次的状态都是一定的</p>
+<blockquote>
+<p>检查，先看状态是否是对的！这种做法很优秀！！</p>
+</blockquote>
+<h2 id="6-2-最短Hamilton路径"><a href="#6-2-最短Hamilton路径" class="headerlink" title="6.2 最短Hamilton路径"></a>6.2 最短Hamilton路径</h2><p>0~n-1, 从0到n-1不重不漏地恰好经过每个点一次</p>
+<p>n!n</p>
+<blockquote>
+<p>乘以路径的长度，为什么是n？<br>20! * 20 时间复杂度非常高</p>
+</blockquote>
+<p>跟上个题一样，用一个整数表示一个状态</p>
+<p>f[i,j]</p>
+<ul>
+<li>状态表示<br>集合：所有从0走到j，走过的所有点的状态是i的所有路径的长度<blockquote>
+<p>i是二进制数，表示所有点的状态数<br>0到j，j是具体哪个点的标号</p>
+</blockquote>
+</li>
+</ul>
+<p>属性：Min</p>
+<ul>
+<li>状态计算<br>f[i,j]<br>集合划分<br>倒数第二个点来分类<br>0-&gt;k-&gt;j<br>f[i,j] = min_k f[i-{j},k] + a[k][j]</li>
+</ul>
+<blockquote>
+<p>这里为什么用状态压缩，而没有用其他情况来做，因为这里的走到j节点，不一定从小的点走到，可能从更多的大的点走到</p>
+</blockquote>
+<h1 id="7-树形DP"><a href="#7-树形DP" class="headerlink" title="7. 树形DP"></a>7. 树形DP</h1><h2 id="7-1-没有上司的舞会"><a href="#7-1-没有上司的舞会" class="headerlink" title="7.1 没有上司的舞会"></a>7.1 没有上司的舞会</h2><p>f[u,0]<br>集合： 所有从以u为根的子树中选择，并且不选u这个点的方案<br>f[u,1]: 所有以u为根的子树中选择并且选择u这个点的方案</p>
+<p>属性： Max</p>
+<p>u-&gt; s1,s2<br>f(u,0) = sum_s max((f(s1,0), f(s1,1))<br>f(u,1) = sum_s f(s1,0)  + a(u)</p>
+<blockquote>
+<p>这里sum 实际上求的就是边，所以计算量就是枚举所有的边，而对于树的所有边之和为n-1.<br>即u的范围为n-1, 每个单位为2， 即为常数<br>因此复杂度为O(n)</p>
+</blockquote>
+<blockquote>
+<p>树形DP的感觉就是，其实关心还是两个状态之间的关系，不过这里的状态转换为了树。<br>考虑当前与上一节点的关系，就相当于考虑父节点与子节点之间的关系</p>
+</blockquote>
+<h1 id="8-记忆化搜索"><a href="#8-记忆化搜索" class="headerlink" title="8. 记忆化搜索"></a>8. 记忆化搜索</h1><h2 id="8-1-滑雪"><a href="#8-1-滑雪" class="headerlink" title="8.1 滑雪"></a>8.1 滑雪</h2><ul>
+<li>状态表示<br>f[i,j]<br>所有从(i,j)开始滑的路径</li>
+</ul>
+<p>Max</p>
+<ul>
+<li>状态计算<br>f[i,j]<br>按第一步开始滑的路径<br>按方向分 f[i,j]<br>i,j -&gt; i,j+1<br>f[i,j+1]开始滑的最大长度  </li>
+</ul>
+<blockquote>
+<p>拓扑图，不能成环； 怎么判断实际的情况？</p>
+</blockquote>
+<p>注意到记忆化搜索代码很有意思</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>时间复杂度<br>空间复杂度<br>代码复杂度: 记忆化搜索</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -2069,1643 +3508,6 @@ map(key, ts) // ts为一个测试样本
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture7/" class="post-title-link" itemprop="url">nju-course-cplus-lecture7</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:59:18 / 修改时间：09:59:49" itemprop="dateCreated datePublished" datetime="2019-09-19T09:59:18+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><h2 id="转移构造函数-amp-转移赋值操作符重载函数"><a href="#转移构造函数-amp-转移赋值操作符重载函数" class="headerlink" title="转移构造函数&amp;转移赋值操作符重载函数"></a>转移构造函数&amp;转移赋值操作符重载函数</h2><p>拷贝构造问题<br>当用一个临时或即将消亡的对象去初始化另一个同类的对象时，目前的拷贝构造函数实现效率不高</p>
-<p>主要对应的是一种情况：即当类作为返回值时，调用拷贝构造函数后会立即消亡。</p>
-<p>在C++中就提出了一种转移构造函数的概念。</p>
-<p>转移构造函数即进行资源转移<br>A(A&amp;&amp; x) {<br>    p=x.p;<br>    x.p=NULL;<br>}</p>
-<p>赋值操作符重载， 转移赋值操作符重载</p>
-<h2 id="函数式-amp-逻辑式程序设计"><a href="#函数式-amp-逻辑式程序设计" class="headerlink" title="函数式&amp;逻辑式程序设计"></a>函数式&amp;逻辑式程序设计</h2><p>从本质上说，用计算机来解决实际问题就是通过对反映问题本质的数据进行处理来实现的:<br>程序=算法+数据结构</p>
-<p>如何看待和组织算法和数据结构却存在着不同的做法，从而形成不同的程序设计范式：</p>
-<ul>
-<li>程序设计范式是设计、组织和编写程序的一种方式，它往往要基于一组理论、原则和概念</li>
-<li>不同的范式将采用不同的程序结构和程序元素来描述程序。</li>
-<li>范式具有针对性，不同的范式往往适合于解决不同类型的问题。</li>
-</ul>
-<ol>
-<li>过程式程序设计</li>
-</ol>
-<ul>
-<li>一种以功能为中心、基于功能分解和复合的程序设计范式。</li>
-<li>程序由一些子程序构成，每个子程序对应一个子功能。子程序描述了一系列操作，它是操作的封装体，实现了过程抽象。</li>
-<li>程序的执行过程体现为一系列的子程序调用</li>
-<li>在过程式程序中，数据处于附属地位，它独立于子程序，在子程序调用时通过参数或全局变量传给子程序使用。</li>
-</ul>
-<ol start="2">
-<li>面向对象程序设计</li>
-</ol>
-<ul>
-<li>一种以数据为中心，基于数据抽象的程序设计范式。</li>
-<li>程序由一些对象构成，对象是由一些数据及可施加于这些数据上的操作所组成的封装体。</li>
-<li>对象的特征由相应的类来描述，一个类描述的对象特征可以从其它的类获得。</li>
-<li>程序的执行过程体现为各个对象之间相互发送和处理消息</li>
-<li>在面向对象程序中，数据表现为对象的属性，对数据的操作是通过向包含数据的对象发送消息（调用对象提供的操作）来实现。</li>
-</ul>
-<ol start="3">
-<li>函数式程序设计</li>
-</ol>
-<ul>
-<li>程序由一组数学函数构成，计算过程体现为一系列的函数应用（把函数作用于数据）</li>
-<li>基于的理论是递归函数理论和lambda演算</li>
-</ul>
-<ol start="4">
-<li>逻辑式程序设计</li>
-</ol>
-<ul>
-<li>程序由一组事实和一组推理规则构成，在事实基础上运用推理规则来实施计算。</li>
-<li>基于的理论是谓词演算。</li>
-</ul>
-<h2 id="命令式-amp-声明式程序设计"><a href="#命令式-amp-声明式程序设计" class="headerlink" title="命令式&amp;声明式程序设计"></a>命令式&amp;声明式程序设计</h2><ol>
-<li>命令式程序设计</li>
-</ol>
-<ul>
-<li>强调对“如何做”的描述，要对操作步骤和状态变化给出明确的描述。例如，过程式和面向对象程序设计</li>
-<li>与冯洛伊曼结构一致，是使用较广泛的程序设计范式，适合于解决大部分的实际应用问题。</li>
-</ul>
-<ol start="2">
-<li>声明式程序设计</li>
-</ol>
-<ul>
-<li>强调对“做什么”的描述，而如何做则由实现系统自动完成。例如，函数式和逻辑式程序设计</li>
-<li>有良好的数学理论支持，并且，设计出的程序具有潜在的并行性。适合于需要大量进行复杂的符号处理（非数值计算）的人工智能领域的应用。</li>
-</ul>
-<p>函数式程序设计的几个基本特征</p>
-<ul>
-<li>“纯”函数：引用透明（无副作用，以相同的参数调用函数总得到相同的值）</li>
-<li>没有状态（数据不可变）：计算不改变已有数据，而是产生新的数据。（无赋值操作）</li>
-<li>函数也是值（first-class citizen) ：函数的参数和返回值都可以是函数。（高阶函数）</li>
-<li>表达式的惰性（延迟）求值（Lazy evaluation）：需要的时候才计算。</li>
-<li>潜在的并行性。</li>
-</ul>
-<p>函数式程序设计的几个基本技术</p>
-<ul>
-<li><p>递归：实现重复操作，不采用迭代方式（循环）。</p>
-</li>
-<li><p>尾递归：递归调用是递归函数的最后一步操作，编译可优化之。 就是返回参数的return f(a,b); 这里f(a,b)不应该含有任何运算<br>尾递归有以下几个好处：<br>便于编译程序优化：</p>
-<ul>
-<li>重用本次调用的栈空间</li>
-<li>自动转成迭代<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">T f(T1 x1, T2 x2, ...)</span><br><span class="line">&#123;  ......</span><br><span class="line">    ... return f(e1,e2,...);</span><br><span class="line">    ......</span><br><span class="line">    ... return f(e3,e4,...);</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br><span class="line">改成：</span><br><span class="line">T f(T1 x1, T2 x2, ...)</span><br><span class="line">&#123;  while (true)</span><br><span class="line">    &#123; ......</span><br><span class="line">       ... &#123; x1 = e1; x2 = e2; ... continue;&#125; </span><br><span class="line">       ......</span><br><span class="line">       ... &#123; x1 = e3; x2 = e4; ... continue;&#125;</span><br><span class="line">       ......</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>map/reduce（映射/规约）：对一个集合中的元素做映射和规约操作。</p>
-</li>
-<li><p>currying（柯里化）：把接受多个参数的函数变换成接受单一参数（原函数的第一个参数）的函数，该函数返回一个接收剩余参数的函数。（函数约简）</p>
-</li>
-</ul>
-<p>map,  reduce操作</p>
-<ul>
-<li>惰性和并行求值</li>
-</ul>
-<p>对于一个函数式程序：（示意）<br>a = f1();  //f1是一个纯函数b = f2();  //f2是一个纯函数<br>……<br>if (…)    … a + b …<br>由于f1、f2是纯函数，哪个先执行都可以，甚至可以并发执行！<br>f1、f2也可以到需要它们的时候（a+b）再执行（惰性求值）；如果程序中没用到它们，f1、f2也可以不执行！</p>
-<p>逻辑式程序设计简介</p>
-<p>程序由一组事实和一组推理规则构成，在事实基础上运用推理规则来实施计算。<br>基于的理论就是谓词演算</p>
-<p>特征</p>
-<ul>
-<li>数据（事实和规则）就是程序</li>
-<li>计算（匹配、搜索、回溯）由实现系统自动完成。</li>
-</ul>
-<p>语言<br>Prolog</p>
-<blockquote>
-<p>逻辑式程序设计是事实和规则作为数据。 给定目标，系统会自动进行搜索来探讨是否有效<br>函数式程序设计给人的感觉就是运用这些来做。</p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture6-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture6-summary</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:57:29 / 修改时间：09:58:12" itemprop="dateCreated datePublished" datetime="2019-09-19T09:57:29+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><ol>
-<li>Window是一种基于图形界面的多任务操作系统。同时多个，交互，用户操作</li>
-</ol>
-<ul>
-<li>两种方式：直接的应用程序，API</li>
-<li>应用方式: 单文档、多文档、对话框。<blockquote>
-<p>单文档是什么？多文档是什么？</p>
-</blockquote>
-</li>
-</ul>
-<p>基于消息驱动的，不断地处理消息</p>
-<ol start="2">
-<li>面向过程，基于Windows API<br>每个应用程序都提供了一个主函数，首先进行注册每一类的窗口，其次创建主窗口，然后进入消息循环。再对消息进行分类处理。<br>消息还可以生成新的消息。</li>
-</ol>
-<blockquote>
-<p>实际上是Windows将每个窗口都进行了分类，也就是每个窗口和消息都具有总的类别。HWND, UINT<br>然后，主窗口接收消息，接收到消息后传递到对应的窗口。对应的窗口可以考虑再进行窗口的改变，再生成新的消息加入消息队列，如此反复，直到消息队列中的消息被完全处理完。</p>
-</blockquote>
-<p>可重入函数，哪些函数是可以重新调用其他函数的？</p>
-<p>资源：程序代码，菜单id，显示文字，对话框类型，尺寸与位置, 存储在相应的资源文件.rc中</p>
-<ol start="3">
-<li>面向对象，基于MFC类库的支持<br>对象： 窗口，文档<br>应用程序包含成员对象窗口和文档</li>
-</ol>
-<blockquote>
-<p>多文档和单文档，多文档允许同时操作多个文档；单文档只允许操作单个文档。</p>
-</blockquote>
-<p>然后，所有的分类标准也是从CObject派生的，派生了AA,Ex,FS,A</p>
-<p>MFC主要类</p>
-<ul>
-<li>窗口类</li>
-</ul>
-<ol>
-<li>基本窗口类Cwd<blockquote>
-<p>从后面来看这里应该是基类没错了。</p>
-</blockquote>
-</li>
-<li>框架窗口类应该是基本窗口类的子类或者基本窗口类是它的参数的感觉，因为它要对子窗口进行管理以及提供更多的比如对标题栏、菜单栏、工具栏等的支持。 </li>
-<li>视类：显示数据。位于多文档框架的可显示区。</li>
-<li>对话框类，特殊的弹出来的类</li>
-</ol>
-<ul>
-<li>文档类 CDocument</li>
-<li>应用框架类</li>
-</ul>
-<ol>
-<li>文档模板类 </li>
-<li>应用类</li>
-</ol>
-<ul>
-<li>绘图类</li>
-<li>文件输入/输出类</li>
-<li>常用数据类型</li>
-</ul>
-<p>文档-视结构</p>
-<p>CView, CDocument, CFrameWnd, CDocTemplate, CWinApp</p>
-<p>应用向导<br>类向导</p>
-<blockquote>
-<p>如何将GUI与面向对象设计联系起来？</p>
-</blockquote>
-<p>GUI设计</p>
-<ul>
-<li>菜单</li>
-<li>对话框<br>消息，成员函数</li>
-<li>绘图<br>绘图函数，绘图工具；作用范围</li>
-<li>坐标变化</li>
-</ul>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture6/" class="post-title-link" itemprop="url">nju-course-cplus-lecture6</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:56:10 / 修改时间：12:21:39" itemprop="dateCreated datePublished" datetime="2019-09-19T09:56:10+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><p>Windows简介<br>消息驱动的程序结构<br>基于Windows API的过程式Window应用陈旭设计<br>基于MFC和”文档-视”结构的面向对象Windows应用程序设计</p>
-<h2 id="Windows简介"><a href="#Windows简介" class="headerlink" title="Windows简介"></a>Windows简介</h2><p>Window是一种基于图形界面的多任务操作系统</p>
-<ul>
-<li>系统中可以同时运行多个应用程序</li>
-<li>每个应用程序通过窗口与用户进行交互</li>
-<li>用户通过鼠标的单击，双击，拖放，菜单选择以及键盘输入来进行操作</li>
-</ul>
-<p>Windows功能以两种方式提供：</p>
-<ul>
-<li>工具（应用程序）：资源管理器、记事本、画图，。。。直接使用</li>
-<li>函数库: 作为Windows的API。</li>
-</ul>
-<p>单文档应用</p>
-<ul>
-<li>只能对一个文档的数据进行操作</li>
-<li>只有结束当前文档的操作后，才能进行下一个文档的操作<br>多文档应用</li>
-<li>可以同时对多个文档的数据进行操作</li>
-<li>不必等到一个文档的所有操作结束，就可以对其它文档进行操作，对不同文档的操作是在不同的子窗口进行的<br>对话框应用</li>
-<li>以对话框的形式操作一个文档数据</li>
-<li>对文档数据的操作以各种control空间来实现</li>
-<li>程序以按确定或取消等按钮来结束</li>
-</ul>
-<p>Windows应用程序的结构属于消息（事件）驱动的结构：<br>程序的任何一个动作都是在接受到一条消息后发生的</p>
-<p>Windows的消息有：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WM_KEYDOWN/WM_KEYUP（键盘按键）</span><br><span class="line">WM_CHAR（字符）</span><br><span class="line">WM_LBUTTONDOWN/WM_LBUTTONUP/WM_LBUTTONDBLCLK/WM_MOUSEMOVE （鼠标按键）</span><br><span class="line">WM_COMMAND（菜单）</span><br><span class="line">WM_PAINT（窗口内容刷新）</span><br><span class="line">WM_TIMER（定时器消息）</span><br></pre></td></tr></table></figure>
-
-<p>每个Windows应用程序都有一个消息队列，Windows系统会把各个应用程序的消息放入各自的消息队列。<br>大部分的消息都关联到某个窗口</p>
-<ul>
-<li>每个窗口都有一个消息处理函数</li>
-</ul>
-<p>Windows应用程序不断从自己的消息队列中获取消息并调用相应窗口中的消息处理函数来处理获得的消息。<br>这个“取消息-处理消息”的过程构成了消息循环。<br>当取到某个特定消息后，消息循环结束。</p>
-<p>主程序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//初始化</span><br><span class="line">...</span><br><span class="line">// 进入消息循环</span><br><span class="line">while(取消息)   消息队列</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    //处理消息 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>消息处理函数：<br>注意：每个消息的处理时间不宜太长，否则会造成程序”假死”现象(程序不响应其它消息)</p>
-<blockquote>
-<p>这个消息队列应该是最外面的队列吧，那么对于最里面的队列。每个队列都是这样做的吗？好奇！</p>
-</blockquote>
-<h2 id="基于Window-API的过程式Windows应用程序设计"><a href="#基于Window-API的过程式Windows应用程序设计" class="headerlink" title="基于Window API的过程式Windows应用程序设计"></a>基于Window API的过程式Windows应用程序设计</h2><p>每个Windows应用程序都必须提供一个主函数WinMain，其主要功能是:</p>
-<ul>
-<li>注册窗口类：窗口的基本信息：名字、基本风格、消息处理函数、图标、光标、背景颜色; 每类窗口都需要注册</li>
-<li>创建应用程序的主窗口，其他窗口等需要时再创建</li>
-<li>进入消息循环，直到接收到WM_QUIT消息后，消息循环结束。</li>
-</ul>
-<p>程序还要为每类窗口提供一个消息处理函数，用于处理发送到它的消息。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;windows.h&gt;</span><br><span class="line">int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR IpCmdLine, int nCmdShow // 主窗口显式方式)</span><br><span class="line">WinMain()&#123;</span><br><span class="line">    // 注册窗口类</span><br><span class="line">    RegisterClass(.., WindowProc, &quot;my window class&quot;);</span><br><span class="line">    ...</span><br><span class="line">    // 创建主窗口</span><br><span class="line">    HWND hWnd;</span><br><span class="line">    hWnd = CreateWindow(&quot;my window class&quot;, ..., x,y, width,height,...)</span><br><span class="line">    ShowWindow(hWnd, nCmdShow)</span><br><span class="line">    ...</span><br><span class="line">    // 进入消息循环</span><br><span class="line">    while(GetMessage(&amp;msg, NULL, 0, 0))&#123; // 消息队列</span><br><span class="line">        ...</span><br><span class="line">        DispatchMessage(&amp;msg) // 消息处理函数</span><br><span class="line">    &#125;</span><br><span class="line">    return msg.wParam;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 窗口处理函数</span><br><span class="line">LRESULT CALLBACK WindowProc(HWND hWnd, // 窗口标志 </span><br><span class="line">                            UINT message, // 消息标识, WPARAM wParam, LPARAM lParam...) &#123;</span><br><span class="line">    switch(message) &#123;</span><br><span class="line">        case WM_KEYDOWN:</span><br><span class="line">            wParam   //wParam为按键在键盘上的位置，扫描码</span><br><span class="line">        case WM_CHAR: // 字符健消息</span><br><span class="line">            wParam</span><br><span class="line">        case WM_COMMAND: // 菜单消息</span><br><span class="line">            switch(wParam) //wParam是菜单项的标识</span><br><span class="line">            &#123;</span><br><span class="line">                case ID_FILE_OPEN:</span><br><span class="line">                case ID_START_TIMER:</span><br><span class="line">            &#125;</span><br><span class="line">        case WM_LBUTTONDOWN: // 鼠标左键按下消息</span><br><span class="line">            IParam</span><br><span class="line">        case WM_PAINT: // 窗口刷新消息</span><br><span class="line">        case WM_TIMER: // 定时器消息</span><br><span class="line">        case WM_CLOSE: // 请求关闭窗口消息</span><br><span class="line">            DestoryWindow(hWnd); // 撤销窗口</span><br><span class="line">            break;</span><br><span class="line">        case WM_DESTROY: // 窗口被关闭消息</span><br><span class="line">            PostQuitMessage(0);</span><br><span class="line">            break;</span><br><span class="line">        defalut:</span><br><span class="line">            return DefWindowProc();</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>消息处理函数中还可以生成新的消息，方式有两种:</p>
-<ul>
-<li>PostMessage 消息放入消息队列</li>
-<li>SendMessage 直接调用消息处理函数<br>他们的参数为: HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam. 消息参数1和2<blockquote>
-<p>hWnd接收消息的窗口标识，应该是把窗口进行了分类的感觉吧。Msg实际也是将消息标识进行了分类</p>
-</blockquote>
-</li>
-</ul>
-<p>消息处理函数应是可再入的<br>由于消息处理在处理一条消息时可能会主动产生一些新消息，这些消息并不放入消息队列，而是直接调用消息处理函数来处理这些消息，遮掩，就有可能导致小夏处理函数的一次执行还未结束，另一次执行就开始的现象，这可能会引起数据的不一致错误。</p>
-<blockquote>
-<p>这里消息的概念是平行的，假设每个消息可能对实际的函数产生不一样的结果。</p>
-</blockquote>
-<p>因此，消息处理函数应该是一个可重入函数，即函数调用者要自带工作区（数据空间）：</p>
-<ul>
-<li>函数需要的数据需要通过参数来传递</li>
-<li>函数不能有static存储类的局部变量</li>
-<li>在函数中访问全局变量也可能导致函数不可再入<blockquote>
-<p>实话说，不懂什么意思，函数需要自己调用吗？还是怎么的？ </p>
-</blockquote>
-</li>
-</ul>
-<p>资源<br>每个Windows应用程序，除了程序代码外，还包含一些资源描述：<br>菜单：菜单ID, 菜单项ID/显示文字<br>对话框:对话框类型，尺寸与位置</p>
-<p>资源描述有规定的格式，存储在相应的资源文件(.rc)中，经编译后将作为Windows应用程序的一部分被链接到应用程序的目标文件中。<br>资源可以用VC++的资源管理器来进行可视化编辑。</p>
-<blockquote>
-<p>这里的资源也就对应着C++的内容</p>
-</blockquote>
-<h3 id="面向对象的Windows应用程序设计"><a href="#面向对象的Windows应用程序设计" class="headerlink" title="面向对象的Windows应用程序设计"></a>面向对象的Windows应用程序设计</h3><p>基于Windows API的程序设计是一种基于过程抽象的程序设计范式。<br>通过调用API函数编写程序的粒度太细、太繁琐，开发效率不高。<br>如何以更大粒度的程序元素（如对象）来开发Windows应用程序？</p>
-<ul>
-<li>Microsoft的MFC类库提供了以面向对象范式进行应用程序开发的支持。</li>
-</ul>
-<p>窗口对象</p>
-<ul>
-<li>显示程序的处理数据</li>
-<li>处理Windows的消息、实现与用户的交互</li>
-<li>窗口对象之间可以存在聚集关系</li>
-</ul>
-<p>文档对象</p>
-<ul>
-<li>管理在各个窗口中显示和处理的数据</li>
-<li>文档对象与窗口对象之间可以存在着一对多的关系</li>
-</ul>
-<p>应用程序对象</p>
-<ul>
-<li>管理属于它的窗口对象和文档对象</li>
-<li>实现消息循环</li>
-<li>与他的窗口对象及文档对象之间构成 聚集关系。</li>
-</ul>
-<blockquote>
-<p>聚集关系实际上就是指窗口之间的互相联系。<br>理解：窗口对象主要是显示程序，窗口对象之间可以互相存在关系；文档对象即主要指的是每个窗口中的数据，可以考虑窗口中的数据。<br>窗口就是数据的显示层，而文档就是指的具体数据。应用程序对象就是main函数的感觉。</p>
-</blockquote>
-<p>对Windows应用，应用程序对象和主窗口对象只有一个，子窗口对象和文档对象则可以有多个，它们在程序运行的不同时刻创建。</p>
-<p>例如，对于一个多文档的Windows应用程序</p>
-<ul>
-<li>在程序开始运行时，首先创建应用程序对象;</li>
-<li>由应用程序对象来创建主窗口对象；</li>
-<li>在程序运行过程中，用户选择主窗口菜单项”文档|打开”，创建一个稳定那个对象以及相应的子窗口对象。<blockquote>
-<p>也就是说文档对象其实是叶节点的感觉，是最底层的东西。</p>
-</blockquote>
-</li>
-</ul>
-<p>MFC Microsoft Foundation Class library<br>微软基础类库</p>
-<p>MFC是微软公司提供的支持以面向对象范式进行Windows应用程序开发的一个基础类库</p>
-<ul>
-<li>MFC提供了一些类来描述应用中对象的基本功能，应用程序可以通过集成这些类来实现各自的特殊功能。<blockquote>
-<p>在这里，想起qt中，本身有Dialog, Frame等对象，实际上感觉也是如此的。</p>
-</blockquote>
-</li>
-<li>MFC还提供了一种基于”文档-视”结构的应用框架。<blockquote>
-<p>所谓框架需要进行好好理解，所谓框架一般来说是指的在实际问题过程中不断向前发展。一般来说最好了解框架的历史。但是实际上如果一开始接触不到这个信息的话，只有先进行框架的原理和功能，以及如何使用等方面进行先理解。当理解明白后，直接使用。注意！不要迷信框架，最后把如何从很复杂的东西抽象到框架的过程理解明白。当然，第一步肯定是要会用框架。</p>
-</blockquote>
-</li>
-</ul>
-<p><img src="00001.png" alt></p>
-<blockquote>
-<p>由图可以看出，首先CObject分为了应用的框架Application Architecture, 异常Exceptions, 文件服务File Services, 基本类型Arrays, Lists, Maps, Internet Services, 以及Graphical Drawing, Control Support, Menus, ODBC Database Support, DAO Database Support, Synchronization, Windows Sockets等高级专题。<br>对于Application Architecture用可以分为CCmdTarget即能处理Windows消息的类，往下派生CWind,分为以下几类， Frame Windows, Control Bars, Property Sheets以及 Dialog Boxes 以及Views以及Controls等等。<br>还有一部分Class不是从CObject派生的，也就是说不是采用的面向对象范式。<br>Internet Server API, Run-time Object Model Support, Structures, Support Classes, Typed Template Collections, OLE Type Wrappers, OLE Automation Typesm Synchronization.</p>
-</blockquote>
-<p><img src="00002.png" alt></p>
-<blockquote>
-<p>可以看出CCmdTarget被分为了好几类，CWinThread, CWinApp 线程的， CDocument文档的， CDocTemplate文档类型的。<br><img src="00003.png" alt></p>
-</blockquote>
-<h4 id="MFC提供的主要类"><a href="#MFC提供的主要类" class="headerlink" title="MFC提供的主要类"></a>MFC提供的主要类</h4><ul>
-<li>窗口类<ul>
-<li>基本窗口类CWnd<ul>
-<li>实现窗口的基本功能:<blockquote>
-<p>一般的消息处理、窗口大小和位置管理、菜单管理、坐标系管理、滚动条管理、剪切板管理、窗口状态管理、窗口间位置关系管理，等等<br>是其他窗口类的基类</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>框架窗口类<ul>
-<li>提供对标题栏、菜单栏、工具栏、状态栏以及属于它的子窗口的管理功能。</li>
-<li>CFrameWnd: 提供了单文档应用主窗口的基本功能</li>
-<li>CMDIFrameWnd: 提供了多文档应用主窗口的基本功能</li>
-<li>CMDIChildWnd: 提供了多文档应用子窗口的基本功能<blockquote>
-<p>一个窗口中有多个CView,CMDIChildWnd和CMDIFrameWnd一定对应吗？</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>视类CView<ul>
-<li>实现程序数据的显示功能以及操作数据时与用户的交互功能</li>
-<li>视窗口位于单文档应用主窗口CFrameWnd和多文档应用子窗口CMDIChildWnd的客户区（可显示区）</li>
-</ul>
-</li>
-<li>对话框类CDialog<ul>
-<li>对话框是一种特殊的窗口，用于获取用户的输入信息。</li>
-<li>每个对话框都包含了一些对话框控件（如：按钮、列表框、单选/多选框等），这些控件属于对话框对象的成员对象。</li>
-<li>CDialog类封装了对话框的基本功能，它构成了所有对话框的基类。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>文档类CDocument<ul>
-<li>对程序要处理的数据进行管理，包括磁盘文件I/O.</li>
-<li>一个CDocument类的对象至少要对应一个CView类的对象<blockquote>
-<p>这里也就是所谓的数据-展示的感觉<br>刚刚最开始自己的感觉就是应该是数据与文档对应</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>应用框架类<blockquote>
-<p>这里是怎么组织的，真让人好奇</p>
-</blockquote>
-<ul>
-<li>文档模板类<ul>
-<li>实现对文档、视窗口和框架窗口所构成的对象组的管理功能。（用于支持基于“文档=视”结构的应用框架）</li>
-<li>CDocTemplate: 文档模板的基类<blockquote>
-<p>CView+CDocument</p>
-</blockquote>
-</li>
-<li>CSingleDocTemplate: 单文档模板基类</li>
-<li>CMultiDocTemplate: 多文档模板类<blockquote>
-<p>这里跟自己的理解是一样的吗？它的意思是这里进行管理的功能？</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>应用类CWinApp<ul>
-<li>提供了对Windows应用程序的各部分进行组合和管理的功能，其中包括对主窗口和文档模板的管理以及实现消息循环等、<blockquote>
-<p>换言之，应用类调用文档模板类，实现消息循环。文档模板类实现对文档、视窗口、框架窗口所构成的对象组的管理。文档即数据，视窗口即文档的数据，框架窗口即整个菜单栏，状态栏以及其他的等等</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="00004.png" alt></p>
-<ul>
-<li>绘图类<ul>
-<li>绘图环境类CDC<ul>
-<li>实现Windows应用程序中的绘图功能：文本以及几何图形（线、矩形、椭圆等）的输出</li>
-<li>要关联一个窗口以及一些绘图工具</li>
-</ul>
-</li>
-<li>绘图工具类CPen, CFont, CBrush<ul>
-<li>实现笔、字体、刷子等绘图所需的绘图元素。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>文件输入\输出类<ul>
-<li>CFile类：实现了基于字节流的文件I/O</li>
-<li>CArchive类：通过重载操作符&lt;&lt;和&gt;&gt;实现了对基本数据类型和MFC类对象的文件I/O.</li>
-</ul>
-</li>
-<li>常用数据类型<ul>
-<li>CPoint点坐标，CRect矩形信息，CSize矩形的宽度/高度，点之间的偏移量等</li>
-<li>字符串类CString</li>
-</ul>
-</li>
-</ul>
-<h4 id="文档-视结构"><a href="#文档-视结构" class="headerlink" title="文档-视结构"></a>文档-视结构</h4><ul>
-<li>文档<ul>
-<li>用于存储和管理程序中的数据。</li>
-</ul>
-</li>
-<li>视<ul>
-<li>显示文档数据以及实现对文档数据进行操作时与用户的交互功能</li>
-</ul>
-</li>
-<li>文档与视一起可以实现：<ul>
-<li>数据的内部存储形式和数据的外部表现形式相互独立</li>
-<li>一个文档对象对应一个或多个视对象，即，对于同一个文档数据可以用不同的方式进行显示和操作</li>
-</ul>
-</li>
-</ul>
-<p>MFC提供了一个基于“文档-视”结构的应用框架，主要由以下类构成：</p>
-<ul>
-<li>CView</li>
-<li>CDocument</li>
-<li>CFrameWnd</li>
-<li>CDocTemplate</li>
-<li>CWinApp<br>应用框架规定了各个组成部分之间的关系，它带来的好处是简化了程序的控制流程设计。</li>
-</ul>
-<p>基于“文档-视”结构的多文档应用框架的控制逻辑</p>
-<ul>
-<li>首先创建一个CWinApp类的应用对象，然后<ul>
-<li>调用CWinApp类的成员函数InitInstance类对应用对象进行初始化：<ul>
-<li>创建一个CMultiDocTemplate类的文档模板对象，并调用CWinApp类的成员函数AddDocTemplate把它加入到应用对象中。</li>
-<li>创建一个CMDIFramWnd类的主框架窗口对象，并记录在应用对象的数据成员m_pMainWnd中。</li>
-</ul>
-</li>
-<li>调用CWinApp类的成员函数Run,进入消息循环。<blockquote>
-<p>也就是说CWinApp-&gt; InitInstance; 类文档模板对象，主框架窗口对象。然后容纳其他的。最后就是进行消息循环，其实也是Run的一个封装。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>用户选择菜单项”文件|打开”后，调用CWinApp类的成员函数OnFileOpen:<ul>
-<li>显示打开文件对话框，让用户选择要打开的文件</li>
-<li>根据文档模板创建三个对象：文档CDoument,子框架窗口CMDIChildWnd和视CView, 并建立起他们之间的关联。</li>
-<li>调用CDocument对象的成员函数OnOpenDocument从磁盘文件读取数据:<ul>
-<li>创建一个CArchive类的对象。</li>
-<li>以CArchive类的对象作为参数调用CDocument的成员函数Serialize从磁盘读入数据并存放在文档对象中。</li>
-</ul>
-</li>
-<li>调用对应CView对象的成员函数OnInitialUpdate通知相应的视进行数据显示，这时，CView类的成员函数OnUpdate将会被调用，它会向CView对象发送WM_PAINT消息</li>
-<li>CView对象收到WM_PAINT消息后将调用CView的成员函数OnDraw显示文档的数据<blockquote>
-<p>这里他们三者之间的联系未说明白。首先，前面已经说到了管理的是消息队列。现在就是当面对具体的消息(事件)时的动作，此时是如果选择文件/打开后，首先会建立CDoucent, CView, CMDIChildren. 然后，在想这里的子框架的作用是否是打开不断的目录。其次，这里的CView类的成员函数发送WM_PAINT，应该会等待CDocument的一个消息后才会启动OnDraw吧，感觉上是这样的</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>CView对象(视)与CDocument对象(文档)之间的交互<ul>
-<li>通过CView对象的成员函数GetDocument可获得相应的文档对象</li>
-<li>通过CDocument对象的成员函数GetFirstViewPosition和GetNextView可获得相应 的视(可以有多个)</li>
-<li>修改文档数据后，可以通过CDocument对象的成员函数SetModifiedFlag设置修改标记为true,并调用CDocument对象的成员函数UpdateAllViews通知相应的视刷新显示<ul>
-<li>这时，CView对象的成员函数OnUpdate和OnDraw将会被调用。<blockquote>
-<p>理解： 等于那个动作会调度CView，CView然后是CDocument的父亲，通过这些就可以显示函数。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>用户选择菜单项“文件|保存”<ul>
-<li>调用CDocument对象的成员函数OnSaveDoucument把文档数据保存到磁盘中：<ul>
-<li>创建一个CArchive类的对象</li>
-<li>以CArchive类的对象作为参数调用CDocument对象的成员函数Serialize把文档中的数据写入磁盘</li>
-<li>调用CDocument对象的成员函数SetModifiedFlag设置修改标记为false.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>用户选择菜单项“文件|关闭”<ul>
-<li>调用CDocument对象的成员函数OnFileClose;<ul>
-<li>调用CDocument对象的成员函数IsModified判断文档是否被修改，如果被修改，提示用户保存数据，然后按菜单项”文件|保存”处理</li>
-<li>调用CDocument对象的成员函数OnCloseDocument撤销相应的视和子框架窗口</li>
-</ul>
-</li>
-<li>撤销文档对象</li>
-</ul>
-</li>
-<li>用户选择菜单项“文件|退出”或关闭主窗口：<ul>
-<li>向应用的主窗口（CMDIFrameWnd类的框架窗口）发送一条WM_CLOSE消息。</li>
-<li>主窗口收到WM_CLOSE:<ul>
-<li>关闭所打开的文档（包括相应的视和子框架窗口）</li>
-<li>撤销主窗口</li>
-<li>向应用发送一条WM_QUIT消息</li>
-</ul>
-</li>
-<li>在CWinApp类的成员函数Run的消息循环中收到WM_QUIT消息后，<ul>
-<li>退出消息循环</li>
-<li>调用CWinApp对象的成员函数ExitInstance做程序退出前的一些处理。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>CView</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- CDocument *m_pDocument;</span><br><span class="line">// 存储对应文档对象的指针</span><br><span class="line">- CDocument *GetDocument() const;</span><br><span class="line">// 获得对应的文档对象</span><br><span class="line">- virtual void onDraw(CDC *pDC)=0;</span><br><span class="line">// 处理窗口刷新消息:WM_PAINT;</span><br><span class="line">- virtual void onInitialUpdate();</span><br><span class="line">// 视对象创建时被调用</span><br><span class="line">- virtual void OnUpdate(CView *pSender, LPARAM IHint, CObject* pHint);</span><br><span class="line">// 文档对象的数据发生改变时调用该函数刷新相应的视对象。默认处理: 发送WM_PAINT消息。</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>不亏为抽象类的感觉</p>
-</blockquote>
-<ul>
-<li>CDocument<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">- void AddView(CView *pView);</span><br><span class="line">// 给文档对象增加一个关联的CView类的对象，双向注册的感觉？.  通过参数的形式组合，倒也很正常。 不过是有GetDocument来调用它</span><br><span class="line">- void RemoveView(CView *pView);</span><br><span class="line">// 使一个CView类的对象脱离于文档对象的关联</span><br><span class="line">- virtual POSITION GetFirstViewPosition() const;</span><br><span class="line">// 获取关联的第一个CView对象的位置</span><br><span class="line">- virtual CView* GetNextView(POSITION&amp; rPosition) const;</span><br><span class="line">// 获取指定位置的CView对象，rPosition自动往后移动一个位置</span><br><span class="line">- void UpdateAllViews(CView* pSender, LPARAM IHint=0L, CObject* pHint=NULL);</span><br><span class="line">// 向关联的CView对象发送刷新消息。当pSender为NULL时，向关联的所有CView对象发送刷新消息。</span><br><span class="line">&gt; 怎么实现刷新？首先思考，这个刷新肯定是由某个动作触发的，那么把它加在其余的后面就可以了呗。对！</span><br><span class="line"></span><br><span class="line">void SetModifiedFlag(BOOL bModified=TRUE);</span><br><span class="line">设置文档修改标记。</span><br><span class="line">BOOL IsModified( );</span><br><span class="line">判断文档是否被修改。</span><br><span class="line">virtual BOOL OnSaveDocument(LPCTSTR 							lpszPathName ); </span><br><span class="line">把文档中数据保存到文件名为lpszPathName 的文件中去。</span><br><span class="line">virtual BOOL OnOpenDocument(LPCTSTR 							lpszPathName );</span><br><span class="line">从文件名为lpszPathName 的文件中读取文档数据。</span><br><span class="line">virtual BOOL OnNewDocument( );</span><br><span class="line">对文档数据进行初始化。</span><br><span class="line">virtual void OnCloseDocument( ); </span><br><span class="line">关闭文档。</span><br><span class="line">virtual void Serialize( CArchive&amp; ar ); </span><br><span class="line">用于文档数据的序列化（写入磁盘文件或从磁盘文件读出）。</span><br><span class="line">一般由OnSaveDocument和OnOpenDocument来调用</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CArchive档案类</span><br><span class="line">// 实现对基本数据类型和从CObject继承的对象的文件输入/输出操作</span><br><span class="line">CArchive重载了操作符&lt;&lt;和&gt;&gt;</span><br><span class="line">IsLoading();  // 输入</span><br><span class="line">IsStoring();  // 输出</span><br></pre></td></tr></table></figure>
-
-<p>CDocTemplate文档模板类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CDocTemplate类的构造函数（其参数为文档、视以及框架窗口的类信息）：</span><br><span class="line">CDocTemplate(UINT nIDResource,</span><br><span class="line">	  	CRuntimeClass* pDocClass, </span><br><span class="line"> 		CRuntimeClass* pFrameClass, </span><br><span class="line">	       CRuntimeClass* pViewClass );</span><br></pre></td></tr></table></figure>
-
-<p>CWinApp</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">virtual BOOL InitInstance(); </span><br><span class="line">应用程序初始化，包括注册窗口类、创建/显示主窗口等。它由WinMain调用。</span><br><span class="line">virtual int Run();</span><br><span class="line">实现消息循环。它由WinMain调用</span><br><span class="line">virtual int ExitInstance();</span><br><span class="line">应用程序结束处理，由Run调用。</span><br><span class="line">virtual CWnd *GetMainWnd( ); </span><br><span class="line">获得主窗口对象指针。</span><br><span class="line">void AddDocTemplate(CDocTemplate* Template );</span><br><span class="line">把一个文档模板加入到CWinApp类的对象中</span><br><span class="line">afx_msg void OnFileNew( );</span><br><span class="line">提供对“File|New”菜单消息的处理功能。</span><br><span class="line">afx_msg void OnFileOpen( );</span><br><span class="line">提供对“File|Open”菜单消息的处理功能。</span><br></pre></td></tr></table></figure>
-
-<p>Application Wizard应用向导</p>
-<ul>
-<li>要在程序中建立应用框架中各对象的创建和操作代码将是一件很麻烦的工作。<br>VC++提供了一个应用向导，基于MFC的多文档应用程序，会自动建立5个雷，并分别为这些类写了一些必要的代码:<br>CMyApp<br>CMainFrame<br>CChildFrame<br>CMyView<br>CMyDoc<br>在应用向导建立的应用程序中有一个CMyApp类的全局对象theApp,它将在WinMain执行之前创建。<br>为了体现”纯”面向对象特性，在应用向导建立的应用程序中隐藏了主函数WinMain. 在隐藏的WinMain中，</li>
-<li>首先调用theApp的成员函数InitInstance对应用程序进行初始化</li>
-<li>然后去调用theApp的成员函数Run进入消息循环<br>消息循环结束之后，将会调用theApp的成员函数ExitInstance进行程序结束前的一些处理。<br>在应用向导建立的应用程序中对消息处理函数进行了结构化处理:</li>
-<li>通过消息映射机制把Windows消息与相应类的成员函数关联起来</li>
-<li>各个消息的处理分别由相应类的一个成员函数来实现。</li>
-</ul>
-<p>类向导<br>为应用程序中从MFC派生的类增加/删除成员</p>
-<ul>
-<li>消息处理成员函数（菜单、窗口、键盘、鼠标）</li>
-<li>基类中可重定义的成员函数</li>
-<li>新定义数据成员（成员变量）</li>
-<li>对话框类与各个“控件”所对应的数据成员<br>为应用程序增加/删除基于MFC的类</li>
-</ul>
-<h4 id="图形用户接口设计GUI"><a href="#图形用户接口设计GUI" class="headerlink" title="图形用户接口设计GUI"></a>图形用户接口设计GUI</h4><ul>
-<li>菜单</li>
-<li>对话框</li>
-<li>绘图</li>
-<li>坐标变换</li>
-</ul>
-<h5 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h5><p>菜单是执行程序功能的一种手段。<br>    - 一个程序可以有多个菜单，每个菜单都有一个标识。<br>    - 菜单有菜单项构成，每个菜单项包含：<br>        - 标识<br>        - 显示文字和提示文字<br>        - 处理函数<br>    - 菜单的外观设计可以用资源编辑器来完成<br>    - 菜单处理函数可以用类向导来添加。</p>
-<h5 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h5><p>对话框是一种窗口，它是Windows应用程序与用户进行交互的一种重要手段。<br>每个对话框都包含了一些对话框控件（如：按钮、编辑、列表、组合等），这些控件属于对话框对象的成员对象（子窗口）</p>
-<blockquote>
-<p>子窗口这个概念原来等效于成员对象啊？<br>一个对话框往往需要对应一个对话框模板<br>    - 每个对话框模板都有一个标识<br>    - 对话框模板描述了对话框的组成，包括：对话框的标识和尺寸；对话框中各个控件的标识、类型、尺寸与位置等<br>    - 对话框模板可用资源编辑器来设计<br>哪些东西是可以机器化的呢？比如说，这里利用机器，UI来设计，其实就是应用了这里的东西的感觉。其实莫过于最奇妙的东西就是，消息的发送和传递。谁是参数？在注册的时候需要些什么东西？</p>
-</blockquote>
-<p>每个对话框都对应着一个对话框类，它可以用类向导来管理：<br>    - 为对话框控件指定消息处理函数<br>    - 为对话框指定成员变量</p>
-<p>CDialog对话框类<br>程序中需要打开对话框时，首先要创建一个对话框类的对象，然后调用该类的成员函数DoMadal.如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CMyDlg dlg; // 创建一个对话框类的对象dlg.</span><br><span class="line">dlg.m_...=...; //通过dlg的成员变量设置对话框中各控制的初试内容。</span><br><span class="line">...</span><br><span class="line">if((dlg.DoModal()==IDOK)) // 显示对话框，返回值可以为IDOK何IDCANCEL &#123;</span><br><span class="line">    ... = dlg.m_...; // 取对话框控制中的内容。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>公共的对话框类<br>    - CFileDialog: 文件打开/保存对话框<br>    - CFontDialog: 字体选择对话框<br>    - CColorDialog: 颜色选择对话框<br>    - CPrintDialog: 打印设置对话框<br>    - CFindReplaceDialog: 查找/替换对话框</p>
-<h5 id="绘图–CDC类"><a href="#绘图–CDC类" class="headerlink" title="绘图–CDC类"></a>绘图–CDC类</h5><p>设备环境类CDC用于实现Windows应用程序中的绘图功能。<br>进行绘图时，首先要创建一个CDC类或其派生类的对象，该对象将包含绘图时所需要的各种元素，包括:<br>    - 绘图函数，如：输出文字、画线、画矩形、画椭圆等<br>    - 绘图工具，如：字体、颜色、笔、刷子等<br>在创建CDC类或其派生类的对象时需要指出它所对应的窗口对象，绘图操作将在相应窗口中进行。<br>应用框架在调用CView的OnDraw成员函数时，会自动创建一个CDC类的对象，作为参数传给OnDraw.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">文本输出函数 </span><br><span class="line">virtual BOOL TextOut(int x,int y,LPCTSTR lpszString,int nCount);</span><br><span class="line">BOOL TextOut(int x,int y,const CString&amp; str);</span><br><span class="line">virtual int DrawText(LPCTSTR lpszString,int nCount,LPRECT lpRect,UINT nFormat );</span><br><span class="line">int DrawText(const CString&amp; str,LPRECT lpRect,UINT nFormat);</span><br><span class="line">设置字符和背景颜色</span><br><span class="line">virtual COLORREF SetTextColor( COLORREF crColor ); </span><br><span class="line">virtual COLORREF SetBkColor( COLORREF crColor ); </span><br><span class="line">COLORREF类型的值可以用宏“RGB(red,green,blue)”来表示，例如，RGB(255,0,0)表示红色；RGB(0,255,0)表示绿色； RGB(255,255,255)表示白色。</span><br><span class="line"></span><br><span class="line">几何图形输出函数</span><br><span class="line">画线段</span><br><span class="line">//定线段的起点坐标</span><br><span class="line">CPoint MoveTo( int x, int y );</span><br><span class="line">CPoint MoveTo( POINT point );</span><br><span class="line">//从起点坐标开始画线直到指定的终点坐标</span><br><span class="line">BOOL LineTo( POINT point );</span><br><span class="line">BOOL LineTo( int x, int y );</span><br><span class="line"></span><br><span class="line">画矩形。</span><br><span class="line">BOOL Rectangle( int x1, int y1, int x2, int y2 );</span><br><span class="line">BOOL Rectangle( LPCRECT lpRect );</span><br><span class="line"></span><br><span class="line">画椭圆，参数为外接矩形。</span><br><span class="line">BOOL Ellipse( int x1, int y1, int x2, int y2 );</span><br><span class="line">BOOL Ellipse( LPCRECT lpRect ); </span><br><span class="line"></span><br><span class="line">选择绘图工具函数</span><br><span class="line">选择系统提供的绘图工具</span><br><span class="line">virtual CGdiObject* SelectStockObject(int nIndex); </span><br><span class="line">选择自定义的笔。返回CDC中原来的笔的指针。</span><br><span class="line">CPen* SelectObject( CPen* pPen ); </span><br><span class="line">选择自定义的刷子。返回CDC中原来的刷子的指针。</span><br><span class="line">CBrush* SelectObject( CBrush* pBrush ); </span><br><span class="line">选择自定义的字体，返回CDC中原来的字体的指针。</span><br><span class="line">virtual CFont* SelectObject( CFont* pFont );</span><br><span class="line">注意：用完绘图工具之后，要把绘图工具从CDC类的对象中选出来，以免CDC类对象消亡时重复撤销它包含的绘图工具！</span><br></pre></td></tr></table></figure>
-
-<p>绘图工具</p>
-<ul>
-<li>画笔（用于画线）<ul>
-<li>构造函数的参数为笔型、笔宽以及颜色<br><code>CPen(int nPenStyle, int nWidth, COLORREF crColor);</code></li>
-</ul>
-</li>
-<li>刷子（用于填充封闭图形）<ul>
-<li>构造函数的参数为刷子的颜色<br><code>CBrush(COLORREF crColor);</code></li>
-</ul>
-</li>
-<li>字体<ul>
-<li>先创建一个默认构造的CFont类的对象，然后调用该类的CreatePointFont成员函数完成字体的构造<br><code>CFont();</code><br><code>bool CFont::CreatePointFont(int nPointSize, LPCTSTR lpszFaceName, CDC* pDC=NULL);</code></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">void CMyView::OnDraw(CDC* pDC)</span><br><span class="line">&#123;	COLORREF old_text_color=pDC-&gt;SetTextColor(RGB(255,0,0)); 					//把字符颜色设置成“红”色。</span><br><span class="line">	COLORREF old_bk_color=pDC-&gt;SetBkColor(RGB(0,255,0)); 					//把字符背景颜色设置成“绿”色。</span><br><span class="line">	pDC-&gt;TextOut(0,0,&quot;hello&quot;); //在位置(0,0)处显示字符串&quot;hello&quot;</span><br><span class="line">	CPen pen(PS_SOLID,2,RGB(0,255,0)),*old_pen; //创建一个绿色的实线笔</span><br><span class="line">    old_pen = pDC-&gt;SelectObject(&amp;pen); //把新笔选进CDC类的对象中</span><br><span class="line">	CBrush brush(RGB(0,0,255)),*old_brush; //创建一个蓝色的刷子</span><br><span class="line">	old_brush = pDC-&gt;SelectObject(&amp;brush); //把新刷子选进CDC类的对象中</span><br><span class="line">    pDC-&gt;MoveTo(0,0); pDC-&gt;LineTo(200,200); //画一个绿色的线段</span><br><span class="line">	pDC-&gt;Rectangle(0,50,100,150); //画一个内部为蓝色、边为绿色的矩形</span><br><span class="line">	pDC-&gt;SelectObject(old_pen); //把原来的笔选回到CDC类的对象中</span><br><span class="line">	pDC-&gt;SelectObject(old_brush); //把原来的刷子选回到CDC类的对象中</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void CStudentsView::OnDraw(CDC* pDC)</span><br><span class="line">&#123; CStudentsDoc* pDoc = GetDocument();</span><br><span class="line">   CFont *old_font=(CFont *)pDC-&gt;SelectStockObject(ANSI_FIXED_FONT);</span><br><span class="line">   for (int i=0,num=pDoc-&gt;get_num_of_students(); i &lt; num; i++)</span><br><span class="line">  &#123; STUDENT_TYPE st;</span><br><span class="line">    pDoc-&gt;get_student(i,st);</span><br><span class="line">    CString temp;</span><br><span class="line">    temp.Format(&quot;%-10.10s%-10.10s%-4.4s%-10.10s%-20.20s%-40.40s&quot;,</span><br><span class="line">                st.number,st.name,st.sex,st.birthdate,st.birthplace,st.address);</span><br><span class="line">    if (i != current_student)</span><br><span class="line">    &#123; pDC-&gt;SetTextColor(RGB(0,0,0));</span><br><span class="line">       pDC-&gt;SetBkColor(RGB(255,255,255));</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123; pDC-&gt;SetBkColor(RGB(0,0,0));</span><br><span class="line">       pDC-&gt;SetTextColor(RGB(255,255,255));</span><br><span class="line">    &#125;</span><br><span class="line">    pDC-&gt;TextOut(0,i*20,temp);</span><br><span class="line">  &#125;</span><br><span class="line">  pDC-&gt;SelectObject(old_font);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>CView的一些派生类</p>
-<ul>
-<li>CScrollView(带滚动功能的视)</li>
-<li>CEditView(具有编辑功能的视)</li>
-<li>CFormView(具有表格功能的视)</li>
-<li>CHtmlView(具有Web浏览功能的视)</li>
-</ul>
-<h5 id="坐标转换"><a href="#坐标转换" class="headerlink" title="坐标转换"></a>坐标转换</h5><p>CScrollView</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">void CScrollView::SetScrollSizes( </span><br><span class="line">  		int nMapMode, </span><br><span class="line">  		SIZE sizeTotal, </span><br><span class="line">  		const SIZE&amp; sizePage = sizeDefault, </span><br><span class="line">  		const SIZE&amp; sizeLine = sizeDefault );</span><br><span class="line">nMapMode：映射方式（坐标的逻辑单位，坐标轴方向）</span><br><span class="line">例如：MM_TEXT（逻辑单位为像素点，坐标原点位于左上角，x轴从左向右，y轴从上往下。</span><br><span class="line">sizeTotal：文档内容的大小</span><br><span class="line">sizePage：文档滚动页的大小</span><br><span class="line">sizeLine：文档滚动行的大小</span><br><span class="line">需要在CScrollView的OnUpdate和OnSize中调用。</span><br><span class="line"></span><br><span class="line">void CStudentsView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint) </span><br><span class="line">&#123; // TODO: Add your specialized code here and/or call the base class</span><br><span class="line">  CStudentsDoc* pDoc = GetDocument();</span><br><span class="line">  </span><br><span class="line">  // TODO: calculate the total size of this view</span><br><span class="line">  CSize sizeTotal,sizePage,sizeLine;   </span><br><span class="line">  sizeTotal.cx = 100; //文本宽度固定</span><br><span class="line">  sizeTotal.cy = pDoc-&gt;get_num_of_students()*20; //文本长度</span><br><span class="line">  RECT rect;</span><br><span class="line">  GetClientRect(&amp;rect); //获取视窗口的大小</span><br><span class="line">  sizePage.cx = rect.right-rect.left-8; //页宽度</span><br><span class="line">  sizePage.cy = rect.bottom-rect.top-20; //页长度</span><br><span class="line">  sizeLine.cx = 8; //行宽度</span><br><span class="line">  sizeLine.cy = 20; //行高度</span><br><span class="line"></span><br><span class="line">  SetScrollSizes(MM_TEXT,sizeTotal,sizePage,sizeLine);</span><br><span class="line"></span><br><span class="line">  Invalidate();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void CStudentsView::OnSize(UINT nType, int cx, int cy) </span><br><span class="line">&#123; CScrollView::OnSize(nType, cx, cy);</span><br><span class="line">	</span><br><span class="line">  // TODO: Add your message handler code here</span><br><span class="line">  CStudentsDoc* pDoc = GetDocument();</span><br><span class="line">  </span><br><span class="line"> // TODO: calculate the total size of this view</span><br><span class="line">  CSize sizeTotal, sizePage, sizeLine; </span><br><span class="line">  sizeTotal.cx = 100;</span><br><span class="line">  sizeTotal.cy = pDoc-&gt;get_num_of_students()*20;</span><br><span class="line">  sizePage.cx = cx-8;</span><br><span class="line">  sizePage.cy = cy-20;</span><br><span class="line">  sizeLine.cx = 8;</span><br><span class="line">  sizeLine.cy = 20;</span><br><span class="line">  </span><br><span class="line">  SetScrollSizes(MM_TEXT,sizeTotal,sizePage,sizeLine);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="00005.png" alt><br>坐标转换函数<br>OnPrepareDC(&amp;dc,NULL);<br>为ScrollView初始化dc<br>dc.DPtoLP(&amp;point);<br>从物理坐标转换到逻辑坐标<br>dc.LPtoDP(&amp;point);<br>从逻辑坐标转换到物理坐标</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">void CStudentsView::OnLButtonDown(UINT nFlags,</span><br><span class="line">                                                       CPoint point) </span><br><span class="line">&#123;</span><br><span class="line">  // TODO: Add your message handler code here </span><br><span class="line">  // and/or call default</span><br><span class="line">  </span><br><span class="line">  CClientDC dc(this);</span><br><span class="line">  OnPrepareDC(&amp;dc,NULL); //transform dc to   </span><br><span class="line">                                        //scrollview</span><br><span class="line">  dc.DPtoLP(&amp;point); // 物理坐标转逻辑坐标</span><br><span class="line"></span><br><span class="line">  current_student = point.y/20;   </span><br><span class="line"> </span><br><span class="line">  Invalidate(); //重新显示视窗口内容，OnDraw将被调用</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="一点反思"><a href="#一点反思" class="headerlink" title="一点反思"></a>一点反思</h3><p>学习的几个过程</p>
-<ol>
-<li>首先，如果课件足够好，也可以不用记笔记，这样的效率高，但是能够记住吗？但是感觉上最有用的可能就是反思吧？也就是说并不意味着一定要记很多笔记。<br>记住，衡量的标准一直是上课预估后面不会做的易错点，还有精华的地方自己是否掌握了，这才是最重要的。</li>
-</ol>
-<p>按照以前的学习态度，如果是自己在乎的知识。<br>首先，第一次一定要要么有好的课本，或者材料特别好。<br>看书，并且记自己不懂的地方。<br>第一次看书下来，主要讲什么的大体的脉络要清晰。</p>
-<p>然后还要衡量所花的时间等诸多因素。</p>
-<p>然后，再将笔记进一步总结。练过所有需要练习的局部知识点，然后开始自己。<br>学习知识点还有几遍，然后就是大量地做题，直到做到彻底掌握这个知识点为止。<br>最后，如果时间充裕再看其他知识点进行迁移，弄明白整个过程。</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture5-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture5-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture5-summary</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:54:53 / 修改时间：09:55:49" itemprop="dateCreated datePublished" datetime="2019-09-19T09:54:53+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>总结</p>
-<h1 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h1><p>按输入输出的类型分为三种：控制台、文件、字符串（局部的内存区域）</p>
-<ol>
-<li>控制台</li>
-</ol>
-<ul>
-<li>C<ul>
-<li>输出<blockquote>
-<p>putchar(), puts(), printf()  %d,c,u,f</p>
-</blockquote>
-</li>
-<li>输入<blockquote>
-<p>getchar(), gets(), scanf()</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>C++<br>cin,  cout, cerr直接, clog<br>iomanip:   setw()?   setiosflags(scientific, flags) setprecision<br>cout.write();<br>cin.get(), cin.read();<br>cin.fail()  // 是否输入成功，0表示成功<blockquote>
-<p>一般地，对输出不需要判断文件结束，输入需要判断文件结束</p>
-</blockquote>
-</li>
-<li>操作符的重载： 继承的问题， display()</li>
-</ul>
-<ol start="2">
-<li>文件<br>永久保存数据的设备<br>文本(字符串)，二进制文件(机器表示) </li>
-</ol>
-<ul>
-<li>C<ul>
-<li>输出<br>fopen(), fputc(), fputs(), fprintf(),size_t fwrite(sizeof()) //字节，二进制, fclose()<blockquote>
-<p>目录问题，路径写法。  打开方式: w创建,清除,  a尾  b; 不同操作系统，windows \n-&gt;\t\n</p>
-</blockquote>
-</li>
-<li>输入<br>fopen() NULL失败，<blockquote>
-<p>r, b,  fgetc(), fgets(), fscanf(), fread(sizeof()). feof()判断是否到的文件的末尾</p>
-</blockquote>
-</li>
-<li>r+, w+, a+,  b</li>
-<li>fseek(), ftell, cur,end,set</li>
-</ul>
-</li>
-<li>C++<br>输出<br>out_file(), open, write, &lt;&lt;<br>输入<br>in_file(),read,  eof</li>
-</ul>
-<ol start="3">
-<li><p>字符串<br>char buf[100];<br>ostrstream str_buf(buf,100);</p>
-</li>
-<li><p>其他<br>traits</p>
-</li>
-</ol>
-<blockquote>
-<p>思考，为什么独独设置了这三类？</p>
-</blockquote>
-<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>所谓异常，其实就是程序过程中出现的bug。其实主要可以分为以下几种。</p>
-<ol>
-<li>语法错误， 编译器会解决</li>
-<li>逻辑错误，很关键，要学会排错</li>
-</ol>
-<ul>
-<li>不能运行，实现的逻辑有问题</li>
-<li>能运行，有问题<ul>
-<li>输出错误<ul>
-<li>程序逻辑错误</li>
-<li>有的函数的输入输出没有检查</li>
-</ul>
-</li>
-<li>编译出错<ul>
-<li>平台相关</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ol start="3">
-<li>运行异常<ul>
-<li>程序对运行环境考虑不周<blockquote>
-<p>这里很重要，务必注意程序的环境</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ol>
-<p>鲁棒性，就是能应对足够多的异常。</p>
-<p>处理异常的方法：<br>直接，当地抛出异常，即exit();<br>最大的问题可能就是当程序特别大的时候，程序员不知道什么地方出错了。</p>
-<p>异地处理：参数值，新建参数值，全局变量，这些都不好。</p>
-<p>推出抽象化，实际上也是通过全局变量来做的，不过交给了底层。上层可以用最简单的语句进行实现。</p>
-<p>try{<br>    检测语句；<br>}catch(类型 变量)</p>
-<p>throw{}<br>一旦进行检测必然抛出，很优秀。<br>而且只抛出子层的，向上处理。没有就控制台。</p>
-<p>上面是无法避免的可能出现的运行异常的处理。</p>
-<p>只要不可控都要进行上面的处理。</p>
-<p>下面聊到代码调试，如何测试bug</p>
-<p>一般的怎么做就分析输出语句呗，看输出语句是否正确。<br>一种抽象assert();<br>易于定义位置。<br>以及可以一键清除。</p>
-<p>```<br>#define NDEBUG<br>#include<cassert><br>`</cassert></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture5/" class="post-title-link" itemprop="url">nju-course-cplus-lecture5</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:53:37 / 修改时间：09:54:39" itemprop="dateCreated datePublished" datetime="2019-09-19T09:53:37+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><h2 id="9-输入-输出"><a href="#9-输入-输出" class="headerlink" title="9. 输入/输出"></a>9. 输入/输出</h2><p>输入、输出具体的实现会音操作系统和计算机硬件的不同而有所不同，与平台相关。<br>在C++中，一种基于字节流的操作。</p>
-<p>分为：</p>
-<ol>
-<li>面向控制台的I/O  iostream - istream, ostream</li>
-<li>面向文件的I/O  fstream, ifstream, ofstream</li>
-<li>面向字符串变量的I/O  strstream, istrstream, ostrstream</li>
-</ol>
-<p>在c++中，ios_base基类，ios派生。 I/O类都是用类模板来实现的</p>
-<blockquote>
-<p>因为输入输出通常会设计到外设，即经常考虑把程序所需要运行的数据输出到外设和从外设输入。<br>C++STL中的输入输出被C++编译程序所接受。但是，因为具体平台相关性，还可以采用其他方式进行输入输出。例如：Visual C++提供的MFC基础类中包含了具有输入、输出功能的类。<br>但是，指定注意的一点就是以非C++标准库方式进行输入输出不利于C++程序的移植</p>
-</blockquote>
-<h3 id="9-1-面向控制台的I-O"><a href="#9-1-面向控制台的I-O" class="headerlink" title="9.1 面向控制台的I/O"></a>9.1 面向控制台的I/O</h3><h4 id="9-1-1-基于函数库的控制台输入、输出"><a href="#9-1-1-基于函数库的控制台输入、输出" class="headerlink" title="9.1.1 基于函数库的控制台输入、输出"></a>9.1.1 基于函数库的控制台输入、输出</h4><p>C语言标准库的功能，C++保留了这些功能</p>
-<ul>
-<li>输出<br>putchar(int ch);</li>
-</ul>
-<p>int puts(const char *p); </p>
-<blockquote>
-<p>什么是标准输入平台？这里应该就是控制台输入输出的意思。</p>
-</blockquote>
-<p>printf() // 返回输出 字符个数或返回负数<br>注意printf(“”)这里如果是%s, 不接受空格和回车的，如果需要空格%[0-9a-zA-Z ]这样显式指定。</p>
-<blockquote>
-<p>记得字符又被分为了好几种，比如打印字符，什么字符之类。</p>
-</blockquote>
-<ul>
-<li>printf常用格式控制字符及其含义</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>控制字符</th>
-<th>类型</th>
-<th>输出格式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%c</td>
-<td>int</td>
-<td>字符</td>
-</tr>
-<tr>
-<td>%d</td>
-<td>int</td>
-<td>有符号十进制整数</td>
-</tr>
-<tr>
-<td>%u</td>
-<td>unsigned int</td>
-<td>无符号十进制整数</td>
-</tr>
-<tr>
-<td>%x, %X</td>
-<td>unsigned int</td>
-<td>无符号16进制</td>
-</tr>
-<tr>
-<td>%o</td>
-<td>unsigned int</td>
-<td>无符号8进制</td>
-</tr>
-<tr>
-<td>%s</td>
-<td>char*</td>
-<td>字符串</td>
-</tr>
-<tr>
-<td>%e,%E</td>
-<td>double</td>
-<td>科学计数法的形式</td>
-</tr>
-<tr>
-<td>%f</td>
-<td>double</td>
-<td>一般形式</td>
-</tr>
-<tr>
-<td>%%</td>
-<td></td>
-<td>字符%</td>
-</tr>
-<tr>
-<td>- 输入</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>// 操作失败返回EOF</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>int getchar();</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>// 成功返回p，否则null<br>char *gets(char *p);</p>
-<blockquote>
-<p>平台怎么处理空格和回车？是否会纳入考虑<br>scanf() // 返回实际输入并保存的数据个数或返回EOF<br>%5f, 好像是指定位数来着？？测试</p>
-</blockquote>
-<h4 id="9-1-2-基于类库的控制台I-O"><a href="#9-1-2-基于类库的控制台I-O" class="headerlink" title="9.1.2 基于类库的控制台I/O"></a>9.1.2 基于类库的控制台I/O</h4><p>C++的改变，用类来做。<br>问题：用库函数scanf和printf需要实现基本数据类型数据的输入和输出，实际操作的是格式串。<br>printf,scanf等于说是多参数，即输入的参数个数时可变的。这样冲某种意义上破坏了C++强类型的特点</p>
-<blockquote>
-<p>C++强类型有什么特点？<br>从某种意义上是不是有安全的概念？<br>另外，scanf和printf还有一个特点就是不能对用户自定义，只能操作基础的数据类型<br>。<br>而I/O类库提供了更为方便和安全的输入、输出操作，并且这些操作可以很容易地扩充到用户自定义类型的数据。</p>
-</blockquote>
-<h5 id="1-预定义的控制台对象"><a href="#1-预定义的控制台对象" class="headerlink" title="1). 预定义的控制台对象"></a>1). 预定义的控制台对象</h5><p>在I/O类库中预定义了4个I/O对象，cin,cout,cerr以及clog，利用这些对象可以直接进行控制台的输入输出。<br>cin-&gt;istream.  cout,cerr,clog-&gt;ostream<br>cout敌营这计算机系统的用于输出程序正常运行结果的标准输出设备，而cerr和clog则对应着计算即系统的用于输出程序错误信息的设备，通常都对应着显式器，但是cerr和clog不受输出重定向的影响。</p>
-<blockquote>
-<p>linux的输出命令的感觉吗？<br>重定向，也就是原本默认的标准输入，从新定义输出到文件。不受是不可操作的意思吗？？？？<br>并且cerr不对输出信息进行缓存，因此它有较快的响应效果。</p>
-</blockquote>
-<h6 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h6><p>对于指针的输出有一个特例，即输出指向字符串的指针时，不输出字符串的首地址，，而是输出字符串。</p>
-<p>进一步，为了对输出格式进行进一步的控制，可以通过输出一些操纵符来实现。<br>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;iomanip&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int x =10;</span><br><span class="line">cout&lt;&lt;hex&lt;&lt;x&lt;&lt;endl; // 以十六进制输出x的值，然后换行。</span><br></pre></td></tr></table></figure>
-
-<p>其中，对于浮点数float,double和long double,当输出格式为ios::scientific或ios::fixed时，精度设置操纵符setprecision用于设置小数点后的位数。<br>当什么没有时，用于设置浮点数有效数字的个数。</p>
-<p>!!! 只对浮点数有效</p>
-<blockquote>
-<p>setiosflags(ios::scientific) // 设置输出格式<br>resetiosflags(ios::scientific) // 取消输出格式</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>操作符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>endl</td>
-<td>输出换行符，并执行flush操作</td>
-</tr>
-<tr>
-<td>flush</td>
-<td>使输出缓存的内容立即输出？？？</td>
-</tr>
-<tr>
-<td>dec</td>
-<td>十进制输出</td>
-</tr>
-<tr>
-<td>oct</td>
-<td>八</td>
-</tr>
-<tr>
-<td>hex</td>
-<td>16</td>
-</tr>
-<tr>
-<td>setprecision(int n)</td>
-<td>设置浮点数的精度</td>
-</tr>
-<tr>
-<td>setiosflags(long flage)</td>
-<td>设置/取消输出格式，flags的取值可以是:ios:scientific(指数形式), ios:fixed(小数形式)</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>注意: 设置一遍后均有效，然后应该是就近原则吧！<br>初始状态下，输出格式为自动方式，输出精度为6位有效数字。</p>
-</blockquote>
-<blockquote>
-<p>很好奇cout是怎么解析&lt;&lt;符的？按照空格回车然后进行分隔吗？还是怎么的？</p>
-</blockquote>
-<blockquote>
-<p>还存在其他类型吗？这样只对double类型进行了处理，一般来说输出应该不需要其他情况的输出了吧，对！<br>一般只有两种类型，double, str 还有其他需要控制输出的吗？？？</p>
-</blockquote>
-<blockquote>
-<p>突然想起，输出扩展需要的有比如输出的数据对齐指定？待安排</p>
-</blockquote>
-<h6 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h6><p>任何基本数据类型都可以通过cin对象和抽取操作符&gt;&gt;来进行输入。<br>在输入每个数据之间用空白符分开，最后输入一个回车符。另外也可以用一些操作控制符来控制输入的行为。</p>
-<blockquote>
-<p>对于输入来说，感觉上也就字符串数据需要进行控制了吧，setw()用于指定输入字符的最大个数。</p>
-</blockquote>
-<blockquote>
-<p>对，还需要清空输出吧？感觉上<br>cin &gt;&gt; setw(10) &gt;&gt; str; // 把输入的前9个字符和一个’\0’放入str中</p>
-</blockquote>
-<p>!!!!果然不出所料，果然对于输入流来说，当输入流没有用完时是接着用输入流的</p>
-<p>get(), getline(*p, cout,delim)<br>read()<br>cin.get(ch);<br>read();</p>
-<blockquote>
-<p>感觉这些输入地方太容易出错了，我之前就是这里老出错。不要有只取多少位数据的情况。</p>
-</blockquote>
-<p>特别地，cin的输入操作是无法读入空白符的，这时才可用上面的成员函数实现空白符的读入。</p>
-<blockquote>
-<p>所以此时一般扩展用getline</p>
-</blockquote>
-<p>cin的输入操作是带输入缓存的，只有当用户输入“回车”时，输入的数据才会放入程序的变量中。<br>需要注意的是，基于类库的输入、输出操作中可能遇到问题（如没有正确输入数据等）。 因此，在操作后可通过下面的函数来判断操作是否成功。<br>bool ios::fail(); //true表示操作失败<br>怎么用？ </p>
-<blockquote>
-<p>(cin&gt;&gt;ch2)返回的不是基本类型int,bool<br>cin.fail() 那什么操作失败呢？<br>比如int, 输入字符串</p>
-</blockquote>
-<h4 id="9-1-3-抽取、插入操作符-gt-gt-和-lt-lt-的重载。"><a href="#9-1-3-抽取、插入操作符-gt-gt-和-lt-lt-的重载。" class="headerlink" title="9.1.3 抽取、插入操作符&gt;&gt;和&lt;&lt;的重载。"></a>9.1.3 抽取、插入操作符&gt;&gt;和&lt;&lt;的重载。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">    int x,y;</span><br><span class="line">    friend ostream&amp; operator &lt;&lt;(ostream&amp; out, const A &amp;a);</span><br><span class="line">public:</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ostream&amp; operator &lt;&lt;(ostream&amp; out, const A &amp;a)</span><br></pre></td></tr></table></figure>
-
-<p>// 从某种意义上理解，ostream是stream的子类，所以可行。这里是类为啥又可以？</p>
-<p>一般来说，只做输出。</p>
-<p>有几种方法，如何在继承下使有效？</p>
-<ol>
-<li>如果在基类定义，而没有在派生类定义，派生类只能输出一部分值。</li>
-<li>如果在派生类定义，不能解决间接调用的情况<br>特别是用基类的指针，不知道会动态绑定到哪种情况的时候，考虑使用封装。<br>即在每个类里面重载display()函数，在&lt;&lt;中只需要调用display()函数即可。</li>
-</ol>
-<h3 id="9-2-面向文件的输入，输出"><a href="#9-2-面向文件的输入，输出" class="headerlink" title="9.2 面向文件的输入，输出"></a>9.2 面向文件的输入，输出</h3><p>程序运行结果有时需要永久地保存起来，以供其他程序或本程序下一次运行时使用:程序运行所需要的数据也常常要从其他程序或本程序上衣词运行所保存的数据中获得。用于永久保存数据的设备称为外部存储器，如磁盘、磁带、光盘等。</p>
-<h4 id="9-2-1-文件概述"><a href="#9-2-1-文件概述" class="headerlink" title="9.2.1 文件概述"></a>9.2.1 文件概述</h4><p>在外部存储器中保存数据的方式通常由两种：文件和数据库。<br>本程序设计教程只介绍一文件方式永久性地保存数据，数据库由其他专门的课程介绍。在C++中，把文件看成由一系列字节构成的字节串，称为流式文件，对文件中数据的操作通常是逐个字节顺序进行。在对文件数据进行读写前，首先要打开文件，打开文件的目的是：把程序内部一个表示文件的变量与外部的一个具体文件关系起来，并创建内存缓冲区，每个打开的文件都有一个隐式的读写位置指针，它指向文件的当前读写位置。在进行读写操作时，每读入，写出一个字节，文件位置指针会自动往后移动一个字节的位置。<br>文件读写完毕后，通常需要关闭文件，其目的是把暂存在内存缓冲区中的内容写入文件，并归还打开文件是申请的内存资源。<br>在文件中，数据的存储方式有两种，文本方式和二进制方式。<br>文本方式一般用于存储具有行结构的文字数据，如源程序或纯文本格式的数据等。二进制方式一般用于存储无显式结构的数据，数据的格式由应用程序来解释，如目标代码程序以及二进制数据等。<br>这两种方式的主要区别是，文本文件中只包含可显示字符和有限的几个控制字符（如\r,\n,\t）;而二进制文件可以包含任意的没有显式含义的二进制文件。为了进一步区分两种存储方式，我们用一个例子来说明。<br>对于一个还只能输123457，可以用来种方式保存到文件中：</p>
-<ol>
-<li>文本方式：依次把1,2,3,4,5,6,7的ASCII玛写入文件（共7个字节）</li>
-<li>二进制方式：把整数123457的计算机内部表示（如补码）分解为字节写入文件（如果整数内部为32位，则为4个字节）。<blockquote>
-<p>以二进制方式组织的文件不利于文件在不同计算机平台上使用。<br>因为不同计算机平台的内部表示不一样<br>关于文件的压缩的思路估计也有这样的一份。</p>
-</blockquote>
-</li>
-</ol>
-<h4 id="9-2-2-基于函数库的文件I-O"><a href="#9-2-2-基于函数库的文件I-O" class="headerlink" title="9.2.2 基于函数库的文件I/O"></a>9.2.2 基于函数库的文件I/O</h4><p>C++从C语言标准库中保留下来的输入、输出函数库包含了对文件进行输入、输出操作的函数。<br><code>#include&lt;cstdio&gt;</code></p>
-<h5 id="1-文件的输出操作"><a href="#1-文件的输出操作" class="headerlink" title="1) 文件的输出操作"></a>1) 文件的输出操作</h5><ul>
-<li>打开文件<br>打开外部文件输出数据fopen<br><code>FILE *fopen(const char *filename, const char *mode); // 打开文件</code><br>mode表示打开方式：<br>w:打开一个外部文件用于写操作。如果外部文件已经存在，则首先把它的内容清除；否则先创建该外部文件。<br>a:打开一个外部文件用于添加（从文件末尾）操作。如果不存在，则首先创建文件<br>另外，在打开方式的后面还可以加上b,指出以二进制方式打开文件。默认打开方式为文本方式。对一文本方式打开的文件，当输出字符为\n时，在某些平台（如DOS和Windows平台）将自动转换为’\r’’\n’两个字符写入外部文件<br>一般来说，以文本方式组织的文件要用文本方式打开；以二进制方式组织的文件要用二进制方式打开。<br>以w方式打开文件时，文件位置指针指向文件的头；以a方式打开文件时，文件位置指针指向文件的尾。<br>文件打开成功后，fopen将返回一个费控的”FILE*”指针，该指针指向与打开文件有关的一些信息（如文件的内存缓冲区等），它将被之后的文件输出操作函数使用。<blockquote>
-<p>就是实际上内存是按块组织的，这个指针会指向一些节点。当不断输出文件时，需要进行改变指针以扩大文件写的内容，还有更改好多相关的东西。<br>如果文件打开失败，则fopen返回空指针NULL.</p>
-</blockquote>
-</li>
-<li>输出操作</li>
-</ul>
-<p>文件打开成功后就可以往文件中写入数据了。往文件中写入数据的函数主要有以下几个。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 输出一个字符，输出成功时返回输出的字符</span><br><span class="line">int fputc(int c, FILE *stream);</span><br><span class="line"></span><br><span class="line">// 输出一个字符串，输出成功时返回一个非负整数。</span><br><span class="line">int fputs(const char *string, FILE*stream);</span><br><span class="line"></span><br><span class="line">// 输出基本类型数据，返回输出的字符数</span><br><span class="line">int fprintf(FILE *stream, const char *format[,argument]...)</span><br><span class="line">// 看来这里我搞错了，</span><br><span class="line"></span><br><span class="line">// 按字节输出数据。参数size为字节块的尺寸；cout为字节块的个数。返回实际输出的字节块的个数</span><br><span class="line">size_t fwrite(const void *buffer, size_t size, size_t count, FILE *stream);// size_t:unsigned int;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>感觉操作系统，最难的一块就在于要计算好待数据内容的大小。<br>数据存储也是按字节方式的，所以fwrite也是二进制方式，对!</p>
-</blockquote>
-<p>在上面的函数中，都有一个FILE*类型的指针参数，该指针参数是fopen成功打开文件后返回的。<br>前三个函数主要以文本方式输出数据，而第4个函数则是以二进制方式。</p>
-<ul>
-<li><p>关闭文件 <code>fclose(FILE *stream);</code></p>
-</li>
-<li><p>作业<br>从键盘键入一批学生的成绩信息并把他们以文本格式存入外部文件:scores.txt。<br>// 注意这里为什么是字符串输入。因为这些字符都是可显式字符，所以可以显式指定，就在文件中看见这些内容</p>
-</li>
-</ul>
-<blockquote>
-<p>扩展版本：使用C++中的类<br>请务必注意循环输入的判断条件<br>还有一些系统目录是没有权限，怎么说吧，除非知道相对目录很清楚的情况外，都用绝对目录来做吧</p>
-</blockquote>
-<h5 id="2-文件的输入操作"><a href="#2-文件的输入操作" class="headerlink" title="2) 文件的输入操作"></a>2) 文件的输入操作</h5><ol>
-<li>打开文件<br>打开外部文件输入数据要用下面的函数来实现<br><code>FILE *fp = fopen(const char *filename, char *mode)</code>;<br>filename是要打开的外部文件名；mode是打开方式。<br>它可以是’r’, 表示打开一个外部文件用于读操作，这时外部文件必须存在，否则打开文件失败。<br>另外，可以在后面加上b，表示以二进制方式打开文件，默认打开方式为文本方式，在进行输入操作时，外部文件中连续两个字符\t和\n(Window)自动转换为一个字符\n. 读入字符0x1A(Ctrl+Z)时表示文件结束。<br>文件打开成功后，fopen将返回一个非空的”FILE *”类型的指针，该指针用于今后的文件输入操作函数。文件打开失败后，fopen返回空指针<br>文件打开成功后，文件位置指针指向文件头。</li>
-<li>输入操作<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 输入一个字符，然后返回字符的编码</span><br><span class="line">fgetc(FILE *stream);</span><br><span class="line">&gt; 哇，这个操作完全可以用来做循环条件啊，牛逼</span><br><span class="line"></span><br><span class="line">// 输入一个字符串，函数正常结束时返回string的值，否则返回NULL。</span><br><span class="line">char *fgets(char *string, int n, FILE *stream)</span><br><span class="line"></span><br><span class="line">// 输入基本类型的数据，返回值表示读入并存储的数据个数</span><br><span class="line">fscanf()</span><br><span class="line"></span><br><span class="line">// 按字节输入数据。</span><br><span class="line">size_t fread(const void *buffer, size_t size, size_t count, FILE *stream);</span><br><span class="line"></span><br><span class="line">// 判断文件结束。当文件位置指针在文件末尾时，继续进行读操作会使得feof返回非零(true)</span><br><span class="line">int feof(FILE *stream);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>当从文件中读取数据时，必须知道文件的存储格式，包括数据的类型和存储方式等。</p>
-<blockquote>
-<p>fscanf和fprintf(文本文件), fread和fwrite(二进制文件)对应<br>3. 关闭文件 fclose(FILE *stream)</p>
-</blockquote>
-<ul>
-<li>小练习<br>读取上一个中的数据，计算每个学生的平均成绩；统计男生人数。</li>
-</ul>
-<h5 id="3-文件的输入、输出操作"><a href="#3-文件的输入、输出操作" class="headerlink" title="3) 文件的输入、输出操作"></a>3) 文件的输入、输出操作</h5><blockquote>
-<p>在上面注意到一个点，输入和输出都涉及到文件打开方式，那么文件打开方式是否与实际情况相符合了呢？</p>
-</blockquote>
-<p>以w和a方式打开的文件只能对其进行输出操作；以r打开的文件只能进行输入操作。</p>
-<p>mode扩展：</p>
-<ul>
-<li>r+ 读写，文件必须存在</li>
-<li>w+ 读写。 文件不存在会创建一个空文件，否则情况一寸照的文件<blockquote>
-<p>前面这两种不过是+号更多了一种功能，跟本身功能关系很大的</p>
-</blockquote>
-</li>
-<li>a+ 打开一个外部文件用于读、添加操作。如果文件不存在，则首先创建一个空文件。以这种方式打开的文件，输出操作总是在文件尾进行。</li>
-</ul>
-<p>另外，在这些后面可以加上t,b, 文本，二进制。对！已经测试过！”w+b”</p>
-<h5 id="4-随机输入-输出"><a href="#4-随机输入-输出" class="headerlink" title="4) 随机输入/输出"></a>4) 随机输入/输出</h5><p>一般情况下，文件的读写操作都是顺序进行的，即在进行输入输出操作时，必须按顺序读入，这样降低了文件访问的小。<br>每个打开的文件都有一个位置指针，指向当前读写文字，每读入或写出一个字符，文件的位置指针都会自动往后移动一个位置。<br><code>fseek(FILE *stream, long offset,int origin)</code><br>其中，origin指出参考位置，它可以是SEEK_CUR, SEEK_END, SEEK_SET;offset是移动的字节偏移量，正值往后移动，负值往前移动。<br>fseek返回值为0表示移动成功，否则表示移动失败。<br>当前位置可以通过<code>ftell(FILE *stream)</code></p>
-<blockquote>
-<p>? 是返回的基于开头的字节数吗？？？<br>需要练习<br><strong>练习</strong><br>读入第二个学生的信息，把该学生的专业修改为COMPUTER。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">...// 省略了Sex,Date,Major及Student的定义</span><br><span class="line">int main()&#123;</span><br><span class="line">    FILE *fp = fopen(&quot;d:\\students.dat&quot;, &quot;r+b&quot;)</span><br><span class="line">    if( fp==NULL) &#123;</span><br><span class="line">        printf(&quot;打开文件失败&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Student st;</span><br><span class="line">if (fseek(fp,sizeof(st),SEEK_SET)==0)&#123; // 文件指针指向第二个学生数据</span><br><span class="line">    fread(&amp;st,sizeof(st), 1,fp); //读入第二个学生信息</span><br><span class="line">    st.major=COMPUTER;</span><br><span class="line">    fseek(fp,-sizeof(st),SEEK_CUR);</span><br><span class="line">    fwrite(&amp;st,sizeof(st),1,fp); //修改后的第二个学生数据写入文件</span><br><span class="line">&#125;</span><br><span class="line">fclose(fp);  // 这里student 为结构体，所以不用重载，sizeof直接可以用，如果是类是否需要重载呢？</span><br><span class="line">return 0;</span><br></pre></td></tr></table></figure>
-
-<h4 id="9-3-3-基于类库的文件I-O"><a href="#9-3-3-基于类库的文件I-O" class="headerlink" title="9.3.3 基于类库的文件I/O"></a>9.3.3 基于类库的文件I/O</h4><p>前面展示了C的部分，下面展示使用I/O类库进行外部文件的输入、输出。<br><code>#incldue&lt;iostream&gt;,  #include&lt;fstream&gt;</code></p>
-<h5 id="1-输出"><a href="#1-输出" class="headerlink" title="1) 输出"></a>1) 输出</h5><p>首先创建一个ofstream类(是ostream的派生对象)，使之与某个外部文静建立联系：</p>
-<ol>
-<li>直接方式 <code>ofstream outfile(文件名，打开方式)</code></li>
-<li>间接方式 <code>ofstream outfile; outfile.open()</code><br>打开方式ios::out 同w, ios::app同a<br>打开方式还可以是上面的值与ios::binary按位或|的结果。默认为文本方式。<br>打开文件是否成功判断<br><code>if(!out_file) 失败;   out_file.fail(), !out_file.is_open()</code><br>文件成功打开后，可以使用插入操作符“&lt;&lt;”,或ofstream的一些成员函数来进行输出操作.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">out_file&lt;&lt;x;</span><br><span class="line">out_file.write((char *)&amp;x, sizeof(x));// 以二进制方式输出数据。</span><br><span class="line">out_file.close();</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p><strong>练习</strong><br>用I/O类库来实现9-1的程序功能。</p>
-<blockquote>
-<p>值得注意的是，对ostream和istream重载的插入操作符也能是ofstream和ifstream的对象。</p>
-</blockquote>
-<h5 id="2-输入"><a href="#2-输入" class="headerlink" title="2) 输入"></a>2) 输入</h5><p>同输出， 打开方式ios::in，同r。<br><code>in_file.read((char*)&amp;x,sizeof(x)); //以二进制形式读入文件</code><br>判断文件是否结束<br><code>ios::eof(); // 返回非0表示上一次读操作中遇到了文件末尾</code></p>
-<p><strong>练习</strong></p>
-<h5 id="3-输入-输出与随机存取"><a href="#3-输入-输出与随机存取" class="headerlink" title="3) 输入/输出与随机存取"></a>3) 输入/输出与随机存取</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">istream&amp; istream::seekg(&lt;位置&gt;) // 指定绝对位置</span><br><span class="line">istream&amp; istream::seekg(&lt;位置&gt;, &lt;参照位置&gt;) // 指定相对位置</span><br><span class="line">streampos istream::tellg(); // 获取指针位置</span><br><span class="line"></span><br><span class="line">ostream&amp; ostream::seekg(&lt;位置&gt;) // 指定绝对位置</span><br><span class="line">ostream&amp; ostream::seekg(&lt;位置&gt;, &lt;参照位置&gt;) // 指定相对位置</span><br><span class="line">streampos ostream::tellg(); // 获取指针位置</span><br><span class="line"></span><br><span class="line">参照位置ios::beg, ios::cur, ios::end</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-4-面向字符串变量的输入-输出"><a href="#9-4-面向字符串变量的输入-输出" class="headerlink" title="9.4 面向字符串变量的输入/输出"></a>9.4 面向字符串变量的输入/输出</h3><p>有时，程序中有些数据并不直接输出到标准输出设备或文件，而是需要保存在程序中的某个字符变量中；程序中有些数据有时也不直接从标准输入设备或文件中获得，而是需要从程序中的某个字符变量中获得。这时，可以采用C++标准库的基于字符串变量的输入输出功能。<br>基于字符串变量的输入/输出功能的主要是sscanf和sprintf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int sprintf(char *buffer, const char *format);</span><br><span class="line">int sscanf(char *buffer, const char *format);</span><br></pre></td></tr></table></figure>
-
-<p>与文件输入/输出不同，这里的输入源和输出目标不是文件，而是内存中一个区域:buffer. 比如说把int型变量转换为一个字符串存入字符数组a中.</p>
-<p>对于基于I/O类库的字符串变量输入/输出操作，首先需要创建类istream,ostrstream或strstream的一个对象。</p>
-<blockquote>
-<p>在新的标准中被istringstream, ostringstream和stringstream（头文件sstream）代替</p>
-</blockquote>
-<p>// 输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;strstream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">ostrstream str_buf; // 默认构造采用可扩充的内部缓冲</span><br><span class="line">或</span><br><span class="line">char buf[1000];</span><br><span class="line">ostrstream str_buf(buf,100);</span><br><span class="line"></span><br><span class="line">int x,y;</span><br><span class="line">str_buf&lt;&lt;x&lt;&lt;y&lt;&lt;endl;  // 通过该途径使得x和y获得了值</span><br><span class="line">char *p = str_buf.str(); // 可获取str_buf中字符串缓存的首地址</span><br></pre></td></tr></table></figure>
-
-<p>// 输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;strstream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">char buf[100];</span><br><span class="line">... // 通过某种途径在buf中存放了一些字符串</span><br><span class="line">istrstream str_buf(buf);</span><br><span class="line">或</span><br><span class="line">istrstream str_buf(buf,100);</span><br><span class="line">// 如果str_buf对象的构造没有给出长度，则认为它的缓存中的内容以&apos;\0&apos;结束</span><br></pre></td></tr></table></figure>
-
-<p>另外，也可使用抽取操作符或者其他操作符。</p>
-<blockquote>
-<p>用处：就是用一个东西来进行收集的感觉。然后可以用，对是这样的感觉。</p>
-</blockquote>
-<h3 id="9-5-其它点"><a href="#9-5-其它点" class="headerlink" title="9.5 其它点"></a>9.5 其它点</h3><blockquote>
-<p>怎么查看C++的版本？</p>
-</blockquote>
-<blockquote>
-<p>Linux输出平台参数一般是怎么设置的？看起来有什么快捷的地方？有没有一本好书？</p>
-</blockquote>
-<blockquote>
-<p>一般对于继承C中的输入，输出元素，返回结果如果为非负数表示正常，具体有什么含义？返回EOF表示出问题。其他有什么函数类似？</p>
-</blockquote>
-<blockquote>
-<p>观察到一个点，如果正常结束的话是Process finished with exit code 0; 非正常结束返回的是一个有问题的数</p>
-</blockquote>
-<blockquote>
-<p>wostream 是干什么用的？</p>
-</blockquote>
-<blockquote>
-<p>ostream &lt;CharT, class_traits&gt;有什么用？<br>为什么不能进行ostream a; 使用</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename charT, type traints=char_traits&lt;charT&gt;</span><br><span class="line">class basic_string;</span><br><span class="line">class basci_istram</span><br><span class="line"></span><br><span class="line">// traits 特征，性状。</span><br><span class="line">basic_string&lt;char&gt; string;</span><br><span class="line">basic_string&lt;TCHAR&gt; string;</span><br><span class="line">// 这里TCHAR可以自己指定</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTMxOTc3MC93aGF0LWlzLXRoZS1wb2ludC1vZi1zdGwtY2hhcmFjdGVyLXRyYWl0cw==" title="https://stackoverflow.com/questions/5319770/what-is-the-point-of-stl-character-traits">https://stackoverflow.com/questions/5319770/what-is-the-point-of-stl-character-traits<i class="fa fa-external-link"></i></span></p>
-</li>
-<li><p><span class="exturl" data-url="aHR0cDovL3d3dy5jcGx1c3BsdXMuY29tL3JlZmVyZW5jZS9zdHJpbmcvY2hhcl90cmFpdHMv" title="http://www.cplusplus.com/reference/string/char_traits/">http://www.cplusplus.com/reference/string/char_traits/<i class="fa fa-external-link"></i></span></p>
-</li>
-</ul>
-<p>解释<br>官方给的定义是：<br>Character traits:<br>Character traits classes specify character properties and provide specific semantics for certain operations on characters and sequences of characters.<br>换而言之，这里的意思就是对字符串这个操作特别放宽了要求，允许你过滤或者定义特殊化的字符串。<br>其实，平时我们都是需要什么就进行什么过滤，而这里的感觉就是给你了机会，让你将其定义为类型，然后操作起来更简便。<br>这里是最初开始设计的内容，后面都是在这基础上的延伸。</p>
-<blockquote>
-<p>模式匹配问题，记得刷leetcode,感觉上就有这样类似的问题。即如何进行模式匹配，实际上就是涉及到DFA和NFA，有限自动机和无限自动机。然后可以发现有限自动机方式，是按照回溯的方法解析的，所以会超级耗费内存。这样一想也解释通了。</p>
-</blockquote>
-<blockquote>
-<p>路径名问题，在Windows中为, /.有两种写法\,或者/(linux). 其实主要原因在于编译器如果进行解释吧！</p>
-</blockquote>
-<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>异常概述<br>C++的异常处理机制<br>程序调试</p>
-<ul>
-<li><p>程序的错误通常包括：</p>
-<ul>
-<li><p>语法错误：程序的书写不符合语言的语法规则。这类错误可由编译程序发现。例如：</p>
-<ul>
-<li>使用了未定义或未声明的标识符</li>
-<li>左右括号不匹配</li>
-</ul>
-</li>
-<li><p>逻辑错误：程序设计部当造成程序没有完成预期的功能。这类错误可通过对程序进行静态分析和动态测试发现。</p>
-<ul>
-<li>把两个数相加写成了相乘</li>
-<li>排序功能未能正确排序<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bool strlonger(char *str1,char *str2)&#123;</span><br><span class="line">    return strlen(str1)-strlen(str2)&gt;0;</span><br><span class="line">&#125;   </span><br><span class="line">strlonger(&quot;abc&quot;,&quot;1234&quot;) //?</span><br><span class="line">因为strlen()返回的是unsigned int, -1&gt;0这个被认为是真。 两个unsigned int运算结果不会进行自动转换。</span><br><span class="line">修改 (int)(strlen(str1)-strlen(str2))&gt;0</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>运行异常：程序设计对程序运行环境考虑不周而造成的程序运行错误。</p>
-<ul>
-<li>对于x/y操作，y输入了零</li>
-<li>由内存空间不足导致的访问空指针：int *p=new int; *p=10;</li>
-<li>输入数据的数量超过存放它们的数组的大小导致数组下标越界</li>
-<li>多任务环境可能导致的文件操作错误</li>
-<li>给一个采用二分法查找的函数提供了一个未排序的数组</li>
-<li>数据超出了其类型所允许的范围（溢出）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>语法错误，编辑器会编译不通过.<br>逻辑错误：环境正常，结果不正确。<br>运行异常：环境正常，结果正确。环境不正常，结果不正确</p>
-<p>在程序运行环境正常的情况下，导致运行异常的错误是不会出现的。<br>程序异常错误往往是由于程序设计者对程序运行环境的一些特殊情况考虑不足所造成的。</p>
-<p>导致程序运行异常的情况是可以预料的，但它是无法避免的。</p>
-<p>为了保证程序的鲁棒性，必须在程序中对可能的异常进行预见性处理。</p>
-<blockquote>
-<p>比如在输入的输入对输入的各种情况进行排查，原本的一个例子就是输入文件，然后文件路径不存在。</p>
-</blockquote>
-<h3 id="处理异常的策略"><a href="#处理异常的策略" class="headerlink" title="处理异常的策略"></a>处理异常的策略</h3><blockquote>
-<p>思考：有时间异常不是错误，所以没有必要当场处理；而且，有可能当场有重要的事情，那么这样做的话其实是非常草率的一件事情。还有用exit或abort, 这种每次都一下子退出了，完全不知道出现了什么问题，对程序员来说是一种特别懵逼的状态。</p>
-</blockquote>
-<p>就地处理, 在发现错误的地方处理异常。<br>异地处理，在其他地方（非异常发现地）处理异常。</p>
-<p>异常的就地处理</p>
-<p>常见做法是调用C++标准库中的函数exit或abort</p>
-<ul>
-<li>abort立即终止程序的执行，不做任何的善后处理工作</li>
-<li>exit在终止程序的运行前，会做关闭被程序打开的文件、调用全局对象和static存储类的局部对象的析构函数等工作。<br>注意：不要在对象类的析构函数中调用exit，否则该析构函数不能调用。</li>
-</ul>
-<p>不管是abort还是exit，都”not user-friendly”</p>
-<p>异常的异地处理。</p>
-<p>发现异常时，在发现地（如在被调用的函数中）有时不知道如何处理这个异常，或者不能很好地处理这个异常，要由程序的其它地方（如函数的调用者）来处理。<br>例如，前面的函数f中打开文件失败，这时可以由调用者重新提供一个文件来解决。</p>
-<h3 id="如何实现异常的异地处理？"><a href="#如何实现异常的异地处理？" class="headerlink" title="如何实现异常的异地处理？"></a>如何实现异常的异地处理？</h3><ol>
-<li>通过函数的返回值，或指针、引用类型的参数，或全局变量把异常情况通知函数的调用者，由调用者处理。在计算机网络中很多情况都是这样处理的。<blockquote>
-<p>该途径的不足：<br>通过函数的返回值返回异常情况会导致正常返回值和异常返回值交叉在一起。<br>通过指针，引用类型的参数返回异常情况，需要引入额外的参数，给设计带来负担<br>通过全局变量返回异常情况会导致使用者忽视这个全局变量的问题，不知道它的存在。<br>程序的可读性差！程序的正常处理与异常处理混杂在一起</p>
-</blockquote>
-</li>
-<li>通过语言提供的结构化异常处理机制进行处理<br>C++异常处理机制<br>把有可能遭遇异常的一系列操作（语句或函数调用）构成一个try语句块<br>如果try语句块中的某个操作在执行中发现了异常，则通过执行一个throw语句抛出一个异常对象，之后的操作不再进行。<br>抛置的异常对象将由能够处理这个异常的地方通过catch语句块来捕获并处理之。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">void f(char *filename)&#123;</span><br><span class="line">    ifstream file(filename);</span><br><span class="line">    if (file.fail())  throw filename(); // 产生异常</span><br><span class="line">    int x;</span><br><span class="line">    cin&gt;&gt;x;</span><br><span class="line">    ...</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> int main()&#123;</span><br><span class="line">     char str[100];</span><br><span class="line">     ...</span><br><span class="line">     try&#123;</span><br><span class="line">         f(str); // 启动异常处理机制</span><br><span class="line">         // 如果在函数f中抛掷了char*类型的异常，则程序转到try后面的catch(char*str)处理</span><br><span class="line">     &#125; catch(char *fn)&#123; // 捕获异常</span><br><span class="line">         ...// 处理异常</span><br><span class="line">     &#125;</span><br><span class="line">     ...// 正常情况</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<blockquote>
-<p>一种直观的感觉，等于说try语句这里把所有的异常进行了传递，然后所有子的对象都会返回回来。如果从运行的角度来思考也很正常。然后，还有一个点，类也可以实现，即基类的指针一直指回基类？对吗？</p>
-</blockquote>
-<h3 id="try语句"><a href="#try语句" class="headerlink" title="try语句"></a>try语句</h3><p>try语句块的作用是启动异常处理机制。其格式为：<br>try{<br>    语句序列<br>}</p>
-<p>上述的语句序列中可以有函数调用。</p>
-<h3 id="throw语句"><a href="#throw语句" class="headerlink" title="throw语句"></a>throw语句</h3><p>throw语句用于在发现异常情况时产生异常对象。<br>throw &lt;表达式&gt;<br>表达式为任意类型的C++表达式。<br>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void f(char *filename)&#123;</span><br><span class="line">    ifstream file(filename);</span><br><span class="line">    if (file.fail())  throw filename(); // 产生异常</span><br><span class="line">    // 注意这里异常的对象为一个字符串指针，这里是与catch中的类型相互对应的。</span><br><span class="line">    int x;</span><br><span class="line">    cin&gt;&gt;x;</span><br><span class="line">    ...</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>执行throw后，接在其后的语句将不再继续执行，而是转向异常处理（由某个catch语句给出）</p>
-<blockquote>
-<p>这里也好理解，当出错的时候肯定是这样处理了啊<br>一个问题？<br>这样做属于异常的异地处理了。怎么说来看的话是封装了一层。即实际上也是用的全局变量，但是不是在返回一层时调用，可能是返回多层时进行调用的。细想一下，震惊了哈哈哈。<br>挺好，用本身自带的变量不好，重新开辟一个浪费，如果是全局变量则被忽视，所以倒不如由底层处理好了再说，真棒！</p>
-</blockquote>
-<h3 id="catch语句"><a href="#catch语句" class="headerlink" title="catch语句"></a>catch语句</h3><p>catch语句块用于捕获throw产生的异常对象并处理相应的异常。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">catch(&lt;类型&gt;[&lt;变量&gt;])</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>类型用于指出捕获何种异常对象，它与异常对象的类型匹配规则如若函数重载。<br>变量用于存储异常对象，它可以缺省，缺省时表明catch语句块只关心异常对象的类型，而不考虑具体的异常对象。</p>
-<blockquote>
-<p>这里想到了实际上做的时候确实只关心了异常对象的类型，而且是将类型分为了唯一的积累，这样处理起来就方便了很多。</p>
-</blockquote>
-<p>catch语句块要紧接在某个try语句的后面。</p>
-<p>一个try语句块可以跟多个catch语句块，用于捕获不同类型的异常对象并进行处理。</p>
-<blockquote>
-<p>这里做的是类型其实也还可以，但是很是不行，因为处理的准则应该是对应于哪种错误，关于类型直接反馈不到处理上。</p>
-</blockquote>
-<p>关于try、throw和catch几点注意</p>
-<ul>
-<li><p>在try语句块的语句序列执行中如果没有抛出异常对象，则其后的catch语句不执行，而是继续执行try语句块之后的非catch语句。</p>
-</li>
-<li><p>在try语句块的语句序列执行中如果抛掷了异常对象</p>
-<ul>
-<li>该try语句块之后有能够捕获该异常对象的catch语句，则执行这个catch语句中的语句序列，然后继续执行这个catch语句之后的非catch语句</li>
-<li>该try语句块之后没有能够捕获该异常对象的catch语句，则由函数调用链的上一层函数中的try语句的相应catch来捕获。<blockquote>
-<p>这就是用到的向上层抛出异常。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>如果抛除异常对象的throw语句不是由程序的某个try语句块中的语句序列调用的，则抛掷的异常不会被程序中的catch捕获</p>
-<blockquote>
-<p>也就是不在try语句中，所以就要注意了，必须代码在检测范围中才能被检测啊，这是很浅显的道理了啊！</p>
-</blockquote>
-</li>
-<li><p>异常处理的嵌套<br>try语句是可以嵌套的</p>
-</li>
-<li><p>当在内层的try语句的执行中产生了异常，则首先在内层try语句块之后的catch语句中找，否则想上处理</p>
-</li>
-<li><p>如果抛掷的异常对象没有，则调用系统的terminate函数进行标准化异常处理。默认情况下，terminate函数将会去调用abort函数。</p>
-</li>
-</ul>
-<p>还有一个很重大的问题，有时候终止程序需要很大的代价，那么是否可以做到程序不终止，一直到获得正确的数据为止呢？</p>
-<blockquote>
-<p>?????上层一直while循环 </p>
-</blockquote>
-<h2 id="程序调试"><a href="#程序调试" class="headerlink" title="程序调试"></a>程序调试</h2><ul>
-<li>一个处于开发阶段的程序可能会含有很多错误（逻辑或异常）。</li>
-<li>发现和找出这些错误的一种手段是在程序中的某些地方家伙少年宫一些输出语句，在程序运行时把一些调试信息（如变量的值）输出到显示器。</li>
-</ul>
-<blockquote>
-<p>啊啊，我现在都一直用的是这种笨办法</p>
-</blockquote>
-<p>这种方式存在以下问题：</p>
-<ul>
-<li>调试者必须对输出的值做一定的分析才能知道程序是否有错。</li>
-<li>在开发结束后，去掉调试信息有时是一件很繁琐的工作<blockquote>
-<p>难道是用 Debug, 或者调试工具？哇撒</p>
-</blockquote>
-</li>
-</ul>
-<p>？断言<br>实际上，在调试程序时输出程序中的某些变量或表达式的值，其目的是为了确认程序输出的这些值与预期的值是否相符。<br>上述的目的可以让程序设计者在程序的一些关键或容易出错的点上插入一些相关的断言来表达<br>    - 断言是一个逻辑表达式，它描述了程序执行到断言处应该满足的条件<br>    - 如果条件满足则程序继续执行下去，否则程序执行异常终止。<br>在程序测试阶段，断言可以帮助测试这发现程序的逻辑错误，也可以用来发现一些异常错误。</p>
-<blockquote>
-<p>语法错误首先X,然后的话异常只能按自己是否能够预知下得到。然后的断言最大的好处真的在可以发现程序的逻辑错误啊，真牛逼！其实这等同于输出的，就是每次debug这样真的好麻烦好吗？而且没有意思，哇咔咔，这样真有趣！</p>
-</blockquote>
-<blockquote>
-<p>哇，想起了java的测试工具类，python的测试工具包，终于浮出水面了吗？</p>
-</blockquote>
-<p>宏assert</p>
-<p>C++标准库提供的一个宏assert(cassert, assert.h),可以实现断言。<br>宏assert要求一个关系，逻辑表达式作为其参数，当assert执行时，<br>    - 如果表达式的值为false，则会显示出相应的表达式、它所在的源文件名以及所在的行号等诊断信息，然后调用库函数abort终止<br>    - 当表达式的值为true时，程序继续执行</p>
-<p>例如，下面的宏assert调用表示程序执行到该宏调用处变量x的值应等于1：<br>assert(x==1)<br>当程序执行到该调用处，如果x的值不等于1，则它会显示下面的信息并终止：<br>Assertion failed:x=1,fileXXX,line YYY<br>可以返现异常错误，如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int divide(int x,int y)&#123;</span><br><span class="line">    assert(y==0);</span><br><span class="line">    return x/y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这是真的是超级好用的一个东西。<br>宏assert的实现是通过条件编译预处理命令来实现的：<br>cassert,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#ifdef NDEBUG</span><br><span class="line">#define assert(exp) ((void)0)</span><br><span class="line">#else</span><br><span class="line">#define assert(exp) ((exp)?(void)0:&lt;输出诊断信息并调用库函数abort&gt;)</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>解释，也就是说宏assert只有在宏名NDEBUG没有定义时才有效，这时，程序一般处于开发、测试阶段。程序开发结束提交时，应该让宏名NDEBUG有定义。然后重新编译程序，这样，assert就不再有效了。</p>
-</blockquote>
-<blockquote>
-<p>在思考，#DEBUG有啥用？</p>
-</blockquote>
-<h3 id="一点有意思的记录"><a href="#一点有意思的记录" class="headerlink" title="一点有意思的记录"></a>一点有意思的记录</h3><p>char *p=”adad”;<br>*p指向的是字符串。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">strlen(p); // 传入指针就行，能想清楚。</span><br><span class="line">// 这本身就是其功能规定的，所以这里也不多说什么。觉得就这样吧，是对的。</span><br><span class="line">cout&lt;&lt;p;  //正常输出</span><br><span class="line">printf(&quot;%s&quot;,p); // 输出</span><br></pre></td></tr></table></figure>
-
-<p>// 等下，我好想这里搞错了什么，或者说把一些事情。也就是说这里指针是没错的。因为这里是统一处理输入输出的函数。</p>
-<p>// 另一个方面讲</p>
-<p>太棒了，刚说自己想多了，结果才发现这里有说明的。</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -3758,7 +3560,7 @@ map(key, ts) // ts为一个测试样本
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">89</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -3771,7 +3573,7 @@ map(key, ts) // ts为一个测试样本
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">70</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -3784,7 +3586,7 @@ map(key, ts) // ts为一个测试样本
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">62</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

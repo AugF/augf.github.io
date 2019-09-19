@@ -200,7 +200,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">62</span></a>
 
   </li>
       
@@ -213,7 +213,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">65</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">70</span></a>
 
   </li>
       
@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">84</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">89</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,756 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/12/semi-paper-code-read/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/12/semi-paper-code-read/" class="post-title-link" itemprop="url">semi-paper code read</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-12 12:47:23 / 修改时间：21:08:13" itemprop="dateCreated datePublished" datetime="2019-09-12T12:47:23+08:00">2019-09-12</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/semi-gnn/" itemprop="url" rel="index"><span itemprop="name">semi-gnn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="论文1"><a href="#论文1" class="headerlink" title="论文1"></a>论文1</h2><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RraXBmL2djbg==" title="https://github.com/tkipf/gcn">https://github.com/tkipf/gcn<i class="fa fa-external-link"></i></span></p>
+<p>Data</p>
+<ul>
+<li>n<em>n   n</em>d  d=c:channels  e=f:classes</li>
+</ul>
+<ol>
+<li>gcn 文件组织结构<ul>
+<li>readme.md<ul>
+<li>data:  d=c: chanels   e=f:classes<ul>
+<li>citation network data:  cora, citeseer, pubmed</li>
+<li>nell:  revisiting semi-supervised learning with graph embedding</li>
+</ul>
+</li>
+<li>model: gcn,  gcn_cheby, dense</li>
+</ul>
+</li>
+<li>gcn<ul>
+<li>data<ul>
+<li>.tx  the feature vectors of test instances</li>
+<li>.ty  the one-hot labels</li>
+<li>.index   the indices of test instances in graph,   inductive setting</li>
+<li>.x :  the feature vectors of the labeled training instances </li>
+<li>.y :  the labeled</li>
+<li>.allx: all</li>
+<li>.ally</li>
+</ul>
+</li>
+<li>inits.py<ul>
+<li>uniform,  glorot: [input_dim, output_dim],  zeros, ones</li>
+</ul>
+</li>
+<li>metrics.py<ul>
+<li>cross_entropy + accuary</li>
+</ul>
+</li>
+<li>models.py<ul>
+<li>gcn: semi-superised </li>
+<li>gcn_cheby: convolutional</li>
+<li>dense: basic multi-layer perceptron</li>
+<li>Model<blockquote>
+<p>self.layers[0], 第一层的layer. 对第一层中的var的值，进行相加，这里的var只有weights, bias.  进行乘以固定系数相加<br>num_features_nonzero: dropout的方法也不同</p>
+</blockquote>
+<ul>
+<li>init<ul>
+<li>name, logging</li>
+<li>vars, placeholdres</li>
+<li>layers, activations</li>
+<li>inputs, outputs</li>
+<li>loss, accuary</li>
+<li>optimizer, opt_op</li>
+</ul>
+</li>
+<li>build:   tf.variable_scope(self.name)<ul>
+<li>build sequential layer model</li>
+<li>store model variables for easy access</li>
+<li>build metrics:  weight_decay: 5e-4: weight for L2 loss on embedding matrix. ???</li>
+</ul>
+</li>
+<li>predict</li>
+<li>_loss</li>
+<li>_accuracy</li>
+<li>save</li>
+<li>load</li>
+</ul>
+</li>
+<li>MLP<ul>
+<li><strong>init</strong>:  inputs: features,  input_dim, output_dim, placeholders, optimizer, build</li>
+<li>_loss: 变量的l2 loss???? += 交叉熵</li>
+<li>_build;  Dense</li>
+</ul>
+</li>
+<li>GCN<ul>
+<li>_build: GraphConvolution</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>utils.py<ul>
+<li>load_data</li>
+</ul>
+</li>
+<li>layers.py<ul>
+<li>get_layer_uid: 全场唯一uid</li>
+<li>sparse_dropout: dropout for sparse tensors????</li>
+<li>Layer<ul>
+<li>init: name, vars, logging, sparse_inputs</li>
+<li>_call: return inputs</li>
+<li>__call: add inputs, outputs ??? tf.summary.histogram()?// 为了方便展示直方图?</li>
+<li>_log_vars:  add vars in histogram</li>
+</ul>
+</li>
+<li>Dense(Layer)<ul>
+<li>__init:  input_dim, output_dim, placeholders, dropout=0., sparse_inputs, act, bias=false, featureless=false  glorot()</li>
+<li>_call<ul>
+<li>dropout:</li>
+<li>transform:  是否使用稀疏矩阵相乘</li>
+<li>bias:  self.vars[‘bias’] 没有输入的，只有输出，在隐藏层中，对结果产生影响</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>GraphConvolution: graph convolution layer(Layer)<ul>
+<li>act?  support?  bias?   featureless?  act: tensorflow activation</li>
+<li>init<ul>
+<li>support 变量的个数 weights_i:  glorot   bias=zeros</li>
+</ul>
+</li>
+<li>_call<ul>
+<li>convlve ??</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>train.py<ul>
+<li>flags<blockquote>
+<p>dataset, model, learning_rate, epochs,, hidden1-16, dropout</p>
+</blockquote>
+<ul>
+<li>weight_decay: weight for l2 loss on embedding matrix</li>
+<li>early_stopping</li>
+<li>max_degree:  Chebyshev 不等式的阶</li>
+</ul>
+</li>
+<li>placeholders<ul>
+<li>support: [preprocess_adj(adj)]<blockquote>
+<p>为什么要这么做? 因为gcn_cheby模型中每层的A实际上是不一样的</p>
+</blockquote>
+</li>
+<li>features: </li>
+<li>labels: </li>
+<li>labels_mask: </li>
+<li>dropout: 注意稀疏矩阵和稠密矩阵 dropout方法还不一样 </li>
+<li>num_feature_nonzero: </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>corn<br>    - x:  140,1433  tx: 1000,1433  ty: 1000, 7<br>    - allx: 1708  1433  ? 为何总数不相等</p>
+<pre><code>- (allx,tx) 说明这两个不相等 </code></pre><h3 id="论文2"><a href="#论文2" class="headerlink" title="论文2"></a>论文2</h3><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tpbWl5b3VuZy9wbGFuZXRvaWQ=" title="https://github.com/kimiyoung/planetoid">https://github.com/kimiyoung/planetoid<i class="fa fa-external-link"></i></span></p>
+<ul>
+<li>test_ind.py:  induce model 的测试</li>
+<li>test_trans.py:  transive model的测试</li>
+<li>ind_model.py:  model   add_data  build  gen_train_inst   gen_graph gen_lable_graph</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/12/daily-thinking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/12/daily-thinking/" class="post-title-link" itemprop="url">daily thinking</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-12 00:22:55 / 修改时间：21:27:05" itemprop="dateCreated datePublished" datetime="2019-09-12T00:22:55+08:00">2019-09-12</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/daily/" itemprop="url" rel="index"><span itemprop="name">daily</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/daily/summary/" itemprop="url" rel="index"><span itemprop="name">summary</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>感觉不及时写写自己的想法，自己可能会对自己所犯的错误记得不够牢靠</p>
+<h2 id="一点想法"><a href="#一点想法" class="headerlink" title="一点想法"></a>一点想法</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ol>
+<li><p>前段时间，没头没脑地看似很认真地同时并行地学习tensorflow，结果发现笔记也有很多。其实还是给忘的差不多了，仍然不会；</p>
+<blockquote>
+<p>! 某段时间应该集中在一件事情上，事情不在多，在精</p>
+</blockquote>
+</li>
+<li><p>用来三天时间搭博客，前面看一些教程，东看看西看看，结果一遇到bug啥都不会。资料不是最新的，不是学习的官方的资料</p>
+<blockquote>
+<p>! 一定要自己对大纲了解，以及学习最官方的资料</p>
+</blockquote>
+</li>
+<li><p>关于论文的梯度公式看了很多篇文章以及进行推导，结果实现却花了很多时间仍未完成。</p>
+<blockquote>
+<p>! 一开始学习的途径不对，计算机最大的特点就是在于实践！每做一件事情时请务必动手</p>
+</blockquote>
+</li>
+<li><p>论文太多，太杂? 感觉看不过来</p>
+<blockquote>
+<p>! 学会慢慢地分类</p>
+</blockquote>
+</li>
+<li><p>比如画出一个图形，其实用matplotlib很好画，可就是没想通？</p>
+<blockquote>
+<p>记住别人的设计是面向对象的，图灵机，一切都是由最简单的堆叠而成</p>
+</blockquote>
+</li>
+<li><p>代码迟迟不想下手</p>
+<blockquote>
+<p>记住！代码这件事，只有不断地练习；谨记！永远不要期望第一版的代码有多好，重点是自己的想法实现了才是最重要的； 而且当你做了之后才发现自己哪些地方问题特别大</p>
+</blockquote>
+</li>
+<li><p>时间应该花在最基本的东西的学习和了解上!</p>
+<blockquote>
+<p>最基础的东西应该要反复过才行，不要贪多</p>
+</blockquote>
+</li>
+<li><p>现在的时间自己仍然不可控</p>
+<blockquote>
+<p>! 现在最重要的是能把自己的想法做完和事情做完，其他地慢慢就会会了</p>
+</blockquote>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/12/daily-thinking/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/11/semi-gnn-relization-progress/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/11/semi-gnn-relization-progress/" class="post-title-link" itemprop="url">semi-gnn, relization progress</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-11 00:03:42" itemprop="dateCreated datePublished" datetime="2019-09-11T00:03:42+08:00">2019-09-11</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-12 09:33:59" itemprop="dateModified" datetime="2019-09-12T09:33:59+08:00">2019-09-12</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/semi-gnn/" itemprop="url" rel="index"><span itemprop="name">semi-gnn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>试图用numpy实现</p>
+</blockquote>
+<p>主要问题</p>
+<blockquote>
+<p>模拟自动微分这一块出现的问题</p>
+</blockquote>
+<p>对于softmaxarg()函数来说<br>目标即寻找一个平滑函数</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kZWVwbm90ZXMuaW8vc29mdG1heC1jcm9zc2VudHJvcHk=" title="https://deepnotes.io/softmax-crossentropy">https://deepnotes.io/softmax-crossentropy<i class="fa fa-external-link"></i></span></p>
+<p>一个softmax的非常好的做法</p>
+<p>soft-argmax</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ib3V0aGlseC53b3JkcHJlc3MuY29tLzIwMTMvMDQvMjEvYS1zb2Z0LWFyZ21heC8=" title="https://bouthilx.wordpress.com/2013/04/21/a-soft-argmax/">https://bouthilx.wordpress.com/2013/04/21/a-soft-argmax/<i class="fa fa-external-link"></i></span></p>
+<h2 id="一些后记"><a href="#一些后记" class="headerlink" title="一些后记"></a>一些后记</h2><p>关于cs231n课程代码的一些借鉴</p>
+<ol>
+<li><p>一个pipeline</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> past.builtins <span class="keyword">import</span> xrange</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TwoLayerNet</span><span class="params">(object)</span>:</span></span><br><span class="line">  <span class="string">"""</span></span><br><span class="line"><span class="string">  A two-layer fully-connected neural network. The net has an input dimension of</span></span><br><span class="line"><span class="string">  N, a hidden layer dimension of H, and performs classification over C classes.</span></span><br><span class="line"><span class="string">  We train the network with a softmax loss function and L2 regularization on the</span></span><br><span class="line"><span class="string">  weight matrices. The network uses a ReLU nonlinearity after the first fully</span></span><br><span class="line"><span class="string">  connected layer.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  In other words, the network has the following architecture:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  input - fully connected layer - ReLU - fully connected layer - softmax</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  The outputs of the second fully-connected layer are the scores for each class.</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, input_size, hidden_size, output_size, std=<span class="number">1e-4</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Initialize the model. Weights are initialized to small random values and</span></span><br><span class="line"><span class="string">    biases are initialized to zero. Weights and biases are stored in the</span></span><br><span class="line"><span class="string">    variable self.params, which is a dictionary with the following keys:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    W1: First layer weights; has shape (D, H)</span></span><br><span class="line"><span class="string">    b1: First layer biases; has shape (H,)</span></span><br><span class="line"><span class="string">    W2: Second layer weights; has shape (H, C)</span></span><br><span class="line"><span class="string">    b2: Second layer biases; has shape (C,)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - input_size: The dimension D of the input data.</span></span><br><span class="line"><span class="string">    - hidden_size: The number of neurons H in the hidden layer.</span></span><br><span class="line"><span class="string">    - output_size: The number of classes C.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    self.params = &#123;&#125;</span><br><span class="line">    self.params[<span class="string">'W1'</span>] = std * np.random.randn(input_size, hidden_size)</span><br><span class="line">    self.params[<span class="string">'b1'</span>] = np.zeros(hidden_size)</span><br><span class="line">    self.params[<span class="string">'W2'</span>] = std * np.random.randn(hidden_size, output_size)</span><br><span class="line">    self.params[<span class="string">'b2'</span>] = np.zeros(output_size)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, X, y=None, reg=<span class="number">0.0</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Compute the loss and gradients for a two layer fully connected neural</span></span><br><span class="line"><span class="string">    network.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - X: Input data of shape (N, D). Each X[i] is a training sample.</span></span><br><span class="line"><span class="string">    - y: Vector of training labels. y[i] is the label for X[i], and each y[i] is</span></span><br><span class="line"><span class="string">      an integer in the range 0 &lt;= y[i] &lt; C. This parameter is optional; if it</span></span><br><span class="line"><span class="string">      is not passed then we only return scores, and if it is passed then we</span></span><br><span class="line"><span class="string">      instead return the loss and gradients.</span></span><br><span class="line"><span class="string">    - reg: Regularization strength.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    If y is None, return a matrix scores of shape (N, C) where scores[i, c] is</span></span><br><span class="line"><span class="string">    the score for class c on input X[i].</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    If y is not None, instead return a tuple of:</span></span><br><span class="line"><span class="string">    - loss: Loss (data loss and regularization loss) for this batch of training</span></span><br><span class="line"><span class="string">      samples.</span></span><br><span class="line"><span class="string">    - grads: Dictionary mapping parameter names to gradients of those parameters</span></span><br><span class="line"><span class="string">      with respect to the loss function; has the same keys as self.params.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># Unpack variables from the params dictionary</span></span><br><span class="line">    W1, b1 = self.params[<span class="string">'W1'</span>], self.params[<span class="string">'b1'</span>]</span><br><span class="line">    W2, b2 = self.params[<span class="string">'W2'</span>], self.params[<span class="string">'b2'</span>]</span><br><span class="line">    N, D = X.shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute the forward pass</span></span><br><span class="line">    scores = <span class="literal">None</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Perform the forward pass, computing the class scores for the input. #</span></span><br><span class="line">    <span class="comment"># Store the result in the scores variable, which should be an array of      #</span></span><br><span class="line">    <span class="comment"># shape (N, C).                                                             #</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="comment">#                              END OF YOUR CODE                             #</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># If the targets are not given then jump out, we're done</span></span><br><span class="line">    <span class="keyword">if</span> y <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">      <span class="keyword">return</span> scores</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute the loss</span></span><br><span class="line">    loss = <span class="literal">None</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Finish the forward pass, and compute the loss. This should include  #</span></span><br><span class="line">    <span class="comment"># both the data loss and L2 regularization for W1 and W2. Store the result  #</span></span><br><span class="line">    <span class="comment"># in the variable loss, which should be a scalar. Use the Softmax           #</span></span><br><span class="line">    <span class="comment"># classifier loss.                                                          #</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="comment">#                              END OF YOUR CODE                             #</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Backward pass: compute gradients</span></span><br><span class="line">    grads = &#123;&#125;</span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Compute the backward pass, computing the derivatives of the weights #</span></span><br><span class="line">    <span class="comment"># and biases. Store the results in the grads dictionary. For example,       #</span></span><br><span class="line">    <span class="comment"># grads['W1'] should store the gradient on W1, and be a matrix of same size #</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="comment">#                              END OF YOUR CODE                             #</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> loss, grads</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, X, y, X_val, y_val,</span></span></span><br><span class="line"><span class="function"><span class="params">            learning_rate=<span class="number">1e-3</span>, learning_rate_decay=<span class="number">0.95</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            reg=<span class="number">5e-6</span>, num_iters=<span class="number">100</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            batch_size=<span class="number">200</span>, verbose=False)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Train this neural network using stochastic gradient descent.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - X: A numpy array of shape (N, D) giving training data.</span></span><br><span class="line"><span class="string">    - y: A numpy array f shape (N,) giving training labels; y[i] = c means that</span></span><br><span class="line"><span class="string">      X[i] has label c, where 0 &lt;= c &lt; C.</span></span><br><span class="line"><span class="string">    - X_val: A numpy array of shape (N_val, D) giving validation data.</span></span><br><span class="line"><span class="string">    - y_val: A numpy array of shape (N_val,) giving validation labels.</span></span><br><span class="line"><span class="string">    - learning_rate: Scalar giving learning rate for optimization.</span></span><br><span class="line"><span class="string">    - learning_rate_decay: Scalar giving factor used to decay the learning rate</span></span><br><span class="line"><span class="string">      after each epoch.</span></span><br><span class="line"><span class="string">    - reg: Scalar giving regularization strength.</span></span><br><span class="line"><span class="string">    - num_iters: Number of steps to take when optimizing.</span></span><br><span class="line"><span class="string">    - batch_size: Number of training examples to use per step.</span></span><br><span class="line"><span class="string">    - verbose: boolean; if true print progress during optimization.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    num_train = X.shape[<span class="number">0</span>]</span><br><span class="line">    iterations_per_epoch = max(num_train / batch_size, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Use SGD to optimize the parameters in self.model</span></span><br><span class="line">    loss_history = []</span><br><span class="line">    train_acc_history = []</span><br><span class="line">    val_acc_history = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> it <span class="keyword">in</span> xrange(num_iters):</span><br><span class="line">      X_batch = <span class="literal">None</span></span><br><span class="line">      y_batch = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="comment"># <span class="doctag">TODO:</span> Create a random minibatch of training data and labels, storing  #</span></span><br><span class="line">      <span class="comment"># them in X_batch and y_batch respectively.                             #</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="keyword">pass</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="comment">#                             END OF YOUR CODE                          #</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line"></span><br><span class="line">      <span class="comment"># Compute loss and gradients using the current minibatch</span></span><br><span class="line">      loss, grads = self.loss(X_batch, y=y_batch, reg=reg)</span><br><span class="line">      loss_history.append(loss)</span><br><span class="line"></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="comment"># <span class="doctag">TODO:</span> Use the gradients in the grads dictionary to update the         #</span></span><br><span class="line">      <span class="comment"># parameters of the network (stored in the dictionary self.params)      #</span></span><br><span class="line">      <span class="comment"># using stochastic gradient descent. You'll need to use the gradients   #</span></span><br><span class="line">      <span class="comment"># stored in the grads dictionary defined above.                         #</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="keyword">pass</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="comment">#                             END OF YOUR CODE                          #</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> verbose <span class="keyword">and</span> it % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">'iteration %d / %d: loss %f'</span> % (it, num_iters, loss))</span><br><span class="line"></span><br><span class="line">      <span class="comment"># Every epoch, check train and val accuracy and decay learning rate.</span></span><br><span class="line">      <span class="keyword">if</span> it % iterations_per_epoch == <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># Check accuracy</span></span><br><span class="line">        train_acc = (self.predict(X_batch) == y_batch).mean()</span><br><span class="line">        val_acc = (self.predict(X_val) == y_val).mean()</span><br><span class="line">        train_acc_history.append(train_acc)</span><br><span class="line">        val_acc_history.append(val_acc)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Decay learning rate</span></span><br><span class="line">        learning_rate *= learning_rate_decay</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="string">'loss_history'</span>: loss_history,</span><br><span class="line">      <span class="string">'train_acc_history'</span>: train_acc_history,</span><br><span class="line">      <span class="string">'val_acc_history'</span>: val_acc_history,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Use the trained weights of this two-layer network to predict labels for</span></span><br><span class="line"><span class="string">    data points. For each data point we predict scores for each of the C</span></span><br><span class="line"><span class="string">    classes, and assign each data point to the class with the highest score.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - X: A numpy array of shape (N, D) giving N D-dimensional data points to</span></span><br><span class="line"><span class="string">      classify.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    - y_pred: A numpy array of shape (N,) giving predicted labels for each of</span></span><br><span class="line"><span class="string">      the elements of X. For all i, y_pred[i] = c means that X[i] is predicted</span></span><br><span class="line"><span class="string">      to have class c, where 0 &lt;= c &lt; C.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    y_pred = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement this function; it should be VERY simple!                #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment">#                              END OF YOUR CODE                           #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> y_pred</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>graph架构</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 整个Graph</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ComputationGraph</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, inputs)</span>:</span></span><br><span class="line">        <span class="comment"># 1. [pass inputs to input gates...]</span></span><br><span class="line">        <span class="comment"># 2. forward the computational graph</span></span><br><span class="line">        <span class="keyword">for</span> gate <span class="keyword">in</span> self.graph.nodes_topologically_sorted():</span><br><span class="line">            gate.forward()</span><br><span class="line">        <span class="keyword">return</span> loss</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> gate <span class="keyword">in</span> reversed(self.graph.nodes_topologically_sorted):</span><br><span class="line">            gate.backward()</span><br><span class="line">        <span class="keyword">return</span> inputs_gradients</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每个gate</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MultipyGate</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""x, y,z: scalars"""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x, y)</span>:</span></span><br><span class="line">        z = x*y</span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line">        <span class="keyword">return</span> z</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(self, dz)</span>:</span></span><br><span class="line">        dx = self.y * dz <span class="comment"># [dz/dx * dL/dz]</span></span><br><span class="line">        dy = self.x * dz <span class="comment"># [dz/dy * dL/dz]</span></span><br><span class="line">        <span class="keyword">return</span> [dx, dy]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>前向传播的一个例子</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># assume some unit gaussian 10-D input data</span></span><br><span class="line">D = np.random.randn(<span class="number">100</span>, <span class="number">500</span>) <span class="comment"># 100， 500</span></span><br><span class="line">hidden_layer_sizes = [<span class="number">500</span>] * <span class="number">10</span></span><br><span class="line">nonlinearities = [<span class="string">'tanh'</span>] * len(hidden_layer_sizes)</span><br><span class="line"></span><br><span class="line">act = &#123;<span class="string">'relu'</span>: <span class="keyword">lambda</span> x: np.maximum(<span class="number">0</span>,x), <span class="string">'tanh'</span>: <span class="keyword">lambda</span> x: np.tanh(x)&#125;</span><br><span class="line"></span><br><span class="line">Hs = &#123;&#125;  <span class="comment"># why?</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(hidden_layer_sizes)):</span><br><span class="line">    X = D <span class="keyword">if</span> i == <span class="number">0</span> <span class="keyword">else</span> Hs[i<span class="number">-1</span>]</span><br><span class="line">    fan_in = X.shape[<span class="number">1</span>]</span><br><span class="line">    fan_out = hidden_layer_sizes[i]</span><br><span class="line">    W = np.random.randn(fan_in, fan_out) * <span class="number">0.01</span></span><br><span class="line"></span><br><span class="line">    H = np.dot(X, W)</span><br><span class="line">    H = act[nonlinearities[i]](H)</span><br><span class="line">    Hs[i] = H  <span class="comment"># cache result on this layer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ctrl + enter</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># look at distribution at each layer</span></span><br><span class="line">print(<span class="string">"input layer had mean %f and std %f"</span> % (np.mean(D), np.std(D)))</span><br><span class="line">layer_means = [np.mean(H) <span class="keyword">for</span> i, H <span class="keyword">in</span> Hs.items()] <span class="comment"># ?</span></span><br><span class="line">layer_stds = [np.std(H) <span class="keyword">for</span> i, H <span class="keyword">in</span> Hs.items()]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, H <span class="keyword">in</span> Hs.items():</span><br><span class="line">    print(<span class="string">"hiddeen layer %d had mean %f and std %f"</span> % (i + <span class="number">1</span>, layer_means[i], layer_stds[i]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot the means and standard deviations</span></span><br><span class="line"></span><br><span class="line">plt.figure()</span><br><span class="line">plt.subplot(<span class="number">121</span>)</span><br><span class="line">plt.plot(list(Hs.keys()), layer_means, <span class="string">"ob-"</span>)</span><br><span class="line">plt.title(<span class="string">"layer mean"</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>)</span><br><span class="line">plt.plot(list(Hs.keys()), layer_stds, <span class="string">"or-"</span>)</span><br><span class="line">plt.title(<span class="string">"layer std"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot the raw distribution</span></span><br><span class="line">plt.figure()</span><br><span class="line"><span class="keyword">for</span> i, H <span class="keyword">in</span> Hs.items():</span><br><span class="line">    plt.subplot(<span class="number">1</span>, len(Hs), i+<span class="number">1</span>)</span><br><span class="line">    plt.hist(H.ravel(), <span class="number">30</span>, range=(<span class="number">-1</span>,<span class="number">1</span>)) <span class="comment"># ravel, shape to (1, N)</span></span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/10/deep-learning-study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/10/deep-learning-study/" class="post-title-link" itemprop="url">deep learning study</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-10 20:56:16" itemprop="dateCreated datePublished" datetime="2019-09-10T20:56:16+08:00">2019-09-10</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-12 19:44:34" itemprop="dateModified" datetime="2019-09-12T19:44:34+08:00">2019-09-12</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/tensorflow/" itemprop="url" rel="index"><span itemprop="name">tensorflow</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-tensorflows"><a href="#1-tensorflows" class="headerlink" title="1. tensorflows"></a>1. tensorflows</h2><p>tensorflow 数据流图  用于数值计算单开源软件库</p>
+<p>Nodes : 数学操作</p>
+<blockquote>
+<p>特别地，有数据输入和数据输出的节点， 或者是读取、写入持久变量的终点<br>persistent</p>
+</blockquote>
+<p>edges: 多维数据数组， tensor</p>
+<blockquote>
+<p>根据不同的计算, 张, 即数据的大小可变size</p>
+</blockquote>
+<p>特征</p>
+<ul>
+<li>高度的灵活性，可自己写C++</li>
+<li>可以在CPU, GPU, Docker等， Portablilty 可移植性</li>
+<li>科研和产品</li>
+<li>自动求微分<blockquote>
+<p>只需要添加数据和目标函数，可以自动计算相关的微分导数</p>
+</blockquote>
+</li>
+<li>多语言支持</li>
+<li>支持线程、队列、异步操作的支持，可以自由第将TensorFlow中的计算元素分配到不同的设备中</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/10/deep-learning-study/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/10/ipython-personnal-reference/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/10/ipython-personnal-reference/" class="post-title-link" itemprop="url">ipython personnal reference</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-10 16:57:52" itemprop="dateCreated datePublished" datetime="2019-09-10T16:57:52+08:00">2019-09-10</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-11 17:01:05" itemprop="dateModified" datetime="2019-09-11T17:01:05+08:00">2019-09-11</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>首先意图不过就是整理最常用和自己最关心的内容</p>
+</blockquote>
+<h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><ol>
+<li>如何保存<br><code>%save -r my-filename line_m-line_n line_r</code></li>
+</ol>
+<h3 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h3><p>有两种形式</p>
+<ol>
+<li><p>% 命令</p>
+</li>
+<li><p>: 命令</p>
+</li>
+</ol>
+<p>? -&gt; Introduction and overview of IPython’s features.<br>%quickref -&gt; Quick reference<br>help -&gt; Python’s own help system<br>object? -&gt; Details about ‘object’<br>object?? -&gt; Details about extra details</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -966,7 +1716,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">89</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -979,7 +1729,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">70</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -992,7 +1742,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">62</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -1183,9 +1933,19 @@
   
     
       
+        
+      
     
       
-        
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       

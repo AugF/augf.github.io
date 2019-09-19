@@ -1,5 +1,5 @@
-https://augf.github.io/2019/09/19/daily-cplus-thinking/
-https://augf.github.io/2019/09/19/machinelearning-gradient-descent/
-https://augf.github.io/2019/09/19/spark-study-thinking-1/
-https://augf.github.io/2019/09/19/spark-study-thinking/
-https://augf.github.io/2019/09/19/deeplearning-learn/
+https://augf.github.io/2019/09/19/linux/
+https://augf.github.io/2019/09/19/vim/
+https://augf.github.io/2019/09/19/deeplearning-tensorflow-study/
+https://augf.github.io/2019/09/19/spark-study/
+https://augf.github.io/2019/09/19/python-study/
