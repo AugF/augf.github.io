@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://augf.github.io/2019/09/18/git-using/</loc>
+    
+    <lastmod>2019-09-22T23:36:12.198Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/12/vscode-using/</loc>
+    
+    <lastmod>2019-09-22T23:04:45.110Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://augf.github.io/2019/09/19/linux/</loc>
     
     <lastmod>2019-09-19T05:28:36.232Z</lastmod>
@@ -506,13 +520,6 @@
   </url>
   
   <url>
-    <loc>https://augf.github.io/2019/09/18/git-using/</loc>
-    
-    <lastmod>2019-09-18T07:55:56.621Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://augf.github.io/2019/09/16/algorithm-improve-class/</loc>
     
     <lastmod>2019-09-16T07:07:57.182Z</lastmod>
@@ -544,13 +551,6 @@
     <loc>https://augf.github.io/2019/09/12/semi-paper-code-read/</loc>
     
     <lastmod>2019-09-12T13:08:13.918Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/12/vscode-using/</loc>
-    
-    <lastmod>2019-09-12T12:36:02.401Z</lastmod>
     
   </url>
   

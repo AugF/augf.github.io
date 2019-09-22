@@ -5659,11 +5659,19 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
                 
               
 
-              <time title="创建时间：2019-09-18 14:24:20 / 修改时间：15:55:56" itemprop="dateCreated datePublished" datetime="2019-09-18T14:24:20+08:00">2019-09-18</time>
+              <time title="创建时间：2019-09-18 14:24:20" itemprop="dateCreated datePublished" datetime="2019-09-18T14:24:20+08:00">2019-09-18</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-23 07:36:12" itemprop="dateModified" datetime="2019-09-23T07:36:12+08:00">2019-09-23</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -5699,7 +5707,7 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
 
       
           <p>更全面的请参考<br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTUvMTIvZ2l0LWNoZWF0LXNoZWV0Lmh0bWw=" title="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html<i class="fa fa-external-link"></i></span></p>
-<h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>Workspace：工作区<br>Index / Stage：暂存区<br>Repository：仓库区（或本地仓库）<br>Remote：远程仓库</p>
+<h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>Workspace：工作区<br>Index / Stage：暂存区  add<br>Repository：仓库区（或本地仓库） commit/fetch<br>Remote：远程仓库</p>
 <p>git reflog 查看当前分支的最近几次提交<br>git log 查看所有commit的记录</p>
 <h2 id="开始git之旅"><a href="#开始git之旅" class="headerlink" title="开始git之旅"></a>开始git之旅</h2><ol>
 <li>github上新建reposity，假设仓库名为Inbox</li>
@@ -5743,15 +5751,21 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
 <li>merge前和push前需要检查本地内容有没有提交，请注意一件事就是先提交</li>
 <li>更新本地分支<ul>
 <li>git pull注意不过不带参数是直接覆盖</li>
-<li>git pull origin next:master 取回origin主机的next分支与本地的master分支合并</li>
+<li>git pull origin next:master 取回origin主机的next分支与本地的master分支合并  !!!<blockquote>
+<p>一种思路可以将代码全部拉到本地某个分支<br>git fetch origin + git merge origin/next</p>
+</blockquote>
+</li>
+<li>git branch –set-upstream master origin/next 自动为本地master追踪分支 </li>
 </ul>
 </li>
 <li>远程分支操作<ul>
 <li>查看远程分支： git branch -r</li>
 <li>创建运程分支： git push origin [name]</li>
-<li>删除远程分支： git push origin :[name]<h2 id="对别人的项目做贡献"><a href="#对别人的项目做贡献" class="headerlink" title="对别人的项目做贡献"></a>对别人的项目做贡献</h2></li>
+<li>删除远程分支： git push origin :[name]</li>
 </ul>
 </li>
+</ol>
+<h2 id="对别人的项目做贡献"><a href="#对别人的项目做贡献" class="headerlink" title="对别人的项目做贡献"></a>对别人的项目做贡献</h2><ol>
 <li>非Collaborators<ul>
 <li>git remote add upstream </li>
 <li>git fetch upstream</li>
@@ -5759,7 +5773,7 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
 </ul>
 </li>
 </ol>
-<h2 id="对远程分支操作"><a href="#对远程分支操作" class="headerlink" title="对远程分支操作"></a>对远程分支操作</h2><ol>
+<h2 id="对远程仓库名进行查看"><a href="#对远程仓库名进行查看" class="headerlink" title="对远程仓库名进行查看"></a>对远程仓库名进行查看</h2><ol>
 <li>git remote show <code>&lt;主机名&gt;</code> : 查看远程主机，不包含地址</li>
 <li>git remote add <code>&lt;主机名&gt;</code>: 添加远程主机</li>
 <li>git remote rm <code>&lt;主机名&gt;</code>: 删除远程主机</li>
@@ -5794,6 +5808,11 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
 <li><p>OpenSSL: error:1409442E:SSL routines:ssl3_read_bytes:tlsv1 alert protocol version</p>
 <blockquote>
 <p>向pasa gitbucket提交出现该bug<br>按照stackoverflow上  <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTMxNTE0NTYvb3BlbnNzbC1lcnJvcjE0MDk0NDJlc3NsLXJvdXRpbmVzc3NsMy1yZWFkLWJ5dGVzdGxzdjEtYWxlcnQtcHJvdG9jb2wtdmVyc2lv" title="https://stackoverflow.com/questions/53151456/openssl-error1409442essl-routinesssl3-read-bytestlsv1-alert-protocol-versio">https://stackoverflow.com/questions/53151456/openssl-error1409442essl-routinesssl3-read-bytestlsv1-alert-protocol-versio<i class="fa fa-external-link"></i></span><br>修改  wget –secure-protocol=TLSv1_2 仍然未解决</p>
+</blockquote>
+</li>
+<li><p>如何强制将远程代码覆盖到本地</p>
+<blockquote>
+<p>git pull 并没有得到远程最新的代码<br>使用 git fetch -all &amp;&amp; git reset –hard origin/master &amp;&amp; git pull 强制覆盖本地代码</p>
 </blockquote>
 </li>
 </ol>
