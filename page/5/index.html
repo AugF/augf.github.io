@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">89</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">90</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,194 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture2-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-cplus-lecture2-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture2-summary</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:47:59 / 修改时间：09:48:56" itemprop="dateCreated datePublished" datetime="2019-09-19T09:47:59+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>重点</p>
+<ol>
+<li>抽象和封装<blockquote>
+<p>抽象是外，封装是里；为什么好？栈举例，直接来，没有函数封装；结构体+函数封装，数据隐私问题，成员仍可被破坏。</p>
+</blockquote>
+</li>
+</ol>
+<p>一个重要的问题：加访问控制 public, private(默认),protected</p>
+<p>面向对象：类型和对象。程序若干个对象。对象之间关系，一是继承，传承特征；对象之间靠接口，公有函数的参数或友元来维持关系。</p>
+<p>设计几大理念：</p>
+<ol>
+<li>抽象，控制住底层的复杂度</li>
+<li>封装，同上，侧重隐藏信息</li>
+<li>模块化，抽象封装是单个，模块化则是对整个而言</li>
+<li>软件复用：可复用的东西变得更多</li>
+<li>可维护性：代码框架灵活</li>
+<li>软件模型的自然度：能对应于问题空间</li>
+</ol>
+<p>面向过程：过程即功能，特定功能集合，没有对象的概念。所有的东西会乱成一团。复用性差，太特殊</p>
+<ol start="2">
+<li>面向过程</li>
+</ol>
+<p>类型 对象（动态）</p>
+<p>系统向一个对象通信(即只调用一个对象的接口).然后不定地解决问题。</p>
+<blockquote>
+<p>不过是类的问题。</p>
+</blockquote>
+<ol start="3">
+<li>特性：多态</li>
+</ol>
+<p>函数名，类型。</p>
+<p>父类对象继承子类:<br>子类可以有两个选择<br>父类指针可以有两个指向<br>消息可以有多种发送选择</p>
+<p>访问控制的建议<br>内部的东西private, 比如类的数据成员，类内部使用的成员函数。</p>
+<p>调用未定义的类，指针+引用</p>
+<p>对象，动态和静态、全局和局部。</p>
+<ol start="4">
+<li>使用对象</li>
+</ol>
+<ul>
+<li><p>赋值</p>
+</li>
+<li><p>参数 const A &amp;</p>
+</li>
+<li><p>返回值</p>
+</li>
+<li><p>this</p>
+</li>
+<li><p>对象初始化，常量和引用一般不让初始化</p>
+</li>
+<li><p>构造函数和析构函数对应。</p>
+</li>
+<li><p>成员对象，拷贝构造函数</p>
+</li>
+<li><p>静态成员对象</p>
+</li>
+<li><p>f(const Data&amp; d){}, 然后 类的对象就分为两种：获取对象状态 const,外界元素均可访问，也要通过类的对象来操作，不够对应2那种参数可以进行使用；改变对象状态，需要类的对象来进行操作。</p>
+<blockquote>
+<p>换言之，是为常量对象而准备的</p>
+</blockquote>
+</li>
+<li><p>友元，不具有对称性和传递性，可以是类，全局函数或者类的成员函数（都行）。</p>
+<blockquote>
+<p>具体时间差没测试。效率上会消失多少？</p>
+</blockquote>
+</li>
+<li><p>类作为单独的模块，降低耦合。成员函数只向有限个元素发送。</p>
+</li>
+<li><p>作业：用类来实现矩阵和向量类型<br>矩阵：数据、行数、列数。<br>外界的获取接口：</p>
+</li>
+<li><p>获得行数和列数，int&amp; element(int x, int y), 这样是否可以通过地址来修改元素的值呢？<br><code>m.element(1,2) = m.element(1,2) + 1</code>, 不过说到底也是对的啊，进行的是值替代, 而这也是符合引用的定义的啊。</p>
+</li>
+<li><p>操作函数，对元素进行操作</p>
+</li>
+<li><p>构造函数: 对元素和空间进行检查。</p>
+</li>
+</ul>
+<blockquote>
+<p>注意：凡是函数，一定要记得对函数的输入数据进行检查和核对。</p>
+</blockquote>
+<p>向量：数据、维数。</p>
+<ul>
+<li>附录：补充<blockquote>
+<p>cout与cerr: 几次都遇到这种情况，不过我想今天应该明了。cout是控制台输出，当遇到endl，就不再缓冲，直接把数据输出。<br>cerr在命令行下，<br>linux下命令行截取的是cerr, 1&gt;&gt;log输出的是控制台，2&gt;&gt;输出的是错误信息 </p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>缓冲，刷新的概念，集中输出，防止刷屏。可以看到缓冲好的数据，生活中有很多这样的例子。比如，电视机显式，等一段画面到来时再显示图像。<br>注意指针和实体数组，对于指针单位长度和数组元素一样。然后，new开辟的空间只能用指针来做。</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -1984,206 +2172,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-BruteForce/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-course-BruteForce/" class="post-title-link" itemprop="url">algorithm course BruteForce</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:04:00 / 修改时间：09:19:39" itemprop="dateCreated datePublished" datetime="2019-09-19T09:04:00+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-1-数学归纳法溯源与公理化思维"><a href="#1-1-数学归纳法溯源与公理化思维" class="headerlink" title="1.1 数学归纳法溯源与公理化思维"></a>1.1 数学归纳法溯源与公理化思维</h2><blockquote>
-<p>首先我们需要考虑到自然数的定义到底是什么。</p>
-<p>一般地，定义$\empty $为0，注意这里参考了维基百科</p>
-</blockquote>
-<ol>
-<li><p>well-ordering principle</p>
-<blockquote>
-<p>任何非空的自然数集合必然有最小元素，既是最基本的原则。</p>
-</blockquote>
-</li>
-<li><p>只有一种数学归纳法</p>
-<blockquote>
-<p>基于良序定理，考虑一组关于自然数的命题P(n). 如果P(n)不是关于所有的自然数都成立，那么必然有P(n)存在最小反例。</p>
-<p>如果P(n)不对所有命题都成立，则</p>
-<p>$$\exist a \geq 2, P(1) \and P(2) \and … \and \neg P(a) = True$$</p>
-<p>否命题， P(n)对所有命题都成立</p>
-<p>$$\exist a \geq 2, P(1) \and P(2) \and … \and \neg P(a) = FALSE$$</p>
-<p>逆否命题</p>
-<p>$$\exist a \geq 2, P(1) \and P(2) \and … \and P(a-1) \rightarrow P(a) =True$$</p>
-</blockquote>
-</li>
-<li><p>一个错误的数学归纳法证明</p>
-</li>
-<li><p>算法正确性证明实例</p>
-</li>
-</ol>
-<h2 id="1-2-极限、实数与-epsilon-N"><a href="#1-2-极限、实数与-epsilon-N" class="headerlink" title="1.2 极限、实数与$\epsilon -N $"></a>1.2 极限、实数与$\epsilon -N $</h2><p>$\mathbb{N} \Rightarrow \mathbb{Z}$:   减法不封闭</p>
-<p>$\mathbb{Z} \Rightarrow \mathbb{Q}$:   除法不封闭</p>
-<p>$\mathbb{Q} \Rightarrow R$:   无限，无穷概念的引入</p>
-<p>$\mathbb{R} \Rightarrow \mathbb{C}$:  引入复数域，由于是否存在根的原因 </p>
-<h2 id="1-3-从算法角度重新审视数学的概念"><a href="#1-3-从算法角度重新审视数学的概念" class="headerlink" title="1.3 从算法角度重新审视数学的概念"></a>1.3 从算法角度重新审视数学的概念</h2><h4 id="1-一些基本概念"><a href="#1-一些基本概念" class="headerlink" title="1. 一些基本概念"></a>1. 一些基本概念</h4><ul>
-<li><p>自变量， 通常是自然数</p>
-</li>
-<li><p>单调性？</p>
-</li>
-<li><p>取整 $\lceil x \rceil , \lfloor x \rfloor$, 问题的量往往是自然数级别的</p>
-</li>
-<li><p>对数$\log{n}$</p>
-<blockquote>
-<p>与之相关的现象：</p>
-<ol>
-<li><p>折半，当问题划分规模为n的问题，经过折半查找，大概$\log{n}$次循环问题的规模降为常数。</p>
-</li>
-<li><p>完美二叉树，对于一个n个节点的完美二叉树，他的高度为$\lfloor \log{n} \rfloor$.</p>
-<blockquote>
-<ul>
-<li><p>完美二叉树的概念</p>
-<p>所有外部节点的深度都相同</p>
-</li>
-</ul>
-</blockquote>
-</li>
-<li><p>二进制数的比特数。一个十进制的自然数的二进制表示所需的比特数为$\lfloor \log{n} \rfloor + 1$.</p>
-<blockquote>
-<p>从数值的角度，二进制数每向右移动一位，比特数减1，数值变为原来的$\frac{1}{2}$</p>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-</li>
-<li><p>阶乘</p>
-<blockquote>
-<p>对于n个完全不同的数，其全排列的个数为$n!$.</p>
-<p>如果阶乘是连乘形式，通常对它取对数变成求和形式。</p>
-<p>这里有个Stirling公式，因为平时用的不多，这里就不补充了</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="2-常用级数求和"><a href="#2-常用级数求和" class="headerlink" title="2. 常用级数求和"></a>2. 常用级数求和</h3><p>求和与算法分析往往关系非常密切。</p>
-<ul>
-<li><p>多项式级数</p>
-<ol>
-<li>$\sum_{i=1}^n {i} = \frac {n(n+1)}{2}$</li>
-<li>$\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}$</li>
-<li>$\sum_{i=1}^n i^k = \Theta (\frac{1}{k+1} n^{k+1})$</li>
-</ol>
-</li>
-<li><p>几何级数，等比数列，只考虑最大的那项即可</p>
-</li>
-<li><p>算术几何级数</p>
-<blockquote>
-<p>$\sum_{i=1}^k i *2^i = (k-1) 2^{k+1} + 2$</p>
-</blockquote>
-</li>
-<li><p>调和级数</p>
-<blockquote>
-<p>$\sum_{i=1}^k \frac{1}{i} = \ln k + \Upsilon + \epsilon$</p>
-</blockquote>
-</li>
-<li><p>斐波拉数列</p>
-</li>
-</ul>
-<h3 id="3-期望值，-指标随机变量，期望的线性特征"><a href="#3-期望值，-指标随机变量，期望的线性特征" class="headerlink" title="3. 期望值， 指标随机变量，期望的线性特征"></a>3. 期望值， 指标随机变量，期望的线性特征</h3><h3 id="4-蛮力算法"><a href="#4-蛮力算法" class="headerlink" title="4.  蛮力算法"></a>4.  <font color="red">蛮力算法</font></h3><ol>
-<li><p>微博名人问题: 寻找图中所有人都关注，但是不关注别人的人。</p>
-<blockquote>
-<p>BF1: 对每个人是否是名人进行判断，时间复杂度为$O(n^2)$</p>
-<p>BF2: 对每一对关系进行思考，根据一对关系，进行将名人进行筛选</p>
-<p>本质：集合中的二元关系，所以有算法下界O(n^2) ??</p>
-</blockquote>
-</li>
-<li><p>频繁项问题特例(出现次数超过一半)的线性时间解</p>
-<blockquote>
-<p>注意这里实际利用了$f \geq n/2$ 这件事，扩展思考 <strong>$f \geq n/k$</strong></p>
-</blockquote>
-</li>
-<li><p>候选：交换左右部分，最大和连续子串问题，Maxima问题的非分治解</p>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -2236,7 +2224,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">90</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

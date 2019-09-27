@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://augf.github.io/2019/09/24/tensorflow-variable/</loc>
+    <lastmod>2019-09-26</lastmod>
+  </url>  <url>
     <loc>https://augf.github.io/2019/09/18/git-using/</loc>
-    <lastmod>2019-09-22</lastmod>
+    <lastmod>2019-09-24</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/12/vscode-using/</loc>
     <lastmod>2019-09-22</lastmod>

@@ -71,19 +71,19 @@
     })();
 </script>
 
-  <meta name="description" content="spark中map就是把数据集分配到各个节点上，然后各个节点执行  思考Partioner的过程是什么  Partitioner感觉上是全局变量  HashPartitioner就是把Hash桶做成了  inputSplit, 一定要比它大，这样就可以使得每一部分执行的数据少 flatMap并没有那么简单，也就是说flatMap = map + flatten  flatMap(t=&amp;gt;f(t">
-<meta name="keywords" content="thinking,spark">
+  <meta name="description" content="https://blog.csdn.net/shenxiaolu1984/article/details/52815641  tensorflow变量相关  https://blog.csdn.net/huqinweI987/article/details/82771521  tensorflow自动训练简介和选择训练  概览tf.Optimizer只优化tf.GraphKeys.TRAINABL">
+<meta name="keywords" content="deeplearning,tensorflow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spark study thinking">
-<meta property="og:url" content="https://augf.github.io/2019/09/19/spark-study-thinking-1/index.html">
+<meta property="og:title" content="tensorflow variable">
+<meta property="og:url" content="https://augf.github.io/2019/09/24/tensorflow-variable/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
-<meta property="og:description" content="spark中map就是把数据集分配到各个节点上，然后各个节点执行  思考Partioner的过程是什么  Partitioner感觉上是全局变量  HashPartitioner就是把Hash桶做成了  inputSplit, 一定要比它大，这样就可以使得每一部分执行的数据少 flatMap并没有那么简单，也就是说flatMap = map + flatten  flatMap(t=&amp;gt;f(t">
+<meta property="og:description" content="https://blog.csdn.net/shenxiaolu1984/article/details/52815641  tensorflow变量相关  https://blog.csdn.net/huqinweI987/article/details/82771521  tensorflow自动训练简介和选择训练  概览tf.Optimizer只优化tf.GraphKeys.TRAINABL">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-19T05:10:05.096Z">
+<meta property="og:updated_time" content="2019-09-26T08:56:04.854Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spark study thinking">
-<meta name="twitter:description" content="spark中map就是把数据集分配到各个节点上，然后各个节点执行  思考Partioner的过程是什么  Partitioner感觉上是全局变量  HashPartitioner就是把Hash桶做成了  inputSplit, 一定要比它大，这样就可以使得每一部分执行的数据少 flatMap并没有那么简单，也就是说flatMap = map + flatten  flatMap(t=&amp;gt;f(t">
-  <link rel="canonical" href="https://augf.github.io/2019/09/19/spark-study-thinking-1/">
+<meta name="twitter:title" content="tensorflow variable">
+<meta name="twitter:description" content="https://blog.csdn.net/shenxiaolu1984/article/details/52815641  tensorflow变量相关  https://blog.csdn.net/huqinweI987/article/details/82771521  tensorflow自动训练简介和选择训练  概览tf.Optimizer只优化tf.GraphKeys.TRAINABL">
+  <link rel="canonical" href="https://augf.github.io/2019/09/24/tensorflow-variable/">
 
 
 <script id="page-configurations">
@@ -97,7 +97,7 @@
   };
 </script>
 
-  <title>spark study thinking | AugF's Notes</title>
+  <title>tensorflow variable | AugF's Notes</title>
   
 
 
@@ -284,7 +284,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/spark-study-thinking-1/">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/24/tensorflow-variable/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eugene Wang">
@@ -296,7 +296,7 @@
       <meta itemprop="name" content="AugF's Notes">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">spark study thinking
+        <h2 class="post-title" itemprop="name headline">tensorflow variable
 
           
         </h2>
@@ -312,11 +312,19 @@
                 
               
 
-              <time title="创建时间：2019-09-19 13:09:17 / 修改时间：13:10:05" itemprop="dateCreated datePublished" datetime="2019-09-19T13:09:17+08:00">2019-09-19</time>
+              <time title="创建时间：2019-09-24 16:23:33" itemprop="dateCreated datePublished" datetime="2019-09-24T16:23:33+08:00">2019-09-24</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-26 16:56:04" itemprop="dateModified" datetime="2019-09-26T16:56:04+08:00">2019-09-26</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -325,14 +333,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/thinking/" itemprop="url" rel="index"><span itemprop="name">thinking</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/tensorflow/" itemprop="url" rel="index"><span itemprop="name">tensorflow</span></a></span>
 
                 
                 
@@ -359,160 +367,51 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>spark中map就是把数据集分配到各个节点上，然后各个节点执行</p>
+        <p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoZW54aWFvbHUxOTg0L2FydGljbGUvZGV0YWlscy81MjgxNTY0MQ==" title="https://blog.csdn.net/shenxiaolu1984/article/details/52815641">https://blog.csdn.net/shenxiaolu1984/article/details/52815641<i class="fa fa-external-link"></i></span></p>
 <blockquote>
-<p>思考Partioner的过程是什么</p>
+<p>tensorflow变量相关</p>
 </blockquote>
-<p>Partitioner感觉上是全局变量</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1cWlud2VJOTg3L2FydGljbGUvZGV0YWlscy84Mjc3MTUyMQ==" title="https://blog.csdn.net/huqinweI987/article/details/82771521">https://blog.csdn.net/huqinweI987/article/details/82771521<i class="fa fa-external-link"></i></span></p>
 <blockquote>
-<p>HashPartitioner就是把Hash桶做成了</p>
+<p>tensorflow自动训练简介和选择训练</p>
 </blockquote>
-<p>inputSplit, 一定要比它大，这样就可以使得每一部分执行的数据少</p>
-<p>flatMap并没有那么简单，也就是说<br>flatMap = map + flatten</p>
-<blockquote>
-<p>flatMap(t=&gt;f(t))<br>f返回的是什么类型，最终结果就是什么类型</p>
-</blockquote>
-<p>reduce(x+y=&gt;x)<br>reduceByKey(x+y=&gt;x)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mapPartitions(iter =&gt; &#123;    // mapPartitions即 Mapper端的数据进行了Combine计数</span><br><span class="line">      val pair = mutable.Map.empty[WrapArray, Long]</span><br><span class="line">      while (iter.hasNext) &#123;</span><br><span class="line">        val arr = new WrapArray(iter.next())</span><br><span class="line">        val value = pair.get(arr)</span><br><span class="line">        if (value == None) &#123;</span><br><span class="line">          pair(arr) = 1L</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          pair(arr) = value.get + 1L</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      pair.iterator   // 这种写法很精妙，进行学习</span><br><span class="line">    &#125;)</span><br><span class="line">    // 每次返回一个迭代器，下次还可以考虑继续使用这个迭代器</span><br></pre></td></tr></table></figure>
-
-<p>基本类型的迭代器可以定义</p>
-<p>自定义迭代器<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1hpYW9IZWlCbGFjay9hcnRpY2xlL2RldGFpbHMvNzcwMTQ2MjY=" title="https://blog.csdn.net/XiaoHeiBlack/article/details/77014626">https://blog.csdn.net/XiaoHeiBlack/article/details/77014626<i class="fa fa-external-link"></i></span></p>
-<p>groupByKey(): RDD, Iterable[V]<br>reduceByKey(): U+U=&gt;U</p>
-<blockquote>
-<p>思考迭代器</p>
-</blockquote>
-<p>FPGrowth思路整理</p>
-<p>MLlib做法：</p>
-<ol>
-<li>产生每个分区的数据集<blockquote>
-<p>val part = partitioner.getPartition(item), 这一步依然感觉很懵逼?<br>mapreduce中map的过程实际上就不过是map的数据集的个体变大的。所以按照自己想的就是<br>代码这里的感觉就是用的默认集群的？？？</p>
+<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>tf.Optimizer只优化tf.GraphKeys.TRAINABLE_VARIABLES变量</p>
+<p>init=tf.initialize_all_variables()<br>sess.run(init)  // 初始化之后Variable中的值生成完毕，不再变化</p>
+<p>v = tf.all_variables() // 查看所有tf.GraphKeys.VARIABLES<br>v = tf.get_collection(tf.GraphKeys.VARIABLES)</p>
+<h2 id="各类Variable"><a href="#各类Variable" class="headerlink" title="各类Variable"></a>各类Variable</h2><ul>
+<li>获取训练的变量 方式1<ul>
+<li>tf.all_variables()<blockquote>
+<p>直接在某种状态下进行运行即可</p>
 </blockquote>
 </li>
-<li>将每个分区的数据集合并为一棵子树</li>
-<li>将所有分区合并为一个大的子树</li>
-<li>从这个大的子树中提取对应的频繁项集</li>
-</ol>
-<p>defaultParallelism(): cluster default<br>trait: 相当于接口</p>
-<p>sc.text(): 这里默认的也是这个参数</p>
-<p>FPNewDef做法</p>
-<ol>
-<li>产生对应分区的数据集</li>
-<li>对每个分区进行相同合并</li>
-<li>数据重新写为(key, value)</li>
-<li>映射到对应的分区<blockquote>
-<p>所以就要用分区内的排序来做<br>repartitionAndSortWithinPartitions<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC81OTA2ZGRiNWJmY2Q=" title="https://www.jianshu.com/p/5906ddb5bfcd">https://www.jianshu.com/p/5906ddb5bfcd<i class="fa fa-external-link"></i></span></p>
-</blockquote>
+<li>tf.trainable_variables()</li>
+</ul>
 </li>
-<li>分区内根据顺序收集，从而形成条件树<blockquote>
-<p>这里可以直接根据收集结果来产生频繁项集啊</p>
-</blockquote>
-</li>
-</ol>
-<p>NewIdea</p>
-<ol>
-<li>产生分区的数据集</li>
-<li>可选，Combine(需要开销)</li>
-<li>数据重新分为(key, value)</li>
-<li>reduceByKey<blockquote>
-<p>收集对应的key，然后直接产生条件树</p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>因为类没有实现迭代器的特性，所以不能这样用？ 居然可以用排序就可以了，牛逼，牛逼<br>如果是对所有的元素做某种运算，但不需要产生最后的结果，只需要foreach</p>
-</blockquote>
-<blockquote>
-<p>第一个想法，一个是将每个(key,value)的value映射为一个FPNewNode, 然后添加，需要重新改写数据结构<br>第二个想法，reduceByKey，先收集到一个集合，然后再对该集合进行下一步做法</p>
-</blockquote>
-<p>? spark任务调用顺序</p>
-<p>spark-shell –master spark://slave033:7077 </p>
-<p>例子：<br>1 2 3 4<br>1 2 4<br>2 3<br>2 4</p>
-<p>partion: 2</p>
-<p>1:<br> 1 2 3 4  -&gt;<br> 1 2 4</p>
-<p>2:<br> 2 3<br> 2 4</p>
-<p>总结：<br>FPTree中的extract是对所有的项都要来直接求解，试着不需要。只需要对某一个地方进行求解即可。<br>然后这里的 extract又是个递归</p>
-<p>summries中包含所有元素</p>
-<blockquote>
-<p>怎么生成数据？关于大数据集的<br>slave033上的文件和hdfs上的文件有什么区别？</p>
-<blockquote>
-<p>这个问题实际上是想问这里用到的是啥？</p>
-</blockquote>
-</blockquote>
-<p>本地进行模拟运行</p>
-<h2 id="学到的知识"><a href="#学到的知识" class="headerlink" title="学到的知识"></a>学到的知识</h2><h3 id="1-spark-default-parallelism"><a href="#1-spark-default-parallelism" class="headerlink" title="1. spark.default.parallelism"></a>1. spark.default.parallelism</h3><blockquote>
-<p>如果不进行设置，默认值是底层HDFS的block数量（HDFS中有设置）; 一般这是个特别需要设置； 在默认情况下，非常小，如果不调节它就起不到分布式的效果了。通常来说也不会只调节到num_executors*executor-cores，因为相当于只给每个节点分配了对应很少的值，所以实际上的话，是在2~3倍。为什么呢，因为有的task运行速度快，有的慢，为了避免快的执行完等慢的，所以可以考虑多加进行设置，这样的话就能充分利用到集群了。<br>? hdfs block的数量？？<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRlYmxvZy5jb20vYXJjaGl2ZXMvMTY1OS5odG1s" title="https://www.iteblog.com/archives/1659.html">https://www.iteblog.com/archives/1659.html<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-<h3 id="2-scala语法"><a href="#2-scala语法" class="headerlink" title="2. scala语法"></a>2. scala语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class FPTree</span><br><span class="line">  def merge(other: FPTree[T]): this.type = &#123;</span><br><span class="line">    other.transactions.foreach &#123; case (t, c) =&gt;</span><br><span class="line">      add(t, c)  // 这里就默认的是this.add()</span><br><span class="line">    &#125;</span><br><span class="line">    this</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-Spark参数配置优先级"><a href="#3-Spark参数配置优先级" class="headerlink" title="3. Spark参数配置优先级"></a>3. Spark参数配置优先级</h3><ol>
-<li>SparkConf</li>
-<li>spark-submit  spark-shell</li>
-<li>spark-defaults.conf<blockquote>
-<p>在文件中进行配置</p>
-</blockquote>
-<h3 id="4-零散知识点"><a href="#4-零散知识点" class="headerlink" title="4. 零散知识点"></a>4. 零散知识点</h3></li>
-</ol>
-<h4 id="4-1-提交"><a href="#4-1-提交" class="headerlink" title="4.1 提交"></a>4.1 提交</h4><ol>
-<li>spark-shell</li>
-</ol>
-<ul>
-<li>–master spark://host:port本身的运行模式</li>
-<li>–deploy-mode: driver端位于哪里</li>
-<li>dirver-memory, dirver-cores<blockquote>
-<p>driver-memory, driver-cores指的是driver端执行的情况 </p>
-</blockquote>
+<li>获取训练的变量 方式2<ul>
+<li>tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)</li>
+<li>优化特定的变量:  optimizer.minimize(cost, var_list)</li>
+</ul>
 </li>
 </ul>
-<ol start="2">
-<li>运行模式</li>
-</ol>
-<ul>
-<li>standalone模式</li>
-<li>spark on yarn, dirver在本地</li>
-<li>spark on yarn, dirver在集群<blockquote>
-<p>其实standalone和其他没有什么区别吧，主要就在于standalone是主模式，而yarn各个节点都相同</p>
-</blockquote>
-</li>
-</ul>
-<ol start="3">
-<li>yarn</li>
-</ol>
-<p>yarn: 整个资源管理在一个资源池中，想要获取资源通过在资源池中进行获取</p>
+<p>sess: how to get a default sess</p>
+<p>tf.gradients()</p>
 <blockquote>
-<p>这里yarn把整个集群集合在了一起，具体yarn是怎么执行的需要看居然的yarn的东西。</p>
+<p>需要注意的是grad_weights这里返回得到的是list</p>
 </blockquote>
-<p>然后，关于yarn的就有几个特别的参数：</p>
-<p>worker是资源分配单位<br>executor是任务执行单位</p>
-<p>executor的内存主要分为几块</p>
+<p>使用一个未知的函数时，请务必详细地查看参数</p>
+<p>想想tensorflow, 真的是厉害， 把模型具体给抽象出来</p>
+<p>做事之前先想清楚，比如说对这段时间科研进行总结的话</p>
+<p>一件事情不要测试过多，过于复杂</p>
+<p>首要目标应该是把事情做完。</p>
+<p>而且遇到挫折，不要扔，可以暂时转移，应该是想如何解决问题</p>
+<p>ctrl+shift+f 全局搜索</p>
+<p>一定要精确度到最细</p>
+<p>而且要把测试代码单独拿出来，没做一次改变进行一次测试</p>
+<p>git 使用中扩展思路总结:</p>
 <ol>
-<li>执行自己的代码所需要的内存,默认值20%</li>
-<li>shuffle所需要的内存，默认20%</li>
-<li>持久化的内存,默认60%</li>
+<li>代码在当前版本，然后进行两部分分别测试，那么可以考虑创建两个分支</li>
+<li>代码提交的版本最好是能够运行的</li>
 </ol>
-<p>资源参数调优:</p>
-<ol>
-<li><p>num-executors: 总的executor数</p>
-<blockquote>
-<p>总共的任务执行单元</p>
-</blockquote>
-</li>
-<li><p>executor-cores </p>
-</li>
-</ol>
-<h3 id="inputPath"><a href="#inputPath" class="headerlink" title="inputPath"></a>inputPath</h3><blockquote>
-<p>在哪里？<br>hdfs://master:port/根路径</p>
-</blockquote>
-<blockquote>
-<p>默认情况下为master节点上的9000端口</p>
-</blockquote>
-<p>注意到一个问题： aggreateByKey一直都是根据key来处理<br>reduceByKey(partioner, <em>+</em>) 可以使结果放在对应的位置上</p>
-<p>学长的代码，想法依然是那样的。感觉上还是最终落在了收集fpTree上，而且并没有什么优化啊。</p>
-<p>前面汇聚相同的什么用?</p>
-<p>在倒数第二个的时候依然是形成fpTree,然后提取</p>
-<h2 id="scala编程"><a href="#scala编程" class="headerlink" title="scala编程"></a>scala编程</h2><p>注意区分Iterator和</p>
-<h2 id="师兄代码的想法"><a href="#师兄代码的想法" class="headerlink" title="师兄代码的想法"></a>师兄代码的想法</h2><p>建树开销，即考虑的是</p>
-<p>spark-submit 默认参数在 spark-defaults.conf中<br>？ master是否进行资源的分配</p>
-<p>–dirver-memory<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vd2Vpd2VpZmVuZy9wLzgwNzM1NTMuaHRtbA==" title="https://www.cnblogs.com/weiweifeng/p/8073553.html">https://www.cnblogs.com/weiweifeng/p/8073553.html<i class="fa fa-external-link"></i></span></p>
 
     </div>
 
@@ -531,7 +430,7 @@
     <strong>本文作者： </strong>Eugene Wang</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://augf.github.io/2019/09/19/spark-study-thinking-1/" title="spark study thinking">https://augf.github.io/2019/09/19/spark-study-thinking-1/</a>
+    <a href="https://augf.github.io/2019/09/24/tensorflow-variable/" title="tensorflow variable">https://augf.github.io/2019/09/24/tensorflow-variable/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -546,9 +445,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/thinking/" rel="tag"><i class="fa fa-tag"></i> thinking</a>
+              <a href="/tags/deeplearning/" rel="tag"><i class="fa fa-tag"></i> deeplearning</a>
             
-              <a href="/tags/spark/" rel="tag"><i class="fa fa-tag"></i> spark</a>
+              <a href="/tags/tensorflow/" rel="tag"><i class="fa fa-tag"></i> tensorflow</a>
             
           </div>
         
@@ -558,8 +457,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/09/19/spark-study-thinking/" rel="next" title="spark study thinking">
-                  <i class="fa fa-chevron-left"></i> spark study thinking
+                <a href="/2019/09/19/linux/" rel="next" title="linux">
+                  <i class="fa fa-chevron-left"></i> linux
                 </a>
               
             </div>
@@ -567,10 +466,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/09/19/machinelearning-gradient-descent/" rel="prev" title="machinelearning gradient descent">
-                  machinelearning gradient descent <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -626,7 +521,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#学到的知识"><span class="nav-number">1.</span> <span class="nav-text">学到的知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-spark-default-parallelism"><span class="nav-number">1.1.</span> <span class="nav-text">1. spark.default.parallelism</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-scala语法"><span class="nav-number">1.2.</span> <span class="nav-text">2. scala语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Spark参数配置优先级"><span class="nav-number">1.3.</span> <span class="nav-text">3. Spark参数配置优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-零散知识点"><span class="nav-number">1.4.</span> <span class="nav-text">4. 零散知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-提交"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 提交</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inputPath"><span class="nav-number">1.5.</span> <span class="nav-text">inputPath</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scala编程"><span class="nav-number">2.</span> <span class="nav-text">scala编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#师兄代码的想法"><span class="nav-number">3.</span> <span class="nav-text">师兄代码的想法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各类Variable"><span class="nav-number">2.</span> <span class="nav-text">各类Variable</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->

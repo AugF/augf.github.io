@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">89</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">90</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,209 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-thinking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/algorithm-thinking/" class="post-title-link" itemprop="url">algorithm-thinking</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 08:49:01 / 修改时间：08:49:49" itemprop="dateCreated datePublished" datetime="2019-09-19T08:49:01+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/thinking/" itemprop="url" rel="index"><span itemprop="name">thinking</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="v2"><a href="#v2" class="headerlink" title="v2"></a>v2</h2><blockquote>
+<ol>
+<li>C++ STL</li>
+<li>数据结构基础</li>
+<li>图</li>
+<li>暴力求解法<ul>
+<li>简单枚举</li>
+<li>回溯法</li>
+</ul>
+</li>
+<li>高效算法设计</li>
+<li>动态规划初步</li>
+<li>数学概念与方法</li>
+<li>图论模型与算法</li>
+<li>高级专题</li>
+</ol>
+</blockquote>
+<h3 id="4-暴力求解法"><a href="#4-暴力求解法" class="headerlink" title="4. 暴力求解法"></a>4. 暴力求解法</h3><h4 id="4-1-简单枚举"><a href="#4-1-简单枚举" class="headerlink" title="4.1 简单枚举"></a>4.1 简单枚举</h4><blockquote>
+<p>一般来说，也需要对问题进行一定分析。从多个角度入手分析最小的枚举范围。</p>
+</blockquote>
+<h4 id="4-2-枚举排列"><a href="#4-2-枚举排列" class="headerlink" title="4.2 枚举排列"></a>4.2 枚举排列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">*S</span><br><span class="line">*A</span><br><span class="line">main()&#123;</span><br><span class="line">S=&#123;1,2,..,9&#125;</span><br><span class="line">A=&quot;&quot;</span><br><span class="line">print_permutation(A,S);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print_permutation(A, S)&#123;</span><br><span class="line">	if(S==null)&#123;</span><br><span class="line">		print A;</span><br><span class="line">	&#125;</span><br><span class="line">	else &#123;</span><br><span class="line">		for v in sorted(S):</span><br><span class="line">			print_permutation(A+&quot;v&quot;,S-&#123;v&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">在具体中的运用，比如C++</span><br><span class="line">数组A，不具有长度信息，同时可以考虑用临时变量</span><br></pre></td></tr></table></figure>
+
+<p>考虑生成可重集的排列</p>
+<blockquote>
+<p>tips: 比如S中A出现的次数是否用完</p>
+</blockquote>
+<ul>
+<li>排列子集生成</li>
+</ul>
+<p>n!</p>
+<blockquote>
+<p>怎么输出一棵解答树：</p>
+<p>n</p>
+<p>*a</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt; print_tree(t)&#123;</span><br><span class="line">&gt; </span><br><span class="line">&gt; if (t&gt;n) &#123;</span><br><span class="line">&gt; </span><br><span class="line">&gt; ​	printf(X)</span><br><span class="line">&gt; </span><br><span class="line">&gt; &#125; else &#123;</span><br><span class="line">&gt; </span><br><span class="line">&gt; for(int i=t;i&lt;=n;i++)&#123;</span><br><span class="line">&gt; </span><br><span class="line">&gt; ​	swap(x[i],x[t]);</span><br><span class="line">&gt; </span><br><span class="line">&gt; ​	print_tree(t+1);</span><br><span class="line">&gt; </span><br><span class="line">&gt; ​	swap(x[i],x[t]);</span><br><span class="line">&gt; </span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>下一个排列：</p>
+<p>枚举排列常见方法有两种：一是递归枚举，二是用STL中的next_permutation.</p>
+<h4 id="4-3-子集生成"><a href="#4-3-子集生成" class="headerlink" title="4.3 子集生成"></a>4.3 子集生成</h4><ul>
+<li><p>增量构造法</p>
+<blockquote>
+<p>实现规定A中的集合按升序排列好。</p>
+<p>for循环的理解还不到位，阅读代码能力还有待加强。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">void print_subset(int n, int* A, int cur) &#123;</span><br><span class="line">    for(int i = 0; i &lt; cur; i++) printf(&quot;%d &quot;, A[i]); // 打印当前集合</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    if()</span><br><span class="line">    int s = cur ? A[cur-1]+1 : 0; // 确定当前元素的最小可能值</span><br><span class="line">    // 下一个元素一个是当前的前一个元素加一，并开始排列。否则就为0；隐含地处理了cur为0，无A[cur-1]的情况</span><br><span class="line">    for(int i = s; i &lt; n; i++) &#123;</span><br><span class="line">        A[cur] = i;</span><br><span class="line">        print_subset(n, A, cur+1); // 递归构造子集</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">n=4</span><br><span class="line">0</span><br><span class="line">0 1</span><br><span class="line">0 1 2</span><br><span class="line">0 1 2 3</span><br><span class="line">0 1 3</span><br><span class="line">0 2 3</span><br><span class="line">0 3</span><br><span class="line">1</span><br><span class="line">1 2</span><br><span class="line">1 2 3</span><br><span class="line">1 3</span><br><span class="line">2</span><br><span class="line">2 3</span><br><span class="line">3</span><br><span class="line"></span><br><span class="line">在枚举子集的增量法中，需要使用定序的方法，避免同一个集合出现两次。</span><br><span class="line"></span><br><span class="line">可以发现这个框架不适用，特别是当子集不是给定的自然数，而是给定的集合时。</span><br><span class="line"></span><br><span class="line">改进版</span><br><span class="line"></span><br><span class="line">S=sorted(S)=&#123;0,2,3,4&#125;</span><br><span class="line">n=len(S)</span><br><span class="line">print_subset(n,A,S,0,0)</span><br><span class="line">print_subset(n,*A,S,cur,s)&#123;</span><br><span class="line">	// 不需要界，中间过程也用于输出。</span><br><span class="line">	for(int i=0;i&lt;cur) print(A[i]);</span><br><span class="line">	printf(&quot;\n&quot;)</span><br><span class="line">	// </span><br><span class="line">	for(int j=cur;j&lt;n;j++) &#123;</span><br><span class="line">		A[cur]=S[i];</span><br><span class="line">		print_subset(n,A,S,cur+1,i+1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">// 可用树来直观检验和表示循环的结构。</span><br><span class="line">// 还有测试时，作为一般递归函数，在i=0,1,2就有表示了。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>位向量法</p>
+<blockquote>
+<p>位向量法其实更适合表示即给定子集，并且子集元素非自然数那种。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">并非构造子集A本身，而是构造一个位向量B[i],其中B[i]=1,当且仅当i在子集A中</span><br><span class="line">*B</span><br><span class="line">void print_subset(n,B,cur)&#123;</span><br><span class="line">	if(cur==n) &#123;</span><br><span class="line">		for(b in B):</span><br><span class="line">			if(b) printf(b);</span><br><span class="line">		printf(&quot;\n&quot;);	</span><br><span class="line">	&#125;</span><br><span class="line">	else&#123;</span><br><span class="line">	// 两种情况，直接枚举</span><br><span class="line">		B[cur]=1;</span><br><span class="line">		print_subset(n,B,cur+1);</span><br><span class="line">		B[cur]=0;</span><br><span class="line">		print_subset(n,B,cur+1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>二进制法</p>
+<blockquote>
+<p>突发奇想，想到二进制数的表示方法为 1&lt;&lt;n， n个1就为 1&lt;&lt;(n+1)-1；</p>
+<p>对于位运算，其实考虑的就是数组的两个元素可能做哪些运算（在0,1层面上）？</p>
+<p>基本上就三种：</p>
+<ol>
+<li>检查该位的状态，用与&amp;</li>
+<li>将该位置1。考虑用或|，或者加上一个数（速度慢）</li>
+<li>将该位置0。考虑用对称差^，不行的话减去一个数（速度慢）</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h4 id="4-4-回溯法"><a href="#4-4-回溯法" class="headerlink" title="4.4 回溯法"></a>4.4 回溯法</h4><blockquote>
+<p>回溯法的关键，根据框架去思考问题。首先把问题转变为子集树或者排列树。然后找对应的约束。</p>
+</blockquote>
+<ul>
+<li>八皇后问题</li>
+</ul>
+<blockquote>
+<p>第一种方法：从64个格子中寻找子集或者寻找八个满足的格子。分别对应于三个约束。</p>
+<p>位置+二维就可以形式化为排列数，这样就去掉了两个条件</p>
+<p>限制条件为，[i,x[i]]。从某种意义上只需要和上一个元素比较是否在斜线上。就是两点斜率的绝对值为1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; *x = &#123;1,2,..,8&#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt; search(t)&#123;</span><br><span class="line">&gt; 	if (t &gt; n) &#123;</span><br><span class="line">&gt; 		printf(&quot;sucess&quot;)</span><br><span class="line">&gt; 	&#125;</span><br><span class="line">&gt; 	else &#123;</span><br><span class="line">&gt; 		for(int j=t;j&lt;=n;j++)&#123;</span><br><span class="line">&gt; 			</span><br><span class="line">&gt; 		&#125;</span><br><span class="line">&gt; 	&#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>这样有点太定势思维了，最重要的是掌握回溯法的精髓，即只需要状态的前进和恢复。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; v1: 因为这里分析出来是排列，那么可以考虑只是行被排除了。如果走到递归边界。</span><br><span class="line">&gt; 首先，从初试节点开始，每个值都可以取，然后检查现在的每个节点所取的值是否与之前节点的值冲突。如果没有冲突，递归执行。</span><br><span class="line">&gt; </span><br><span class="line">&gt; v2: 没选中一个节点，对该节点周围的所有节点进行染色；所以当前仅当这些点没被染色，才可选这些节点。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li><p>判断素数环</p>
+<blockquote>
+<p>法一、使用生成-测试法。即先将素数生成好，然后再判断是否为素数。生成所有的排列，然后测试所有的排列是否满足情况</p>
+<p>法二、使用回溯法，但是值得注意的是在这里直接使用会所。然后判断每个元素</p>
+<blockquote>
+<p>由此也可以看出，对于生成测试法，时间复杂度就是所有情况；而对于回溯法可以去掉很多情况。所以当最坏情况的枚举量很大时，应该考虑采用回溯法而不是生成-测试法。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; 回溯法</span><br><span class="line">&gt; int dfs(int t)&#123;</span><br><span class="line">&gt; 	if(S==null)&#123; // 递归到达最后一层</span><br><span class="line">&gt; 		print A;</span><br><span class="line">&gt; 	&#125;</span><br><span class="line">&gt; 	else &#123;</span><br><span class="line">&gt; 		// 这里for循环对应于子树的个数</span><br><span class="line">&gt; 		for v in sorted(S): // 对于众多的变形，就是很多限制排除掉一些不可能的情况</span><br><span class="line">&gt; 			print_permutation(A+&quot;v&quot;,S-&#123;v&#125;);</span><br><span class="line">&gt; 	&#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>困难的串</p>
+</li>
+<li><p>带宽</p>
+</li>
+<li><p>天平难题</p>
+</li>
+</ul>
+<h4 id="4-5-路径寻找问题"><a href="#4-5-路径寻找问题" class="headerlink" title="4.5 路径寻找问题"></a>4.5 路径寻找问题</h4><h4 id="4-6-迭代加深搜索"><a href="#4-6-迭代加深搜索" class="headerlink" title="4.6 迭代加深搜索"></a>4.6 迭代加深搜索</h4><h3 id="5-高级篇"><a href="#5-高级篇" class="headerlink" title="5. 高级篇"></a>5. 高级篇</h3><ul>
+<li>再谈排序与检索</li>
+<li>递归与分治</li>
+<li>贪心法</li>
+<li>算法设计与优化策略</li>
+<li>动态规划初步</li>
+<li>数学概念与方法</li>
+<li>图论模型与算法</li>
+</ul>
+<h4 id="5-1-算法分析设计初步"><a href="#5-1-算法分析设计初步" class="headerlink" title="5.1 算法分析设计初步"></a>5.1 算法分析设计初步</h4><p>一种直觉的柑橘</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -5625,216 +5828,6 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/18/git-using/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/18/git-using/" class="post-title-link" itemprop="url">git using</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-18 14:24:20" itemprop="dateCreated datePublished" datetime="2019-09-18T14:24:20+08:00">2019-09-18</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-23 07:36:12" itemprop="dateModified" datetime="2019-09-23T07:36:12+08:00">2019-09-23</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>更全面的请参考<br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTUvMTIvZ2l0LWNoZWF0LXNoZWV0Lmh0bWw=" title="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html<i class="fa fa-external-link"></i></span></p>
-<h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>Workspace：工作区<br>Index / Stage：暂存区  add<br>Repository：仓库区（或本地仓库） commit/fetch<br>Remote：远程仓库</p>
-<p>git reflog 查看当前分支的最近几次提交<br>git log 查看所有commit的记录</p>
-<h2 id="开始git之旅"><a href="#开始git之旅" class="headerlink" title="开始git之旅"></a>开始git之旅</h2><ol>
-<li>github上新建reposity，假设仓库名为Inbox</li>
-<li>本地化 <ul>
-<li>配置 <br><br>git config –global user.name “yourname” <br><br>git config –global user.email “youremail” <br><br><font color="red">git config –global core.editor vim</font> <br><blockquote>
-<p>这一点很重要，可以摆出Git自带的愚蠢的GNO的困扰</p>
-</blockquote>
-<ul>
-<li>两种方式<ul>
-<li>git init <br><br>git remote add origin <code>http://website://repo.git</code> <br><blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvRGVzaWduUGF0dGVybnMuZ2l0" title="https://github.com/AugF/DesignPatterns.git">https://github.com/AugF/DesignPatterns.git<i class="fa fa-external-link"></i></span><br>git push -u origin master</p>
-</blockquote>
-</li>
-<li>git clone <code>http://website://repo.git</code><h2 id="多人开发思路："><a href="#多人开发思路：" class="headerlink" title="多人开发思路："></a>多人开发思路：</h2>git branch查看分支</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>git checkout -b fpm， 创建分支并转到分支<br>git checkout -d fpm,  删除分支</p>
-<p>所有的修改操作都在fpm分支上<br>master负责merge远程分支</p>
-<ol>
-<li>希望master分支更新fpm分支上的内容<ul>
-<li>git checkout master</li>
-<li>git merge fpm</li>
-<li>git branch 查看分支</li>
-<li><blockquote>
-<p>fpm 分支并不会消失</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>希望fpm更新到master分支上的内容<ul>
-<li>git checkout fpm</li>
-<li>git rebase master</li>
-</ul>
-</li>
-<li>希望能够显示本地分支的情况</li>
-<li>merge前和push前需要检查本地内容有没有提交，请注意一件事就是先提交</li>
-<li>更新本地分支<ul>
-<li>git pull注意不过不带参数是直接覆盖</li>
-<li>git pull origin next:master 取回origin主机的next分支与本地的master分支合并  !!!<blockquote>
-<p>一种思路可以将代码全部拉到本地某个分支<br>git fetch origin + git merge origin/next</p>
-</blockquote>
-</li>
-<li>git branch –set-upstream master origin/next 自动为本地master追踪分支 </li>
-</ul>
-</li>
-<li>远程分支操作<ul>
-<li>查看远程分支： git branch -r</li>
-<li>创建运程分支： git push origin [name]</li>
-<li>删除远程分支： git push origin :[name]</li>
-</ul>
-</li>
-</ol>
-<h2 id="对别人的项目做贡献"><a href="#对别人的项目做贡献" class="headerlink" title="对别人的项目做贡献"></a>对别人的项目做贡献</h2><ol>
-<li>非Collaborators<ul>
-<li>git remote add upstream </li>
-<li>git fetch upstream</li>
-<li>git merge upstream/master</li>
-</ul>
-</li>
-</ol>
-<h2 id="对远程仓库名进行查看"><a href="#对远程仓库名进行查看" class="headerlink" title="对远程仓库名进行查看"></a>对远程仓库名进行查看</h2><ol>
-<li>git remote show <code>&lt;主机名&gt;</code> : 查看远程主机，不包含地址</li>
-<li>git remote add <code>&lt;主机名&gt;</code>: 添加远程主机</li>
-<li>git remote rm <code>&lt;主机名&gt;</code>: 删除远程主机</li>
-<li>git remote rename <code>&lt;主机名&gt;</code>: 改名</li>
-<li>git remote -v: 连带查看地址<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 列出所有tag</span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"># 新建一个tag在当前commit</span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"># 删除本地tag</span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"># 查看tag信息</span><br><span class="line">$ git show [tag]</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><ol>
-<li><p>You have not concluded your merge (MERGE_HEAD exists). Exiting because of unfinished merge<br>之前的提交没有merge</p>
-<blockquote>
-<p>git reset –merge</p>
-</blockquote>
-</li>
-<li><p>无法推送一些引用到 ‘<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5dW5wYW4vbmxwLXpoLU5FUi5naXQmIzM5Ow==" title="https://github.com/wangyunpan/nlp-zh-NER.git&#39;">https://github.com/wangyunpan/nlp-zh-NER.git&#39;<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>git pull<br>git push</p>
-</blockquote>
-</li>
-<li><p>报错<br>fatal: 远程 origin 已经存在。</p>
-<blockquote>
-<p>git remote rm origin  删除远程分支</p>
-</blockquote>
-</li>
-<li><p>如果我本地一顿猛操作，然后需要更新文件，然后应该怎么办？ 不能直接git pull, 再git push, 这样会覆盖本地的文件？？</p>
-</li>
-<li><p>! [rejected]        master -&gt; master (non-fast-forward)<br>error: failed to push some refs to ‘<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvRGVzaWduUGF0dGVybnMuZ2l0JiMzOTs=" title="https://github.com/AugF/DesignPatterns.git&#39;">https://github.com/AugF/DesignPatterns.git&#39;<i class="fa fa-external-link"></i></span><br>hint: Updates were rejected because the tip of your current branch is behind</p>
-<blockquote>
-<p>git push origin master -f</p>
-</blockquote>
-</li>
-<li><p>OpenSSL: error:1409442E:SSL routines:ssl3_read_bytes:tlsv1 alert protocol version</p>
-<blockquote>
-<p>向pasa gitbucket提交出现该bug<br>按照stackoverflow上  <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTMxNTE0NTYvb3BlbnNzbC1lcnJvcjE0MDk0NDJlc3NsLXJvdXRpbmVzc3NsMy1yZWFkLWJ5dGVzdGxzdjEtYWxlcnQtcHJvdG9jb2wtdmVyc2lv" title="https://stackoverflow.com/questions/53151456/openssl-error1409442essl-routinesssl3-read-bytestlsv1-alert-protocol-versio">https://stackoverflow.com/questions/53151456/openssl-error1409442essl-routinesssl3-read-bytestlsv1-alert-protocol-versio<i class="fa fa-external-link"></i></span><br>修改  wget –secure-protocol=TLSv1_2 仍然未解决</p>
-</blockquote>
-</li>
-<li><p>如何强制将远程代码覆盖到本地</p>
-<blockquote>
-<p>git pull 并没有得到远程最新的代码<br>使用 git fetch -all &amp;&amp; git reset –hard origin/master &amp;&amp; git pull 强制覆盖本地代码</p>
-</blockquote>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -5887,7 +5880,7 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">90</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
