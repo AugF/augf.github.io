@@ -779,7 +779,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
             
-            <a href="/2019/09/16/algorithm-improve-class/" class="post-title-link" itemprop="url">algorithm improve class</a>
+            <a href="/2019/09/16/algorithm-improve-class/" class="post-title-link" itemprop="url">algorithm acwing improve class</a>
           
         </h2>
 
@@ -794,11 +794,19 @@
                 
               
 
-              <time title="创建时间：2019-09-16 14:57:57 / 修改时间：15:07:57" itemprop="dateCreated datePublished" datetime="2019-09-16T14:57:57+08:00">2019-09-16</time>
+              <time title="创建时间：2019-09-16 14:57:57" itemprop="dateCreated datePublished" datetime="2019-09-16T14:57:57+08:00">2019-09-16</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-30 07:43:12" itemprop="dateModified" datetime="2019-09-30T07:43:12+08:00">2019-09-30</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -856,7 +864,35 @@
 </li>
 <li><p>dp</p>
 <ul>
-<li>23:06</li>
+<li>数字三角形 采花生问题<blockquote>
+<p>从集合角度来考虑问题, 一个集合就代替了暴搜中的一个元素</p>
+</blockquote>
+<ul>
+<li>状态表示 f[i, j]<ul>
+<li>集合： 所有从(1, 1)走到(i, j)的路线</li>
+<li>属性： Max/Min/数量： 集合中所有集合的每个元素的最大值；<blockquote>
+<p>于是f(n, m)就是目标值;  计算该值实际上就是寻找一个拓扑排序</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>状态计算： 集合划分  分而治之<blockquote>
+<p>依据最后一步来划分</p>
+</blockquote>
+<ul>
+<li>划分依据<ul>
+<li>不重复（最值无所谓，数量必须要）</li>
+<li>不漏（所有的都必须考虑）<blockquote>
+<p>本题图的连通性</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最低通行费： 最大值往往不需要初始化，最小值需要进行考虑</li>
 </ul>
 </li>
 </ol>

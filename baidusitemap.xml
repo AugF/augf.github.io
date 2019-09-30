@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://augf.github.io/2019/09/16/algorithm-improve-class/</loc>
+    <lastmod>2019-09-29</lastmod>
+  </url>  <url>
     <loc>https://augf.github.io/2019/09/24/tensorflow-variable/</loc>
     <lastmod>2019-09-26</lastmod>
   </url>  <url>
@@ -225,9 +228,6 @@
   </url>  <url>
     <loc>https://augf.github.io/2019/09/16/clean-code-reading-note/</loc>
     <lastmod>2019-09-18</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/09/16/algorithm-improve-class/</loc>
-    <lastmod>2019-09-16</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/15/python-pylint/</loc>
     <lastmod>2019-09-15</lastmod>
