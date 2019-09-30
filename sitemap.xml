@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://augf.github.io/2019/09/18/git-using/</loc>
+    
+    <lastmod>2019-09-30T12:26:53.126Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://augf.github.io/2019/09/16/algorithm-improve-class/</loc>
     
-    <lastmod>2019-09-29T23:43:12.673Z</lastmod>
+    <lastmod>2019-09-30T07:01:41.276Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>https://augf.github.io/2019/09/24/tensorflow-variable/</loc>
     
     <lastmod>2019-09-26T08:56:04.854Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/18/git-using/</loc>
-    
-    <lastmod>2019-09-24T08:00:57.310Z</lastmod>
     
   </url>
   
