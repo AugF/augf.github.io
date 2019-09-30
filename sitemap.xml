@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/</loc>
+    
+    <lastmod>2019-09-30T12:56:44.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/gnn-gnn-parallel-gnn-overview-paper-summary/</loc>
+    
+    <lastmod>2019-09-30T12:55:54.618Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/gnn-parallel-gnn-semi-gnn-paper-read/</loc>
+    
+    <lastmod>2019-09-30T12:55:19.908Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/gnn-parallel-gnn-overview-paper-details/</loc>
+    
+    <lastmod>2019-09-30T12:54:51.483Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://augf.github.io/2019/09/18/git-using/</loc>
     
     <lastmod>2019-09-30T12:26:53.126Z</lastmod>
@@ -96,27 +124,6 @@
     <loc>https://augf.github.io/2019/09/19/deeplearning-learn/</loc>
     
     <lastmod>2019-09-19T05:05:41.716Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/19/gnn-summary-paper-summary/</loc>
-    
-    <lastmod>2019-09-19T05:01:06.606Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/19/gnn-semi-gnn-paper-read/</loc>
-    
-    <lastmod>2019-09-19T04:57:15.675Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/19/gnn-summary-paper-read/</loc>
-    
-    <lastmod>2019-09-19T04:56:13.206Z</lastmod>
     
   </url>
   
