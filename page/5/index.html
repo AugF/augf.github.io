@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">91</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">92</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,179 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture3-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-cplus-lecture3-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture3-summary</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:50:15 / 修改时间：09:51:02" itemprop="dateCreated datePublished" datetime="2019-09-19T09:50:15+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h2><p>首先，不能考虑传统方法，即add，为什么？因为从某种意义上来讲极其不实用。</p>
+<p>所以考虑重载操作符, 下列不能重载<br>.  标志作用域的<br>sizeof() 计算内存空间的<br>?:  双判断的<br>:: 类的标志符</p>
+<h3 id="一般地"><a href="#一般地" class="headerlink" title="一般地"></a>一般地</h3><blockquote>
+<p>全局友元函数和成员函数两种方式。<br>对比来说，也就是成员函数，默认前面有类., 这其实是作为函数的默认参数this的，即const Complex&amp;</p>
+</blockquote>
+<p>那么就有一下几种操作符重载的例子，这里就只给出成员函数类型的<br>返回值、参数</p>
+<ul>
+<li>双目<br>Complex opreator # (const Complex &amp;c)</li>
+<li>单目<br>Complex opreator *();</li>
+</ul>
+<p>++i;<br>Complex &amp;opreator ++();</p>
+<blockquote>
+<p>前置++,返回运算后的结果。<br>i++;<br>Complex opreator ++(int);//注意这里直接是int，没有变量名，只是为了区分。<br>后置++，返回当前，实际+1；</p>
+</blockquote>
+<hr>
+<p>特别说明，<br>返回值的确定，当需要返回的是一个值得改变的值是用这个。<br>参数的确定</p>
+<hr>
+<h3 id="特殊地"><a href="#特殊地" class="headerlink" title="特殊地"></a>特殊地</h3><p>=</p>
+<blockquote>
+<p>区分两种不同的含义，初始化时调用拷贝构造函数；赋值时重载函数、<br>都要注意默认的指针直接复制的问题</p>
+</blockquote>
+<p>[]</p>
+<blockquote>
+<p>很简单，类似于单目运算</p>
+</blockquote>
+<p>new</p>
+<blockquote>
+<p>分配空间+调用构造函数<br>只能用静态成员来书写，static可以不用写<br>void *operator new(size_t size) {<br>    void *p=malloc(size); // 调用系统堆空间分配操作<br>    memset(p,0,size); //把系统申请到的堆空间初始化为全0<br>    return p;<br>}<br>返回类型必须为void *<br>参数size表示对象所需空间的大小，其类型为size_t（unsigned int）<br>可以选择带其他参数，此时就可以在非堆区分配空间<br>p = new (buf局部变量) A(size);</p>
+</blockquote>
+<p>delete</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>从某种意义上说，new和delete可以提高效率。因为delete归还不是归还到堆区，而是归还原本new申请的空间. 进行空间管理</p>
+</blockquote>
+<p>()</p>
+<blockquote>
+<p>int opreator() (int x){return x+value;}  A a(3); cout&lt;&lt;a(10);<br>此时()将类对象作为了函数。有冒险用啊？<br>比如新建一个随机数对象，初始化种子后random(1)，后面每需要一个随机数random()直接产生，很快！<br>?, 这里跟函数对象有什么关系？这里是把类对象通过重载()作为函数使用</p>
+</blockquote>
+<p>而函数对象，就是lambda表达式搞的是一大堆符号，然后后面跟一些参数。而也可以直接把它作为参数传递。</p>
+<p>// 功能：求上下限为a,b的积分，步长假设为0.01<br>// 函数定义<br>double integrate(double (*f)(double),double a,double b){<br>    double sum=0;<br>    for(double i=a; i&lt;=b; i+=0.01){<br>        sum+=f(i);<br>    }<br>    return sum;<br>}</p>
+<p>// 使用：这里传入的函数对象是lambda表达式<br>integrate([](double x)-&gt;double { return x*x; },0,1);</p>
+<blockquote>
+<p>想想这真的可以做很多东西。</p>
+</blockquote>
+<p>-&gt;<br>双目，第一个为指向类或结构的指针，第二个为第一个的成员</p>
+<blockquote>
+<p>例子：获取在程序执行的某个时刻获得某个对象被访问的次数<br>注意，凡是成员对象，还有成员函数被访问都算，即暴露给外界可访问的东西。<br>对于成员函数很容易想到可以每个里面加上cout++;但是对于数据成员不好操作。<br>此时即智能指针<br>想法即是在A类外部在套了个B类，B将A作为了成员，当接到访问时， B-&gt;()-&gt;f(), 第二个才访问到A的内容， B-&gt;()。 为了完全模拟还要重载其他操作符，如*,[],… 太麻烦了！！<br>对于歧义问题即+这种操作符，一般地会进行隐式转化，但当有一方为类就很难，显式解决。</p>
+</blockquote>
+<ul>
+<li>lambda表达式</li>
+</ul>
+<blockquote>
+<p>C++11给你规定了一堆东西，你可以拿去玩。其实也就是lambda函数那一章，其实后面还可以再加lambda表达式。最后再传递参数。</p>
+</blockquote>
+<p>所以就允许你用函数作为参数，其实这就很容易了。突然想起了scala.<br>而且lambda表达式还允许你加入局部变量之类的东西。</p>
+<ul>
+<li>继承</li>
+</ul>
+<p>提出就是为了最大程度的软件复用。<br>日常有多种行为，就是很小的改动的那种。<br>比如事务按层次来分类，对概念进行组合，软件进行增量开发等等</p>
+<p>访问控制：自己，公开，继承。</p>
+<p>继承破坏了封装性。<br>耦合性是事务之间的关联程度。</p>
+<p>继承方式，过滤器</p>
+<p>多态性：<br>子类又是父类；从某种意义上说，很强大。父类指针就可以随便用。</p>
+<p>但又带来了问题了，可以随便用。但是肯定会指向自己，所以引进虚函数。允许指向未来更好的实现。</p>
+<blockquote>
+<p>高层代码完全不用修改。相比用union实现的。<br>于是有了纯虚函数，这就形成了真正意义上的抽象。</p>
+</blockquote>
+<p>然后，还有聚集的方式。</p>
+<p>总结：C++很好地用类进行数据的封装，保证了元素的私密性。<br>然后为了给外界提供一定的界限。<br>将数据的访问方式进行了分类。<br>对于获取信息的，外界全局函数就可以采用。const关键字很妙！<br>还有设置信息。</p>
+<p>类作为类型。将不变的抽象给static元素。</p>
+<p>然后，多态性。函数名，参数名。 再加上运算符号。</p>
+<p>一对一并不完全符合世界的表述所以增加了多继承的方式。</p>
+<p>然后再对类型的统一，最终就变为了泛型设计。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -2219,126 +2392,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-searching/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-course-searching/" class="post-title-link" itemprop="url">algorithm course searching</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:17:17 / 修改时间：09:19:20" itemprop="dateCreated datePublished" datetime="2019-09-19T09:17:17+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Searching"><a href="#Searching" class="headerlink" title="Searching"></a>Searching</h2><h3 id="BF"><a href="#BF" class="headerlink" title="BF"></a>BF</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">search(v)&#123;</span><br><span class="line"></span><br><span class="line">	for a in array:</span><br><span class="line">		if a.value = v:</span><br><span class="line">			return true;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="BST"><a href="#BST" class="headerlink" title="BST"></a>BST</h3><blockquote>
-<p>这里研究的关键问题是searching，设为key-value对，那么目标是查找value，一般来说目的是查找该value是否存在，或者更进一步返回位置。</p>
-</blockquote>
-<blockquote>
-<p>由前面分析知，对于searching问题</p>
-<ol>
-<li>组织为原本的形式，BF O(n)</li>
-<li>组织为hash的形式，O(1)</li>
-<li>组织为树的结构，O([logn])</li>
-</ol>
-<p>我们知道，搜索的长度实际上与搜索的树的高度密切相关，所以我们希望寻找平衡的树。</p>
-</blockquote>
-<blockquote>
-<p>本身有多种平衡树的结构，我们这里RBT</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">递归定义，由递归定义无论如何是很容易地去写出原本的结构的。</span><br><span class="line"></span><br><span class="line">RB0</span><br><span class="line"></span><br><span class="line">RB: black (RB/ARB, RB/ARB)</span><br><span class="line"></span><br><span class="line">ARB: red (RB, RB)</span><br><span class="line"></span><br><span class="line">insert()</span><br><span class="line">delete()</span><br><span class="line"></span><br><span class="line">class RBTree</span><br><span class="line">	Element root;</span><br><span class="line">	RBtree leftSubtree；</span><br><span class="line">	RBtree rightSubtree;</span><br><span class="line">	int color; // red,black</span><br><span class="line">	</span><br><span class="line">	static class InsReturn</span><br><span class="line">		public RBtree newTree;</span><br><span class="line">		public int status; //ok,rbr,brb,rrb,brr</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h4 id="Insertion"><a href="#Insertion" class="headerlink" title="Insertion"></a>Insertion</h4><h3 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h3><blockquote>
-<p>这里在Insert使用均摊分析， 即ArrayDouble</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Insert</span><br><span class="line">Delete //? 删除是否需要收缩</span><br><span class="line">Find</span><br><span class="line"></span><br><span class="line">hashingInsert(H, x)&#123;</span><br><span class="line">	size = num = 0;</span><br><span class="line">	if size = 0:</span><br><span class="line">		allocate a block of size 1:</span><br><span class="line">		size = 1;</span><br><span class="line">	if num = size:</span><br><span class="line">		allocate a block of size 2size:</span><br><span class="line">		size = 2size;</span><br><span class="line">	insert x into the table;</span><br><span class="line">	num ++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -2391,7 +2444,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

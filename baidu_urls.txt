@@ -1,5 +1,5 @@
+https://augf.github.io/2019/10/02/lua-learning/
 https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/
 https://augf.github.io/2019/09/24/tensorflow-variable/
 https://augf.github.io/2019/09/19/linux/
 https://augf.github.io/2019/09/19/vim/
-https://augf.github.io/2019/09/19/deeplearning-tensorflow-study/

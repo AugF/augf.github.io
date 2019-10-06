@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://augf.github.io/2019/09/16/algorithm-improve-class/</loc>
+    <lastmod>2019-10-06</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/19/linux/</loc>
+    <lastmod>2019-10-06</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/10/02/lua-learning/</loc>
+    <lastmod>2019-10-02</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/18/TOEFL-listening/</loc>
+    <lastmod>2019-10-01</lastmod>
+  </url>  <url>
     <loc>https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/</loc>
     <lastmod>2019-09-30</lastmod>
   </url>  <url>
@@ -16,17 +28,11 @@
     <loc>https://augf.github.io/2019/09/18/git-using/</loc>
     <lastmod>2019-09-30</lastmod>
   </url>  <url>
-    <loc>https://augf.github.io/2019/09/16/algorithm-improve-class/</loc>
-    <lastmod>2019-09-30</lastmod>
-  </url>  <url>
     <loc>https://augf.github.io/2019/09/24/tensorflow-variable/</loc>
     <lastmod>2019-09-26</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/12/vscode-using/</loc>
     <lastmod>2019-09-22</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/09/19/linux/</loc>
-    <lastmod>2019-09-19</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/19/vim/</loc>
     <lastmod>2019-09-19</lastmod>
@@ -113,9 +119,6 @@
     <lastmod>2019-09-19</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/19/TOEFL-word-details/</loc>
-    <lastmod>2019-09-19</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/09/18/TOEFL-listening/</loc>
     <lastmod>2019-09-19</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/19/nju-course-cplus-lecture7/</loc>

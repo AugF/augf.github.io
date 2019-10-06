@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">91</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">92</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,252 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/spark-study-thinking-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/spark-study-thinking-1/" class="post-title-link" itemprop="url">spark study thinking</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 13:09:17 / 修改时间：13:10:05" itemprop="dateCreated datePublished" datetime="2019-09-19T13:09:17+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/thinking/" itemprop="url" rel="index"><span itemprop="name">thinking</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>spark中map就是把数据集分配到各个节点上，然后各个节点执行</p>
+<blockquote>
+<p>思考Partioner的过程是什么</p>
+</blockquote>
+<p>Partitioner感觉上是全局变量</p>
+<blockquote>
+<p>HashPartitioner就是把Hash桶做成了</p>
+</blockquote>
+<p>inputSplit, 一定要比它大，这样就可以使得每一部分执行的数据少</p>
+<p>flatMap并没有那么简单，也就是说<br>flatMap = map + flatten</p>
+<blockquote>
+<p>flatMap(t=&gt;f(t))<br>f返回的是什么类型，最终结果就是什么类型</p>
+</blockquote>
+<p>reduce(x+y=&gt;x)<br>reduceByKey(x+y=&gt;x)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mapPartitions(iter =&gt; &#123;    // mapPartitions即 Mapper端的数据进行了Combine计数</span><br><span class="line">      val pair = mutable.Map.empty[WrapArray, Long]</span><br><span class="line">      while (iter.hasNext) &#123;</span><br><span class="line">        val arr = new WrapArray(iter.next())</span><br><span class="line">        val value = pair.get(arr)</span><br><span class="line">        if (value == None) &#123;</span><br><span class="line">          pair(arr) = 1L</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          pair(arr) = value.get + 1L</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      pair.iterator   // 这种写法很精妙，进行学习</span><br><span class="line">    &#125;)</span><br><span class="line">    // 每次返回一个迭代器，下次还可以考虑继续使用这个迭代器</span><br></pre></td></tr></table></figure>
+
+<p>基本类型的迭代器可以定义</p>
+<p>自定义迭代器<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1hpYW9IZWlCbGFjay9hcnRpY2xlL2RldGFpbHMvNzcwMTQ2MjY=" title="https://blog.csdn.net/XiaoHeiBlack/article/details/77014626">https://blog.csdn.net/XiaoHeiBlack/article/details/77014626<i class="fa fa-external-link"></i></span></p>
+<p>groupByKey(): RDD, Iterable[V]<br>reduceByKey(): U+U=&gt;U</p>
+<blockquote>
+<p>思考迭代器</p>
+</blockquote>
+<p>FPGrowth思路整理</p>
+<p>MLlib做法：</p>
+<ol>
+<li>产生每个分区的数据集<blockquote>
+<p>val part = partitioner.getPartition(item), 这一步依然感觉很懵逼?<br>mapreduce中map的过程实际上就不过是map的数据集的个体变大的。所以按照自己想的就是<br>代码这里的感觉就是用的默认集群的？？？</p>
+</blockquote>
+</li>
+<li>将每个分区的数据集合并为一棵子树</li>
+<li>将所有分区合并为一个大的子树</li>
+<li>从这个大的子树中提取对应的频繁项集</li>
+</ol>
+<p>defaultParallelism(): cluster default<br>trait: 相当于接口</p>
+<p>sc.text(): 这里默认的也是这个参数</p>
+<p>FPNewDef做法</p>
+<ol>
+<li>产生对应分区的数据集</li>
+<li>对每个分区进行相同合并</li>
+<li>数据重新写为(key, value)</li>
+<li>映射到对应的分区<blockquote>
+<p>所以就要用分区内的排序来做<br>repartitionAndSortWithinPartitions<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC81OTA2ZGRiNWJmY2Q=" title="https://www.jianshu.com/p/5906ddb5bfcd">https://www.jianshu.com/p/5906ddb5bfcd<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+<li>分区内根据顺序收集，从而形成条件树<blockquote>
+<p>这里可以直接根据收集结果来产生频繁项集啊</p>
+</blockquote>
+</li>
+</ol>
+<p>NewIdea</p>
+<ol>
+<li>产生分区的数据集</li>
+<li>可选，Combine(需要开销)</li>
+<li>数据重新分为(key, value)</li>
+<li>reduceByKey<blockquote>
+<p>收集对应的key，然后直接产生条件树</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>因为类没有实现迭代器的特性，所以不能这样用？ 居然可以用排序就可以了，牛逼，牛逼<br>如果是对所有的元素做某种运算，但不需要产生最后的结果，只需要foreach</p>
+</blockquote>
+<blockquote>
+<p>第一个想法，一个是将每个(key,value)的value映射为一个FPNewNode, 然后添加，需要重新改写数据结构<br>第二个想法，reduceByKey，先收集到一个集合，然后再对该集合进行下一步做法</p>
+</blockquote>
+<p>? spark任务调用顺序</p>
+<p>spark-shell –master spark://slave033:7077 </p>
+<p>例子：<br>1 2 3 4<br>1 2 4<br>2 3<br>2 4</p>
+<p>partion: 2</p>
+<p>1:<br> 1 2 3 4  -&gt;<br> 1 2 4</p>
+<p>2:<br> 2 3<br> 2 4</p>
+<p>总结：<br>FPTree中的extract是对所有的项都要来直接求解，试着不需要。只需要对某一个地方进行求解即可。<br>然后这里的 extract又是个递归</p>
+<p>summries中包含所有元素</p>
+<blockquote>
+<p>怎么生成数据？关于大数据集的<br>slave033上的文件和hdfs上的文件有什么区别？</p>
+<blockquote>
+<p>这个问题实际上是想问这里用到的是啥？</p>
+</blockquote>
+</blockquote>
+<p>本地进行模拟运行</p>
+<h2 id="学到的知识"><a href="#学到的知识" class="headerlink" title="学到的知识"></a>学到的知识</h2><h3 id="1-spark-default-parallelism"><a href="#1-spark-default-parallelism" class="headerlink" title="1. spark.default.parallelism"></a>1. spark.default.parallelism</h3><blockquote>
+<p>如果不进行设置，默认值是底层HDFS的block数量（HDFS中有设置）; 一般这是个特别需要设置； 在默认情况下，非常小，如果不调节它就起不到分布式的效果了。通常来说也不会只调节到num_executors*executor-cores，因为相当于只给每个节点分配了对应很少的值，所以实际上的话，是在2~3倍。为什么呢，因为有的task运行速度快，有的慢，为了避免快的执行完等慢的，所以可以考虑多加进行设置，这样的话就能充分利用到集群了。<br>? hdfs block的数量？？<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRlYmxvZy5jb20vYXJjaGl2ZXMvMTY1OS5odG1s" title="https://www.iteblog.com/archives/1659.html">https://www.iteblog.com/archives/1659.html<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<h3 id="2-scala语法"><a href="#2-scala语法" class="headerlink" title="2. scala语法"></a>2. scala语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class FPTree</span><br><span class="line">  def merge(other: FPTree[T]): this.type = &#123;</span><br><span class="line">    other.transactions.foreach &#123; case (t, c) =&gt;</span><br><span class="line">      add(t, c)  // 这里就默认的是this.add()</span><br><span class="line">    &#125;</span><br><span class="line">    this</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Spark参数配置优先级"><a href="#3-Spark参数配置优先级" class="headerlink" title="3. Spark参数配置优先级"></a>3. Spark参数配置优先级</h3><ol>
+<li>SparkConf</li>
+<li>spark-submit  spark-shell</li>
+<li>spark-defaults.conf<blockquote>
+<p>在文件中进行配置</p>
+</blockquote>
+<h3 id="4-零散知识点"><a href="#4-零散知识点" class="headerlink" title="4. 零散知识点"></a>4. 零散知识点</h3></li>
+</ol>
+<h4 id="4-1-提交"><a href="#4-1-提交" class="headerlink" title="4.1 提交"></a>4.1 提交</h4><ol>
+<li>spark-shell</li>
+</ol>
+<ul>
+<li>–master spark://host:port本身的运行模式</li>
+<li>–deploy-mode: driver端位于哪里</li>
+<li>dirver-memory, dirver-cores<blockquote>
+<p>driver-memory, driver-cores指的是driver端执行的情况 </p>
+</blockquote>
+</li>
+</ul>
+<ol start="2">
+<li>运行模式</li>
+</ol>
+<ul>
+<li>standalone模式</li>
+<li>spark on yarn, dirver在本地</li>
+<li>spark on yarn, dirver在集群<blockquote>
+<p>其实standalone和其他没有什么区别吧，主要就在于standalone是主模式，而yarn各个节点都相同</p>
+</blockquote>
+</li>
+</ul>
+<ol start="3">
+<li>yarn</li>
+</ol>
+<p>yarn: 整个资源管理在一个资源池中，想要获取资源通过在资源池中进行获取</p>
+<blockquote>
+<p>这里yarn把整个集群集合在了一起，具体yarn是怎么执行的需要看居然的yarn的东西。</p>
+</blockquote>
+<p>然后，关于yarn的就有几个特别的参数：</p>
+<p>worker是资源分配单位<br>executor是任务执行单位</p>
+<p>executor的内存主要分为几块</p>
+<ol>
+<li>执行自己的代码所需要的内存,默认值20%</li>
+<li>shuffle所需要的内存，默认20%</li>
+<li>持久化的内存,默认60%</li>
+</ol>
+<p>资源参数调优:</p>
+<ol>
+<li><p>num-executors: 总的executor数</p>
+<blockquote>
+<p>总共的任务执行单元</p>
+</blockquote>
+</li>
+<li><p>executor-cores </p>
+</li>
+</ol>
+<h3 id="inputPath"><a href="#inputPath" class="headerlink" title="inputPath"></a>inputPath</h3><blockquote>
+<p>在哪里？<br>hdfs://master:port/根路径</p>
+</blockquote>
+<blockquote>
+<p>默认情况下为master节点上的9000端口</p>
+</blockquote>
+<p>注意到一个问题： aggreateByKey一直都是根据key来处理<br>reduceByKey(partioner, <em>+</em>) 可以使结果放在对应的位置上</p>
+<p>学长的代码，想法依然是那样的。感觉上还是最终落在了收集fpTree上，而且并没有什么优化啊。</p>
+<p>前面汇聚相同的什么用?</p>
+<p>在倒数第二个的时候依然是形成fpTree,然后提取</p>
+<h2 id="scala编程"><a href="#scala编程" class="headerlink" title="scala编程"></a>scala编程</h2><p>注意区分Iterator和</p>
+<h2 id="师兄代码的想法"><a href="#师兄代码的想法" class="headerlink" title="师兄代码的想法"></a>师兄代码的想法</h2><p>建树开销，即考虑的是</p>
+<p>spark-submit 默认参数在 spark-defaults.conf中<br>？ master是否进行资源的分配</p>
+<p>–dirver-memory<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vd2Vpd2VpZmVuZy9wLzgwNzM1NTMuaHRtbA==" title="https://www.cnblogs.com/weiweifeng/p/8073553.html">https://www.cnblogs.com/weiweifeng/p/8073553.html<i class="fa fa-external-link"></i></span></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -2930,274 +3176,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/" class="post-title-link" itemprop="url">machinelearning cornerstone when can machines learn</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:30:31 / 修改时间：12:33:41" itemprop="dateCreated datePublished" datetime="2019-09-19T12:30:31+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/" itemprop="url" rel="index"><span itemprop="name">machinelearning</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/cornerstone/" itemprop="url" rel="index"><span itemprop="name">cornerstone</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-The-Learning-Problem"><a href="#1-The-Learning-Problem" class="headerlink" title="1. The Learning Problem"></a>1. The Learning Problem</h1><h2 id="1-1-Introduction"><a href="#1-1-Introduction" class="headerlink" title="1.1. Introduction"></a>1.1. Introduction</h2><p>theory+technique<br>多个角度概念<br>what + why + how + better:</p>
-<h2 id="1-2-what-is-ML"><a href="#1-2-what-is-ML" class="headerlink" title="1.2. what is ML?"></a>1.2. what is ML?</h2><h3 id="1-2-1-definetion"><a href="#1-2-1-definetion" class="headerlink" title="1.2.1 definetion"></a>1.2.1 definetion</h3><p>observation-&gt;learning-&gt;skill<br>data-&gt;ml-&gt;skill</p>
-<blockquote>
-<p>so data is more like observation, will be better.<br>learning skill how to use in data</p>
-</blockquote>
-<p>learning:<br>ml:</p>
-<p>skill: improve some performance measure.</p>
-<h3 id="1-2-2-Application"><a href="#1-2-2-Application" class="headerlink" title="1.2.2 Application:"></a>1.2.2 Application:</h3><p>stock data-&gt;ML-&gt;more stock gain</p>
-<ul>
-<li>Tree Recognition<br>‘define’  trees and hand-program: difficult<br>learn from data(observations) and recognize</li>
-</ul>
-<h3 id="1-2-3-Use-Scenarios"><a href="#1-2-3-Use-Scenarios" class="headerlink" title="1.2.3 Use Scenarios"></a>1.2.3 Use Scenarios</h3><p>navigating on Mars<br>cannot’ define the solution</p>
-<blockquote>
-<p>一般世界人，都使用的是规则来判定一件事。<br>high-frequency trading<br>consumer-targeted marketing</p>
-</blockquote>
-<h3 id="1-2-4-key-essence-of-ml"><a href="#1-2-4-key-essence-of-ml" class="headerlink" title="1.2.4 key essence of ml"></a>1.2.4 key essence of ml</h3><ol>
-<li>some underlying pattern to be learned<br>exisits target<br>eg: predict whether the next cry of baby</li>
-<li>but no easy definition !<br>eg: determining whether a given graph contains a cycle</li>
-<li>this is data about the pattern<br>eg:whether the earth will be destoryed</li>
-</ol>
-<h2 id="1-3-Learning-Problem"><a href="#1-3-Learning-Problem" class="headerlink" title="1.3. Learning Problem"></a>1.3. Learning Problem</h2><ol>
-<li>Daily Needs<br>Food<br>Clothing<br>Housing<br>Transportation</li>
-<li>Education</li>
-<li>Entertainment</li>
-</ol>
-<h2 id="1-4-ML-vs-DM-AI-Statistics"><a href="#1-4-ML-vs-DM-AI-Statistics" class="headerlink" title="1.4 ML vs DM,AI,Statistics"></a>1.4 ML vs DM,AI,Statistics</h2><p>from f -&gt; ML -&gt; g.<br><img src="00001.png" alt> </p>
-<p>ML vs DM<br><img src="00002.png" alt><br>DM can help ML, and vice versa.<br>efficient computation</p>
-<p>ML vs AI<br><img src="00003.png" alt></p>
-<p>ML vs Statistics(inference )<br><img src="00004.png" alt>  </p>
-<h1 id="2-Learning-to-Answer-Yes-No"><a href="#2-Learning-to-Answer-Yes-No" class="headerlink" title="2. Learning to Answer Yes_No"></a>2. Learning to Answer Yes_No</h1><h2 id="2-1-Example"><a href="#2-1-Example" class="headerlink" title="2.1 Example"></a>2.1 Example</h2><h3 id="PLA算法设计"><a href="#PLA算法设计" class="headerlink" title="PLA算法设计"></a>PLA算法设计</h3><p><strong>设计思想</strong><br>知错能改，纠正错误的思想.<br>图形结合法来求解<br><strong>类别</strong><br>局部</p>
-<p><strong>步骤</strong><br>线性函数，感知机。<br>修正参数，w_{t+1}在错误案例上进行修正。</p>
-<blockquote>
-<p>知错能改法<br>Cyclic PLA,简单的检查是否还有错误。<br>对数据饶一圈，让这第100个人都没有犯错</p>
-</blockquote>
-<h3 id="PLA算法的正确性"><a href="#PLA算法的正确性" class="headerlink" title="PLA算法的正确性"></a>PLA算法的正确性</h3><p><strong>假设</strong></p>
-<ol>
-<li>问题具有最优解</li>
-<li>样本真实，没有噪声</li>
-</ol>
-<p><strong>收敛到最优解</strong></p>
-<p><strong>算法会停止（求迭代轮数）</strong></p>
-<p>PLA用图形的夹角来做。P8</p>
-<p>PLA是否可学习？<br>判断两个数是否接近？<br>做累积，两个向量内积越来越大</p>
-<p><img src="00005.png" alt></p>
-<p><img src="00006.png" alt></p>
-<blockquote>
-<p>资料是否是线性可分？资料这里是指D，还是实际分布</p>
-</blockquote>
-<blockquote>
-<p>从某种分布上来说，未知资料是否线性可分。</p>
-</blockquote>
-<blockquote>
-<p>理论这里对吗？就是是否线性可分</p>
-</blockquote>
-<h2 id="2-2-Learning-with-noisy-data"><a href="#2-2-Learning-with-noisy-data" class="headerlink" title="2.2 Learning with noisy data"></a>2.2 Learning with noisy data</h2><blockquote>
-<p>待测数据上有噪声<br>假设犯错率很低，那么假设没有犯错率</p>
-</blockquote>
-<p>假设没有噪声，但不知道是否可学习怎么办？<br>试图去找犯错误最小的。 NP-hard</p>
-<p>科学家的做法：找不到全局最好的解，所以考虑使用贪心。 Pocket Algorithm，在自己的口袋保留最好的算法，根据步长随机更新的思想。<br><img src="00013.png" alt></p>
-<p><img src="00007.png" alt></p>
-<blockquote>
-<p>因为是最优算法所以返回的结果必然都是最优的。对于算法的比较，记住一定从时间复杂度上看。 还有一旦是线性可分，那么就意味着算法都可以不犯错。</p>
-</blockquote>
-<h1 id="3-Types-of-Learning"><a href="#3-Types-of-Learning" class="headerlink" title="3. Types of Learning"></a>3. Types of Learning</h1><h2 id="v1-输出空间角度"><a href="#v1-输出空间角度" class="headerlink" title="v1 输出空间角度"></a>v1 输出空间角度</h2><ul>
-<li>binary classification</li>
-<li>mulitclass classification</li>
-<li>回归问题<blockquote>
-<p>对于有限的复杂的输出可以看作是多分类问题</p>
-</blockquote>
-</li>
-<li>结构学习问题：比如学习蛋白质的长相，讲的话的语法树（输出空间中具有某种结果）<blockquote>
-<p>其实从某种意义上也是划归到多分类上去。</p>
-</blockquote>
-<h2 id="v2-资料的角度"><a href="#v2-资料的角度" class="headerlink" title="v2 资料的角度"></a>v2 资料的角度</h2></li>
-</ul>
-<ol>
-<li>监督学习: 完全是有标记样本</li>
-<li>非监督学习: 未标记样本，分群<blockquote>
-<p>监督可以看作是没有答案<br>聚类，文章主题</p>
-</blockquote>
-<ul>
-<li>density estimation: {x_n}</li>
-<li>outlier detection:<blockquote>
-<p>难衡量好坏，因为没有目标</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>半监督学习：有标记样本+未标记样本。</li>
-<li>强化学习: 不断强化，给予惩罚和奖励；不断学得最终的目标。<blockquote>
-<p>喂给机器资料，对机器进行评价，好还是不好<br>partial/implicit information</p>
-</blockquote>
-</li>
-</ol>
-<p><img src="00008.png" alt></p>
-<h2 id="v3-取得样本的方式，学习的角度"><a href="#v3-取得样本的方式，学习的角度" class="headerlink" title="v3 取得样本的方式，学习的角度"></a>v3 取得样本的方式，学习的角度</h2><ol>
-<li>Batch Learning</li>
-<li>Online learing</li>
-<li>active: “question asking” –query the yn of the chosen xn<blockquote>
-<p>有技巧地问问题，可以用很少的问题学习到很多的东西。标记很贵的情况。</p>
-</blockquote>
-</li>
-</ol>
-<p><img src="00009.png" alt></p>
-<h2 id="v4-特征的角度"><a href="#v4-特征的角度" class="headerlink" title="v4 特征的角度"></a>v4 特征的角度</h2><p>二维向量：对称性、密度性</p>
-<ul>
-<li>concrete</li>
-<li>abstract 客户的编号，实际就是一种抽象了。</li>
-<li>raw<br><img src="00010.png" alt></li>
-</ul>
-<blockquote>
-<p>如何找一个最合适的特征</p>
-</blockquote>
-<blockquote>
-<p>至少可以从这些分类中寻找一个感兴趣的东西<br><img src="00011.png" alt></p>
-</blockquote>
-<h1 id="4-Feasibility-of-Learning"><a href="#4-Feasibility-of-Learning" class="headerlink" title="4. Feasibility of Learning"></a>4. Feasibility of Learning</h1><p><img src="00012.png" alt></p>
-<h2 id="4-1-Learning-is-impossible"><a href="#4-1-Learning-is-impossible" class="headerlink" title="4.1 Learning is impossible?"></a>4.1 Learning is impossible?</h2><p>adversarial teacher</p>
-<blockquote>
-<p>此时如何学习？<br>有什么问题？目标不唯一<br>这也是为什么<br>No free lunch, 我们坚持的是什么？如果我们坚持f不知道，我们要在D之外学到东西是不可能的。f一定是定下来的，否则是无法解决。再理解</p>
-</blockquote>
-<blockquote>
-<p>这个道理很常见，就像是猜数一样，一定要目标一定才可猜。</p>
-</blockquote>
-<blockquote>
-<p>这也是为什么要用机器学习算法的原因，一般地话，为什么要有测试集，就是试图用测试集来衡量训练误差。</p>
-</blockquote>
-<blockquote>
-<p>还有对于某些题的设定有问题，这其实就只是一种解释，需要更多的解释来完成这个问题</p>
-</blockquote>
-<h2 id="4-2-Inferring-Something-Unknown"><a href="#4-2-Inferring-Something-Unknown" class="headerlink" title="4.2 Inferring Something Unknown"></a>4.2 Inferring Something Unknown</h2><p>can we infer something unknown in other scenarios?</p>
-<blockquote>
-<p>随机采样，这就是为什么要用采样了？<br>参数估计，大数定理。<br>数学上的定理Hoeffding，相差很远的可能性很小；特别是当样本够大，得到的估计趋于真实的估计。<br>注意这里两个方面，看多个变量<br><img src="00014.png" alt></p>
-</blockquote>
-<blockquote>
-<p>从瓶子里去橙色球和其他颜色球，怎么知道原本中含有多少橙色球？一个想法就是通过对瓶子 的球进行采样一定数量，那么，根据采样的数量来就可以来估计真实的值。</p>
-</blockquote>
-<h2 id="4-3-Connection-to-Learning"><a href="#4-3-Connection-to-Learning" class="headerlink" title="4.3 Connection to Learning"></a>4.3 Connection to Learning</h2><p><img src="00015.png" alt></p>
-<p>注意，这里考虑了假设空间和问题空间是一致的。<br>与学习之间的联系。首先我们有一大堆的假设，并从这些假设中抽取一个假设作为真实的假设。 然后，根据这个假设我们就需要得到未来的函数。那么，想法就是从满足这些假设的数据中独立同分布地抽取多个数据。<br>首先，数据如果足够多，利用这些数据学得的假设，并且，我们有理由相信从这些东西中学得的假设。 在数据集特别大的情况下，来学习得到的假设会更好，更满足实际的情况。</p>
-<p>测试数据从某种意义上的设置就是想得到怎么样的数据？</p>
-<blockquote>
-<p>但是一般来说测试数据都是中肯的<br>还有一个方面就是用来纠正学习到的模型，因为学习到的模型有时候是过拟合的，即可解释为泛化能力。</p>
-</blockquote>
-<p><strong>Verification of One h</strong></p>
-<p><img src="00016.png" alt></p>
-<blockquote>
-<p>这里比较了real学习和根据经验误差来学习的差别。</p>
-</blockquote>
-<p>算法总是得到相同的假设，由此可以觉得该算法不好？</p>
-<blockquote>
-<p>假设空间小就意味着算法不好吗？<br>经验误差小就意味着算法好吗？从某个方面可以这样看</p>
-</blockquote>
-<p><img src="00017.png" alt></p>
-<p>ML学得的规则，不一定对过去有效，因为只是过去的抽样数据；不一定对将来有效，因为有一定误差的存在；在未来一百天中选规则也不成，因为构不成学习，不过是很多规则的累加</p>
-<h2 id="4-4-Connection-to-Real-Learning"><a href="#4-4-Connection-to-Real-Learning" class="headerlink" title="4.4 Connection to Real Learning"></a>4.4 Connection to Real Learning</h2><p>bad sample: E_in and E_out far away–can get worse when involving “choice”.</p>
-<blockquote>
-<p>注意，数据的合理性，即样本是否合理。从某种意义上来说，需要看样本是否满足一些基本的分布，详细见西瓜书。<br>就是说所选取的样本是不好的样本，从另一个角度来看，就是一个指导的感觉就是还是说的是独立同分布的问题，即是否满足独立同分布。</p>
-</blockquote>
-<blockquote>
-<p>训练的样本不是好的样本，这是一个检查的标准。</p>
-</blockquote>
-<p><strong>什么是Bad Sample</strong><br>这个和过拟合有关吗？<br>好的数据任意进行选择就可以。<br>但是坏的数据会使算法踩到雷，算法得到不好的结果。</p>
-<p>分析：假设对于每个假设都有bad example, 那么如何。</p>
-<p>就是需要选取某个数据集，所有假设基本上都不会踩到雷。</p>
-<p>评价，只要有一个不好就认为不好。<br>那么，不好的数据集的大小是多少？<br><img src="00018.png" alt></p>
-<p>M是假设的个数。</p>
-<blockquote>
-<p>结论：只有样例过多才能满足要求；<br>现实的指导意义：只有尽可能地将数据认为是正反例合理的情况，否则其他不合理。</p>
-</blockquote>
-<p>所以，当数据合理时，我们认为满足PAC，此时Ein=Eout, Eout就是在未知数据集上的表现情况；注意这里还未引入泛化误差的概念。那么，实际上就是选经验误差最小的，因为经验误差在这里认为是等于泛化的。</p>
-<p>而泛化误差是用来进行评价的。 </p>
-<p>到此为止，说明了假设空间为有限的情况，并未扩展到假设空间为无限的情况。</p>
-<p><img src="00019.png" alt></p>
-<blockquote>
-<p>理解！</p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -3250,7 +3228,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

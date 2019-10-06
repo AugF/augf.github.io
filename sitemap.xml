@@ -2,9 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://augf.github.io/2019/09/16/algorithm-improve-class/</loc>
+    
+    <lastmod>2019-10-06T22:17:20.394Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/linux/</loc>
+    
+    <lastmod>2019-10-06T22:05:34.087Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/10/02/lua-learning/</loc>
+    
+    <lastmod>2019-10-02T16:29:38.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/18/TOEFL-listening/</loc>
+    
+    <lastmod>2019-10-01T02:04:24.038Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/</loc>
     
-    <lastmod>2019-09-30T12:56:44.770Z</lastmod>
+    <lastmod>2019-09-30T13:15:43.891Z</lastmod>
     
   </url>
   
@@ -37,13 +65,6 @@
   </url>
   
   <url>
-    <loc>https://augf.github.io/2019/09/16/algorithm-improve-class/</loc>
-    
-    <lastmod>2019-09-30T07:01:41.276Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://augf.github.io/2019/09/24/tensorflow-variable/</loc>
     
     <lastmod>2019-09-26T08:56:04.854Z</lastmod>
@@ -54,13 +75,6 @@
     <loc>https://augf.github.io/2019/09/12/vscode-using/</loc>
     
     <lastmod>2019-09-22T23:04:45.110Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/19/linux/</loc>
-    
-    <lastmod>2019-09-19T05:28:36.232Z</lastmod>
     
   </url>
   
@@ -264,13 +278,6 @@
     <loc>https://augf.github.io/2019/09/19/TOEFL-word-details/</loc>
     
     <lastmod>2019-09-19T02:52:06.999Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/18/TOEFL-listening/</loc>
-    
-    <lastmod>2019-09-19T02:51:50.928Z</lastmod>
     
   </url>
   

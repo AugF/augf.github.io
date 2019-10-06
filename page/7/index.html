@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">91</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">92</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,130 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-dfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/algorithm-course-dfs/" class="post-title-link" itemprop="url">algorithm course dfs</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 08:51:42 / 修改时间：09:20:48" itemprop="dateCreated datePublished" datetime="2019-09-19T08:51:42+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><blockquote>
+<p>配合笔记使用，这里假设为简单图</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 统计变量</span><br><span class="line">struct Vertex&#123;</span><br><span class="line">    string color;</span><br><span class="line">    int parent;</span><br><span class="line">    int dis;</span><br><span class="line">    double discovertime;</span><br><span class="line">    double finishtime;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 处理不同连通分支</span><br><span class="line">DFS-Wrapper()</span><br><span class="line">&#123;// 其中n为数组的长度</span><br><span class="line">    Vertex[]  V = new int[n+1]&apos;</span><br><span class="line">    Edge[] E = new int[m+1];</span><br><span class="line"></span><br><span class="line">    // initiliaze</span><br><span class="line">    for v in V:</span><br><span class="line">        v.color = white;</span><br><span class="line">    time = 0;</span><br><span class="line">    </span><br><span class="line">    for v in V:</span><br><span class="line">        if color[v]==white:</span><br><span class="line">            v.parent = -1;</span><br><span class="line">            DFS(v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="有向图"><a href="#有向图" class="headerlink" title="有向图"></a>有向图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">DFS-directed(v) &#123;</span><br><span class="line">    v.color=gray;</span><br><span class="line">    time ++;  v.dicovertime = time;</span><br><span class="line">    pre processing of dfs;</span><br><span class="line"></span><br><span class="line">    for w that vw in E:</span><br><span class="line">        if w.color = white:</span><br><span class="line">            &lt;pre-processing of TE&gt;</span><br><span class="line">            w.parent = v;</span><br><span class="line">            DFS(w);</span><br><span class="line">            &lt;post-precessing of TE&gt;</span><br><span class="line">        else if w.color = gray:</span><br><span class="line">            // BE</span><br><span class="line">        else if w.color = black:</span><br><span class="line">            if w.parent -&gt;&gt; v:  DE</span><br><span class="line">            if !(root(w,v)) || root(w,v) not in &#123;w,v&#125;: CE</span><br><span class="line"></span><br><span class="line">    post-processing of dfs;</span><br><span class="line">    time++; v.finishtime = time;</span><br><span class="line">    v.color = black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="无向图"><a href="#无向图" class="headerlink" title="无向图"></a>无向图</h3><blockquote>
+<ol>
+<li>注意这里的TE,BE,DE,CE都是实际上存在的边；如果一个边访问两次，则可以将其看作是二次遍历。</li>
+<li>再试想一下，如果边标记是否被访问；那么一条边可能二次遍历。如果剔除二次遍历。</li>
+<li>!!!! 无向图的DFS,  CE不存在</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">DFS-undirected(v) &#123;</span><br><span class="line">    v.color=gray;</span><br><span class="line">    time ++;  v.dicovertime = time;</span><br><span class="line">    pre processing of dfs;</span><br><span class="line"></span><br><span class="line">    for w that vw in E:</span><br><span class="line">        if w.color = white: //TE</span><br><span class="line">            &lt;pre-processing of TE&gt;</span><br><span class="line">            w.parent = v;</span><br><span class="line">            DFS(w);</span><br><span class="line">            &lt;post-precessing of TE&gt;</span><br><span class="line">        else if w.color = gray:</span><br><span class="line">            if w.parent != v:  // BE</span><br><span class="line">            if w.parent == v:  // 二次遍历vw</span><br><span class="line">        else if w.color = black:</span><br><span class="line">            if w.parent == v // BE 二次遍历</span><br><span class="line"></span><br><span class="line">    post-processing of dfs;</span><br><span class="line">    time++; v.finishtime = time;</span><br><span class="line">    v.color = black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>有向图</p>
+<ol>
+<li><p>拓扑排序</p>
+</li>
+<li><p>Critical Path</p>
+</li>
+<li><p>SCC</p>
+</li>
+</ol>
+<p>无向图</p>
+<ol>
+<li><p>割点</p>
+</li>
+<li><p>桥</p>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -3906,7 +4030,7 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-19 10:51:50" itemprop="dateModified" datetime="2019-09-19T10:51:50+08:00">2019-09-19</time>
+                <time title="修改时间：2019-10-01 10:04:24" itemprop="dateModified" datetime="2019-10-01T10:04:24+08:00">2019-10-01</time>
               </span>
             
           
@@ -4213,6 +4337,41 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
 <p>天文学</p>
 <blockquote>
 <p>Journey to the Edge of the Universe, 2遍 !<br><span class="exturl" data-url="aHR0cHM6Ly93d3cudm9pY2V0dWJlLmNvbS92aWRlb3MvMTc5MzE=" title="https://www.voicetube.com/videos/17931">https://www.voicetube.com/videos/17931<i class="fa fa-external-link"></i></span><br>多做TPO, 关键在细抠</p>
+</blockquote>
+<h2 id="2-1-精听"><a href="#2-1-精听" class="headerlink" title="2.1 精听"></a>2.1 精听</h2><ol>
+<li>听+做题</li>
+<li>努力听清，逐句，保留不会的地方</li>
+<li>对照文本，搞懂一切</li>
+<li>复听</li>
+<li>对照文本，看忙去</li>
+<li>听读训练</li>
+</ol>
+<p>注意！ 3天之后请复听！</p>
+<blockquote>
+<p>it’ mounthful:  something is hard to explain. TPO!!!</p>
+</blockquote>
+<p>注意不要忽略简单的俗语，要真正弄懂一句话<br>TPO23 C2:<br>And my students. they bring so much insight to the table that it’s easy to forget who the professor is.</p>
+<blockquote>
+<p>注意这里table是引申为上课的教室的意思</p>
+</blockquote>
+<p>能看懂却不能有画面感的句子！！</p>
+<p>lec1:  2.5h~3h.<br>200h足够</p>
+<h2 id="2-2-语音现象"><a href="#2-2-语音现象" class="headerlink" title="2.2 语音现象"></a>2.2 语音现象</h2><p>it so produce offers again?</p>
+<ol>
+<li>but sometimes the produce we offer is organically grown.<blockquote>
+<p>produce ? organically grown?<br>produce, n. stress pronuncation, 农产品<br>记单词时要认真地记住各种常见单词的含义</p>
+</blockquote>
+</li>
+</ol>
+<p>content, 由发音 去记单词</p>
+<p>todo: 变词音，变词性，变词义的单词</p>
+<p>lecture by next summer<br>2. Ok, I’m going to begin this lecture by giving you your next assignment. </p>
+<blockquote>
+<p>by giving ????   从单词的具体的音去反应，从句子的结构去反应<br>giving you your 反应不过来<br>! p + k + 元 = b/d/g   因为有元音，所以需要把气息给收住</p>
+</blockquote>
+<p>it’s my issue to see esos  i think<br>3. It’s meant to show a sense of isolation I think.</p>
+<blockquote>
+<p>语速, 看句子， meant ?<br>a sense of 辅元音连读未听出来<br>of 弱化， 弱化的本质实际上就是嘴型变小<br>美音和英音， 美音meant !!!!</p>
 </blockquote>
 
         
@@ -4751,407 +4910,6 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/18/design-pattern-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/18/design-pattern-summary/" class="post-title-link" itemprop="url">design pattern summary</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-18 18:51:43 / 修改时间：18:58:16" itemprop="dateCreated datePublished" datetime="2019-09-18T18:51:43+08:00">2019-09-18</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/design-pattern/" itemprop="url" rel="index"><span itemprop="name">design_pattern</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/design-pattern/summary/" itemprop="url" rel="index"><span itemprop="name">summary</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>参考书籍： head first 之设计模式</p>
-<p>相关实现代码： <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvRGVzaWduUGF0dGVybnM=" title="https://github.com/AugF/DesignPatterns">https://github.com/AugF/DesignPatterns<i class="fa fa-external-link"></i></span></p>
-<h2 id="A-概览"><a href="#A-概览" class="headerlink" title="A. 概览"></a>A. 概览</h2><ol>
-<li><p>OO基础</p>
-<ul>
-<li>抽象<blockquote>
-<p>基类，类的定义</p>
-</blockquote>
-</li>
-<li>继承<blockquote>
-<p>在设计模式中体现，父类和子类的多态</p>
-</blockquote>
-</li>
-<li>封装<blockquote>
-<p>类本身的定义，类封装或者函数封装</p>
-</blockquote>
-</li>
-<li>多态<blockquote>
-<p>参数，返回值多态</p>
-</blockquote>
-<ul>
-<li>运算符多态</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>类代码可控制的点</p>
-<ul>
-<li>访问控制<blockquote>
-<p>保护，公有，私有</p>
-</blockquote>
-</li>
-<li>单例方法，类的方法<ul>
-<li>静态变量</li>
-<li>单件模式</li>
-</ul>
-</li>
-<li>多态<ul>
-<li>函数参数多态</li>
-<li>函数返回值多态</li>
-<li>操作符多态</li>
-</ul>
-</li>
-<li>变量类型<ul>
-<li>引用</li>
-<li>常量</li>
-<li>setter, getter类 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>OO原则</p>
-<ul>
-<li>封装变化</li>
-<li>多用组合，少用继承</li>
-<li>针对接口编程，不针对实现编程</li>
-<li>为了松耦合而设计</li>
-<li>类应该对扩展开放，对修改关闭（开闭原则）</li>
-<li>要依赖抽象，不要依赖具体类（依赖倒置原则）<blockquote>
-<p>不要让高层组件依赖于低层组件</p>
-</blockquote>
-</li>
-<li>最少知识原则，只和你的密友谈话，和Law of Demeter一样的意思</li>
-<li>好莱坞原则：别调用我们，我们会调用你们</li>
-<li>一个类应该只有一个引起变化的原因（单一原则）<blockquote>
-<p>还有一个概念叫内聚，用来度量一个类或者模块紧密地达到单一目的或责任。 单一原则要求高内聚</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ol>
-<ol start="4">
-<li>原则总结<ul>
-<li>类本身<ul>
-<li>单一职责</li>
-<li>封装变化</li>
-<li>对扩展开放，对修改关闭</li>
-</ul>
-</li>
-<li>类之间的关系的目标<ul>
-<li>松耦合</li>
-<li>最少知识(和很少的类交互)</li>
-</ul>
-</li>
-<li>类之间关系的设计<ul>
-<li>思想<ul>
-<li>多用组合，少用继承 </li>
-<li>针对接口，不针对实现</li>
-</ul>
-</li>
-<li>物理<ul>
-<li>依赖抽象，不依赖具体类</li>
-<li>掌握主动性, 主动发出，而不是被动接受</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<ol start="5">
-<li>OO方法<ul>
-<li>策略模式: 接口实现动态的方法<blockquote>
-<p>定义算法族，分别封装起来，让它们可以互相替换，此模式使得算法的变化独立于使用算法的客户. 委托即接口</p>
-</blockquote>
-</li>
-<li>订阅者模式: 出版者和订阅者<blockquote>
-<p>在对象之间定义一对多的依赖，这样当一个对象改变状态时，依赖它的对象会收到通知，并自动更新<br>窗口添加监听对象</p>
-</blockquote>
-</li>
-<li>装饰器模式: 开闭原则的唯一实现??<blockquote>
-<p>动态地将责任附加到对象上。想要扩展功能，装饰器提供有别于继承的另一种选择<br>永远都不会实例化对象</p>
-</blockquote>
-</li>
-<li>工厂方法模式：完成多种类别的对象创建的封装<blockquote>
-<p>定义了一个创建对象的接口，但由子类来决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。<br>输入目标返回实例</p>
-</blockquote>
-</li>
-<li>抽象工厂模式：创建一个家族<blockquote>
-<p>提供一个接口，用于创建相关或依赖对象的家族，而不需要明确指定具体类</p>
-</blockquote>
-</li>
-<li>单件模式: 有益于随时随地地使用全局变量<blockquote>
-<p>确保一个类只有一个实例，并提供一个全局访问点<br>使用vilatile static Singleton uniqueInstance， vilatile关键字要求当uniqueInstance初始化为Singeleton时，多个线程需要正确处理它</p>
-</blockquote>
-</li>
-<li>命令模式： 封装命令的具体形式, 日志的记录，其他的操作实际上就是写入文件, 面板的按钮引起操作<blockquote>
-<p>将“请求”封装成对象，以便使用不同的请求，队列或者日志来参数化其他对象，命令模式也支持可撤销操作<br>具体实现就是，User中, sendCommand(command), buttonPressed事件触发command.execute(); Command将对其他的一些复杂操作完全包括在自身execute中<br>单独将方法抽出来成为一个类</p>
-</blockquote>
-</li>
-<li>适配器模式: 接口解耦<blockquote>
-<p>将一个类的接口，转换为客户期望的另一个接口。适配器让原本接口不兼容的类可以合作无间。</p>
-</blockquote>
-</li>
-<li>外观模式：操作的简易化封装<blockquote>
-<p>提供了一个统一的接口，用来访问子系统的一群接口。外观定义了一个高层接口，让子系统更容易使用。</p>
-</blockquote>
-</li>
-<li>模板方法模式： 封装算法<blockquote>
-<p>在一个方法中定义了一个算法的骨架，而将一些步骤延迟到子类中。模板方法可以在不改变算法结构的情况下，重新定义算法中的某些步骤</p>
-</blockquote>
-</li>
-<li>迭代器模式： 封装集合，顺序访问接口<blockquote>
-<p>提供一种方法顺序访问聚合对象中的各个元素，而又不暴露其内部的表示。</p>
-</blockquote>
-</li>
-<li>组合模式： 同等方式对待整体和部分中的每一个元素<blockquote>
-<p>允许你将对象组合为树形结构来表现“整体/部分”层次结构，组合能让客户以一致的方式处理个别对象以及对象组合。</p>
-</blockquote>
-<ul>
-<li>两个版本： 透明式和不透明式</li>
-</ul>
-</li>
-<li>状态模式：通过引用不同的状态对象，将不同行为委托给所对应的（当前的）对象。<blockquote>
-<p>允许对象在内部状态改变时改变它的行为，对象看起来好像修改了它的类<br>! 内部状态改变时，改变它的行为实际是就是将将行为委托给状态。因为本身引用到多个不同的状态，所以可以来类好像产生了改变，实际上是由行为引起转向了不同的状态对象</p>
-</blockquote>
-</li>
-<li>代理模式: 用于输入对象的过滤. Proxy代替RealSubject处理外界输入<blockquote>
-<p>为另一个对象提供一个替身或占位符以控制对这个对象的访问<br>使用代理模式创建代表对象，让代表对象控制某对象的访问。被代理的对象可以是远程的对象、创建开销大的对象或者需要安全控制的对象。<br>transient A a; 声明类中a属性不用序列化<br>虚拟代理的例子中，加载图片涉及到新开一个线程</p>
-</blockquote>
-<ul>
-<li>特性<blockquote>
-<p>代表对象和以及处理相比于对象更多的东西<br>只允许访问部分接口</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>复合模式<blockquote>
-<p>复合模式结合两个或两个以上的模型，组成一个解决方案，解决一再发生的一般性问题<br>注意！ 简单的叠加不叫复合模式，复合模式是一个对象同时参与到多个模式中。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="B-常见模式总结"><a href="#B-常见模式总结" class="headerlink" title="B. 常见模式总结"></a>B. 常见模式总结</h2><ol>
-<li>全局变量： 单件模式<blockquote>
-<p>实现： 变量标志，关键字控制多线程，即模板</p>
-</blockquote>
-<ul>
-<li>测试： 全局只有一个锅炉</li>
-</ul>
-</li>
-<li>接口不匹配： 适配器模式 <ul>
-<li>类适配器<blockquote>
-<p>原本的类没有，只有新类<br>Adapter实现目标类Duck的接口, Adapter构造参数为要替代的类Turkey, 然后实现Duck的接口<br>实际使用时用Adapter当做Duck使用</p>
-</blockquote>
-</li>
-<li>对象适配器<blockquote>
-<p>实现目标类的接口或抽象类，不过只需要覆盖方法即可</p>
-</blockquote>
-</li>
-<li>测试： 火鸡的接口来冒充鸭子的接口</li>
-</ul>
-</li>
-<li>可变子类太多： 装饰器模式<blockquote>
-<p>抽象接口, 两类扩展接口，一种是基本的元素类（必需品）, 一种是可扩充品，参数为该接口本身, 添加一些东西，对要计算的值再计算;</p>
-</blockquote>
-<ul>
-<li>测试： 面包的可加的料有很多，而且可加的次数不受限</li>
-</ul>
-</li>
-<li>类之间的通信： 订阅者模式 Java Observable<blockquote>
-<p>被订阅者拥有订阅者列表，可对该列表进行添加等操作, 当自身的某些东西改变时, 触发订阅者列表中的每个的set接口改变新的值<br>订阅者有统一的接口, 订阅者有被订阅者作为构造参数, 构造同时使用被订阅者方法加入自己。<br>订阅者根据被订阅者set自己的方法</p>
-</blockquote>
-<ul>
-<li>应用：窗口部件在初始化的同时注册许多</li>
-<li>测试： 温度计，被多个显示屏所订阅</li>
-</ul>
-</li>
-<li>要初始化的类太多,初始化太繁琐: 工厂模式<blockquote>
-<p>超级简单！<br>产品类接口，然后一些产品的实现。<br>工厂将接口作为参数，然后声明方法，通过指定的参数，即指示创建类的名称，然后拥有对应的动作</p>
-</blockquote>
-<ul>
-<li>测试： 工厂创建各种各样的面包</li>
-</ul>
-</li>
-<li>有多个功能相似（有重叠）的类： 抽象工厂模式<blockquote>
-<p>在工厂的基础上，工厂再作为接口，每个具体的工厂用于多个多个不同的产品。<br>User类在使用时，直接可选择性地创建工厂</p>
-</blockquote>
-<ul>
-<li>测试：不同的面包店，提供不一样的买的东西</li>
-</ul>
-</li>
-<li>接口太复杂： 外观模式<blockquote>
-<p>非常简单的事情<br>主体包含很多部分控件，封装主体的操作，每个操作对应到一组组件的动作</p>
-</blockquote>
-<ul>
-<li>应用：应用总窗口的创建操作</li>
-<li>测试：party房间绝对房间中的一切状态</li>
-</ul>
-</li>
-<li>方法的步骤很多，以及处理种类各异: 命令模式 Java<blockquote>
-<p>声明中间Command接口, 对应很多的实体, execute<br>命令方发出setCommand(), 动作然后对应的Command被触发<br>对应的Command实体可以是操纵一些方法，也可以是操纵一些类</p>
-</blockquote>
-<ul>
-<li>应用: 对于窗口部件的多个触发事件</li>
-<li>测试： 餐厅服务员的例子</li>
-</ul>
-</li>
-<li>算法的封装： 模板模式<blockquote>
-<p>抽象类作为高层, 写好了算法的绝大部分，只留下一小部分<br>实现方法，抽象类封装具体的算法过程，具体的一小部分由继承实现</p>
-</blockquote>
-<ul>
-<li>应用: Arrays.Sort()</li>
-<li>测试：不同的餐厅菜单，试图实现对应的问题</li>
-</ul>
-</li>
-<li>方法的多样性，选其一： 策略模式<blockquote>
-<p>User类的某个组件为接口，并且该接口会对应很多具体的实现</p>
-</blockquote>
-<ul>
-<li>测试：比如英雄可以选择多样的武器，并发出动作，每个武器的动作不一样</li>
-</ul>
-</li>
-<li>封装集合，不同的物理实现； 迭代器模式<blockquote>
-<p>首先迭代器一个接口，然后每种物理的储存抽象为迭代器，扩展自迭代器接口。<br>具体的迭代器实现传入目标类为构造参数。目标类有createIterator调用迭代的方法，创建迭代器<br>使用时直接使用迭代器接口即可</p>
-</blockquote>
-<ul>
-<li>测试: 建立多个不同物理集合方式的类，然后进行遍历</li>
-</ul>
-</li>
-<li>同等方式对待整体和个体的元素： 组合模式<blockquote>
-<p>首先具有统一的接口<br>对于方法，不过某些只能叶子实现，某些只能组合实现。<br>对于组合来说，会维护一个数组，表示其拥有的元素；每个组合，一个print可以完全展示其所有元素<br>扩展使用，组合+迭代器，如何实现的?<br>Iterator接口， CompositeIterator() 组合迭代器，本身会维护一个栈, 当new时，会push进入元素。<br>CompositeIterator()的next(),hasNext()实现有讲究； 取next时，会递归地将成分解析!!!, 当发现真正的叶子时，进行加入，并返回该元素; hasNext()的判断过程也是一个递归的过程<br>hard!!  menu createIterator(menuComponents.iterator) meanComponents为数组元素<br>NullIterator, false, null; 供叶子使用;</p>
-</blockquote>
-<ul>
-<li>测试： 由menu接口来做, menuComponent来共同生成，menu作为组合， menu可以添加menu, 或者menuItems, 测试遍历输出结果如何</li>
-</ul>
-</li>
-<li>对象更易于分割为各个状态，而且更简单： 状态模式<blockquote>
-<p>每个状态接口，不同状态进行扩展，每个状态会实现这些的方法，而且这些类中的这些方法一般会包含状态的转换<br>对于主类，常见的操作是这些各种类实际是组成部分，当然会有一些简易的初始化步骤</p>
-</blockquote>
-<ul>
-<li>测试： 完全一系列主类的动作，通过主类当前的状态的输出进行查看</li>
-</ul>
-</li>
-<li>对象的访问控制： 代理模式<ul>
-<li>远程代理<blockquote>
-<p>实际上是远程通信<br>实现一个远程代理接口(注意返回值和参数都是可序列化对象，并抛出异常)，该接口继承自具体的Remote;<br>实现远程代理接口的具体类（需要继承UnicastRemoteObject， 同时要求有个午餐的构造器），实际上是具体的服务。因为涉及到远程，所以这里首先注册rmi rmiregistry产生对应代理辅助对象<br>开启服务端，服务端创建一个对象，然后使用Naming.rebind(“name”, new MyRemoteImpl())注册。<br>服务端运行， 并且在存根产生目录rmiregistry运行辅助对象<br>客户端请求 直接使用MyRemote接口，然后使用Naming.lookup(“rmi://localhost” + name)得到远程对象。<br>然后得到的这个对象即可直接使用。</p>
-</blockquote>
-<ul>
-<li>测试：直接输出远程对象的方法</li>
-</ul>
-</li>
-<li>动态代理<blockquote>
-<p>使用java自带的Proxy<br>例子：实现一个类的访问权限控制。<br>首先，一个类接口，一个具体类<br>一个关于类的代理 implements InvocationHandler, 构造函数参数为类接口。<br>根据 Proxy.newProxyInstance(classloader, interfaces(), new Handler(a))方法返回一个原类<br>实现invoke()方法，即对可使用的方法进行过滤，对参数进行过滤；一起进行重新分配</p>
-</blockquote>
-<ul>
-<li>测试： 使用返回回来的原类进行测试，是否实现了过滤</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>如何能够更快速，简便地画图？<br>思考，现在打字只是为了记住一些东西，但是记录的东西意义性值得考虑</p>
-</blockquote>
-<ol start="15">
-<li>复合模式之MVC<blockquote>
-<p>MVC: model, view, control<br>view和contrl都是view的观察者, model改变后会直接告诉contrl, control做出对应逻辑的改变，或许产生view的变化<br>contrl是view的策略模式<br>view内部的组件实际上是组合模式。控制器只要与顶层组件进行交互即可</p>
-</blockquote>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -5204,7 +4962,7 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

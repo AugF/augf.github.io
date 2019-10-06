@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">91</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">92</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,274 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/" class="post-title-link" itemprop="url">machinelearning cornerstone when can machines learn</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:30:31 / 修改时间：12:33:41" itemprop="dateCreated datePublished" datetime="2019-09-19T12:30:31+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/" itemprop="url" rel="index"><span itemprop="name">machinelearning</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/cornerstone/" itemprop="url" rel="index"><span itemprop="name">cornerstone</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-The-Learning-Problem"><a href="#1-The-Learning-Problem" class="headerlink" title="1. The Learning Problem"></a>1. The Learning Problem</h1><h2 id="1-1-Introduction"><a href="#1-1-Introduction" class="headerlink" title="1.1. Introduction"></a>1.1. Introduction</h2><p>theory+technique<br>多个角度概念<br>what + why + how + better:</p>
+<h2 id="1-2-what-is-ML"><a href="#1-2-what-is-ML" class="headerlink" title="1.2. what is ML?"></a>1.2. what is ML?</h2><h3 id="1-2-1-definetion"><a href="#1-2-1-definetion" class="headerlink" title="1.2.1 definetion"></a>1.2.1 definetion</h3><p>observation-&gt;learning-&gt;skill<br>data-&gt;ml-&gt;skill</p>
+<blockquote>
+<p>so data is more like observation, will be better.<br>learning skill how to use in data</p>
+</blockquote>
+<p>learning:<br>ml:</p>
+<p>skill: improve some performance measure.</p>
+<h3 id="1-2-2-Application"><a href="#1-2-2-Application" class="headerlink" title="1.2.2 Application:"></a>1.2.2 Application:</h3><p>stock data-&gt;ML-&gt;more stock gain</p>
+<ul>
+<li>Tree Recognition<br>‘define’  trees and hand-program: difficult<br>learn from data(observations) and recognize</li>
+</ul>
+<h3 id="1-2-3-Use-Scenarios"><a href="#1-2-3-Use-Scenarios" class="headerlink" title="1.2.3 Use Scenarios"></a>1.2.3 Use Scenarios</h3><p>navigating on Mars<br>cannot’ define the solution</p>
+<blockquote>
+<p>一般世界人，都使用的是规则来判定一件事。<br>high-frequency trading<br>consumer-targeted marketing</p>
+</blockquote>
+<h3 id="1-2-4-key-essence-of-ml"><a href="#1-2-4-key-essence-of-ml" class="headerlink" title="1.2.4 key essence of ml"></a>1.2.4 key essence of ml</h3><ol>
+<li>some underlying pattern to be learned<br>exisits target<br>eg: predict whether the next cry of baby</li>
+<li>but no easy definition !<br>eg: determining whether a given graph contains a cycle</li>
+<li>this is data about the pattern<br>eg:whether the earth will be destoryed</li>
+</ol>
+<h2 id="1-3-Learning-Problem"><a href="#1-3-Learning-Problem" class="headerlink" title="1.3. Learning Problem"></a>1.3. Learning Problem</h2><ol>
+<li>Daily Needs<br>Food<br>Clothing<br>Housing<br>Transportation</li>
+<li>Education</li>
+<li>Entertainment</li>
+</ol>
+<h2 id="1-4-ML-vs-DM-AI-Statistics"><a href="#1-4-ML-vs-DM-AI-Statistics" class="headerlink" title="1.4 ML vs DM,AI,Statistics"></a>1.4 ML vs DM,AI,Statistics</h2><p>from f -&gt; ML -&gt; g.<br><img src="00001.png" alt> </p>
+<p>ML vs DM<br><img src="00002.png" alt><br>DM can help ML, and vice versa.<br>efficient computation</p>
+<p>ML vs AI<br><img src="00003.png" alt></p>
+<p>ML vs Statistics(inference )<br><img src="00004.png" alt>  </p>
+<h1 id="2-Learning-to-Answer-Yes-No"><a href="#2-Learning-to-Answer-Yes-No" class="headerlink" title="2. Learning to Answer Yes_No"></a>2. Learning to Answer Yes_No</h1><h2 id="2-1-Example"><a href="#2-1-Example" class="headerlink" title="2.1 Example"></a>2.1 Example</h2><h3 id="PLA算法设计"><a href="#PLA算法设计" class="headerlink" title="PLA算法设计"></a>PLA算法设计</h3><p><strong>设计思想</strong><br>知错能改，纠正错误的思想.<br>图形结合法来求解<br><strong>类别</strong><br>局部</p>
+<p><strong>步骤</strong><br>线性函数，感知机。<br>修正参数，w_{t+1}在错误案例上进行修正。</p>
+<blockquote>
+<p>知错能改法<br>Cyclic PLA,简单的检查是否还有错误。<br>对数据饶一圈，让这第100个人都没有犯错</p>
+</blockquote>
+<h3 id="PLA算法的正确性"><a href="#PLA算法的正确性" class="headerlink" title="PLA算法的正确性"></a>PLA算法的正确性</h3><p><strong>假设</strong></p>
+<ol>
+<li>问题具有最优解</li>
+<li>样本真实，没有噪声</li>
+</ol>
+<p><strong>收敛到最优解</strong></p>
+<p><strong>算法会停止（求迭代轮数）</strong></p>
+<p>PLA用图形的夹角来做。P8</p>
+<p>PLA是否可学习？<br>判断两个数是否接近？<br>做累积，两个向量内积越来越大</p>
+<p><img src="00005.png" alt></p>
+<p><img src="00006.png" alt></p>
+<blockquote>
+<p>资料是否是线性可分？资料这里是指D，还是实际分布</p>
+</blockquote>
+<blockquote>
+<p>从某种分布上来说，未知资料是否线性可分。</p>
+</blockquote>
+<blockquote>
+<p>理论这里对吗？就是是否线性可分</p>
+</blockquote>
+<h2 id="2-2-Learning-with-noisy-data"><a href="#2-2-Learning-with-noisy-data" class="headerlink" title="2.2 Learning with noisy data"></a>2.2 Learning with noisy data</h2><blockquote>
+<p>待测数据上有噪声<br>假设犯错率很低，那么假设没有犯错率</p>
+</blockquote>
+<p>假设没有噪声，但不知道是否可学习怎么办？<br>试图去找犯错误最小的。 NP-hard</p>
+<p>科学家的做法：找不到全局最好的解，所以考虑使用贪心。 Pocket Algorithm，在自己的口袋保留最好的算法，根据步长随机更新的思想。<br><img src="00013.png" alt></p>
+<p><img src="00007.png" alt></p>
+<blockquote>
+<p>因为是最优算法所以返回的结果必然都是最优的。对于算法的比较，记住一定从时间复杂度上看。 还有一旦是线性可分，那么就意味着算法都可以不犯错。</p>
+</blockquote>
+<h1 id="3-Types-of-Learning"><a href="#3-Types-of-Learning" class="headerlink" title="3. Types of Learning"></a>3. Types of Learning</h1><h2 id="v1-输出空间角度"><a href="#v1-输出空间角度" class="headerlink" title="v1 输出空间角度"></a>v1 输出空间角度</h2><ul>
+<li>binary classification</li>
+<li>mulitclass classification</li>
+<li>回归问题<blockquote>
+<p>对于有限的复杂的输出可以看作是多分类问题</p>
+</blockquote>
+</li>
+<li>结构学习问题：比如学习蛋白质的长相，讲的话的语法树（输出空间中具有某种结果）<blockquote>
+<p>其实从某种意义上也是划归到多分类上去。</p>
+</blockquote>
+<h2 id="v2-资料的角度"><a href="#v2-资料的角度" class="headerlink" title="v2 资料的角度"></a>v2 资料的角度</h2></li>
+</ul>
+<ol>
+<li>监督学习: 完全是有标记样本</li>
+<li>非监督学习: 未标记样本，分群<blockquote>
+<p>监督可以看作是没有答案<br>聚类，文章主题</p>
+</blockquote>
+<ul>
+<li>density estimation: {x_n}</li>
+<li>outlier detection:<blockquote>
+<p>难衡量好坏，因为没有目标</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>半监督学习：有标记样本+未标记样本。</li>
+<li>强化学习: 不断强化，给予惩罚和奖励；不断学得最终的目标。<blockquote>
+<p>喂给机器资料，对机器进行评价，好还是不好<br>partial/implicit information</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="00008.png" alt></p>
+<h2 id="v3-取得样本的方式，学习的角度"><a href="#v3-取得样本的方式，学习的角度" class="headerlink" title="v3 取得样本的方式，学习的角度"></a>v3 取得样本的方式，学习的角度</h2><ol>
+<li>Batch Learning</li>
+<li>Online learing</li>
+<li>active: “question asking” –query the yn of the chosen xn<blockquote>
+<p>有技巧地问问题，可以用很少的问题学习到很多的东西。标记很贵的情况。</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="00009.png" alt></p>
+<h2 id="v4-特征的角度"><a href="#v4-特征的角度" class="headerlink" title="v4 特征的角度"></a>v4 特征的角度</h2><p>二维向量：对称性、密度性</p>
+<ul>
+<li>concrete</li>
+<li>abstract 客户的编号，实际就是一种抽象了。</li>
+<li>raw<br><img src="00010.png" alt></li>
+</ul>
+<blockquote>
+<p>如何找一个最合适的特征</p>
+</blockquote>
+<blockquote>
+<p>至少可以从这些分类中寻找一个感兴趣的东西<br><img src="00011.png" alt></p>
+</blockquote>
+<h1 id="4-Feasibility-of-Learning"><a href="#4-Feasibility-of-Learning" class="headerlink" title="4. Feasibility of Learning"></a>4. Feasibility of Learning</h1><p><img src="00012.png" alt></p>
+<h2 id="4-1-Learning-is-impossible"><a href="#4-1-Learning-is-impossible" class="headerlink" title="4.1 Learning is impossible?"></a>4.1 Learning is impossible?</h2><p>adversarial teacher</p>
+<blockquote>
+<p>此时如何学习？<br>有什么问题？目标不唯一<br>这也是为什么<br>No free lunch, 我们坚持的是什么？如果我们坚持f不知道，我们要在D之外学到东西是不可能的。f一定是定下来的，否则是无法解决。再理解</p>
+</blockquote>
+<blockquote>
+<p>这个道理很常见，就像是猜数一样，一定要目标一定才可猜。</p>
+</blockquote>
+<blockquote>
+<p>这也是为什么要用机器学习算法的原因，一般地话，为什么要有测试集，就是试图用测试集来衡量训练误差。</p>
+</blockquote>
+<blockquote>
+<p>还有对于某些题的设定有问题，这其实就只是一种解释，需要更多的解释来完成这个问题</p>
+</blockquote>
+<h2 id="4-2-Inferring-Something-Unknown"><a href="#4-2-Inferring-Something-Unknown" class="headerlink" title="4.2 Inferring Something Unknown"></a>4.2 Inferring Something Unknown</h2><p>can we infer something unknown in other scenarios?</p>
+<blockquote>
+<p>随机采样，这就是为什么要用采样了？<br>参数估计，大数定理。<br>数学上的定理Hoeffding，相差很远的可能性很小；特别是当样本够大，得到的估计趋于真实的估计。<br>注意这里两个方面，看多个变量<br><img src="00014.png" alt></p>
+</blockquote>
+<blockquote>
+<p>从瓶子里去橙色球和其他颜色球，怎么知道原本中含有多少橙色球？一个想法就是通过对瓶子 的球进行采样一定数量，那么，根据采样的数量来就可以来估计真实的值。</p>
+</blockquote>
+<h2 id="4-3-Connection-to-Learning"><a href="#4-3-Connection-to-Learning" class="headerlink" title="4.3 Connection to Learning"></a>4.3 Connection to Learning</h2><p><img src="00015.png" alt></p>
+<p>注意，这里考虑了假设空间和问题空间是一致的。<br>与学习之间的联系。首先我们有一大堆的假设，并从这些假设中抽取一个假设作为真实的假设。 然后，根据这个假设我们就需要得到未来的函数。那么，想法就是从满足这些假设的数据中独立同分布地抽取多个数据。<br>首先，数据如果足够多，利用这些数据学得的假设，并且，我们有理由相信从这些东西中学得的假设。 在数据集特别大的情况下，来学习得到的假设会更好，更满足实际的情况。</p>
+<p>测试数据从某种意义上的设置就是想得到怎么样的数据？</p>
+<blockquote>
+<p>但是一般来说测试数据都是中肯的<br>还有一个方面就是用来纠正学习到的模型，因为学习到的模型有时候是过拟合的，即可解释为泛化能力。</p>
+</blockquote>
+<p><strong>Verification of One h</strong></p>
+<p><img src="00016.png" alt></p>
+<blockquote>
+<p>这里比较了real学习和根据经验误差来学习的差别。</p>
+</blockquote>
+<p>算法总是得到相同的假设，由此可以觉得该算法不好？</p>
+<blockquote>
+<p>假设空间小就意味着算法不好吗？<br>经验误差小就意味着算法好吗？从某个方面可以这样看</p>
+</blockquote>
+<p><img src="00017.png" alt></p>
+<p>ML学得的规则，不一定对过去有效，因为只是过去的抽样数据；不一定对将来有效，因为有一定误差的存在；在未来一百天中选规则也不成，因为构不成学习，不过是很多规则的累加</p>
+<h2 id="4-4-Connection-to-Real-Learning"><a href="#4-4-Connection-to-Real-Learning" class="headerlink" title="4.4 Connection to Real Learning"></a>4.4 Connection to Real Learning</h2><p>bad sample: E_in and E_out far away–can get worse when involving “choice”.</p>
+<blockquote>
+<p>注意，数据的合理性，即样本是否合理。从某种意义上来说，需要看样本是否满足一些基本的分布，详细见西瓜书。<br>就是说所选取的样本是不好的样本，从另一个角度来看，就是一个指导的感觉就是还是说的是独立同分布的问题，即是否满足独立同分布。</p>
+</blockquote>
+<blockquote>
+<p>训练的样本不是好的样本，这是一个检查的标准。</p>
+</blockquote>
+<p><strong>什么是Bad Sample</strong><br>这个和过拟合有关吗？<br>好的数据任意进行选择就可以。<br>但是坏的数据会使算法踩到雷，算法得到不好的结果。</p>
+<p>分析：假设对于每个假设都有bad example, 那么如何。</p>
+<p>就是需要选取某个数据集，所有假设基本上都不会踩到雷。</p>
+<p>评价，只要有一个不好就认为不好。<br>那么，不好的数据集的大小是多少？<br><img src="00018.png" alt></p>
+<p>M是假设的个数。</p>
+<blockquote>
+<p>结论：只有样例过多才能满足要求；<br>现实的指导意义：只有尽可能地将数据认为是正反例合理的情况，否则其他不合理。</p>
+</blockquote>
+<p>所以，当数据合理时，我们认为满足PAC，此时Ein=Eout, Eout就是在未知数据集上的表现情况；注意这里还未引入泛化误差的概念。那么，实际上就是选经验误差最小的，因为经验误差在这里认为是等于泛化的。</p>
+<p>而泛化误差是用来进行评价的。 </p>
+<p>到此为止，说明了假设空间为有限的情况，并未扩展到假设空间为无限的情况。</p>
+<p><img src="00019.png" alt></p>
+<blockquote>
+<p>理解！</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -2957,404 +3225,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-mapreduce-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-mapreduce-summary/" class="post-title-link" itemprop="url">nju-course mapreduce summary</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:05:54 / 修改时间：12:06:51" itemprop="dateCreated datePublished" datetime="2019-09-19T12:05:54+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/mapreduce/" itemprop="url" rel="index"><span itemprop="name">mapreduce</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="ch1-大数据技术简介"><a href="#ch1-大数据技术简介" class="headerlink" title="ch1 大数据技术简介"></a>ch1 大数据技术简介</h2><p>数据规模到底多大才叫大数据？<br>大数据一词的重点不是在于数据规模的定义，而是指信息技术发展已经进入了一个新时代</p>
-<p>大数据的特点：5V</p>
-<ul>
-<li>Volume: 大容量：PB级规模</li>
-<li>Varirty: 多样性：结构化/非结构化</li>
-<li>Velocity: 时效性： 实时处理</li>
-<li>Veracity： 准确性：结果准确</li>
-<li>Value： 大价值：深度价值</li>
-</ul>
-<p>大数据处理技术产生的背景</p>
-<ul>
-<li>多核/多处理器并行计算</li>
-<li>MapReduce大数据并行计算</li>
-<li>行业大数据应用需求</li>
-</ul>
-<p>大数据分析应用的ABCD关键要素<br>算法模型<br>业务场景<br>计算力<br>数据资源</p>
-<p>结构特征</p>
-<ul>
-<li>结构化数据</li>
-<li>半结构化数据</li>
-</ul>
-<p>获取和处理方式</p>
-<ul>
-<li>静态（线下数据）/非实时数据</li>
-<li>动态（流式/增量式/线上）/实时数据</li>
-</ul>
-<p>关联特征</p>
-<ul>
-<li>无关联/简单关联数据（键值记录型数据）</li>
-<li>复杂关联数据（图数据）</li>
-</ul>
-<p>大数据处理的主要技术问题</p>
-<p>存储：巨量数据如何存得下</p>
-<p>计算：巨量数据如何快速完成计算</p>
-<p>分析：如何返现大数据的深度价值</p>
-<p>大数据研究的基本途径</p>
-<ul>
-<li>降低尺度，寻找数据尺度无关近似算法</li>
-<li>新算法，寻找新算法降低计算复杂度</li>
-<li>并行化，分而治之，并行化处理</li>
-</ul>
-<h2 id="ch2-MapReduce简介"><a href="#ch2-MapReduce简介" class="headerlink" title="ch2 MapReduce简介"></a>ch2 MapReduce简介</h2><p>提高计算机硬件性能的而主要手段</p>
-<ul>
-<li>提高字长、流水式微体系结构技术</li>
-<li>提高集成度</li>
-<li>提高主频</li>
-</ul>
-<p>按照系统类型来分，并行计算系统通常包括</p>
-<ul>
-<li>多核/众核、对称多处理、大规模并行处理、集群、网格等不同类型</li>
-</ul>
-<p>按照程序设计模型/方法分类，并行计算主要可以分为</p>
-<ul>
-<li>共享内存变量程序设计方式</li>
-<li>消息传递程序设计方式</li>
-<li>MapReduce程序设计方式</li>
-</ul>
-<p>为什么需要大规模数据并行处理</p>
-<ul>
-<li>处理数据的能力大幅落后于数据增长</li>
-<li>海量数据隐含着更准确的事实</li>
-</ul>
-<p>什么是MapReduce</p>
-<ul>
-<li>基于集群的高性能并行计算平台</li>
-<li>并行程序开发与运行框架</li>
-<li>并行程序设计模型与方法</li>
-</ul>
-<p>为什么MapReduce如此重要？</p>
-<ul>
-<li>高效的大规模数据处理方法</li>
-<li>改变了大规模尺度上组织计算的方式</li>
-<li>第一个不同于冯洛依曼结构的、基于集群而非单机的计算方式的重大突破</li>
-<li>目前为止最为成功的基于大规模计算资源的并行计算抽象方法</li>
-</ul>
-<p>对付大数据处理——分而治之</p>
-<ul>
-<li>大数据分而治之的并行化计算</li>
-<li>大数据任务划分和并行计算模型</li>
-</ul>
-<p>构建抽象模型——Map和Reduce</p>
-<ul>
-<li>主要设计思想：为大数据处理过程中的两个主要处理操作提供一种抽象机制</li>
-<li>典型的流式大数据问题的特征</li>
-<li>Map和Reduce操作的抽象描述，提供一种抽象机制，把做什么和怎么做分开，程序员仅需要描述做什么，不需要关心怎么做</li>
-<li>基于Map和Reduce的并行计算模型和计算过程</li>
-</ul>
-<p>上升到框架——自动并行化并隐藏底层细节</p>
-<ul>
-<li>主要需求、目标和设计思想<ul>
-<li>实现自动并行化计算</li>
-<li>为程序员隐藏系统层细节</li>
-</ul>
-</li>
-<li>MapReduce提供统一的构建并完成以下的主要功能<ul>
-<li>任务调度</li>
-<li>数据/代码互定位</li>
-<li>出错处理</li>
-<li>分布式数据存储与文件管理</li>
-<li>Comibiner和Partitioner(设计目的和作用)</li>
-</ul>
-</li>
-</ul>
-<p>MapReduce的主要设计思想和特征</p>
-<ul>
-<li><p>向外横向扩展，而非向上纵向扩展</p>
-</li>
-<li><p>失效被认为是常态</p>
-</li>
-<li><p>吧计算处理向数据迁移</p>
-</li>
-<li><p>顺序处理数据、避免随机访问数据</p>
-</li>
-<li><p>为应用开发者隐藏系统层细节</p>
-</li>
-<li><p>平滑无缝的可扩展性</p>
-<p>MapReduce提供的主要功能</p>
-<ul>
-<li>任务调度：负责为划分后的就hi算任务分配和调度计算节点；同时负责监控这些节点的执行状态</li>
-<li>数据/代码互定位：为了减少数据通信，一个基本原则是本地化数据处理，即一个计算节点尽可能处理其本地磁盘上所分布存储的数据</li>
-<li>出错处理</li>
-<li>分布式数据存储与文件管理</li>
-<li>Combiner和Partitioner： 将中间结果数据进入reduce节点前需要进行合并处理，把具有同样主键的数据合并到一起避免重复传送，优化网络传输，在Map之后执行；而Partitioner的主要设计目的和作用是数据分区，将数据分配到合适的Reduce节点，避免不同Reduce节点上数据的相关性，在Reduce之前执行</li>
-</ul>
-</li>
-</ul>
-<h2 id="ch3-Google-Hadoop-MaqReduce基本构架"><a href="#ch3-Google-Hadoop-MaqReduce基本构架" class="headerlink" title="ch3. Google/Hadoop MaqReduce基本构架"></a>ch3. Google/Hadoop MaqReduce基本构架</h2><p>Google MapReduce的基本工作原理</p>
-<ul>
-<li>并行化处理的基本过程，系统中有一个负责调度的主节点，以及数据Map和Reduce工作节点（Worker）</li>
-<li>带宽优化（Combiner的设计目的和作用），优化到Reduce的结果</li>
-<li>用数据分区解决数据相关性问题（Partitioner的设计目的和作用），即根据一定的策略对Map输出的中间结果进行分区</li>
-<li>失效处理： 主节点失效checkpoinr,检查整个计算作业的执行情况；工作节点失效，直接终止</li>
-<li>计算优化，把一个计算任务让多个Map节点同时做，取最快完成者的计算结果。冗余节点</li>
-</ul>
-<p>分布式文件系统GFS的基本工作原理</p>
-<ul>
-<li>Google GFS的基本设计部原则<ul>
-<li>廉价本地磁盘分布存储</li>
-<li>多数据自动备份解决可靠性</li>
-<li>为上层的MapReduce计算框架提供支撑</li>
-</ul>
-</li>
-</ul>
-<p>Google GFS的基本构架和工作原理</p>
-<ul>
-<li>GFS Master的主要作用</li>
-<li>GFS ChuckServer的主要作用</li>
-<li>数据访问工作过程</li>
-<li>GFS的系统管理技术</li>
-</ul>
-<p>分布式结构化数据表BigTable</p>
-<ul>
-<li><p>BigTable设计动机和目标</p>
-<ul>
-<li>需要存储管理海量的结构化半结构化数据</li>
-<li>海量的服务请求</li>
-<li>商用数据库无法使用</li>
-</ul>
-</li>
-<li><p>BigTable数据模型——多维表</p>
-<ul>
-<li>行关键字、列关键字、时间戳</li>
-</ul>
-</li>
-<li><p>BigTable基本构架</p>
-<ul>
-<li>子表服务器</li>
-<li>子表存储结构SSTable（对应于GFS数据块）</li>
-<li>子表数据格式</li>
-<li>子表寻址</li>
-</ul>
-</li>
-</ul>
-<p>Hadoop MapReduce主要组件<br>NameNode相当于Google的MasterServer<br>DataNode–ChunckServer</p>
-<ul>
-<li><p>文件输入格式InputFormat <br><br>定义文件如何分割和读取，选择文件或者其它让对象，用来作为输入；定义InputSplits，将一个文件分为不同任务，mapred.min.split.size；为RecordReader提供一个工厂，用来读取这个文件。</p>
-<ul>
-<li>TextInputFormat, LineRecordReader</li>
-<li>KeyValueTextInputFormat</li>
-<li>SequenceFileInputFormat<br>一个MapReduce程序统称为一个Job，一个Job有许多个任务构成<br>JobConf.setInputFormat</li>
-</ul>
-</li>
-<li><p>Mapper <br><br>每一个Mapper类的实例生成了一个Java进程，负责处理某一个InputSplit上的数据，用Maper.Context</p>
-</li>
-<li><p>Combiner <br><br>conf.setCombinerClass(Reduce.class)</p>
-</li>
-<li><p>Partitioner &amp;&amp; Shuffle</p>
-</li>
-<li><p>Sort， 传输到每一个Reduce节点上的，将被所有的Reduce函数接收的Key,value会被hadoop自动排序</p>
-</li>
-<li><p>Reducer</p>
-</li>
-<li><p>OutputFormat <br><br>与InputFormat对应</p>
-</li>
-</ul>
-<p>Hadoop系统中，JobTracker的主要作用是 作业控制（作业分解、状态监控），资源管理，而TaskTracker的主要作用是 汇报心跳、执行JobTracker的命令，NameNode的作用是存储了所有文件元数据、文件与数据块的映射关系，以及文件属性等核心数据；DataNode的作用是存储具体的数据快</p>
-<h2 id="ch4-程序安装"><a href="#ch4-程序安装" class="headerlink" title="ch4 程序安装"></a>ch4 程序安装</h2><h2 id="ch5-MapReduce算法设计"><a href="#ch5-MapReduce算法设计" class="headerlink" title="ch5 MapReduce算法设计"></a>ch5 MapReduce算法设计</h2><p>MapReduce处理流程</p>
-<ol>
-<li>map</li>
-<li>shuffle and sort</li>
-<li>reduce</li>
-</ol>
-<p>可编程控制部分<br>Mapper： setup(), map(), cleanup()<br>Shuffle: Partitioner(划分均匀，查找快速)<br>Sort<br>Reduce: setup(), reduce(), cleanup()</p>
-<p>应用</p>
-<ol>
-<li>构建单词同现矩阵</li>
-<li>文档倒排索引，在map阶段单词在前，文档名在后，有效负载（如词频，只是需要在前一步进行统计即可）</li>
-<li>专利文献数据分析,统计被引文献，citing, cited</li>
-</ol>
-<h2 id="ch6-HBase-Hive"><a href="#ch6-HBase-Hive" class="headerlink" title="ch6 HBase Hive"></a>ch6 HBase Hive</h2><p>Hadoop HBase基本数据类型是一张多维表，该表的存储和检索有行关键字和列关键字、时间戳三个关键字组成，其数据操作访问是 通过JavaAPI和MapReduce接口编程实现，而Hive是一个分布式数据仓库，其数据操作访问编程是通过SQL实现</p>
-<h2 id="ch7-高级MapReduce编程技术"><a href="#ch7-高级MapReduce编程技术" class="headerlink" title="ch7 高级MapReduce编程技术"></a>ch7 高级MapReduce编程技术</h2><p>用户自定义Partitioner和Combiner<br>组合式</p>
-<h2 id="ch8-基于MapReduce的搜索引擎算法"><a href="#ch8-基于MapReduce的搜索引擎算法" class="headerlink" title="ch8 基于MapReduce的搜索引擎算法"></a>ch8 基于MapReduce的搜索引擎算法</h2><p>PageRank算法</p>
-<h2 id="ch9-数据挖掘基础算法"><a href="#ch9-数据挖掘基础算法" class="headerlink" title="ch9 数据挖掘基础算法"></a>ch9 数据挖掘基础算法</h2><h3 id="k-means算法"><a href="#k-means算法" class="headerlink" title="k-means算法"></a>k-means算法</h3><p>将给定的多个对象分成若干组，组内的各个对象是相似的，组间的对象是不相似的。<br>数据点的类型可以划分为欧氏和非欧<br>对于欧式空间，取各个数据点的平均值<br>对于非欧空间，取某个处于最中间的店，取若干个最具代表性的点</p>
-<p>k-means:<br>第一步，选区k个初始点,作为出事的cluster center<br>第二步，Loop {<br>    对输入中的每一个点p：<br>    {<br>        计算p到各个cluster的距离<br>        将p归入最近的cluster<br>    }<br>    重新计算各个cluster的中心<br>}<br>第三步，根据最终胜出的簇中心对所有数据元素进行划分聚类的工作</p>
-<p>问题：<br>样本数据有n个，预期生产k个cluster，则k-means算法t次迭代过程中的时间复杂度为O(nkt)</p>
-<p>并行化算法设计<br>思路： 在处理每一个数据点是，只需要知道cluster center的信息</p>
-<p>将所有数据分布到不同的MapReduce节点上，每个节点只对自己的数据进行计算<br>每个Map节点能够读取上一次迭代生成的cluster center<br>Reduce节点综合每个属于每个cluster的数据点，计算出新的cluster centers (Reducer的个数实际上就和聚类中心的个数相同)</p>
-<p>全局文件</p>
-<ul>
-<li><p>当前的迭代次数</p>
-</li>
-<li><p>K个不同聚类中心的数据结构（id, center, 数据点的个数）</p>
-<p>  class Mapper<br>  setup(){</p>
-<pre><code>读取全局的聚类中心数据 centers</code></pre><p>  }<br>  map(key, p) //p 为一个数据点<br>  {</p>
-<pre><code>minDis = Double.MAX_VALUE
-index = -1
-for i=0 to Centers.length
-{
-    dis = ComputeDist(p, Centers[i])
-    if (dis &lt; minDis&gt;)  // 替换k个点
-    {
-        minDis = dis;
-        index = i;
-    }
-}
-emit(Centers[i].ClusterID, (p,1)) 
-// 1表示数据点的个数</code></pre><p>  }</p>
-<p>  class Reducer<br>  reduce(ClusterID, value=[p(pm1, n1), (pm2, n2), ..])<br>  {</p>
-<pre><code>pm = 0.0, n=0;
-k = 数据点列表中数据项的总个数
-for i=0 to k
-{
-    pm += pm[i]*n[i]; n+=n[i];
-}
-pm = pm/n;
-emit(ClusterID, (pm,n));// 输出新的聚类中心的数据值</code></pre><p>  }</p>
-</li>
-</ul>
-<h3 id="基于MapReduce的分类并行化算法"><a href="#基于MapReduce的分类并行化算法" class="headerlink" title="基于MapReduce的分类并行化算法"></a>基于MapReduce的分类并行化算法</h3><p>从一组已经带有分类标记的训练样本数据集来预测一个测试样本的分类结果</p>
-<h4 id="kNN"><a href="#kNN" class="headerlink" title="kNN"></a>kNN</h4><p>k-NN: 计算测试样本到各训练样本的距离，取其中距离最小的K个，并根据这K个训练样本的标记进行投票得到测试样本的标记。</p>
-<p>并行化思路<br>全局变量：<br>样本数据和k个最近的样本</p>
-<p>对于每一个的样本数据，检查如果就hi算出来的值比目前大则替换，否则保留<br>根据所保留的k个最大的值得到最终的分类标记</p>
-<h4 id="朴素贝叶斯分类"><a href="#朴素贝叶斯分类" class="headerlink" title="朴素贝叶斯分类"></a>朴素贝叶斯分类</h4><p>关键：对于一个未知类别的样本X，可以先分别计算出X属于每一个类别Yi的概率P(X|Yi)P(Yi), 然后选择其中概率最大的Yi作为其类别<br>理解：因为分母都是一样的，所以实际上考虑的就是分子的情况</p>
-<p>并行化算法设计思路：<br>用MapReduce扫描数据集，计算每个类别Yi出现的频度FYi，以及每个属性值出现在Yi的频度FxYij</p>
-<p>训练集的并行化代码<br>    class Mapper<br>    map(key, tr)<br>    {<br>        tr: trid,A,y<br>        emit(y,1) // 类别<br>        for i=0 to A.length<br>        {<br>            emit(&lt;y, xni, xvi&gt;, 1)<br>        }<br>    }<br>    class Reducer<br>    reduce(key, value_lsit) // Key为分类标记y, 或者&lt;y, xni, xvi&gt;<br>    {<br>        sum = 0<br>        while(value_lsit.hasNext()) {<br>            sum += value_lsit.next().get()<br>        }<br>        emit(key, sum)<br>    }</p>
-<p>测试样本分类预测Mapper</p>
-<pre><code>class Mapper
-setup()
-{
-    读取从训练数据集中得到的频度数据
-    分类频度表 FY = {(Yi, 每个Yi的频度FYi)}
-    属性频度表 FxY = {(&lt;Yi, xnj, xvj&gt;, 出现频度FxYij)}}
-}
-map(key, ts) // ts为一个测试样本
-{
-    ts tsid, A
-    MaxF = MIN_VALUE; idx = -1
-    扫描每个表，找到类别最大的表所在的位置
-    emit(tsid, FY[idx].Yi)
-}</code></pre><h4 id="SVM短文本分类"><a href="#SVM短文本分类" class="headerlink" title="SVM短文本分类"></a>SVM短文本分类</h4><p>训练阶段，对于多类（480类）问题，为了提高多类精度，首先针对每个类做一个2class两类分类器<br>预测阶段，分别用480个分类其对每个待预测的样本进行分类并打分，选择分类为”是“且打分最高的类别作为该样本可能的预测类别，则将该测试样本判定为不属于480类的异类</p>
-<p>第一步，用训练数据产生480个2-class分类器模型<br>Map: 将每个训练样本的分类标签ClassID作为主键，输出（ClassID,  &lt;true/ false, 特征向量&gt;<br>Reduce： 具有相同ClassID的键值对进入同一个Reduce</p>
-<p>第二步，用480个2-Class分类器模型处理测试数据<br>Map： 将每个测试样本，以SampleID作为主键，输出（SampleID, &lt;LableID, 评分Score&gt;）<br>Reduce: SampleID</p>
-<h2 id="ch10-Spark系统及其编程技术"><a href="#ch10-Spark系统及其编程技术" class="headerlink" title="ch10 Spark系统及其编程技术"></a>ch10 Spark系统及其编程技术</h2><h3 id="Scala"><a href="#Scala" class="headerlink" title="Scala"></a>Scala</h3><ol>
-<li>val, var 不变引用和可变引用</li>
-<li>基于JVM、面向对象、函数式编程</li>
-<li>类是对象的抽象，对象是类的具体实现，占内存</li>
-</ol>
-<h3 id="Spark-vs-Hadoop"><a href="#Spark-vs-Hadoop" class="headerlink" title="Spark vs Hadoop"></a>Spark vs Hadoop</h3><p>Spark不足：<br>不擅长做以下计算：</p>
-<ol>
-<li>实时计算：Map Reduce无法在毫秒内或者秒级内返回结果</li>
-<li>流式计算：流式计算的输入数据是动态的，设计特点决定了数据源必须是静态的</li>
-<li>DAG计算：多个应用程序存在依赖关系，后一个应用程序的输入为前一个的输出。每个MapReduce的阿左也输出结果都会写道磁盘，会造成大量的磁盘IO，性能非常的地下。</li>
-<li>没有利用好内存资源，频繁第磁盘草坪做<br>Spark优点：</li>
-<li>Spark 把中间数据放到内存，迭代运算效率高。Spark支持DAG图的分布式并行计算的编程框架，减少了迭代过程中的数据的读写磁盘，提高了处理效率。（延迟加载）</li>
-<li>容错性高。Spark引进了弹性分布式数据集RDD的抽象，他是分布在一组节点的制度对象集合，这些集合式弹性的，如果数据集一部分丢失，则可以通过“血统：对它们进行重建。另外在RDD计算时可以通过CheckPoint来实现容错。</li>
-<li>更加通用。mapreduce只提供了map和reduce两种操作，而spark提供了很多种，大致分为Transformation和Action两大类</li>
-</ol>
-<h3 id="RDDs"><a href="#RDDs" class="headerlink" title="RDDs"></a>RDDs</h3><ol>
-<li>基于RDD之间的依赖关系组成lineage,重计算以及checkpoint等机制保证容错性</li>
-<li>只读、可分区，这个数据集的全部或部分可以缓存在内存中，在多次计算间重用，弹性指内存不够时可以与磁盘进行交换</li>
-</ol>
-<h3 id="Spark的基本构架和组件"><a href="#Spark的基本构架和组件" class="headerlink" title="Spark的基本构架和组件"></a>Spark的基本构架和组件</h3><p>Spark： mapreduce，rdd，function programing<br>本地运行模式，独立运行模式，mesos，yarn两套资源管理框架</p>
-<p>Spark集群的基本结构</p>
-<ul>
-<li>Master node： 集群部署式的概念，式整个集群的控制器，负责整个集群的正常运行，管理Worker node</li>
-<li>Worker node： 式计算节点，接收主节点命令与进行状态汇报</li>
-<li>Executors: 每个Worker上有一个Executor，负责完成Task程序的执行</li>
-<li>Spark集群部署后，需要在主从节点启动Master进程和Worker进程，对整个集群进行控制</li>
-</ul>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -3407,7 +3277,7 @@ map(key, ts) // ts为一个测试样本
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

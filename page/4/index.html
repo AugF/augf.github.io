@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">91</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">92</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,404 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-mapreduce-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-mapreduce-summary/" class="post-title-link" itemprop="url">nju-course mapreduce summary</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:05:54 / 修改时间：12:06:51" itemprop="dateCreated datePublished" datetime="2019-09-19T12:05:54+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/mapreduce/" itemprop="url" rel="index"><span itemprop="name">mapreduce</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="ch1-大数据技术简介"><a href="#ch1-大数据技术简介" class="headerlink" title="ch1 大数据技术简介"></a>ch1 大数据技术简介</h2><p>数据规模到底多大才叫大数据？<br>大数据一词的重点不是在于数据规模的定义，而是指信息技术发展已经进入了一个新时代</p>
+<p>大数据的特点：5V</p>
+<ul>
+<li>Volume: 大容量：PB级规模</li>
+<li>Varirty: 多样性：结构化/非结构化</li>
+<li>Velocity: 时效性： 实时处理</li>
+<li>Veracity： 准确性：结果准确</li>
+<li>Value： 大价值：深度价值</li>
+</ul>
+<p>大数据处理技术产生的背景</p>
+<ul>
+<li>多核/多处理器并行计算</li>
+<li>MapReduce大数据并行计算</li>
+<li>行业大数据应用需求</li>
+</ul>
+<p>大数据分析应用的ABCD关键要素<br>算法模型<br>业务场景<br>计算力<br>数据资源</p>
+<p>结构特征</p>
+<ul>
+<li>结构化数据</li>
+<li>半结构化数据</li>
+</ul>
+<p>获取和处理方式</p>
+<ul>
+<li>静态（线下数据）/非实时数据</li>
+<li>动态（流式/增量式/线上）/实时数据</li>
+</ul>
+<p>关联特征</p>
+<ul>
+<li>无关联/简单关联数据（键值记录型数据）</li>
+<li>复杂关联数据（图数据）</li>
+</ul>
+<p>大数据处理的主要技术问题</p>
+<p>存储：巨量数据如何存得下</p>
+<p>计算：巨量数据如何快速完成计算</p>
+<p>分析：如何返现大数据的深度价值</p>
+<p>大数据研究的基本途径</p>
+<ul>
+<li>降低尺度，寻找数据尺度无关近似算法</li>
+<li>新算法，寻找新算法降低计算复杂度</li>
+<li>并行化，分而治之，并行化处理</li>
+</ul>
+<h2 id="ch2-MapReduce简介"><a href="#ch2-MapReduce简介" class="headerlink" title="ch2 MapReduce简介"></a>ch2 MapReduce简介</h2><p>提高计算机硬件性能的而主要手段</p>
+<ul>
+<li>提高字长、流水式微体系结构技术</li>
+<li>提高集成度</li>
+<li>提高主频</li>
+</ul>
+<p>按照系统类型来分，并行计算系统通常包括</p>
+<ul>
+<li>多核/众核、对称多处理、大规模并行处理、集群、网格等不同类型</li>
+</ul>
+<p>按照程序设计模型/方法分类，并行计算主要可以分为</p>
+<ul>
+<li>共享内存变量程序设计方式</li>
+<li>消息传递程序设计方式</li>
+<li>MapReduce程序设计方式</li>
+</ul>
+<p>为什么需要大规模数据并行处理</p>
+<ul>
+<li>处理数据的能力大幅落后于数据增长</li>
+<li>海量数据隐含着更准确的事实</li>
+</ul>
+<p>什么是MapReduce</p>
+<ul>
+<li>基于集群的高性能并行计算平台</li>
+<li>并行程序开发与运行框架</li>
+<li>并行程序设计模型与方法</li>
+</ul>
+<p>为什么MapReduce如此重要？</p>
+<ul>
+<li>高效的大规模数据处理方法</li>
+<li>改变了大规模尺度上组织计算的方式</li>
+<li>第一个不同于冯洛依曼结构的、基于集群而非单机的计算方式的重大突破</li>
+<li>目前为止最为成功的基于大规模计算资源的并行计算抽象方法</li>
+</ul>
+<p>对付大数据处理——分而治之</p>
+<ul>
+<li>大数据分而治之的并行化计算</li>
+<li>大数据任务划分和并行计算模型</li>
+</ul>
+<p>构建抽象模型——Map和Reduce</p>
+<ul>
+<li>主要设计思想：为大数据处理过程中的两个主要处理操作提供一种抽象机制</li>
+<li>典型的流式大数据问题的特征</li>
+<li>Map和Reduce操作的抽象描述，提供一种抽象机制，把做什么和怎么做分开，程序员仅需要描述做什么，不需要关心怎么做</li>
+<li>基于Map和Reduce的并行计算模型和计算过程</li>
+</ul>
+<p>上升到框架——自动并行化并隐藏底层细节</p>
+<ul>
+<li>主要需求、目标和设计思想<ul>
+<li>实现自动并行化计算</li>
+<li>为程序员隐藏系统层细节</li>
+</ul>
+</li>
+<li>MapReduce提供统一的构建并完成以下的主要功能<ul>
+<li>任务调度</li>
+<li>数据/代码互定位</li>
+<li>出错处理</li>
+<li>分布式数据存储与文件管理</li>
+<li>Comibiner和Partitioner(设计目的和作用)</li>
+</ul>
+</li>
+</ul>
+<p>MapReduce的主要设计思想和特征</p>
+<ul>
+<li><p>向外横向扩展，而非向上纵向扩展</p>
+</li>
+<li><p>失效被认为是常态</p>
+</li>
+<li><p>吧计算处理向数据迁移</p>
+</li>
+<li><p>顺序处理数据、避免随机访问数据</p>
+</li>
+<li><p>为应用开发者隐藏系统层细节</p>
+</li>
+<li><p>平滑无缝的可扩展性</p>
+<p>MapReduce提供的主要功能</p>
+<ul>
+<li>任务调度：负责为划分后的就hi算任务分配和调度计算节点；同时负责监控这些节点的执行状态</li>
+<li>数据/代码互定位：为了减少数据通信，一个基本原则是本地化数据处理，即一个计算节点尽可能处理其本地磁盘上所分布存储的数据</li>
+<li>出错处理</li>
+<li>分布式数据存储与文件管理</li>
+<li>Combiner和Partitioner： 将中间结果数据进入reduce节点前需要进行合并处理，把具有同样主键的数据合并到一起避免重复传送，优化网络传输，在Map之后执行；而Partitioner的主要设计目的和作用是数据分区，将数据分配到合适的Reduce节点，避免不同Reduce节点上数据的相关性，在Reduce之前执行</li>
+</ul>
+</li>
+</ul>
+<h2 id="ch3-Google-Hadoop-MaqReduce基本构架"><a href="#ch3-Google-Hadoop-MaqReduce基本构架" class="headerlink" title="ch3. Google/Hadoop MaqReduce基本构架"></a>ch3. Google/Hadoop MaqReduce基本构架</h2><p>Google MapReduce的基本工作原理</p>
+<ul>
+<li>并行化处理的基本过程，系统中有一个负责调度的主节点，以及数据Map和Reduce工作节点（Worker）</li>
+<li>带宽优化（Combiner的设计目的和作用），优化到Reduce的结果</li>
+<li>用数据分区解决数据相关性问题（Partitioner的设计目的和作用），即根据一定的策略对Map输出的中间结果进行分区</li>
+<li>失效处理： 主节点失效checkpoinr,检查整个计算作业的执行情况；工作节点失效，直接终止</li>
+<li>计算优化，把一个计算任务让多个Map节点同时做，取最快完成者的计算结果。冗余节点</li>
+</ul>
+<p>分布式文件系统GFS的基本工作原理</p>
+<ul>
+<li>Google GFS的基本设计部原则<ul>
+<li>廉价本地磁盘分布存储</li>
+<li>多数据自动备份解决可靠性</li>
+<li>为上层的MapReduce计算框架提供支撑</li>
+</ul>
+</li>
+</ul>
+<p>Google GFS的基本构架和工作原理</p>
+<ul>
+<li>GFS Master的主要作用</li>
+<li>GFS ChuckServer的主要作用</li>
+<li>数据访问工作过程</li>
+<li>GFS的系统管理技术</li>
+</ul>
+<p>分布式结构化数据表BigTable</p>
+<ul>
+<li><p>BigTable设计动机和目标</p>
+<ul>
+<li>需要存储管理海量的结构化半结构化数据</li>
+<li>海量的服务请求</li>
+<li>商用数据库无法使用</li>
+</ul>
+</li>
+<li><p>BigTable数据模型——多维表</p>
+<ul>
+<li>行关键字、列关键字、时间戳</li>
+</ul>
+</li>
+<li><p>BigTable基本构架</p>
+<ul>
+<li>子表服务器</li>
+<li>子表存储结构SSTable（对应于GFS数据块）</li>
+<li>子表数据格式</li>
+<li>子表寻址</li>
+</ul>
+</li>
+</ul>
+<p>Hadoop MapReduce主要组件<br>NameNode相当于Google的MasterServer<br>DataNode–ChunckServer</p>
+<ul>
+<li><p>文件输入格式InputFormat <br><br>定义文件如何分割和读取，选择文件或者其它让对象，用来作为输入；定义InputSplits，将一个文件分为不同任务，mapred.min.split.size；为RecordReader提供一个工厂，用来读取这个文件。</p>
+<ul>
+<li>TextInputFormat, LineRecordReader</li>
+<li>KeyValueTextInputFormat</li>
+<li>SequenceFileInputFormat<br>一个MapReduce程序统称为一个Job，一个Job有许多个任务构成<br>JobConf.setInputFormat</li>
+</ul>
+</li>
+<li><p>Mapper <br><br>每一个Mapper类的实例生成了一个Java进程，负责处理某一个InputSplit上的数据，用Maper.Context</p>
+</li>
+<li><p>Combiner <br><br>conf.setCombinerClass(Reduce.class)</p>
+</li>
+<li><p>Partitioner &amp;&amp; Shuffle</p>
+</li>
+<li><p>Sort， 传输到每一个Reduce节点上的，将被所有的Reduce函数接收的Key,value会被hadoop自动排序</p>
+</li>
+<li><p>Reducer</p>
+</li>
+<li><p>OutputFormat <br><br>与InputFormat对应</p>
+</li>
+</ul>
+<p>Hadoop系统中，JobTracker的主要作用是 作业控制（作业分解、状态监控），资源管理，而TaskTracker的主要作用是 汇报心跳、执行JobTracker的命令，NameNode的作用是存储了所有文件元数据、文件与数据块的映射关系，以及文件属性等核心数据；DataNode的作用是存储具体的数据快</p>
+<h2 id="ch4-程序安装"><a href="#ch4-程序安装" class="headerlink" title="ch4 程序安装"></a>ch4 程序安装</h2><h2 id="ch5-MapReduce算法设计"><a href="#ch5-MapReduce算法设计" class="headerlink" title="ch5 MapReduce算法设计"></a>ch5 MapReduce算法设计</h2><p>MapReduce处理流程</p>
+<ol>
+<li>map</li>
+<li>shuffle and sort</li>
+<li>reduce</li>
+</ol>
+<p>可编程控制部分<br>Mapper： setup(), map(), cleanup()<br>Shuffle: Partitioner(划分均匀，查找快速)<br>Sort<br>Reduce: setup(), reduce(), cleanup()</p>
+<p>应用</p>
+<ol>
+<li>构建单词同现矩阵</li>
+<li>文档倒排索引，在map阶段单词在前，文档名在后，有效负载（如词频，只是需要在前一步进行统计即可）</li>
+<li>专利文献数据分析,统计被引文献，citing, cited</li>
+</ol>
+<h2 id="ch6-HBase-Hive"><a href="#ch6-HBase-Hive" class="headerlink" title="ch6 HBase Hive"></a>ch6 HBase Hive</h2><p>Hadoop HBase基本数据类型是一张多维表，该表的存储和检索有行关键字和列关键字、时间戳三个关键字组成，其数据操作访问是 通过JavaAPI和MapReduce接口编程实现，而Hive是一个分布式数据仓库，其数据操作访问编程是通过SQL实现</p>
+<h2 id="ch7-高级MapReduce编程技术"><a href="#ch7-高级MapReduce编程技术" class="headerlink" title="ch7 高级MapReduce编程技术"></a>ch7 高级MapReduce编程技术</h2><p>用户自定义Partitioner和Combiner<br>组合式</p>
+<h2 id="ch8-基于MapReduce的搜索引擎算法"><a href="#ch8-基于MapReduce的搜索引擎算法" class="headerlink" title="ch8 基于MapReduce的搜索引擎算法"></a>ch8 基于MapReduce的搜索引擎算法</h2><p>PageRank算法</p>
+<h2 id="ch9-数据挖掘基础算法"><a href="#ch9-数据挖掘基础算法" class="headerlink" title="ch9 数据挖掘基础算法"></a>ch9 数据挖掘基础算法</h2><h3 id="k-means算法"><a href="#k-means算法" class="headerlink" title="k-means算法"></a>k-means算法</h3><p>将给定的多个对象分成若干组，组内的各个对象是相似的，组间的对象是不相似的。<br>数据点的类型可以划分为欧氏和非欧<br>对于欧式空间，取各个数据点的平均值<br>对于非欧空间，取某个处于最中间的店，取若干个最具代表性的点</p>
+<p>k-means:<br>第一步，选区k个初始点,作为出事的cluster center<br>第二步，Loop {<br>    对输入中的每一个点p：<br>    {<br>        计算p到各个cluster的距离<br>        将p归入最近的cluster<br>    }<br>    重新计算各个cluster的中心<br>}<br>第三步，根据最终胜出的簇中心对所有数据元素进行划分聚类的工作</p>
+<p>问题：<br>样本数据有n个，预期生产k个cluster，则k-means算法t次迭代过程中的时间复杂度为O(nkt)</p>
+<p>并行化算法设计<br>思路： 在处理每一个数据点是，只需要知道cluster center的信息</p>
+<p>将所有数据分布到不同的MapReduce节点上，每个节点只对自己的数据进行计算<br>每个Map节点能够读取上一次迭代生成的cluster center<br>Reduce节点综合每个属于每个cluster的数据点，计算出新的cluster centers (Reducer的个数实际上就和聚类中心的个数相同)</p>
+<p>全局文件</p>
+<ul>
+<li><p>当前的迭代次数</p>
+</li>
+<li><p>K个不同聚类中心的数据结构（id, center, 数据点的个数）</p>
+<p>  class Mapper<br>  setup(){</p>
+<pre><code>读取全局的聚类中心数据 centers</code></pre><p>  }<br>  map(key, p) //p 为一个数据点<br>  {</p>
+<pre><code>minDis = Double.MAX_VALUE
+index = -1
+for i=0 to Centers.length
+{
+    dis = ComputeDist(p, Centers[i])
+    if (dis &lt; minDis&gt;)  // 替换k个点
+    {
+        minDis = dis;
+        index = i;
+    }
+}
+emit(Centers[i].ClusterID, (p,1)) 
+// 1表示数据点的个数</code></pre><p>  }</p>
+<p>  class Reducer<br>  reduce(ClusterID, value=[p(pm1, n1), (pm2, n2), ..])<br>  {</p>
+<pre><code>pm = 0.0, n=0;
+k = 数据点列表中数据项的总个数
+for i=0 to k
+{
+    pm += pm[i]*n[i]; n+=n[i];
+}
+pm = pm/n;
+emit(ClusterID, (pm,n));// 输出新的聚类中心的数据值</code></pre><p>  }</p>
+</li>
+</ul>
+<h3 id="基于MapReduce的分类并行化算法"><a href="#基于MapReduce的分类并行化算法" class="headerlink" title="基于MapReduce的分类并行化算法"></a>基于MapReduce的分类并行化算法</h3><p>从一组已经带有分类标记的训练样本数据集来预测一个测试样本的分类结果</p>
+<h4 id="kNN"><a href="#kNN" class="headerlink" title="kNN"></a>kNN</h4><p>k-NN: 计算测试样本到各训练样本的距离，取其中距离最小的K个，并根据这K个训练样本的标记进行投票得到测试样本的标记。</p>
+<p>并行化思路<br>全局变量：<br>样本数据和k个最近的样本</p>
+<p>对于每一个的样本数据，检查如果就hi算出来的值比目前大则替换，否则保留<br>根据所保留的k个最大的值得到最终的分类标记</p>
+<h4 id="朴素贝叶斯分类"><a href="#朴素贝叶斯分类" class="headerlink" title="朴素贝叶斯分类"></a>朴素贝叶斯分类</h4><p>关键：对于一个未知类别的样本X，可以先分别计算出X属于每一个类别Yi的概率P(X|Yi)P(Yi), 然后选择其中概率最大的Yi作为其类别<br>理解：因为分母都是一样的，所以实际上考虑的就是分子的情况</p>
+<p>并行化算法设计思路：<br>用MapReduce扫描数据集，计算每个类别Yi出现的频度FYi，以及每个属性值出现在Yi的频度FxYij</p>
+<p>训练集的并行化代码<br>    class Mapper<br>    map(key, tr)<br>    {<br>        tr: trid,A,y<br>        emit(y,1) // 类别<br>        for i=0 to A.length<br>        {<br>            emit(&lt;y, xni, xvi&gt;, 1)<br>        }<br>    }<br>    class Reducer<br>    reduce(key, value_lsit) // Key为分类标记y, 或者&lt;y, xni, xvi&gt;<br>    {<br>        sum = 0<br>        while(value_lsit.hasNext()) {<br>            sum += value_lsit.next().get()<br>        }<br>        emit(key, sum)<br>    }</p>
+<p>测试样本分类预测Mapper</p>
+<pre><code>class Mapper
+setup()
+{
+    读取从训练数据集中得到的频度数据
+    分类频度表 FY = {(Yi, 每个Yi的频度FYi)}
+    属性频度表 FxY = {(&lt;Yi, xnj, xvj&gt;, 出现频度FxYij)}}
+}
+map(key, ts) // ts为一个测试样本
+{
+    ts tsid, A
+    MaxF = MIN_VALUE; idx = -1
+    扫描每个表，找到类别最大的表所在的位置
+    emit(tsid, FY[idx].Yi)
+}</code></pre><h4 id="SVM短文本分类"><a href="#SVM短文本分类" class="headerlink" title="SVM短文本分类"></a>SVM短文本分类</h4><p>训练阶段，对于多类（480类）问题，为了提高多类精度，首先针对每个类做一个2class两类分类器<br>预测阶段，分别用480个分类其对每个待预测的样本进行分类并打分，选择分类为”是“且打分最高的类别作为该样本可能的预测类别，则将该测试样本判定为不属于480类的异类</p>
+<p>第一步，用训练数据产生480个2-class分类器模型<br>Map: 将每个训练样本的分类标签ClassID作为主键，输出（ClassID,  &lt;true/ false, 特征向量&gt;<br>Reduce： 具有相同ClassID的键值对进入同一个Reduce</p>
+<p>第二步，用480个2-Class分类器模型处理测试数据<br>Map： 将每个测试样本，以SampleID作为主键，输出（SampleID, &lt;LableID, 评分Score&gt;）<br>Reduce: SampleID</p>
+<h2 id="ch10-Spark系统及其编程技术"><a href="#ch10-Spark系统及其编程技术" class="headerlink" title="ch10 Spark系统及其编程技术"></a>ch10 Spark系统及其编程技术</h2><h3 id="Scala"><a href="#Scala" class="headerlink" title="Scala"></a>Scala</h3><ol>
+<li>val, var 不变引用和可变引用</li>
+<li>基于JVM、面向对象、函数式编程</li>
+<li>类是对象的抽象，对象是类的具体实现，占内存</li>
+</ol>
+<h3 id="Spark-vs-Hadoop"><a href="#Spark-vs-Hadoop" class="headerlink" title="Spark vs Hadoop"></a>Spark vs Hadoop</h3><p>Spark不足：<br>不擅长做以下计算：</p>
+<ol>
+<li>实时计算：Map Reduce无法在毫秒内或者秒级内返回结果</li>
+<li>流式计算：流式计算的输入数据是动态的，设计特点决定了数据源必须是静态的</li>
+<li>DAG计算：多个应用程序存在依赖关系，后一个应用程序的输入为前一个的输出。每个MapReduce的阿左也输出结果都会写道磁盘，会造成大量的磁盘IO，性能非常的地下。</li>
+<li>没有利用好内存资源，频繁第磁盘草坪做<br>Spark优点：</li>
+<li>Spark 把中间数据放到内存，迭代运算效率高。Spark支持DAG图的分布式并行计算的编程框架，减少了迭代过程中的数据的读写磁盘，提高了处理效率。（延迟加载）</li>
+<li>容错性高。Spark引进了弹性分布式数据集RDD的抽象，他是分布在一组节点的制度对象集合，这些集合式弹性的，如果数据集一部分丢失，则可以通过“血统：对它们进行重建。另外在RDD计算时可以通过CheckPoint来实现容错。</li>
+<li>更加通用。mapreduce只提供了map和reduce两种操作，而spark提供了很多种，大致分为Transformation和Action两大类</li>
+</ol>
+<h3 id="RDDs"><a href="#RDDs" class="headerlink" title="RDDs"></a>RDDs</h3><ol>
+<li>基于RDD之间的依赖关系组成lineage,重计算以及checkpoint等机制保证容错性</li>
+<li>只读、可分区，这个数据集的全部或部分可以缓存在内存中，在多次计算间重用，弹性指内存不够时可以与磁盘进行交换</li>
+</ol>
+<h3 id="Spark的基本构架和组件"><a href="#Spark的基本构架和组件" class="headerlink" title="Spark的基本构架和组件"></a>Spark的基本构架和组件</h3><p>Spark： mapreduce，rdd，function programing<br>本地运行模式，独立运行模式，mesos，yarn两套资源管理框架</p>
+<p>Spark集群的基本结构</p>
+<ul>
+<li>Master node： 集群部署式的概念，式整个集群的控制器，负责整个集群的正常运行，管理Worker node</li>
+<li>Worker node： 式计算节点，接收主节点命令与进行状态汇报</li>
+<li>Executors: 每个Worker上有一个Executor，负责完成Task程序的执行</li>
+<li>Spark集群部署后，需要在主从节点启动Master进程和Worker进程，对整个集群进行控制</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -3324,179 +3722,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture3-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture3-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture3-summary</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:50:15 / 修改时间：09:51:02" itemprop="dateCreated datePublished" datetime="2019-09-19T09:50:15+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h2><p>首先，不能考虑传统方法，即add，为什么？因为从某种意义上来讲极其不实用。</p>
-<p>所以考虑重载操作符, 下列不能重载<br>.  标志作用域的<br>sizeof() 计算内存空间的<br>?:  双判断的<br>:: 类的标志符</p>
-<h3 id="一般地"><a href="#一般地" class="headerlink" title="一般地"></a>一般地</h3><blockquote>
-<p>全局友元函数和成员函数两种方式。<br>对比来说，也就是成员函数，默认前面有类., 这其实是作为函数的默认参数this的，即const Complex&amp;</p>
-</blockquote>
-<p>那么就有一下几种操作符重载的例子，这里就只给出成员函数类型的<br>返回值、参数</p>
-<ul>
-<li>双目<br>Complex opreator # (const Complex &amp;c)</li>
-<li>单目<br>Complex opreator *();</li>
-</ul>
-<p>++i;<br>Complex &amp;opreator ++();</p>
-<blockquote>
-<p>前置++,返回运算后的结果。<br>i++;<br>Complex opreator ++(int);//注意这里直接是int，没有变量名，只是为了区分。<br>后置++，返回当前，实际+1；</p>
-</blockquote>
-<hr>
-<p>特别说明，<br>返回值的确定，当需要返回的是一个值得改变的值是用这个。<br>参数的确定</p>
-<hr>
-<h3 id="特殊地"><a href="#特殊地" class="headerlink" title="特殊地"></a>特殊地</h3><p>=</p>
-<blockquote>
-<p>区分两种不同的含义，初始化时调用拷贝构造函数；赋值时重载函数、<br>都要注意默认的指针直接复制的问题</p>
-</blockquote>
-<p>[]</p>
-<blockquote>
-<p>很简单，类似于单目运算</p>
-</blockquote>
-<p>new</p>
-<blockquote>
-<p>分配空间+调用构造函数<br>只能用静态成员来书写，static可以不用写<br>void *operator new(size_t size) {<br>    void *p=malloc(size); // 调用系统堆空间分配操作<br>    memset(p,0,size); //把系统申请到的堆空间初始化为全0<br>    return p;<br>}<br>返回类型必须为void *<br>参数size表示对象所需空间的大小，其类型为size_t（unsigned int）<br>可以选择带其他参数，此时就可以在非堆区分配空间<br>p = new (buf局部变量) A(size);</p>
-</blockquote>
-<p>delete</p>
-<blockquote>
-</blockquote>
-<blockquote>
-<p>从某种意义上说，new和delete可以提高效率。因为delete归还不是归还到堆区，而是归还原本new申请的空间. 进行空间管理</p>
-</blockquote>
-<p>()</p>
-<blockquote>
-<p>int opreator() (int x){return x+value;}  A a(3); cout&lt;&lt;a(10);<br>此时()将类对象作为了函数。有冒险用啊？<br>比如新建一个随机数对象，初始化种子后random(1)，后面每需要一个随机数random()直接产生，很快！<br>?, 这里跟函数对象有什么关系？这里是把类对象通过重载()作为函数使用</p>
-</blockquote>
-<p>而函数对象，就是lambda表达式搞的是一大堆符号，然后后面跟一些参数。而也可以直接把它作为参数传递。</p>
-<p>// 功能：求上下限为a,b的积分，步长假设为0.01<br>// 函数定义<br>double integrate(double (*f)(double),double a,double b){<br>    double sum=0;<br>    for(double i=a; i&lt;=b; i+=0.01){<br>        sum+=f(i);<br>    }<br>    return sum;<br>}</p>
-<p>// 使用：这里传入的函数对象是lambda表达式<br>integrate([](double x)-&gt;double { return x*x; },0,1);</p>
-<blockquote>
-<p>想想这真的可以做很多东西。</p>
-</blockquote>
-<p>-&gt;<br>双目，第一个为指向类或结构的指针，第二个为第一个的成员</p>
-<blockquote>
-<p>例子：获取在程序执行的某个时刻获得某个对象被访问的次数<br>注意，凡是成员对象，还有成员函数被访问都算，即暴露给外界可访问的东西。<br>对于成员函数很容易想到可以每个里面加上cout++;但是对于数据成员不好操作。<br>此时即智能指针<br>想法即是在A类外部在套了个B类，B将A作为了成员，当接到访问时， B-&gt;()-&gt;f(), 第二个才访问到A的内容， B-&gt;()。 为了完全模拟还要重载其他操作符，如*,[],… 太麻烦了！！<br>对于歧义问题即+这种操作符，一般地会进行隐式转化，但当有一方为类就很难，显式解决。</p>
-</blockquote>
-<ul>
-<li>lambda表达式</li>
-</ul>
-<blockquote>
-<p>C++11给你规定了一堆东西，你可以拿去玩。其实也就是lambda函数那一章，其实后面还可以再加lambda表达式。最后再传递参数。</p>
-</blockquote>
-<p>所以就允许你用函数作为参数，其实这就很容易了。突然想起了scala.<br>而且lambda表达式还允许你加入局部变量之类的东西。</p>
-<ul>
-<li>继承</li>
-</ul>
-<p>提出就是为了最大程度的软件复用。<br>日常有多种行为，就是很小的改动的那种。<br>比如事务按层次来分类，对概念进行组合，软件进行增量开发等等</p>
-<p>访问控制：自己，公开，继承。</p>
-<p>继承破坏了封装性。<br>耦合性是事务之间的关联程度。</p>
-<p>继承方式，过滤器</p>
-<p>多态性：<br>子类又是父类；从某种意义上说，很强大。父类指针就可以随便用。</p>
-<p>但又带来了问题了，可以随便用。但是肯定会指向自己，所以引进虚函数。允许指向未来更好的实现。</p>
-<blockquote>
-<p>高层代码完全不用修改。相比用union实现的。<br>于是有了纯虚函数，这就形成了真正意义上的抽象。</p>
-</blockquote>
-<p>然后，还有聚集的方式。</p>
-<p>总结：C++很好地用类进行数据的封装，保证了元素的私密性。<br>然后为了给外界提供一定的界限。<br>将数据的访问方式进行了分类。<br>对于获取信息的，外界全局函数就可以采用。const关键字很妙！<br>还有设置信息。</p>
-<p>类作为类型。将不变的抽象给static元素。</p>
-<p>然后，多态性。函数名，参数名。 再加上运算符号。</p>
-<p>一对一并不完全符合世界的表述所以增加了多继承的方式。</p>
-<p>然后再对类型的统一，最终就变为了泛型设计。</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -3549,7 +3774,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
