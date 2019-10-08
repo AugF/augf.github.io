@@ -71,18 +71,26 @@
     })();
 </script>
 
-  <meta name="description" content="1. Abstracta simple neural model, CommNet,  continuous communication for fully cooperative task. !!! can according to the language devised by the agents to do effective strategies. 2. Introduction eac">
+  <meta name="description" content="Abstract很多任务在Ai中都需要多个智能体之间的交互。特别地，这些相互交互的协议往往是提前手动特化好的，不能随着训练而改变。在这篇文章， 提出一个简单的神经模型 CommNet, 用于全合作的任务之间的连续的交流这个模型包含多个智能体，而且他们之间的交流信息可以依据policy来进行学习得到。我们应用这个模型到一些列的任务中，使他们自安静相互学习，最终提高他们在非交流智能体和baseline">
 <meta name="keywords" content="gnn-parallel,cnn,paper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gnn-parallel-communication_neural_network-read">
 <meta property="og:url" content="https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
-<meta property="og:description" content="1. Abstracta simple neural model, CommNet,  continuous communication for fully cooperative task. !!! can according to the language devised by the agents to do effective strategies. 2. Introduction eac">
+<meta property="og:description" content="Abstract很多任务在Ai中都需要多个智能体之间的交互。特别地，这些相互交互的协议往往是提前手动特化好的，不能随着训练而改变。在这篇文章， 提出一个简单的神经模型 CommNet, 用于全合作的任务之间的连续的交流这个模型包含多个智能体，而且他们之间的交流信息可以依据policy来进行学习得到。我们应用这个模型到一些列的任务中，使他们自安静相互学习，最终提高他们在非交流智能体和baseline">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-30T13:15:43.891Z">
+<meta property="og:image" content="https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/gnn-parallel-communication-neural-network-read/eq1&2.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/gnn-parallel-communication-neural-network-read/fig1_whole_model.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/gnn-parallel-communication-neural-network-read%5Cres.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/gnn-parallel-communication-neural-network-read/fig2_traffic_junction.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/gnn-parallel-communication-neural-network-read/eq_traffic_junction.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/gnn-parallel-communication-neural-network-read/table2.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/gnn-parallel-communication-neural-network-read/fig3.png">
+<meta property="og:updated_time" content="2019-10-08T12:23:00.397Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gnn-parallel-communication_neural_network-read">
-<meta name="twitter:description" content="1. Abstracta simple neural model, CommNet,  continuous communication for fully cooperative task. !!! can according to the language devised by the agents to do effective strategies. 2. Introduction eac">
+<meta name="twitter:description" content="Abstract很多任务在Ai中都需要多个智能体之间的交互。特别地，这些相互交互的协议往往是提前手动特化好的，不能随着训练而改变。在这篇文章， 提出一个简单的神经模型 CommNet, 用于全合作的任务之间的连续的交流这个模型包含多个智能体，而且他们之间的交流信息可以依据policy来进行学习得到。我们应用这个模型到一些列的任务中，使他们自安静相互学习，最终提高他们在非交流智能体和baseline">
+<meta name="twitter:image" content="https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/gnn-parallel-communication-neural-network-read/eq1&2.png">
   <link rel="canonical" href="https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/">
 
 
@@ -312,11 +320,19 @@
                 
               
 
-              <time title="创建时间：2019-09-30 20:46:40 / 修改时间：21:15:43" itemprop="dateCreated datePublished" datetime="2019-09-30T20:46:40+08:00">2019-09-30</time>
+              <time title="创建时间：2019-09-30 20:46:40" itemprop="dateCreated datePublished" datetime="2019-09-30T20:46:40+08:00">2019-09-30</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-08 20:23:00" itemprop="dateModified" datetime="2019-10-08T20:23:00+08:00">2019-10-08</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -359,32 +375,119 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-Abstract"><a href="#1-Abstract" class="headerlink" title="1. Abstract"></a>1. Abstract</h2><p>a simple neural model, CommNet,  continuous communication for fully cooperative task.</p>
-<p>!!! can according to the language devised by the agents to do effective strategies.</p>
-<h2 id="2-Introduction"><a href="#2-Introduction" class="headerlink" title="2. Introduction"></a>2. Introduction</h2><ol>
-<li><p>each actor, limited capabilities or visibility.</p>
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>很多任务在Ai中都需要多个智能体之间的交互。特别地，这些相互交互的协议往往是提前手动特化好的，不能随着训练而改变。<br>在这篇文章， 提出一个简单的神经模型 CommNet, 用于全合作的任务之间的连续的交流<br>这个模型包含多个智能体，而且他们之间的交流信息可以依据policy来进行学习得到。<br>我们应用这个模型到一些列的任务中，使他们自安静相互学习，最终提高他们在非交流智能体和baselines中的表现。<br>在某些例子中，最好的效果甚至可以根据智能体所产生的语言来做出好的策略</p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>Communication是智能体一个很basic的方面，特别是在真实环境中的复杂任务。但是大多都有着有限的能力limited capabilities或者对环境的不足的可见性visibility。 实际中的例子包括电梯控制，sensor networks, Communication是一个很重要的因素在robot soccer中。在某些特别的环境中，Communication交流甚至比智能体个人Individual的表现更为重要。然而，现有Reinforcement learning中， specification and format of Communication 是 pre-determined.</p>
+<p>在这篇work中，我们提出了一种模型，在做出actions之前可以通过agents之间的cooperating来进行学习。Each agent 被一个deep feed-forward network控制, 通过一个continuous vector. 通过这个channel, 他们可以获得来自于其他智能体的summed transmissions。然而，每个agent传递的信息不是a-prioir,而是学习得到的。  因为学习是continuous, 所以模型可以通过back-propagation来进行训练， 所以他们可以与标准的single agent RL algorithms或者supervised learning方法相结合。 这个模型是简单而且多才多艺的，它允许应用于只能partial visibility of the environment, 智能体可以学习task-specific交流通过他们之间的表现。更进一步， 模型可以动态变化， the number and type of agents.</p>
+<p>我们考虑设置了J个agents, 所有的一起合作去最大化reward R在某些环境中。 我们做了一个assumption, 每个agent获得R独立于contribution. 这就意味着， each agent有他们各自的控制器或者可以把他们看作a pieces of a larger model一大个训练的模型。<br>从另一个观点来看，我们的控制器将每个agent的input映射到他们的actions. ? input, 每个agent参加在a subset of units?<br>一个特别的在layer之间的结构就是<br>a. 实例化通信的channe<br>b. 传播agent的state</p>
+<p>我们扩展了这个模型在一系列任务上，在某些方面， supervision 用来提供每一步动作， 偶尔地给别人提供?<br>In the former case, 对于每个agent多续联的控制器， backpropagation the error signal 通过 connectivity structure，确保智能体学习到如何communication? (学习函数)来最大化目标。<br>In the latter case, RL会用于一个额外的步骤来提供训练信号，在每个时间步里?  等于说训练数据是通过它提供的?</p>
+<h2 id="2-Communication-Model"><a href="#2-Communication-Model" class="headerlink" title="2. Communication Model"></a>2. Communication Model</h2><p>我们表述了一个模型用来计算 the distribution over actions $p(\mathbf{a}(t)|\mathbf{s}(t), \theta)$即在给定时间步t下的行动的概率分布。<br>$s_j$作为$j_{th}$的agents在环境中获取的state. ? == input? yes<br>controller ‘s input 是所有的state拼接而成的向量$\mathbf{s}={s_1, s_2, …, s_J}$,  output是all actions的拼接 $\mathbf{a} = {a_1, a_2, …, a_J}$</p>
+<blockquote>
+<p>?controller每个agent都有一个，然后output是所有的，输出的是直接概率吗？ distribution又是如何得到的</p>
+</blockquote>
+<p>$\Phi$即a single controller 包括individual controllers for each agents, 和communication对于agents.</p>
+<blockquote>
+<p>?</p>
+</blockquote>
+<h3 id="2-1-Controller-Struture"><a href="#2-1-Controller-Struture" class="headerlink" title="2.1 Controller Struture"></a>2.1 Controller Struture</h3><p>$\Phi$是有modules$f^i$得到的， $i \in {0,…,K}$, K是沟通的时间步</p>
+<p><img src="gnn-parallel-communication-neural-network-read/eq1&2.png" alt></p>
+<p>每个$f_i$对agent j有两个输入$h_j$和$c_j$</p>
+<blockquote>
+<p>注意到的$c_j$这里是收集的不包含自身</p>
+</blockquote>
+<p>$h^{i+1} = \delta(T^i h^i)$</p>
+<blockquote>
+<p>这里考虑到了进一步将权重进行简化<br>需要说明的是这里$T^i$具有permutation invariant, 即排列不变性<br>这里$c^{i+1}$允许其他的形式, 所以agent的数量可以发生改变</p>
+</blockquote>
+<p>另外</p>
+<ol>
+<li><p>first layer:  encoder funciton, problem dependent问题独立性相关的。 </p>
+<blockquote>
+<p>$h^{0} = r(s_j)$, 一般地， $c^0 = 0$</p>
+</blockquote>
 </li>
-<li><p>robot soccer. main methods is RL,, but need specification and format of the communication is pre-determined. !</p>
+<li><p>end layer: decoder funciton  $a_j = q(h_j^K)$</p>
 </li>
-<li><p>paper:</p>
+<li><p>the whole model<br><img src="gnn-parallel-communication-neural-network-read/fig1_whole_model.png" alt></p>
+<blockquote>
+<p>解释： $\Phi$是整个过程？, 这个应该不是单个吧？ 灰色阴影是agent, 还是agent group?</p>
+</blockquote>
 <ul>
-<li>agent: deep feed-forward network, a continuous vector, and communicate with others.</li>
-<li>transmission is not a-prioir?</li>
-<li>involving partial visibility of the enviornment</li>
-<li>allows dynamic variation of the number and type of agents</li>
-<li>targets<ul>
-<li>J agents,  maximize reward R</li>
-<li>receive R is independent of their contribution ? example</li>
-<li>f-f nn:  inputs -&gt; actions   single ???</li>
+<li>用了所有agent的状态? 需要吗？</li>
+<li>使用等式1和2</li>
+<li>根据decoder, 采样出所有的agents的行动</li>
 </ul>
 </li>
-<li>two cases<ul>
-<li>cnn</li>
-<li>rl:   material</li>
-</ul>
+</ol>
+<h3 id="2-2-Model-Extensions"><a href="#2-2-Model-Extensions" class="headerlink" title="2.2 Model Extensions"></a>2.2 Model Extensions</h3><ol>
+<li>Local Connectivity: 在$c^i$计算中， 可以选择特别数量的来做</li>
+<li>Skip Connection: $h^{i+1} = f^i(h^i, c^i, h^0)$, 在f中添加其他T的h的印象</li>
+<li>Temporal Recurrence: 一直循环某一个$f^i$。<h2 id="3-Related-Work"><a href="#3-Related-Work" class="headerlink" title="3. Related Work"></a>3. Related Work</h2></li>
+</ol>
+<h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><h3 id="4-1-Baselines"><a href="#4-1-Baselines" class="headerlink" title="4.1 Baselines"></a>4.1 Baselines</h3><ol>
+<li><p>独立的控制器： 每个控制器都是独立的一部分，它们之间没有任何交流。 在这里直接认为$\mathbf{a} = (\Phi(s_1), \Phi_(s_2), …, \Phi_(s_J))$完全是独立的。 这样的优点其实在于分子性和灵活性，可以很好地选择进入或者退出 </p>
 </li>
-</ul>
+<li><p>全连接的控制器： 认为$\Phi$是一个全连接层的神经网络, softmax使用multiple output softmax heads?.  简单的理解就是所有的agent全进行参与</p>
 </li>
+<li><p>离散的交流： 一个agents可替代的communicate方式就是通过discrete symbols（感觉就是一些信号量）。 因为$\Phi$包含了离散的操作，所以不可微分，RL可以用来训练。 特别地，一个agent可以在每个communication step产生离散的信号。 但是，如果这里有internal 时间段，我们可以直接应用policy gradient? 如何做， 见下文<br>$w_j^i ~ softmax(Dh_j^i)$, 这里D是模型的参数。在我们广播的操作中，在下一个$c^{i+1}$的运算即变成了离散的操作之间与，或关系。</p>
+</li>
+</ol>
+<h3 id="4-2-Simple-Demonstration-with-a-Lever-Pulling-Task"><a href="#4-2-Simple-Demonstration-with-a-Lever-Pulling-Task" class="headerlink" title="4.2 Simple Demonstration with a Lever Pulling Task"></a>4.2 Simple Demonstration with a Lever Pulling Task</h3><p>我们设计一个游戏，需要agent之间相互communicate来win. 这个包括了m个levers(杠杆？ 有什么用？), a pool of N agents. 在each round中， 从N个agents中随机地取m个agents, 他们每个必须选择一个lever to pull(?), 同时与其他m-1个agents进行交互，在每轮结束时(每轮都选？) </p>
+<blockquote>
+<p>每一轮都选m个agent,  每个agent每轮确定一个lever. 每个lever如何初始化？<br>这个游戏的目标是让它们每个都选择一个不同的lever?, 这是目标？<br>lever是什么？<br>同时，所有的agents按照获取的不同的levers的比列来获得奖励。<br>每个agent可以看到自己的身份, $s_j = j$<br>所以这是一个间谍游戏，level也是混在其中？？</p>
+</blockquote>
+<p>我们扩展这个游戏m=5, N=500. 使用CommNet拥有两个交流步K=2和skip connections from (4)来进行实验。 </p>
+<ol>
+<li>encoder是一个N entries of 128D的查找表</li>
+<li>$f^i$是一个两层的神经网络，以ReLU非线性的结构， $f(h^i, c^i, h^0)$, 输出128D的向量。</li>
+<li>decoder是一个linear layer plus softmax, 产生关于m layer的一个分布<blockquote>
+<p>decoder就是$p(a|s, \theta)$, 这里行动action用来选择lever</p>
+</blockquote>
+</li>
+<li>sample来决定使用哪一个</li>
+</ol>
+<p>同时与Indepent controller进行对比，所有结构相同，只有c为0.<br>我们同时扩展了两组实验Supervised和RL</p>
+<ul>
+<li>Supervised: 使用排序agents IDs, 每个agent pull the lever根据当前m agents中的相对顺序</li>
+<li>RL: 另一篇论文</li>
+</ul>
+<p><img src="gnn-parallel-communication-neural-network-read%5Cres.png" alt></p>
+<blockquote>
+<p>m=5,  500 trials, 5000 batches of size 64 during traning<br>metrics = # distinct / # levers</p>
+</blockquote>
+<h3 id="4-3-Multi-turn-Games"><a href="#4-3-Multi-turn-Games" class="headerlink" title="4.3 Multi-turn Games"></a>4.3 Multi-turn Games</h3><p>两项任务：</p>
+<ol>
+<li>控制通过交通路口的汽车进入，最大化流量的同时，最大程度减小碰撞</li>
+<li>控制多个代理击败敌人</li>
+</ol>
+<p>使用前馈神经网络MLP, $f^i$是一个single layer network, K=2 communication steps. 对于RNN module, 我们需要一个$f^i$, 使用共享权重。 最后对$f^t$使用LSTM, 在所有的模块中，hidden layer is 50, MLP使用skip connections. 训练300 epochs, 每一轮进行100 weight updates 使用RMSProp在mini-batch有288论的训练。<br>在训练中会经过~8.6M</p>
+<p>a few days</p>
+<h4 id="4-3-1-Traffic-Junction"><a href="#4-3-1-Traffic-Junction" class="headerlink" title="4.3.1 Traffic Junction"></a>4.3.1 Traffic Junction</h4><p><img src="gnn-parallel-communication-neural-network-read/fig2_traffic_junction.png" alt></p>
+<blockquote>
+<p>left: 观察到车时，可能有的三种行进路线<br>middle: 有限的视野， 不能看见己方机器人，目标是攻击对方机器人<br>right: 当视野扩大时，实验对比。</p>
+</blockquote>
+<p>包含了4-way junction on 14*14 grid. 在每个时间步里，以某个概率p在四个方向放入车辆，车辆的总共数量为10. 每个car在有限的视野下，选择两种操作，前进或者不动。</p>
+<p>当两个车位置重叠时即发生碰撞，此时reward=-10. 不影响以其他方式模拟？</p>
+<p>为了缓解交通事故，会给每个时间步安排一个$Tr_{time}$, 于是可以得到总共的时间步:</p>
+<p><img src="gnn-parallel-communication-neural-network-read/eq_traffic_junction.png" alt></p>
+<p>each car {n, l, r}, 视野范围为3*3, 所以维度为 $3^3 * n * l * r$</p>
+<p><img src="gnn-parallel-communication-neural-network-read/table2.png" alt></p>
+<p>将f()使用不同的结构时所带来的失败概率上的问题</p>
+<h4 id="4-3-2-Analysis-of-Communication"><a href="#4-3-2-Analysis-of-Communication" class="headerlink" title="4.3.2 Analysis of Communication"></a>4.3.2 Analysis of Communication</h4><p>Communication的分析</p>
+<p><img src="gnn-parallel-communication-neural-network-read/fig3.png" alt></p>
+<blockquote>
+<p>left: 在traffic junctiontask中，两个主要的成分的交流向量c在多轮运行中的结果。</p>
+</blockquote>
+<h4 id="4-3-3-Combat-Task"><a href="#4-3-3-Combat-Task" class="headerlink" title="4.3.3 Combat Task"></a>4.3.3 Combat Task</h4><p>对抗任务，15<em>15， m=5 agents, 5</em>5 初始化位置</p>
+<p>视野3*3, 电脑方可以共享位置。</p>
+<p>攻击一下就减1，总共生命值3， 只要在视野内即可攻击。</p>
+<p>失败条件： 所有agents生命值为0， 达到最终轮数</p>
+<p>？</p>
+<h3 id="4-4-bAbI-Tasks"><a href="#4-4-bAbI-Tasks" class="headerlink" title="4.4 bAbI Tasks"></a>4.4 bAbI Tasks</h3><p>读一段故事回答问题。</p>
+<h2 id="5-Discussion-and-Future-Work"><a href="#5-Discussion-and-Future-Work" class="headerlink" title="5. Discussion and Future Work"></a>5. Discussion and Future Work</h2><p>MARL在多种任务中表现超过没有交流， 全连接，模型利用离散交流信息的模型，我们去的了很好的效果。</p>
+<p>另一方面，可扩展的</p>
+<ol>
+<li>异构agent types</li>
+<li>large numbers of agents.</li>
 </ol>
 
     </div>
@@ -501,7 +604,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Abstract"><span class="nav-number">1.</span> <span class="nav-text">1. Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Introduction"><span class="nav-number">2.</span> <span class="nav-text">2. Introduction</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Communication-Model"><span class="nav-number">3.</span> <span class="nav-text">2. Communication Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Controller-Struture"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Controller Struture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Model-Extensions"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Model Extensions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Related-Work"><span class="nav-number">4.</span> <span class="nav-text">3. Related Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Experiments"><span class="nav-number">5.</span> <span class="nav-text">4. Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Baselines"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Baselines</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Simple-Demonstration-with-a-Lever-Pulling-Task"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 Simple Demonstration with a Lever Pulling Task</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-Multi-turn-Games"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 Multi-turn Games</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-1-Traffic-Junction"><span class="nav-number">5.3.1.</span> <span class="nav-text">4.3.1 Traffic Junction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-2-Analysis-of-Communication"><span class="nav-number">5.3.2.</span> <span class="nav-text">4.3.2 Analysis of Communication</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-3-Combat-Task"><span class="nav-number">5.3.3.</span> <span class="nav-text">4.3.3 Combat Task</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-bAbI-Tasks"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 bAbI Tasks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Discussion-and-Future-Work"><span class="nav-number">6.</span> <span class="nav-text">5. Discussion and Future Work</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->

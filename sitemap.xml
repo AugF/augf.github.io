@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/</loc>
+    
+    <lastmod>2019-10-08T12:23:00.397Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/gnn-parallel-gnn-semi-gnn-paper-read/</loc>
+    
+    <lastmod>2019-10-08T08:44:48.070Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://augf.github.io/2019/09/19/linux/</loc>
     
     <lastmod>2019-10-07T01:37:34.798Z</lastmod>
@@ -30,23 +44,9 @@
   </url>
   
   <url>
-    <loc>https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/</loc>
-    
-    <lastmod>2019-09-30T13:15:43.891Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://augf.github.io/2019/09/19/gnn-gnn-parallel-gnn-overview-paper-summary/</loc>
     
     <lastmod>2019-09-30T12:55:54.618Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/19/gnn-parallel-gnn-semi-gnn-paper-read/</loc>
-    
-    <lastmod>2019-09-30T12:55:19.908Z</lastmod>
     
   </url>
   
