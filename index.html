@@ -200,7 +200,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">64</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">69</span></a>
 
   </li>
       
@@ -213,7 +213,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">72</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">74</span></a>
 
   </li>
       
@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">92</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">95</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -282,6 +282,357 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/10/13/gnn-parallel-cnn-code-read/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/13/gnn-parallel-cnn-code-read/" class="post-title-link" itemprop="url">未命名</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-13 10:07:17" itemprop="dateCreated datePublished" datetime="2019-10-13T10:07:17+08:00">2019-10-13</time>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-paper-read/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/10/gnn-parallel-ggsnn-paper-read/" class="post-title-link" itemprop="url">gnn-parallel-ggsnn-paper-read</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-10 21:16:00" itemprop="dateCreated datePublished" datetime="2019-10-10T21:16:00+08:00">2019-10-10</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-11 11:37:11" itemprop="dateModified" datetime="2019-10-11T11:37:11+08:00">2019-10-11</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn-parallel/" itemprop="url" rel="index"><span itemprop="name">gnn-parallel</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>图结构广泛出现在化学、自然语言语义、社交网络和知识结构中。<br>在这篇工作中，我们学习了关于图结构输入的特征学习方法。<br>我们开始的起点是2009年的GNN的工作，我们使用gated recurrent units和现代化优化手段，并且扩展到输出序列。<br>结果是灵活的并且广泛对于神经网络，结果相对于纯粹基于序列的模型具有很好的归纳偏差?，尤其是图结构的模型。(LSTM)</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zODc0MDg0Mw==" title="https://zhuanlan.zhihu.com/p/38740843">https://zhuanlan.zhihu.com/p/38740843<i class="fa fa-external-link"></i></span>, 归纳偏差简单的理解就是模型的偏好是什么？<br>我们描述了模型在bAbI任务上的能力和图的算法学习任务。接下来，我们展示了程序验证中的问题的应用效果，其中子图可以抽象为数据结构</p>
+</blockquote>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>很多现实的图结构任务。 我们想在学习任务中将图作为输入。标准的方法对于问题来说包括对于一个输入图的工程自定义特征， graph kernel.<br>方法用来定义图的特征通过在图上random walks， 更多的靠近我们目标的是先从图中进行学习特征中能包括GNN, spectral networks以及在图足迹分类，化学分子表示上的方法</p>
+<p>我们的主要贡献在于关于GNN在输出sequences上的边线。之前在特征学习的工作主要集中在产生图的单个，但是很多关于图的许多问题需要输出熟悉怒。<br>例子包括在图上的路径，具有理想节点的枚举，以及图分类任务的序列。比如， a start and end node.<br>我们不确定现有的工作是否能够很好的解决这个问题<br>我们的动机来自于程序验证，需要输出logical formulas， 我们把它形式化为一个序列化输出问题。<br>第二个贡献是GNN是一个广阔的神经网络模型可以应用再现阶段的很多领域</p>
+<p>这里有两种关于图的特征学习的设定：</p>
+<ol>
+<li>学习关于输入图的表示</li>
+<li>学习在产生序列输出的interal state的表示</li>
+</ol>
+<p>其中，1主要在GNN的工作里面。我们对这个框架做了调整，比如使用modern practices 有关Recurrent Neural Networks. 2是我们期望从图结构问题中输出的，这不仅仅是individual classfication. 因此，这要的挑战就在于如何在图中学习特征，并且encode 已经产生的partial输出序列（比如path so far if outputting a path），以及还需要被产生的（the remaining path）。<br>我们同时也展示了GNN framework can be adapted to these settings, 从而获得一个新的关于基于图的神经网络模型，GGS-NNs</p>
+<p>我们阐述了这个模型在bAbI tasks和图算法，在学习模型的能力上。 然后我们展示关于程序验证的应用。 当需要试图验证内存安全是，一个核心的问题是如何发现关于程序中运用的关于数据结构的数学描述。 我们 phrased这个机器学习任务，在我们需要map from a set of input graphs, 代表运用的内存，用来获取关于是咧的数据结构的logical descripton. 另外有一篇论文依赖于大量的手写工程的特征，我们展示了可以使用GGS-NN来替代该系统。</p>
+<h2 id="2-Graph-Neural-Networks"><a href="#2-Graph-Neural-Networks" class="headerlink" title="2. Graph Neural Networks"></a>2. Graph Neural Networks</h2><p>在这段中，我们review GNNs, 并且介绍了整个过程用到的notation and conecpts</p>
+<p>GNNs 是一个普遍的神经网络结构根据图来定义， G=(V, E), 其中v为Nodes, e为edges. 我们主要集中在directed graph上，所以(v, v’)表示一个directed edge, 但是我们发现这个框架可以easily to adapyed to undirected graphs, see Scarselli et al.(2009). The node vector(node representation or node embedding) for node v 是$h_v$, 图也可以包含关于摸个节点的标签, edge labels<br>$h_S$中S是a set of nodes<br>$l_S$中S是a set of edges<br>$IN(v)$表示v节点的祖先<br>$OUT(v)$表示v节点的后继<br>$NBR(v)=IN(v) U OUT(V)$表示v的邻居<br>$Co(v)$ 所有经过顶点v的边</p>
+<p>GNNs将graphs map到outputs通过两步：</p>
+<ol>
+<li>propagation step计算每个节点的表示</li>
+<li>$o_v = g(\mathbf{h}_v, l_v)$ 从node的表示和对应的labels中学习，来获取关于每个节点的一个输出。<br>在对于g的notation， 我们留下了关于参数的隐式的依赖，然后我们继续做这件事。<br>this system是differentiable from end-to-end, 所以所有参数都可以通过gradient-based optimization学习</li>
+</ol>
+<h3 id="2-1-Propagation-Model"><a href="#2-1-Propagation-Model" class="headerlink" title="2.1 Propagation Model"></a>2.1 Propagation Model</h3><p>在这里是关于一个迭代过程传播节点的表示。初始化节点的表示$h_v$可以设置为arbitary values(任意的值)，然后node representation根据下面的节点表示进行更新，直到convergence.</p>
+<p>$$h_v^{(t)} = f^*(l_v, l_{Co_{(v)}}, l_{NBR(v)}, h_{NBR(v)}^{(t-1)})$$<br>很多变量被提及，所以Scarselli建议decompsing函数f为一个关于每个对应的变得相加</p>
+<p>$$f(l_v, l_{(v’,v), l_{v’}, h_{v’}^{(t)}}) = A h_{v’}^{(t-1)}+b$$</p>
+<h3 id="2-2-Output-Model-and-Learning"><a href="#2-2-Output-Model-and-Learning" class="headerlink" title="2.2 Output Model and Learning"></a>2.2 Output Model and Learning</h3><p>输出模型定义在每个节点上， g函数是可微的，可以maps到输出。 这仅仅是一个linear or neural network mapping.<br>在这个模型中每个节点将获得一个最终的表示。<br>如果是为了处理graph-level分类任务，他们的建议是使用一个dummy ‘supper node, which is connected to all other nodes by a special type of edge.”<br>学习过程 ALmeida-Pineda算法已经完成<br>然后基于梯度的计算直到收敛解决最终问题。<br>评价：</p>
+<ol>
+<li>advantage: 不需要存储中间状态来计算梯度。</li>
+<li>disadvantage: 参数必须首先的， 所以传播步骤是一个收缩map。这需要来确保收敛，因为它可能限制模型的表达能力。</li>
+</ol>
+<p>鼓励使用一个关于1-norm的Jacobian作为惩罚项。<br>Appendix A是一个例子，给出了收缩银蛇的直觉难以在图中长时间传播信息</p>
+<h2 id="3-Gated-Graph-Neural-Networks"><a href="#3-Gated-Graph-Neural-Networks" class="headerlink" title="3. Gated Graph Neural Networks"></a>3. Gated Graph Neural Networks</h2><p>我们提出了GG-NNs, 适用于non-sequential puputs.<br>关于GNNs的最大调整是我们使用了Gated Recurrent Units，并且unroll(展开) 一个循环的重复的神经步，使用backpropagation 来计算梯度。<br>这需要更多的内存相比于GNN算法，但是不需要限制参数来确保收敛convergence. 我们同时扩展了隐藏层的表示和输出模型</p>
+<h3 id="3-1-Node-Annatations"><a href="#3-1-Node-Annatations" class="headerlink" title="3.1 Node Annatations"></a>3.1 Node Annatations</h3><p>在GNNs中， 这里没有明显的点来初始化节点的表示因为收缩图map constraint来确保，者使得我们不需要与其他的节点label作为额外的输出。为了分辨这些节点用作输入和之前介绍的节点。 node annotations 并且使用向量x来denote这些表示。<br>为了产生他们怎么用，考一个简单的任务，训练图神经网络来预测接地那t如何到达节点s在一个给定的图上。在这个问题中有来哥哥问题相关的 节点，s 和t， [1,0] [0,1].<br>在可到达的例子中， 可简单来看春波模型如何来传播节点的annotation(注解)，使得它们的第一位变为1.<br>output step classifier可以轻易地辨别nodel是如何从s到达t的通过查看安歇节点有非零的实体在前两维上</p>
+<blockquote>
+<p>这个过程好像标签传播</p>
+</blockquote>
+<h3 id="3-2-Propagation-Model-前向传播模型"><a href="#3-2-Propagation-Model-前向传播模型" class="headerlink" title="3.2 Propagation Model 前向传播模型"></a>3.2 Propagation Model 前向传播模型</h3><p><img src="gnn-parallel-ggsnn-paper-read/ggnn-equations.png" alt></p>
+<p>MatrixA决定了节点在图的communicate中如何进行交流。<br>稀疏的结构和参数在A中图图1所示。<br>eq 1是初始化步骤，copy node annotions到隐藏层的第一位，并把剩余维度清零。<br>eq 2是在不同节点间通过出度和入度的边来春波参数，这些参数独立于边的种类和方向。<br>$a_v^{(t)}$</p>
+<blockquote>
+<p>? 输入x是什么？是对应的邻接矩阵信息吗? 注意维度，这里是二维的</p>
+</blockquote>
+<p>剩余的就是GRU的部分<br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zMjQ4MTc0Nw==" title="https://zhuanlan.zhihu.com/p/32481747">https://zhuanlan.zhihu.com/p/32481747<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aC5kMmwuYWkvY2hhcHRlcl9yZWN1cnJlbnQtbmV1cmFsLW5ldHdvcmtzL2dydS5odG1s" title="https://zh.d2l.ai/chapter_recurrent-neural-networks/gru.html">https://zh.d2l.ai/chapter_recurrent-neural-networks/gru.html<i class="fa fa-external-link"></i></span></p>
+<p>$z_t$用于门控的更新， $r_t$用于门控的重置</p>
+<p>$h^{(t-1)} = h^{(t-1)} . r$</p>
+<blockquote>
+<p>理解，$H_t$是更新门， 最终结果是对上一时间步的隐藏层和当前时间步的候选隐藏状态$H_t$做组合<br>$Z_t * H_{t-1}$ 表示对上一层的遗忘，忘记上一层的某些东西<br>$(1-Z_t) * H_{t}$表示对当前候选隐藏层的状态进行记忆。<br>这里z是门控喜好， 门控信号越接近1表示记忆得越多，越接近0表示遗忘得越多？？<br>需要看乘法是怎么做的？</p>
+</blockquote>
+<blockquote>
+<p>不要管z和r怎么看，都是有w的超参数，实际上就进行理解为z是用来学习分配更新的，r是用来产生中间隐藏候选状态的中间变量</p>
+</blockquote>
+<p>结果表示GRU-like 前向传播步骤更有效果</p>
+<h3 id="3-3-Output-Models"><a href="#3-3-Output-Models" class="headerlink" title="3.3 Output Models"></a>3.3 Output Models</h3><p>这里有one-step outputs，我们可以用来产生各种的情形。首先GG-NNs node selection任务为门戈节点的输出进行打分，并且因公softmax在node 分数上</p>
+<blockquote>
+<p>意思是node selection其实它会中间输出表示，按理说维度应该和类别一样。<br>其实这里就是中间观察的结果</p>
+</blockquote>
+<p>对于graph-level outputs,我们的定义如下</p>
+<p><img src="gnn-parallel-ggsnn-paper-read/eq7.png" alt></p>
+<blockquote>
+<p>这里$\delta$使用的是soft attention机制? 来决定是否哪些节点与当前的tgraph-level任务相关。 i和j是神经网络。使用$h_v^{(T)}$和$x(v)$$作为input和ouputs的real-valued vectors.<br>tanh可以被替代<br>这里说的就是如何产生中间观察结果，记得之前有学习过一个模型！<br>不理解？</p>
+</blockquote>
+<h2 id="4-Gated-Graph-Sequence-Neural-Networks"><a href="#4-Gated-Graph-Sequence-Neural-Networks" class="headerlink" title="4. Gated Graph Sequence Neural Networks"></a>4. Gated Graph Sequence Neural Networks</h2><p>在这里GGSNNs</p>
+<p>对于k-th 输出步骤，我们描述了node annotations as $X^{(k)}$, 我们用了两个<br>GG-NNs $F_o^k$和$F_x^k$来从$X$中预测o. 以及$F_X$用来从$X_k$预测$X_{k+1}$, 两个都是包括了一个前向模型和输出模型。在前向模型中，我们使用了节点向量作为t层的前向步骤和k层的输出步骤。<br>在之前的每一步，我们设置</p>
+<blockquote>
+<p>这两个模型一个输出x， 一个用来输出o； 在之前我们把$H^{k-1}$初始化为0-extending的$X_{k}$. 这种简单的变体是能够很快用来训练和评估的，在很多case种，整个模型可以达到相同的表现。但是在某些case中，两个的表现效果不一样，所以这种变体不能work得很好<br>? 为什么<br>我们介绍了node annotation ouput用来从H预测X。<br>这个预测对于每个节点都可以很简单地用一个神经网络j来连接h和x作为输入和输出，从而得到一个真实的分数<br>?</p>
+</blockquote>
+<p>这里有两种关于GGS-NNs的设定：<br>specifying all intermediate annotation Xk, 或者训练所有模型，仅仅给X1, graphs and target sequence.<br>前者可以提高表现力，但我们有邻居只是在知道节点的信息在哪些</p>
+<blockquote>
+<p>取得节点达摩鞋特征。<br>第二种更为普遍</p>
+</blockquote>
+<ol>
+<li>Sequence outputs with observed annotations<br>考虑任务来做整个， 图的序列预测，每个预测只是包括图的一笑部分。为了确定每个部分都有一个输出，每个节点只有一位就过来，表示我们已经解释了。<blockquote>
+<p>子图训练？？</p>
+</blockquote>
+</li>
+</ol>
+<p>在某些设定中，少量的annotations足够来预测。我们可以扩展多个模型，这些模型都有注释地可做</p>
+<blockquote>
+<p>one idea, 可以用不同的邻域，来结合多个相同模型！！！ 还有模型的组合</p>
+</blockquote>
+<p>单步domain预测，这实际上和所有是一样的<br>2. Sequence outputs with latent annotations<br>一般地，当中间不可用时，作为隐藏层，后向传播训练</p>
+<h2 id="5-应用"><a href="#5-应用" class="headerlink" title="5. 应用"></a>5. 应用</h2><p>这里我们简述了如何使用GGS-NNs. 我们主要集中在bAbI任务上。</p>
+<h3 id="5-1-bABI"><a href="#5-1-bABI" class="headerlink" title="5.1 bABI"></a>5.1 bABI</h3><p>bAbi任务是用来测试关于AI系统的可解释能力</p>
+<p>首先我们–symbolic选项将故事改写为关系和实体。<br>关系为边， 实体为节点。<br>所以整个故事就可以秒速为一个图。<br>问题会被描述为eval in the data.</p>
+<p>question type 问题类型， some argument. 他们可以被初始化为node annotations.</p>
+<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><p>th test.lua to test all the modules in the ggnn and run libraries</p>
+<ol>
+<li>go into “babi/data”, run’bash get_10_fold_data.sh” to get 10 folds of bAbI data for 5 tasks (4, 15, 16, 18, 19) and do some preprocessing</li>
+<li>go into ‘babi/data/extra_seq_tasks’, run’bash generate_10_fold_data.sh’ to get 10 folds of data for the two extra sequence tasks</li>
+<li>go back to ‘babi/‘ and use ‘run_experiments.py’ to run the GGNN/GGS-NN</li>
+<li>Use ‘run_rnn_baselines.py babi18 lstm’ runs LSTM on bAbI task 18 for all 10 folds of data</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/10/09/linux-keyboard-using/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/09/linux-keyboard-using/" class="post-title-link" itemprop="url">linux keyboard using</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-09 06:29:04" itemprop="dateCreated datePublished" datetime="2019-10-09T06:29:04+08:00">2019-10-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-13 10:07:17" itemprop="dateModified" datetime="2019-10-13T10:07:17+08:00">2019-10-13</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>快捷键： hot key</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vRWFzb25KaW0vcC83MTE5MjE0Lmh0bWw=" title="https://www.cnblogs.com/EasonJim/p/7119214.html">https://www.cnblogs.com/EasonJim/p/7119214.html<i class="fa fa-external-link"></i></span></p>
+<p>如何查看？<br>在桌面空白位置长按Win</p>
+<p>如何屏幕最左化 ctrl+win+-&gt;  </p>
+<blockquote>
+<p>以下是针对Ubuntu的快捷键，测试没有效果。<br>进一步，通常可以在系统设置-&gt; 键盘-&gt; 快捷键中对相应的设置进行查看</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/10/02/lua-learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -322,7 +673,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-03 00:29:38" itemprop="dateModified" datetime="2019-10-03T00:29:38+08:00">2019-10-03</time>
+                <time title="修改时间：2019-10-13 10:07:17" itemprop="dateModified" datetime="2019-10-13T10:07:17+08:00">2019-10-13</time>
               </span>
             
           
@@ -338,12 +689,113 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-Variables-and-flow-control"><a href="#1-Variables-and-flow-control" class="headerlink" title="1. Variables and flow control"></a>1. Variables and flow control</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">num = 42</span><br><span class="line">&gt; all is doules 双精度， 64bit,  &lt;=53bit is not problem</span><br><span class="line"></span><br><span class="line">no ++ or +=</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">while ..  do ... end</span><br><span class="line"></span><br><span class="line">if ...  then .. elseif .. else ... end</span><br><span class="line"></span><br><span class="line">if not BoolValue the ... end</span><br><span class="line"></span><br><span class="line">for i=1, 100, step do ... end</span><br><span class="line"></span><br><span class="line">repeat</span><br><span class="line">    print(&apos;the way of the future&apos;)</span><br><span class="line">util ...</span><br></pre></td></tr></table></figure>
+          <p><span class="exturl" data-url="aHR0cHM6Ly93d3cucnVub29iLmNvbS9sdWEvbHVhLW1pc2NlbGxhbmVvdXMtb3BlcmF0b3IuaHRtbA==" title="https://www.runoob.com/lua/lua-miscellaneous-operator.html">https://www.runoob.com/lua/lua-miscellaneous-operator.html<i class="fa fa-external-link"></i></span></p>
+<ol>
+<li><p>data struture:</p>
+<ul>
+<li>nil</li>
+<li>boolean</li>
+<li>number: 双精度的实浮点数</li>
+<li>string</li>
+<li>funcion: 由C或lua编写的函数</li>
+<li>userdata: 任意存储在变量中的C数据解雇</li>
+<li>thread: 表示执行的独立线路，用于执行协同程序</li>
+<li>table: 关联数据<blockquote>
+<p>type() 查看类型</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>variable</p>
+<ul>
+<li>global</li>
+<li>local</li>
+<li>表中的索引 A.b, A[b], gettable_event(t, i)</li>
+</ul>
+</li>
+<li><p>loop</p>
+<ol>
+<li>while (true) \ do \ 执行体 \ end</li>
+<li>do () while() end</li>
+<li>for<ul>
+<li>数值<blockquote>
+<p>for var=exp1, exp2, exp3 do \ 执行体 \ end</p>
+</blockquote>
+</li>
+<li>泛型循环 相当于foreach<blockquote>
+<p>for i, v in ipairs(a) do \ print(i, v) \ end<br>for k, v in pairs(table) do \ print(k, v) \ end</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>if: process control</p>
+<ul>
+<li>if(cond) then \ true-exp \ end</li>
+<li>if(cond) then \ true-exp \ else \ false-exp \ end</li>
+<li>if(cond1) the \ true1-exp \ elseif(cond2) \ true2-exp \ else \ else-exp \ end</li>
+</ul>
+</li>
+<li><p>function</p>
+<ul>
+<li>定义<blockquote>
+<p><code>&lt;scope&gt; function &lt;function-name&gt; (arg1, arg2, ..., argn) \ &lt;function-body&gt; \ return result_params_comma_separated \ end</code></p>
+</blockquote>
+</li>
+<li>usage<ul>
+<li>add(…) 三点表示可变参数 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>运算符</p>
+<ul>
+<li>+, -, *, /, %, ^, -</li>
+<li>==, ~=, &gt;, &gt;=, &lt;=</li>
+<li>and, or, not</li>
+<li>a..b,  #a</li>
+</ul>
+</li>
+<li><p>string</p>
+<blockquote>
+<p>以下均是静态方法</p>
+</blockquote>
+<ul>
+<li>uppper</li>
+<li>lower</li>
+<li>gsub(mainstr, findstr, replacestr, num)</li>
+<li>find(str, substr, [init, [end]]): index</li>
+<li>reverse</li>
+<li>format(“the value is:%d”, 4)<ul>
+<li>%c, %d, %f, %s</li>
+<li>[符号][占位符][对齐标志-左对齐][宽度数值][小数位数]<blockquote>
+<p>more: <span class="exturl" data-url="aHR0cHM6Ly93d3cucnVub29iLmNvbS9sdWEvbHVhLXN0cmluZ3MuaHRtbA==" title="https://www.runoob.com/lua/lua-strings.html">https://www.runoob.com/lua/lua-strings.html<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>char(arg): convert other type to char type to concat</li>
+<li>byte(arg)</li>
+<li>len(str) </li>
+<li>rep(str, n): 返回n个拷贝</li>
+<li>gmatch(str, re_pattern): return iterator</li>
+<li>match(str, re_pattern): return the first match</li>
+</ul>
+</li>
+</ol>
+<p>? lua have not go to definition??</p>
+<p>th TREPL都充满了方便的特性:</p>
+<ol>
+<li>tab不全</li>
+<li>历史 history</li>
+<li>打印 print</li>
+<li>eval() 自动打印</li>
+<li>自助:?</li>
+<li>shell命令: $ ls</li>
+</ol>
+<p>torch中文网学习<br><span class="exturl" data-url="aHR0cHM6Ly9wdG9yY2guY29tL2RvY3MvMi9maXZlLXNpbXBsZS1leGFtcGxlcw==" title="https://ptorch.com/docs/2/five-simple-examples">https://ptorch.com/docs/2/five-simple-examples<i class="fa fa-external-link"></i></span></p>
 
-<h2 id="2-Functions"><a href="#2-Functions" class="headerlink" title="2. Functions"></a>2. Functions</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">function fib(n)</span><br><span class="line">    if n &lt; 2 then return 1 end</span><br><span class="line">    return fib(n-2) + fib(n-1)</span><br><span class="line"></span><br><span class="line">&gt; closures and anonymous functions are ok.</span><br><span class="line"></span><br><span class="line">function adder(x)</span><br><span class="line">    return function (y) return x+y end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">x, y, z = 1, 2, 3, 4</span><br><span class="line">&gt; 4 is discarded</span><br><span class="line"></span><br><span class="line">function bar(a, b, c)</span><br><span class="line">    print(a, b, c)</span><br><span class="line">    return 4, 8, 15, 15, 23, 43</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">x, y = bar(&apos;zerap&apos;)</span><br><span class="line"></span><br><span class="line">function f(x) return x*x end</span><br><span class="line">f = function (x) return x*x end</span><br><span class="line"></span><br><span class="line">local function g(x) return math.sin(x) end</span><br><span class="line">local g; g = function(x) return math.sin(x) end</span><br><span class="line">&gt; local decl makes g-self-references ok ???</span><br><span class="line">print &apos;hello&apos;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-Tables"><a href="#3-Tables" class="headerlink" title="3. Tables"></a>3. Tables</h2><p>lua’s only compound data structure.<br>hash-lookup dicts  — lists<br>tables  –  dicts, maps</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;key1 = &apos;value1&apos;, key2 = false&#125;</span><br><span class="line">print(t.key1)</span><br><span class="line">t.newKey=&#123;&#125;</span><br><span class="line">t.key2 = nil // removes key2 from the table</span><br></pre></td></tr></table></figure>
         
       
     </div>
@@ -766,7 +1218,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-07 09:37:34" itemprop="dateModified" datetime="2019-10-07T09:37:34+08:00">2019-10-07</time>
+                <time title="修改时间：2019-10-13 10:07:17" itemprop="dateModified" datetime="2019-10-13T10:07:17+08:00">2019-10-13</time>
               </span>
             
           
@@ -918,6 +1370,37 @@
 </ul>
 </li>
 <li><p>uname -a: 查看当前版本信息</p>
+</li>
+<li><p>chrome 快速定位到搜索栏: ctrl+L, alt+D</p>
+</li>
+<li><p>最小化所有窗口 win + d ？ 最小化当前窗口， 终端重启一个</p>
+</li>
+<li><p>to add deepin some memory</p>
+</li>
+<li><p>mv 使用正则表达式</p>
+</li>
+<li><p>关于硬盘：rename没有必要</p>
+</li>
+<li><p>linux关于安装系统的命令</p>
+<ul>
+<li>ln命令： 功能是为某一个文件在另一个位置建议一个同步的链接<ul>
+<li>例子<ul>
+<li>ln -s link1 link2<blockquote>
+<p>为link1文件创建软链接link2, 如果link1丢失，link2将会失效</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>百度网盘使用有问题，aria2使用频率不高，放弃</p>
+</li>
+<li><p>安装linux版的hexo</p>
+<blockquote>
+<p>配置文件一般是有全局配置文件的，在～/.npmrc这些内容之下</p>
+</blockquote>
 </li>
 </ol>
 
@@ -1715,925 +2198,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/python-study/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/python-study/" class="post-title-link" itemprop="url">python-study</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 13:17:33 / 修改时间：13:18:04" itemprop="dateCreated datePublished" datetime="2019-09-19T13:17:33+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/study/" itemprop="url" rel="index"><span itemprop="name">study</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-vscode的好处"><a href="#1-vscode的好处" class="headerlink" title="1. vscode的好处"></a>1. vscode的好处</h2><ol>
-<li>显示思路过程</li>
-<li>实时性显示</li>
-<li>块编程</li>
-<li>批处理</li>
-</ol>
-<h2 id="2-机器学习常用的库"><a href="#2-机器学习常用的库" class="headerlink" title="2. 机器学习常用的库"></a>2. 机器学习常用的库</h2><ul>
-<li><p>核心库与统计：Numpy、Scipy、Pandas、StatsModels。</p>
-</li>
-<li><p>可视化：Matplotlib、Seaborn、Plotly、Bokeh、Pydot、Scikit-learn、XGBoost/LightGBM/CatBoost、Eli5。</p>
-</li>
-<li><p>深度学习：Tensorflow、PyTorch、Keras。</p>
-</li>
-<li><p>分布式深度学习：Dist-keras/elephas/spark-deep-learning。</p>
-</li>
-</ul>
-<p>自然语言处理：NLTK、SpaCy、Gensim。</p>
-<p>数据抓取：Scrapy。</p>
-<h2 id="3-python使用总结"><a href="#3-python使用总结" class="headerlink" title="3. python使用总结"></a>3. python使用总结</h2><p>jupyter</p>
-<ul>
-<li>b? 查看文档</li>
-<li>b?? 查看源码</li>
-<li>%shell命令 <ul>
-<li>qucikref 快捷查看</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-1-基本类型"><a href="#3-1-基本类型" class="headerlink" title="3.1 基本类型"></a>3.1 基本类型</h3><h4 id="3-1-1-null类型"><a href="#3-1-1-null类型" class="headerlink" title="3.1.1 null类型"></a>3.1.1 null类型</h4><p>注意一个想法，python中万物均可对象化，这么说的意思就是所有东西都有它的类型和值。</p>
-<blockquote>
-<p>特别需要注意的是，哪些时候使用引用即可，哪些使用必须使用一个新的对象</p>
-</blockquote>
-<blockquote>
-<p>dir() 查看参数的方法, type() 查看类型, id()=hashCode,</p>
-</blockquote>
-<ul>
-<li>==: value equality</li>
-<li>is: reference equality<blockquote>
-<p>is是==加上两个对象的位置是一样<br>== isinstance(some_object, (int, float)) &amp;&amp; value</p>
-</blockquote>
-</li>
-</ul>
-<p>None表示不是对象？什么时候会碰到？？</p>
-<blockquote>
-<p>比如函数参数时，什么都没有传递过来，都是有默认值的情况！！！<br>表示空对象, 类型是NoneType, 值是为空<br>if(None) =False // 一般是None的话，最好事先说出。<br>True和Flase类型也跟None不一样，他们是bool类型</p>
-</blockquote>
-<p>NULL: 表示空字符，str</p>
-<p>“”:<br>0:<br>False:<br>True: </p>
-<h4 id="3-1-2-值和引用"><a href="#3-1-2-值和引用" class="headerlink" title="3.1.2 值和引用"></a>3.1.2 值和引用</h4><ul>
-<li><p>值类型: 数值、字符串、元组(注意这里是元组)</p>
-<blockquote>
-<p>即只能自己改自己，不能因为赋值就改变自己，因为赋值它始终是产生了一个新的内存地址</p>
-</blockquote>
-</li>
-<li><p>引用类型： 列表、集合、字典</p>
-<blockquote>
-<p>本身允许被改变</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="3-1-3-and-or替代了-amp-amp-amp-依然是按位操作，-它的优先级始终是小于比较，大于赋值的"><a href="#3-1-3-and-or替代了-amp-amp-amp-依然是按位操作，-它的优先级始终是小于比较，大于赋值的" class="headerlink" title="3.1.3 and, or替代了&amp;&amp;, ||;  &amp;,|依然是按位操作， 它的优先级始终是小于比较，大于赋值的"></a>3.1.3 and, or替代了&amp;&amp;, ||;  &amp;,|依然是按位操作， 它的优先级始终是小于比较，大于赋值的</h4><blockquote>
-<p>python中int之间的and, or; 始终是按照先将其转化为bool类型，然后按照实际的and,or判断逻辑，不行则返回即返回值</p>
-</blockquote>
-<h4 id="3-1-4"><a href="#3-1-4" class="headerlink" title="3.1.4"></a>3.1.4</h4><ul>
-<li>可执行的伪代码</li>
-<li>使用缩进而不是括号</li>
-<li>万物皆可对象</li>
-<li>动态引用，强类型</li>
-<li>鸭子类型，不关注具体类型，而是关注能做什么</li>
-<li>属性和方法<ul>
-<li>getattr(a, attr)(x): 反射，属于强类型</li>
-</ul>
-</li>
-<li>可变 vs 不可变</li>
-<li>单值，即标量类型<ul>
-<li>None</li>
-<li>str</li>
-<li>bytes</li>
-<li>float</li>
-<li>bool</li>
-<li>int</li>
-</ul>
-</li>
-<li>数值类型<ul>
-<li>**, 平方</li>
-<li>7.2324</li>
-<li>6.78e-5</li>
-<li>3 / 2: 实际的除法</li>
-<li>3 // 2: 整除</li>
-</ul>
-</li>
-<li>字符串<ul>
-<li>‘, “, “””</li>
-<li>r’ ‘,  “\“  字面值和转义</li>
-<li>不可变的，即s[1]=2是错误的。<ul>
-<li>hash(): 可行；</li>
-<li>=：产生一个新的对象</li>
-</ul>
-</li>
-<li>基本操作<ul>
-<li>长度 len()</li>
-<li>清空 str=””</li>
-<li>判断某种属性<ul>
-<li>isalnum() // 数字和单词</li>
-<li>isalpha() // 单词</li>
-<li>isdecimal() // 数字 byte</li>
-<li>islower() // 小写</li>
-</ul>
-</li>
-<li>字母相关操作<ul>
-<li>lower()</li>
-<li>captialize()</li>
-<li>upper()</li>
-</ul>
-</li>
-<li>常见操作<ul>
-<li>查找<ul>
-<li>次数， count(substr,start, end)</li>
-<li>位置<ul>
-<li>index(str, ) rindex  // 异常</li>
-<li>find(str, ) rfind // lower,  -1</li>
-<li>endswith, startswith</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>去空格<ul>
-<li>strip(),  rstrip()</li>
-</ul>
-</li>
-<li>划分为列表： split,  rsplit</li>
-<li>替换， replace(A, B)</li>
-<li>合并两个字符串<ul>
-<li>join</li>
-</ul>
-</li>
-<li>格式化<ul>
-<li>{0:.2f}, {0:s}, {2:d}</li>
-</ul>
-</li>
-<li>encode, decode</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-2-元组-集合-列表-字典"><a href="#3-2-元组-集合-列表-字典" class="headerlink" title="3.2. 元组(), 集合{}, 列表[], 字典{}"></a>3.2. 元组(), 集合{}, 列表[], 字典{}</h3><h4 id="3-2-1-list"><a href="#3-2-1-list" class="headerlink" title="3.2.1 list []"></a>3.2.1 list []</h4><ul>
-<li>长度<blockquote>
-<p>特别地，长度一般是有多种方法，具体哪种一般来说看源代码怎么定义的，对于Tree结构，习惯性地包括定义size,那么使用size方法绝对是最优秀的</p>
-</blockquote>
-<ul>
-<li><strong>len</strong>方法</li>
-</ul>
-</li>
-<li>插入<ul>
-<li>尾部， apppend</li>
-<li>任意， insert(index, value) </li>
-</ul>
-</li>
-<li>删除<ul>
-<li>尾部， pop()</li>
-<li>任意， del li[index]</li>
-<li>值， remove(value)</li>
-</ul>
-</li>
-<li>查找<ul>
-<li>单点查找<ul>
-<li>是否存在 in</li>
-<li>index:  li.index(value)</li>
-<li>value:   li[index]</li>
-</ul>
-</li>
-<li>范围查找<ul>
-<li>d[start:end:step] // 可为负</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>合并list<ul>
-<li>+性能低</li>
-<li>extend(list2)</li>
-</ul>
-</li>
-<li>其他<ul>
-<li>li.sort(key=) // 原地排序</li>
-<li>sorted(li) // 返回副本</li>
-<li>reversed</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>允许范围查找，赋值，删除，即切片</p>
-</blockquote>
-<h4 id="3-2-2-dict"><a href="#3-2-2-dict" class="headerlink" title="3.2.2 dict {}"></a>3.2.2 dict {}</h4><blockquote>
-<p>key必须是可以hashtable的数据，即唯一性, 可以通过hash来检验; 一般来说只有值类型可哈希<br><strong>doc</strong> , 查看文档中的使用说明，输入与输出<br>isinstance(1, set) 查看是否是需要的类型</p>
-</blockquote>
-<ul>
-<li><p>插入</p>
-<ul>
-<li>set(key, defalut) // 存在不改变值<blockquote>
-<p>可加后续操作 set(key, default).appende(key)</p>
-</blockquote>
-</li>
-<li>di[key]=value  // 存在改变值</li>
-</ul>
-</li>
-<li><p>删除</p>
-<ul>
-<li>del d[key]</li>
-<li>di.pop(key) // 返回当前元素</li>
-</ul>
-</li>
-<li><p>查看</p>
-<ul>
-<li>存在： in di // 默认在keys()中查看</li>
-<li>di[key] // KeyError 异常 </li>
-<li>do.get(key, default_value) // 不存在返回特定的值</li>
-</ul>
-</li>
-<li><p>合并dict</p>
-<ul>
-<li>update(di2)  // 完全舍弃旧值</li>
-</ul>
-</li>
-<li><p>输出</p>
-<ul>
-<li>di.keys() // Iterable类型</li>
-<li>di.values()</li>
-</ul>
-</li>
-<li><p>由两个列表创建</p>
-<ul>
-<li>di = {k:v  for k,v in  zip(list1, list2)}  // 会吞并重复元素</li>
-<li>di = dict(zip(list1, list2))<blockquote>
-<p>li = list(zip(list1, list2)) // [( ), ( )] 此时内部为元组</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>分解为两个列表</p>
-<ul>
-<li>list1, list2 = dict.keys(), dict.values() // python3是对应的顺序<blockquote>
-<p>list1, list2 = zip(*li)  // li为列表时</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>一些进一步简化的操作</p>
-<ul>
-<li>defaultdict // 可设置value默认值<blockquote>
-<p>from collections import defaultdict<br>by_letter=defaultdict(list) // 中间传入的为类型</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>一个很神奇的现象, di = {1:2, 2:5} ci=di</p>
-<ol>
-<li>di = {} ,  ci =&gt; {1:2, 2:5}</li>
-<li>di[1]=5  ci[1]=&gt;5</li>
-</ol>
-</blockquote>
-<p><font color="red">defaultdict</font></p>
-<blockquote>
-<p>可以用来指定value的类型</p>
-</blockquote>
-<h4 id="3-2-3-集合-set"><a href="#3-2-3-集合-set" class="headerlink" title="3.2.3 集合 set{}"></a>3.2.3 集合 set{}</h4><blockquote>
-<p>特殊的字典，只有健没有值; 同样不可重复.<br>没有特定的位置性.  像元组则是序列数据，即可重复出现</p>
-</blockquote>
-<ul>
-<li>插入： add(x)</li>
-<li>删除： remove(x)</li>
-<li>清空： clear()</li>
-<li>合并集合： a.update({1,2})</li>
-<li>清楚首元素： a.pop() // 默认最小元素， 可以做堆</li>
-<li>两个集合的运算<ul>
-<li>A是B的子集： A.issubset(B)</li>
-<li>A是B的父集： A.issuperset(B)</li>
-<li>并集<ul>
-<li>|</li>
-<li>union</li>
-</ul>
-</li>
-<li>交集<ul>
-<li>&amp;</li>
-<li>intersection</li>
-</ul>
-</li>
-<li>差集， -,  不够减为空</li>
-<li>异或 ^</li>
-<li>支持 &amp;=</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-2-4-推导式"><a href="#3-2-4-推导式" class="headerlink" title="3.2.4 推导式"></a>3.2.4 推导式</h4><ul>
-<li><p>list </p>
-</li>
-<li><p>tuple: !!! 有个特别好的特性就是generator, 即满足惰性求值; 而且是值类型</p>
-<blockquote>
-<p>所以这里得到的结果不是tuple类型，而是generator</p>
-</blockquote>
-</li>
-<li><p>{} 结果两种</p>
-<ul>
-<li>dict</li>
-<li>set</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-2-5-复制"><a href="#3-2-5-复制" class="headerlink" title="3.2.5  复制"></a>3.2.5  复制</h4><ul>
-<li>copy只复制一层</li>
-<li>深度复制<blockquote>
-<p>import copy<br>di = copy.deepcopy(my_dict)</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="3-2-6-一些好的方法"><a href="#3-2-6-一些好的方法" class="headerlink" title="3.2.6 一些好的方法"></a>3.2.6 一些好的方法</h4><ul>
-<li><strong>mro_</strong> ：动态类型， 判断属于哪些类型</li>
-<li>isinstance(A, type): 判断是否属于某个类型</li>
-<li>if,  <strong>len</strong>, 查看是否为0,  and都是转变为bool类型来做</li>
-<li><strong>doc</strong>: 查看基本的函数输入，输出文档</li>
-<li>dir(): 查看所拥有的方法</li>
-</ul>
-<h3 id="3-3-语句"><a href="#3-3-语句" class="headerlink" title="3.3 语句"></a>3.3 语句</h3><ul>
-<li>if A: pass  elif: pass else: pass</li>
-<li>while A: pass</li>
-<li>for i in range(2):</li>
-<li>try:   except Exception:  finally<h3 id="3-4-函数"><a href="#3-4-函数" class="headerlink" title="3.4 函数"></a>3.4 函数</h3></li>
-</ul>
-<h4 id="3-4-1-基本"><a href="#3-4-1-基本" class="headerlink" title="3.4.1 基本"></a>3.4.1 基本</h4><ul>
-<li>参数<ul>
-<li>顺序性， 有默认值的放在最后</li>
-<li><em>args, *</em>kwargs  默认为None</li>
-<li>可为函数</li>
-<li>字典式指定值<blockquote>
-<p>无参数时，为None</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>变量： 严格作用域</li>
-<li>返回值：<ul>
-<li>多值</li>
-<li>字典</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-4-2-匿名函数"><a href="#3-4-2-匿名函数" class="headerlink" title="3.4.2 匿名函数"></a>3.4.2 匿名函数</h4><p><code>lambda paras: return_value</code><br><code>lambda x,y : x+y</code></p>
-<blockquote>
-<p>可以引用在任何需要使用函数作为参数的情况中<br>如 map,  reduce, sort<br>reduce 还是不大好理解</p>
-</blockquote>
-<h4 id="3-4-3-柯里化"><a href="#3-4-3-柯里化" class="headerlink" title="3.4.3 柯里化"></a>3.4.3 柯里化</h4><p>部分参数应用<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add_number = lambda x,y: x+y</span><br><span class="line">from functools import partial</span><br><span class="line">add_five = partial(add_numbers, 5)  // 相比于默认参数，是动态默认参数</span><br></pre></td></tr></table></figure></p>
-<h4 id="3-4-4-生成器"><a href="#3-4-4-生成器" class="headerlink" title="3.4.4 生成器"></a>3.4.4 生成器</h4><p> generaotr 惰性求值</p>
-<ul>
-<li><p>return =&gt; yeild</p>
-</li>
-<li><p>gen = ( )</p>
-<h4 id="3-4-5-itertools模块"><a href="#3-4-5-itertools模块" class="headerlink" title="3.4.5 itertools模块"></a>3.4.5 itertools模块</h4><blockquote>
-<p>用于许多常见数据算法的生成器</p>
-</blockquote>
-</li>
-</ul>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubGlhb3h1ZWZlbmcuY29tL3dpa2kvMTAxNjk1OTY2MzYwMjQwMC8xMDE3NzgzMTQ1OTg3MzYw" title="https://www.liaoxuefeng.com/wiki/1016959663602400/1017783145987360">https://www.liaoxuefeng.com/wiki/1016959663602400/1017783145987360<i class="fa fa-external-link"></i></span></p>
-<ul>
-<li><p>combinations(, k): 产生组合数</p>
-</li>
-<li><p>permutations(): 产生排列数</p>
-</li>
-<li><p>groupby, 将相同的字符串给弄出来</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for key, group in itertools.groupby(&apos;AAABBBCCAAA&apos;):</span><br><span class="line">...     print(key, list(group))</span><br><span class="line">...</span><br><span class="line">A [&apos;A&apos;, &apos;A&apos;, &apos;A&apos;]</span><br><span class="line">B [&apos;B&apos;, &apos;B&apos;, &apos;B&apos;]</span><br><span class="line">C [&apos;C&apos;, &apos;C&apos;]</span><br><span class="line">A [&apos;A&apos;, &apos;A&apos;, &apos;A&apos;]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>chain(iter1, iter2[,..]): 串联多个iter</p>
-</li>
-<li><p>repeat(‘A’,n): 重复n次</p>
-</li>
-<li><p>cycle(“ABC”): 循环，直到ctrl+c退出 </p>
-<h4 id="3-4-6-字节、位运算"><a href="#3-4-6-字节、位运算" class="headerlink" title="3.4.6 字节、位运算"></a>3.4.6 字节、位运算</h4><p>(n &amp; 0x3f3f3) &gt;&gt;1: 人可用</p>
-</li>
-</ul>
-<h3 id="3-5-类"><a href="#3-5-类" class="headerlink" title="3.5 类"></a>3.5 类</h3><ul>
-<li>命名特点<ul>
-<li>属性: 名词</li>
-<li>方法：动词, 注意要加括号</li>
-<li></li>
-</ul>
-</li>
-</ul>
-<h3 id="3-6-其他模块"><a href="#3-6-其他模块" class="headerlink" title="3.6 其他模块"></a>3.6 其他模块</h3><h4 id="3-6-1-正则表达式"><a href="#3-6-1-正则表达式" class="headerlink" title="3.6.1 正则表达式"></a>3.6.1 正则表达式</h4><ul>
-<li>模式: r”  “<ul>
-<li>替换：str = re.sub(origin_str, res_str, str)</li>
-<li>匹配首个结果 re.match(, test) None(False)</li>
-<li>划分 li = re.split(r’ ‘,str)</li>
-<li>分组 li = re.group(r’ ‘, str)  //group(0)为原始, 1-k为分组结果</li>
-</ul>
-</li>
-<li>方法<ul>
-<li>单个字母匹配<ul>
-<li>\d 数字</li>
-<li>\s 空格</li>
-<li>\w 字母或数字</li>
-<li>. 任意</li>
-<li>0<del>9,a</del>z 特别</li>
-<li>. 转义， 匹配原字符</li>
-</ul>
-</li>
-<li>次数<ul>
-<li>a  1次</li>
-<li>a+ &gt;=1</li>
-<li>a* &gt;=0</li>
-<li>a{n} n次</li>
-<li>a{n,m} n~m次</li>
-</ul>
-</li>
-<li>特别<ul>
-<li>^\d: 指定必须从数字开头</li>
-<li>\d$: 指定必须数字结尾</li>
-</ul>
-</li>
-<li>范围<ul>
-<li>[ABC]: A,B,C任意模式</li>
-<li>(A|B)： 两个可选<blockquote>
-<p>() 子表达式的开始和结束，在分组时起到特别的作用，一个括号表示一个group</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>特别说明：正则表达式匹配为贪婪模式</li>
-</ul>
-<h4 id="3-6-2-文件模块"><a href="#3-6-2-文件模块" class="headerlink" title="3.6.2 文件模块"></a>3.6.2 文件模块</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i in open(path): // i默认有行结束符，记住用rstrip()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>f.read(121)</p>
-</li>
-<li><p>f.tell()</p>
-</li>
-<li><p>f.seek(3): 移动指针到指定字节</p>
-</li>
-<li><p>模式： r, w, a, r+, b, U</p>
-</li>
-</ul>
-<h4 id="3-6-3-collections"><a href="#3-6-3-collections" class="headerlink" title="3.6.3 collections"></a>3.6.3 collections</h4><ul>
-<li><p>namedtuple</p>
-<blockquote>
-<p>为tuple的每一项起名字</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from collections import namedtuple</span><br><span class="line">Point = namedtuple(&apos;Point&apos;,[&apos;x&apos;,&apos;y&apos;])</span><br><span class="line">p = Point(1,2)</span><br><span class="line">p.x  # 1</span><br><span class="line">p.y # 2</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>deque</p>
-<blockquote>
-<p>list支持的太过分, deque缩小限制，只允许两端插入和删除</p>
-</blockquote>
-<ul>
-<li>append, appendleft</li>
-<li>pop , popleft</li>
-</ul>
-</li>
-<li><p>defaultdict</p>
-<blockquote>
-<p>设置默认的值<br>dd = defaultdict(lambda: “N/A”)</p>
-</blockquote>
-</li>
-<li><p>OrderedDict</p>
-<blockquote>
-<p> 保证先进先出的顺序，可以当做队列用</p>
-</blockquote>
-</li>
-<li><p>ChainMap</p>
-<blockquote>
-<p>将多个dict, 合为一个逻辑dict</p>
-</blockquote>
-<h2 id="4-优化"><a href="#4-优化" class="headerlink" title="4. 优化"></a>4. 优化</h2></li>
-</ul>
-<p><span class="exturl" data-url="aHR0cHM6Ly9weXRob24td2ViLWd1aWRlLnJlYWR0aGVkb2NzLmlvL3poL2xhdGVzdC9pZGlvbS9pZGlvbS5odG1sI3RydWUtZmFsc2Utbm9uZQ==" title="https://python-web-guide.readthedocs.io/zh/latest/idiom/idiom.html#true-false-none">https://python-web-guide.readthedocs.io/zh/latest/idiom/idiom.html#true-false-none<i class="fa fa-external-link"></i></span></p>
-<h3 id="a-链式：1-lt-a-lt-7"><a href="#a-链式：1-lt-a-lt-7" class="headerlink" title="a. 链式：1&lt;a&lt;7"></a>a. 链式：1&lt;a&lt;7</h3><h3 id="b-b-a-if-a-gt-b-else-b"><a href="#b-b-a-if-a-gt-b-else-b" class="headerlink" title="b. b=a if a&gt;b else b"></a>b. b=a if a&gt;b else b</h3><h3 id="c-x-y-y-x"><a href="#c-x-y-y-x" class="headerlink" title="c. x,y=y,x"></a>c. x,y=y,x</h3><h3 id="d-str-”myname-my-age-”-format-name-age"><a href="#d-str-”myname-my-age-”-format-name-age" class="headerlink" title="d. str=”myname:{} my age {}”.format(name, age)"></a>d. str=”myname:{} my age {}”.format(name, age)</h3><h3 id="e-list-dict使用"><a href="#e-list-dict使用" class="headerlink" title="e. list, dict使用[], {}"></a>e. list, dict使用[], {}</h3><p>odd_list=[e for e in mulist if e%2==1]</p>
-<p>user_list = [{‘name’: ‘lucy’, ‘email’: ‘lucy@g.com’}, {‘name’: ‘lily’, ‘email’: ‘lily@g.com’}]<br>user_email = {user[‘name’]:user[‘email’] for user in user_list if ‘email’ in user}</p>
-<h3 id="f-if-None-特别说明"><a href="#f-if-None-特别说明" class="headerlink" title="f. if None 特别说明"></a>f. if None 特别说明</h3><p>if() : pass 实际调用的是l.<strong>len</strong>()==0</p>
-<p>if something is None:  // None是单例对象<br>// 注意</p>
-<h3 id="g-index变量访问-enumerate"><a href="#g-index变量访问-enumerate" class="headerlink" title="g. index变量访问, enumerate;"></a>g. index变量访问, enumerate;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for index,  element int enumerate(my_container)</span><br></pre></td></tr></table></figure>
-
-<h3 id="h-避免使用可变变量作为函数参数的默认初始化值-None"><a href="#h-避免使用可变变量作为函数参数的默认初始化值-None" class="headerlink" title="h. 避免使用可变变量作为函数参数的默认初始化值, None"></a>h. 避免使用可变变量作为函数参数的默认初始化值, None</h3><p>// 可以使用None作为可变对象的占位符</p>
-<h3 id="i-函数参数即函数"><a href="#i-函数参数即函数" class="headerlink" title="i. 函数参数即函数"></a>i. 函数参数即函数</h3><p>// 一切都可对象，可以把参数作为函数使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import operator as op</span><br><span class="line">def print_table(operator):</span><br><span class="line">    for x in range(1, 3):</span><br><span class="line">        for y in range(1, 3):</span><br><span class="line">            print(str(operator(x, y)) + &apos;\n&apos;)</span><br><span class="line"></span><br><span class="line">for operator in (op.add, op.sub, op.mul, op.div):</span><br><span class="line">    print_table(operator)</span><br></pre></td></tr></table></figure>
-
-<h3 id="j-防御式编程-不断检查参数"><a href="#j-防御式编程-不断检查参数" class="headerlink" title="j. 防御式编程, 不断检查参数"></a>j. 防御式编程, 不断检查参数</h3><h3 id="k-dict实现switch-case"><a href="#k-dict实现switch-case" class="headerlink" title="k. dict实现switch..case.."></a>k. dict实现switch..case..</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># bad</span><br><span class="line">def apply_operation(left_operand, right_operand, operator):</span><br><span class="line">    if operator == &apos;+&apos;:</span><br><span class="line">        return left_operand + right_operand</span><br><span class="line">    elif operator == &apos;-&apos;:</span><br><span class="line">        return left_operand - right_operand</span><br><span class="line">    elif operator == &apos;*&apos;:</span><br><span class="line">        return left_operand * right_operand</span><br><span class="line">    elif operator == &apos;/&apos;:</span><br><span class="line">        return left_operand / right_operand</span><br><span class="line"># good</span><br><span class="line">def apply_operation(left_operand, right_operand, operator):</span><br><span class="line">    import operator as op</span><br><span class="line">    operator_mapper = &#123;&apos;+&apos;: op.add, &apos;-&apos;: op.sub, &apos;*&apos;: op.mul, &apos;/&apos;: op.truediv&#125;</span><br><span class="line">    return operator_mapper[operator](left_operand, right_operand)</span><br></pre></td></tr></table></figure>
-
-<h3 id="l-namedtuple"><a href="#l-namedtuple" class="headerlink" title="l. namedtuple ?"></a>l. namedtuple ?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># bad</span><br><span class="line">rows = [(&apos;lily&apos;, 20, 2000), (&apos;lucy&apos;, 19, 2500)]</span><br><span class="line">for row in rows:</span><br><span class="line">    print &apos;&#123;&#125;`age is &#123;&#125;, salary is &#123;&#125; &apos;.format(row[0], row[1], row[2])</span><br><span class="line"></span><br><span class="line"># good</span><br><span class="line">from collections import  namedtuple</span><br><span class="line">Employee = namedtuple(&apos;Employee&apos;, &apos;name, age, salary&apos;)</span><br><span class="line">for row in rows:</span><br><span class="line">    employee = Employee._make(row)</span><br><span class="line">    print &apos;&#123;&#125;`age is &#123;&#125;, salary is &#123;&#125; &apos;.format(employee.name, employee.age, employee.salary)</span><br></pre></td></tr></table></figure>
-
-<h3 id="m-isinstance"><a href="#m-isinstance" class="headerlink" title="m. isinstance"></a>m. isinstance</h3><h3 id="n-with"><a href="#n-with" class="headerlink" title="n. with"></a>n. with</h3><h3 id="o-yeild关键字-惰性求值"><a href="#o-yeild关键字-惰性求值" class="headerlink" title="o. yeild关键字, 惰性求值"></a>o. yeild关键字, 惰性求值</h3><p>([ expression ]) // 本身就是惰性求值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># bad</span><br><span class="line">def f():</span><br><span class="line">    # ...</span><br><span class="line">    return biglist</span><br><span class="line"></span><br><span class="line"># good</span><br><span class="line">def f():</span><br><span class="line">    # ...</span><br><span class="line">    for i in biglist:</span><br><span class="line">        yield i</span><br></pre></td></tr></table></figure>
-
-<h3 id="p-Wraper"><a href="#p-Wraper" class="headerlink" title="p. Wraper"></a>p. Wraper</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">from functools import wraps</span><br><span class="line"></span><br><span class="line">ef beg(target_function):</span><br><span class="line">    @wraps(target_function)</span><br><span class="line">    def wrapper(*args, **kwargs):</span><br><span class="line">        msg, say_please = target_function(*args, **kwargs)</span><br><span class="line">        if say_please:</span><br><span class="line">            return &quot;&#123;&#125; &#123;&#125;&quot;.format(msg, &quot;Please! I am poor :(&quot;)</span><br><span class="line">        return msg</span><br><span class="line"></span><br><span class="line">    return wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@beg</span><br><span class="line">def say(say_please=False):</span><br><span class="line">    msg = &quot;Can you buy me a beer?&quot;</span><br><span class="line">    return msg, say_please</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-好用的工具"><a href="#5-好用的工具" class="headerlink" title="5. 好用的工具"></a>5. 好用的工具</h2><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L21vcXNpZW4vYXJ0aWNsZS9kZXRhaWxzLzc5NTQ0ODc2" title="https://blog.csdn.net/moqsien/article/details/79544876">https://blog.csdn.net/moqsien/article/details/79544876<i class="fa fa-external-link"></i></span></p>
-<h2 id="6-一些其他"><a href="#6-一些其他" class="headerlink" title="6. 一些其他"></a>6. 一些其他</h2><h3 id="6-1-二分搜索和维护已排序的列表"><a href="#6-1-二分搜索和维护已排序的列表" class="headerlink" title="6.1 二分搜索和维护已排序的列表"></a>6.1 二分搜索和维护已排序的列表</h3><p>bitsect: 二分搜索</p>
-<p>bitsect.bitsect(c, 2) // 搜索插入的位置<br>bitsect.insort(c,5) // 插入元素</p>
-<h3 id="6-2-排序"><a href="#6-2-排序" class="headerlink" title="6.2 排序"></a>6.2 排序</h3><p>a.sort(key=len)<br>sorted(a)</p>
-<h3 id="6-3-zip-将多个列表、元组或其它序列成对组合为一个元组列表-zip-list-解压"><a href="#6-3-zip-将多个列表、元组或其它序列成对组合为一个元组列表-zip-list-解压" class="headerlink" title="6.3 zip: 将多个列表、元组或其它序列成对组合为一个元组列表; zip(*list), 解压"></a>6.3 zip: 将多个列表、元组或其它序列成对组合为一个元组列表; zip(*list), 解压</h3><p>seq1 = [‘foo’, ‘bar’, ‘baz’]<br>seq2 = [‘a’, ‘b’, ‘c’]<br>zip(seq1, seq2)</p>
-<blockquote>
-<p>type zip</p>
-</blockquote>
-<p>a = list(zip(seq1,seq2))</p>
-<p>解压<br>seq1, seq2 = zip(*a)</p>
-<h3 id="6-4-reversed翻转"><a href="#6-4-reversed翻转" class="headerlink" title="6.4 reversed翻转"></a>6.4 reversed翻转</h3><p>另外，注意range也是一种类型</p>
-<p>关于relu的倒数可以直接用</p>
-<h2 id="7-关于Python解释器"><a href="#7-关于Python解释器" class="headerlink" title="7. 关于Python解释器"></a>7. 关于Python解释器</h2><ol>
-<li>脚本语言 vs 编译语言</li>
-</ol>
-<p>首先，脚本语言需要能够实时运行，与编译语言来说有何不同？ 脚本语言需要进行保存上下文变量</p>
-<blockquote>
-<p>特别地， C vs Python<br>    1. 没有类型： 在实现阶段，那么需要进行多层的类型匹配。这会花费大量的时间<br>    2. 函数参数？ python中对参数是如何进行解释的？ 如果按照python来参数是进行怎么解释的<br>    3. ？</p>
-</blockquote>
-<ol start="2">
-<li>解释器<br>？ 解释器是如何实现的<ul>
-<li>CPython: 使用C语言对python进行解释</li>
-<li>IPython: 在CPython的基础上向上封装了一些高级接口<blockquote>
-<p>另外，还有一些其他的接口，比如JPython, 用jav来做</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/daily-cplus-thinking/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/daily-cplus-thinking/" class="post-title-link" itemprop="url">daily cplus thinking</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 13:13:45 / 修改时间：13:14:31" itemprop="dateCreated datePublished" datetime="2019-09-19T13:13:45+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/daily/" itemprop="url" rel="index"><span itemprop="name">daily</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/daily/thinking/" itemprop="url" rel="index"><span itemprop="name">thinking</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="C-多文件组织"><a href="#C-多文件组织" class="headerlink" title="C++ 多文件组织"></a>C++ 多文件组织</h2><h3 id="1-问题"><a href="#1-问题" class="headerlink" title="1. 问题"></a>1. 问题</h3><p>之前大学学习的时候也是这个问题一直在困扰自己没有得到解决。<br>主要想思考着将计算机系统基础所学知识联系起来思考。<br>首先，两个问题：</p>
-<ol>
-<li>多个cpp中调用同一个.cpp, 或者重复调用一个.h, 或者变量重复怎么办</li>
-<li>头文件中有那个#ifdef定义的怎么用</li>
-</ol>
-<blockquote>
-<p>现在已经知道的就是c++在编译的过程中是先将cpp文件进行编译（有时间再复习计算机基础的知识，结合起来进行思考）。</p>
-</blockquote>
-<h3 id="2-想法"><a href="#2-想法" class="headerlink" title="2. 想法"></a>2. 想法</h3><p>gcc编译过程有静态链接和动态链接的过程。对于动态链接就是增加已经预先编译好的东西。</p>
-<p>一般来说，编译器会做以下几个过程：</p>
-<ol>
-<li>预处理阶段</li>
-<li>词法与语法分析阶段</li>
-<li>编译阶段，首先编译成纯汇编语句，再将之汇编成跟CPU相关的二进制码，生成各个目标文件(obj文件)</li>
-<li>连接阶段，将各个目标文件中的各段代码进行绝对地址定位，生成跟特定平台相关的可执行文件</li>
-</ol>
-<p>注意，1主要是处理源文件中的宏、变量、函数声明、嵌套的头文件包含等东西，然后重新生成C文件。<br>2和3通常为一起，此时已经产生了符号表。已经将全局符号和局部变量分开了。而且在操作系统中，建立了对应的符号表以及将定义位置和引用都联系好了。同时，已将将全局变量还有程序转入了对应的程序的位置区段。</p>
-<p>哪些已经编译好的内容是指直接只差操作系统指定将代码放在哪里了，只要操作系统指定位置，那么就可以指定按行行动，然后产生文件了？</p>
-<blockquote>
-<p>刚刚看了维基百科，其实这里所表述的链接也很正常，易于理解。实际上就是所想的那样的。dll提出的初衷也就是为了复用，比如window窗口部件。直接复用就可以调用同样的功能。</p>
-</blockquote>
-<h4 id="2-1-静态编译"><a href="#2-1-静态编译" class="headerlink" title="2.1 静态编译"></a>2.1 静态编译</h4><p>首先，不管是IDE还是命令行，IDE不过是命令行的一个集成，帮你把什么东西都设置快捷了，让你来进行操作。<br>gcc .cpp .cpp<br>它会把每个cpp进行编译成.o文件，再由.o文件一起生成可执行文件。<br>main.cpp一定是在最后。</p>
-<h5 id="为什么有-h和-cpp文件？"><a href="#为什么有-h和-cpp文件？" class="headerlink" title="为什么有.h和.cpp文件？"></a>为什么有.h和.cpp文件？</h5><p>.h文件一般是放说明的，而.cpp一般是对应的实现；（同名警告！？ 是会给编译过程带来好处吗？）</p>
-<p>如果一个.h中声明太多，需要两个.cpp来书写可以吗，如果允许，这样感觉同名潜规则没必要。不允许，编译器规定死了，相关声明只能从相关同名文件中去找。然后，如果其他.cpp声明要用到该环境直接用即可。</p>
-<p>所以一般来说，那我们再构建其他文件时，只需要include .h文件就可以了啊，没有必要引入其他文件。</p>
-<p>对啊，因为你生成的是cpp文件，所以这里每个cpp对应的是.o， 它会在对应的表上记录。<br>那么对应的cpp与源文件存在依赖关系，所以这里就涉及到依赖关系。</p>
-<blockquote>
-<p>依赖关系，这里就是图的拓扑排序。还有一个问题，记得计算机系统基础中有讲过gcc 后面的参数对表的构建其实也是有影响的</p>
-</blockquote>
-<p>同时，又可以回答一个问题，在cpp中引用stdio.h也是没有问题的啊。因为这些不过是标志着它会去找文件，所以完全就没有关系。最终不过是生成.o文件是，它会把对应的库中的文件进行替换而已。</p>
-<h5 id="一些关键字作用的思考"><a href="#一些关键字作用的思考" class="headerlink" title="一些关键字作用的思考"></a>一些关键字作用的思考</h5><ol>
-<li>incline<br> ？incline声明的会先一步静态编译到程序中。<br> extern感觉上更多的用法是在一个cpp文件中使用的是另一个文件中的，然后却并不会指出是在哪个文件中定义又初始化的，不安全，不建议使用该关键字。</li>
-</ol>
-<ol start="2">
-<li><p>define<br> # define关键字的使用也相当明了了。我们的目的是什么，就是每个.h文件应该管理自己特有的变量和函数声明这样我们就能使程序避免变得杂乱无章。而且像<code>#define FILE_H</code>这种操作，只能在file.h中做啊，其他情况你为什么要这么做。而加 </p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#ifndef CPLUS_LAB1_STACK_H</span><br><span class="line">#define CPLUS_LAB1_STACK_H</span><br><span class="line">stack.h特有的</span><br><span class="line">#endif //CPLUS_LAB1_STACK_H</span><br></pre></td></tr></table></figure>
-
-<p> 不过是避免犯错，编译特有的。</p>
-<p> 思考define的第二种用法，首先在命令行或者某个场合环境下，你需要说明你现在是什么环境，或者代码里定义环境。然后，在代码里使用对应的条件判断语句也就很轻易的判断出是哪个了。</p>
-<h5 id="多文件组织"><a href="#多文件组织" class="headerlink" title="多文件组织"></a>多文件组织</h5><p>多个.h之间的依赖，有什么例子吗？如果是结构体，比如有个queue的操作，现在我又要新建一个优先级queue的操作，所以可以用到queue的操作。那么就涉及到进阶的知识即抽象为类，以及类之间的关系表示。</p>
-</li>
-</ol>
-<p>一般来说书写.h文件的话没有必要那么多和复杂。而且一般是直接引用两个相对独立的.h, 共同使用它们的函数。然后其实一个cpp也可以调用多个.h的，那么这样的话，按前面的想就明了。<br>有反常情况吗？</p>
-<p>还有一个问题可以创建文件的问题，至少在clion中，因为MakeFile是自己书写，所以只用把文件路径点名即可，照样可以操作，对。</p>
-<h4 id="2-2-动态链接"><a href="#2-2-动态链接" class="headerlink" title="2.2 动态链接"></a>2.2 动态链接</h4><p>.dll未明朗解决</p>
-<h3 id="3-进一步思考和建议"><a href="#3-进一步思考和建议" class="headerlink" title="3. 进一步思考和建议"></a>3. 进一步思考和建议</h3><p>MakeFile相关的东西<br>整理以及实践的结果</p>
-<p>一点额外的东西：<br>一般情况下，程序并不关心栈的具体分配情况，但进行混合语言编程时，则要考虑不同语言在栈使用上的差别。</p>
-<blockquote>
-<ol>
-<li>还需要考虑哪些？</li>
-</ol>
-</blockquote>
-<h3 id="4-再理解的内容"><a href="#4-再理解的内容" class="headerlink" title="4. 再理解的内容"></a>4. 再理解的内容</h3><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxNjcwMzcvYXJ0aWNsZS9kZXRhaWxzLzE5NjgwODc3" title="https://blog.csdn.net/u010167037/article/details/19680877">关于如何将多个Cpp组织起来 -jamesheros<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NhbmRjcGx1c3BsdXMvYXJ0aWNsZS9kZXRhaWxzLzUzMzI2MzY4" title="https://blog.csdn.net/candcplusplus/article/details/53326368">菜鸟攻略-C语言多文件编程初探 -流沙的刺客<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xlZTI0NDg2ODE0OS9hcnRpY2xlL2RldGFpbHMvMzkzNDE3NTE=" title="https://blog.csdn.net/lee244868149/article/details/39341751">头文件与同名源文件的关系-奔跑的路<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hoYnhoYnNxL2FydGljbGUvZGV0YWlscy83ODk1NTIxNg==" title="https://blog.csdn.net/xhbxhbsq/article/details/78955216">C语言中，头文件和源文件的关系<i class="fa fa-external-link"></i></span></li>
-<li>计算机系统基础, 袁春风</li>
-<li>程序员的自我修养-链接、装载与库<blockquote>
-<p>只是被推荐，未读</p>
-</blockquote>
-</li>
-</ul>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/machinelearning-gradient-descent/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/machinelearning-gradient-descent/" class="post-title-link" itemprop="url">machinelearning gradient descent</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 13:11:31 / 修改时间：13:12:05" itemprop="dateCreated datePublished" datetime="2019-09-19T13:11:31+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/" itemprop="url" rel="index"><span itemprop="name">machinelearning</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/gradient-descent/" itemprop="url" rel="index"><span itemprop="name">gradient-descent</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>SGD ? 是只是针对一个样本做的吗？ 难道不是学习了随机</p>
-<p>无偏估计：不考虑系统误差，只有随机误差，在大数情况下有效。 也就是估计式的期望等于估计值</p>
-<p>SGD Challenges:</p>
-<ol>
-<li>收敛速度跟学习速率关系很大，大容易震荡，小收敛很慢</li>
-<li>学习速率对所有特征都是一样的。事实上，应该某些特征下降慢，有些快，没有考虑稀疏性</li>
-<li>容易陷入不太好局部最小或鞍点。</li>
-</ol>
-<p>误差曲面，权重为多维的<br>梯度与等高线的关系<br>梯度是等高线上的法向量<br>梯度是数字较低的等高线指向数值较高的等高线，梯度的模是函数在这个法线方向的方向导数<br>常见的有两种误差曲线：<br>一种一维的，一种等高线的，实际上就是反映在图像上多维的等高线<br>动量使得收敛过程更快地通过SGD来回震荡的峡谷</p>
-<p>改进</p>
-<ol>
-<li>动量： 模拟物体运动的惯性，更新时一定程度上保留之前更新的方向，同时利用当前的batch的梯度微雕最终的更新方向。增加了一定程度上的稳定性，有一定的摆脱局部最优的能力<ul>
-<li>传统：首先计算当前位置的梯度，然后再更新累加的梯度方向移动</li>
-<li>NAG: 先在之前累加的梯度方向上移动，然后再计算当前位置的梯度？<blockquote>
-<p>利用了物理中动量的思想，保持总的下降方向减小震荡，也比较容易跳出不太好的局部最小 </p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>自动调节学习速率<ul>
-<li>Adagrad: Adagrad利用以前的梯度信息Gt判断对应的特征是否经常被更新， 平滑项用于防止分母为0<blockquote>
-<p>考虑了之前的梯度的累加的信息，Gt是一个对角矩阵，每个对角线(i,i)的值为累加到t次迭代的对应参数wt梯度平方和，越到后面学习率会变得越来越小</p>
-</blockquote>
-<ul>
-<li>Rmsprop: Adagrad的改进：解决Adagrad算法中学习率单调下降趋向于0的问题，把历史梯度累积窗口限定到固定的窗口</li>
-<li>Adadelta: 使用均方根来估计步长，使用临近时间窗口的步长来估计当前的步长；避免了手动调借参数<ul>
-<li>Adam： 使用一阶和二阶矩估计<blockquote>
-<p>Adam = Rmsprop + Bias-crrection + Momentum<br>初始化gradient较大，导致基于速度的算法NAG发生偏离又修正过来；具有自适应学习率的算法效果想加速版的SGD,能更加稳定地解决large initial gradient问题</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>二阶优化方法</p>
-<p>现实世界中所遇到的Hessian矩阵都是实对称的，实对称矩阵都能分解为实特征向量和实特征值<br>梯度下降无法利用含在Hessian矩阵的曲率信息。对于正曲率，梯度下降会下降得很慢；对于负曲率，梯度下降会下降得很快。当迭代点越靠近X，其搜索步长就越小，因而收敛速度越慢</p>
-<p>牛顿法，寻找收敛速度快的无约束最优化方法，在每次迭代时，用适当的二次函数去近似目标函数f</p>
-<blockquote>
-<p>更新公式，二阶和一阶的内积和？<br>二阶矩阵计算内容包含太多。</p>
-</blockquote>
-<p>牛顿法考虑走了一步后，坡度是否会变得更大。要求二阶矩阵的逆，计算量巨大k^3</p>
-<p>改进</p>
-<ul>
-<li>共轭梯度<blockquote>
-<p>避免求逆运算<br>向量共轭是正交的推广，共轭方向法最多经过N步迭代，就可以到达极小值点，二次收敛性。沿共轭方向集的每个方向顺序做line search的时候，在每个方向上都不需要做重复搜索。每个方向的移动都不会影响到在另一方向上已经找到的极小值？<br>  CG:线性搜索并不严重依赖于线性搜索寻找该方向上和真正极小值很近的一点。</p>
-</blockquote>
-</li>
-<li>拟牛顿法<blockquote>
-<p>不用二阶偏导数而构造正定对称阵<br>BFGS, 需要存储Hessian逆矩阵M, 空间复杂度O(n), 花费更少的时间改进每个线性搜索<br>  line search: 搜索方向d_k 已经是确定的，目标是如何在一个确定的d_k上，找到一个合适的a_k</p>
-</blockquote>
-</li>
-</ul>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -2686,7 +2250,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2699,7 +2263,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-count">74</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -2712,7 +2276,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">69</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -2903,9 +2467,9 @@
   
     
       
-        
-      
     
+      
+        
       
     
       

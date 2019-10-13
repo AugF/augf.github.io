@@ -79,7 +79,7 @@
 <meta property="og:site_name" content="AugF&#39;s Notes">
 <meta property="og:description" content="更全面的请参考http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html 绪论Workspace：工作区Index / Stage：暂存区  addRepository：仓库区（或本地仓库） commit/fetchRemote：远程仓库 git reflog 查看当前分支的最近几次提交git log 查看所有commit的记录 开始gi">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-30T12:26:53.126Z">
+<meta property="og:updated_time" content="2019-10-13T02:10:09.211Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git using">
 <meta name="twitter:description" content="更全面的请参考http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html 绪论Workspace：工作区Index / Stage：暂存区  addRepository：仓库区（或本地仓库） commit/fetchRemote：远程仓库 git reflog 查看当前分支的最近几次提交git log 查看所有commit的记录 开始gi">
@@ -201,7 +201,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">64</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">69</span></a>
 
   </li>
       
@@ -214,7 +214,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">72</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">74</span></a>
 
   </li>
       
@@ -227,7 +227,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">92</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">95</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -323,7 +323,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-30 20:26:53" itemprop="dateModified" datetime="2019-09-30T20:26:53+08:00">2019-09-30</time>
+                <time title="修改时间：2019-10-13 10:10:09" itemprop="dateModified" datetime="2019-10-13T10:10:09+08:00">2019-10-13</time>
               </span>
             
           
@@ -378,9 +378,14 @@
 </blockquote>
 <ul>
 <li>两种方式<ul>
-<li>git init <br><br>git remote add origin <code>http://website://repo.git</code> <br><blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvRGVzaWduUGF0dGVybnMuZ2l0" title="https://github.com/AugF/DesignPatterns.git">https://github.com/AugF/DesignPatterns.git<i class="fa fa-external-link"></i></span><br>git push -u origin master</p>
+<li>git init <br><ul>
+<li>git remote add origin <code>http://website://repo.git</code> <br><blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvRGVzaWduUGF0dGVybnMuZ2l0" title="https://github.com/AugF/DesignPatterns.git">https://github.com/AugF/DesignPatterns.git<i class="fa fa-external-link"></i></span></p>
 </blockquote>
+</li>
+<li>git push -u origin master</li>
+<li>git push origin master -f</li>
+</ul>
 </li>
 <li>git clone <code>http://website://repo.git</code><h2 id="多人开发思路："><a href="#多人开发思路：" class="headerlink" title="多人开发思路："></a>多人开发思路：</h2>git branch查看分支</li>
 </ul>
@@ -413,7 +418,7 @@
 <li>更新本地分支<ul>
 <li>git pull注意不过不带参数是直接覆盖</li>
 <li>git pull origin next:master 取回origin主机的next分支与本地的master分支合并  !!!<blockquote>
-<p>一种思路可以将代码全部拉到本地某个分支<br>git fetch origin + git merge origin/next</p>
+<p>或者git pull origin master<br>一种思路可以将代码全部拉到本地某个分支<br>git fetch origin + git merge origin/next</p>
 </blockquote>
 </li>
 <li>git branch –set-upstream master origin/next 自动为本地master追踪分支 </li>
@@ -483,6 +488,14 @@
 <li><p>如何将现有代码分支push到远程指定分支</p>
 <blockquote>
 <p>git push –set-upstream origin current_branch</p>
+</blockquote>
+</li>
+<li><p>fatal: protocal ‘https’ is not supported</p>
+<blockquote>
+<ol>
+<li>use ssh</li>
+<li>在git安装目录中找到libcurl-4.dll的文件位置，并移动到其他地方</li>
+</ol>
 </blockquote>
 </li>
 </ol>
@@ -617,7 +630,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -630,7 +643,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-count">74</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -643,7 +656,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">69</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

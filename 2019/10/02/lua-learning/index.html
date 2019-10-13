@@ -71,18 +71,18 @@
     })();
 </script>
 
-  <meta name="description" content="1. Variables and flow control1234567891011121314151617num = 42&amp;gt; all is doules 双精度， 64bit,  &amp;lt;=53bit is not problemno ++ or +=while ..  do ... endif ...  then .. elseif .. else ... endif not BoolV">
-<meta name="keywords" content="hexo, notes">
+  <meta name="description" content="https://www.runoob.com/lua/lua-miscellaneous-operator.html  data struture:  nil boolean number: 双精度的实浮点数 string funcion: 由C或lua编写的函数 userdata: 任意存储在变量中的C数据解雇 thread: 表示执行的独立线路，用于执行协同程序 table: 关联数据 typ">
+<meta name="keywords" content="gnn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lua learning">
 <meta property="og:url" content="https://augf.github.io/2019/10/02/lua-learning/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
-<meta property="og:description" content="1. Variables and flow control1234567891011121314151617num = 42&amp;gt; all is doules 双精度， 64bit,  &amp;lt;=53bit is not problemno ++ or +=while ..  do ... endif ...  then .. elseif .. else ... endif not BoolV">
+<meta property="og:description" content="https://www.runoob.com/lua/lua-miscellaneous-operator.html  data struture:  nil boolean number: 双精度的实浮点数 string funcion: 由C或lua编写的函数 userdata: 任意存储在变量中的C数据解雇 thread: 表示执行的独立线路，用于执行协同程序 table: 关联数据 typ">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-02T16:29:38.644Z">
+<meta property="og:updated_time" content="2019-10-13T02:07:17.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lua learning">
-<meta name="twitter:description" content="1. Variables and flow control1234567891011121314151617num = 42&amp;gt; all is doules 双精度， 64bit,  &amp;lt;=53bit is not problemno ++ or +=while ..  do ... endif ...  then .. elseif .. else ... endif not BoolV">
+<meta name="twitter:description" content="https://www.runoob.com/lua/lua-miscellaneous-operator.html  data struture:  nil boolean number: 双精度的实浮点数 string funcion: 由C或lua编写的函数 userdata: 任意存储在变量中的C数据解雇 thread: 表示执行的独立线路，用于执行协同程序 table: 关联数据 typ">
   <link rel="canonical" href="https://augf.github.io/2019/10/02/lua-learning/">
 
 
@@ -201,7 +201,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">64</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">69</span></a>
 
   </li>
       
@@ -214,7 +214,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">72</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">74</span></a>
 
   </li>
       
@@ -227,7 +227,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">92</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">95</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -323,7 +323,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-03 00:29:38" itemprop="dateModified" datetime="2019-10-03T00:29:38+08:00">2019-10-03</time>
+                <time title="修改时间：2019-10-13 10:07:17" itemprop="dateModified" datetime="2019-10-13T10:07:17+08:00">2019-10-13</time>
               </span>
             
           
@@ -347,12 +347,113 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-Variables-and-flow-control"><a href="#1-Variables-and-flow-control" class="headerlink" title="1. Variables and flow control"></a>1. Variables and flow control</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">num = 42</span><br><span class="line">&gt; all is doules 双精度， 64bit,  &lt;=53bit is not problem</span><br><span class="line"></span><br><span class="line">no ++ or +=</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">while ..  do ... end</span><br><span class="line"></span><br><span class="line">if ...  then .. elseif .. else ... end</span><br><span class="line"></span><br><span class="line">if not BoolValue the ... end</span><br><span class="line"></span><br><span class="line">for i=1, 100, step do ... end</span><br><span class="line"></span><br><span class="line">repeat</span><br><span class="line">    print(&apos;the way of the future&apos;)</span><br><span class="line">util ...</span><br></pre></td></tr></table></figure>
+        <p><span class="exturl" data-url="aHR0cHM6Ly93d3cucnVub29iLmNvbS9sdWEvbHVhLW1pc2NlbGxhbmVvdXMtb3BlcmF0b3IuaHRtbA==" title="https://www.runoob.com/lua/lua-miscellaneous-operator.html">https://www.runoob.com/lua/lua-miscellaneous-operator.html<i class="fa fa-external-link"></i></span></p>
+<ol>
+<li><p>data struture:</p>
+<ul>
+<li>nil</li>
+<li>boolean</li>
+<li>number: 双精度的实浮点数</li>
+<li>string</li>
+<li>funcion: 由C或lua编写的函数</li>
+<li>userdata: 任意存储在变量中的C数据解雇</li>
+<li>thread: 表示执行的独立线路，用于执行协同程序</li>
+<li>table: 关联数据<blockquote>
+<p>type() 查看类型</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>variable</p>
+<ul>
+<li>global</li>
+<li>local</li>
+<li>表中的索引 A.b, A[b], gettable_event(t, i)</li>
+</ul>
+</li>
+<li><p>loop</p>
+<ol>
+<li>while (true) \ do \ 执行体 \ end</li>
+<li>do () while() end</li>
+<li>for<ul>
+<li>数值<blockquote>
+<p>for var=exp1, exp2, exp3 do \ 执行体 \ end</p>
+</blockquote>
+</li>
+<li>泛型循环 相当于foreach<blockquote>
+<p>for i, v in ipairs(a) do \ print(i, v) \ end<br>for k, v in pairs(table) do \ print(k, v) \ end</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>if: process control</p>
+<ul>
+<li>if(cond) then \ true-exp \ end</li>
+<li>if(cond) then \ true-exp \ else \ false-exp \ end</li>
+<li>if(cond1) the \ true1-exp \ elseif(cond2) \ true2-exp \ else \ else-exp \ end</li>
+</ul>
+</li>
+<li><p>function</p>
+<ul>
+<li>定义<blockquote>
+<p><code>&lt;scope&gt; function &lt;function-name&gt; (arg1, arg2, ..., argn) \ &lt;function-body&gt; \ return result_params_comma_separated \ end</code></p>
+</blockquote>
+</li>
+<li>usage<ul>
+<li>add(…) 三点表示可变参数 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>运算符</p>
+<ul>
+<li>+, -, *, /, %, ^, -</li>
+<li>==, ~=, &gt;, &gt;=, &lt;=</li>
+<li>and, or, not</li>
+<li>a..b,  #a</li>
+</ul>
+</li>
+<li><p>string</p>
+<blockquote>
+<p>以下均是静态方法</p>
+</blockquote>
+<ul>
+<li>uppper</li>
+<li>lower</li>
+<li>gsub(mainstr, findstr, replacestr, num)</li>
+<li>find(str, substr, [init, [end]]): index</li>
+<li>reverse</li>
+<li>format(“the value is:%d”, 4)<ul>
+<li>%c, %d, %f, %s</li>
+<li>[符号][占位符][对齐标志-左对齐][宽度数值][小数位数]<blockquote>
+<p>more: <span class="exturl" data-url="aHR0cHM6Ly93d3cucnVub29iLmNvbS9sdWEvbHVhLXN0cmluZ3MuaHRtbA==" title="https://www.runoob.com/lua/lua-strings.html">https://www.runoob.com/lua/lua-strings.html<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>char(arg): convert other type to char type to concat</li>
+<li>byte(arg)</li>
+<li>len(str) </li>
+<li>rep(str, n): 返回n个拷贝</li>
+<li>gmatch(str, re_pattern): return iterator</li>
+<li>match(str, re_pattern): return the first match</li>
+</ul>
+</li>
+</ol>
+<p>? lua have not go to definition??</p>
+<p>th TREPL都充满了方便的特性:</p>
+<ol>
+<li>tab不全</li>
+<li>历史 history</li>
+<li>打印 print</li>
+<li>eval() 自动打印</li>
+<li>自助:?</li>
+<li>shell命令: $ ls</li>
+</ol>
+<p>torch中文网学习<br><span class="exturl" data-url="aHR0cHM6Ly9wdG9yY2guY29tL2RvY3MvMi9maXZlLXNpbXBsZS1leGFtcGxlcw==" title="https://ptorch.com/docs/2/five-simple-examples">https://ptorch.com/docs/2/five-simple-examples<i class="fa fa-external-link"></i></span></p>
 
-<h2 id="2-Functions"><a href="#2-Functions" class="headerlink" title="2. Functions"></a>2. Functions</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">function fib(n)</span><br><span class="line">    if n &lt; 2 then return 1 end</span><br><span class="line">    return fib(n-2) + fib(n-1)</span><br><span class="line"></span><br><span class="line">&gt; closures and anonymous functions are ok.</span><br><span class="line"></span><br><span class="line">function adder(x)</span><br><span class="line">    return function (y) return x+y end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">x, y, z = 1, 2, 3, 4</span><br><span class="line">&gt; 4 is discarded</span><br><span class="line"></span><br><span class="line">function bar(a, b, c)</span><br><span class="line">    print(a, b, c)</span><br><span class="line">    return 4, 8, 15, 15, 23, 43</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">x, y = bar(&apos;zerap&apos;)</span><br><span class="line"></span><br><span class="line">function f(x) return x*x end</span><br><span class="line">f = function (x) return x*x end</span><br><span class="line"></span><br><span class="line">local function g(x) return math.sin(x) end</span><br><span class="line">local g; g = function(x) return math.sin(x) end</span><br><span class="line">&gt; local decl makes g-self-references ok ???</span><br><span class="line">print &apos;hello&apos;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-Tables"><a href="#3-Tables" class="headerlink" title="3. Tables"></a>3. Tables</h2><p>lua’s only compound data structure.<br>hash-lookup dicts  — lists<br>tables  –  dicts, maps</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;key1 = &apos;value1&apos;, key2 = false&#125;</span><br><span class="line">print(t.key1)</span><br><span class="line">t.newKey=&#123;&#125;</span><br><span class="line">t.key2 = nil // removes key2 from the table</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -380,6 +481,15 @@
       
 
       <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/gnn/" rel="tag"><i class="fa fa-tag"></i> gnn</a>
+            
+          </div>
+        
 
         
 
@@ -395,6 +505,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/09/linux-keyboard-using/" rel="prev" title="linux keyboard using">
+                  linux keyboard using <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -450,8 +564,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Variables-and-flow-control"><span class="nav-number">1.</span> <span class="nav-text">1. Variables and flow control</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Functions"><span class="nav-number">2.</span> <span class="nav-text">2. Functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Tables"><span class="nav-number">3.</span> <span class="nav-text">3. Tables</span></a></li></ol></div>
-        
       </div>
       <!--/noindex-->
 
@@ -468,7 +580,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -481,7 +593,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-count">74</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -494,7 +606,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">69</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

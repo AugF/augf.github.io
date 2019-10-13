@@ -2,6 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://augf.github.io/2019/09/16/algorithm-acwing-improve/</loc>
+    
+    <lastmod>2019-10-13T03:05:47.289Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/18/git-using/</loc>
+    
+    <lastmod>2019-10-13T02:10:09.211Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/10/02/lua-learning/</loc>
+    
+    <lastmod>2019-10-13T02:07:17.049Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/19/linux/</loc>
+    
+    <lastmod>2019-10-13T02:07:17.046Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/10/09/linux-keyboard-using/</loc>
+    
+    <lastmod>2019-10-13T02:07:17.044Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/10/hexo-study/</loc>
+    
+    <lastmod>2019-10-13T02:07:17.042Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/10/13/gnn-parallel-cnn-code-read/</loc>
+    
+    <lastmod>2019-10-13T02:07:17.039Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-paper-read/</loc>
+    
+    <lastmod>2019-10-11T03:37:11.863Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://augf.github.io/2019/09/30/gnn-parallel-communication-neural-network-read/</loc>
     
     <lastmod>2019-10-08T12:23:00.397Z</lastmod>
@@ -12,27 +68,6 @@
     <loc>https://augf.github.io/2019/09/19/gnn-parallel-gnn-semi-gnn-paper-read/</loc>
     
     <lastmod>2019-10-08T08:44:48.070Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/19/linux/</loc>
-    
-    <lastmod>2019-10-07T01:37:34.798Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/16/algorithm-improve-class/</loc>
-    
-    <lastmod>2019-10-06T22:17:20.394Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/10/02/lua-learning/</loc>
-    
-    <lastmod>2019-10-02T16:29:38.644Z</lastmod>
     
   </url>
   
@@ -54,13 +89,6 @@
     <loc>https://augf.github.io/2019/09/19/gnn-parallel-gnn-overview-paper-details/</loc>
     
     <lastmod>2019-09-30T12:54:51.483Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/18/git-using/</loc>
-    
-    <lastmod>2019-09-30T12:26:53.126Z</lastmod>
     
   </url>
   
@@ -614,13 +642,6 @@
     <loc>https://augf.github.io/2019/09/10/ipython-personnal-reference/</loc>
     
     <lastmod>2019-09-11T09:01:05.885Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/10/hexo-study/</loc>
-    
-    <lastmod>2019-09-10T07:40:27.605Z</lastmod>
     
   </url>
   
