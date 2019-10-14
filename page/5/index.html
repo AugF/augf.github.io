@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">95</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">94</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,585 +277,6 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture5/" class="post-title-link" itemprop="url">nju-course-cplus-lecture5</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:53:37 / 修改时间：09:54:39" itemprop="dateCreated datePublished" datetime="2019-09-19T09:53:37+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><h2 id="9-输入-输出"><a href="#9-输入-输出" class="headerlink" title="9. 输入/输出"></a>9. 输入/输出</h2><p>输入、输出具体的实现会音操作系统和计算机硬件的不同而有所不同，与平台相关。<br>在C++中，一种基于字节流的操作。</p>
-<p>分为：</p>
-<ol>
-<li>面向控制台的I/O  iostream - istream, ostream</li>
-<li>面向文件的I/O  fstream, ifstream, ofstream</li>
-<li>面向字符串变量的I/O  strstream, istrstream, ostrstream</li>
-</ol>
-<p>在c++中，ios_base基类，ios派生。 I/O类都是用类模板来实现的</p>
-<blockquote>
-<p>因为输入输出通常会设计到外设，即经常考虑把程序所需要运行的数据输出到外设和从外设输入。<br>C++STL中的输入输出被C++编译程序所接受。但是，因为具体平台相关性，还可以采用其他方式进行输入输出。例如：Visual C++提供的MFC基础类中包含了具有输入、输出功能的类。<br>但是，指定注意的一点就是以非C++标准库方式进行输入输出不利于C++程序的移植</p>
-</blockquote>
-<h3 id="9-1-面向控制台的I-O"><a href="#9-1-面向控制台的I-O" class="headerlink" title="9.1 面向控制台的I/O"></a>9.1 面向控制台的I/O</h3><h4 id="9-1-1-基于函数库的控制台输入、输出"><a href="#9-1-1-基于函数库的控制台输入、输出" class="headerlink" title="9.1.1 基于函数库的控制台输入、输出"></a>9.1.1 基于函数库的控制台输入、输出</h4><p>C语言标准库的功能，C++保留了这些功能</p>
-<ul>
-<li>输出<br>putchar(int ch);</li>
-</ul>
-<p>int puts(const char *p); </p>
-<blockquote>
-<p>什么是标准输入平台？这里应该就是控制台输入输出的意思。</p>
-</blockquote>
-<p>printf() // 返回输出 字符个数或返回负数<br>注意printf(“”)这里如果是%s, 不接受空格和回车的，如果需要空格%[0-9a-zA-Z ]这样显式指定。</p>
-<blockquote>
-<p>记得字符又被分为了好几种，比如打印字符，什么字符之类。</p>
-</blockquote>
-<ul>
-<li>printf常用格式控制字符及其含义</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>控制字符</th>
-<th>类型</th>
-<th>输出格式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%c</td>
-<td>int</td>
-<td>字符</td>
-</tr>
-<tr>
-<td>%d</td>
-<td>int</td>
-<td>有符号十进制整数</td>
-</tr>
-<tr>
-<td>%u</td>
-<td>unsigned int</td>
-<td>无符号十进制整数</td>
-</tr>
-<tr>
-<td>%x, %X</td>
-<td>unsigned int</td>
-<td>无符号16进制</td>
-</tr>
-<tr>
-<td>%o</td>
-<td>unsigned int</td>
-<td>无符号8进制</td>
-</tr>
-<tr>
-<td>%s</td>
-<td>char*</td>
-<td>字符串</td>
-</tr>
-<tr>
-<td>%e,%E</td>
-<td>double</td>
-<td>科学计数法的形式</td>
-</tr>
-<tr>
-<td>%f</td>
-<td>double</td>
-<td>一般形式</td>
-</tr>
-<tr>
-<td>%%</td>
-<td></td>
-<td>字符%</td>
-</tr>
-<tr>
-<td>- 输入</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>// 操作失败返回EOF</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>int getchar();</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>// 成功返回p，否则null<br>char *gets(char *p);</p>
-<blockquote>
-<p>平台怎么处理空格和回车？是否会纳入考虑<br>scanf() // 返回实际输入并保存的数据个数或返回EOF<br>%5f, 好像是指定位数来着？？测试</p>
-</blockquote>
-<h4 id="9-1-2-基于类库的控制台I-O"><a href="#9-1-2-基于类库的控制台I-O" class="headerlink" title="9.1.2 基于类库的控制台I/O"></a>9.1.2 基于类库的控制台I/O</h4><p>C++的改变，用类来做。<br>问题：用库函数scanf和printf需要实现基本数据类型数据的输入和输出，实际操作的是格式串。<br>printf,scanf等于说是多参数，即输入的参数个数时可变的。这样冲某种意义上破坏了C++强类型的特点</p>
-<blockquote>
-<p>C++强类型有什么特点？<br>从某种意义上是不是有安全的概念？<br>另外，scanf和printf还有一个特点就是不能对用户自定义，只能操作基础的数据类型<br>。<br>而I/O类库提供了更为方便和安全的输入、输出操作，并且这些操作可以很容易地扩充到用户自定义类型的数据。</p>
-</blockquote>
-<h5 id="1-预定义的控制台对象"><a href="#1-预定义的控制台对象" class="headerlink" title="1). 预定义的控制台对象"></a>1). 预定义的控制台对象</h5><p>在I/O类库中预定义了4个I/O对象，cin,cout,cerr以及clog，利用这些对象可以直接进行控制台的输入输出。<br>cin-&gt;istream.  cout,cerr,clog-&gt;ostream<br>cout敌营这计算机系统的用于输出程序正常运行结果的标准输出设备，而cerr和clog则对应着计算即系统的用于输出程序错误信息的设备，通常都对应着显式器，但是cerr和clog不受输出重定向的影响。</p>
-<blockquote>
-<p>linux的输出命令的感觉吗？<br>重定向，也就是原本默认的标准输入，从新定义输出到文件。不受是不可操作的意思吗？？？？<br>并且cerr不对输出信息进行缓存，因此它有较快的响应效果。</p>
-</blockquote>
-<h6 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h6><p>对于指针的输出有一个特例，即输出指向字符串的指针时，不输出字符串的首地址，，而是输出字符串。</p>
-<p>进一步，为了对输出格式进行进一步的控制，可以通过输出一些操纵符来实现。<br>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;iomanip&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int x =10;</span><br><span class="line">cout&lt;&lt;hex&lt;&lt;x&lt;&lt;endl; // 以十六进制输出x的值，然后换行。</span><br></pre></td></tr></table></figure>
-
-<p>其中，对于浮点数float,double和long double,当输出格式为ios::scientific或ios::fixed时，精度设置操纵符setprecision用于设置小数点后的位数。<br>当什么没有时，用于设置浮点数有效数字的个数。</p>
-<p>!!! 只对浮点数有效</p>
-<blockquote>
-<p>setiosflags(ios::scientific) // 设置输出格式<br>resetiosflags(ios::scientific) // 取消输出格式</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>操作符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>endl</td>
-<td>输出换行符，并执行flush操作</td>
-</tr>
-<tr>
-<td>flush</td>
-<td>使输出缓存的内容立即输出？？？</td>
-</tr>
-<tr>
-<td>dec</td>
-<td>十进制输出</td>
-</tr>
-<tr>
-<td>oct</td>
-<td>八</td>
-</tr>
-<tr>
-<td>hex</td>
-<td>16</td>
-</tr>
-<tr>
-<td>setprecision(int n)</td>
-<td>设置浮点数的精度</td>
-</tr>
-<tr>
-<td>setiosflags(long flage)</td>
-<td>设置/取消输出格式，flags的取值可以是:ios:scientific(指数形式), ios:fixed(小数形式)</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>注意: 设置一遍后均有效，然后应该是就近原则吧！<br>初始状态下，输出格式为自动方式，输出精度为6位有效数字。</p>
-</blockquote>
-<blockquote>
-<p>很好奇cout是怎么解析&lt;&lt;符的？按照空格回车然后进行分隔吗？还是怎么的？</p>
-</blockquote>
-<blockquote>
-<p>还存在其他类型吗？这样只对double类型进行了处理，一般来说输出应该不需要其他情况的输出了吧，对！<br>一般只有两种类型，double, str 还有其他需要控制输出的吗？？？</p>
-</blockquote>
-<blockquote>
-<p>突然想起，输出扩展需要的有比如输出的数据对齐指定？待安排</p>
-</blockquote>
-<h6 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h6><p>任何基本数据类型都可以通过cin对象和抽取操作符&gt;&gt;来进行输入。<br>在输入每个数据之间用空白符分开，最后输入一个回车符。另外也可以用一些操作控制符来控制输入的行为。</p>
-<blockquote>
-<p>对于输入来说，感觉上也就字符串数据需要进行控制了吧，setw()用于指定输入字符的最大个数。</p>
-</blockquote>
-<blockquote>
-<p>对，还需要清空输出吧？感觉上<br>cin &gt;&gt; setw(10) &gt;&gt; str; // 把输入的前9个字符和一个’\0’放入str中</p>
-</blockquote>
-<p>!!!!果然不出所料，果然对于输入流来说，当输入流没有用完时是接着用输入流的</p>
-<p>get(), getline(*p, cout,delim)<br>read()<br>cin.get(ch);<br>read();</p>
-<blockquote>
-<p>感觉这些输入地方太容易出错了，我之前就是这里老出错。不要有只取多少位数据的情况。</p>
-</blockquote>
-<p>特别地，cin的输入操作是无法读入空白符的，这时才可用上面的成员函数实现空白符的读入。</p>
-<blockquote>
-<p>所以此时一般扩展用getline</p>
-</blockquote>
-<p>cin的输入操作是带输入缓存的，只有当用户输入“回车”时，输入的数据才会放入程序的变量中。<br>需要注意的是，基于类库的输入、输出操作中可能遇到问题（如没有正确输入数据等）。 因此，在操作后可通过下面的函数来判断操作是否成功。<br>bool ios::fail(); //true表示操作失败<br>怎么用？ </p>
-<blockquote>
-<p>(cin&gt;&gt;ch2)返回的不是基本类型int,bool<br>cin.fail() 那什么操作失败呢？<br>比如int, 输入字符串</p>
-</blockquote>
-<h4 id="9-1-3-抽取、插入操作符-gt-gt-和-lt-lt-的重载。"><a href="#9-1-3-抽取、插入操作符-gt-gt-和-lt-lt-的重载。" class="headerlink" title="9.1.3 抽取、插入操作符&gt;&gt;和&lt;&lt;的重载。"></a>9.1.3 抽取、插入操作符&gt;&gt;和&lt;&lt;的重载。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">    int x,y;</span><br><span class="line">    friend ostream&amp; operator &lt;&lt;(ostream&amp; out, const A &amp;a);</span><br><span class="line">public:</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ostream&amp; operator &lt;&lt;(ostream&amp; out, const A &amp;a)</span><br></pre></td></tr></table></figure>
-
-<p>// 从某种意义上理解，ostream是stream的子类，所以可行。这里是类为啥又可以？</p>
-<p>一般来说，只做输出。</p>
-<p>有几种方法，如何在继承下使有效？</p>
-<ol>
-<li>如果在基类定义，而没有在派生类定义，派生类只能输出一部分值。</li>
-<li>如果在派生类定义，不能解决间接调用的情况<br>特别是用基类的指针，不知道会动态绑定到哪种情况的时候，考虑使用封装。<br>即在每个类里面重载display()函数，在&lt;&lt;中只需要调用display()函数即可。</li>
-</ol>
-<h3 id="9-2-面向文件的输入，输出"><a href="#9-2-面向文件的输入，输出" class="headerlink" title="9.2 面向文件的输入，输出"></a>9.2 面向文件的输入，输出</h3><p>程序运行结果有时需要永久地保存起来，以供其他程序或本程序下一次运行时使用:程序运行所需要的数据也常常要从其他程序或本程序上衣词运行所保存的数据中获得。用于永久保存数据的设备称为外部存储器，如磁盘、磁带、光盘等。</p>
-<h4 id="9-2-1-文件概述"><a href="#9-2-1-文件概述" class="headerlink" title="9.2.1 文件概述"></a>9.2.1 文件概述</h4><p>在外部存储器中保存数据的方式通常由两种：文件和数据库。<br>本程序设计教程只介绍一文件方式永久性地保存数据，数据库由其他专门的课程介绍。在C++中，把文件看成由一系列字节构成的字节串，称为流式文件，对文件中数据的操作通常是逐个字节顺序进行。在对文件数据进行读写前，首先要打开文件，打开文件的目的是：把程序内部一个表示文件的变量与外部的一个具体文件关系起来，并创建内存缓冲区，每个打开的文件都有一个隐式的读写位置指针，它指向文件的当前读写位置。在进行读写操作时，每读入，写出一个字节，文件位置指针会自动往后移动一个字节的位置。<br>文件读写完毕后，通常需要关闭文件，其目的是把暂存在内存缓冲区中的内容写入文件，并归还打开文件是申请的内存资源。<br>在文件中，数据的存储方式有两种，文本方式和二进制方式。<br>文本方式一般用于存储具有行结构的文字数据，如源程序或纯文本格式的数据等。二进制方式一般用于存储无显式结构的数据，数据的格式由应用程序来解释，如目标代码程序以及二进制数据等。<br>这两种方式的主要区别是，文本文件中只包含可显示字符和有限的几个控制字符（如\r,\n,\t）;而二进制文件可以包含任意的没有显式含义的二进制文件。为了进一步区分两种存储方式，我们用一个例子来说明。<br>对于一个还只能输123457，可以用来种方式保存到文件中：</p>
-<ol>
-<li>文本方式：依次把1,2,3,4,5,6,7的ASCII玛写入文件（共7个字节）</li>
-<li>二进制方式：把整数123457的计算机内部表示（如补码）分解为字节写入文件（如果整数内部为32位，则为4个字节）。<blockquote>
-<p>以二进制方式组织的文件不利于文件在不同计算机平台上使用。<br>因为不同计算机平台的内部表示不一样<br>关于文件的压缩的思路估计也有这样的一份。</p>
-</blockquote>
-</li>
-</ol>
-<h4 id="9-2-2-基于函数库的文件I-O"><a href="#9-2-2-基于函数库的文件I-O" class="headerlink" title="9.2.2 基于函数库的文件I/O"></a>9.2.2 基于函数库的文件I/O</h4><p>C++从C语言标准库中保留下来的输入、输出函数库包含了对文件进行输入、输出操作的函数。<br><code>#include&lt;cstdio&gt;</code></p>
-<h5 id="1-文件的输出操作"><a href="#1-文件的输出操作" class="headerlink" title="1) 文件的输出操作"></a>1) 文件的输出操作</h5><ul>
-<li>打开文件<br>打开外部文件输出数据fopen<br><code>FILE *fopen(const char *filename, const char *mode); // 打开文件</code><br>mode表示打开方式：<br>w:打开一个外部文件用于写操作。如果外部文件已经存在，则首先把它的内容清除；否则先创建该外部文件。<br>a:打开一个外部文件用于添加（从文件末尾）操作。如果不存在，则首先创建文件<br>另外，在打开方式的后面还可以加上b,指出以二进制方式打开文件。默认打开方式为文本方式。对一文本方式打开的文件，当输出字符为\n时，在某些平台（如DOS和Windows平台）将自动转换为’\r’’\n’两个字符写入外部文件<br>一般来说，以文本方式组织的文件要用文本方式打开；以二进制方式组织的文件要用二进制方式打开。<br>以w方式打开文件时，文件位置指针指向文件的头；以a方式打开文件时，文件位置指针指向文件的尾。<br>文件打开成功后，fopen将返回一个费控的”FILE*”指针，该指针指向与打开文件有关的一些信息（如文件的内存缓冲区等），它将被之后的文件输出操作函数使用。<blockquote>
-<p>就是实际上内存是按块组织的，这个指针会指向一些节点。当不断输出文件时，需要进行改变指针以扩大文件写的内容，还有更改好多相关的东西。<br>如果文件打开失败，则fopen返回空指针NULL.</p>
-</blockquote>
-</li>
-<li>输出操作</li>
-</ul>
-<p>文件打开成功后就可以往文件中写入数据了。往文件中写入数据的函数主要有以下几个。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 输出一个字符，输出成功时返回输出的字符</span><br><span class="line">int fputc(int c, FILE *stream);</span><br><span class="line"></span><br><span class="line">// 输出一个字符串，输出成功时返回一个非负整数。</span><br><span class="line">int fputs(const char *string, FILE*stream);</span><br><span class="line"></span><br><span class="line">// 输出基本类型数据，返回输出的字符数</span><br><span class="line">int fprintf(FILE *stream, const char *format[,argument]...)</span><br><span class="line">// 看来这里我搞错了，</span><br><span class="line"></span><br><span class="line">// 按字节输出数据。参数size为字节块的尺寸；cout为字节块的个数。返回实际输出的字节块的个数</span><br><span class="line">size_t fwrite(const void *buffer, size_t size, size_t count, FILE *stream);// size_t:unsigned int;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>感觉操作系统，最难的一块就在于要计算好待数据内容的大小。<br>数据存储也是按字节方式的，所以fwrite也是二进制方式，对!</p>
-</blockquote>
-<p>在上面的函数中，都有一个FILE*类型的指针参数，该指针参数是fopen成功打开文件后返回的。<br>前三个函数主要以文本方式输出数据，而第4个函数则是以二进制方式。</p>
-<ul>
-<li><p>关闭文件 <code>fclose(FILE *stream);</code></p>
-</li>
-<li><p>作业<br>从键盘键入一批学生的成绩信息并把他们以文本格式存入外部文件:scores.txt。<br>// 注意这里为什么是字符串输入。因为这些字符都是可显式字符，所以可以显式指定，就在文件中看见这些内容</p>
-</li>
-</ul>
-<blockquote>
-<p>扩展版本：使用C++中的类<br>请务必注意循环输入的判断条件<br>还有一些系统目录是没有权限，怎么说吧，除非知道相对目录很清楚的情况外，都用绝对目录来做吧</p>
-</blockquote>
-<h5 id="2-文件的输入操作"><a href="#2-文件的输入操作" class="headerlink" title="2) 文件的输入操作"></a>2) 文件的输入操作</h5><ol>
-<li>打开文件<br>打开外部文件输入数据要用下面的函数来实现<br><code>FILE *fp = fopen(const char *filename, char *mode)</code>;<br>filename是要打开的外部文件名；mode是打开方式。<br>它可以是’r’, 表示打开一个外部文件用于读操作，这时外部文件必须存在，否则打开文件失败。<br>另外，可以在后面加上b，表示以二进制方式打开文件，默认打开方式为文本方式，在进行输入操作时，外部文件中连续两个字符\t和\n(Window)自动转换为一个字符\n. 读入字符0x1A(Ctrl+Z)时表示文件结束。<br>文件打开成功后，fopen将返回一个非空的”FILE *”类型的指针，该指针用于今后的文件输入操作函数。文件打开失败后，fopen返回空指针<br>文件打开成功后，文件位置指针指向文件头。</li>
-<li>输入操作<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 输入一个字符，然后返回字符的编码</span><br><span class="line">fgetc(FILE *stream);</span><br><span class="line">&gt; 哇，这个操作完全可以用来做循环条件啊，牛逼</span><br><span class="line"></span><br><span class="line">// 输入一个字符串，函数正常结束时返回string的值，否则返回NULL。</span><br><span class="line">char *fgets(char *string, int n, FILE *stream)</span><br><span class="line"></span><br><span class="line">// 输入基本类型的数据，返回值表示读入并存储的数据个数</span><br><span class="line">fscanf()</span><br><span class="line"></span><br><span class="line">// 按字节输入数据。</span><br><span class="line">size_t fread(const void *buffer, size_t size, size_t count, FILE *stream);</span><br><span class="line"></span><br><span class="line">// 判断文件结束。当文件位置指针在文件末尾时，继续进行读操作会使得feof返回非零(true)</span><br><span class="line">int feof(FILE *stream);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>当从文件中读取数据时，必须知道文件的存储格式，包括数据的类型和存储方式等。</p>
-<blockquote>
-<p>fscanf和fprintf(文本文件), fread和fwrite(二进制文件)对应<br>3. 关闭文件 fclose(FILE *stream)</p>
-</blockquote>
-<ul>
-<li>小练习<br>读取上一个中的数据，计算每个学生的平均成绩；统计男生人数。</li>
-</ul>
-<h5 id="3-文件的输入、输出操作"><a href="#3-文件的输入、输出操作" class="headerlink" title="3) 文件的输入、输出操作"></a>3) 文件的输入、输出操作</h5><blockquote>
-<p>在上面注意到一个点，输入和输出都涉及到文件打开方式，那么文件打开方式是否与实际情况相符合了呢？</p>
-</blockquote>
-<p>以w和a方式打开的文件只能对其进行输出操作；以r打开的文件只能进行输入操作。</p>
-<p>mode扩展：</p>
-<ul>
-<li>r+ 读写，文件必须存在</li>
-<li>w+ 读写。 文件不存在会创建一个空文件，否则情况一寸照的文件<blockquote>
-<p>前面这两种不过是+号更多了一种功能，跟本身功能关系很大的</p>
-</blockquote>
-</li>
-<li>a+ 打开一个外部文件用于读、添加操作。如果文件不存在，则首先创建一个空文件。以这种方式打开的文件，输出操作总是在文件尾进行。</li>
-</ul>
-<p>另外，在这些后面可以加上t,b, 文本，二进制。对！已经测试过！”w+b”</p>
-<h5 id="4-随机输入-输出"><a href="#4-随机输入-输出" class="headerlink" title="4) 随机输入/输出"></a>4) 随机输入/输出</h5><p>一般情况下，文件的读写操作都是顺序进行的，即在进行输入输出操作时，必须按顺序读入，这样降低了文件访问的小。<br>每个打开的文件都有一个位置指针，指向当前读写文字，每读入或写出一个字符，文件的位置指针都会自动往后移动一个位置。<br><code>fseek(FILE *stream, long offset,int origin)</code><br>其中，origin指出参考位置，它可以是SEEK_CUR, SEEK_END, SEEK_SET;offset是移动的字节偏移量，正值往后移动，负值往前移动。<br>fseek返回值为0表示移动成功，否则表示移动失败。<br>当前位置可以通过<code>ftell(FILE *stream)</code></p>
-<blockquote>
-<p>? 是返回的基于开头的字节数吗？？？<br>需要练习<br><strong>练习</strong><br>读入第二个学生的信息，把该学生的专业修改为COMPUTER。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">...// 省略了Sex,Date,Major及Student的定义</span><br><span class="line">int main()&#123;</span><br><span class="line">    FILE *fp = fopen(&quot;d:\\students.dat&quot;, &quot;r+b&quot;)</span><br><span class="line">    if( fp==NULL) &#123;</span><br><span class="line">        printf(&quot;打开文件失败&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Student st;</span><br><span class="line">if (fseek(fp,sizeof(st),SEEK_SET)==0)&#123; // 文件指针指向第二个学生数据</span><br><span class="line">    fread(&amp;st,sizeof(st), 1,fp); //读入第二个学生信息</span><br><span class="line">    st.major=COMPUTER;</span><br><span class="line">    fseek(fp,-sizeof(st),SEEK_CUR);</span><br><span class="line">    fwrite(&amp;st,sizeof(st),1,fp); //修改后的第二个学生数据写入文件</span><br><span class="line">&#125;</span><br><span class="line">fclose(fp);  // 这里student 为结构体，所以不用重载，sizeof直接可以用，如果是类是否需要重载呢？</span><br><span class="line">return 0;</span><br></pre></td></tr></table></figure>
-
-<h4 id="9-3-3-基于类库的文件I-O"><a href="#9-3-3-基于类库的文件I-O" class="headerlink" title="9.3.3 基于类库的文件I/O"></a>9.3.3 基于类库的文件I/O</h4><p>前面展示了C的部分，下面展示使用I/O类库进行外部文件的输入、输出。<br><code>#incldue&lt;iostream&gt;,  #include&lt;fstream&gt;</code></p>
-<h5 id="1-输出"><a href="#1-输出" class="headerlink" title="1) 输出"></a>1) 输出</h5><p>首先创建一个ofstream类(是ostream的派生对象)，使之与某个外部文静建立联系：</p>
-<ol>
-<li>直接方式 <code>ofstream outfile(文件名，打开方式)</code></li>
-<li>间接方式 <code>ofstream outfile; outfile.open()</code><br>打开方式ios::out 同w, ios::app同a<br>打开方式还可以是上面的值与ios::binary按位或|的结果。默认为文本方式。<br>打开文件是否成功判断<br><code>if(!out_file) 失败;   out_file.fail(), !out_file.is_open()</code><br>文件成功打开后，可以使用插入操作符“&lt;&lt;”,或ofstream的一些成员函数来进行输出操作.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">out_file&lt;&lt;x;</span><br><span class="line">out_file.write((char *)&amp;x, sizeof(x));// 以二进制方式输出数据。</span><br><span class="line">out_file.close();</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p><strong>练习</strong><br>用I/O类库来实现9-1的程序功能。</p>
-<blockquote>
-<p>值得注意的是，对ostream和istream重载的插入操作符也能是ofstream和ifstream的对象。</p>
-</blockquote>
-<h5 id="2-输入"><a href="#2-输入" class="headerlink" title="2) 输入"></a>2) 输入</h5><p>同输出， 打开方式ios::in，同r。<br><code>in_file.read((char*)&amp;x,sizeof(x)); //以二进制形式读入文件</code><br>判断文件是否结束<br><code>ios::eof(); // 返回非0表示上一次读操作中遇到了文件末尾</code></p>
-<p><strong>练习</strong></p>
-<h5 id="3-输入-输出与随机存取"><a href="#3-输入-输出与随机存取" class="headerlink" title="3) 输入/输出与随机存取"></a>3) 输入/输出与随机存取</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">istream&amp; istream::seekg(&lt;位置&gt;) // 指定绝对位置</span><br><span class="line">istream&amp; istream::seekg(&lt;位置&gt;, &lt;参照位置&gt;) // 指定相对位置</span><br><span class="line">streampos istream::tellg(); // 获取指针位置</span><br><span class="line"></span><br><span class="line">ostream&amp; ostream::seekg(&lt;位置&gt;) // 指定绝对位置</span><br><span class="line">ostream&amp; ostream::seekg(&lt;位置&gt;, &lt;参照位置&gt;) // 指定相对位置</span><br><span class="line">streampos ostream::tellg(); // 获取指针位置</span><br><span class="line"></span><br><span class="line">参照位置ios::beg, ios::cur, ios::end</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-4-面向字符串变量的输入-输出"><a href="#9-4-面向字符串变量的输入-输出" class="headerlink" title="9.4 面向字符串变量的输入/输出"></a>9.4 面向字符串变量的输入/输出</h3><p>有时，程序中有些数据并不直接输出到标准输出设备或文件，而是需要保存在程序中的某个字符变量中；程序中有些数据有时也不直接从标准输入设备或文件中获得，而是需要从程序中的某个字符变量中获得。这时，可以采用C++标准库的基于字符串变量的输入输出功能。<br>基于字符串变量的输入/输出功能的主要是sscanf和sprintf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int sprintf(char *buffer, const char *format);</span><br><span class="line">int sscanf(char *buffer, const char *format);</span><br></pre></td></tr></table></figure>
-
-<p>与文件输入/输出不同，这里的输入源和输出目标不是文件，而是内存中一个区域:buffer. 比如说把int型变量转换为一个字符串存入字符数组a中.</p>
-<p>对于基于I/O类库的字符串变量输入/输出操作，首先需要创建类istream,ostrstream或strstream的一个对象。</p>
-<blockquote>
-<p>在新的标准中被istringstream, ostringstream和stringstream（头文件sstream）代替</p>
-</blockquote>
-<p>// 输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;strstream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">ostrstream str_buf; // 默认构造采用可扩充的内部缓冲</span><br><span class="line">或</span><br><span class="line">char buf[1000];</span><br><span class="line">ostrstream str_buf(buf,100);</span><br><span class="line"></span><br><span class="line">int x,y;</span><br><span class="line">str_buf&lt;&lt;x&lt;&lt;y&lt;&lt;endl;  // 通过该途径使得x和y获得了值</span><br><span class="line">char *p = str_buf.str(); // 可获取str_buf中字符串缓存的首地址</span><br></pre></td></tr></table></figure>
-
-<p>// 输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;strstream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">char buf[100];</span><br><span class="line">... // 通过某种途径在buf中存放了一些字符串</span><br><span class="line">istrstream str_buf(buf);</span><br><span class="line">或</span><br><span class="line">istrstream str_buf(buf,100);</span><br><span class="line">// 如果str_buf对象的构造没有给出长度，则认为它的缓存中的内容以&apos;\0&apos;结束</span><br></pre></td></tr></table></figure>
-
-<p>另外，也可使用抽取操作符或者其他操作符。</p>
-<blockquote>
-<p>用处：就是用一个东西来进行收集的感觉。然后可以用，对是这样的感觉。</p>
-</blockquote>
-<h3 id="9-5-其它点"><a href="#9-5-其它点" class="headerlink" title="9.5 其它点"></a>9.5 其它点</h3><blockquote>
-<p>怎么查看C++的版本？</p>
-</blockquote>
-<blockquote>
-<p>Linux输出平台参数一般是怎么设置的？看起来有什么快捷的地方？有没有一本好书？</p>
-</blockquote>
-<blockquote>
-<p>一般对于继承C中的输入，输出元素，返回结果如果为非负数表示正常，具体有什么含义？返回EOF表示出问题。其他有什么函数类似？</p>
-</blockquote>
-<blockquote>
-<p>观察到一个点，如果正常结束的话是Process finished with exit code 0; 非正常结束返回的是一个有问题的数</p>
-</blockquote>
-<blockquote>
-<p>wostream 是干什么用的？</p>
-</blockquote>
-<blockquote>
-<p>ostream &lt;CharT, class_traits&gt;有什么用？<br>为什么不能进行ostream a; 使用</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename charT, type traints=char_traits&lt;charT&gt;</span><br><span class="line">class basic_string;</span><br><span class="line">class basci_istram</span><br><span class="line"></span><br><span class="line">// traits 特征，性状。</span><br><span class="line">basic_string&lt;char&gt; string;</span><br><span class="line">basic_string&lt;TCHAR&gt; string;</span><br><span class="line">// 这里TCHAR可以自己指定</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTMxOTc3MC93aGF0LWlzLXRoZS1wb2ludC1vZi1zdGwtY2hhcmFjdGVyLXRyYWl0cw==" title="https://stackoverflow.com/questions/5319770/what-is-the-point-of-stl-character-traits">https://stackoverflow.com/questions/5319770/what-is-the-point-of-stl-character-traits<i class="fa fa-external-link"></i></span></p>
-</li>
-<li><p><span class="exturl" data-url="aHR0cDovL3d3dy5jcGx1c3BsdXMuY29tL3JlZmVyZW5jZS9zdHJpbmcvY2hhcl90cmFpdHMv" title="http://www.cplusplus.com/reference/string/char_traits/">http://www.cplusplus.com/reference/string/char_traits/<i class="fa fa-external-link"></i></span></p>
-</li>
-</ul>
-<p>解释<br>官方给的定义是：<br>Character traits:<br>Character traits classes specify character properties and provide specific semantics for certain operations on characters and sequences of characters.<br>换而言之，这里的意思就是对字符串这个操作特别放宽了要求，允许你过滤或者定义特殊化的字符串。<br>其实，平时我们都是需要什么就进行什么过滤，而这里的感觉就是给你了机会，让你将其定义为类型，然后操作起来更简便。<br>这里是最初开始设计的内容，后面都是在这基础上的延伸。</p>
-<blockquote>
-<p>模式匹配问题，记得刷leetcode,感觉上就有这样类似的问题。即如何进行模式匹配，实际上就是涉及到DFA和NFA，有限自动机和无限自动机。然后可以发现有限自动机方式，是按照回溯的方法解析的，所以会超级耗费内存。这样一想也解释通了。</p>
-</blockquote>
-<blockquote>
-<p>路径名问题，在Windows中为, /.有两种写法\,或者/(linux). 其实主要原因在于编译器如果进行解释吧！</p>
-</blockquote>
-<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>异常概述<br>C++的异常处理机制<br>程序调试</p>
-<ul>
-<li><p>程序的错误通常包括：</p>
-<ul>
-<li><p>语法错误：程序的书写不符合语言的语法规则。这类错误可由编译程序发现。例如：</p>
-<ul>
-<li>使用了未定义或未声明的标识符</li>
-<li>左右括号不匹配</li>
-</ul>
-</li>
-<li><p>逻辑错误：程序设计部当造成程序没有完成预期的功能。这类错误可通过对程序进行静态分析和动态测试发现。</p>
-<ul>
-<li>把两个数相加写成了相乘</li>
-<li>排序功能未能正确排序<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bool strlonger(char *str1,char *str2)&#123;</span><br><span class="line">    return strlen(str1)-strlen(str2)&gt;0;</span><br><span class="line">&#125;   </span><br><span class="line">strlonger(&quot;abc&quot;,&quot;1234&quot;) //?</span><br><span class="line">因为strlen()返回的是unsigned int, -1&gt;0这个被认为是真。 两个unsigned int运算结果不会进行自动转换。</span><br><span class="line">修改 (int)(strlen(str1)-strlen(str2))&gt;0</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>运行异常：程序设计对程序运行环境考虑不周而造成的程序运行错误。</p>
-<ul>
-<li>对于x/y操作，y输入了零</li>
-<li>由内存空间不足导致的访问空指针：int *p=new int; *p=10;</li>
-<li>输入数据的数量超过存放它们的数组的大小导致数组下标越界</li>
-<li>多任务环境可能导致的文件操作错误</li>
-<li>给一个采用二分法查找的函数提供了一个未排序的数组</li>
-<li>数据超出了其类型所允许的范围（溢出）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>语法错误，编辑器会编译不通过.<br>逻辑错误：环境正常，结果不正确。<br>运行异常：环境正常，结果正确。环境不正常，结果不正确</p>
-<p>在程序运行环境正常的情况下，导致运行异常的错误是不会出现的。<br>程序异常错误往往是由于程序设计者对程序运行环境的一些特殊情况考虑不足所造成的。</p>
-<p>导致程序运行异常的情况是可以预料的，但它是无法避免的。</p>
-<p>为了保证程序的鲁棒性，必须在程序中对可能的异常进行预见性处理。</p>
-<blockquote>
-<p>比如在输入的输入对输入的各种情况进行排查，原本的一个例子就是输入文件，然后文件路径不存在。</p>
-</blockquote>
-<h3 id="处理异常的策略"><a href="#处理异常的策略" class="headerlink" title="处理异常的策略"></a>处理异常的策略</h3><blockquote>
-<p>思考：有时间异常不是错误，所以没有必要当场处理；而且，有可能当场有重要的事情，那么这样做的话其实是非常草率的一件事情。还有用exit或abort, 这种每次都一下子退出了，完全不知道出现了什么问题，对程序员来说是一种特别懵逼的状态。</p>
-</blockquote>
-<p>就地处理, 在发现错误的地方处理异常。<br>异地处理，在其他地方（非异常发现地）处理异常。</p>
-<p>异常的就地处理</p>
-<p>常见做法是调用C++标准库中的函数exit或abort</p>
-<ul>
-<li>abort立即终止程序的执行，不做任何的善后处理工作</li>
-<li>exit在终止程序的运行前，会做关闭被程序打开的文件、调用全局对象和static存储类的局部对象的析构函数等工作。<br>注意：不要在对象类的析构函数中调用exit，否则该析构函数不能调用。</li>
-</ul>
-<p>不管是abort还是exit，都”not user-friendly”</p>
-<p>异常的异地处理。</p>
-<p>发现异常时，在发现地（如在被调用的函数中）有时不知道如何处理这个异常，或者不能很好地处理这个异常，要由程序的其它地方（如函数的调用者）来处理。<br>例如，前面的函数f中打开文件失败，这时可以由调用者重新提供一个文件来解决。</p>
-<h3 id="如何实现异常的异地处理？"><a href="#如何实现异常的异地处理？" class="headerlink" title="如何实现异常的异地处理？"></a>如何实现异常的异地处理？</h3><ol>
-<li>通过函数的返回值，或指针、引用类型的参数，或全局变量把异常情况通知函数的调用者，由调用者处理。在计算机网络中很多情况都是这样处理的。<blockquote>
-<p>该途径的不足：<br>通过函数的返回值返回异常情况会导致正常返回值和异常返回值交叉在一起。<br>通过指针，引用类型的参数返回异常情况，需要引入额外的参数，给设计带来负担<br>通过全局变量返回异常情况会导致使用者忽视这个全局变量的问题，不知道它的存在。<br>程序的可读性差！程序的正常处理与异常处理混杂在一起</p>
-</blockquote>
-</li>
-<li>通过语言提供的结构化异常处理机制进行处理<br>C++异常处理机制<br>把有可能遭遇异常的一系列操作（语句或函数调用）构成一个try语句块<br>如果try语句块中的某个操作在执行中发现了异常，则通过执行一个throw语句抛出一个异常对象，之后的操作不再进行。<br>抛置的异常对象将由能够处理这个异常的地方通过catch语句块来捕获并处理之。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">void f(char *filename)&#123;</span><br><span class="line">    ifstream file(filename);</span><br><span class="line">    if (file.fail())  throw filename(); // 产生异常</span><br><span class="line">    int x;</span><br><span class="line">    cin&gt;&gt;x;</span><br><span class="line">    ...</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> int main()&#123;</span><br><span class="line">     char str[100];</span><br><span class="line">     ...</span><br><span class="line">     try&#123;</span><br><span class="line">         f(str); // 启动异常处理机制</span><br><span class="line">         // 如果在函数f中抛掷了char*类型的异常，则程序转到try后面的catch(char*str)处理</span><br><span class="line">     &#125; catch(char *fn)&#123; // 捕获异常</span><br><span class="line">         ...// 处理异常</span><br><span class="line">     &#125;</span><br><span class="line">     ...// 正常情况</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<blockquote>
-<p>一种直观的感觉，等于说try语句这里把所有的异常进行了传递，然后所有子的对象都会返回回来。如果从运行的角度来思考也很正常。然后，还有一个点，类也可以实现，即基类的指针一直指回基类？对吗？</p>
-</blockquote>
-<h3 id="try语句"><a href="#try语句" class="headerlink" title="try语句"></a>try语句</h3><p>try语句块的作用是启动异常处理机制。其格式为：<br>try{<br>    语句序列<br>}</p>
-<p>上述的语句序列中可以有函数调用。</p>
-<h3 id="throw语句"><a href="#throw语句" class="headerlink" title="throw语句"></a>throw语句</h3><p>throw语句用于在发现异常情况时产生异常对象。<br>throw &lt;表达式&gt;<br>表达式为任意类型的C++表达式。<br>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void f(char *filename)&#123;</span><br><span class="line">    ifstream file(filename);</span><br><span class="line">    if (file.fail())  throw filename(); // 产生异常</span><br><span class="line">    // 注意这里异常的对象为一个字符串指针，这里是与catch中的类型相互对应的。</span><br><span class="line">    int x;</span><br><span class="line">    cin&gt;&gt;x;</span><br><span class="line">    ...</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>执行throw后，接在其后的语句将不再继续执行，而是转向异常处理（由某个catch语句给出）</p>
-<blockquote>
-<p>这里也好理解，当出错的时候肯定是这样处理了啊<br>一个问题？<br>这样做属于异常的异地处理了。怎么说来看的话是封装了一层。即实际上也是用的全局变量，但是不是在返回一层时调用，可能是返回多层时进行调用的。细想一下，震惊了哈哈哈。<br>挺好，用本身自带的变量不好，重新开辟一个浪费，如果是全局变量则被忽视，所以倒不如由底层处理好了再说，真棒！</p>
-</blockquote>
-<h3 id="catch语句"><a href="#catch语句" class="headerlink" title="catch语句"></a>catch语句</h3><p>catch语句块用于捕获throw产生的异常对象并处理相应的异常。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">catch(&lt;类型&gt;[&lt;变量&gt;])</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>类型用于指出捕获何种异常对象，它与异常对象的类型匹配规则如若函数重载。<br>变量用于存储异常对象，它可以缺省，缺省时表明catch语句块只关心异常对象的类型，而不考虑具体的异常对象。</p>
-<blockquote>
-<p>这里想到了实际上做的时候确实只关心了异常对象的类型，而且是将类型分为了唯一的积累，这样处理起来就方便了很多。</p>
-</blockquote>
-<p>catch语句块要紧接在某个try语句的后面。</p>
-<p>一个try语句块可以跟多个catch语句块，用于捕获不同类型的异常对象并进行处理。</p>
-<blockquote>
-<p>这里做的是类型其实也还可以，但是很是不行，因为处理的准则应该是对应于哪种错误，关于类型直接反馈不到处理上。</p>
-</blockquote>
-<p>关于try、throw和catch几点注意</p>
-<ul>
-<li><p>在try语句块的语句序列执行中如果没有抛出异常对象，则其后的catch语句不执行，而是继续执行try语句块之后的非catch语句。</p>
-</li>
-<li><p>在try语句块的语句序列执行中如果抛掷了异常对象</p>
-<ul>
-<li>该try语句块之后有能够捕获该异常对象的catch语句，则执行这个catch语句中的语句序列，然后继续执行这个catch语句之后的非catch语句</li>
-<li>该try语句块之后没有能够捕获该异常对象的catch语句，则由函数调用链的上一层函数中的try语句的相应catch来捕获。<blockquote>
-<p>这就是用到的向上层抛出异常。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>如果抛除异常对象的throw语句不是由程序的某个try语句块中的语句序列调用的，则抛掷的异常不会被程序中的catch捕获</p>
-<blockquote>
-<p>也就是不在try语句中，所以就要注意了，必须代码在检测范围中才能被检测啊，这是很浅显的道理了啊！</p>
-</blockquote>
-</li>
-<li><p>异常处理的嵌套<br>try语句是可以嵌套的</p>
-</li>
-<li><p>当在内层的try语句的执行中产生了异常，则首先在内层try语句块之后的catch语句中找，否则想上处理</p>
-</li>
-<li><p>如果抛掷的异常对象没有，则调用系统的terminate函数进行标准化异常处理。默认情况下，terminate函数将会去调用abort函数。</p>
-</li>
-</ul>
-<p>还有一个很重大的问题，有时候终止程序需要很大的代价，那么是否可以做到程序不终止，一直到获得正确的数据为止呢？</p>
-<blockquote>
-<p>?????上层一直while循环 </p>
-</blockquote>
-<h2 id="程序调试"><a href="#程序调试" class="headerlink" title="程序调试"></a>程序调试</h2><ul>
-<li>一个处于开发阶段的程序可能会含有很多错误（逻辑或异常）。</li>
-<li>发现和找出这些错误的一种手段是在程序中的某些地方家伙少年宫一些输出语句，在程序运行时把一些调试信息（如变量的值）输出到显示器。</li>
-</ul>
-<blockquote>
-<p>啊啊，我现在都一直用的是这种笨办法</p>
-</blockquote>
-<p>这种方式存在以下问题：</p>
-<ul>
-<li>调试者必须对输出的值做一定的分析才能知道程序是否有错。</li>
-<li>在开发结束后，去掉调试信息有时是一件很繁琐的工作<blockquote>
-<p>难道是用 Debug, 或者调试工具？哇撒</p>
-</blockquote>
-</li>
-</ul>
-<p>？断言<br>实际上，在调试程序时输出程序中的某些变量或表达式的值，其目的是为了确认程序输出的这些值与预期的值是否相符。<br>上述的目的可以让程序设计者在程序的一些关键或容易出错的点上插入一些相关的断言来表达<br>    - 断言是一个逻辑表达式，它描述了程序执行到断言处应该满足的条件<br>    - 如果条件满足则程序继续执行下去，否则程序执行异常终止。<br>在程序测试阶段，断言可以帮助测试这发现程序的逻辑错误，也可以用来发现一些异常错误。</p>
-<blockquote>
-<p>语法错误首先X,然后的话异常只能按自己是否能够预知下得到。然后的断言最大的好处真的在可以发现程序的逻辑错误啊，真牛逼！其实这等同于输出的，就是每次debug这样真的好麻烦好吗？而且没有意思，哇咔咔，这样真有趣！</p>
-</blockquote>
-<blockquote>
-<p>哇，想起了java的测试工具类，python的测试工具包，终于浮出水面了吗？</p>
-</blockquote>
-<p>宏assert</p>
-<p>C++标准库提供的一个宏assert(cassert, assert.h),可以实现断言。<br>宏assert要求一个关系，逻辑表达式作为其参数，当assert执行时，<br>    - 如果表达式的值为false，则会显示出相应的表达式、它所在的源文件名以及所在的行号等诊断信息，然后调用库函数abort终止<br>    - 当表达式的值为true时，程序继续执行</p>
-<p>例如，下面的宏assert调用表示程序执行到该宏调用处变量x的值应等于1：<br>assert(x==1)<br>当程序执行到该调用处，如果x的值不等于1，则它会显示下面的信息并终止：<br>Assertion failed:x=1,fileXXX,line YYY<br>可以返现异常错误，如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int divide(int x,int y)&#123;</span><br><span class="line">    assert(y==0);</span><br><span class="line">    return x/y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这是真的是超级好用的一个东西。<br>宏assert的实现是通过条件编译预处理命令来实现的：<br>cassert,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#ifdef NDEBUG</span><br><span class="line">#define assert(exp) ((void)0)</span><br><span class="line">#else</span><br><span class="line">#define assert(exp) ((exp)?(void)0:&lt;输出诊断信息并调用库函数abort&gt;)</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>解释，也就是说宏assert只有在宏名NDEBUG没有定义时才有效，这时，程序一般处于开发、测试阶段。程序开发结束提交时，应该让宏名NDEBUG有定义。然后重新编译程序，这样，assert就不再有效了。</p>
-</blockquote>
-<blockquote>
-<p>在思考，#DEBUG有啥用？</p>
-</blockquote>
-<h3 id="一点有意思的记录"><a href="#一点有意思的记录" class="headerlink" title="一点有意思的记录"></a>一点有意思的记录</h3><p>char *p=”adad”;<br>*p指向的是字符串。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">strlen(p); // 传入指针就行，能想清楚。</span><br><span class="line">// 这本身就是其功能规定的，所以这里也不多说什么。觉得就这样吧，是对的。</span><br><span class="line">cout&lt;&lt;p;  //正常输出</span><br><span class="line">printf(&quot;%s&quot;,p); // 输出</span><br></pre></td></tr></table></figure>
-
-<p>// 等下，我好想这里搞错了什么，或者说把一些事情。也就是说这里指针是没错的。因为这里是统一处理输入输出的函数。</p>
-<p>// 另一个方面讲</p>
-<p>太棒了，刚说自己想多了，结果才发现这里有说明的。</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -2962,6 +2383,304 @@
   </article>
 
     
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/neu-algorithm-course/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/neu-algorithm-course/" class="post-title-link" itemprop="url">neu algorithm course</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:23:01 / 修改时间：09:42:01" itemprop="dateCreated datePublished" datetime="2019-09-19T09:23:01+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/neu/" itemprop="url" rel="index"><span itemprop="name">neu</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/neu/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="NEU-Algorithm"><a href="#NEU-Algorithm" class="headerlink" title="NEU-Algorithm"></a>NEU-Algorithm</h2><p>主要是为了对比这学期学的算法书与本科学习的清华大学之间教材的区别。</p>
+<p>清华大学教材</p>
+<ol>
+<li>递归分治</li>
+<li>动态规划</li>
+<li>贪心策略</li>
+<li>回溯法，一种复杂版的蛮力的感觉</li>
+<li>分支限界法</li>
+<li>随机化算法</li>
+<li>线性规划与网络流</li>
+</ol>
+<p>还有一个思考点：</p>
+<p>常规思路：</p>
+<p>问题， BF1， BF2， 改进，……</p>
+<p>大量的题之后</p>
+<ol>
+<li>对于某道题，什么样的解法能将其搞定？什么样的解法能直觉达到最优</li>
+<li>这些方法的适用范围以及时间复杂度</li>
+</ol>
+<h3 id="4-回溯法"><a href="#4-回溯法" class="headerlink" title="4. 回溯法"></a>4. 回溯法</h3><blockquote>
+<p>从某种意义上感觉，回溯法是用来明确定义了问题的解空间。比如背包问题，有n个物品，则解空间就是{0,1}^N。 但这样下来感觉上有一个问题就是时间复杂度与n有关，不也不一定这样说，应该是说解空间为最多可以容纳多少个解。</p>
+<p>！！！这里就涉及到问题的表示方法，即一个问题究竟怎样可以表示地最优</p>
+</blockquote>
+<p>利用了DFS框架，首先将代解的问题看作一棵搜索树。</p>
+<h4 id="1）对应的问题定义是什么？"><a href="#1）对应的问题定义是什么？" class="headerlink" title="1）对应的问题定义是什么？"></a>1）对应的问题定义是什么？</h4><p>问题的解向量：回溯法希望一个问题的解可以表示为一个n元式(x1,x2,…,xn)的形式</p>
+<p>显约束：对分量Xi的取值限定</p>
+<p>隐约束：对于问题的一个实例，解向量满足现实约束条件的所有多元组，构成了该实例的一个解空间。</p>
+<p>注意：同一个问题可以有多种表示n，有些表示方法更简单，所需表示的状态空间更小（存储量少，搜索方法简单）p(n)</p>
+<h4 id="2）-相关的一些定义"><a href="#2）-相关的一些定义" class="headerlink" title="2） 相关的一些定义"></a>2） 相关的一些定义</h4><p>扩展节点：正在产生儿子的节点，即第一类灰色节点，当前最小灰色节点</p>
+<p>活节点：一个自身已生成但其儿子还没有全部生成的节点， 即第二类灰色节点，非直系灰色节点</p>
+<p>死节点：黑色节点</p>
+<h4 id="3）实现方法"><a href="#3）实现方法" class="headerlink" title="3）实现方法"></a>3）实现方法</h4><p>问题状态生成方法：</p>
+<p>如果对一个扩展节点R，一旦产生了它的一个儿子C，就把C当做新的扩展节点。在完成对子树C的穷尽搜索之后，将R重新变成扩展节点，继续生成下一个儿子。</p>
+<p>回溯法：为了避免发生那些不可能产生最佳解的问题状态，要不断地利用限界函数（bounding function）来处死那些实际上不可能产生所需解的活节点，以减少问题的计算量。</p>
+<p>具有限界函数的深度优先方法称为回溯法</p>
+<h4 id="4）基本思想"><a href="#4）基本思想" class="headerlink" title="4）基本思想"></a>4）基本思想</h4><ul>
+<li><p>针对所给问题，定义问题的解空间</p>
+</li>
+<li><p>确定易于搜素的解空间结构</p>
+</li>
+<li><p>以深度优先方式搜素解空间，并在搜素过程中用剪枝函数避免无效搜素。</p>
+<blockquote>
+<p>常用剪枝函数：用约束函数在扩展节点处剪去不满足约束的子树；用限界函数剪去得不到最优解的子树。</p>
+<p>即两个条件：</p>
+<ul>
+<li>每个值本身的约束</li>
+<li>是否能得到最优解的约束</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h4 id="5）时空复杂度分析"><a href="#5）时空复杂度分析" class="headerlink" title="5）时空复杂度分析"></a>5）时空复杂度分析</h4><p>空间：由于在搜素过程中是动态产生问题的解空间。所以，在任何时刻，算法只保存从根节点到当前扩展节点的路径即可。所以如果解空间树中从根节点到叶节点的最长路径的长度为h(n)，那么回溯法所需的计算空间通常为O(h(n))。而显式地存储整个解空间需要O(2^{h(n)})或O(h(n)!)内存空间。</p>
+<p>时间：</p>
+<blockquote>
+<p>待处理？</p>
+<p>两种分析方法，第一种，从树出发，即本身形成的结构，然后通过树的节点来分析复杂度；第二种，由代码出发，即代码往往能表示很多东西，从代码出发可以</p>
+<p>感觉上是 O(2^n), O(n!),  这里n应该是最小表示来说</p>
+<p>基于全局，从全局的所有结构中寻找结果，那么可以发现其性能复杂度是高于分支限界法的。</p>
+<p>跟动态规划一样是万能解的感觉？</p>
+</blockquote>
+<h4 id="6）-代码框架"><a href="#6）-代码框架" class="headerlink" title="6） 代码框架"></a>6） 代码框架</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">backtrack-wrapper()&#123;</span><br><span class="line">  bestw = 0</span><br><span class="line">  backtrack(1);</span><br><span class="line">  cout&gt;&gt;bestw&gt;&gt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void backtrack(int t)</span><br><span class="line">&#123;</span><br><span class="line">	if(t&gt;n || solution(x)) &#123;   // 注意这里t&gt;n, solution(x)应该在上一层更好，但是这里也没事。</span><br><span class="line">		temp = output(x); //已经搜索到叶节点; 这里只是输出的当前可行解。</span><br><span class="line">		if (temp &gt; bestw)</span><br><span class="line">			update bestw, bestx;</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">		// 排列树，例如任务的调度问题求最节约时间的任务调度，那么实际上求得的结果就是任务的排列。在这里做时考虑将边作为任务。</span><br><span class="line">		for(int i=t;i&lt;=n ;i++ )  //排列数由边构成</span><br><span class="line">			// 这里说明有n个孩子，注意问题已经发生改变</span><br><span class="line">			&lt;对x[i]相关统计量进行处理&gt; </span><br><span class="line">			// 前面的选择在x[i-1]中。</span><br><span class="line">			x[i] = i; // 注意这里需要进行定义</span><br><span class="line">			if (问题仍然未得到解决)</span><br><span class="line">			&#123;</span><br><span class="line">			swap(x[t],x[i]);</span><br><span class="line">			if (legal[t]) backtrack(t+1);</span><br><span class="line">			swap(x[t],x[i]) // 进行恢复</span><br><span class="line">			&#125;</span><br><span class="line">			&lt;对x[i]相关统计量进行恢复&gt;</span><br><span class="line">// 输出 backtrack(1) n=2</span><br><span class="line">// </span><br><span class="line">		</span><br><span class="line">		// 子集树</span><br><span class="line">		if(第一颗子树) &#123;</span><br><span class="line">				//动态变化的结果，等于说这里其实存储的是临时第t层的; 这里是遍历子树</span><br><span class="line">				// 这里会产生带到下一层的变量, 比如说当前使用量cw</span><br><span class="line">				if(constraint(x[t])&amp;&amp;bound(x[t]))  		                          backtrack(t+1);</span><br><span class="line">				//这里是进行子树回溯。为下一阶段同等的子节点做准备		</span><br><span class="line">		&#125;</span><br><span class="line">		if(第二颗子树) &#123;</span><br><span class="line">				...</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		for(int i=f(n,t);i&lt;=g(n,t);i++)  // 所以这里循环的次数就是子节点的个数。</span><br><span class="line">			x[t]=h(i);  h(i)为从f(n,t)到g(n,t)的选择，比如0,1</span><br><span class="line">			具体来说，这里应该再增加一个进行可以对各个子节点记性处理的操作。（</span><br><span class="line">			注意！该操作为什么要加在这里，肯定是在这里啊，想想递归思路）</span><br><span class="line">			if(constraint(x[t])&amp;&amp;bound(x[t]))  		                          backtrack(t+1);</span><br><span class="line">			// 这里可以加某一统计变量，比如说或选址少1啦</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">n表示最大递归深度</span><br><span class="line">t表示当前递归深度</span><br><span class="line">i为当前节点对应的子节点</span><br><span class="line">f(n,t): 当前扩展节点未搜索过的子树起始编号；难道还要重新搞起始节点？？？</span><br><span class="line">g(n,t): 当前扩展节点未搜索过的子树终止编号</span><br><span class="line">h(i)为第i个可选的问题表示</span><br><span class="line">x[t]这里是临时变量，可以替代很多情况的。</span><br><span class="line"></span><br><span class="line">constraint: 关于x[t]的约束，只有当前节点的值有关。</span><br><span class="line">bound: 关于能否产生解的约束，与x[t]有关，实际上还与前面的某个统计量有关。这里开始有点联想到那个什么矩阵,一般与剩余量有关。</span><br><span class="line"></span><br><span class="line">n为全局变量，需要提前得出来。</span><br><span class="line">bestw也为全局变量</span><br><span class="line"></span><br><span class="line">思考点： </span><br><span class="line">1. 进行进一步理解？有啥意义</span><br><span class="line">  进行问题结果建模，其中产生了问题结果状态树。所以此时时间复杂度分析是树节点的个数，同时需要考虑其他那些附加函数的复杂度。如果把他们看作1的话，易于分析。</span><br><span class="line">2. 与DFS框架来说有什么关系？</span><br><span class="line">  这里就是一种简单的树的结构，即仅仅只是对树进行DFS遍历而已。而DFS的精华在于对图的处理上。</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">进一步求解最优解和最优路径！</span><br></pre></td></tr></table></figure>
+
+<p>7）其他</p>
+<p>优点本质：</p>
+<p>回溯法的约束条件是所有解都应满足的条件，所以从某种意义上来说回溯法可以得到所有解，其中包括最优解。</p>
+<blockquote>
+<p>这个跟图遍历不一样哟。</p>
+</blockquote>
+<p>但无限界bound函数时，该问题是判定问题，不是最优化问题</p>
+<p>8）例子</p>
+<p>按解空间为子集树和排列树进行划分</p>
+<ul>
+<li><p>子集树</p>
+<blockquote>
+<p>为什么叫子集树？答案的解是问题的解的子集。</p>
+<p>问题：</p>
+<p>一批n个集装箱要装上重量为c1和c2的轮船，每个集装箱i的重量为wi。且有</p>
+<p>$\sum_{i=1}^n w_i \leq c_1 + c_2$.</p>
+<p>试图找出一种方案满足：</p>
+<ol>
+<li>首先将第一艘轮船尽可能装满</li>
+<li>将剩余的集装箱装上第二艘轮船</li>
+</ol>
+<p>目标：bestw， </p>
+<p>其余设置量：cw, bestx,  r</p>
+<p>解题：</p>
+<p>框架的层数对应n。 solution</p>
+<p>根节点有两颗子树，选或不选（0/1）</p>
+<p>可行性约束函数：$\sum_{i=1}^n w_i x_i \leq c_1$</p>
+<p>上界函数（不选择当前元素）：</p>
+<p>当前载重量cw+剩余集装箱的重量r $\leq$ 当前最优载重量bestw</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt; *W</span><br><span class="line">&gt; *x</span><br><span class="line">&gt; *bestx</span><br><span class="line">&gt; bestw</span><br><span class="line">&gt; cw = 0</span><br><span class="line">&gt; </span><br><span class="line">&gt; backtrack-wrapper()&#123;</span><br><span class="line">&gt; 	backtrack(1);</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt; backtrack(int t)&#123;</span><br><span class="line">&gt; 	if(t&gt;n || solution(x)) &#123;</span><br><span class="line">&gt; 		查看是否需要更新</span><br><span class="line">&gt; 		*bestx = *x;</span><br><span class="line">&gt; 		bestw = cw;</span><br><span class="line">&gt; 	&#125; else &#123;</span><br><span class="line">&gt; 		if(cw + x[t] &lt;= c) // 搜索左子树</span><br><span class="line">&gt; 			x[t] = 1;</span><br><span class="line">&gt; 			cw += x[t];</span><br><span class="line">&gt; 			backtrack(t+1);</span><br><span class="line">&gt; 		if(cw + x[t] &gt; c) // 搜素右子树</span><br><span class="line">&gt; 	&#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>排列树</p>
+<blockquote>
+<p>为什么叫排列树？答案的解是问题的解的排列。</p>
+<p>问题:</p>
+<p>批处理作业调度：给定n个作业的集合{$J_1,J_2, …, J_n$}. 每个作业必须先由机器1处理，然后由机器2处理。作业$J_i$需要机器j的处理时间为$t_{ji}$。要求对于给定的n个作业，制定最佳作业调度方案，使其完成时间和达到最小。</p>
+<p>例子：</p>
+<table>
+<thead>
+<tr>
+<th>$t_{j i}$</th>
+<th>j1</th>
+<th>j2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>i1</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>i2</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>i3</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<p>数据结构：</p>
+<p>存储: $M[i][j]$, 注意i表示第i个作业，j表示机器j</p>
+<p>注意这里有个问题就是j1上一个结束就可以执行下一个，而j2的话必须是上一个任务结束，下一个任务才能开始。所以数据结构</p>
+<p>f1: 当前任务结束时间</p>
+<p>f2*: f2[i] = max(f2[i-1], f1) + t2(i-1)</p>
+<p>? 这题是否有问题？感觉并不需要最终相加啊</p>
+<p>则由此可给出回溯法版的算法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&gt; inital M;</span><br><span class="line">&gt; bestf</span><br><span class="line">&gt; *f2</span><br><span class="line">&gt; f1</span><br><span class="line">&gt; f</span><br><span class="line">&gt; *x</span><br><span class="line">&gt; *bestx</span><br><span class="line">&gt; </span><br><span class="line">&gt; backtrack-wrapper()</span><br><span class="line">&gt; &#123;</span><br><span class="line">&gt; backtrack(1);</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt; backtrack(int t)&#123;</span><br><span class="line">&gt; 	if(t&gt;n) &#123; // 已经将事情安排完</span><br><span class="line">&gt; 		*bestx=*x</span><br><span class="line">&gt; 		bestf=f</span><br><span class="line">&gt; 		//</span><br><span class="line">&gt; 	&#125;</span><br><span class="line">&gt; 	else&#123;</span><br><span class="line">&gt; 		for(int j=t;j&lt;=n;j++)&#123;</span><br><span class="line">&gt; 			f1 += M[x[j]][1];</span><br><span class="line">&gt; 			f2[i] = Max(f2[i-1], f1)+M[x[j]][2];</span><br><span class="line">&gt; 			f += f2[i];</span><br><span class="line">&gt; 			if(f &lt; bestf)&#123;</span><br><span class="line">&gt; 				swap(x[t],x[i]);</span><br><span class="line">&gt; 				backtrack(t+1);</span><br><span class="line">&gt; 				swap(x[t],x[i]);</span><br><span class="line">&gt; 			&#125;</span><br><span class="line">&gt; 			f1 += M[x[j]][1];</span><br><span class="line">&gt; 			f2[i] = Max(f2[i-1], f1)+M[x[j]][2];</span><br><span class="line">&gt; 			f += f2[i];</span><br><span class="line">&gt; 		&#125;</span><br><span class="line">&gt; 	&#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+</blockquote>
+</li>
+</ul>
+<p>其他例子</p>
+<ul>
+<li>最大团问题</li>
+</ul>
+<blockquote>
+<p>感觉上进入右子树的时机给的很有问题。</p>
+</blockquote>
+<ul>
+<li>图的m着色问题</li>
+</ul>
+<blockquote>
+<p>教训就是要区分判定问题还是最优化问题</p>
+</blockquote>
+<h4 id="7）回溯法效率分析"><a href="#7）回溯法效率分析" class="headerlink" title="7）回溯法效率分析"></a>7）回溯法效率分析</h4><p>回溯法取决于以下因素：</p>
+<ul>
+<li>产生x[k]的时间</li>
+<li>满足显约束x[k]值的个数</li>
+<li>计算约束函数的时间</li>
+<li>计算上界函数的时间</li>
+<li>满足约束函数和上界函数约束的所有x[k]的个数</li>
+</ul>
+<blockquote>
+<p>由此可见，在选择约束函数式通常存在生成节点数与约束函数计算量之间的折中。</p>
+</blockquote>
+<h3 id="5-分支限界法"><a href="#5-分支限界法" class="headerlink" title="5. 分支限界法"></a>5. 分支限界法</h3><p>利用BFS框架</p>
+<p>试图去寻找问题的一个解或者最优解。</p>
+<blockquote>
+<p>在分支限界法中，每个活结点只有一次机会成为扩展节点。活节点一旦成为扩展节点，就一次性生成器所有儿子节点。在这些儿子节点中，导致不可行解或导致非最优解的儿子节点被舍弃，其余儿子节点加入活节点链表。</p>
+<p>感觉上有点像BestFS的框架的感觉，比较奇妙的以及感觉需要深入思考的就是这里怎么把一些兄弟节点给排除的。</p>
+<p>剪枝策略：在算法扩展节点中，一旦发现一个节点的下界不小于当前找到的最短路长，则算法剪去以该节点为根的子树。所以从某种意义上来说是等于还是在基于之前的信息进行剪枝。 所以这里的剪枝函数必然是某种与路径相关的变量。</p>
+</blockquote>
+<p>2）算法框架</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pq;</span><br><span class="line">cw;</span><br><span class="line">bestw;</span><br><span class="line"></span><br><span class="line">branchBound(s)  // 注意s可以是随机开始的一个点</span><br><span class="line">&#123;</span><br><span class="line">	pq Q;</span><br><span class="line">	Q.add(-1);</span><br><span class="line">	Ew=0;</span><br><span class="line">	bestw=0;</span><br><span class="line">	while(true) &#123;</span><br><span class="line">		for every w of v:</span><br><span class="line">			if(bound(w)) Q.add(w,..);//注意这里可以添加一些其他变量之类的东西。</span><br><span class="line">		// 注意这里可以做一些更新操作。</span><br><span class="line">		Q.delete(v);</span><br><span class="line">		if(v == -1) &#123;</span><br><span class="line">			if(Q.isEmpty) return bestw;</span><br><span class="line">			Q.add(-1);</span><br><span class="line">			Q.delete(Ew);</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3）算法直观感觉</p>
+<p>分支限界法常用来解离散最优解的问题。</p>
+<p>算法过程：首先，队列中有第一个元素。然后，对队列中选取的节点的子节点加入到队列中。按照优先级选取某个元素，凡是操作某个元素，对应的临时变量进行更新；当到达叶子节点时，说明开始取得某个最优值。所以此时考虑对队列中小于最优值的进行剪枝。</p>
+<p>一个问题就是对于离散树和排列树两种不同的情况应该如何考虑。</p>
+<ul>
+<li>单源最短路径</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Graph &#123;</span><br><span class="line">n; //顶点数</span><br><span class="line">*prev //前驱顶点数组</span><br><span class="line">**c  // 邻接矩阵</span><br><span class="line">*dist //最短距离数组</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MinHeapNode&#123;</span><br><span class="line">i; // 顶点编号</span><br><span class="line">length; //当前路长</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main()&#123;</span><br><span class="line">ShortestPath(s)</span><br><span class="line">// 找出s到其他所有顶点的最短路径。结果在*dist中。</span><br><span class="line">&#125;</span><br><span class="line">ShortestPath(int v)</span><br><span class="line">&#123;</span><br><span class="line">MinHeap&lt;&lt;MinHeapNode&gt;&gt; H(100);</span><br><span class="line">MinHeapNode E;</span><br><span class="line">E.i=v;</span><br><span class="line">E.length=0;</span><br><span class="line">dist[v]=0;</span><br><span class="line">while(true)&#123;</span><br><span class="line">for(int j=1; j&lt;=n;j++)&#123;</span><br><span class="line">	if(c[E.i][j]&lt;inf &amp;&amp; E.length+c[E.i][j]&lt;dist[j]) &#123;</span><br><span class="line">	// 第一个条件表示有边存在， 第二个情况表示比当前的dist[j]还要短</span><br><span class="line">		dist[j] = E.length+c[E.i][j];</span><br><span class="line">		prev[i]=E.i;</span><br><span class="line">		// 加入活节点列表</span><br><span class="line">		MinHeapNode N;</span><br><span class="line">		N.i =i;</span><br><span class="line">		N.length=dist[j]; // 注意这里的更新</span><br><span class="line">		H.Insert(N)</span><br><span class="line">	&#125;</span><br><span class="line">	try &#123;H.DeleteMin(E);&#125; // 这里蕴含了取下一个节点。</span><br><span class="line">	catch(OutOfBounds)&#123;break;&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分支限界法有种感觉就是利用层次遍历，首先取一个节点，然后找它的儿子节点。对每个儿子节点扩充，因为是队列，所以处理起来感觉像是并行处理。如果两个节点扩展到同一个节点，那么选取最优的节点，而删除非最优的节点。</p>
+<p>从某种意义上说，当源点的多条路遍历结果到达某个节点时，进行比对，选择最优的。</p>
+<p>而跟bestfs不同的是，bestfs比较是同时发生一下选定的，而分支限界法是异步发生，异步选定的。</p>
+</blockquote>
+<h3 id="6-随机化算法"><a href="#6-随机化算法" class="headerlink" title="6. 随机化算法"></a>6. 随机化算法</h3><blockquote>
+<p>随机化算法的特征是对所求解问题的同一个实例用同一随机化算法求解两次可能得到完全不同的效果。但是会在很大程度上降低时间复杂度。</p>
+<p>常见的随机化算法：</p>
+<ol>
+<li>数字随机化算法，常用于数值问题的求解</li>
+<li>蒙特卡洛算法，常用于求问题的精确解</li>
+<li>拉斯维加斯算法，不会得到不正确的解</li>
+<li>舍伍德算法，求解的算法总是正确的。</li>
+</ol>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
   </div>
 
   
@@ -3014,7 +2733,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
