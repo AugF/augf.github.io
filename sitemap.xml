@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://augf.github.io/2019/09/12/gnn-semi-paper-code-read/</loc>
+    
+    <lastmod>2019-10-14T02:27:18.006Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/09/11/gnn-semi-gnn-relization-progress/</loc>
+    
+    <lastmod>2019-10-14T02:27:09.070Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-paper-read/</loc>
+    
+    <lastmod>2019-10-14T02:25:21.723Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://augf.github.io/2019/09/16/algorithm-acwing-improve/</loc>
     
-    <lastmod>2019-10-13T03:05:47.289Z</lastmod>
+    <lastmod>2019-10-13T03:19:12.561Z</lastmod>
     
   </url>
   
@@ -47,13 +68,6 @@
     <loc>https://augf.github.io/2019/10/13/gnn-parallel-cnn-code-read/</loc>
     
     <lastmod>2019-10-13T02:07:17.039Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-paper-read/</loc>
-    
-    <lastmod>2019-10-11T03:37:11.863Z</lastmod>
     
   </url>
   
@@ -597,13 +611,6 @@
   </url>
   
   <url>
-    <loc>https://augf.github.io/2019/09/12/semi-paper-code-read/</loc>
-    
-    <lastmod>2019-09-12T13:08:13.918Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://augf.github.io/2019/09/12/numpy-study/</loc>
     
     <lastmod>2019-09-12T11:46:57.889Z</lastmod>
@@ -628,13 +635,6 @@
     <loc>https://augf.github.io/2019/09/12/blog-todo/</loc>
     
     <lastmod>2019-09-12T05:43:35.454Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/09/11/semi-gnn-relization-progress/</loc>
-    
-    <lastmod>2019-09-12T01:33:59.675Z</lastmod>
     
   </url>
   

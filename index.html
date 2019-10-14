@@ -390,7 +390,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-11 11:37:11" itemprop="dateModified" datetime="2019-10-11T11:37:11+08:00">2019-10-11</time>
+                <time title="修改时间：2019-10-14 10:25:21" itemprop="dateModified" datetime="2019-10-14T10:25:21+08:00">2019-10-14</time>
               </span>
             
           
@@ -498,10 +498,21 @@
 <p>one idea, 可以用不同的邻域，来结合多个相同模型！！！ 还有模型的组合</p>
 </blockquote>
 <p>单步domain预测，这实际上和所有是一样的<br>2. Sequence outputs with latent annotations<br>一般地，当中间不可用时，作为隐藏层，后向传播训练</p>
-<h2 id="5-应用"><a href="#5-应用" class="headerlink" title="5. 应用"></a>5. 应用</h2><p>这里我们简述了如何使用GGS-NNs. 我们主要集中在bAbI任务上。</p>
-<h3 id="5-1-bABI"><a href="#5-1-bABI" class="headerlink" title="5.1 bABI"></a>5.1 bABI</h3><p>bAbi任务是用来测试关于AI系统的可解释能力</p>
-<p>首先我们–symbolic选项将故事改写为关系和实体。<br>关系为边， 实体为节点。<br>所以整个故事就可以秒速为一个图。<br>问题会被描述为eval in the data.</p>
-<p>question type 问题类型， some argument. 他们可以被初始化为node annotations.</p>
+<h2 id="5-应用"><a href="#5-应用" class="headerlink" title="5. 应用"></a>5. 应用</h2><h3 id="5-1-bAbI任务"><a href="#5-1-bAbI任务" class="headerlink" title="5.1 bAbI任务"></a>5.1 bAbI任务</h3><p>这里我们简述了如何使用GGS-NNs. 我们主要集中在bAbI任务上。</p>
+<p>bAbI tasks是Facebook提出的一个AI任务集， 第一组发布的bAbI包括20个任务。若要查看这些任务的详细信息， 请移步<span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE1MDIuMDU2OTg=" title="https://arxiv.org/abs/1502.05698">bAbI tasks<i class="fa fa-external-link"></i></span>.  在bAbI数据集中，每一篇文本对应于一个故事。本文将每个故事映射成了一个简单的图（节点对应于实体，边对应于关系）。 每个问题(eval)由问题类型（类似于谓词，如”has_fear”)与一些参数（对应于图中一个或多个节点）构成。当任务具有多种问题类型时，需要对每种类型都训练一个独立的模型。在本文中，仅处理类型未二元一阶谓词的问题。</p>
+<p>例如，对于问题“eval E&gt;A true”, 那么问题的类型为”&gt;”, 图中的节点E将会被（初始化）标注为$x_E = [1, 0]^T$, 节点A将会被标注为$x_A=[0, 1]^T$, 其他节点将会被标注为$[0, 0]^T$</p>
+<h4 id="单输出任务"><a href="#单输出任务" class="headerlink" title="单输出任务"></a>单输出任务</h4><p>单输出任务实验基于bAbI的四个任务： Task4: Two Argument Relations(选用D=4)； Task15: Basic Deduction(D=5); Task16: Basic Induction(D=6); Task 18: Size Reasoning(D=3)</p>
+<blockquote>
+<p>D是什么？</p>
+</blockquote>
+<p>在bAbI任务集的四个任务上的实验结果为（括号内为使用的训练样本数，下同）</p>
+<p><img src="gnn-parallel-ggsnn-paper-read/bAbI_res.png" alt></p>
+<h4 id="序列输出任务"><a href="#序列输出任务" class="headerlink" title="序列输出任务"></a>序列输出任务</h4><p>序列输出任务基于bAbI Task19: Path Finding(D=6). 其实验结果如下：</p>
+<p><img src="gnn-parallel-ggsnn-paper-read/bAbI_res2.png" alt></p>
+<h3 id="5-2-程序验证问题-GGS-NNs"><a href="#5-2-程序验证问题-GGS-NNs" class="headerlink" title="5.2 程序验证问题 GGS-NNs"></a>5.2 程序验证问题 GGS-NNs</h3><p>在GGS-NNs的工作主要来自于实际program verification. 在automatic program verification中最关键的一步就是program invariants的推论， 它用来近似评估在一次execution中一些程序状态是否可达。 发现数据结构中的不变量是一个open problem. 在这里，C函数为例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">node* concat(node* a, node* b) &#123;</span><br><span class="line">    if (a==NULL)  return b;</span><br><span class="line">    node* cur=a;</span><br><span class="line">    while (cur.next != NULL)</span><br><span class="line">        cur = cur-&gt;next;</span><br><span class="line">    cur-&gt;next = b;</span><br><span class="line">    return a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了证明这个问题two lists a和b确实是concatnates连接的，所有指针取消引用都是合法的。我们需要characterize程序在每一次迭代的循环中的help。 在这里我们用了separation logic(分隔的逻辑符号)， 它使用inductive predicates归纳谓词来描述抽象数据结构。 举个例子， 一个分段的lsit定义为 </p>
 <h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><p>th test.lua to test all the modules in the ggnn and run libraries</p>
 <ol>
 <li>go into “babi/data”, run’bash get_10_fold_data.sh” to get 10 folds of bAbI data for 5 tasks (4, 15, 16, 18, 19) and do some preprocessing</li>
@@ -509,6 +520,8 @@
 <li>go back to ‘babi/‘ and use ‘run_experiments.py’ to run the GGNN/GGS-NN</li>
 <li>Use ‘run_rnn_baselines.py babi18 lstm’ runs LSTM on bAbI task 18 for all 10 folds of data</li>
 </ol>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yODE3MDE5Nw==" title="https://zhuanlan.zhihu.com/p/28170197">https://zhuanlan.zhihu.com/p/28170197<i class="fa fa-external-link"></i></span></p>
+<p>jianshu.com/p/40362662014a</p>
 
         
       
