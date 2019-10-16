@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-paper-read/</loc>
+    <lastmod>2019-10-16</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/10/14/tools-latex-MathJax/</loc>
+    <lastmod>2019-10-14</lastmod>
+  </url>  <url>
     <loc>https://augf.github.io/2019/09/12/gnn-semi-paper-code-read/</loc>
     <lastmod>2019-10-14</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/11/gnn-semi-gnn-relization-progress/</loc>
-    <lastmod>2019-10-14</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-paper-read/</loc>
     <lastmod>2019-10-14</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/16/algorithm-acwing-improve/</loc>

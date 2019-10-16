@@ -200,7 +200,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">69</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">70</span></a>
 
   </li>
       
@@ -213,7 +213,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">74</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">75</span></a>
 
   </li>
       
@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">94</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">95</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,192 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-dp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/algorithm-course-dp/" class="post-title-link" itemprop="url">algorithm course dp</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 08:56:21 / 修改时间：09:20:28" itemprop="dateCreated datePublished" datetime="2019-09-19T08:56:21+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h2><blockquote>
+<p>DP是一种思想，就是通过构建图的模型来解决。但是有一个问题就是任何问题都可以表示为合法的图结构（只要是合法的图结构），即实际问题为有向图，一定存在入度为0的点和出度为0的点。那么根据依赖，就可以通过入门级动态规划得到解决的。</p>
+</blockquote>
+<p>然后又想一个东西。问题可以分为哪几种类？</p>
+<ol>
+<li>离散空间上的点？还是其他？</li>
+<li>从某种意义上来说，还有其他东西吗？</li>
+</ol>
+<blockquote>
+<p>对吧？</p>
+<p>其实对应的就是图论上的最优路径的问题。 感觉上没错？</p>
+<p>又有人说动态规划就是图论上最优路的定义问题，感觉说的很没错了。</p>
+</blockquote>
+<p>如果把问题等效为图：其实在这里将问题等效为图，实际上每个节点对应的是图的状态，注意这里的状态空间而已，有的节点的状态不一定可以认为它是能行的。但这样一想又稍微有点过分，实际上它应该跟递归分治在一类。因为从表示和记录上，它是对原问题的最优解进行分解，在解的角度上进行建模而已。</p>
+<p>而回溯法和分支限界法才真正地从解空间入手，至少思想上是，具体是否是还得再思考。</p>
+<blockquote>
+<p>又一点想法：DP不过是问题可以分解为超级简单的图结构。</p>
+<p>DP理解其实可以有多个角度，只要某个角度理解明白也就明白了。</p>
+<p>首先，经典角度看成是解决非重复子问题。</p>
+<p>其次，本次课新的角度即看作是一个拓扑求解序列，从源头到尽头。a-&gt;b, 往往意味着的是a的解决依赖于b，所以这里就可以考虑深度优先遍历，确保是连通的。</p>
+<blockquote>
+<ol>
+<li>这里一个关键的考虑点就是BE边时，往往是需要汇聚当前的最优结果。</li>
+<li>对于CE边，当结果已经得到时，有一方便的数据结构可以存储，可以直接进行查看。</li>
+</ol>
+</blockquote>
+</blockquote>
+<p>？ DP能成功运行需要的条件是什么。</p>
+<p>最优子结构还是怎么的？</p>
+<p>理解是否图遍历问题？即根本不需要进行图遍历。</p>
+<p>图遍历的另一种感觉就是考虑上所有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">通用框架</span><br><span class="line"></span><br><span class="line">Fibonacci by DP</span><br><span class="line"></span><br><span class="line">fibDP(soln, k)</span><br><span class="line">	int fib, f1, f2</span><br><span class="line">	if (k&lt;2) fib = k;</span><br><span class="line">	else</span><br><span class="line">		if (member(soln,k-1)==false) //member即查询子问题是否求解</span><br><span class="line">			f1=fibDP(soln,k-1)</span><br><span class="line">		else f1=retrieve(soln,k-1)</span><br><span class="line">		if (member(soln,k-2)==false)</span><br><span class="line">			f2=fibDP(soln,k-2)</span><br><span class="line">		else f2=retrieve(soln,k-2)</span><br><span class="line">	store(soln,k,fib)</span><br><span class="line">	return fib</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解题三个步骤：</p>
+<ol>
+<li>整体思路</li>
+<li>算法设计</li>
+<li>时空分析及正确性证明</li>
+<li>改进建议</li>
+</ol>
+</blockquote>
+<h3 id="1-Matrix-Multiplication"><a href="#1-Matrix-Multiplication" class="headerlink" title="1. Matrix Multiplication"></a>1. Matrix Multiplication</h3><h4 id="v1-递归版本"><a href="#v1-递归版本" class="headerlink" title="v1. 递归版本"></a>v1. 递归版本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mmTry1(dim, len, seq)</span><br><span class="line">	if len&lt;3 bestCost=0</span><br><span class="line">	else</span><br><span class="line">		bestCost=\infity</span><br><span class="line">		for (i=1; i&lt;=len-1; i++)</span><br><span class="line">			c=cost of muitiplication at position seq[i]</span><br><span class="line">			newSeq=seq with ith elemnt deleted;</span><br><span class="line">			b=mmTry1(dim, len-1, newSeq)</span><br><span class="line">			bestCost=min(bestCost, b+c)</span><br><span class="line">	return bestCost</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度： T(n) = (n-1)T(n-1)+n.  $O((n-1)!)$</p>
+<p>问题求解结构就是一棵树的结构。</p>
+<p>不是很清晰？</p>
+<h4 id="v2-递归与分治"><a href="#v2-递归与分治" class="headerlink" title="v2. 递归与分治"></a>v2. 递归与分治</h4><p>看子问题的求解方式，也可以知道递归与分治版本是没有动态规划强的。</p>
+<blockquote>
+<p>表面上看还是子问题的规模问题</p>
+</blockquote>
+<p>Improved Recursion</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mmTry2(dim, low, high)</span><br><span class="line">	if(higt-low==1) bestCost=0</span><br><span class="line">	else</span><br><span class="line">		bestCost=\infity</span><br><span class="line">		for(k=low+1;k&lt;=high-1;k++)</span><br><span class="line">			a=mmTry2(dim, low, k);</span><br><span class="line">			b=mmTry2(dim, k, high);</span><br><span class="line">			c=cost of multiplication at position k;</span><br><span class="line">			bestCost=min(bestCost, a+b+c)</span><br><span class="line">	return bestCost</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度： T(n) $\geq$ 2T(n-1) + O(n). $\Omega(2^n)$</p>
+<h4 id="v3-入门级DP"><a href="#v3-入门级DP" class="headerlink" title="v3. 入门级DP"></a>v3. 入门级DP</h4><p>用二维空间存储，子问题解。</p>
+<p>store(cost, low, high, bestCost)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mmTry2DP(dim, low, high, cost)</span><br><span class="line">	bestCost=0</span><br><span class="line">	for(k=low+1;k&lt;= high-1;k++)</span><br><span class="line">		if (member(low,k)==false)</span><br><span class="line">			a=mmTry2(dim,low,k)</span><br><span class="line">		else a=retrieve(cost,low,k)</span><br><span class="line">		if (member(k,high)==false)</span><br><span class="line">			a=mmTry2(dim,k,high)</span><br><span class="line">		else b=retrieve(cost,k,high)</span><br><span class="line">		c=cost of multiplication at position k;</span><br><span class="line">		bestCost=min(bestCost, a+b+c)</span><br><span class="line">	store(cost,low,high,bestCost)</span><br><span class="line">	return bestCost</span><br></pre></td></tr></table></figure>
+
+<h4 id="v4-高级DP"><a href="#v4-高级DP" class="headerlink" title="v4. 高级DP"></a>v4. 高级DP</h4><blockquote>
+<p>为什么这个好？不需要编译器进行调度</p>
+<p>不管写法是否循环，都是用子问题的解去拼大问题的解。</p>
+<p>循环：人为规定子问题的求解顺序。</p>
+<p>递归：编译器决定递归的子问题求解顺序。</p>
+<p>Tips: 二维循环找调度，一维循环找最优</p>
+</blockquote>
+<p>DP求解方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Steps for applying DP:</span><br><span class="line"></span><br><span class="line">1.Define subproblems: # of subproblems</span><br><span class="line">2.Set the goal</span><br><span class="line">3.Define the recurrence</span><br><span class="line">	- larger subproblem &lt;- # smaller subproblems</span><br><span class="line">	- init. conditions</span><br><span class="line">4.Write pseudo-code</span><br><span class="line">	fill table in some order</span><br><span class="line">5.Analyze the time complexity</span><br><span class="line">6.Extract the optimal solution(optionally)</span><br></pre></td></tr></table></figure>
+
+<p>Common subproblems in DP</p>
+<ul>
+<li><p>1D subproblems</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: x_1, x_2, ...,x_n (array, sequence, string)</span><br><span class="line">Subproblems: x_1, x_2, ..., x_i (prefix/suffix)</span><br><span class="line">#: O(n)</span><br><span class="line">Examples: Maximum-sum subarray, Longest increasing subsequence, Text justification</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2D subproblems</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">--Class 1</span><br><span class="line">Input: x_1, x_2, ...,x_m; y_1, y2, ...,y_n</span><br><span class="line">Subproblems: x_1,x_2,...,x_i; y_1,y_2,...,y_i</span><br><span class="line">#: O(mn)</span><br><span class="line">Examples: Edit distance, Longest common subsequence</span><br><span class="line"></span><br><span class="line">--Class 2*</span><br><span class="line">Input:x_1, x_2, ...,x_n</span><br><span class="line">Subproblems:x_i,...,x_j</span><br><span class="line">#: O(n^2)</span><br><span class="line">Examples: Matrix chain multiplication, Optimal BST</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3D subproblems</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Floyd-Warshall algorithm</span><br><span class="line">	d(i,j,k)=min(d(i,j,k-1), d(i,k,k-1)+d(k,j,k-1))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DP on graphs</p>
+<ul>
+<li><p>On rooted tree</p>
+<p>Subproblems:  rooted subtrees</p>
+</li>
+<li><p>On DAG</p>
+<p>Subproblems: nodes after/before in the topo. order</p>
+</li>
+</ul>
+</li>
+<li><p>Knaspack problem</p>
+<p>Subset sum problem, Change-making problem</p>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -4227,413 +4413,6 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/18/TOEFL-listening/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/18/TOEFL-listening/" class="post-title-link" itemprop="url">TOEFL listening</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-18 19:43:45" itemprop="dateCreated datePublished" datetime="2019-09-18T19:43:45+08:00">2019-09-18</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-01 10:04:24" itemprop="dateModified" datetime="2019-10-01T10:04:24+08:00">2019-10-01</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/" itemprop="url" rel="index"><span itemprop="name">english</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/TOEFL/" itemprop="url" rel="index"><span itemprop="name">TOEFL</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/english/TOEFL/listening/" itemprop="url" rel="index"><span itemprop="name">listening</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>书籍推荐： 林强新托福听力真经之TPO超详解析</p>
-<h2 id="1-1-考试"><a href="#1-1-考试" class="headerlink" title="1.1 考试"></a>1.1 考试</h2><ol>
-<li><p>题型<br>30： 1 conversation + 2 lecturers<br>2*30<br>英语加试 1+2</p>
-</li>
-<li><p>时间<br>20 mins听力+10 mins做题(5+6+6=17)</p>
-<blockquote>
-<p>30s 一题, 计时！</p>
-</blockquote>
-</li>
-<li><p>具体的题<br>要点: </p>
-</li>
-</ol>
-<ul>
-<li>名词专业化，学术化 stack 书架</li>
-<li>一词多义</li>
-</ul>
-<p>5 mins 文章<br>题未知！！<br>答题，next，题不可逆！！</p>
-<ol start="4">
-<li>内容</li>
-</ol>
-<ul>
-<li><p>对话</p>
-<ul>
-<li>office hours 多 老师！</li>
-<li>service encounters 遭遇 多</li>
-<li>students interaction 0.1比例 !!!<blockquote>
-<p>女尊男悲， ！女</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>讲座</p>
-<ul>
-<li>独白，互动，问答出题</li>
-<li>kinds<ul>
-<li>Arts</li>
-<li>Life Science<blockquote>
-<p>动物</p>
-</blockquote>
-</li>
-<li>Physical Science 自然科学！</li>
-<li>Social Science</li>
-</ul>
-</li>
-<li>main domins<ul>
-<li>Mosaics 马赛克，镶嵌</li>
-<li>Ceramics陶瓷</li>
-<li>Physioloy of sensory organs 感知器官生命机能</li>
-<li>Food foraging 觅食</li>
-<li>Astronomy and cosmology 天文学，物理学</li>
-<li>Particle physics 粒子物理</li>
-<li>Seismology 地震学</li>
-<li>Optics 光学</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>考试题型</p>
-</li>
-</ul>
-<ol>
-<li>Basic comprehension<ul>
-<li>Gist question 主旨题</li>
-<li>Detail</li>
-</ul>
-</li>
-<li>Pragmatic understanding<ul>
-<li>Purpose !<blockquote>
-<p>不要过度推断 tpo27, 直接！！ </p>
-</blockquote>
-</li>
-<li>Attitude</li>
-</ul>
-</li>
-<li>Connecting information<ul>
-<li>Organization !<blockquote>
-<p>不要过度推断，记住细节问体现了什么，落实到组织上</p>
-</blockquote>
-</li>
-<li>Inference</li>
-</ul>
-</li>
-</ol>
-<p>做题原则！！</p>
-<h2 id="1-2-23分以上"><a href="#1-2-23分以上" class="headerlink" title="1.2 23分以上"></a>1.2 23分以上</h2><ol>
-<li>六大误区：</li>
-</ol>
-<ul>
-<li>词汇量大，分就高</li>
-<li>tpo刷2次</li>
-<li>真实题难</li>
-<li>笔记</li>
-<li>走神</li>
-<li>多练难</li>
-</ul>
-<ol start="2">
-<li>词汇<br>5000 80+<br>6500 90+<br>8000 100+<br>13000 110+</li>
-</ol>
-<p>0.7 基础<br>0.2 专业<br>0.1 超托福, 放弃！</p>
-<p>基础词汇1s反映不过来，不合格，听不准</p>
-<p>语速 190~210<br>单词反映力</p>
-<ol>
-<li>revolvtion? 天文学? v. 中乱</li>
-<li>deceive 欺骗</li>
-<li>not seriously? 未必，否定</li>
-<li>incoperate 吸收，纳入,合作</li>
-<li>suite  ! sw:t  套房，套件</li>
-</ol>
-<p>怎么背?</p>
-<ol>
-<li>重复！多次</li>
-<li>时差, 练抢答<blockquote>
-<p>记录?</p>
-</blockquote>
-</li>
-<li>音差, 跟读</li>
-</ol>
-<blockquote>
-<p>出声，快速抢答; 早晚40min<br>tpo提高的手段<br>每道题做到很好, 难度没有绝对之分</p>
-</blockquote>
-<p>tpo哪三个学科出现频率最高？</p>
-<blockquote>
-<p>生物，艺术，天文宇宙</p>
-</blockquote>
-<p>背书的专业词汇</p>
-<p>记笔记</p>
-<blockquote>
-<p>听，优先值是是否听懂!</p>
-</blockquote>
-<p>2h录音，分开，一次不超过40min</p>
-<h2 id="1-3-听力推荐"><a href="#1-3-听力推荐" class="headerlink" title="1.3 听力推荐"></a>1.3 听力推荐</h2><ol>
-<li>Step by Step 3000: 2或4<blockquote>
-<p>题材多，题型多，口音多； 细节把握</p>
-</blockquote>
-</li>
-<li>Listen to this 经典 !!!<blockquote>
-<p>题材多，题型多，练英音 </p>
-</blockquote>
-</li>
-<li>新概念2（语法）， 3（词汇）<blockquote>
-<p>方便自学</p>
-</blockquote>
-</li>
-<li>空中英语教室，中级别 泛听   </li>
-</ol>
-<p>听写吗?</p>
-<blockquote>
-<p>只注意局部，而忘记了整体<br>没有用！</p>
-</blockquote>
-<p>为什么第一遍听不懂，第二遍可以？</p>
-<blockquote>
-<p>精听不够，没办法梳理大意</p>
-</blockquote>
-<p>tpo听力词汇，词频词汇！</p>
-<blockquote>
-<p>精准备考</p>
-</blockquote>
-<p>语法不好怎么办？</p>
-<blockquote>
-<p>无敌英语高中语法 1<del>63, 1</del>128</p>
-</blockquote>
-<p>校园生活</p>
-<blockquote>
-<p>That’s why I chose Yale? !<br><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj10R24zLVJXOEFqaw==" title="https://www.youtube.com/watch?v=tGn3-RW8Ajk">https://www.youtube.com/watch?v=tGn3-RW8Ajk<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-<ul>
-<li>debate： a serious discussion of a subject in which many people take part<blockquote>
-<p>Education is the current focus of public debate.</p>
-</blockquote>
-</li>
-<li>matriculate: to be formally admited to study at a university or college<blockquote>
-<p>where to matriculate</p>
-</blockquote>
-</li>
-<li>hail  <ul>
-<li>v. (formal) to call someone in order to attract their attention<blockquote>
-<p>shall we hail a taxi</p>
-</blockquote>
-</li>
-<li>n. small, hard balls of ice that fall from the sky like rain.<blockquote>
-<p>a hail of bullets</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>quintessential: being the most typical example or most important part of something.<blockquote>
-<p>Sheep’s milk  cheese is the quintessential Corsican cheese.</p>
-</blockquote>
-</li>
-<li>residential   reside<ol>
-<li>a residential road, area. has only private houses, not ofices and factories.</li>
-<li>a residential job, position,course, etc, is one for which you live at the same place where you work or study</li>
-<li>relating to where you live or have lived.<blockquote>
-<p>It was not safe to locate the chemicals factory in a residential area.</p>
-</blockquote>
-</li>
-</ol>
-</li>
-<li>liberal  ~ arts 文科<ol>
-<li>society: respecting and allowing many different types or beliefs or behaviour<blockquote>
-<p>a liberal society.</p>
-</blockquote>
-</li>
-<li>politics: believing in or allowing more personal freedom and deveplopment  towards a fairer sharing of wealth and power within society</li>
-<li>generous: giving or given in generous way</li>
-<li>not exact: without attention to or interest in detail</li>
-</ol>
-</li>
-<li>thrive: to grow, to develop, or be successful 好的，成长的趋势<blockquote>
-<p>she seems to thrive on stress</p>
-</blockquote>
-</li>
-<li>thread<ul>
-<li>fibre:  (a length of )a very thin fibre线<blockquote>
-<p>losse threads</p>
-</blockquote>
-</li>
-<li>connection: main thinking way</li>
-<li>v. put something long and thin such as string or through a narraow ole or into a small space<br>  穿线， 除毛</li>
-</ul>
-</li>
-<li>Shakespeare Studies and Pre-Med   </li>
-<li>common  ground 共同点</li>
-<li>grill: 烤架，烧烤店</li>
-<li>fill: v. 填充，充满; n. 需要的量</li>
-<li>buttery: n. 饮食店; 涂了黄油的土豆</li>
-<li>right down to: 就连…也包括在内</li>
-<li>work out: 锻炼身体</li>
-<li>below: 在较低处，在什么之下，小于</li>
-<li>rehearsal: 排练，彩排</li>
-<li>hone: 使…变锋利；磨炼  hone the skill</li>
-<li>chill: to become cold 冷却，使变冷</li>
-<li>dorms 宿舍</li>
-<li>suite 套房</li>
-<li>sheets 床单</li>
-<li>couch 沙发，以某种方式表达</li>
-<li>lava熔岩 lamp灯</li>
-<li>awhile=for a short time. <blockquote>
-<p>stay awhile</p>
-</blockquote>
-</li>
-<li>master<ul>
-<li>n. 主人; 船长; 大师; 杰出画家; 男中学教师; 少爷： 原版</li>
-<li>v. 精通，掌握</li>
-<li>a. 技术娴熟的</li>
-</ul>
-</li>
-<li>dean<ul>
-<li>n. 系主任；元老；牧师</li>
-</ul>
-</li>
-<li>suffice足够 to be enough</li>
-<li>Broadway （纽约）百老汇剧场，音乐剧</li>
-<li>subsidize: to pay part of the cost of something</li>
-<li>harmonize: 为什么配和声，使协调</li>
-<li>cheer for 欢呼，喝彩；鼓舞，振奋</li>
-<li>prevail v. 占优势，流行，盛行<blockquote>
-<p>7.09</p>
-</blockquote>
-</li>
-</ul>
-<p>天文学</p>
-<blockquote>
-<p>Journey to the Edge of the Universe, 2遍 !<br><span class="exturl" data-url="aHR0cHM6Ly93d3cudm9pY2V0dWJlLmNvbS92aWRlb3MvMTc5MzE=" title="https://www.voicetube.com/videos/17931">https://www.voicetube.com/videos/17931<i class="fa fa-external-link"></i></span><br>多做TPO, 关键在细抠</p>
-</blockquote>
-<h2 id="2-1-精听"><a href="#2-1-精听" class="headerlink" title="2.1 精听"></a>2.1 精听</h2><ol>
-<li>听+做题</li>
-<li>努力听清，逐句，保留不会的地方</li>
-<li>对照文本，搞懂一切</li>
-<li>复听</li>
-<li>对照文本，看忙去</li>
-<li>听读训练</li>
-</ol>
-<p>注意！ 3天之后请复听！</p>
-<blockquote>
-<p>it’ mounthful:  something is hard to explain. TPO!!!</p>
-</blockquote>
-<p>注意不要忽略简单的俗语，要真正弄懂一句话<br>TPO23 C2:<br>And my students. they bring so much insight to the table that it’s easy to forget who the professor is.</p>
-<blockquote>
-<p>注意这里table是引申为上课的教室的意思</p>
-</blockquote>
-<p>能看懂却不能有画面感的句子！！</p>
-<p>lec1:  2.5h~3h.<br>200h足够</p>
-<h2 id="2-2-语音现象"><a href="#2-2-语音现象" class="headerlink" title="2.2 语音现象"></a>2.2 语音现象</h2><p>it so produce offers again?</p>
-<ol>
-<li>but sometimes the produce we offer is organically grown.<blockquote>
-<p>produce ? organically grown?<br>produce, n. stress pronuncation, 农产品<br>记单词时要认真地记住各种常见单词的含义</p>
-</blockquote>
-</li>
-</ol>
-<p>content, 由发音 去记单词</p>
-<p>todo: 变词音，变词性，变词义的单词</p>
-<p>lecture by next summer<br>2. Ok, I’m going to begin this lecture by giving you your next assignment. </p>
-<blockquote>
-<p>by giving ????   从单词的具体的音去反应，从句子的结构去反应<br>giving you your 反应不过来<br>! p + k + 元 = b/d/g   因为有元音，所以需要把气息给收住</p>
-</blockquote>
-<p>it’s my issue to see esos  i think<br>3. It’s meant to show a sense of isolation I think.</p>
-<blockquote>
-<p>语速, 看句子， meant ?<br>a sense of 辅元音连读未听出来<br>of 弱化， 弱化的本质实际上就是嘴型变小<br>美音和英音， 美音meant !!!!</p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -4686,7 +4465,7 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -4699,7 +4478,7 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-count">75</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -4712,7 +4491,7 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">70</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
