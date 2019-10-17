@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">95</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">96</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,181 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-greedy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/algorithm-acwing-greedy/" class="post-title-link" itemprop="url">algorithm acwing greedy</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:13:13 / 修改时间：12:14:10" itemprop="dateCreated datePublished" datetime="2019-09-19T12:13:13+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/greedy/" itemprop="url" rel="index"><span itemprop="name">greedy</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h1><p>无套路而言，最难的是证明其正确性</p>
+<p>试下还是有套路的<br>一般来说，举例看是否能证明正确性</p>
+<p>一般区间问题，先排序</p>
+<ol>
+<li>按区间左右端点排序，或者双关键字排序</li>
+</ol>
+<h2 id="区间选点"><a href="#区间选点" class="headerlink" title="区间选点"></a>区间选点</h2><blockquote>
+<p>数轴选最少的点覆盖所有的区间</p>
+</blockquote>
+<ol>
+<li>将每个区间按右端点从小到大排序</li>
+<li>从前往后依次枚举每一个区间<br>如果当前区间已经包含点，则直接pass<br>否则，选择当前区间的右端点</li>
+</ol>
+<p>A=B A&lt;=B A&gt;=B</p>
+<p>Ans问题的最优解  ans实际问题的解<br>最小值</p>
+<p>Ans &lt;= cnt</p>
+<blockquote>
+<p>cnt是一种可行方案，而Ans是所有可行方案中最小的。 显然!<br>Ans &gt;= cnt<br>找到了cnt相互没有交集的区间，每选一个点最多覆盖一个区间。所有可行解必定大于cnt<br>关键证明，算法得到的是最基本的情况！！！</p>
+</blockquote>
+<h2 id="最大不相交区间数量"><a href="#最大不相交区间数量" class="headerlink" title="最大不相交区间数量"></a>最大不相交区间数量</h2><p>贪心策略： 按右端点选取<br>最大值</p>
+<p>Ans &gt;= cnt: 证明cnt是可行方案，<br>Ans &lt;= cnt:<br>假设Ans&gt;cnt, 反证法</p>
+<p>Ans选择出的是两两没有交集的区间，那一定被第一题的解给覆盖，所以Ans应该&lt;=cnt的. 所以矛盾</p>
+<blockquote>
+<p>考虑问题的转化，记住简单问题证明的模板，把其他复杂的问题转化成原本的问题</p>
+</blockquote>
+<h2 id="区间选组"><a href="#区间选组" class="headerlink" title="区间选组"></a>区间选组</h2><p>贪心：左端点</p>
+<ol>
+<li>将所有区间按左端点从小到大排序</li>
+<li>从前往后处理每个区间<br> 判断能否将其放到某个现有的组中 如果L[i]&lt;= min{r},则不能加入，于是建立新组；否则加入并更新</li>
+</ol>
+<p>考虑数据结构: </p>
+<p>问题： 最小组数<br>证明：</p>
+<ol>
+<li>Ans &lt;= cnt<br>cnt是可行解, 每个组内都没有交集</li>
+<li>Ans &gt;= cnt<br>当与任何一个区间都没有交集</li>
+</ol>
+<p>cnt-1  Max_r &gt;= Li.  因为是按L排序，所以Li&gt;=L0~i-1</p>
+<p>意味着整个cnt组都有公共点，所以对这些基本的组来说，问题的解至少得花cnt, 因此Ans&gt;=cnt</p>
+<blockquote>
+<p>练习题<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aW5nLmNvbS9wcm9ibGVtL2NvbnRlbnQvMTEzLw==" title="https://www.acwing.com/problem/content/113/">https://www.acwing.com/problem/content/113/<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<blockquote>
+<p>左端点相交的最大个数，右端点不相交的最大个数<br>再练习一遍</p>
+</blockquote>
+<h2 id="区间覆盖"><a href="#区间覆盖" class="headerlink" title="区间覆盖"></a>区间覆盖</h2><p>用最少的区间将给定区间排序</p>
+<p>贪心：将左端点从小到大排序</p>
+<ol>
+<li>将所有区间从左端点从小到大排序</li>
+<li>从前往后依次枚举每个区间，在所有能覆盖start的区间中，选择一个右端点最大的区间; 此时更新新的start点</li>
+</ol>
+<p>Ans&lt;=cnt: 假设有解, 因为我们每次选择区间都是没有空隙的，所以一定能找到方案成为可行解。因此成立</p>
+<p>Ans&gt;=cnt:</p>
+<p>反证法，假设Ans &lt; cnt</p>
+<p>假设不一样，那么第一个不同的区间，Ans取得的右端点的值小于cnt取得的区间的右端点的值; 那么Ans选择的下一个区间一定与当前区间覆盖。即最优解中选出的区间一定能够替换成算法的区间。而且总的Ans数不会变，而且可能Ans大于cnt。</p>
+<p>任何一个最优解都可以通过等价变化得到算法的解，而且每次的变换都不会增加区间的数量，所以算法最终得到的cnt数量一定和Ans相等</p>
+<h2 id="合并果子"><a href="#合并果子" class="headerlink" title="合并果子"></a>合并果子</h2><p>叶节点被算的次数 = 层数<br>如何合理的安排使得最终的权值最小？<br>每次贪心地选择两个最小的数进行合并</p>
+<ol>
+<li>最小的两个点一定深度最深，且可以互为兄弟。<blockquote>
+<p>如果有多个兄弟可以互相交换，并不影响结果；意味着第一步选择两个最小的元素是对的！</p>
+</blockquote>
+</li>
+</ol>
+<p>如何证明？<br>交换任意两个节点，一定会使结果变大。所以当前策略采取的一定是最优的</p>
+<ol start="2">
+<li>n个点是最优解，如何证明n-1的最优解是n的最优解<br>f(n)=f(n-1)+a+b<blockquote>
+<p>因为第一次一定选a,b两个点，所以代价必然是这个<br>目标是求f(n)的最小值<br>因为所有的方案都是合并a和b,所以这里f(n)就等价于f(n-1)<br>因此，数学归纳法就成立</p>
+</blockquote>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -3343,196 +3518,6 @@ map(key, ts) // ts为一个测试样本
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture5-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture5-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture5-summary</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:54:53 / 修改时间：09:55:49" itemprop="dateCreated datePublished" datetime="2019-09-19T09:54:53+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>总结</p>
-<h1 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h1><p>按输入输出的类型分为三种：控制台、文件、字符串（局部的内存区域）</p>
-<ol>
-<li>控制台</li>
-</ol>
-<ul>
-<li>C<ul>
-<li>输出<blockquote>
-<p>putchar(), puts(), printf()  %d,c,u,f</p>
-</blockquote>
-</li>
-<li>输入<blockquote>
-<p>getchar(), gets(), scanf()</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>C++<br>cin,  cout, cerr直接, clog<br>iomanip:   setw()?   setiosflags(scientific, flags) setprecision<br>cout.write();<br>cin.get(), cin.read();<br>cin.fail()  // 是否输入成功，0表示成功<blockquote>
-<p>一般地，对输出不需要判断文件结束，输入需要判断文件结束</p>
-</blockquote>
-</li>
-<li>操作符的重载： 继承的问题， display()</li>
-</ul>
-<ol start="2">
-<li>文件<br>永久保存数据的设备<br>文本(字符串)，二进制文件(机器表示) </li>
-</ol>
-<ul>
-<li>C<ul>
-<li>输出<br>fopen(), fputc(), fputs(), fprintf(),size_t fwrite(sizeof()) //字节，二进制, fclose()<blockquote>
-<p>目录问题，路径写法。  打开方式: w创建,清除,  a尾  b; 不同操作系统，windows \n-&gt;\t\n</p>
-</blockquote>
-</li>
-<li>输入<br>fopen() NULL失败，<blockquote>
-<p>r, b,  fgetc(), fgets(), fscanf(), fread(sizeof()). feof()判断是否到的文件的末尾</p>
-</blockquote>
-</li>
-<li>r+, w+, a+,  b</li>
-<li>fseek(), ftell, cur,end,set</li>
-</ul>
-</li>
-<li>C++<br>输出<br>out_file(), open, write, &lt;&lt;<br>输入<br>in_file(),read,  eof</li>
-</ul>
-<ol start="3">
-<li><p>字符串<br>char buf[100];<br>ostrstream str_buf(buf,100);</p>
-</li>
-<li><p>其他<br>traits</p>
-</li>
-</ol>
-<blockquote>
-<p>思考，为什么独独设置了这三类？</p>
-</blockquote>
-<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>所谓异常，其实就是程序过程中出现的bug。其实主要可以分为以下几种。</p>
-<ol>
-<li>语法错误， 编译器会解决</li>
-<li>逻辑错误，很关键，要学会排错</li>
-</ol>
-<ul>
-<li>不能运行，实现的逻辑有问题</li>
-<li>能运行，有问题<ul>
-<li>输出错误<ul>
-<li>程序逻辑错误</li>
-<li>有的函数的输入输出没有检查</li>
-</ul>
-</li>
-<li>编译出错<ul>
-<li>平台相关</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ol start="3">
-<li>运行异常<ul>
-<li>程序对运行环境考虑不周<blockquote>
-<p>这里很重要，务必注意程序的环境</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ol>
-<p>鲁棒性，就是能应对足够多的异常。</p>
-<p>处理异常的方法：<br>直接，当地抛出异常，即exit();<br>最大的问题可能就是当程序特别大的时候，程序员不知道什么地方出错了。</p>
-<p>异地处理：参数值，新建参数值，全局变量，这些都不好。</p>
-<p>推出抽象化，实际上也是通过全局变量来做的，不过交给了底层。上层可以用最简单的语句进行实现。</p>
-<p>try{<br>    检测语句；<br>}catch(类型 变量)</p>
-<p>throw{}<br>一旦进行检测必然抛出，很优秀。<br>而且只抛出子层的，向上处理。没有就控制台。</p>
-<p>上面是无法避免的可能出现的运行异常的处理。</p>
-<p>只要不可控都要进行上面的处理。</p>
-<p>下面聊到代码调试，如何测试bug</p>
-<p>一般的怎么做就分析输出语句呗，看输出语句是否正确。<br>一种抽象assert();<br>易于定义位置。<br>以及可以一键清除。</p>
-<p>```<br>#define NDEBUG<br>#include<cassert><br>`</cassert></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -3585,7 +3570,7 @@ map(key, ts) // ts为一个测试样本
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">96</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
