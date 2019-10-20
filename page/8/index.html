@@ -4329,7 +4329,7 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-16 17:24:38" itemprop="dateModified" datetime="2019-10-16T17:24:38+08:00">2019-10-16</time>
+                <time title="修改时间：2019-10-20 17:25:35" itemprop="dateModified" datetime="2019-10-20T17:25:35+08:00">2019-10-20</time>
               </span>
             
           
@@ -4466,7 +4466,7 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
 </ul>
 </li>
 </ol>
-<h3 id="2-2-最长上升子序列问题"><a href="#2-2-最长上升子序列问题" class="headerlink" title="2.2 最长上升子序列问题"></a>2.2 最长上升子序列问题</h3><p>LIS(longest increase subsequence)<br>    1017<br>        1014，482<br>    1012<br>    1016<br>    1010(+贪心)<br>        187(+dfs)<br>    272(LCS)</p>
+<h3 id="2-2-最长上升子序列问题"><a href="#2-2-最长上升子序列问题" class="headerlink" title="2.2 最长上升子序列问题"></a>2.2 最长上升子序列问题</h3><p>LIS(longest increase subsequence)<br>    1017 怪盗基德<br>        1014 登山，482 合唱队形<br>    1012 友好城市<br>    1016 最大上升子序列<br>    1010(+贪心) 拦截导弹<br>        187(+dfs) 导弹防御系统<br>    272(LCS) 最长公共上升子序列</p>
 <h4 id="2-2-1-basic"><a href="#2-2-1-basic" class="headerlink" title="2.2.1 basic"></a>2.2.1 basic</h4><p>895: 最长上升子序列问题</p>
 <ul>
 <li>状态表示f[i]<ul>
@@ -4485,8 +4485,79 @@ dismiss 解散，不屑一顾  construction 构造， 主观解释  susceptible 
 <blockquote>
 <p>LLS实际上可以从n^2转化为nlogn, 实际与后面的一步的转化。 优化？</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int N = 110;</span><br><span class="line"></span><br><span class="line">int n;</span><br><span class="line">int a[N], f[N];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int T;</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;T);</span><br><span class="line">    while(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(&quot;%d&quot;, &amp;n);</span><br><span class="line">        for (int i = 1; i &lt;= n; i ++) scanf(&quot;%d&quot;, &amp;a[i]);</span><br><span class="line"></span><br><span class="line">        // 正向求解LTS问题</span><br><span class="line">        int res = 0;</span><br><span class="line">        for (int i = 1; i &lt;= n; i ++) </span><br><span class="line">        &#123;</span><br><span class="line">            f[i] = 1;</span><br><span class="line">            for (int j = 1; j &lt; i; j ++) </span><br><span class="line">                if (a[i] &gt; a[j])</span><br><span class="line">                    f[i] = max(f[i], f[j] + 1);</span><br><span class="line">            res = max(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 反向求解LTS问题</span><br><span class="line">        for (int i = n; i; i --)</span><br><span class="line">        &#123;</span><br><span class="line">            f[i] = 1;</span><br><span class="line">            for (int j = n; j &gt; i; j --)</span><br><span class="line">                if (a[i] &gt; a[j])</span><br><span class="line">                    f[i] = max(f[i], f[j] + 1);</span><br><span class="line">            res = max(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        printf(&quot;%d\n&quot;, res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>272： 最长上升公共子序列<br>f[i,j]</p>
+<ul>
+<li>集合： 所有由第一个序列的前i个字母，第二个序列的前j个字母, 且以b[j]结尾的构成的公共子序列，Max<blockquote>
+<p>注意这里要加条件</p>
+</blockquote>
+</li>
+<li>状态计算： <ol>
+<li>所有包含a[i]的公共上升子序列 a[i]==b[j]<blockquote>
+<p>按照倒数第2类划分， 序列倒数第1个数时null, b[1], b[2], .., b[j-1]<br>进行枚举  f[i,k] + 1 因为b[j]大于，所以实际上就是</p>
+</blockquote>
+</li>
+<li>所有不包含a[i]的公共上升子序列 f[i-1, j]</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-背包问题：-背包九讲"><a href="#3-背包问题：-背包九讲" class="headerlink" title="3. 背包问题： 背包九讲"></a>3. 背包问题： 背包九讲</h2><h3 id="3-1-basic"><a href="#3-1-basic" class="headerlink" title="3.1 basic"></a>3.1 basic</h3><p>01背包<br>    完全背包<br>        多重背包I<br>            多重背包问题II + 二进制<br>            多重背包问题III + 单调队列（滑动窗口求最值）<br>        混合背包<br>    分组背包<br>        有依赖背包 + 树形DP<br>    二维费用的背包问题<br>    求具体方案<br>    求方案数</p>
+<p>简单回顾</p>
+<p>线性DP<br>序列DP: 包含选出来的一些数，相邻的数之间有一些关系</p>
+<p>背包问题: 序列问题， 组合问题DP， 不考虑相邻元素之间的关系，考虑全局</p>
+<p>01背包问题：每个物品选择或者不选<br>f[i,j]所有只从前i个物品中选，且总体积不超过j的选法的集合<br>划分：</p>
+<ol>
+<li>选择第i个物品的所有方案 f[i-1,j-v_i] + w_i </li>
+<li>不选择第i个物品的方案 f[i-1,j]</li>
+</ol>
+<p>完全背包问题： 每个物品选0，1，2，.. 个<br>f[i,j]所有 只从前i个物品中选择，且总体积不超过j的选法<br>f[i,j] = max(f[i-1,j], f[i,j-v]+w)<br>一般当空间优化成1维后，只有完全背包问题的体积是从小到大循环的<br>for 物品<br>    for 体积<br>        for 决策</p>
+<p>多重背包问题： 每个物品选0，…, si个</p>
+<p>规律：当空间优化到1维之后，只有完全背包问题的体积是从小到大循环的。<br>完全背包问题：某个物品的个数可以选任意个</p>
+<blockquote>
+<p>f[i, j] = max(f[i - 1, j], f[i, j-v[i]]) ! 只有这种情况是从小到大循环的。</p>
+</blockquote>
+<p>多重背包问题：某个物品的个数给定</p>
+<blockquote>
+<p>实际上，可以看作滑动窗口，这里对应的代码 todo<br>实际上，解法1： f[i,j]使用二维，直接枚举； f[j]使用一维，使用二进制优化转化为01背包问题。</p>
+</blockquote>
+<p>分组背包问题： 每组中选择一个物品</p>
+<blockquote>
+<p>f[i,j] 这里的i的含义为从前i组进行选择</p>
+</blockquote>
+<p>面试算法题，设计题</p>
+<blockquote>
+<p>万能头文件 #include&lt;bits/stdc++.h&gt;<br>需要注意的就是这样做会导入很多文件，等于说会耗时</p>
+</blockquote>
+<h3 id="3-2-further"><a href="#3-2-further" class="headerlink" title="3.2 further"></a>3.2 further</h3><ul>
+<li>01背包<ul>
+<li>采药</li>
+<li>装箱问题</li>
+<li>小精灵（阅读理解）</li>
+<li>数字组合（方案数）</li>
+<li>开心的金明</li>
+<li>能量石（+贪心）</li>
+</ul>
+</li>
+<li>完全背包<ul>
+<li>买书（方案数）</li>
+<li>货币系统（方案数）<ul>
+<li>货币系统（贪心）</li>
+</ul>
+</li>
+<li>二维费用<ul>
+<li>潜水员</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多重背包<ul>
+<li>庆功会</li>
+</ul>
+</li>
+<li>分组背包<ul>
+<li>机器分配</li>
+</ul>
+</li>
+</ul>
 
         
       
