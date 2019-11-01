@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">96</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">99</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,687 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-cplus-lecture2/" class="post-title-link" itemprop="url">nju-course-cplus-lecture2</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:46:53 / 修改时间：09:47:41" itemprop="dateCreated datePublished" datetime="2019-09-19T09:46:53+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="本节课重点"><a href="#本节课重点" class="headerlink" title="本节课重点"></a>本节课重点</h1><h2 id="1-抽象和封装"><a href="#1-抽象和封装" class="headerlink" title="1. 抽象和封装"></a>1. 抽象和封装</h2><ul>
+<li>抽象: 数据的使用者只需要知道数据能实施的操作以及这些操作之间的关系，不必知道数据的具体表示形式。</li>
+<li>封装：将数据及其操作作为一个整体来进行实现。数据的具体表示对使用者是不可见的，对数据的访问只能通过封装体所提供的对外接口来完成。</li>
+<li>案例<br>比如，栈的使用，首先不能直接在程序中定义，一不小心手误就会出错；其次，采用面向过程的想法：<br>struct Stack{};  void push(Stack &amp;s);<br>当我在其他地方定义一个void f(Stack &amp;s), 会破坏Stack的数据；数据表示仍是公开的，可以对数据进行操作。</li>
+</ul>
+<p>所以引入面向对象。<br>public对外的接口， private隐藏的内容，外不可见<br>protect面向继承</p>
+<p>把程序构造成由若干个对象组成，每个对象是由一些数据以及对这些数据所能实施的操作构成的封装体。<br>一个雷所描述的对象的特征可以继承。</p>
+<blockquote>
+<p>这里特征指private中的成员。对象所定义的操作即是其接口</p>
+</blockquote>
+<h2 id="2-面向对象程序的执行过程"><a href="#2-面向对象程序的执行过程" class="headerlink" title="2. 面向对象程序的执行过程"></a>2. 面向对象程序的执行过程</h2><p>对象构成了面向对象程序的基本计算单位<br>对象间的消息传递是引起面向对象程序进行计算的唯一形式。</p>
+<blockquote>
+<p>从程序外部向程序中的某个对象发送第一条消息标志着程序的开始。该对象在处理这条消息的过程中又向其他对象发送消息，引起进一步的计算。当第一条消息处理结束后则程序的一次计算结束。消息处理可以分为同步和异步，这里显然只涉及到同步。</p>
+</blockquote>
+<h2 id="3-对比"><a href="#3-对比" class="headerlink" title="3. 对比"></a>3. 对比</h2><p>提高软件开发效率和保证软件质量的几个基本程序设计手段</p>
+<ul>
+<li>抽象（复杂度控制）</li>
+<li>封装（信息隐藏）</li>
+<li>模块化（组织大型程序）</li>
+<li>软件复用（延长开发周期）</li>
+<li>可维护性（延长软件寿命）</li>
+<li>软件模型的自然渡（缩小解题空间与问题空间的语义间隙）<blockquote>
+<p>最后一个方面可以思考到，实际上求解问题都可以划分各个状态。即通过状态空间来解题，所以可以看出来基于对象/类的解题方式与问题空间有很好的对应。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>面向过程是什么？强调的是过程即功能，数据和操作分离，数据没有保护，功能特定限定不可扩展。最后，与问题空间没啥关系。<br>最大的高手是能说出一堆东西还能找到准确的分类。</p>
+</blockquote>
+<h2 id="4-面向对象的基本内容"><a href="#4-面向对象的基本内容" class="headerlink" title="4. 面向对象的基本内容"></a>4. 面向对象的基本内容</h2><p>对象-值，类-类型。<br>多态：某一论域中的一个元素存在多种解释：</p>
+<ul>
+<li>一名多用：函数名、操作符重载</li>
+<li>类属性： <ul>
+<li>一函数可以对多种类型数据进行操作？</li>
+<li>一个类型可以描述多种类型的数据</li>
+</ul>
+</li>
+</ul>
+<p>绑定：确定对多态元素的某个使用是多态元素的哪种形式？</p>
+<ul>
+<li>静态绑定</li>
+<li>动态绑定</li>
+</ul>
+<p>面向对象程序特有的多态（继承）</p>
+<ol>
+<li>对象类型的多态: 子类对象可以属于子类，也可以属于父类</li>
+<li>对象标识的多态：父类的引用或指针可以引用或指向父亲对象，也可子类对象</li>
+<li>消息的多态：发给的消息可以发给子类，即，一个消息可以有多种解释（父类与子类有不同解释）</li>
+</ol>
+<p>多态带来的好处：</p>
+<ul>
+<li>易于实现程序高层代码的复用 ？</li>
+<li>使得程序扩充变得容易（只要增加底层的具体实现）</li>
+<li>增强语言的可扩充性（操作符重载）</li>
+</ul>
+<h4 id="类"><a href="#类" class="headerlink" title="类"></a>类</h4><p>对象构成了面向对象的基本计算单位，而对象的特征则是由相应的类来描述。因此，程序中首先要定义类。<br>注意：在C++中，也允许在结构和联合中定义函数，但成员的访问控制与类不同。</p>
+<blockquote>
+<p>结构和联合的成员默认为public,是否可以改我不知道？</p>
+</blockquote>
+<p>访问控制就是public,private,protected.</p>
+<p>public:公开<br>private:本类和友元的代码中访问，默认方式<br>protected:只能在本类、派生类和友元的代码中访问</p>
+<blockquote>
+<p>友元函数什么意思？</p>
+</blockquote>
+<p><strong>访问控制设置的建议</strong></p>
+<ol>
+<li>类的数据成员和在类的内部使用的成员函数应该指定为private,只有提供给外界使用的成员函数才指定为public. 具有public访问控制的成员构成了类与外界的一种接口，在一个类的外部只能访问该类接口中的成员 </li>
+</ol>
+<p><strong>数据类型定义时的注意</strong></p>
+<ol>
+<li><p>在说明一个数据成员的类型时，如果未见到相应类型的定义，或相应的类型未定义完，则该数据成员的类型只能是这些类型的指针或引用类型。</p>
+<blockquote>
+<p>因为实际类型是无法解释代码的。而指针类型是现在符号表中定义，然后再寻找答案的。</p>
+</blockquote>
+</li>
+<li><p>成员函数的实现可在内外定义，在内外定义要用类名受限，区别于全局函数。</p>
+</li>
+<li><p>类成员函数名是可以重载的，它遵循一般函数名的重载规则。</p>
+</li>
+</ol>
+<h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h4><p>对象是动态运行中构造，类型是静态的形式。</p>
+<p>对象可以分为全局对象、局部对象和成员对象？</p>
+<hr>
+<p>对象创建的两种方式</p>
+<ul>
+<li>直接，实体变量，使用实体，在静态区或栈中<blockquote>
+<p>静态区好像不可能？ 前面不说了吗？是这个意思吗？</p>
+</blockquote>
+</li>
+<li>间接，动态，使用指针<br>在堆中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">A *p;</span><br><span class="line">p=new A;  //创建</span><br><span class="line">*p,  p-&gt;  </span><br><span class="line">delete p;</span><br><span class="line"></span><br><span class="line">A *q;</span><br><span class="line">q=new A[100];</span><br><span class="line">q[i]   // *(q+i)</span><br><span class="line">delete []q;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>使用参数进行赋值<br>同类型一样，同类对象可以进行赋值，取对象地址之类的事情<br><code>Data b;</code></p>
+</li>
+<li><p>使用对象作为参数<br>使用对象做实参，不想函数在调用是创建一个大的元素又不想被修改<br>const Data &amp;d</p>
+<blockquote>
+<p>感觉上参数实际上就是一个地址</p>
+</blockquote>
+</li>
+<li><p>使用对象作为返回值</p>
+<blockquote>
+<p>务必注意一个事，如果想返回的是一个新对象返回值用Data；否则容易把参数中，原本函数中的值给改变。最重要的是自己到底是想还是不想被改变</p>
+</blockquote>
+</li>
+<li><p>每个对象，this指针</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 面向对象编程</span><br><span class="line">class A&#123;</span><br><span class="line">    public:</span><br><span class="line">        void g(int i)&#123;</span><br><span class="line">            x=i;</span><br><span class="line">            // 相当于this.x=i;</span><br><span class="line">        &#125;</span><br><span class="line">    private:</span><br><span class="line">        int x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 面向过程编程</span><br><span class="line">struct A&#123;</span><br><span class="line">    int x;</span><br><span class="line">&#125;</span><br><span class="line">void g(A *const this,int i)&#123;</span><br><span class="line">    this-&gt;x=i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a.g(1); 等价于 g(&amp;a,1);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>突然想到了，Python中编程，当初想要将 pub(x,y)变为x(y)的过程？ 具体怎么做还得看一下相关书上的东西。</p>
+</blockquote>
+<hr>
+<ul>
+<li>对象初始化<br>特有的东西，init(), 自动被调用，很好！<br>可重载<br>动态数组 默认 A();<br>常量和引用不能被初始化,为什么？<blockquote>
+<p>一旦被赋值了，那对象还要它干什么</p>
+</blockquote>
+</li>
+</ul>
+<p>初试话顺序按类定义顺序，很显然</p>
+<p>在构造函数中开辟的空间需要自己在析构函数中解决，特别是动态申请的空间。</p>
+<ul>
+<li>成员对象<br>数据成员可以是另一个类<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class A</span><br><span class="line">&#123;   int x;</span><br><span class="line">   public:</span><br><span class="line">	 A() &#123; x = 0; &#125;</span><br><span class="line">	 A(int i) &#123; x = i; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">class B</span><br><span class="line">&#123;   A a;</span><br><span class="line">     int y;</span><br><span class="line">   public:</span><br><span class="line">	  B() &#123; y = 0;&#125; //调用A的默认构造函数对a初始化。</span><br><span class="line">     B(int i) &#123; y = i; &#125; //调用A的默认构造函数对a初始化。  </span><br><span class="line">     B(int i, int j): a(j) &#123; y = i; &#125; //调用A(int)对a 初始化。  </span><br><span class="line">&#125;;</span><br><span class="line">B b0; //b0.y初始化为0，b0.a.x初始化为0</span><br><span class="line">B b1(1); //b1.y初始化为1，b1.a.x初始化为0</span><br><span class="line">B b2(1,2); //b2.y初始化为1，b2.a.x初始化为2</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>析构的顺序跟执行顺序相反。</p>
+<blockquote>
+<p>容易想到，析构函数 先调用本身类，再调用成员对象<br>应用场景：复杂的窗口调用关系时</p>
+</blockquote>
+<ul>
+<li>拷贝构造函数<br><code>A(const A&amp;a){}</code> ！<blockquote>
+<p>正如其名，在需要拷贝，即值传递的时候用到<br>比如说，构造函数就自定义的，那么拷贝构造函数？<br>?默认构造函数是什么？-&gt; 隐式拷贝构造函数</p>
+</blockquote>
+</li>
+</ul>
+<p>对于隐式拷贝构造函数：</p>
+<ol>
+<li>非对象成员逐个赋值</li>
+<li>对象成员优先选择构造函数，否则隐式<blockquote>
+<p>这里注意，当成员构造函数中申请了一片空间，可能会同时指向一片空间</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>p=new int[5]; 这样会指向一个空间吗？首先，要看它的第一步动作，如果是</p>
+</blockquote>
+<p>对于自定义拷贝构造函数，注意成员对象默认构造函数，否则显式指定</p>
+<blockquote>
+<p>这里比较麻烦，</p>
+</blockquote>
+<ol>
+<li>定义对象<br><code>A a，b; b=a;</code></li>
+<li>对象作为值参数和返回值</li>
+</ol>
+<ul>
+<li>const</li>
+</ul>
+<p>void f(const Date&amp; d){<br>    d.get_day(); //不可以，无法知道实际上是否进行了数据成员改变，所以统一禁止<br>}</p>
+<p>因此，将类的成员函数分为两类：</p>
+<ul>
+<li>获取对象状态<br>int get_day() const {}; //不能改变数据成员的值， 这下f中d.get_day()ok了</li>
+<li>改变对象状态</li>
+</ul>
+<hr>
+<ul>
+<li>同类对象共享数据（全局变量不行，不安全！）<blockquote>
+<p>问题如何引出？ static还有什么用？</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>采用静态对象，类直接可以获取。static int x; void f() {x++; }<br>// 工厂模式，进行计数， 类可直接访问，只有一个备份<br>应用：实现对某类对象的计数</p>
+</blockquote>
+<ul>
+<li>静态成员函数<br>静态成员函数只能访问类的静态成员。<br>静态成员函数没有隐藏的this<blockquote>
+<p>静态都可以通过对象和类两种方式来访问</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>在一些“纯”面向对象程序设计语言中，把类看作对象，用元类(meta class)来描述.<br>静态成员属于“类对象”</p>
+</blockquote>
+<ul>
+<li>友元<blockquote>
+<p>暴露的一个超级大的接口，为了应对其他方面的不足。<br>目的是为了提高在类的外部对类的数据成员的访问效率。</p>
+</blockquote>
+</li>
+</ul>
+<p>友元可以是全局函数、其它的类或其它类的某些成员函数。<br>class A<br>{<br>    ? // 感觉是public<br>    friend void func();<br>    friend class B;<br>    friend void C::f();<br>private:<br>    int x;<br>}</p>
+<p>友元关系具有不对称性。<br>友元也不具有传递性<br>友元是数据保护和数据访问效率之间的一种折中方案</p>
+<p>todo<br>用类来实现矩阵和向量类型<br>multipy的实现</p>
+<p>类作为模块</p>
+<ul>
+<li>类是一个自然的模块划分单位</li>
+<li>.h文件中存放的是类的定义</li>
+<li>.cpp文件中是类成员函数的实现</li>
+</ul>
+<p>一个模块一般有两个文件</p>
+<blockquote>
+<p>耦合性：模块与模块之间的依赖关系</p>
+</blockquote>
+<p>过程： 结构式</p>
+<p>面向对象：降低耦合</p>
+<blockquote>
+<p>Demeter法则，一个类的成员函数除了访问自身类结构的直接子结构外，不能以任何方式依赖于任何其他类的结构。<br>每个成员函数只应向某个有限集合中的对象发送消息。<br>仅与你的直接朋友联系。</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture1-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-cplus-lecture1-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture1-summary</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:45:52 / 修改时间：09:46:39" itemprop="dateCreated datePublished" datetime="2019-09-19T09:45:52+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>静态数据区：全局变量、static存储类的局部变量以及常量的内存分配；<br>extern int x; 引用其他文件的全局变量，注意初始值。<br>使用说明： 尽量使用本地变量static; 全局变量赋初始值；外部全局变量使用extern.</p>
+</blockquote>
+<h1 id="上节课重点回顾"><a href="#上节课重点回顾" class="headerlink" title="上节课重点回顾"></a>上节课重点回顾</h1><ol>
+<li><p>程序=算法+数据结构</p>
+</li>
+<li><p>代码区和栈区(普通局部变量)、堆区(malloc使用的变量)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//file1.cpp</span><br><span class="line">int a=1;</span><br><span class="line"></span><br><span class="line">//file2.cpp</span><br><span class="line">extern int a; //</span><br><span class="line">int main()&#123;</span><br><span class="line">    a=100;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">new同malloc, 分配的变量在堆区中</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再理解循环， 以及递归调用。实际执行（中序遍历）。循环,退出条件。多种情况，基本及其他。返回值，参数忌大值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">while()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">for( ; ; )</span><br><span class="line">共享全局变量</span><br><span class="line"></span><br><span class="line">int recursion(int a) &#123;</span><br><span class="line">    if(a in basic) solve;</span><br><span class="line">    else &#123;</span><br><span class="line">        recursion(a/2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>引用，名字。指针，链表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">int f(int *b)&#123;</span><br><span class="line">    int c=3;</span><br><span class="line">    *b=c; // 在b未改变指向的地址之前做赋值。能够赋值成功</span><br><span class="line">    b=&amp;c; // 这样操作没什么用，如果返回b的值可能变了。</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main()&#123;</span><br><span class="line">    int a=1;</span><br><span class="line">    inf *b=a; // 这里初始化等价于int *b; b=&amp;a;</span><br><span class="line">    f(&amp;b); // 1-&gt;3</span><br><span class="line">&#125;</span><br><span class="line">// 指针没有那么恐怖，主要是看在哪定义的，即作用范围。如函数类以及参数，那么作用范围只不过是函数内而已。</span><br><span class="line"></span><br><span class="line">int g(int &amp;x)&#123;</span><br><span class="line">    int m=1;</span><br><span class="line">    x=&amp;m // 错误</span><br><span class="line">    x=m; //这里附带着就把原值给改变了</span><br><span class="line">&#125;</span><br><span class="line">main()&#123;</span><br><span class="line">    int a;</span><br><span class="line">    g(a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">对于数组，同指针一样。指针就理解为链表，当选进去之后，出来还是首地址，但是该改变的都改变了</span><br><span class="line">void fun(int a[])&#123;</span><br><span class="line">    a[1]=1;</span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">    int a[]=&#123;1,2&#125;;</span><br><span class="line">    fun(a);</span><br><span class="line">    cout&lt;&lt;a[1]; // 1</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>序列数据的表示，数组，链表，更多</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">数组 int a[N];</span><br><span class="line">单位长度 a+i*sizeof(int)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>链表</p>
+<ul>
+<li>重新分配</li>
+<li>访问元素，顺序，值</li>
+<li>增加元素</li>
+<li>删除元素<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">file1.h</span><br><span class="line">struct Node&#123;</span><br><span class="line">    int content;</span><br><span class="line">    Node *next;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">不带头结点的单链表</span><br><span class="line">这里首先设计的就不合理。</span><br><span class="line"></span><br><span class="line">Node* find(Node *head,int i)&#123; </span><br><span class="line">    //？这里参数和返回值的类型</span><br><span class="line">    if(!i) return head;</span><br><span class="line">    else&#123;</span><br><span class="line">        //访问</span><br><span class="line">        Node *p=head;</span><br><span class="line">        int j=0;</span><br><span class="line">        while(p!=NULL &amp; j&lt;i)&#123;</span><br><span class="line">            p=p-&gt;next;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        if(p!=NULL) return p;</span><br><span class="line">        else return NULL; // 表示未找到</span><br><span class="line">        // return p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Node* findByValue(Node* head,int value)&#123;</span><br><span class="line">    if(head.content==value) return head;</span><br><span class="line">    else&#123;</span><br><span class="line">        Node *p=head;</span><br><span class="line">        while(p!=NULL&amp;p-&gt;content!=value)</span><br><span class="line">            p=p-&gt;next;</span><br><span class="line">        return p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool insert(Node *head, int value, int i) &#123; // 按所给的位置i插入value，不用返回值。</span><br><span class="line">    Node *q, *p; // 数组才需要new, 单个变量应该不需要。而且新定义的结构体也应该没有被定义在系统内吧</span><br><span class="line">    *p=head;</span><br><span class="line">    q-&gt;content=value;</span><br><span class="line">    if(i=0) &#123; // 注意这里是没有头结点的情况</span><br><span class="line">        q-&gt;next=p;</span><br><span class="line">        head=q;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        while(p!=NULL &amp; i-1)&#123; // 从0开始, 注意是找前一个</span><br><span class="line">            p=p-&gt;next;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        if(p==NULL) &#123;</span><br><span class="line">            delete q;</span><br><span class="line">            q=nullptr;</span><br><span class="line">            // q使用结束后，将其赋值为空。防止多次delete,还有后续使用</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            q-&gt;next=p-&gt;next;</span><br><span class="line">            p-&gt;next=q;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    delete p,q;</span><br><span class="line">    p=nullptr;</span><br><span class="line">    q=pullptr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void deleteP(Node *head, int value, int i) &#123;</span><br><span class="line">    Node *p;</span><br><span class="line">    if(i==0)&#123;</span><br><span class="line">        p=head-&gt;next;</span><br><span class="line">        head=p;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        while(p!=NULL &amp; i-1)&#123; // 从0开始, 注意是找前一个</span><br><span class="line">            p=p-&gt;next;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        Node *q=p-&gt;next; // 如果是最后一个也没关系，不过指向空而已</span><br><span class="line">        p-&gt;next=q-&gt;next;</span><br><span class="line">        delete p,q;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Node q; q.content</span><br><span class="line">// Node *q; q-&gt;content </span><br><span class="line">// 猜想是对的，箭头左边是指针；点号左边是实体</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>命令</p>
+<ul>
+<li><p>include</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">路径搜索策略:</span><br><span class="line">1. 当前目录</span><br><span class="line">2. 参数-L指定的目录</span><br><span class="line">3. gcc的环境变量CPLUS_INCLUDE_PATH</span><br><span class="line">4. gcc的内定目录</span><br><span class="line">gcc -E -v --prefix=..</span><br><span class="line">prefix/include</span><br><span class="line">prefix/local/include</span><br><span class="line">prefix/lib/gcc/--host/-version/include</span><br><span class="line"></span><br><span class="line">#include&lt;a.h&gt;</span><br><span class="line">从第2步开始</span><br><span class="line">#include &quot;a.h&quot;</span><br><span class="line">从第1步开始</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>define</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#define MAX(a,b) ((a)&gt;(b))?(a):(b)</span><br><span class="line">#define M 100</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ifdef,  if</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">file1.h</span><br><span class="line">#define ABC</span><br><span class="line">int a;</span><br><span class="line">void fun();</span><br><span class="line"></span><br><span class="line">file1.cpp</span><br><span class="line">#include &quot;file1.h&quot;</span><br><span class="line">void fun()&#123;</span><br><span class="line">    a=1;</span><br><span class="line">    cout&lt;&lt;a&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">file2.h</span><br><span class="line">#ifdef ABC</span><br><span class="line">    int b;</span><br><span class="line">#else</span><br><span class="line">    int a;</span><br><span class="line">    fun();</span><br><span class="line">#endif</span><br><span class="line">    int c;</span><br><span class="line"></span><br><span class="line">file2.cpp</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-cplus-lecture1/" class="post-title-link" itemprop="url">nju-course-cplus</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:42:19 / 修改时间：09:44:36" itemprop="dateCreated datePublished" datetime="2019-09-19T09:42:19+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="0-程序设计基础知识回顾"><a href="#0-程序设计基础知识回顾" class="headerlink" title="0 程序设计基础知识回顾"></a>0 程序设计基础知识回顾</h2><h3 id="0-1-基本"><a href="#0-1-基本" class="headerlink" title="0.1 基本"></a>0.1 基本</h3><p>程序=算法+数据结构</p>
+<p>在程序中，数据类型来描述数据，流程控制语句来实现算法</p>
+<p>数据类型规定了两个集合：</p>
+<ol>
+<li>值集</li>
+<li>操作集</li>
+</ol>
+<p>基本数据类型：对应机器指令能直接处理的数据<br>构造数据类型：由基本数据类型构造出来的数据，枚举、数组、结构、联合、指针、引用</p>
+<p>程序实体在内存中的安排</p>
+<ul>
+<li>静态数据区用于全局变量、static存储类的局部变量及常量的内存分配。如果没有显式初始化，系统将把它们初始化为0</li>
+<li>代码区用于存放程序的指令</li>
+<li>栈区用于auto存储类的局部变量</li>
+<li>堆区用于动态变量的内存分配</li>
+</ul>
+<p>对于返回值：</p>
+<ul>
+<li>如果是简单数据类型，通常在寄存器</li>
+<li>否则，在一块临时内存空间，在调用者的栈空间，调用者把这块空间的地址传给被调用者，被调用者通过这个地址存储返回值</li>
+</ul>
+<p>一般情况，不必关心栈的具体情况，进行混合语言编程，需要考虑不同语言在栈上的差别<br>过深的函数嵌套将造成栈空间不足。<br>对于参数来说，不应把大的结构按值传递给函数，不应定义很大的局部数组变量。<br>不要返回局部变量的地址，没有什么输出。</p>
+<blockquote>
+<p>这里仿佛懂了为什么不在函数里定义变量，而一般的算法竞赛的代码都在开头定义，因为最终所处的位置不一样。<br>还有一点就是对于函数参数，最后的情况下还是进行地址传递的好。</p>
+</blockquote>
+<h3 id="循环-amp-递归函数"><a href="#循环-amp-递归函数" class="headerlink" title="循环&amp;递归函数"></a>循环&amp;递归函数</h3><blockquote>
+<p>循环，重点关注的是退出的元素，即循环判断语句中的内容。</p>
+</blockquote>
+<p>循环对计算机问题求解中的穷举法和迭代法提供支持</p>
+<p>分而治之： 把一个问题分解为若干个子问题，而每个子问题的性质与原问题相同，只是在规模上比原问题要小。每个子问题的求解过程可以采用与原问题相同的方式来进行。</p>
+<p>递归函数的关键：<br>递归条件：何时进行递归调用，它描述了问题求解的一般情况，包括：分解和综合过程<br>结束条件：何时不需递归调用，它描述了问题求解的特殊情况或基本情况</p>
+<blockquote>
+<p>递归函数中定义的局部变量在运行中分布在栈区中，而非静态数据区，因此此时临时变量将不再有效。所以务必注意在设计递归函数时的变量的要求是否符合实际的要求。<br>循环是在同一组变量上进行重复操作；递归则是在不同的变量组上进行重复操作</p>
+</blockquote>
+<h3 id="指针和引用"><a href="#指针和引用" class="headerlink" title="指针和引用"></a>指针和引用</h3><blockquote>
+<p>指针再理解，尽管数据结构是链表，其在底层的存储方式不过是一个一个位置块而已。而指针指向它，不过是指向这些块，并能通过这些块，不断继续能访问到下面的元素。<br>但是，一点有意思的是，指针就像路标，指示该点的位置。而且用指针可以改变链表后面的组织方式。但指针获得后面元素的指针，对元素之间进行一顿猛操作后。前面的指针依然生效，此时返回前面的指针，就是返回一种新的位置。</p>
+</blockquote>
+<p>指针只是一个位置的地址，可以在程序中间接来访问，通过p可以访问实参意外的数据，变量的地址； 初始化后，仍可指向其它变量<br>引用，变量的名字，只能直接访问实参的数据，初始化后，不能再指向其它变量。  &amp;=const *.</p>
+<p>&amp;最好用，指向的变量不可改变，但可以在函数中改变其值。</p>
+<blockquote>
+<p>引用类型变量<br> int x=0;<br> int &amp;y=x; //y是引用类型变量，x的别名<br> y=1;<br> cout&lt;&lt;x; // x==1<br> 不要返回局部变量的引用，这样返回值可能会被修改。</p>
+</blockquote>
+<p>const int &amp; 不可不改变其值</p>
+<p>const int *:  *p=1 X<br>int * const p: p=&amp;x X</p>
+<p>const三种用法</p>
+<ol>
+<li>放在开头，修饰内容，内容不可Ian<br>const int a=5;<br>const int *p = 8;</li>
+<li>放在<em>后面，修饰指针，指针不可变<br>int a = 8;<br>int</em> const p = &a;</li>
+</ol>
+<p>*p = 9; // 正确<br>int  b = 7;<br>p = &b; // 错误</p>
+<h3 id="序列数据的表示"><a href="#序列数据的表示" class="headerlink" title="序列数据的表示"></a>序列数据的表示</h3><h4 id="1-静态表示"><a href="#1-静态表示" class="headerlink" title="1. 静态表示"></a>1. 静态表示</h4><p>int a[N];  // N为一个常量或常量表达式<br>好处：能够快速访问序列元素a[i]:  a的首地址+i*sizeof(int)</p>
+<h4 id="2-动态表示"><a href="#2-动态表示" class="headerlink" title="2. 动态表示"></a>2. 动态表示</h4><p>数据的内存空间随元素数量的变化动态分配</p>
+<ul>
+<li>动态数组<br>int <em>p=new int[n];  //动态分配数组空间，n可以是变量<br>p[i] // 使用数组元素，等价于</em>(p+i)<br>int *q=new int[n+m] //扩大空间<br>…// 元素从p到q的转移<br>delete []p; // 删除原来的空间<br>p=q;  //p指向新的空间<br>p[j]<h5 id="链表"><a href="#链表" class="headerlink" title="链表"></a><strong>链表</strong></h5>为每个元素动态分配内存空间，各元素的内存空间不必联系。</li>
+</ul>
+<p>为了能把离散的元素空间“串”起来<br>好处：空间补充容易，增加、删除元素不影响其它元素<br>strut Node{<br>    int content;<br>    Node *next;<br>};<br>Node *head=NULL;</p>
+<p>这里的链表头结点也有值. 所以访问时，头结点从第一个元素开始思考。</p>
+<h6 id="访问链表元素"><a href="#访问链表元素" class="headerlink" title="访问链表元素"></a>访问链表元素</h6><blockquote>
+<p>输入是链表的头结点，目的是返回元素的值</p>
+</blockquote>
+<ul>
+<li><p>访问第i个元素(i=0,1,2,…)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Node *p=head;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;i &amp;&amp; p!=<span class="literal">NULL</span>;j++)&#123;</span><br><span class="line">    p=p-&gt;next;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(p!=<span class="literal">NULL</span>)  *p  <span class="comment">//访问第i个元素</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">设计数单位为i=<span class="number">4</span>，若从<span class="number">0</span>开始。值得注意的是这里</span><br><span class="line">Node *head;</span><br><span class="line">head=L;</span><br><span class="line"><span class="keyword">while</span>(p!=<span class="literal">NULL</span> &amp; i) &#123;</span><br><span class="line">    p=p-&gt;next;</span><br><span class="line">    i--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问指定元素a</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Node *p=head;</span><br><span class="line">while(p!=NULL &amp;&amp; p-&gt;content!=a) p=p-&gt;next;</span><br><span class="line">if(p!=NULL) *p //访问元素a</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h6 id="在单链表中增加元素"><a href="#在单链表中增加元素" class="headerlink" title="在单链表中增加元素"></a>在单链表中增加元素</h6><blockquote>
+<p>传入旧的链表，目的是返回新的链表。而新的链表由头结点返回标志即可。</p>
+</blockquote>
+<ul>
+<li>分配新元素的空间<br>Node *p=new Node;</li>
+<li>存储元素本身的内容<br>p-&gt;content=..</li>
+<li>找到前一个元素的位置（设由q指向它）<ul>
+<li>按序号找:</li>
+<li>按内容找</li>
+</ul>
+</li>
+<li>把新元素q插入<br>p-&gt;next=q-&gt;next<br>q-&gt;next=p;</li>
+<li>特殊情况的处理！<br>在表头增加元素q<br>q-&gt;next=head-&gt;next<br>head-&gt;next=q;  // 错误，这里把head当做空了<h6 id="在单链表中删除元素"><a href="#在单链表中删除元素" class="headerlink" title="在单链表中删除元素"></a>在单链表中删除元素</h6></li>
+<li>找到前一个元素的位置（由q指向它），要删除p，则 p=q-&gt;next<blockquote>
+<p>删除元素：<br>  q-&gt;next=p-&gt;next;<br>  delete p;</p>
+</blockquote>
+</li>
+<li>特殊情况的处理！<ul>
+<li>要删除的元素不存在<blockquote>
+<p>目的达到了，但关键就是是否需要进行报告所删除的元素不存在。<br>此时遍历到最后一个节点的next节点，p==NULL</p>
+</blockquote>
+</li>
+<li>删除第一个元素<blockquote>
+<p>Node *p=head;<br>if(n==0) {<br>  return head-&gt;next; //<br>}</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>? 如何结合数组与链表的优点？<br>STL, vector,  可以动态开辟空间，还可以随机访问。 ？</p>
+</blockquote>
+<h3 id="编译预处理命令"><a href="#编译预处理命令" class="headerlink" title="编译预处理命令"></a>编译预处理命令</h3><p>编译预处理命令不是C++程序所要完成的功能，而是用于对编译过程给出指导，其功能有编译预处理系统在编译时候来完成。<br>编译预处理命令主要有：</p>
+<h4 id="include-文件包含命令"><a href="#include-文件包含命令" class="headerlink" title="#include 文件包含命令"></a>#include 文件包含命令</h4><p>&lt;文件名&gt; 在系统指定目录下寻找文件<br>“文件名” 现在包含改文件所在目录下寻找指定文件，再找系统文件</p>
+<blockquote>
+<p>但是这里找的是工程目录？还是文件目录？</p>
+</blockquote>
+<p>为多模块结构提供了支持<br>file1.h  // 进行全局变量、函数的声明<br>file1.cpp // 进行全局变量、函数的定义</p>
+<p>file2.h<br>file2.cpp</p>
+<p>int main(){<br>    double r; // 局部变量的定义<br>}</p>
+<blockquote>
+<p>如果file1.h和file2.h发生冲突怎么办</p>
+</blockquote>
+<h4 id="define-宏定义命令"><a href="#define-宏定义命令" class="headerlink" title="#define 宏定义命令"></a>#define 宏定义命令</h4><p>宏定义常用来定义变量和实现类似函数的功能：</p>
+<blockquote>
+<p>#define &lt;宏名&gt;(&lt;参数表&gt;) &lt;文字串&gt;<br>如： #define max(a,b) ((a)&gt;(b) ? (a):(b))</p>
+</blockquote>
+<p>优点：效率更高<br>缺点：需要加上很多的括号，否则会出问题；有时会重复计算；替换时不进行参数类型检查和转换；不利于调试</p>
+<h4 id="条件编译命令"><a href="#条件编译命令" class="headerlink" title="条件编译命令"></a>条件编译命令</h4><blockquote>
+<p>理解，一种感觉就是编写代码过程中，即实际的代码分布为多个文件，而怎么样把整个文件一起组织呢?<br>由小往大看，分为局部变量和全局变量。全局变量应该是在运行过程中堆栈中的静态数据区的。所以，这里一方面希望不能冲突<br>file1.h, file2.h冲突怎么办。 用条件编译设置指示变量来表示将编译哪些内容和不编译哪些内容。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;代码1&gt; 必须编译的代码</span><br><span class="line">#define ABC</span><br><span class="line">&lt;代码2&gt; 必须编译的代码</span><br><span class="line">#ifdef ABC</span><br><span class="line">&lt;代码2&gt; 如果宏名ABC有定义则编译之</span><br><span class="line">#else</span><br><span class="line">&lt;代码3&gt; //如果宏名ABC没有定义，编译之 </span><br><span class="line">#endif</span><br><span class="line">&lt;代码4&gt; //必须编译的代码</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意可以嵌入到代码中执行<br>宏可以在代码中定义，也可在编译环境中定义</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#if &lt;常量表达式1&gt; / #ifdef &lt;宏名&gt; / #ifndef &lt;宏名&gt;</span><br><span class="line">	&lt;程序段1&gt;</span><br><span class="line">#elif &lt;常量表达式2&gt;</span><br><span class="line">	&lt;程序段2&gt;</span><br><span class="line">......</span><br><span class="line">#elif &lt;常量表达式n&gt;</span><br><span class="line">	&lt;程序段n&gt;</span><br><span class="line">[#else</span><br><span class="line">	&lt;程序段n+1&gt;]</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<p>作用：</p>
+<blockquote>
+<p>避免包含头文件带来的重复定义或声明<br>基于多环境的程序编制 </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">重复包含下面的头文件不会引起多次编译</span><br><span class="line">//module1.h</span><br><span class="line">#ifndef MODULE1</span><br><span class="line">#define MODULE1</span><br><span class="line">......  //module1中的程序实体的声明或定义</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">编译到不同的平台</span><br><span class="line">#ifdef UNIX</span><br><span class="line">	......  //适合于UNIX环境的代码</span><br><span class="line">#elif WINDOWS</span><br><span class="line">	......  //适合于WINDOWS环境的代码</span><br><span class="line">#else</span><br><span class="line">	......  //适合于其它环境的代码</span><br><span class="line">#endif</span><br><span class="line">......  //适合于各种环境的公共代码</span><br><span class="line"></span><br><span class="line">在开发阶段加入的调试信息：</span><br><span class="line">#ifdef DEBUG</span><br><span class="line">......  //调试信息，主要由输出操作构成 </span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -1503,349 +2184,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-MST/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-course-MST/" class="post-title-link" itemprop="url">algorithm course MST</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:02:26 / 修改时间：09:19:46" itemprop="dateCreated datePublished" datetime="2019-09-19T09:02:26+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="MST"><a href="#MST" class="headerlink" title="MST"></a>MST</h2><blockquote>
-<p>注意，MST从某种意义上是图上的应用关于贪心策略的一部分。</p>
-</blockquote>
-<h3 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h3><p>定义1. 常规定义： X, S, V/S, e: a lightest edge across (S,V/S)</p>
-<p>证明要点：</p>
-<p>首先假设cut中的一条e在MST中，然后因为cut中有一条cycle，所以必然有一条边可以构成。所以可以构成一条最小生成树，即取cycle中最小的边。</p>
-<p>MST每次都有一部分。</p>
-<p>定义2.  Reverse-delete方法</p>
-<p>delete an 最大权edge if this does not disconnect the graph.</p>
-<p>Cycle Property</p>
-<p>$T \in F \Leftrightarrow \exist T’: T’ \in F - {e}  $</p>
-<p>定义3.  </p>
-<p>10.18 求证：Minimum-weight eage across any cut is unique , so Unique MST.</p>
-<p>证明1：</p>
-<p>Construct T by adding all such edges.</p>
-<p>$e \in \forall MST, T \in \forall MST$</p>
-<p>T is spanning tree eage.</p>
-<ul>
-<li>construct cycle 连通</li>
-<li>no cycle ?</li>
-</ul>
-<p>证明2：</p>
-<p>依赖于某个算法进行证明。</p>
-<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><p>更多地思考</p>
-<p>使用递归与分治的策略解决MST问题</p>
-<blockquote>
-<p> 整体思路:</p>
-<ol>
-<li>将图按点集划分为两个集合，分别求解这两个集合的MST。</li>
-<li>然后再找这两个集合之间的最小边，将两个MST一起合并为整个图的MST。</li>
-</ol>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-Greedy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-course-Greedy/" class="post-title-link" itemprop="url">algorithm course Greedy</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:01:25 / 修改时间：09:19:52" itemprop="dateCreated datePublished" datetime="2019-09-19T09:01:25+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Greedy"><a href="#Greedy" class="headerlink" title="Greedy"></a>Greedy</h2><blockquote>
-<p>Greedy就是BestFS</p>
-</blockquote>
-<p>Greedy 满足三个条件</p>
-<ol>
-<li><p>feasible, 即满足约束</p>
-</li>
-<li><p>Locally optimal</p>
-</li>
-<li><p>Irrevocable: 不可回退</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 过程可以看作是不断从candidate中，根据某种策略选择local optimal, 然后更新candidate, 重复选择过程，知道candidate为空，或者已经找到问题的解</span><br><span class="line"></span><br><span class="line">step by step解决问题</span><br><span class="line"></span><br><span class="line">Greedy(candidate) &#123;</span><br><span class="line">	S = null;  // S为解决问题的解集</span><br><span class="line"></span><br><span class="line">	while not solution(S) and candidate != null: &#123;</span><br><span class="line">		choose locally optimal x from candidate;</span><br><span class="line">        </span><br><span class="line">        candidate = candidate - &#123;x&#125;;</span><br><span class="line">        if feasible(x) then S = S + &#123;x&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	if solution(S) return S;</span><br><span class="line">	else return &quot;no solution&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="MST"><a href="#MST" class="headerlink" title="MST"></a>MST</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">primMST(G,n) &#123;</span><br><span class="line"></span><br><span class="line">	initialize the priority queue pq as empty;</span><br><span class="line">	Select vertex s to start the tree;</span><br><span class="line">	Set its candidate edge to (-1, s, 0);</span><br><span class="line">	</span><br><span class="line">	insert(pq, s, 0)</span><br><span class="line">	while(pq is not empty)&#123;	 </span><br><span class="line">         v = getMin(pq); deleteMin(pq);</span><br><span class="line">         add the candidate edge of v to the tree;</span><br><span class="line">         updateFringe(pq, G, v)</span><br><span class="line">	&#125;</span><br><span class="line">	return</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">updateFringe(pq,G,v)&#123;</span><br><span class="line">	for w that vw in E: //2m loops?</span><br><span class="line">		newWgt = w(v,w)</span><br><span class="line">		if w.status is unseen then</span><br><span class="line">			Set its candidate edge to (v,w newWgt)</span><br><span class="line">			insert(pq,w,newWgt)</span><br><span class="line">		else // w in Fringe, 需要更新在pq中的权值</span><br><span class="line">			if newWgt &lt; getPriorty(pq,w)</span><br><span class="line">				Revise its candidate edge to (v,newWgt) // 记录哪个边才是真正与之相邻</span><br><span class="line">				decreseKey(pq, w, newWgt) // 改变pq中w的权值</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?--priorityqueue </span><br><span class="line">- getMin(pq)</span><br><span class="line">- deleteMin(pq)</span><br><span class="line">- insert(pq, w, newWgt)</span><br><span class="line">- decreseKey(pq, w, newWgt)</span><br></pre></td></tr></table></figure>
-
-<h3 id="BestFS"><a href="#BestFS" class="headerlink" title="BestFS"></a>BestFS</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Initialize the priority queue Fringe as empty</span><br><span class="line">while Fringe != empty do</span><br><span class="line">	v: = Fringe.extract-min();</span><br><span class="line">	&lt;process-v&gt;</span><br><span class="line">	update-fringe(v, Fringe)</span><br><span class="line"></span><br><span class="line">subroutine update-fringe(v, Fringe)</span><br><span class="line">	for w of v which is Frensh do</span><br><span class="line">		set the priority of w, insert w to Fringe</span><br><span class="line">	for w of v which is Fringe do</span><br><span class="line">		update the priority if w in Fringe, if necessary.</span><br></pre></td></tr></table></figure>
-
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-Graph/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-course-Graph/" class="post-title-link" itemprop="url">algorithm course Graph</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:00:20 / 修改时间：09:20:02" itemprop="dateCreated datePublished" datetime="2019-09-19T09:00:20+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="图论与网络流"><a href="#图论与网络流" class="headerlink" title="图论与网络流"></a>图论与网络流</h2><p>k连通和k-边连通的区别与联系</p>
-<p>图论几大问题</p>
-<ul>
-<li><p>连通分支数</p>
-</li>
-<li><p>支配集</p>
-<blockquote>
-<p>支配集中的点根据边支配非支配集中的点</p>
-</blockquote>
-</li>
-<li><p>最大点独立集</p>
-<blockquote>
-<p>点独立集中任意两顶点不相邻</p>
-<p>注意：多次取点独立集问题就是点着色问题</p>
-</blockquote>
-</li>
-<li><p>点覆盖集</p>
-<blockquote>
-<p>点覆盖集中的点将所有边覆盖</p>
-</blockquote>
-</li>
-<li><p>边独立集</p>
-<blockquote>
-<p>边独立集中的任意两个边都不相邻，即求<strong>匹配</strong>数，对应于边着色</p>
-</blockquote>
-</li>
-<li><p>边覆盖集</p>
-<blockquote>
-<p>边覆盖集中的所有边将点完全覆盖</p>
-</blockquote>
-</li>
-</ul>
-<p>其他问题</p>
-<ul>
-<li>平面图及平面图的判断</li>
-<li>网络流，将图的问题一网打尽</li>
-</ul>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1898,7 +2236,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

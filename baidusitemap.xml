@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://augf.github.io/2019/11/01/gnn-parallel-ggsnn-code-realize/</loc>
+    <lastmod>2019-11-01</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/19/linux/</loc>
+    <lastmod>2019-10-31</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/19/python-study/</loc>
+    <lastmod>2019-10-31</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/10/26/gnn-parallel-GRU/</loc>
+    <lastmod>2019-10-31</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/19/gnn-gnn-parallel-gnn-overview-paper-summary/</loc>
+    <lastmod>2019-10-31</lastmod>
+  </url>  <url>
     <loc>https://augf.github.io/2019/09/16/algorithm-acwing-improve/</loc>
-    <lastmod>2019-10-20</lastmod>
+    <lastmod>2019-10-29</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-greedy/</loc>
+    <lastmod>2019-10-29</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-code-read/</loc>
+    <lastmod>2019-10-28</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-paper-read/</loc>
-    <lastmod>2019-10-17</lastmod>
+    <lastmod>2019-10-23</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/10/17/%E8%AE%BA%E6%96%87%E6%80%9D%E8%80%83-Gated-Graph-Sequence-Neural-Networks-ICLR-2016/</loc>
     <lastmod>2019-10-17</lastmod>
@@ -25,9 +46,6 @@
     <loc>https://augf.github.io/2019/10/02/lua-learning/</loc>
     <lastmod>2019-10-13</lastmod>
   </url>  <url>
-    <loc>https://augf.github.io/2019/09/19/linux/</loc>
-    <lastmod>2019-10-13</lastmod>
-  </url>  <url>
     <loc>https://augf.github.io/2019/10/09/linux-keyboard-using/</loc>
     <lastmod>2019-10-13</lastmod>
   </url>  <url>
@@ -42,9 +60,6 @@
   </url>  <url>
     <loc>https://augf.github.io/2019/09/18/TOEFL-listening/</loc>
     <lastmod>2019-10-01</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/09/19/gnn-gnn-parallel-gnn-overview-paper-summary/</loc>
-    <lastmod>2019-09-30</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/19/gnn-parallel-gnn-overview-paper-details/</loc>
     <lastmod>2019-09-30</lastmod>
@@ -62,9 +77,6 @@
     <lastmod>2019-09-19</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/19/spark-study/</loc>
-    <lastmod>2019-09-19</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/09/19/python-study/</loc>
     <lastmod>2019-09-19</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/19/daily-cplus-thinking/</loc>
@@ -113,9 +125,6 @@
     <lastmod>2019-09-19</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/19/algorithm-acwing-math/</loc>
-    <lastmod>2019-09-19</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-greedy/</loc>
     <lastmod>2019-09-19</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/19/algorithm-acwing-dp/</loc>

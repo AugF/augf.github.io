@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">96</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">99</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,295 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/11/01/gnn-parallel-ggsnn-code-realize/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/01/gnn-parallel-ggsnn-code-realize/" class="post-title-link" itemprop="url">gnn-parallel-ggsnn-code-realize</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-01 09:29:13 / 修改时间：10:43:30" itemprop="dateCreated datePublished" datetime="2019-11-01T09:29:13+08:00">2019-11-01</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="待做"><a href="#待做" class="headerlink" title="待做"></a>待做</h2><ol>
+<li><p>表示复杂的梯度计算图</p>
+<blockquote>
+<p>根据计算图来表示，计算图有两种类型</p>
+</blockquote>
+<ul>
+<li>节点表示操作，边表示数据，如Tensorflow</li>
+<li>节点表示数据，边表示操作，如计算图 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4bDU1L2FydGljbGUvZGV0YWlscy84MzUzNzE0NA==" title="https://blog.csdn.net/zxl55/article/details/83537144">https://blog.csdn.net/zxl55/article/details/83537144<i class="fa fa-external-link"></i></span></li>
+</ul>
+</li>
+<li><p>将所有复杂的公式转变为矩阵操作，然后直接使用Tensorflow类似的想法，不过感觉上可以做得更具体点</p>
+</li>
+</ol>
+<p>py</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/10/26/gnn-parallel-GRU/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/26/gnn-parallel-GRU/" class="post-title-link" itemprop="url">gnn-parallel-GRU</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-26 08:57:59" itemprop="dateCreated datePublished" datetime="2019-10-26T08:57:59+08:00">2019-10-26</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-31 13:23:03" itemprop="dateModified" datetime="2019-10-31T13:23:03+08:00">2019-10-31</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2015</p>
+<h2 id="1-Abstract"><a href="#1-Abstract" class="headerlink" title="1. Abstract"></a>1. Abstract</h2><p>机器翻译。<br>encoder + decoder<br>encoder: a fixed-lenght representation<br>decoder: a correct translation from this representation</p>
+<p>RNN Encoder-Decoder<br>gated recusive rconvolutional neural network</p>
+<p>the neural machine translation performs relatively well on short sentences without unknown words.<br>but degrades rapidly as the lengthe of the sentence and the number of unknown words.</p>
+<p>gated recursive convolutional networks learns a grammatical struture</p>
+<h2 id="2-Introduction"><a href="#2-Introduction" class="headerlink" title="2. Introduction"></a>2. Introduction</h2><p>SMT仅仅记忆一小部分内容<br>GRU可以记忆500MB内容</p>
+<p>没有工作来分析这些模型的属性以及表现</p>
+<p>understand the properties and behavior</p>
+<p>grConv is able to learn, without supervision, a kind of syntactic struture over the sourece language.</p>
+<blockquote>
+<p>rnn, cnn paper</p>
+</blockquote>
+<p>不懂概率的形式</p>
+<blockquote>
+<p>K是class labels 数量</p>
+</blockquote>
+<p>p(x): joint distribution</p>
+<hr>
+<p>以上抛弃</p>
+<p>Learning Phrase Representations using RNN Encoder–Decoder<br>for Statistical Machine Translation</p>
+<p>其实所谓的概率模型$p(x_1, x_2, …, x_n)$， 其实是链式法则，直接看最后一层即可，这也就是RNN实际的含义。</p>
+<p>RNN其实的目标是 maximize the conditional log-likelihood.</p>
+<hr>
+<p>LSTM</p>
+<ol>
+<li>the problem,  with conventional “Back-Propagation Through TIme).   <ul>
+<li>blow up</li>
+<li>vanish</li>
+</ul>
+</li>
+</ol>
+<p>直接已经有的知识那么用</p>
+<p>为什么RNN不能记忆知识？<br>反向传播时，&lt;1.0的数引起梯度消失， &gt;1.0的数引起梯度爆炸</p>
+<p>LSTM: 输入、忘记、输出</p>
+<p>主线剧情由输入分线进行控制</p>
+<p>输入的内容会写入主线，然后忘记的内容会影响到输入的内容</p>
+<p>RNN到底是什么？</p>
+<p>network对于sequence序列问题解决的很好<br>上一个状态和当前状态</p>
+<p>lstm使得其中cell的运算变得复杂</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1FQzNTdmZXMFpfQQ==" title="https://www.youtube.com/watch?v=EC3SvfW0Z_A">https://www.youtube.com/watch?v=EC3SvfW0Z_A<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZseWluZ0xpdHRsZVBpZy9hcnRpY2xlL2RldGFpbHMvNzIyMjkwNDE=" title="https://blog.csdn.net/FlyingLittlePig/article/details/72229041">https://blog.csdn.net/FlyingLittlePig/article/details/72229041<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>非常好，有代码实现部分</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cueXVuYWl0b25nLmNuL3VuZGVyc3RhbmRpbmctbHN0bS1uZXR3b3Jrcy5odG1s" title="https://www.yunaitong.cn/understanding-lstm-networks.html">https://www.yunaitong.cn/understanding-lstm-networks.html<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>这篇也有意思</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj04SHlDTklWUmJTVQ==" title="https://www.youtube.com/watch?v=8HyCNIVRbSU">https://www.youtube.com/watch?v=8HyCNIVRbSU<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>好像有乘积符号</p>
+</blockquote>
+<blockquote>
+<p>传统RNN: $$h = tanh(W_x \cdot x_t + W_h \cdot h_{t-1} + b)$$</p>
+</blockquote>
+<blockquote>
+<p>LSTM:</p>
+<ol>
+<li>forget gate layer<br>$f_t = \delta(W_i \cdot [h_{t-1}, x_t] + b_i)$</li>
+<li>input gate layer<br>$ i_t = \delta(W_i \cdot [h_{t-1, x_t}] + b_i) $<br>$ \tilde{C_t} = tanh(W_C \cdot [h_{t-1}, x_t] + b_C) $</li>
+<li>the current state<br>$ C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C_t} $<blockquote>
+<p>$f_t, i_t$分别表示forget gate的权重， input gate所占的权重<br>根据维度进行猜想，那么这里实际上就不是元素的乘法了？？？</p>
+</blockquote>
+</li>
+<li>output layer<br>$ o_t = \delta (W_o \cdot [h_{t-1}, x_t] + b_o)$<br>$ h_t = o_t \odot tanh(C_t)$</li>
+<li>predict<br>$ y_t = softmax(W_y \cdot h_t + b_t）$</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>GRU:<br>$z_t = \delta (W_z \cdot [h_{t-1}, x_t])$<br>$r_t = \delta(W_r \cdot [h_{t-1}, x_t])$<br>$\tilde{h}<em>t =  tanh(W \cdot [r_t \odot h</em>{t-1}, x_t])$<br>$h_t = (1-z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t$</p>
+<blockquote>
+<p>LSTM的变体，主要的改变在于， forget gate $f_t$和input gate $i_t$用了一个update gate $z_t$来替代.<br>然后， current state的变化再加了一层， $\tilde{h}<em>t = tanh(W \cdot [r_t \odot h</em>{t-1}, x_t])$,  这里引入了一个$r_t$叫做reset gate.<br>其次就是没有了output layer层，直接输出<br> 计算开销更小</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>参考</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zMjQ4MTc0Nw==" title="https://zhuanlan.zhihu.com/p/32481747">https://zhuanlan.zhihu.com/p/32481747<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueXVuYWl0b25nLmNuL3VuZGVyc3RhbmRpbmctbHN0bS1uZXR3b3Jrcy5odG1s" title="https://www.yunaitong.cn/understanding-lstm-networks.html">https://www.yunaitong.cn/understanding-lstm-networks.html<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZseWluZ0xpdHRsZVBpZy9hcnRpY2xlL2RldGFpbHMvNzIyMjkwNDE=" title="https://blog.csdn.net/FlyingLittlePig/article/details/72229041">https://blog.csdn.net/FlyingLittlePig/article/details/72229041<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1FQzNTdmZXMFpfQQ==" title="https://www.youtube.com/watch?v=EC3SvfW0Z_A">https://www.youtube.com/watch?v=EC3SvfW0Z_A<i class="fa fa-external-link"></i></span></li>
+</ol>
+</blockquote>
+<p>GGNN<br>propgagation model</p>
+<ol>
+<li><p>初始化<br>$h_v^{(1)} = [x_v^T, 0]^T$</p>
+</li>
+<li><p>图操作<br>$a_v^{(t)}= A_{v:}^T [h_1^{(t-1)T} … h_{|V|}^{(t-1)T}]^T + b$ </p>
+</li>
+<li><p>GRU<br>$z_v^t = \delta (W^z a_v^{(t)} + U^z h_v^{(t-1)})$<br>$r_v^t = \delta (W^r a_v^{(t)} + U^r h_v^{(t-1)})$<br>$\hat{h}_v^{(t)} = tanh(W a_v^{(t)} + U (r_v^t \odot h_v^{(t-1)}))$<br>$h_v^{(t)} = (1 - z_v^t) \odot h_v^{(t-1)} + z_v^t \odot \hat{h}_v^{(t)}$</p>
+</li>
+</ol>
+<h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><ol>
+<li>初始化<br>$H^{(0)} = [X_v, P]$<br>$A_v = [A_{in}, A_{out}]$<br></li>
+<li>图操作<br>$T^{(t-1)} = A_v (H^{(t-1)} W^{A})$<br></li>
+<li>节点操作<br>$H^{(t)} = $<br><font color="red">$\delta(T^{(t-1)}W^{z_a})$</font> $\odot$ <font color="red">$tanh(T^{(t-1)}W_{h_a})$</font> $ + $<br><font color="red">$\delta(T^{(t-1)}W^{z_a})$</font> $\odot$ <font color="red">$tanh{\delta[(T^{t-1)}W^{r_a} \odot H^{(t-1)})W^h]}$</font>$+$<br><font color="red">$ \delta(T^{(t-1)}W^{z_a})$</font> $ \odot\ tanh{\delta[(H^{(t-1)}W_r)\odot H^{(t-1)}] + H^{(t-1)}}  + $<br><font color="red">$ tanh(T^{(t-1)}W^{h_a})$</font> $ \odot\ \delta(H^{t-1}W^{z_h}) + $<br><font color="red">$tanh{\delta[(T^{(t-1)}W^{r_a} \odot H^{(t-1)})W^h)]} $</font> $ \odot \delta(H^{(t-1)}W^{z_a}) +\ \delta(H^{(t-1)}W^{z_h}) \odot tanh{\delta[(H^{(t-1)}W^{r_h} \odot H^{(t-1)})W^h]- H^{(t-1)} } + H^{(t-1)}$</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -517,6 +806,367 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-code-read/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/10/gnn-parallel-ggsnn-code-read/" class="post-title-link" itemprop="url">gnn-parallel-ggsnn-code-read</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-10 21:16:00" itemprop="dateCreated datePublished" datetime="2019-10-10T21:16:00+08:00">2019-10-10</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-28 21:13:33" itemprop="dateModified" datetime="2019-10-28T21:13:33+08:00">2019-10-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn-parallel/" itemprop="url" rel="index"><span itemprop="name">gnn-parallel</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-torch-lua"><a href="#1-torch-lua" class="headerlink" title="1. torch lua"></a>1. torch lua</h2><p>th test.lua to test all the modules in the ggnn and run libraries</p>
+<ol>
+<li>go into “babi/data”, run’bash get_10_fold_data.sh” to get 10 folds of bAbI data for 5 tasks (4, 15, 16, 18, 19) and do some preprocessing</li>
+<li>go into ‘babi/data/extra_seq_tasks’, run’bash generate_10_fold_data.sh’ to get 10 folds of data for the two extra sequence tasks</li>
+<li>go back to ‘babi/‘ and use ‘run_experiments.py’ to run the GGNN/GGS-NN</li>
+<li>Use ‘run_rnn_baselines.py babi18 lstm’ runs LSTM on bAbI task 18 for all 10 folds of data</li>
+</ol>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><ul>
+<li>run_rnn_baselines babi18 lstm</li>
+<li>run_experiments /  bash generate_10_fold_data.sh</li>
+<li>get_10_fold_data.sh: do some preprocessing预处理</li>
+</ul>
+<h3 id="实际执行"><a href="#实际执行" class="headerlink" title="实际执行"></a>实际执行</h3><ul>
+<li><p>babi4</p>
+<ul>
+<li><p>run_q4()</p>
+<ul>
+<li>babi_train.lua<ul>
+<li>paras <ul>
+<li>nsteps: number of propagation iterations</li>
+<li>learnrate: learning rate 0.01</li>
+<li>momentum: ? for adam ？</li>
+<li>mb: minibatch size</li>
+<li>maxiters: maximum number of weight updates  100</li>
+<li>printafter: save checkpoint after this amount of weight updates</li>
+<li>saveafter: save checkpoint after this amount of weight updates  100</li>
+<li>optim: adam</li>
+<li>statedim: dimensionality of the node representations</li>
+<li>evaltrain: evaluate on training set during training if set to 1</li>
+<li>nthreads: set the number of threads to use with this process</li>
+<li>ntrain: number of training instances 50</li>
+<li>nval: number of validation instances 50</li>
+<li>annotationdim: dimensionality of the node annotations 节点annotations的维度</li>
+<li>outputdir: output directory</li>
+<li>mode: {selectnode, classifygraph, seqclass, shareprop_seqclass} selectnode</li>
+<li>datafile: should contain lists of edges and questions in standard format</li>
+<li>seed: random seed.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">preprocess其实就是edges上的属性，点的属性</span><br><span class="line">color = require &apos;trepl.colorize&apos;</span><br><span class="line">babi_data = require &apos;babi_data&apos;</span><br><span class="line">eval_util = require &apos;eval_util&apos;</span><br><span class="line">ggnn = require &apos;,,/ggnn&apos;</span><br><span class="line">1. prepare data</span><br><span class="line">math.randomseed(opt.seed)</span><br><span class="line">torch.manualSeed(opt.seed)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>eval_q4()</p>
+<ul>
+<li>babi_eval.lua</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>todo: 看具体是怎么做的?</p>
+<h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h3><pre><code>python rnn_preprocess.py processed_$fold/train/${i}_graphs.txt processed_$fold/rnn/train/${i}_tokens.txt --mode graph --nval 50</code></pre><h3 id="bAbi使用"><a href="#bAbi使用" class="headerlink" title="bAbi使用"></a>bAbi使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">babi-tasks PathFinding --path-length 3 --decoys 1</span><br><span class="line">babi-tasks Size --steps 3</span><br><span class="line"></span><br><span class="line"> ./babi-tasks $i 1000 --symbolic true &gt; symbolic_$fold/train/$&#123;i&#125;.txt</span><br><span class="line"></span><br><span class="line">--symbolic true</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-pytorch"><a href="#2-pytorch" class="headerlink" title="2. pytorch"></a>2. pytorch</h2><p>论文中总共4个数据集<br>task 4<br>task 15<br>task 16<br>task 18  只有0.3386</p>
+<ul>
+<li><p>main.py</p>
+<ul>
+<li>grid(opt)<ul>
+<li>main(opt)<ul>
+<li>run(opt)<ul>
+<li>net = GGNN (model.py)</li>
+<li>train_loss = train(epoch, train_dataloader, net, criterion, optimitzer, opt)</li>
+<li>test_loss, numerator, denomitor = test(test_dataloader, net, criterion, optimizer, opt)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>model.py</p>
+<ul>
+<li>GGNN<ul>
+<li>incoming and outgoing edge embedding</li>
+<li>propogation model</li>
+<li>output model</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>task4<br>基本数据集</p>
+<ul>
+<li>edge_types</li>
+<li>labels.txt: true or false</li>
+<li>node_ids.txt:</li>
+<li>question_types.txt:</li>
+<li>graphs.txt<ul>
+<li>n1 e6 n2</li>
+<li>? n1 n2 2<br>数据主要从graphs.txt中提取<br>graphs.txt中的数据<br>n_edges_type  2<br>n_tasks 4 问题的类型<br>n_node 4</li>
+</ul>
+</li>
+</ul>
+<p>item[1] = {task_type, _, task_output}<br>annotation = np.zeros([n_nodes, n_annotation_dim])  # [4, 1]<br>annotation[target][0] = 1</p>
+<blockquote>
+<p>这里的annotation是怎么设置的？ 这样设置有什么用？</p>
+</blockquote>
+<p>task_data_list[task_type-1].append([edge_list,annotation,task_output])</p>
+<blockquote>
+<p>每次只使用一种类型的task_id进行训练</p>
+</blockquote>
+<p>一些提前设置的参数<br>-D: denmensions 50<br>-H: hidden layer size 50</p>
+<p>然后进行变换的参数是<br>bAbIDataloder(train_dataset, batch_size, shuffle, num_workers)<br>batch_size = 1,   num_workers = 2</p>
+<h3 id="pytorch数据处理的通路"><a href="#pytorch数据处理的通路" class="headerlink" title="pytorch数据处理的通路"></a>pytorch数据处理的通路</h3><p>基于task4</p>
+<ol>
+<li><p>原始含义-&gt;graphs.txt</p>
+<ul>
+<li>单条数据<blockquote>
+<p>1 1 2: node_1 e_type node_2  fact<br>3 1 1    fact<br>? 1 1 2: ? qustion_node qustion_type(&lt;=edge_type) question_target</p>
+</blockquote>
+</li>
+<li>根据quetsion_type, 每次指示某个task_type进行运行GGNN模型</li>
+<li>统计数据<ul>
+<li>n_edges_type 2</li>
+<li>n_node 4</li>
+<li>n_tasks 4</li>
+</ul>
+</li>
+<li>返回结果<ul>
+<li>edges: (node_1, edges, node_2)</li>
+<li>annotation:  [n_nodes, n_annotation_dim]<blockquote>
+<p>这里n_annotation_dim由用户自己指定，这里为1<br>question_node对应位为1<br>这里值得注意  n_annotation_dim=2,   结果为<code>[[1, 0, 0, 0], [0, 0, 0, 0]]</code>, 只指示<code>[question_node - 1][0]</code>为1</p>
+</blockquote>
+</li>
+<li>target: question_target<blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>dataset -&gt; dataloader(batch_size=1, shuffle=True, num_workers=2):</p>
+<blockquote>
+<p>猜想是转换为邻接矩阵，或者其他？  介绍的是 产生multi-process iterable</p>
+</blockquote>
+<ul>
+<li><p>dataset</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> &lt;class &apos;list&apos;&gt;: [[[1, 1, 2], [3, 1, 1]], array([[1.],</span><br><span class="line">[0.],</span><br><span class="line">[0.],</span><br><span class="line">[0.]]), 2]</span><br><span class="line">&lt;class &apos;list&apos;&gt;: [[[3, 1, 2], [1, 1, 3]], array([[0.],</span><br><span class="line">[0.],</span><br><span class="line">[1.],</span><br><span class="line">[0.]]), 2]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dataloader</p>
+<blockquote>
+<p>num_samples 15???</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[[[0., 0., 1., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0.],</span><br><span class="line"> [1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span><br><span class="line"> [0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0.],</span><br><span class="line"> [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]]]</span><br><span class="line"> // [4, 16, 1]</span><br><span class="line"> [[[1.],</span><br><span class="line"> [0.],</span><br><span class="line"> [0.],</span><br><span class="line"> [0.]]]</span><br><span class="line"> </span><br><span class="line"> [1]</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>adj_matrix:  (1, 4, 16):  [A_in, A_out]</li>
+<li>annotation (1, 4, 1)<blockquote>
+<p>这里前面的1是与那个有关</p>
+</blockquote>
+</li>
+<li>target:  按索引开始排列，-1, 从0开始 (1,)</li>
+</ul>
+</li>
+<li><p>train.py对代码使用</p>
+<ul>
+<li>padding: (n_nodes, n_nodes, opt.state_dim - opt.annotation_dim)  (1, 4, 3)<blockquote>
+<p>len(): 取的一直都是第一位<br>? 有什么用<br>opt.state_dim: 论文中有提到的关于每个节点要设置多少个的东西<br>所以这个是关于前面的补充？？</p>
+</blockquote>
+</li>
+<li>init_input = (annotation, padding)</li>
+<li>output = net(init_input, annotation, adj_matrix)<blockquote>
+<p>shape: [1, 4],  估计里面存储的是softmax值</p>
+</blockquote>
+<ul>
+<li>GGNN mode: Select node???<ul>
+<li>forward(prop_state, annotation, A)<ul>
+<li>prop_state: (1,4,3)</li>
+<li>annotation: (1,4,1)</li>
+<li>A: (1, 4, 16)<blockquote>
+<p>A的猜测对了，但是in_states, out_states还没检查</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>main.py中相关参数</p>
+<ul>
+<li>opt.state_dim: default 4</li>
+<li>opt.n_steps: propogation: 4</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>pytorch用法小结<br>torch.cat((x, x, x), 1)<br>torch.stack((x, x, x), 2) 进行数据的封装<br>transpose(x, 0, 1) 进行转置</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82NDU1MTQxMg==" title="https://zhuanlan.zhihu.com/p/64551412">https://zhuanlan.zhihu.com/p/64551412<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<p>view(1,6) 按照所想的内容进行填充</p>
+<blockquote>
+<p>view(-1, 1, 2): 如果为-1表示这个位置由其他位置的数字来推断<br>nn.Linear(): 权重自己给定</p>
+</blockquote>
+<h2 id="torch"><a href="#torch" class="headerlink" title="torch"></a>torch</h2><ol>
+<li>ggnn.NodeSelectionGGNN(state_dim, annotation_dim, prop_net_h_sizes, output_net_h_sizes, n_edge_types)<ul>
+<li>state_dim = opt.statedim 4</li>
+<li>annotation: opt 1</li>
+<li>prop_net_h_sizes: {}</li>
+<li>output_net_h_sizes: {state_dim} 4<blockquote>
+<p>输出的每个节点的大小</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="something-new"><a href="#something-new" class="headerlink" title="something new"></a>something new</h2><ol>
+<li>学习方式的问题</li>
+</ol>
+<p>测试集和训练集分开的。<br>测试集和训练集</p>
+<p>测试集上是全部关于一个图的局部的训练数据。</p>
+<p>所以实际上对于每个图的获取方式都不一样</p>
+<p>训练数据是原本图上的一部分</p>
+<ol start="2">
+<li>edge-type训练还是question_type训练</li>
+</ol>
+<p>edge-type不对，这里是边类型直接进行处理了</p>
+<p>question_id 进行训练</p>
+<p>这里question_id实际上是边的type类型，跟之前的理解是一样的</p>
+<ol start="3">
+<li><p>sequence 观测点的想法: 对的，刚刚看了下论文，发现确实是这样的！ 应该是中间的标注能够知道。</p>
+</li>
+<li><p>是否有初始维度之说。 对的，没错！！！</p>
+</li>
+<li><p>训练模式</p>
+<blockquote>
+<p>这又回到了传统的训练方式，不过是借助了图的模型而已。还是进行一个图形一个图形地进行训练</p>
+</blockquote>
+</li>
+<li><p>跟原始的有什么区别，原始的一大串进行考虑，结果发现怎么根据边来传播，发现这样做是最成功的</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2></li>
+<li><p>普通的机器学习 vs 图神经网络</p>
+</li>
+</ol>
+<p>普通机器学习过程即学习一个函数，然后有很多数据都是关于这个函数的。<br>然后，用一个数据会产生loss, 然后根据loss进行反向传播，更新梯度。<br>然后，不断地用多组数据不停地进行训练。</p>
+<p>图神经网络<br>一部分图的数据，一部分图的标签来模拟常见操作。</p>
+<p>不对是一组数据进行学习的过程。</p>
+<ol start="2">
+<li>导数更新<br>对于传统的机器学习。导数更新实际上是由公式算出来的导数，然后导数更新公式上赋值上一堆权重。问题就是如何进行更新。</li>
+</ol>
+<p>对于一般情况来说，如果是一个训练数据直接使用一个数据进行训练即可。如果是多个训练数据，则loss来进行更新</p>
+<ol start="3">
+<li>分析<br>相比于传统的图数据处理方式，GNN, GG-NN等模型可以有效地利用图的拓扑结构信息。</li>
+</ol>
+<p>这些模型在每个传播时间步都需要展开所有的节点，因而这些模型也可以用于处理各种图（包括有向图、无向图、有环图、无环图等）。</p>
+<p>而且有以下问题：</p>
+<blockquote>
+<ol>
+<li>在每个时间步都要展开图中所有节点，效率降低；</li>
+<li>GG-NN将传播时间固定，可能只会得到有效的信息。</li>
+</ol>
+</blockquote>
+<ol start="4">
+<li>总结<blockquote>
+<p>实际是每步即根据出度和入度矩阵进行标签传播，然后每一步都是在图上，从一个节点走到另外的节点。但是这样图上的信息传输也因此受到了约束。<br>而且只是对特定的点给予信息，这意味着只能这些点的信息进行向前传播</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="10-28总结"><a href="#10-28总结" class="headerlink" title="10.28总结"></a>10.28总结</h2><p>对GGNN总结主要如下：<br>所谓的A_in, 实际上就是每个节点新一轮的表示是按照当前边的in边，将in边的节点的值进行加和，从而得到最终的结果。</p>
+<blockquote>
+<p>详细可见矩阵相乘的运算 </p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-paper-read/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -557,7 +1207,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-17 21:23:30" itemprop="dateModified" datetime="2019-10-17T21:23:30+08:00">2019-10-17</time>
+                <time title="修改时间：2019-10-23 08:54:08" itemprop="dateModified" datetime="2019-10-23T08:54:08+08:00">2019-10-23</time>
               </span>
             
           
@@ -747,13 +1397,6 @@
 <ol>
 <li>由于在每个实践部都需要展开所有的节点，每个节点还需要使用D维向量进行表示；当图很大且向量表示很大时，模型的效率问题就会变得很重要</li>
 <li>在GNN中需要保证凸的整体映射是一个压缩映射，这显然就减小了该模型所能建模的问题空间???(好像的要求时对于寻找压缩映射问题而言的)。为了解决这一问题，GG-NN将传播时间步固定为T, 虽然不需要保证收敛，但是，图上的信息传输却也因此受到了约束(???，信息的传输与时间步有关，因为终止条件不再是收敛，而是具体的时间步)。例如，在可达性预测任务中，在两个时间步后节点1的信息才可以到达节点4.虽然本文中采取了一定的措施来缓解这一问题（即不仅定义了沿边方向的转移举证，还定义了与边相反方向的转移矩阵）。但是只要T的大小有限，节点之间的信息就只能沿着路径传播T步，而不能像GNN那样到模型收敛才停止。换句话说，GG-NN实际上是以损失图中较长路径信息的代价换取了模型可建模的问题空间。</li>
-</ol>
-<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><p>th test.lua to test all the modules in the ggnn and run libraries</p>
-<ol>
-<li>go into “babi/data”, run’bash get_10_fold_data.sh” to get 10 folds of bAbI data for 5 tasks (4, 15, 16, 18, 19) and do some preprocessing</li>
-<li>go into ‘babi/data/extra_seq_tasks’, run’bash generate_10_fold_data.sh’ to get 10 folds of data for the two extra sequence tasks</li>
-<li>go back to ‘babi/‘ and use ‘run_experiments.py’ to run the GGNN/GGS-NN</li>
-<li>Use ‘run_rnn_baselines.py babi18 lstm’ runs LSTM on bAbI task 18 for all 10 folds of data</li>
 </ol>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yODE3MDE5Nw==" title="https://zhuanlan.zhihu.com/p/28170197">https://zhuanlan.zhihu.com/p/28170197<i class="fa fa-external-link"></i></span></p>
 <p>jianshu.com/p/40362662014a<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY3Jvc29mdC90Zi1nbm4tc2FtcGxlcw==" title="https://github.com/microsoft/tf-gnn-samples">https://github.com/microsoft/tf-gnn-samples<i class="fa fa-external-link"></i></span></p>
@@ -1422,628 +2065,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/linux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/linux/" class="post-title-link" itemprop="url">linux</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 13:28:11" itemprop="dateCreated datePublished" datetime="2019-09-19T13:28:11+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-13 10:07:17" itemprop="dateModified" datetime="2019-10-13T10:07:17+08:00">2019-10-13</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="作业相关"><a href="#作业相关" class="headerlink" title="作业相关"></a>作业相关</h2><p>jobs 查看正在进行的job<br>ps 查看正在进行的进程</p>
-<p>jobs 挂起<br>kill -stop PID<br>kill %job_num<br>kill pid</p>
-<blockquote>
-<p>先经过ps查看一下</p>
-</blockquote>
-<h2 id="查看端口"><a href="#查看端口" class="headerlink" title="查看端口"></a>查看端口</h2><ol>
-<li><p>linux<br>netstat -lnp | grep 8080<br>ps -aef | grep tomcat</p>
-</li>
-<li><p>windows</p>
-</li>
-</ol>
-<p>netstat -ano | findstr 8080<br>taskkill /F /pid 1088</p>
-<h2 id="ssh使用"><a href="#ssh使用" class="headerlink" title="ssh使用"></a>ssh使用</h2><ol>
-<li>查看ip地址， ifconfig</li>
-<li>sudo apt install openssh-server</li>
-</ol>
-<h2 id="apt-install"><a href="#apt-install" class="headerlink" title="apt install"></a>apt install</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vaGFueGluZy9wLzM5OTYxMDMuaHRtbA==" title="https://www.cnblogs.com/hanxing/p/3996103.html">https://www.cnblogs.com/hanxing/p/3996103.html<i class="fa fa-external-link"></i></span></p>
-<h3 id="1-安装位置"><a href="#1-安装位置" class="headerlink" title="1. 安装位置"></a>1. 安装位置</h3><p>/var/cache/apt/archieve 软件的安装缓存<br>sudo apt-get autoclean 只删除低版本的deb包<br>sudo apt-get clean 全部删除</p>
-<blockquote>
-<p>为了以后安装系统方便，可以将这些deb包保存在其他地方</p>
-</blockquote>
-<p>一般的deb包都安装在/usr 或 /usr/share /usr/local中。<br>自己下载的压缩包或编译的包，有些可以选择安装目录， 一般放在/usr/local. 有时也放在/opt中。</p>
-<p>如果想知道具体位置， dpkg -L XXX.deb</p>
-<blockquote>
-<p>eg: dpkg -L firefox</p>
-</blockquote>
-<p>如果想知道apt-get install 安装的软件<br>dpkg -S softwarenmae | grep cnf$</p>
-<ol>
-<li>dpkg -L  </li>
-<li>dpkg -S  apt-get install<blockquote>
-<p>whereis 查看命令位置</p>
-</blockquote>
-</li>
-<li>/usr,  /usr/share,  /usr/local, /opt</li>
-</ol>
-<p>!!!! usr/share correct!!!</p>
-<h3 id="2-apt-get"><a href="#2-apt-get" class="headerlink" title="2. apt-get"></a>2. apt-get</h3><p>apt-get: advanced packaging tools</p>
-<blockquote>
-<p>apt-get需要root,  apt只需要当前用户</p>
-</blockquote>
-<p><code>apt-get &lt;command&gt; [&lt;option&gt;] pkg1 [pkg2..]</code></p>
-<ol>
-<li>command:<ul>
-<li>update 重新获取软件包列表，很多时候软件安装不上就要先进行update一下</li>
-<li>upgrade 进行更新</li>
-<li>install, remove</li>
-<li>autoremove: 自动移除全部不使用的软件包</li>
-<li>purget 移除软件包和配置文件诶见</li>
-<li>source 下载源码档案</li>
-<li>autoclean</li>
-</ul>
-</li>
-<li>args<ul>
-<li>-h 帮助文件</li>
-<li>-q 输出到日志 无进展指示</li>
-<li>-qq 不输出信息，错误除外</li>
-<li>-d 仅下载， 不安装或解压归档文件</li>
-</ul>
-</li>
-<li>常用实例<ul>
-<li>apt-cache search pkg</li>
-</ul>
-</li>
-</ol>
-<h2 id="3-add-a-path-to-PATH"><a href="#3-add-a-path-to-PATH" class="headerlink" title="3. add a path to PATH"></a>3. add a path to PATH</h2><p>~/bin: some distributions automatically put in your PATH if it exists</p>
-<ol>
-<li>add a path to PATH:  <code>PATH=$PATH:~/opt/bin</code><ul>
-<li>way1: 需要重启<ul>
-<li>~/.profile 当前用户<blockquote>
-<p>profile 侧面，轮廓</p>
-</blockquote>
-</li>
-<li>/etc/profile 所有用户</li>
-</ul>
-</li>
-<li>way2: ~/.bashrc<ul>
-<li>vim ~/.bashrc</li>
-<li>source ~/.bashrc</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>check the path<ul>
-<li>echo $PATH 检查环境变量<blockquote>
-<p>echo 重复，反射； 回应</p>
-</blockquote>
-<h2 id="4-snap"><a href="#4-snap" class="headerlink" title="4. snap"></a>4. snap</h2>add /snap/bin to $PATH</li>
-</ul>
-</li>
-</ol>
-<p>then can directly use</p>
-<h2 id="5-lua环境安装"><a href="#5-lua环境安装" class="headerlink" title="5. lua环境安装"></a>5. lua环境安装</h2><ol>
-<li><p>sudo apt-get install lua5.3</p>
-</li>
-<li><p>sudo apt-get install luarocks</p>
-<blockquote>
-<p>luarocks install gnuplot: install torch first</p>
-</blockquote>
-</li>
-<li><p>git clone torch</p>
-<blockquote>
-<p>bash install-deps<br>lua5.2  torch7<br>th 快捷命令</p>
-</blockquote>
-<h2 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h2></li>
-<li><p>proxy problem: 开机手动设置</p>
-</li>
-<li><p>查看后台进程</p>
-<ul>
-<li>ps</li>
-<li>service<blockquote>
-<p>chkconfig –list<br>no find!!!</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>uname -a: 查看当前版本信息</p>
-</li>
-<li><p>chrome 快速定位到搜索栏: ctrl+L, alt+D</p>
-</li>
-<li><p>最小化所有窗口 win + d ？ 最小化当前窗口， 终端重启一个</p>
-</li>
-<li><p>to add deepin some memory</p>
-</li>
-<li><p>mv 使用正则表达式</p>
-</li>
-<li><p>关于硬盘：rename没有必要</p>
-</li>
-<li><p>linux关于安装系统的命令</p>
-<ul>
-<li>ln命令： 功能是为某一个文件在另一个位置建议一个同步的链接<ul>
-<li>例子<ul>
-<li>ln -s link1 link2<blockquote>
-<p>为link1文件创建软链接link2, 如果link1丢失，link2将会失效</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>百度网盘使用有问题，aria2使用频率不高，放弃</p>
-</li>
-<li><p>安装linux版的hexo</p>
-<blockquote>
-<p>配置文件一般是有全局配置文件的，在～/.npmrc这些内容之下</p>
-</blockquote>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/vim/" class="post-title-link" itemprop="url">vim</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 13:25:19 / 修改时间：13:26:10" itemprop="dateCreated datePublished" datetime="2019-09-19T13:25:19+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h1><h2 id="光标移动"><a href="#光标移动" class="headerlink" title="光标移动"></a>光标移动</h2><ol start="0">
-<li><p>整篇文章<br>gg: 开头<br>G: 末尾<br>123+gg: 跳转到指定行</p>
-</li>
-<li><p>屏幕<br>H屏幕顶行，J合并两行 L屏幕底行<br>M屏幕中间行<br>ctr+f  pagedown<br>ctrl+b  pageup</p>
-</li>
-<li><p>行列上下<br>左、下、上、右 h, j,k,l</p>
-</li>
-<li><p>单词<br>w:开头, 向后<br>b:开头，向前<br>e:末尾，向后</p>
-</li>
-<li><p>缩进</p>
-<blockquote>
-<blockquote>
-<p>缩进  &lt;&lt;</p>
-</blockquote>
-</blockquote>
-</li>
-<li><p>行前，行尾<br>行前，行尾 ^,  $</p>
-</li>
-<li><p>段前，段后<br>{段前  }段后: 跳过开头<br>(  ): 会经过开头行</p>
-<h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2><p>v: 行选择<br>ctrl+v: 列选择</p>
-</li>
-</ol>
-<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><ol>
-<li>插入<br>i: 当前字母前插入<br>I: 当前行前插入</li>
-</ol>
-<p>a: 当前字母后插入<br>A: 当前字母后插入</p>
-<p>o: 下一行插入<br>O: 上一行插入</p>
-<ol start="2">
-<li><p>复制<br>y: 复制选中内容<br>yy: 复制当前行<br>123+yy: 向下复制多少行</p>
-</li>
-<li><p>剪切<br>无，=复制+删除</p>
-</li>
-<li><p>删除<br>y: 复制选中内容<br>yy: 复制当前行<br>123+yy: 向下复制多少行</p>
-</li>
-<li><p>粘贴<br>y: 复制选中内容<br>yy: 复制当前行<br>123+yy: 向下复制多少行</p>
-</li>
-</ol>
-<h2 id="操作撤销和恢复"><a href="#操作撤销和恢复" class="headerlink" title="操作撤销和恢复"></a>操作撤销和恢复</h2><p>u: 撤销操作undo<br>ctr+r 重做redo</p>
-<h2 id="全局查找、替换"><a href="#全局查找、替换" class="headerlink" title="全局查找、替换"></a>全局查找、替换</h2><ol>
-<li><p>查找<br>/word 回车<br>N查看上一处<br>n查看下一处</p>
-</li>
-<li><p>替换<br>:{作用范围}s/{目标}/{替换}/{替换标志}</p>
-</li>
-</ol>
-<ul>
-<li><p>作用范围<br>全局范围<code>:%s/</code><br>当前行s<br>选区 <code>:&#39;&lt;,&#39;&gt;/</code><br>当前行<code>.</code>与接下来的两行<code>+2</code>: <code>:.,+2s</code></p>
-</li>
-<li><p>替换标志<br>g: global替换所有的出现<br>空：从光标位置开始替换<br>gc: 需要进行确认</p>
-</li>
-<li><p>块选择<br>v 光标移动过的位置直接进行选择。可以操作  ctrl+v 列选择<br>y复制， p粘贴 </p>
-</li>
-</ul>
-<p>该模式下移动光标的感觉跟查看下一样</p>
-<p>参考<br><span class="exturl" data-url="aHR0cHM6Ly9oYXJ0dGxlLmxhbmQvMjAxNi8wNy8xOC9pbnRyby10by1yZWdleHAuaHRtbA==" title="https://harttle.land/2016/07/18/intro-to-regexp.html">https://harttle.land/2016/07/18/intro-to-regexp.html<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>正则表达式这篇写得很好！！</p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/deeplearning-tensorflow-study/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/deeplearning-tensorflow-study/" class="post-title-link" itemprop="url">deeplearning tensorflow study</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 13:22:41 / 修改时间：13:23:42" itemprop="dateCreated datePublished" datetime="2019-09-19T13:22:41+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/tensorflow/" itemprop="url" rel="index"><span itemprop="name">tensorflow</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="一个pipeline"><a href="#一个pipeline" class="headerlink" title="一个pipeline"></a>一个pipeline</h1><blockquote>
-<p>一层封装，但还是仍然比较繁琐<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI4OTY2MjcvYXJ0aWNsZS9kZXRhaWxzLzcyODc0Njc4" title="https://blog.csdn.net/u012896627/article/details/72874678">https://blog.csdn.net/u012896627/article/details/72874678<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-<ol>
-<li>建立一个sess=tf.Session<blockquote>
-<p>交互式会话跟全局会话有什么区别<br>tf.Session.init()</p>
-</blockquote>
-<ul>
-<li>tf.Session vs tf.InteractiveSession<blockquote>
-<p>原本每个张量的计算，以及最后的取值都需要在默认的Session中，而且最终的运行也离不开Session.run(); 采用InteractiveSession后， 本身就为默认的session, 此时距直接tensor.eval() 即可运行， vai.init.run()即可运行</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>中间涉及到的张量Tensor, 主要相关的其实就是矩阵运算<ul>
-<li>tensor类型<ul>
-<li>tf.placeholder()  // 通常用于小数据集的输入, 在后面的feed_back={} 将进行制定</li>
-<li>tf.Variable(name=, intilizer=)  // 可用于梯度 更新的内容 </li>
-<li>tf.constant(name= , shape=)</li>
-</ul>
-</li>
-<li>tensor初始化<ul>
-<li>获取指定分布的值<ul>
-<li>random_normal 正态分布 random_uniform 聚云分布 truncated_normal</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>区分不同作用域的变量<ul>
-<li>with tf.variable_scope(scope_name, resue=):  v1=””</li>
-</ul>
-</li>
-<li>小技巧<ul>
-<li>tensor.eval() // 查看tensor的numpy矩阵</li>
-<li>tensor.shape  // 查看形状</li>
-<li>v.assign()  assign(  )</li>
-<li>tf.get_variable(name): 获取指定名称的var</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Tensor之间的运算, 即边<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI4OTY2MjcvYXJ0aWNsZS9kZXRhaWxzLzcyODc0Njc4" title="https://blog.csdn.net/u012896627/article/details/72874678">https://blog.csdn.net/u012896627/article/details/72874678<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-<ul>
-<li>矩阵变换, 这个本身可以用numpy来做？<ul>
-<li>tf.expands_dims(arr, 1), 在指定的轴， 比如axis=1，增加一维，原数据不变？ 如其名，</li>
-<li>tf.concat(arr1, arr2, axis=1) 在某一维上将两个向量合并。 (2,3)-&gt;(2,6), (4,3) 发现对于0来说是倒着来的</li>
-<li>tf.sparse_to_dense()</li>
-<li>tf.random_shuffle()  按照axis=0, 进行制定shuffle</li>
-<li>tf.argmax/ arg.min 找到最大最小所对应的的位置</li>
-<li>tf.equal 判断两个tensor是否每个元素都相等，返回bool的tensor</li>
-<li>tf.cast 将x的数据格式转化为dtype</li>
-<li>tf.matul 用来做举证乘法</li>
-</ul>
-</li>
-<li>神经网络<ul>
-<li>tf.nn.embedding_lookup 将一个数字序列转化为embedding序列表示？举证</li>
-<li>tf.trainable_variables 返回多个有训练的变量</li>
-<li>tf.gradients 用来计算导数</li>
-<li>tf.nn.dropout 防止过拟合</li>
-</ul>
-</li>
-<li>普通操作<ul>
-<li>tf.linrange()  tf.range()</li>
-</ul>
-</li>
-<li>规范化<ul>
-<li>tf.variable_scope</li>
-<li>tf.getvariale_scope</li>
-</ul>
-</li>
-<li></li>
-</ul>
-</li>
-<li>变量的初始化操作<ul>
-<li>Session.run(vari.initilizer)  // 进行变量的初始化</li>
-<li>tf.initialize_all_variables().run()</li>
-</ul>
-</li>
-<li>损失函数和梯度下降<ul>
-<li>损失函数为图的最后一个tensor</li>
-<li>优化器. optimizer = tf.train.GradientDesecentOptimizer(0.5)</li>
-<li>train = ptimizer.minimize(cross_entropy)</li>
-</ul>
-</li>
-<li>tensorflow运行<ul>
-<li>sess.run(fetches, feed_dict,  options)  // <ul>
-<li>fetches: tensor_node</li>
-<li>feed_dict</li>
-<li>return: fetches中的值</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>预测<ul>
-<li>tf.equal(tf.argmax(a, 1), tf.argmax(g,1))</li>
-<li>accuary = tf.reduce_mean()</li>
-</ul>
-</li>
-<li>tensor.close()</li>
-</ol>
-<blockquote>
-<p>另外，所谓的tf.Graph; 每个tensor都可以产生一个graph; 或者定义一个graph, 之后都在该作用域下进行声明tensor </p>
-</blockquote>
-<p>tf快捷配置命令行参数</p>
-<blockquote>
-<p>并不是技术，用在了很多方面</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 声明</span><br><span class="line">FLAGS = tf.app.flags.FLAGS</span><br><span class="line">tf.app.flags.DEFINE_string(props_str, default_str) // DEFINE_TYPE</span><br><span class="line"></span><br><span class="line">// 使用</span><br><span class="line">FLAGS.props</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>查看GPU<br>nvidia-smi</p>
-</li>
-<li><p>以后计划任务，务必注意查看需要花费的时间</p>
-</li>
-</ul>
-<p>什么是skip-gram算法？<br> skip-gram算法是什么，在给出目标单词的情况下，预测它的上下文单词，这里会给定指定窗口大小。<br> 思想：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yOTMwNTQ2NA==" title="https://zhuanlan.zhihu.com/p/29305464">https://zhuanlan.zhihu.com/p/29305464<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>没看懂，还是没明白第一个矩阵W是V*d, 是当前矩阵的什么。还有就是用到邻接矩阵的向量？？</p>
-</blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNzIzNDA3OA==" title="https://zhuanlan.zhihu.com/p/27234078">https://zhuanlan.zhihu.com/p/27234078<i class="fa fa-external-link"></i></span></p>
-<p>扩展，一点想法，代理是什么？<br>代理服务，代理协议，代理端口<br>首先代理服务，有邮件<br>代理协议就是像常见的http/https协议等等<br>代理端口也就是所用的代理端口的感觉</p>
-<p>两个问题：现在已经测试了可以开启代理服务器的方式允许各种方式的网络配置。<br>已经测试了同局域网下可以访问，如何允许私网段以及不同局域网访问呢？按理说是能做到的</p>
-<p>ssh连接远程访问也可以通过代理服务器来做，也就是说如果解决了不同局域网的访问，那么就可以访问到集群</p>
-<p>很多配置相关的文件都在~/.ssh下</p>
-<p>现在所配置的代理不过都是私网地址，即局域网内允许使用的地址<br>另外有一种情况就是NAT，地址映射协议，由某一地址统一管理。如果其他计算机需要访问的话，需要首先在主节点上进行说明。</p>
-<ul>
-<li>docker是什么？有什么用？<br>相关概念：虚拟机，操作系统<br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTgvMDIvZG9ja2VyLXR1dG9yaWFsLmh0bWw=" title="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html">http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html<i class="fa fa-external-link"></i></span><br>虚拟机是在一个操作系统之上再嵌套一个操作系统。</li>
-</ul>
-<p>对于虚拟机来说，它管理很多方面，有着很多方面的高效性。就是一个操作系统，并且能够提供各种服务，比如文件服务、网络</p>
-<p>而docker是进行进程的模拟，所以提供的服务会很快。启动快，占用资源少<br>有什么用？<br>提供一次性的环境， 提供弹性的云服务， 组件微服务架</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -2096,7 +2117,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

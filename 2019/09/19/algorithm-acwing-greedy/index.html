@@ -72,14 +72,14 @@
 </script>
 
   <meta name="description" content="贪心无套路而言，最难的是证明其正确性 试下还是有套路的一般来说，举例看是否能证明正确性 一般区间问题，先排序  按区间左右端点排序，或者双关键字排序  区间选点 数轴选最少的点覆盖所有的区间   将每个区间按右端点从小到大排序 从前往后依次枚举每一个区间如果当前区间已经包含点，则直接pass否则，选择当前区间的右端点  A=B A&amp;lt;=B A&amp;gt;=B Ans问题的最优解  ans实际问题的">
-<meta name="keywords" content="acwing,algorithm,greedy">
+<meta name="keywords" content="algorithm,acwing,greedy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="algorithm acwing greedy">
 <meta property="og:url" content="https://augf.github.io/2019/09/19/algorithm-acwing-greedy/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
 <meta property="og:description" content="贪心无套路而言，最难的是证明其正确性 试下还是有套路的一般来说，举例看是否能证明正确性 一般区间问题，先排序  按区间左右端点排序，或者双关键字排序  区间选点 数轴选最少的点覆盖所有的区间   将每个区间按右端点从小到大排序 从前往后依次枚举每一个区间如果当前区间已经包含点，则直接pass否则，选择当前区间的右端点  A=B A&amp;lt;=B A&amp;gt;=B Ans问题的最优解  ans实际问题的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-19T04:14:10.708Z">
+<meta property="og:updated_time" content="2019-10-29T01:17:16.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="algorithm acwing greedy">
 <meta name="twitter:description" content="贪心无套路而言，最难的是证明其正确性 试下还是有套路的一般来说，举例看是否能证明正确性 一般区间问题，先排序  按区间左右端点排序，或者双关键字排序  区间选点 数轴选最少的点覆盖所有的区间   将每个区间按右端点从小到大排序 从前往后依次枚举每一个区间如果当前区间已经包含点，则直接pass否则，选择当前区间的右端点  A=B A&amp;lt;=B A&amp;gt;=B Ans问题的最优解  ans实际问题的">
@@ -227,7 +227,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">96</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">99</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -312,11 +312,19 @@
                 
               
 
-              <time title="创建时间：2019-09-19 12:13:13 / 修改时间：12:14:10" itemprop="dateCreated datePublished" datetime="2019-09-19T12:13:13+08:00">2019-09-19</time>
+              <time title="创建时间：2019-09-19 12:13:13" itemprop="dateCreated datePublished" datetime="2019-09-19T12:13:13+08:00">2019-09-19</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-29 09:17:16" itemprop="dateModified" datetime="2019-10-29T09:17:16+08:00">2019-10-29</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -442,6 +450,17 @@
 </blockquote>
 </li>
 </ol>
+<p>耍杂技的牛</p>
+<p>一种想法就是如何进行排列？</p>
+<ol>
+<li>猜想1： 根据左端点</li>
+<li>猜想2： 根据右端点</li>
+<li>猜想3： 根据左右端点的加和<br>Min<br>贪心得到的答案 &gt; 最优解</li>
+</ol>
+<p>贪心得到的答案 &lt;= 最优解</p>
+<blockquote>
+<p>假设不是，调整得到最优<br>证明的过程就是比较值，然后比较的技巧就在于抛去一些无关因素的影响</p>
+</blockquote>
 
     </div>
 
@@ -475,9 +494,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/acwing/" rel="tag"><i class="fa fa-tag"></i> acwing</a>
-            
               <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+            
+              <a href="/tags/acwing/" rel="tag"><i class="fa fa-tag"></i> acwing</a>
             
               <a href="/tags/greedy/" rel="tag"><i class="fa fa-tag"></i> greedy</a>
             
@@ -575,7 +594,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

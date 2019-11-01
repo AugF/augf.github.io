@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <link rel="alternate" href="/atom.xml" title="AugF's Notes" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <meta name="description" content="1. torch luath test.lua to test all the modules in the ggnn and run libraries  go into “babi/data”, run’bash get_10_fold_data.sh” to get 10 folds of bAbI data for 5 tasks (4, 15, 16, 18, 19) and do so">
+<meta name="keywords" content="gnn-parallel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gnn-parallel-ggsnn-code-read">
+<meta property="og:url" content="https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-code-read/index.html">
+<meta property="og:site_name" content="AugF&#39;s Notes">
+<meta property="og:description" content="1. torch luath test.lua to test all the modules in the ggnn and run libraries  go into “babi/data”, run’bash get_10_fold_data.sh” to get 10 folds of bAbI data for 5 tasks (4, 15, 16, 18, 19) and do so">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-28T13:13:33.800Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gnn-parallel-ggsnn-code-read">
+<meta name="twitter:description" content="1. torch luath test.lua to test all the modules in the ggnn and run libraries  go into “babi/data”, run’bash get_10_fold_data.sh” to get 10 folds of bAbI data for 5 tasks (4, 15, 16, 18, 19) and do so">
+  <link rel="canonical" href="https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-code-read/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>gnn-parallel-ggsnn-code-read | AugF's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AugF's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">70</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">75</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">99</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-code-read/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">gnn-parallel-ggsnn-code-read
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-10 21:16:00" itemprop="dateCreated datePublished" datetime="2019-10-10T21:16:00+08:00">2019-10-10</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-28 21:13:33" itemprop="dateModified" datetime="2019-10-28T21:13:33+08:00">2019-10-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn-parallel/" itemprop="url" rel="index"><span itemprop="name">gnn-parallel</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-torch-lua"><a href="#1-torch-lua" class="headerlink" title="1. torch lua"></a>1. torch lua</h2><p>th test.lua to test all the modules in the ggnn and run libraries</p>
+<ol>
+<li>go into “babi/data”, run’bash get_10_fold_data.sh” to get 10 folds of bAbI data for 5 tasks (4, 15, 16, 18, 19) and do some preprocessing</li>
+<li>go into ‘babi/data/extra_seq_tasks’, run’bash generate_10_fold_data.sh’ to get 10 folds of data for the two extra sequence tasks</li>
+<li>go back to ‘babi/‘ and use ‘run_experiments.py’ to run the GGNN/GGS-NN</li>
+<li>Use ‘run_rnn_baselines.py babi18 lstm’ runs LSTM on bAbI task 18 for all 10 folds of data</li>
+</ol>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><ul>
+<li>run_rnn_baselines babi18 lstm</li>
+<li>run_experiments /  bash generate_10_fold_data.sh</li>
+<li>get_10_fold_data.sh: do some preprocessing预处理</li>
+</ul>
+<h3 id="实际执行"><a href="#实际执行" class="headerlink" title="实际执行"></a>实际执行</h3><ul>
+<li><p>babi4</p>
+<ul>
+<li><p>run_q4()</p>
+<ul>
+<li>babi_train.lua<ul>
+<li>paras <ul>
+<li>nsteps: number of propagation iterations</li>
+<li>learnrate: learning rate 0.01</li>
+<li>momentum: ? for adam ？</li>
+<li>mb: minibatch size</li>
+<li>maxiters: maximum number of weight updates  100</li>
+<li>printafter: save checkpoint after this amount of weight updates</li>
+<li>saveafter: save checkpoint after this amount of weight updates  100</li>
+<li>optim: adam</li>
+<li>statedim: dimensionality of the node representations</li>
+<li>evaltrain: evaluate on training set during training if set to 1</li>
+<li>nthreads: set the number of threads to use with this process</li>
+<li>ntrain: number of training instances 50</li>
+<li>nval: number of validation instances 50</li>
+<li>annotationdim: dimensionality of the node annotations 节点annotations的维度</li>
+<li>outputdir: output directory</li>
+<li>mode: {selectnode, classifygraph, seqclass, shareprop_seqclass} selectnode</li>
+<li>datafile: should contain lists of edges and questions in standard format</li>
+<li>seed: random seed.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">preprocess其实就是edges上的属性，点的属性</span><br><span class="line">color = require &apos;trepl.colorize&apos;</span><br><span class="line">babi_data = require &apos;babi_data&apos;</span><br><span class="line">eval_util = require &apos;eval_util&apos;</span><br><span class="line">ggnn = require &apos;,,/ggnn&apos;</span><br><span class="line">1. prepare data</span><br><span class="line">math.randomseed(opt.seed)</span><br><span class="line">torch.manualSeed(opt.seed)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>eval_q4()</p>
+<ul>
+<li>babi_eval.lua</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>todo: 看具体是怎么做的?</p>
+<h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h3><pre><code>python rnn_preprocess.py processed_$fold/train/${i}_graphs.txt processed_$fold/rnn/train/${i}_tokens.txt --mode graph --nval 50</code></pre><h3 id="bAbi使用"><a href="#bAbi使用" class="headerlink" title="bAbi使用"></a>bAbi使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">babi-tasks PathFinding --path-length 3 --decoys 1</span><br><span class="line">babi-tasks Size --steps 3</span><br><span class="line"></span><br><span class="line"> ./babi-tasks $i 1000 --symbolic true &gt; symbolic_$fold/train/$&#123;i&#125;.txt</span><br><span class="line"></span><br><span class="line">--symbolic true</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-pytorch"><a href="#2-pytorch" class="headerlink" title="2. pytorch"></a>2. pytorch</h2><p>论文中总共4个数据集<br>task 4<br>task 15<br>task 16<br>task 18  只有0.3386</p>
+<ul>
+<li><p>main.py</p>
+<ul>
+<li>grid(opt)<ul>
+<li>main(opt)<ul>
+<li>run(opt)<ul>
+<li>net = GGNN (model.py)</li>
+<li>train_loss = train(epoch, train_dataloader, net, criterion, optimitzer, opt)</li>
+<li>test_loss, numerator, denomitor = test(test_dataloader, net, criterion, optimizer, opt)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>model.py</p>
+<ul>
+<li>GGNN<ul>
+<li>incoming and outgoing edge embedding</li>
+<li>propogation model</li>
+<li>output model</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>task4<br>基本数据集</p>
+<ul>
+<li>edge_types</li>
+<li>labels.txt: true or false</li>
+<li>node_ids.txt:</li>
+<li>question_types.txt:</li>
+<li>graphs.txt<ul>
+<li>n1 e6 n2</li>
+<li>? n1 n2 2<br>数据主要从graphs.txt中提取<br>graphs.txt中的数据<br>n_edges_type  2<br>n_tasks 4 问题的类型<br>n_node 4</li>
+</ul>
+</li>
+</ul>
+<p>item[1] = {task_type, _, task_output}<br>annotation = np.zeros([n_nodes, n_annotation_dim])  # [4, 1]<br>annotation[target][0] = 1</p>
+<blockquote>
+<p>这里的annotation是怎么设置的？ 这样设置有什么用？</p>
+</blockquote>
+<p>task_data_list[task_type-1].append([edge_list,annotation,task_output])</p>
+<blockquote>
+<p>每次只使用一种类型的task_id进行训练</p>
+</blockquote>
+<p>一些提前设置的参数<br>-D: denmensions 50<br>-H: hidden layer size 50</p>
+<p>然后进行变换的参数是<br>bAbIDataloder(train_dataset, batch_size, shuffle, num_workers)<br>batch_size = 1,   num_workers = 2</p>
+<h3 id="pytorch数据处理的通路"><a href="#pytorch数据处理的通路" class="headerlink" title="pytorch数据处理的通路"></a>pytorch数据处理的通路</h3><p>基于task4</p>
+<ol>
+<li><p>原始含义-&gt;graphs.txt</p>
+<ul>
+<li>单条数据<blockquote>
+<p>1 1 2: node_1 e_type node_2  fact<br>3 1 1    fact<br>? 1 1 2: ? qustion_node qustion_type(&lt;=edge_type) question_target</p>
+</blockquote>
+</li>
+<li>根据quetsion_type, 每次指示某个task_type进行运行GGNN模型</li>
+<li>统计数据<ul>
+<li>n_edges_type 2</li>
+<li>n_node 4</li>
+<li>n_tasks 4</li>
+</ul>
+</li>
+<li>返回结果<ul>
+<li>edges: (node_1, edges, node_2)</li>
+<li>annotation:  [n_nodes, n_annotation_dim]<blockquote>
+<p>这里n_annotation_dim由用户自己指定，这里为1<br>question_node对应位为1<br>这里值得注意  n_annotation_dim=2,   结果为<code>[[1, 0, 0, 0], [0, 0, 0, 0]]</code>, 只指示<code>[question_node - 1][0]</code>为1</p>
+</blockquote>
+</li>
+<li>target: question_target<blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>dataset -&gt; dataloader(batch_size=1, shuffle=True, num_workers=2):</p>
+<blockquote>
+<p>猜想是转换为邻接矩阵，或者其他？  介绍的是 产生multi-process iterable</p>
+</blockquote>
+<ul>
+<li><p>dataset</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> &lt;class &apos;list&apos;&gt;: [[[1, 1, 2], [3, 1, 1]], array([[1.],</span><br><span class="line">[0.],</span><br><span class="line">[0.],</span><br><span class="line">[0.]]), 2]</span><br><span class="line">&lt;class &apos;list&apos;&gt;: [[[3, 1, 2], [1, 1, 3]], array([[0.],</span><br><span class="line">[0.],</span><br><span class="line">[1.],</span><br><span class="line">[0.]]), 2]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dataloader</p>
+<blockquote>
+<p>num_samples 15???</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[[[0., 0., 1., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0.],</span><br><span class="line"> [1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span><br><span class="line"> [0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0.],</span><br><span class="line"> [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]]]</span><br><span class="line"> // [4, 16, 1]</span><br><span class="line"> [[[1.],</span><br><span class="line"> [0.],</span><br><span class="line"> [0.],</span><br><span class="line"> [0.]]]</span><br><span class="line"> </span><br><span class="line"> [1]</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>adj_matrix:  (1, 4, 16):  [A_in, A_out]</li>
+<li>annotation (1, 4, 1)<blockquote>
+<p>这里前面的1是与那个有关</p>
+</blockquote>
+</li>
+<li>target:  按索引开始排列，-1, 从0开始 (1,)</li>
+</ul>
+</li>
+<li><p>train.py对代码使用</p>
+<ul>
+<li>padding: (n_nodes, n_nodes, opt.state_dim - opt.annotation_dim)  (1, 4, 3)<blockquote>
+<p>len(): 取的一直都是第一位<br>? 有什么用<br>opt.state_dim: 论文中有提到的关于每个节点要设置多少个的东西<br>所以这个是关于前面的补充？？</p>
+</blockquote>
+</li>
+<li>init_input = (annotation, padding)</li>
+<li>output = net(init_input, annotation, adj_matrix)<blockquote>
+<p>shape: [1, 4],  估计里面存储的是softmax值</p>
+</blockquote>
+<ul>
+<li>GGNN mode: Select node???<ul>
+<li>forward(prop_state, annotation, A)<ul>
+<li>prop_state: (1,4,3)</li>
+<li>annotation: (1,4,1)</li>
+<li>A: (1, 4, 16)<blockquote>
+<p>A的猜测对了，但是in_states, out_states还没检查</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>main.py中相关参数</p>
+<ul>
+<li>opt.state_dim: default 4</li>
+<li>opt.n_steps: propogation: 4</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>pytorch用法小结<br>torch.cat((x, x, x), 1)<br>torch.stack((x, x, x), 2) 进行数据的封装<br>transpose(x, 0, 1) 进行转置</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82NDU1MTQxMg==" title="https://zhuanlan.zhihu.com/p/64551412">https://zhuanlan.zhihu.com/p/64551412<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<p>view(1,6) 按照所想的内容进行填充</p>
+<blockquote>
+<p>view(-1, 1, 2): 如果为-1表示这个位置由其他位置的数字来推断<br>nn.Linear(): 权重自己给定</p>
+</blockquote>
+<h2 id="torch"><a href="#torch" class="headerlink" title="torch"></a>torch</h2><ol>
+<li>ggnn.NodeSelectionGGNN(state_dim, annotation_dim, prop_net_h_sizes, output_net_h_sizes, n_edge_types)<ul>
+<li>state_dim = opt.statedim 4</li>
+<li>annotation: opt 1</li>
+<li>prop_net_h_sizes: {}</li>
+<li>output_net_h_sizes: {state_dim} 4<blockquote>
+<p>输出的每个节点的大小</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="something-new"><a href="#something-new" class="headerlink" title="something new"></a>something new</h2><ol>
+<li>学习方式的问题</li>
+</ol>
+<p>测试集和训练集分开的。<br>测试集和训练集</p>
+<p>测试集上是全部关于一个图的局部的训练数据。</p>
+<p>所以实际上对于每个图的获取方式都不一样</p>
+<p>训练数据是原本图上的一部分</p>
+<ol start="2">
+<li>edge-type训练还是question_type训练</li>
+</ol>
+<p>edge-type不对，这里是边类型直接进行处理了</p>
+<p>question_id 进行训练</p>
+<p>这里question_id实际上是边的type类型，跟之前的理解是一样的</p>
+<ol start="3">
+<li><p>sequence 观测点的想法: 对的，刚刚看了下论文，发现确实是这样的！ 应该是中间的标注能够知道。</p>
+</li>
+<li><p>是否有初始维度之说。 对的，没错！！！</p>
+</li>
+<li><p>训练模式</p>
+<blockquote>
+<p>这又回到了传统的训练方式，不过是借助了图的模型而已。还是进行一个图形一个图形地进行训练</p>
+</blockquote>
+</li>
+<li><p>跟原始的有什么区别，原始的一大串进行考虑，结果发现怎么根据边来传播，发现这样做是最成功的</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2></li>
+<li><p>普通的机器学习 vs 图神经网络</p>
+</li>
+</ol>
+<p>普通机器学习过程即学习一个函数，然后有很多数据都是关于这个函数的。<br>然后，用一个数据会产生loss, 然后根据loss进行反向传播，更新梯度。<br>然后，不断地用多组数据不停地进行训练。</p>
+<p>图神经网络<br>一部分图的数据，一部分图的标签来模拟常见操作。</p>
+<p>不对是一组数据进行学习的过程。</p>
+<ol start="2">
+<li>导数更新<br>对于传统的机器学习。导数更新实际上是由公式算出来的导数，然后导数更新公式上赋值上一堆权重。问题就是如何进行更新。</li>
+</ol>
+<p>对于一般情况来说，如果是一个训练数据直接使用一个数据进行训练即可。如果是多个训练数据，则loss来进行更新</p>
+<ol start="3">
+<li>分析<br>相比于传统的图数据处理方式，GNN, GG-NN等模型可以有效地利用图的拓扑结构信息。</li>
+</ol>
+<p>这些模型在每个传播时间步都需要展开所有的节点，因而这些模型也可以用于处理各种图（包括有向图、无向图、有环图、无环图等）。</p>
+<p>而且有以下问题：</p>
+<blockquote>
+<ol>
+<li>在每个时间步都要展开图中所有节点，效率降低；</li>
+<li>GG-NN将传播时间固定，可能只会得到有效的信息。</li>
+</ol>
+</blockquote>
+<ol start="4">
+<li>总结<blockquote>
+<p>实际是每步即根据出度和入度矩阵进行标签传播，然后每一步都是在图上，从一个节点走到另外的节点。但是这样图上的信息传输也因此受到了约束。<br>而且只是对特定的点给予信息，这意味着只能这些点的信息进行向前传播</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="10-28总结"><a href="#10-28总结" class="headerlink" title="10.28总结"></a>10.28总结</h2><p>对GGNN总结主要如下：<br>所谓的A_in, 实际上就是每个节点新一轮的表示是按照当前边的in边，将in边的节点的值进行加和，从而得到最终的结果。</p>
+<blockquote>
+<p>详细可见矩阵相乘的运算 </p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eugene Wang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-code-read/" title="gnn-parallel-ggsnn-code-read">https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-code-read/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/gnn-parallel/" rel="tag"><i class="fa fa-tag"></i> gnn-parallel</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/10/gnn-parallel-ggsnn-paper-read/" rel="next" title="gnn-parallel-ggsnn-paper-read">
+                  <i class="fa fa-chevron-left"></i> gnn-parallel-ggsnn-paper-read
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/14/tools-latex-MathJax/" rel="prev" title="tools-latex-MathJax">
+                  tools-latex-MathJax <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-torch-lua"><span class="nav-number">1.</span> <span class="nav-text">1. torch lua</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">1.1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际执行"><span class="nav-number">1.2.</span> <span class="nav-text">实际执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据预处理"><span class="nav-number">1.3.</span> <span class="nav-text">数据预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bAbi使用"><span class="nav-number">1.4.</span> <span class="nav-text">bAbi使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-pytorch"><span class="nav-number">2.</span> <span class="nav-text">2. pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorch数据处理的通路"><span class="nav-number">2.1.</span> <span class="nav-text">pytorch数据处理的通路</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#torch"><span class="nav-number">3.</span> <span class="nav-text">torch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#something-new"><span class="nav-number">4.</span> <span class="nav-text">something new</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考"><span class="nav-number">5.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-28总结"><span class="nav-number">6.</span> <span class="nav-text">10.28总结</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/default-avatar.png"
+      alt="Eugene Wang">
+  <p class="site-author-name" itemprop="name">Eugene Wang</p>
+  <div class="site-description" itemprop="description">Quick notes</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="GitHub &rarr; https://github.com/AugF"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOnl1bnBhbndhbmdAZ21haWwuY29t" title="E-Mail &rarr; mailto:yunpanwang@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vSm9zd3hl" title="Weibo &rarr; https://weibo.com/Joswxe"><i class="fa fa-fw fa-weibo"></i>Weibo</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==" title="https://www.google.com">Google</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jbi5iaW5nLmNvbQ==" title="https://cn.bing.com">Bing</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">Baidu</span>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

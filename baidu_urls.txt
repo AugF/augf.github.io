@@ -1,5 +1,5 @@
+https://augf.github.io/2019/11/01/gnn-parallel-ggsnn-code-realize/
+https://augf.github.io/2019/10/26/gnn-parallel-GRU/
 https://augf.github.io/2019/10/17/论文思考-Gated-Graph-Sequence-Neural-Networks-ICLR-2016/
 https://augf.github.io/2019/10/14/tools-latex-MathJax/
-https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-paper-read/
-https://augf.github.io/2019/10/09/linux-keyboard-using/
-https://augf.github.io/2019/10/02/lua-learning/
+https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-code-read/

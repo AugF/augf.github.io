@@ -72,14 +72,14 @@
 </script>
 
   <meta name="description" content="[TOC] 1. 序言图有着复杂的关系和交互依赖 2D卷积: 邻居的决定由filter sizew = 平均， 邻居有序，可以按照一定的序列来看且有固定的尺寸 Graph卷积： 邻居无序，价值等同，数量不一 Random Walk??? 随机游走，有概率计算方法还有要理解？ 图网络表示：  编码 随机游走 矩阵因式分解  2. 框架Node-level:  MLP+softmax: 见poolin">
-<meta name="keywords" content="gnn-parallel,paper,gnn">
+<meta name="keywords" content="gnn-parallel,gnn,paper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gnn-parallel-gnn-overview-paper-summary">
 <meta property="og:url" content="https://augf.github.io/2019/09/19/gnn-gnn-parallel-gnn-overview-paper-summary/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
 <meta property="og:description" content="[TOC] 1. 序言图有着复杂的关系和交互依赖 2D卷积: 邻居的决定由filter sizew = 平均， 邻居有序，可以按照一定的序列来看且有固定的尺寸 Graph卷积： 邻居无序，价值等同，数量不一 Random Walk??? 随机游走，有概率计算方法还有要理解？ 图网络表示：  编码 随机游走 矩阵因式分解  2. 框架Node-level:  MLP+softmax: 见poolin">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-30T12:55:54.618Z">
+<meta property="og:updated_time" content="2019-10-31T02:08:48.046Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gnn-parallel-gnn-overview-paper-summary">
 <meta name="twitter:description" content="[TOC] 1. 序言图有着复杂的关系和交互依赖 2D卷积: 邻居的决定由filter sizew = 平均， 邻居有序，可以按照一定的序列来看且有固定的尺寸 Graph卷积： 邻居无序，价值等同，数量不一 Random Walk??? 随机游走，有概率计算方法还有要理解？ 图网络表示：  编码 随机游走 矩阵因式分解  2. 框架Node-level:  MLP+softmax: 见poolin">
@@ -227,7 +227,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">96</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">99</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -323,7 +323,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-30 20:55:54" itemprop="dateModified" datetime="2019-09-30T20:55:54+08:00">2019-09-30</time>
+                <time title="修改时间：2019-10-31 10:08:48" itemprop="dateModified" datetime="2019-10-31T10:08:48+08:00">2019-10-31</time>
               </span>
             
           
@@ -500,7 +500,7 @@
 <ul>
 <li><p>GAE<br>GCNs, 然后定义评价函数</p>
 </li>
-<li><p>AGRA<br>GCN产生，GAN评价<br>产生时服从某一先验分布，评价时选出服从分布的</p>
+<li><p>AGRA<br>GCN产生，GAN评价,<br>产生时服从某一先验分布，评价时选出服从分布的</p>
 </li>
 <li><p>混合变体</p>
 <ul>
@@ -543,20 +543,7 @@
 </ul>
 <p>序列化的方式在于，长序列会带来问题？？<br>其他方式维护全局属性难<br>最近的采用变化的自动编码器做，增加输出空间<br>没有方法有很好的大规模可扩展性</p>
 <p>产生+训练</p>
-<h2 id="3-5-GSN"><a href="#3-5-GSN" class="headerlink" title="3.5 GSN"></a>3.5 GSN</h2><p>目标：可以预测未来的节点的value和值</p>
-<ul>
-<li>DCRNN<br>扩散的卷积，出度入度来反映空间性。 DCGRU来统计上一步和邻居节点的卷积信息来反映瞬时性<blockquote>
-<p>??,可能是因为这里用的循环结构，可以循环多次，所以就可以考虑反映了瞬时性</p>
-</blockquote>
-</li>
-<li>CNN-GCN<br>GCN空间信息， 1DCNN来捕捉每个节点的瞬时信息，最终产生每个节点的一个预测</li>
-<li>ST-GCN<br>考虑瞬时流作为节点的边（因此认为兼顾了空间结构，因为考虑了边），所以可以用一个GCN来统计两种信息。用一个标记为两个节点之间的距离。最终每个节点的值为邻接矩阵的求和</li>
-<li>杂项<ul>
-<li>Strutual-RNN<br>预测节点在每个时间步骤的标记<br>用语义组来划分，每个语义组使用不同的RNN模型；这里是考虑了瞬时信息；对于空间信息的考虑，nodeRNN将edgeRNN的输出作为输入认为是考虑了空间性</li>
-</ul>
-</li>
-</ul>
-<p>DCRNN能处理长时间<br>CNN-GCN有效取决于1DCNN<br>ST-CNN考虑瞬时流作为节点的边，导致邻接矩阵平方增长，会导致计算图卷积层的开销增大，但是要堆叠很多次<br>Strutural-RNN需要先验知识来分割语义组</p>
+<h2 id="3-5-GSN"><a href="#3-5-GSN" class="headerlink" title="3.5 GSN"></a>3.5 GSN</h2><p>DCRNN能处理长时间<br>CNN-GCN有效取决于1DCNN<br>ST-CNN考虑瞬时流作为节点的边，导致邻接矩阵平方增长，会导致计算图卷积层的开销增大，但是要堆叠很多次<br>Strutural-RNN需要先验知识来分割语义组</p>
 <p>空间+瞬时</p>
 <h1 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h1><h2 id="4-1-建议"><a href="#4-1-建议" class="headerlink" title="4.1 建议"></a>4.1 建议</h2><p>go deep<br>感受野<br>扩展性： 什么时候具有扩展性？？ 快采样（在线算法）和子图训练。不够<br>动力学和异质性：图的结构固定，节点和边不一定来源相同</p>
 <h2 id="4-2-batch-learning-vs-stochastic-learning"><a href="#4-2-batch-learning-vs-stochastic-learning" class="headerlink" title="4.2 batch learning vs stochastic learning"></a>4.2 batch learning vs stochastic learning</h2><p>batch learning: 批量学习，是一种离线的学习方法</p>
@@ -649,9 +636,9 @@
             
               <a href="/tags/gnn-parallel/" rel="tag"><i class="fa fa-tag"></i> gnn-parallel</a>
             
-              <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
-            
               <a href="/tags/gnn/" rel="tag"><i class="fa fa-tag"></i> gnn</a>
+            
+              <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
             
           </div>
         
@@ -747,7 +734,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
