@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">99</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">104</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,1798 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-data-struture/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/algorithm-acwing-data-struture/" class="post-title-link" itemprop="url">algorithm acwing data-struture</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:09:15 / 修改时间：12:11:00" itemprop="dateCreated datePublished" datetime="2019-09-19T12:09:15+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/data-struture/" itemprop="url" rel="index"><span itemprop="name">data-struture</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>数据结构</p>
+<h1 id="1-链表与邻接表"><a href="#1-链表与邻接表" class="headerlink" title="1. 链表与邻接表"></a>1. 链表与邻接表</h1><p>strut Node{<br>    int val;<br>    Node *next;<br>}; //不讲！</p>
+<p>new Node();  // 动态在堆中申请非常慢！</p>
+<blockquote>
+<p>可以在初始化时弄多个。</p>
+</blockquote>
+<blockquote>
+<p>数组模拟单链表</p>
+</blockquote>
+<ul>
+<li><p>单链表： 邻接表（存储图和树）<br>e[N], ne[N]下标,head, idx</p>
+<blockquote>
+<p>有个问题，删除后空闲节点不好回收；一般来说不需要管删除的点，浪费即浪费，只是想快，不用考虑内存泄露的方法。<br>写工程时，才需要考虑多久<br>单链表只能向后看，向前只能从头遍历。 O(1)时间插入，O(n)时间; 尾插法O(1), 记录一下即可<br>注意从0开始存储内容，所以remove和add都是k-1，还要特别注意remove head;</p>
+</blockquote>
+</li>
+<li><p>双链表： 优化某些问题<br>e[N],l[N],r[N],0表示头，1表示尾<br>init: r[0]=1,l[1]=0, idx=2;<br>注意不需要连起来<br>务必注意，从2开始存储元素，所以remove和add都需要映射为k-1+2=k+1</p>
+</li>
+</ul>
+<p>struct Node{<br>    int e,l,r;<br>}nodes[N];<br>remove<br><code>nodes[nodes[k].l].r=nodes[k].r</code></p>
+<blockquote>
+<p>不推荐</p>
+</blockquote>
+<h1 id="2-栈与队列"><a href="#2-栈与队列" class="headerlink" title="2. 栈与队列"></a>2. 栈与队列</h1><p>栈： tt,0<br>队列：hh,tt</p>
+<blockquote>
+<p>边界看个人习惯，0或-1</p>
+</blockquote>
+<h1 id="3-单调栈"><a href="#3-单调栈" class="headerlink" title="3. 单调栈"></a>3. 单调栈</h1><blockquote>
+<p>给定一个序列，求一个数左离它最近小于它的数<br>暴力做法费时<br>善于发现数据的性质<br>时间复杂度：每个元素进站一次和最多出站一次，所以算法复杂度为O(n);</p>
+</blockquote>
+<h1 id="4-单调队列"><a href="#4-单调队列" class="headerlink" title="4. 单调队列"></a>4. 单调队列</h1><blockquote>
+<p>求滑动窗口中的最大值和最小值， 凡是能抽象出来。<br>一个严格单调队列的最小值就是其头和尾。<br>队列的大小不会超过滑动窗口的大小！！！</p>
+</blockquote>
+<blockquote>
+<p>单调栈和单调队列的做法都是通过暴力分析，然后用栈和队列来模拟，并且去掉没有用的元素。然后再剩余的元素有没有单调性，有的话就可以考虑栈和队列。<br>栈是最近最小，队列是全局最小。然后因为单调还可以用二分法来进行查找。</p>
+</blockquote>
+<p>多重背包也可以用滑动窗口来优化，因为滑动窗口可以做</p>
+<p>对队列的研究，什么时候入队，什么时候出队？</p>
+<p>！！！这里队列里居然存的是下标，天啦一下子就避免了情况的讨论。</p>
+<blockquote>
+<p>存下标会很容易来判断什么时候进行元素弹出</p>
+</blockquote>
+<blockquote>
+<p>在实际做的时候，会开O_2和O_3优化，此时速度就与stl相差没多少了<br>但是在做算法题时，拿数组模拟的队列和栈比stl快。 比赛方是不会开优化的！</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=1e6+10;</span><br><span class="line"></span><br><span class="line">int q[N];</span><br><span class="line">int a[N];</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    int n,k;</span><br><span class="line">    scanf(&quot;%d %d&quot;,&amp;n,&amp;k);</span><br><span class="line">    for(int i=0; i&lt;n;i++) scanf(&quot;%d&quot;,&amp;a[i]);</span><br><span class="line">    int hh=0,tt=-1;</span><br><span class="line">    for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">        // 判断对头是否划出了窗口</span><br><span class="line">        if(hh&lt;=tt &amp;&amp; i-k+1 &gt; q[hh]) hh++;</span><br><span class="line">        while(hh&lt;=tt &amp;&amp; a[q[tt]]&gt;=a[i]) tt--; //</span><br><span class="line">        printf(&quot;hh: %d, tt: %d\n&quot;,hh,tt);</span><br><span class="line">        </span><br><span class="line">        q[++tt]=i; // 注意这里模拟的不是实际的物理位置. !!因为hh&gt;tt,当前元素没找出来，注意</span><br><span class="line">        if(i&gt;=k-1) printf(&quot;---%d \n&quot;,a[q[hh]]);</span><br><span class="line">        </span><br><span class="line">        for(int j=hh;j&lt;=tt;j++) printf(&quot;%d &quot;,a[q[j]]);</span><br><span class="line">        puts(&quot;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-KMP"><a href="#5-KMP" class="headerlink" title="5. KMP"></a>5. KMP</h1><blockquote>
+<p>S字符串,P模板串<br>从1开始</p>
+</blockquote>
+<p>暴力</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">i:1..n</span><br><span class="line">j:2..m</span><br></pre></td></tr></table></figure>
+
+<p>优化：一直向取的距离足够大</p>
+<blockquote>
+<p>最少移动距离，最大后缀</p>
+</blockquote>
+<p>next[i]=j: 以i为终点的，所能匹配的最长距离. 关键！一定要理解透，这里比如next[1]=0,表示第一个节点没有匹配的内容。</p>
+<blockquote>
+<p>务必注意是当前！<br>p[1,j]=p[i-j+1,i]</p>
+</blockquote>
+<p>i,j为S和P的指针。<br>所以在i失配的话。</p>
+<blockquote>
+<p>模板串移动的是最长的，所以从模板串的角度来看是最优的！</p>
+</blockquote>
+<blockquote>
+<p>算法时间复杂度是O(n)的，再快不可能有更快的了！</p>
+</blockquote>
+<blockquote>
+<p>j最多加m次，j大于0， while循环最多减m次。所以时间复杂度为2m。</p>
+</blockquote>
+<p>注意比较的对象：s[M],p[N]</p>
+<h1 id="6-Trie树"><a href="#6-Trie树" class="headerlink" title="6. Trie树"></a>6. Trie树</h1><p>高效存储和查找字符串及其次数的数据结构<br>将字符串拆分为各个字母，组合成一个多叉树。</p>
+<blockquote>
+<p>相比于kmp，利用了前缀<br>如：abcdef, root-&gt;a-&gt;b-&gt;c-&gt;d-&gt;e-&gt;f-&gt;$<br>对于串树，一般只包含大写或小写字母！一定有限制</p>
+</blockquote>
+<p>son[N][26],cnt[N],idx<br>理解：trie树内部每个节点占用一个idx, idx的取值范围为0-N<br>son[idx][1]指向关联的下个节点，cnt[idx]以此idx为结尾的单词的个数。</p>
+<p>所以不可能有son[1][2]和son[1][3],不对有的，这里是指针</p>
+<h1 id="7-并查集"><a href="#7-并查集" class="headerlink" title="7. 并查集"></a>7. 并查集</h1><ul>
+<li>将两个集合合并</li>
+<li>询问两个元素是否在一个集合中<br>BF: belong[x], 判断两个元素是否在一个集合belong[x]==belong[y];合并需要将一个集合中的所有元素改为另一个<br>并查集在近乎O(1)的时间内快速支持两个操作。</li>
+</ul>
+<blockquote>
+<p>原理：用树来做，树根的编号就是整个集合的编号。每个节点存储它的父节点，p[x]表示x的父节点<br>问题1. 如何判断树根，if(p[x]==x): 特殊情况的处理<br>问题2. 如何求x的集合编号：while(p[x]!=x) x=p[x]; 时间复杂度<br>问题3，如何合并两个集合： p[x]是x的集合，p[y]是y的集合，则p[x]=y;</p>
+</blockquote>
+<p>路径压缩优化：当找到根节点时，把路径上的所有节点都指向根节点. O(1)</p>
+<blockquote>
+<p>这里也可以应用一个简单的启发式策略——按秩合并。该方法使用秩来表示树高度的上界，在合并时，总是将具有较小秩的树根指向具有较大秩的树根。简单的说，就是总是将比较矮的树作为子树，添加到较高的树中。为了保存秩，需要额外使用一个与 uset 同长度的数组，并将所有元素都初始化为 0。这样找祖先会减少递归迭代的次数，最坏只有logN次。 暂时这里不采用！</p>
+</blockquote>
+<p>代码核心最关键的就是find()函数！！！</p>
+<blockquote>
+<p>集合合并的所有问题都可以用<br>看题目中哪些操作可以优化，考虑什么时候用什么数据结构；操作有什么特点，最小值，堆。<br>区间和啊， 区间数组，树状数组，线段树！！<br>有序链表，平衡树，set来做</p>
+</blockquote>
+<h1 id="8-堆"><a href="#8-堆" class="headerlink" title="8. 堆"></a>8. 堆</h1><p>如何手写一个堆？stl</p>
+<ul>
+<li>插入一个数</li>
+<li>求集合中的最小值</li>
+<li>删除最小值</li>
+</ul>
+<p>扩展</p>
+<ul>
+<li>删除任意一个元素</li>
+<li>修改任意一个元素</li>
+</ul>
+<blockquote>
+<p>stl中的堆就是优先队列！！priorityqueue<br>小根堆<br>从1开始编号，2i表示左孩子节点，2i+1表示右孩子节点<br>基本操作<br>down(x){} // 往下移，跟孩子中最小的进行交换。说明最上面的数变大了所以要往下沉，那么是否无法交换了就说明没有必要往下移动了。<br>up(x){} // 往上移，只需要与根节点进行比较</p>
+</blockquote>
+<p>变小往上走，变大往下走</p>
+<p>数据结构<br>heap,size</p>
+<ul>
+<li>插入一个数： heap[++size]=x,up(size)</li>
+<li>求最小值： heap[1]</li>
+<li>删除最后一个元素: heap[1]=heap[size], size–,down(1);</li>
+<li>删除任意一个元素： heap[k]=heap[size], down(k),up(k)(只执行一个);</li>
+<li>修改任意一个元素: heap[k]=x,down(k),up(k)<br>完全二叉树。</li>
+</ul>
+<blockquote>
+<p>堆排序，把数列建成一个堆，每次把堆顶元素输出</p>
+</blockquote>
+<ul>
+<li>如何建堆？<blockquote>
+<p>一个一个将数进行插入 nlogn.<br>O(n), 从n/2开始down到1. n/4+ 2<em>n/8+3</em>n/16 +…=O(n)<br>从下往上down可以保证每个儿子都是好的</p>
+</blockquote>
+</li>
+</ul>
+<p>模拟堆， 删除第k个插入的点</p>
+<blockquote>
+<p>ph[j]=k  第j个插入的点在堆中对应第k个元素<br>hp[k]=j  堆中第k个元素对应第j个插入的点<br>需要存储映射</p>
+</blockquote>
+<h1 id="9-哈希表"><a href="#9-哈希表" class="headerlink" title="9. 哈希表"></a>9. 哈希表</h1><h2 id="9-1-简介"><a href="#9-1-简介" class="headerlink" title="9.1 简介"></a>9.1 简介</h2><ul>
+<li>存储结构<br>  开放寻址法、拉链法</li>
+<li>字符串哈希方式</li>
+</ul>
+<blockquote>
+<p>N: 1e5 ,1e6<br>把值域大的数映射到值域比较小的数</p>
+<ol>
+<li>哈希函数，模的数为质数，距离2的整数幂远，数学证明了冲突概率是最小的</li>
+<li>冲突<br>cstring: memset</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>感觉上</p>
+</blockquote>
+<blockquote>
+<p>注意，哈希表能使实际求的时候时间复杂度变低，但是并不意味着空间大小会变小</p>
+</blockquote>
+<h3 id="9-2-方法"><a href="#9-2-方法" class="headerlink" title="9.2 方法"></a>9.2 方法</h3><h4 id="9-2-1-开放寻址法（厕所找坑位法）"><a href="#9-2-1-开放寻址法（厕所找坑位法）" class="headerlink" title="9.2.1 开放寻址法（厕所找坑位法）"></a>9.2.1 开放寻址法（厕所找坑位法）</h4><p>查找、删除、添加<br>如果都满了的话find会陷入死循环，但是经验上来说会用2,-3倍的空间大小。<br>INT_MAX=0x3f3f3f3f;<br>memset()按字节，不能处理vector， strcopy()遇到<code>\0</code>就结束。</p>
+<blockquote>
+<p>哈希表时间复杂度都是O(1)， 用到哈希表O(n).<br>不需要sort一遍，如果sort就会从O(n)-&gt;O(nlogn)，变慢</p>
+</blockquote>
+<blockquote>
+<p>对比前面的离散化的思想，不过离散化区间和那道题实际上运用了前缀和来做。</p>
+</blockquote>
+<h4 id="9-2-3-字符串哈希方式"><a href="#9-2-3-字符串哈希方式" class="headerlink" title="9.2.3 字符串哈希方式"></a>9.2.3 字符串哈希方式</h4><p>对比与KMP，用于查找模板串是否存在，不一定要用KMP算法。</p>
+<p>字符串前缀哈希<br>h[1]=”A”<br>h[2]=”ABC”</p>
+<blockquote>
+<p>h[n]: 表示前n个字符串的哈希值； h[0]=0;</p>
+</blockquote>
+<h5 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h5><ol>
+<li>如何定义某个前缀的哈希值？把字符串转化为数字！<br>把字符串看作是P进制的数（Godel编码）<br>如”ABCD”, 注意需要保证唯一性！！！<br>对应十进制的数：1<em>p^3 + 2</em>p^2 + 3<em>p^1 + 4</em>p^0</li>
+<li>这个数会很大，进行取模, 这里Q会远小于数值: mod Q</li>
+</ol>
+<p>结果将任何一个字符串映射为了0 ~ Q-1.</p>
+<p>注意！<br>不能把某一位的字母映射为0, 需要映射为从1开始的数。<br>假定人品足够好，不考虑冲突；经验值是p取131或13331, Q取2^64,unsigned long long, 所以就不需要取模了，任意一个数都会自动溢出，在绝大概率保证不会出现冲突。</p>
+<p>好处：<br>可以求出字符串所有子串的哈希值：所以就可以用来作字符串的查找<br>字符串：[l,r]的哈希值h[r]-h[l-1]*p[r-l+1]</p>
+<blockquote>
+<p>把所有的看成数位，所以每个数段都有其哈希值。那么，因为最高位当做零位就意味着位数一定？？不需要！！！<br>因此就可以在线性时间内求出每一段的哈希值。</p>
+</blockquote>
+<p>讨论预处理， h(i)=h(i-1)+str(i);</p>
+<blockquote>
+<p>因为这里h()相当于取Q的模，所以h就是没有操作</p>
+</blockquote>
+<h5 id="想想"><a href="#想想" class="headerlink" title="想想"></a>想想</h5><p>这里就是超级牛逼的，比KMP还厉害很多！<br>问某两端是否完全相同</p>
+<p>这里感觉上利用了前缀和的思想以及其他，将字符串通过Godel编码（数的进制的方式），映射为数。<br>因为每一个前缀都是唯一的，所以必然就前缀唯一<br>？？ 那怎么知道这多个前缀是否是某一特定的字符串的呢？还有怎么插入数据的？</p>
+<p>等下这里完全就没有了哈希的概念！！，它是制定了规则。不是前缀树，需要插入一系列字符串进行查找某个字符串是否存在。<br>就是根据规则，进行计算数就行了，就比较某个区间的计算出来的结果是否相同</p>
+<p>但是，预处理的话，一位是对应着多种结果啊，这些是要事先计算出来吗？</p>
+<h5 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h5><p>快速比较两个字符串是否相等。<br>O(n), O(1)</p>
+<p>可解的题：<br>搜索哈希，直接搜<br>兔子<br>回文串<br>后缀数组<br>二维哈希</p>
+<p>KMP可以用来求循环节。</p>
+<h1 id="10-STL初步"><a href="#10-STL初步" class="headerlink" title="10. STL初步"></a>10. STL初步</h1><p>vector, string ,queue, priority_queue, stack, dequeue,<br>set,map,multiset,multimap<br>unordered_set, ….  // c++中实现的哈希表？？？？<br>bitset 状态压缩</p>
+<p>vector 变长数组，倍增思想。<br>string   substr(), c_str()//对应char数组指针<br>queue 队列 push， front, pop<br>priorityqueue, 堆，优先队列，push, top(),pop()<br>stack, push, top, pop()<br>dequeue双端队列, 支持随机访问；<br>set,map, 基于平衡树（红黑树）来实现的，动态维护有序序列<br>unordered,  基于哈希表来实现的 </p>
+<blockquote>
+<p>需要添加对应的头文件</p>
+</blockquote>
+<p>bitset,  压位<br>List</p>
+<p>set: find() O(n) C++ vector基本用法</p>
+<h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><p>vector<int> a(10,n);<br>size() // O(1)<br>empty() //返回<br>clear() 特有<br>系统为某一个进程分配空间时，所需时间与空间大小无关，与申请次数有关。<br>所以1000和1000次1不一样<br>倍增的思想</int></p>
+<p>申请一个数组长度n=10^6, 一共要申请logN次，额外copy次数平均为1<br>front() back()<br>push_back() pop_back()<br>begin() end()<br>[]<br>a.end()=a[size]<br>迭代器可以看成是指针<br>a&lt;b, 支持比较运算，基于字典序</p>
+<h2 id="pair"><a href="#pair" class="headerlink" title="pair"></a>pair</h2><p>pair&lt;int,int&gt; p;<br>p.first(), p.second();<br>支持比较预算，按字典序，以first为第一关键字，second为第二关键字<br>p=make_pair(10,”yxc”)<br>C++11: p={20,”abd”}</p>
+<blockquote>
+<p>某个东西有两种属性<br>三种不同的属性pair&lt;int, pair&lt;int,int&gt;&gt;</p>
+</blockquote>
+<blockquote>
+<p>pair vs struct, 比一般的结构体<br>string可以用作栈</p>
+</blockquote>
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><p>size() length()<br>empty(), clear()<br>a+=”def”, a+=’c’;<br>a.substr(0,2) 起始地址，长度<br>a.c_str()</p>
+<h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><p>size(), empty(), 没有clear()函数q=queue<int>();<br>push(), front(), back(), pop()</int></p>
+<h2 id="priority-queue默认大根堆"><a href="#priority-queue默认大根堆" class="headerlink" title="priority_queue默认大根堆"></a>priority_queue默认大根堆</h2><p>push() 插入一个元素<br>top() 返回堆顶元素<br>pop() 弹出堆顶元素<br>无clear元素</p>
+<p>如何使用小根堆？ 插入时使用负数<br>priority_queue&lt;int,vector<int>,greater<int>&gt; heap; // 定义小根堆</int></int></p>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p>push, top,pop,size, empty</p>
+<h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><p>效率非常低<br>size(), empty(), clear()<br>front()/back()<br>push_back()/pop_back()<br>push_front()/pop_front()<br>begin()/end()<br>[]</p>
+<h2 id="set-multiset-map-multimap"><a href="#set-multiset-map-multimap" class="headerlink" title="set/multiset,map/multimap"></a>set/multiset,map/multimap</h2><p>size()<br>empty()<br>clear() O(1)<br>set/multiset O(logN)<br>    insert() 插入一个数<br>    find() 查找一个数<br>    count() 返回某一个数的个数<br>    begin()/end()   ++, –返回前驱和后继 O(logN)<br>    erase()<br>        (1) 输入是一个数，删除所有x, O(k+logn)<br>        (2) 输入是一个迭代器, 删除这个迭代器<br>    lower_bound()/upper_bound() !!!!<br>        lower_bound() 返回大于等于x的最小的数的迭代器<br>        upper_bound() 返回大于x的最小的数的迭代器，不存在返回end()<br>map/multimap<br>    insert() 插入的是一个pair<br>    erase() 输入的参数是pair或迭代器<br>    find()<br>    [] 时间复杂度是O(logN)??<br>    &gt; map&lt;string,int&gt; a; a[“yxc”]=1<br>    lower_bound(), upper_bound()<br>    &gt; 支持排序</p>
+<p>unordered_set,unordered_map,unordered_multiset, unordered_multimap<br>    和上面类似，增删改查的时间复杂度均为O(1)<br>    但是不支持lower_bound()/upper_bound(), 迭代器的++,–<br>    &gt; 凡是排序的都不支持</p>
+<p>bitset()<br>    &gt; 1024 bool, 1024B=1KB;  用字节来存 1024/8=128<br>    &gt; 什么时候用？ 比如10000*10000 bool,  10^8 B, 100MB, 空间限制是64MB<br>    biset&lt;10000&gt; s; //这里10000指的是个数<br>    ~s取反， &amp;, |, ^<br>    &gt;&gt;, &lt;&lt;<br>    ==, !=<br>    [] 某位<br>    count() 返回有多少个1<br>    any/none()<br>        any()判断至少有一个1<br>        none()判断是否全为0<br>    set() 把所有位置为1<br>    set(k,v) 将第k位变为v<br>    reset() 把所有为变为0<br>    flip() 把所有位取反<br>    flip(k) 把第k位取反</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>scanf读char时有空格和回车不能处理，读字符串可以进行过滤</p>
+<p>比较序列中两个元素的某个关系的最值，如果该关系是双方等价的，那么可以不用存储该元素的数组<br>先插入再查询可以避免处理空，只是多一个时间复杂度</p>
+<p>每次做题前把思路想清楚！！</p>
+<p>思考回溯法，在循环前加入语句和循环后加入语句的区别有什么呢</p>
+<p>模运算很有意思！！</p>
+<p>路径的距离来做</p>
+<p>if (a &amp;&amp; b), 注意是b不等于0时为真</p>
+<p>segment flase: N常数空间开辟不对，或者循环溢出等等</p>
+<h2 id="课后题"><a href="#课后题" class="headerlink" title="课后题"></a>课后题</h2><h3 id="最大异或数"><a href="#最大异或数" class="headerlink" title="最大异或数"></a>最大异或数</h3><blockquote>
+<p>发现这里的思路跟我自己想的还是有很大差别，比如说我的想法就是直接分析题。怎么得到一组数中所有的最大的异或数。<br>这里的做法就是O(n^3)-&gt;O(n^2)<br>记住一定要从暴力解开始出发</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Trie树来做</span><br><span class="line">int res=0;</span><br><span class="line"></span><br><span class="line">// a1,a5;a5,a1; 规定小于数</span><br><span class="line">for(int i=0;i&lt;n;i++)&#123; // 枚举第一个数</span><br><span class="line">    for(int j=0;j&lt;r;j++)&#123;  // 试图找最大的数</span><br><span class="line">        max=res(max,ai^aj);</span><br><span class="line">    &#125; // 枚举第二个数</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">首先考虑如何寻找最大的异或数。 </span><br><span class="line">首先找第30位是0的数</span><br><span class="line">倒序找数</span><br></pre></td></tr></table></figure>
+
+<p>注意这里M的取值是看实际情况中Trie树中最多有多少个节点，所以要看多种情况来做。<br>每个叶节点代表一个集合，表示所有能往下走的数。</p>
+<blockquote>
+<p>与一开始想法不同的点是，倒序排序的，把所有树给撑满，自己的想法这点出问题了<br>举例子</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">res= res*2+u;</span><br><span class="line">res +=1&lt;&lt;i;</span><br><span class="line"></span><br><span class="line">res=1101 -&gt; 11011  二进制乘法的感觉</span><br></pre></td></tr></table></figure>
+
+<h3 id="食物链"><a href="#食物链" class="headerlink" title="食物链"></a>食物链</h3><blockquote>
+<p>首先应该分析题，发现题中种类关系是如此少，以至于所有关系放在一个类中即可</p>
+</blockquote>
+<blockquote>
+<p>哇，居然从路的路径长度入手来看，nb。<br>由距离进行定义，使用模的关系！！厉害，看每个人和领袖之间的距离关系<br>所以说，构造的时候实际上使用的增加最小长度的路径</p>
+</blockquote>
+<blockquote>
+<p>三类，吃、被吃、同类</p>
+</blockquote>
+<p>算法</p>
+<blockquote>
+<p>初始化，每个节点都是根节点，所以初始化为0</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-mapreduce-experiment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-mapreduce-experiment/" class="post-title-link" itemprop="url">nju-course mapreduce experiment</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:07:54 / 修改时间：12:08:22" itemprop="dateCreated datePublished" datetime="2019-09-19T12:07:54+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>实验说明</p>
+<h2 id="MapReduce-Java编程"><a href="#MapReduce-Java编程" class="headerlink" title="MapReduce Java编程"></a>MapReduce Java编程</h2><p>主要工作：</p>
+<h3 id="1-实现Map类"><a href="#1-实现Map类" class="headerlink" title="1 实现Map类"></a>1 实现Map类</h3><p><span class="exturl" data-url="aHR0cHM6Ly9oYWRvb3AuYXBhY2hlLm9yZy9kb2NzL3IyLjcuNC9hcGkvb3JnL2FwYWNoZS9oYWRvb3AvbWFwcmVkdWNlL01hcHBlci5odG1s" title="https://hadoop.apache.org/docs/r2.7.4/api/org/apache/hadoop/mapreduce/Mapper.html">https://hadoop.apache.org/docs/r2.7.4/api/org/apache/hadoop/mapreduce/Mapper.html<i class="fa fa-external-link"></i></span><br>Mapper是hadoop提供的抽象类<br>Mapper&lt;KEYIN,VALUEIN,KEYOUT,VALUEOUT&gt;</p>
+<ul>
+<li>setup(Context context)</li>
+<li>map(KEYIN key,VALUEIN value, CONTEXT context)</li>
+<li>cleanup(Context context)</li>
+<li>run(CONTEXT context) // 一般不使用</li>
+</ul>
+<p>KEYIN，VALUEIN…类型</p>
+<blockquote>
+<p>LongWritable – long <br><br>IntWritable – int <br><br>Text – string <br><br>Object – void</p>
+</blockquote>
+<blockquote>
+<p>这里往往还包含 Partitioner（Hash的方法）和Sort两个部分，一般编程不会涉及到</p>
+</blockquote>
+<h3 id="2-实现Reduce类"><a href="#2-实现Reduce类" class="headerlink" title="2 实现Reduce类"></a>2 实现Reduce类</h3><h3 id="3-实现main函数-（Job）"><a href="#3-实现main函数-（Job）" class="headerlink" title="3 实现main函数 （Job）"></a>3 实现main函数 （Job）</h3><p>conf -&gt; Job 见例子</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FwYWNoZS9oYWRvb3AvdHJlZS90cnVuay9oYWRvb3AtbWFwcmVkdWNlLXByb2plY3QvaGFkb29wLW1hcHJlZHVjZS1leGFtcGxlcy9zcmMvbWFpbi9qYXZhL29yZy9hcGFjaGUvaGFkb29wL2V4YW1wbGVz" title="https://github.com/apache/hadoop/tree/trunk/hadoop-mapreduce-project/hadoop-mapreduce-examples/src/main/java/org/apache/hadoop/examples">github hadoop example例子<i class="fa fa-external-link"></i></span></p>
+<h2 id="ch2-wordcount"><a href="#ch2-wordcount" class="headerlink" title="ch2 wordcount"></a>ch2 wordcount</h2><h3 id="hdfs-相关命令"><a href="#hdfs-相关命令" class="headerlink" title="hdfs 相关命令"></a>hdfs 相关命令</h3><p>hadoop fs:</p>
+<ul>
+<li>-ls -R</li>
+<li>-rmr</li>
+<li>-put localfile dfsfilepath<blockquote>
+<p>eg: -put data/wordcount/*.html input/wordcount <br><br>hdfs://绝对路径</p>
+</blockquote>
+</li>
+<li>-cat file.data</li>
+<li>-mkdir -p </li>
+<li>-get </li>
+</ul>
+<p>hadoop jar localjar_path class_path para1 para2</p>
+<h3 id="paras"><a href="#paras" class="headerlink" title="paras"></a>paras</h3><blockquote>
+<p>注意这里的路径只能hdfs上的文件</p>
+</blockquote>
+<ul>
+<li>inputPath: must exisit, file or dir</li>
+<li>outputPath: dir, the dir can’t exisit</li>
+</ul>
+<h2 id="ch3-带词频的倒排索引"><a href="#ch3-带词频的倒排索引" class="headerlink" title="ch3 带词频的倒排索引"></a>ch3 带词频的倒排索引</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC81ZTA1OWRiYWQ1NTM=" title="https://www.jianshu.com/p/5e059dbad553">InvertedIndex.java<i class="fa fa-external-link"></i></span></p>
+<p>具体设计跟之前的一样</p>
+<h3 id="paras-1"><a href="#paras-1" class="headerlink" title="paras"></a>paras</h3><ul>
+<li>inputPath: dir</li>
+<li>outputPath</li>
+</ul>
+<p>scp命令使用</p>
+<blockquote>
+<p>scp -r target/Lab-1.0-SNAPSHOT.jar <span class="exturl" data-url="bWFpbHRvOmV1Z2VuZXdhbmdAMTE0LjIxMi44MS4xNA==" title="mailto:eugenewang@114.212.81.14">eugenewang@114.212.81.14<i class="fa fa-external-link"></i></span>:~/Documents</p>
+</blockquote>
+<p> hadoop jar /home/eugenewang/Documents/Lab-1.0-SNAPSHOT.jar InvertedIndex /input/invertedindex/exp3_sample_data /output/invertedindex/exp3</p>
+<h2 id="其他知识"><a href="#其他知识" class="headerlink" title="其他知识"></a>其他知识</h2><p>关于FileSplit,InputSplit更多介绍<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpbmdsaWFuZ19saS9hcnRpY2xlL2RldGFpbHMvNTMyODU0NDc/dXRtX3NvdXJjZT1ibG9neGd3ejQ=" title="https://blog.csdn.net/xingliang_li/article/details/53285447?utm_source=blogxgwz4">FileInputFormat类中split切分算法和host选择算法介绍<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9oYWRvb3AuYXBhY2hlLm9yZy9kb2NzL3IyLjkuMC9hcGkvb3JnL2FwYWNoZS9oYWRvb3AvbWFwcmVkL0ZpbGVTcGxpdC5odG1s" title="https://hadoop.apache.org/docs/r2.9.0/api/org/apache/hadoop/mapred/FileSplit.html">Class FileSplit<i class="fa fa-external-link"></i></span></p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ol>
+<li>使用另外一个 MapReduce Job 对每个词语的平均出现次数进行全局排序,<br>输出排序后的结果。</li>
+</ol>
+<p>思考：新建一个排序job,将临时文件作为输出，在其map中，我们将输入每一行进行分割，将词频作为key，其他的作为value,重载Comparator类，进行从小到大排序，之后进行输出即可</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-mapreduce-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-mapreduce-summary/" class="post-title-link" itemprop="url">nju-course mapreduce summary</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:05:54 / 修改时间：12:06:51" itemprop="dateCreated datePublished" datetime="2019-09-19T12:05:54+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/mapreduce/" itemprop="url" rel="index"><span itemprop="name">mapreduce</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="ch1-大数据技术简介"><a href="#ch1-大数据技术简介" class="headerlink" title="ch1 大数据技术简介"></a>ch1 大数据技术简介</h2><p>数据规模到底多大才叫大数据？<br>大数据一词的重点不是在于数据规模的定义，而是指信息技术发展已经进入了一个新时代</p>
+<p>大数据的特点：5V</p>
+<ul>
+<li>Volume: 大容量：PB级规模</li>
+<li>Varirty: 多样性：结构化/非结构化</li>
+<li>Velocity: 时效性： 实时处理</li>
+<li>Veracity： 准确性：结果准确</li>
+<li>Value： 大价值：深度价值</li>
+</ul>
+<p>大数据处理技术产生的背景</p>
+<ul>
+<li>多核/多处理器并行计算</li>
+<li>MapReduce大数据并行计算</li>
+<li>行业大数据应用需求</li>
+</ul>
+<p>大数据分析应用的ABCD关键要素<br>算法模型<br>业务场景<br>计算力<br>数据资源</p>
+<p>结构特征</p>
+<ul>
+<li>结构化数据</li>
+<li>半结构化数据</li>
+</ul>
+<p>获取和处理方式</p>
+<ul>
+<li>静态（线下数据）/非实时数据</li>
+<li>动态（流式/增量式/线上）/实时数据</li>
+</ul>
+<p>关联特征</p>
+<ul>
+<li>无关联/简单关联数据（键值记录型数据）</li>
+<li>复杂关联数据（图数据）</li>
+</ul>
+<p>大数据处理的主要技术问题</p>
+<p>存储：巨量数据如何存得下</p>
+<p>计算：巨量数据如何快速完成计算</p>
+<p>分析：如何返现大数据的深度价值</p>
+<p>大数据研究的基本途径</p>
+<ul>
+<li>降低尺度，寻找数据尺度无关近似算法</li>
+<li>新算法，寻找新算法降低计算复杂度</li>
+<li>并行化，分而治之，并行化处理</li>
+</ul>
+<h2 id="ch2-MapReduce简介"><a href="#ch2-MapReduce简介" class="headerlink" title="ch2 MapReduce简介"></a>ch2 MapReduce简介</h2><p>提高计算机硬件性能的而主要手段</p>
+<ul>
+<li>提高字长、流水式微体系结构技术</li>
+<li>提高集成度</li>
+<li>提高主频</li>
+</ul>
+<p>按照系统类型来分，并行计算系统通常包括</p>
+<ul>
+<li>多核/众核、对称多处理、大规模并行处理、集群、网格等不同类型</li>
+</ul>
+<p>按照程序设计模型/方法分类，并行计算主要可以分为</p>
+<ul>
+<li>共享内存变量程序设计方式</li>
+<li>消息传递程序设计方式</li>
+<li>MapReduce程序设计方式</li>
+</ul>
+<p>为什么需要大规模数据并行处理</p>
+<ul>
+<li>处理数据的能力大幅落后于数据增长</li>
+<li>海量数据隐含着更准确的事实</li>
+</ul>
+<p>什么是MapReduce</p>
+<ul>
+<li>基于集群的高性能并行计算平台</li>
+<li>并行程序开发与运行框架</li>
+<li>并行程序设计模型与方法</li>
+</ul>
+<p>为什么MapReduce如此重要？</p>
+<ul>
+<li>高效的大规模数据处理方法</li>
+<li>改变了大规模尺度上组织计算的方式</li>
+<li>第一个不同于冯洛依曼结构的、基于集群而非单机的计算方式的重大突破</li>
+<li>目前为止最为成功的基于大规模计算资源的并行计算抽象方法</li>
+</ul>
+<p>对付大数据处理——分而治之</p>
+<ul>
+<li>大数据分而治之的并行化计算</li>
+<li>大数据任务划分和并行计算模型</li>
+</ul>
+<p>构建抽象模型——Map和Reduce</p>
+<ul>
+<li>主要设计思想：为大数据处理过程中的两个主要处理操作提供一种抽象机制</li>
+<li>典型的流式大数据问题的特征</li>
+<li>Map和Reduce操作的抽象描述，提供一种抽象机制，把做什么和怎么做分开，程序员仅需要描述做什么，不需要关心怎么做</li>
+<li>基于Map和Reduce的并行计算模型和计算过程</li>
+</ul>
+<p>上升到框架——自动并行化并隐藏底层细节</p>
+<ul>
+<li>主要需求、目标和设计思想<ul>
+<li>实现自动并行化计算</li>
+<li>为程序员隐藏系统层细节</li>
+</ul>
+</li>
+<li>MapReduce提供统一的构建并完成以下的主要功能<ul>
+<li>任务调度</li>
+<li>数据/代码互定位</li>
+<li>出错处理</li>
+<li>分布式数据存储与文件管理</li>
+<li>Comibiner和Partitioner(设计目的和作用)</li>
+</ul>
+</li>
+</ul>
+<p>MapReduce的主要设计思想和特征</p>
+<ul>
+<li><p>向外横向扩展，而非向上纵向扩展</p>
+</li>
+<li><p>失效被认为是常态</p>
+</li>
+<li><p>吧计算处理向数据迁移</p>
+</li>
+<li><p>顺序处理数据、避免随机访问数据</p>
+</li>
+<li><p>为应用开发者隐藏系统层细节</p>
+</li>
+<li><p>平滑无缝的可扩展性</p>
+<p>MapReduce提供的主要功能</p>
+<ul>
+<li>任务调度：负责为划分后的就hi算任务分配和调度计算节点；同时负责监控这些节点的执行状态</li>
+<li>数据/代码互定位：为了减少数据通信，一个基本原则是本地化数据处理，即一个计算节点尽可能处理其本地磁盘上所分布存储的数据</li>
+<li>出错处理</li>
+<li>分布式数据存储与文件管理</li>
+<li>Combiner和Partitioner： 将中间结果数据进入reduce节点前需要进行合并处理，把具有同样主键的数据合并到一起避免重复传送，优化网络传输，在Map之后执行；而Partitioner的主要设计目的和作用是数据分区，将数据分配到合适的Reduce节点，避免不同Reduce节点上数据的相关性，在Reduce之前执行</li>
+</ul>
+</li>
+</ul>
+<h2 id="ch3-Google-Hadoop-MaqReduce基本构架"><a href="#ch3-Google-Hadoop-MaqReduce基本构架" class="headerlink" title="ch3. Google/Hadoop MaqReduce基本构架"></a>ch3. Google/Hadoop MaqReduce基本构架</h2><p>Google MapReduce的基本工作原理</p>
+<ul>
+<li>并行化处理的基本过程，系统中有一个负责调度的主节点，以及数据Map和Reduce工作节点（Worker）</li>
+<li>带宽优化（Combiner的设计目的和作用），优化到Reduce的结果</li>
+<li>用数据分区解决数据相关性问题（Partitioner的设计目的和作用），即根据一定的策略对Map输出的中间结果进行分区</li>
+<li>失效处理： 主节点失效checkpoinr,检查整个计算作业的执行情况；工作节点失效，直接终止</li>
+<li>计算优化，把一个计算任务让多个Map节点同时做，取最快完成者的计算结果。冗余节点</li>
+</ul>
+<p>分布式文件系统GFS的基本工作原理</p>
+<ul>
+<li>Google GFS的基本设计部原则<ul>
+<li>廉价本地磁盘分布存储</li>
+<li>多数据自动备份解决可靠性</li>
+<li>为上层的MapReduce计算框架提供支撑</li>
+</ul>
+</li>
+</ul>
+<p>Google GFS的基本构架和工作原理</p>
+<ul>
+<li>GFS Master的主要作用</li>
+<li>GFS ChuckServer的主要作用</li>
+<li>数据访问工作过程</li>
+<li>GFS的系统管理技术</li>
+</ul>
+<p>分布式结构化数据表BigTable</p>
+<ul>
+<li><p>BigTable设计动机和目标</p>
+<ul>
+<li>需要存储管理海量的结构化半结构化数据</li>
+<li>海量的服务请求</li>
+<li>商用数据库无法使用</li>
+</ul>
+</li>
+<li><p>BigTable数据模型——多维表</p>
+<ul>
+<li>行关键字、列关键字、时间戳</li>
+</ul>
+</li>
+<li><p>BigTable基本构架</p>
+<ul>
+<li>子表服务器</li>
+<li>子表存储结构SSTable（对应于GFS数据块）</li>
+<li>子表数据格式</li>
+<li>子表寻址</li>
+</ul>
+</li>
+</ul>
+<p>Hadoop MapReduce主要组件<br>NameNode相当于Google的MasterServer<br>DataNode–ChunckServer</p>
+<ul>
+<li><p>文件输入格式InputFormat <br><br>定义文件如何分割和读取，选择文件或者其它让对象，用来作为输入；定义InputSplits，将一个文件分为不同任务，mapred.min.split.size；为RecordReader提供一个工厂，用来读取这个文件。</p>
+<ul>
+<li>TextInputFormat, LineRecordReader</li>
+<li>KeyValueTextInputFormat</li>
+<li>SequenceFileInputFormat<br>一个MapReduce程序统称为一个Job，一个Job有许多个任务构成<br>JobConf.setInputFormat</li>
+</ul>
+</li>
+<li><p>Mapper <br><br>每一个Mapper类的实例生成了一个Java进程，负责处理某一个InputSplit上的数据，用Maper.Context</p>
+</li>
+<li><p>Combiner <br><br>conf.setCombinerClass(Reduce.class)</p>
+</li>
+<li><p>Partitioner &amp;&amp; Shuffle</p>
+</li>
+<li><p>Sort， 传输到每一个Reduce节点上的，将被所有的Reduce函数接收的Key,value会被hadoop自动排序</p>
+</li>
+<li><p>Reducer</p>
+</li>
+<li><p>OutputFormat <br><br>与InputFormat对应</p>
+</li>
+</ul>
+<p>Hadoop系统中，JobTracker的主要作用是 作业控制（作业分解、状态监控），资源管理，而TaskTracker的主要作用是 汇报心跳、执行JobTracker的命令，NameNode的作用是存储了所有文件元数据、文件与数据块的映射关系，以及文件属性等核心数据；DataNode的作用是存储具体的数据快</p>
+<h2 id="ch4-程序安装"><a href="#ch4-程序安装" class="headerlink" title="ch4 程序安装"></a>ch4 程序安装</h2><h2 id="ch5-MapReduce算法设计"><a href="#ch5-MapReduce算法设计" class="headerlink" title="ch5 MapReduce算法设计"></a>ch5 MapReduce算法设计</h2><p>MapReduce处理流程</p>
+<ol>
+<li>map</li>
+<li>shuffle and sort</li>
+<li>reduce</li>
+</ol>
+<p>可编程控制部分<br>Mapper： setup(), map(), cleanup()<br>Shuffle: Partitioner(划分均匀，查找快速)<br>Sort<br>Reduce: setup(), reduce(), cleanup()</p>
+<p>应用</p>
+<ol>
+<li>构建单词同现矩阵</li>
+<li>文档倒排索引，在map阶段单词在前，文档名在后，有效负载（如词频，只是需要在前一步进行统计即可）</li>
+<li>专利文献数据分析,统计被引文献，citing, cited</li>
+</ol>
+<h2 id="ch6-HBase-Hive"><a href="#ch6-HBase-Hive" class="headerlink" title="ch6 HBase Hive"></a>ch6 HBase Hive</h2><p>Hadoop HBase基本数据类型是一张多维表，该表的存储和检索有行关键字和列关键字、时间戳三个关键字组成，其数据操作访问是 通过JavaAPI和MapReduce接口编程实现，而Hive是一个分布式数据仓库，其数据操作访问编程是通过SQL实现</p>
+<h2 id="ch7-高级MapReduce编程技术"><a href="#ch7-高级MapReduce编程技术" class="headerlink" title="ch7 高级MapReduce编程技术"></a>ch7 高级MapReduce编程技术</h2><p>用户自定义Partitioner和Combiner<br>组合式</p>
+<h2 id="ch8-基于MapReduce的搜索引擎算法"><a href="#ch8-基于MapReduce的搜索引擎算法" class="headerlink" title="ch8 基于MapReduce的搜索引擎算法"></a>ch8 基于MapReduce的搜索引擎算法</h2><p>PageRank算法</p>
+<h2 id="ch9-数据挖掘基础算法"><a href="#ch9-数据挖掘基础算法" class="headerlink" title="ch9 数据挖掘基础算法"></a>ch9 数据挖掘基础算法</h2><h3 id="k-means算法"><a href="#k-means算法" class="headerlink" title="k-means算法"></a>k-means算法</h3><p>将给定的多个对象分成若干组，组内的各个对象是相似的，组间的对象是不相似的。<br>数据点的类型可以划分为欧氏和非欧<br>对于欧式空间，取各个数据点的平均值<br>对于非欧空间，取某个处于最中间的店，取若干个最具代表性的点</p>
+<p>k-means:<br>第一步，选区k个初始点,作为出事的cluster center<br>第二步，Loop {<br>    对输入中的每一个点p：<br>    {<br>        计算p到各个cluster的距离<br>        将p归入最近的cluster<br>    }<br>    重新计算各个cluster的中心<br>}<br>第三步，根据最终胜出的簇中心对所有数据元素进行划分聚类的工作</p>
+<p>问题：<br>样本数据有n个，预期生产k个cluster，则k-means算法t次迭代过程中的时间复杂度为O(nkt)</p>
+<p>并行化算法设计<br>思路： 在处理每一个数据点是，只需要知道cluster center的信息</p>
+<p>将所有数据分布到不同的MapReduce节点上，每个节点只对自己的数据进行计算<br>每个Map节点能够读取上一次迭代生成的cluster center<br>Reduce节点综合每个属于每个cluster的数据点，计算出新的cluster centers (Reducer的个数实际上就和聚类中心的个数相同)</p>
+<p>全局文件</p>
+<ul>
+<li><p>当前的迭代次数</p>
+</li>
+<li><p>K个不同聚类中心的数据结构（id, center, 数据点的个数）</p>
+<p>  class Mapper<br>  setup(){</p>
+<pre><code>读取全局的聚类中心数据 centers</code></pre><p>  }<br>  map(key, p) //p 为一个数据点<br>  {</p>
+<pre><code>minDis = Double.MAX_VALUE
+index = -1
+for i=0 to Centers.length
+{
+    dis = ComputeDist(p, Centers[i])
+    if (dis &lt; minDis&gt;)  // 替换k个点
+    {
+        minDis = dis;
+        index = i;
+    }
+}
+emit(Centers[i].ClusterID, (p,1)) 
+// 1表示数据点的个数</code></pre><p>  }</p>
+<p>  class Reducer<br>  reduce(ClusterID, value=[p(pm1, n1), (pm2, n2), ..])<br>  {</p>
+<pre><code>pm = 0.0, n=0;
+k = 数据点列表中数据项的总个数
+for i=0 to k
+{
+    pm += pm[i]*n[i]; n+=n[i];
+}
+pm = pm/n;
+emit(ClusterID, (pm,n));// 输出新的聚类中心的数据值</code></pre><p>  }</p>
+</li>
+</ul>
+<h3 id="基于MapReduce的分类并行化算法"><a href="#基于MapReduce的分类并行化算法" class="headerlink" title="基于MapReduce的分类并行化算法"></a>基于MapReduce的分类并行化算法</h3><p>从一组已经带有分类标记的训练样本数据集来预测一个测试样本的分类结果</p>
+<h4 id="kNN"><a href="#kNN" class="headerlink" title="kNN"></a>kNN</h4><p>k-NN: 计算测试样本到各训练样本的距离，取其中距离最小的K个，并根据这K个训练样本的标记进行投票得到测试样本的标记。</p>
+<p>并行化思路<br>全局变量：<br>样本数据和k个最近的样本</p>
+<p>对于每一个的样本数据，检查如果就hi算出来的值比目前大则替换，否则保留<br>根据所保留的k个最大的值得到最终的分类标记</p>
+<h4 id="朴素贝叶斯分类"><a href="#朴素贝叶斯分类" class="headerlink" title="朴素贝叶斯分类"></a>朴素贝叶斯分类</h4><p>关键：对于一个未知类别的样本X，可以先分别计算出X属于每一个类别Yi的概率P(X|Yi)P(Yi), 然后选择其中概率最大的Yi作为其类别<br>理解：因为分母都是一样的，所以实际上考虑的就是分子的情况</p>
+<p>并行化算法设计思路：<br>用MapReduce扫描数据集，计算每个类别Yi出现的频度FYi，以及每个属性值出现在Yi的频度FxYij</p>
+<p>训练集的并行化代码<br>    class Mapper<br>    map(key, tr)<br>    {<br>        tr: trid,A,y<br>        emit(y,1) // 类别<br>        for i=0 to A.length<br>        {<br>            emit(&lt;y, xni, xvi&gt;, 1)<br>        }<br>    }<br>    class Reducer<br>    reduce(key, value_lsit) // Key为分类标记y, 或者&lt;y, xni, xvi&gt;<br>    {<br>        sum = 0<br>        while(value_lsit.hasNext()) {<br>            sum += value_lsit.next().get()<br>        }<br>        emit(key, sum)<br>    }</p>
+<p>测试样本分类预测Mapper</p>
+<pre><code>class Mapper
+setup()
+{
+    读取从训练数据集中得到的频度数据
+    分类频度表 FY = {(Yi, 每个Yi的频度FYi)}
+    属性频度表 FxY = {(&lt;Yi, xnj, xvj&gt;, 出现频度FxYij)}}
+}
+map(key, ts) // ts为一个测试样本
+{
+    ts tsid, A
+    MaxF = MIN_VALUE; idx = -1
+    扫描每个表，找到类别最大的表所在的位置
+    emit(tsid, FY[idx].Yi)
+}</code></pre><h4 id="SVM短文本分类"><a href="#SVM短文本分类" class="headerlink" title="SVM短文本分类"></a>SVM短文本分类</h4><p>训练阶段，对于多类（480类）问题，为了提高多类精度，首先针对每个类做一个2class两类分类器<br>预测阶段，分别用480个分类其对每个待预测的样本进行分类并打分，选择分类为”是“且打分最高的类别作为该样本可能的预测类别，则将该测试样本判定为不属于480类的异类</p>
+<p>第一步，用训练数据产生480个2-class分类器模型<br>Map: 将每个训练样本的分类标签ClassID作为主键，输出（ClassID,  &lt;true/ false, 特征向量&gt;<br>Reduce： 具有相同ClassID的键值对进入同一个Reduce</p>
+<p>第二步，用480个2-Class分类器模型处理测试数据<br>Map： 将每个测试样本，以SampleID作为主键，输出（SampleID, &lt;LableID, 评分Score&gt;）<br>Reduce: SampleID</p>
+<h2 id="ch10-Spark系统及其编程技术"><a href="#ch10-Spark系统及其编程技术" class="headerlink" title="ch10 Spark系统及其编程技术"></a>ch10 Spark系统及其编程技术</h2><h3 id="Scala"><a href="#Scala" class="headerlink" title="Scala"></a>Scala</h3><ol>
+<li>val, var 不变引用和可变引用</li>
+<li>基于JVM、面向对象、函数式编程</li>
+<li>类是对象的抽象，对象是类的具体实现，占内存</li>
+</ol>
+<h3 id="Spark-vs-Hadoop"><a href="#Spark-vs-Hadoop" class="headerlink" title="Spark vs Hadoop"></a>Spark vs Hadoop</h3><p>Spark不足：<br>不擅长做以下计算：</p>
+<ol>
+<li>实时计算：Map Reduce无法在毫秒内或者秒级内返回结果</li>
+<li>流式计算：流式计算的输入数据是动态的，设计特点决定了数据源必须是静态的</li>
+<li>DAG计算：多个应用程序存在依赖关系，后一个应用程序的输入为前一个的输出。每个MapReduce的阿左也输出结果都会写道磁盘，会造成大量的磁盘IO，性能非常的地下。</li>
+<li>没有利用好内存资源，频繁第磁盘草坪做<br>Spark优点：</li>
+<li>Spark 把中间数据放到内存，迭代运算效率高。Spark支持DAG图的分布式并行计算的编程框架，减少了迭代过程中的数据的读写磁盘，提高了处理效率。（延迟加载）</li>
+<li>容错性高。Spark引进了弹性分布式数据集RDD的抽象，他是分布在一组节点的制度对象集合，这些集合式弹性的，如果数据集一部分丢失，则可以通过“血统：对它们进行重建。另外在RDD计算时可以通过CheckPoint来实现容错。</li>
+<li>更加通用。mapreduce只提供了map和reduce两种操作，而spark提供了很多种，大致分为Transformation和Action两大类</li>
+</ol>
+<h3 id="RDDs"><a href="#RDDs" class="headerlink" title="RDDs"></a>RDDs</h3><ol>
+<li>基于RDD之间的依赖关系组成lineage,重计算以及checkpoint等机制保证容错性</li>
+<li>只读、可分区，这个数据集的全部或部分可以缓存在内存中，在多次计算间重用，弹性指内存不够时可以与磁盘进行交换</li>
+</ol>
+<h3 id="Spark的基本构架和组件"><a href="#Spark的基本构架和组件" class="headerlink" title="Spark的基本构架和组件"></a>Spark的基本构架和组件</h3><p>Spark： mapreduce，rdd，function programing<br>本地运行模式，独立运行模式，mesos，yarn两套资源管理框架</p>
+<p>Spark集群的基本结构</p>
+<ul>
+<li>Master node： 集群部署式的概念，式整个集群的控制器，负责整个集群的正常运行，管理Worker node</li>
+<li>Worker node： 式计算节点，接收主节点命令与进行状态汇报</li>
+<li>Executors: 每个Worker上有一个Executor，负责完成Task程序的执行</li>
+<li>Spark集群部署后，需要在主从节点启动Master进程和Worker进程，对整个集群进行控制</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-distributed-system/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-distributed-system/" class="post-title-link" itemprop="url">nju-course distributed system</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:04:16 / 修改时间：12:07:27" itemprop="dateCreated datePublished" datetime="2019-09-19T12:04:16+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/distributedSystem/" itemprop="url" rel="index"><span itemprop="name">distributedSystem</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="分布式系统模型"><a href="#分布式系统模型" class="headerlink" title="分布式系统模型"></a>分布式系统模型</h2><ol>
+<li>什么是分布式系统？</li>
+</ol>
+<ul>
+<li>分布式系统是若干个独立的计算机的集合，这些计算机对于用户来说就像是单个相关的系统</li>
+</ul>
+<ol start="2">
+<li>为什么要分布式？</li>
+</ol>
+<ul>
+<li>让用户连接到资源;</li>
+<li>保证资源在网络上分布的透明性;</li>
+<li>分布式系统是开放的</li>
+<li>分布式系统是可扩展的</li>
+</ul>
+<ol start="3">
+<li>分布式系统透明性和开放性的含义</li>
+</ol>
+<p>透明性可以运用到分布式系统中的各个方面</p>
+<ul>
+<li>访问，隐藏数据表示形式的不同以及资源访问方式的不同</li>
+<li>位置，隐藏资源所在位置</li>
+<li>迁移，隐藏资源是否移动到另一个位置</li>
+<li>重定位，隐藏资源是否在使用过程中移动到另一个位置</li>
+<li>复制，隐藏是否对资源进行复制</li>
+<li>并发，隐藏资源是否由若干个相互竞争的用户共享</li>
+<li>故障，隐藏资源的故障和恢复</li>
+<li>持久性，隐藏资源在内存中还是在硬盘中</li>
+</ul>
+<p>（未答透明性的级别）</p>
+<p>开发性的含义</p>
+<p>一个开发是系统应该是一个这样的系统，它根据一系列准则来提供服务，这些准则描述了所提供服务的语法和语义</p>
+<ul>
+<li>能够与其他开放系统的富户及你想嗯交互，与潜在的环境无关<ul>
+<li>系统应该遵守明确的接口定义</li>
+<li>系统应该支持应用的可移植性</li>
+<li>系统应该能够易于交互</li>
+</ul>
+</li>
+<li>它必须是灵活的，要能够方便地把有不同的开发人员开发的不同组件组合成整个系统。</li>
+</ul>
+<ol start="4">
+<li>分布式系统、网络操作系统和基于中间件的系统</li>
+</ol>
+<ul>
+<li>分布式操作系统，紧耦合的操作系统，用于多处理器系统和同构式多计算机系统，主要目标是隐藏及管理硬件资源</li>
+<li>网络操作系统，松耦合的操作系统，用于异构式多计算机系统（LAN和WAN），主要目标是向远程客户提供本地服务</li>
+<li>中间件，位于网络操作系统通用服务上的附加层，主要目标是提供分布式透明性</li>
+</ul>
+<ol start="5">
+<li>分布式系统的类型</li>
+</ol>
+<ul>
+<li>Distributed computing systems（云计算LAN，网格计算）</li>
+<li>Distributed information systems（TP monitor）</li>
+<li>Distributed pervasive systems (分布式普适系统,移动计算系统等等)</li>
+</ul>
+<ol start="6">
+<li>机制和策略的理解</li>
+</ol>
+<ul>
+<li>需要对不同策略的支持<ul>
+<li>对客户端cache数据一直性要求有多高</li>
+<li>可以允许下载代码执行哪些操作</li>
+<li>面对不同带宽，如何调整QoS的要求</li>
+<li>通信过程需要什么程度的加密</li>
+</ul>
+</li>
+<li>理想上，分布式系统仅仅提供机制<ul>
+<li>允许动态设置缓存测绿</li>
+<li>支持不同程度的移动代码信任</li>
+<li>每个数据流提供可调的QoS参数</li>
+<li>提供不同的加密算法</li>
+</ul>
+</li>
+<li>机制与策略分离原则<ul>
+<li>机制由系统实现，策略由用户完成</li>
+<li>机制放在底层，策略放在高层</li>
+<li>机制集中在少数模块，策略散布在多处</li>
+</ul>
+</li>
+</ul>
+<h2 id="分布式系统架构"><a href="#分布式系统架构" class="headerlink" title="分布式系统架构"></a>分布式系统架构</h2><ol>
+<li>分布式系统架构风格</li>
+</ol>
+<ul>
+<li>组织为逻辑上不同的部分，每个部分分布在不同的机器上<ul>
+<li>层次结构</li>
+<li>面向对象式的结构<ul>
+<li>在空间上或者时间上对进程进行的分离</li>
+</ul>
+</li>
+<li>事件总线，发布订阅模式</li>
+<li>共享数据空间</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>分布式系统组织形式</li>
+</ol>
+<ul>
+<li>中心式<ul>
+<li>C/S模式</li>
+</ul>
+</li>
+<li>非中心式<ul>
+<li>结构化P2P</li>
+<li>非结构化P2P</li>
+</ul>
+</li>
+<li>混合式(BitTorrent）</li>
+</ul>
+<ol start="3">
+<li><p>客户-服务器模式和对等模式</p>
+</li>
+<li><p>分布式系统组织为中间件</p>
+</li>
+</ol>
+<h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2><ol>
+<li>进程 vs 线程<br>程序是静态的代码和数据<br>进程是动态的代码和数据的实例</li>
+</ol>
+<p>进程时具有独立功能的程序关于某个数据集合的一次进行活动，是资源分配和调度的基本单位<br>线程是进程的实体，是CPU调度的基本单位</p>
+<ol start="2">
+<li>代码迁移</li>
+</ol>
+<ul>
+<li>强迁移 vs 弱迁移<br>定义： 将整个进程从一台机器搬到另一台机器上<br>强迁移：迁移后的程序可以从当前开始执行<br>弱迁移：迁移后的程序必须从初始状态开始执行</li>
+</ul>
+<ol start="3">
+<li>代码迁移vs虚拟机迁移</li>
+</ol>
+<ul>
+<li>优势： 代码迁移最多包含代码，数据，执行状态的迁移，总传输量远小于一个虚拟机，所以轻量，网络负载小，无需引入其他中间语言</li>
+<li>不足：在异构系统中可能不适合执行迁移的代码，进程/线程/处理器上下文可能高度依赖于本地硬件，OS和运行时系统</li>
+</ul>
+<h2 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h2><ol>
+<li>通信的类型</li>
+</ol>
+<ul>
+<li>远程调用RPC</li>
+<li>基于消息的通信</li>
+</ul>
+<ol start="2">
+<li>远程调用RPC<br>注意：对于基本的RPC调用，client要有进入localOS中。</li>
+</ol>
+<ul>
+<li>RPC工作过程：<ul>
+<li>客户过程以正常方式调用客户存根</li>
+<li>客户存根生成一个消息，然后调用本地操作系统</li>
+<li>客户端操作系统发送消息给远程操作系统</li>
+<li>服务器存根将参数提取出来，然后调用服务器</li>
+<li>服务器执行要求的操作，操作完成后将结果返回给服务器存根</li>
+<li>服务器存根把结果打包为一个消息，然后调用本地操作系统</li>
+<li>服务器操作系统将含有结果的消息发送给客户端操作系统</li>
+<li>客户端操作系统将消息交给客户存根</li>
+<li>客户存根将结果从消息中提取出来，返回给调用它的客户过程</li>
+</ul>
+</li>
+<li>故障处理<ul>
+<li>客户无法定位到服务器<ul>
+<li>解决：使用特定的返回值/异常处理</li>
+</ul>
+</li>
+<li>客户发给服务器的请求消息丢失<ul>
+<li>解决：设置一个timer, 超时重发</li>
+</ul>
+</li>
+<li>服务器发给客户的应答消息丢失<ul>
+<li>解决：设置一个 timer,对于不幂等的请求，为客户请求分配序号，服务器区别不同的请求</li>
+</ul>
+</li>
+<li>服务器在收到消息后崩溃<br>1 接受后，执行前崩溃<br>2 执行后，发送前崩溃<ul>
+<li>解决：等待服务器启动,然后重发请求/立即放弃并报告失败/不做任何保证</li>
+</ul>
+</li>
+<li>客户机在发送消息后崩溃<ul>
+<li>解决：根绝 extermination: 在日志文件中纪录 RPC 请求，重启后清除孤儿再生 reincarnation: 将时间划分成不同时期，重启后广播新的时期开始。一旦收到广播消息， kill所有 remote computations.温和再生 gentle reincarnation: 将时间划分成不同时期，重启后广播新的时期开始。收到广播消息时，定位 remote computations 的 owner，kill 没有 owner 的。过期 expiration: 赋予每个 RPC 一个一个执行时间 T，未完成任务需显式申请附加配额。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>动态绑定<ul>
+<li>client寻找server过程使用，client提供paras(versionm), handler处理</li>
+<li>为什么？<ul>
+<li>（1）灵活性</li>
+<li>（2）可以支持多个服务器提供相同接口</li>
+<li>（3）binder（具有粘结剂的意思）可以确认客户端和服务器使用相同的接口版本</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>（1）输出、引入接口需要额外管理，花费时间</li>
+<li>（2）在大型分布式系统中，binder的存在可能会是通信瓶颈</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>基于消息的通信</li>
+</ol>
+<ul>
+<li>暂时（一旦发出接收后便不再存在无论是否被接收） vs 永久（信息在中间件永久存在，如邮件系统）</li>
+<li>异步（local buffer暂时保留，qq离线消息） vs 同步（对话， blocked）</li>
+</ul>
+<ol start="4">
+<li>流数据</li>
+</ol>
+<ul>
+<li>视频、音频，雷达;对时间敏感</li>
+<li>流数据+QoS（服务质量，评价指标）<ul>
+<li>需要传输的数据的位数</li>
+<li>通信之间的延迟</li>
+<li>end-to-end的延迟</li>
+<li>最大延迟时间</li>
+</ul>
+</li>
+<li>可能考点：组播通信两种方式<ul>
+<li>Application-level：<ul>
+<li>chord-based tree building</li>
+<li>覆盖网</li>
+<li>epidemic algortihms</li>
+</ul>
+</li>
+<li>Gossip-based data dissemination</li>
+</ul>
+</li>
+</ul>
+<h2 id="同步与资源管理"><a href="#同步与资源管理" class="headerlink" title="同步与资源管理"></a>同步与资源管理</h2><ol>
+<li>同步问题</li>
+</ol>
+<ul>
+<li>系统需要决定谁先谁后</li>
+</ul>
+<ol start="2">
+<li>时钟同步机制</li>
+</ol>
+<ul>
+<li>系统标准时间UTC</li>
+<li>网络同步（T1-T0-I）/2</li>
+<li>The Berkeley Algorithm:公认时间，平均时间</li>
+<li>Averaging Algorithm:去掉最高和最低</li>
+</ul>
+<ol>
+<li>逻辑时钟</li>
+</ol>
+<ul>
+<li>Lamport算法</li>
+<li>向量时撮</li>
+</ul>
+<ol start="2">
+<li>分布式系统中的互斥访问</li>
+</ol>
+<ul>
+<li>集中式算法</li>
+<li>分布式算法</li>
+<li></li>
+</ul>
+<ol start="3">
+<li>分布式系统中的选举机制</li>
+</ol>
+<h2 id="复制与一致性"><a href="#复制与一致性" class="headerlink" title="复制与一致性"></a>复制与一致性</h2><ol>
+<li>复制的优势与不足</li>
+<li>数据一致性模型</li>
+<li>数据一致性协议实例<ol>
+<li>基于法定数量的协议</li>
+</ol>
+</li>
+</ol>
+<h2 id="容错"><a href="#容错" class="headerlink" title="容错"></a>容错</h2><ol>
+<li>可信系统</li>
+<li>提高系统可信性的途径</li>
+<li>K容错系统</li>
+<li>拜占庭问题</li>
+<li>系统回复<ol>
+<li>回退恢复</li>
+<li>前向恢复</li>
+</ol>
+</li>
+<li>检查点</li>
+</ol>
+<h2 id="大数据处理系统"><a href="#大数据处理系统" class="headerlink" title="大数据处理系统"></a>大数据处理系统</h2><p>Big data analytics: making sense of complex data</p>
+<p>Input: unstructured, multimodal, Hig-dimensional, interconneccted, growing fast in volume</p>
+<p>Goal: discover interpretable patterns; understand causal relationships; make informed predictions and decisions</p>
+<p>Challenge：</p>
+<ul>
+<li>the growth of data volume</li>
+<li>the complexity of analytics</li>
+<li>limitied cluster resources</li>
+</ul>
+<p>Solution overview</p>
+<ul>
+<li>Normalize quality metrics</li>
+<li>Pedict quality improvent</li>
+<li>Quality-driven scheduling</li>
+</ul>
+<h2 id="物联网"><a href="#物联网" class="headerlink" title="物联网"></a>物联网</h2><ol>
+<li><p>物联网的概念<br>物联网是一个基于互联网、传统电信网等信息载体，让所有能够被独立寻址的普通物理对象实现互联互通的网络</p>
+</li>
+<li><p>物联网分类<br>普通对象设备化<br>自治终端互联化<br>普适服务智能化</p>
+</li>
+<li><p>物联网四层模型</p>
+</li>
+</ol>
+<ul>
+<li>综合应用层：从以数据服务为主要特征的文件传输到以用户为中心的应用</li>
+<li>管理服务层：将大规模数据组织起来，为上层应用提供支撑</li>
+<li>网络构建层：吧下层设备接入互联网，供上层服务使用，包括3G、4G、Wifi、蓝牙、NFC等通信技术</li>
+<li>感知识别层：联系物理世界和信息世界，包括RIFD、无限传感器、移动终端等感知设备。射频识别技术</li>
+</ul>
+<p>基于目标定位的微动作感知识别机制</p>
+<h2 id="云计算"><a href="#云计算" class="headerlink" title="云计算"></a>云计算</h2><ol>
+<li>简要说明虚拟化技术所解决的问题，并说明虚拟化技术与云计算的关系</li>
+</ol>
+<ul>
+<li>虚拟化技术所解决的问题：虚拟化是由位于下层的软件模块，将其封装或抽象，提供一个物理或软件的接口，使得上层的软件可以直接运行在这个虚拟的环境和运行在原来的环境一样</li>
+<li>虚拟化技术与云计算的关系：<ul>
+<li>虚拟化具有以下优点，有利于云计算<ul>
+<li>封装与隔离的特点，保证每个用户有安全可信的工作环境</li>
+<li>多实例的特点，保证较高的资源利用率，为服务器合并提供基础</li>
+<li>硬件无关性的特点，整合异构硬件资源，可实现虚拟机迁移，使资源调度、负载平衡容易实现</li>
+</ul>
+</li>
+<li>特权功能的特点，用于云计算的入侵检测和病毒检测</li>
+<li>动态调整资源特点，便于云计算的细粒度的可扩展性</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><p>Openstack为代表的基本功能是什么<br>IaaS，基础设施即服务组件，让任何人都可以自行建立和提供云端运算服务。此外，openstack也用作建立防火墙内的“私有云”，提供机构或企业内各部门共享资源。以openstack为代表的IaaS的功能：为IT行业创造虚拟的计算和数据中心，使得其能够把计算单元、存储器、I/O设备、带宽等计算机基础设施，集中起来成为一个虚拟的资源池来为整个网络提供服务。</p>
+</li>
+<li><p>应用场景一适合，应用场景二不适合。OpenStack是基于虚拟化的IaaS云平台，提供的是有性能损耗的虚拟化资源，适用于资源类型较为单一、资源需求实时变化的系统，不适用于高性能计算。</p>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-mlt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-mlt/" class="post-title-link" itemprop="url">nju-course mlt</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:02:37 / 修改时间：12:07:42" itemprop="dateCreated datePublished" datetime="2019-09-19T12:02:37+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/mlt/" itemprop="url" rel="index"><span itemprop="name">mlt</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-BasicInequality"><a href="#1-BasicInequality" class="headerlink" title="1. BasicInequality"></a>1. BasicInequality</h2><p>有哪些不等式？<br>这些不等式是为了解决什么样的问题的？</p>
+<p>凸函数：杰森不等式说明函数的期望大于期望的函数，这说明了什么？</p>
+<p>a. 基本不等式</p>
+<ul>
+<li>杰森不等式<blockquote>
+<p>杰森不等式即变量的期望的函数小于函数的期望</p>
+</blockquote>
+</li>
+<li>Markov不等式<blockquote>
+<p>将$P{X \geq a}$的概率与期望联系在一起</p>
+</blockquote>
+</li>
+<li>chernoff不等式<blockquote>
+<p>将指数以及指数的性质引入。</p>
+</blockquote>
+</li>
+<li>大数定理<blockquote>
+<p>说明了大概率事件的问题</p>
+</blockquote>
+</li>
+<li>信息熵不等式<blockquote>
+<p>有什么用处，暂时未知</p>
+</blockquote>
+</li>
+</ul>
+<p>b. Concentration</p>
+<blockquote>
+<p>研究期望与样本均值之间的关系</p>
+</blockquote>
+<p>c. Martingale不等式</p>
+<blockquote>
+<p>结论很有意思，得到了函数与函数期望之间关系的不等式<br>McDiarmid不等式<br>A martingale is a sequence of random variables for which, at a particular time in the realized sequence, the expectation of the next value in the sequence is equal to the present observed value even given knowledge of all prior observed values.</p>
+</blockquote>
+<h2 id="3-PAC理论"><a href="#3-PAC理论" class="headerlink" title="3. PAC理论"></a>3. PAC理论</h2><p>PAC理论是什么？<br>主要应对的是什么问题？</p>
+<p>PAC是概率近似正确的表达式。首先对于衡量的指标，泛化误差也就是在未知样本上预测结果与真实结果的差异性，如果预测函数是真实的概念类，那么泛化误差应该为0. 经验误差是在已知有限样本数据上的真实与否的一个估计值。<br>PAC学习假设数据原本是存在某一个分布的，而且手上的数据集是通过iid采样得到的。那么，<br>经验误差的期望就应该与泛化误差相等，由于iid条件和期望的线性性。</p>
+<p>注意到，这里的经验误差的计算方式非常简单。</p>
+<p>对于PAC可学习，即我们希望尽可能学习到真实的概念，此时就提出了以$1-\delta$ 满足泛化误差小于某个常数</p>
+<p>但是，我们知道学习任务实际上是有两类的：<br>第一类，简单的，可以在假设空间中学习到概念，此时使用的就是PAC理论<br>第二类，困难的，不可以在假设空间中学习到概念。这种情况往往就是假设空间不合理，不可知PAC可学习。</p>
+<p>对于不可知PAC可学习，此时采用的方法就是使用集中不等式，有给出期望与数据样本的均值之间的关系，所以可以采用就将泛化误差与训练误差之间联系在一起。<br>这也是为什么实际上做的时候，训练样本不断使样本的误差达到最小，从而在未知样本上保持好的性能。</p>
+<p>有什么用？<br>某任务在什么样的条件下可学得较好的模型？需要多少训练样例才能获得较好的模型？</p>
+<p>因为机器学习是在假设空间中寻找概念，所以最重要的一个因素就是衡量假设空间的复杂度。</p>
+<blockquote>
+<p>注意在实际问题中，假设空间其实就是问题的定义域。假设空间可分就是目标概念在假设空间中可以找到，然后实际上就是&gt;证明算法，若算法给定就选该算法，若算法未给定，一般考虑选择经验风险最小化的算法。<br>然后根据定义即证明了可分<br>如果假设空间复杂度有限，用个数来衡量<br>由前面的PAC可学习公式我们就可以得到样本复杂度。<br>一般来说都解题步骤就是首先得到算法，然后图形结合得到泛化整个集合的泛化误差，然后通过独立同分布得到与单个泛化误差之间的关系，最终即可得到样本复杂度。</p>
+</blockquote>
+<h2 id="4-复杂度"><a href="#4-复杂度" class="headerlink" title="4. 复杂度"></a>4. 复杂度</h2><ul>
+<li><p>为什么可以用PAC理论来得到学习算法？<br>当认为处理每个样本的时间是常数，则算法的复杂度就与样本复杂度相关。又由PAC定义，如果概念在假设空间中可以由假设空间复杂度得到样本复杂度。</p>
+</li>
+<li><p>如果假设空间无限，引入假设空间，增长函数和VC维。</p>
+<blockquote>
+<p>无限假设空间的另一种理解方法就是定义域往往是无穷的<br>无限假设空间被有限大小的数据集限制。<br>增长函数即指该概念可以出现多少不同类的情况，则增长函数一定小于H_D<br>VC维就是log_2 {增长函数}</p>
+</blockquote>
+</li>
+<li><p>增长函数可以通过不等式放缩。</p>
+</li>
+<li><p>研究数据分布相关的假设空间复杂度</p>
+<blockquote>
+<p>考虑到现实中的某些标记不一定是真实标记，此时选择事先考虑随机噪声的假设更好。为什么这样更好？因为这里也是往往认为这种时间是具有一定分布的，即是随机噪声。<br>常见的噪声的取值为0.5的概率取某值，当然在其他情况下，噪声可能有其他的分布。<br>为什么要用上界来衡量？如同增长函数的感觉，上界来衡量的感觉就是去找最大的情况，而所有做的过程都是这样来做的。</p>
+</blockquote>
+</li>
+</ul>
+<p>注意有两种复杂度：<br>第一种，经验复杂度，即在随机噪声上的期望<br>第二种，分布复杂度，即在具体分布上的期望</p>
+<p>几个复杂度求解的例子。</p>
+<p>作业1-习题3：<br>求R复杂度时注意关于期望的运算最好使用期望原本的公式。</p>
+<h2 id="5-泛化性"><a href="#5-泛化性" class="headerlink" title="5. 泛化性"></a>5. 泛化性</h2><p>机器学习模型在未见数据上的预测能力。泛化性的好坏可由泛化误差界来表示。<br>所以泛化性的评价标准就是泛化误差。<br>由前面的分析可知，泛化误差区分可分和不可分两种情况。<br>对于可分的情况，样本复杂度是关于名同事我们还可以知道泛化误差的收敛速率<br>对于不可分的情况，此时用的是误差经验最小化来查看结果。</p>
+<blockquote>
+<p>注意不可分与假设空间无限两个概念不要弄混。</p>
+</blockquote>
+<p>无限空间泛化误差界：</p>
+<ul>
+<li>基于VC维的泛化误差界</li>
+<li>基于Rademacher复杂度的泛化误差界</li>
+</ul>
+<p>在研究SVM的VC维时，引入间隔理论，即</p>
+<p>假设x的直径的最大长度为r，权向量的最大模为某个定值。最终根据不等式的放缩、期望以及期望的性质最终可得大小关系式。</p>
+<p>评价：所求的泛化性是对所欲算法都适用的，与具体的学习算法无关。</p>
+<h2 id="6-稳定性"><a href="#6-稳定性" class="headerlink" title="6. 稳定性"></a>6. 稳定性</h2><p>$\zeta_D$: 算法基于样本集返回的假设。<br>z: 代指实际的标签(x,y)<br>关于移除样本的$\beta$-稳定性和替换样本$\gamma$。</p>
+<p>因为稳定性的定义是两个误差的绝对值，所以趋于稳定即这个值越小越好。那么想要基于稳定性的算法具有收敛性，从某个角度理解就是需要该算法能够随着样本的增大而缩小，因为只有样本容量这一个大小。</p>
+<p>定理6.1利用McDiamnd不等式给出了基于稳定性所学的假设的泛化误差界。<br>给出了泛化误差界与训练误差界之间的关系。</p>
+<ul>
+<li>稳定性与可学习性之间有什么关系？<br>稳定性关注点是算法输出的假设的误差，并不考虑空间中所有假设。<br>一个结论：若果学习算法是ERM且稳定的，那么假设空间是PAC可学习的。<br>为什么？<br>因为从稳定性的定义来看就是损失函数上套了一层。</li>
+</ul>
+<p>次梯度，即实际函数与函数的点的切线的距离。<br>这里的关键是有次梯度的关系表达式，即泰勒级数的一阶展开式。将$B_F$和稳定性定义，以及梯度联系在一起。<br>特别说明地是，这里在证明稳定性的上界的时候可以发现，首先是证明了$\Delta h$的最大值的上界。<br>然后再用$\delta$可容许将稳定性的误差放缩为$\Delta h$，最终得到稳定性的范围。<br>注意这里是讨论了基于核正则化算法的稳定性。</p>
+<p>注意到定理6.1,可以发现最关键的就是分析损失函数的上界以及替换误差.</p>
+<p>课文中只给出了基于再生核的泛化误差界，没有给出其他。<br>还有一点就是本文的讨论都是基于均匀稳定性导出的泛化误差界，但均匀稳定性并不是算法奏效的必要条件，</p>
+<h2 id="7-AdaBoost分析"><a href="#7-AdaBoost分析" class="headerlink" title="7. AdaBoost分析"></a>7. AdaBoost分析</h2><p>集成学习即利用某种规则将各个学习结果进行整合从而获得比单个学习器显著优越的泛化性能。</p>
+<p>弱学习器的定义：弱学习器是指在多项式时间内存在一个学习器，其错误率低于50%，即存在比随机猜略好的学习方法。</p>
+<p>简单版的AdaBoost算法<br>在每一轮迭代中，产生一个弱学习器ht,该学习器比随机猜的性能略好，然后根据产生的弱学习器ht，每一个样本被赋予一个权重，如果样本点被正确地分类，那么它的权重越小，表明在下一轮训练中被选中的概率越低。相反，如果某样本点没有被准确地分类，那么它的权重就会提高，然后更显样本集并用于下一轮的学习训练，整个训练过程如此迭代，最后将所有得到的弱分类器通过权重结合起来。</p>
+<p>这里是使用了最优化，使泛化误差去极小值，最终得到权值的更新公式。</p>
+<p><strong>泛化误差反应的是在未知结果上的好坏，而函数空间复杂度则反应的是学习的程度如何，比如是否过拟合之类的信息</strong></p>
+<p><strong>奥卡姆剃刀原理</strong>：在于经验数据一致的模型中，模型越简单，泛化性越好；模型越复杂，泛化性越差。</p>
+<ul>
+<li>AdaBoost间隔<br>AdaBoost间隔理论的定义：<br>间隔定义为正确/错误分类样本(x,y)的基分类器权重之差，在一定程度上了反映了分类器的可信度。<br>有种执行区间的感觉。</li>
+</ul>
+<p>AdaBoost间隔结论<br>学习器在真实分布上的泛化错误率与在训练集上的间隔有关，与训练集的大小，基学习器的个数有关。<br>所以说明了AdaBoost算法但训练错误率时不停止训练，可以进一步增大间隔，从而提高学习方法的泛化性而没有过拟合。<br>也就是AdaBoost算法不易引起过拟合现象。想想真的是超级神奇了。</p>
+<ul>
+<li><p>AdaBoost VC维泛化误差性<br>由VC维得到结论：随着迭代轮数的增加，学习器函数空间复杂度增加，从而导致发生过拟合风险。不过这是有问题的。</p>
+</li>
+<li><p>AdaBoost Rademaer泛化误差性<br>可以发现，这里所用的都是利普西子条件来分析的。</p>
+<h2 id="8-一致性"><a href="#8-一致性" class="headerlink" title="8. 一致性"></a>8. 一致性</h2><p>结构风险，1范数-稀疏性，2范数-平均性</p>
+</li>
+</ul>
+<p>一致性这里研究的就是模型和测试的结果之间是否一致，至少在理论上提供保证。</p>
+<p>KNN 经验风险最小化。<br>Tree 拆分法</p>
+<p>所以这里的问题的起点变为了首先给定样本空间和标记空间。D是这两个空间的笛卡尔积的一个联合分布。分布D可分解为边缘分布和条件概率，为什么？</p>
+<blockquote>
+<p>因为联合分布的定义就是边缘分布乘以条件概率</p>
+</blockquote>
+<p>若函数给出一个分类器或决策函数，其错误率定义为</p>
+<blockquote>
+<p>R(g)=Pr[g(X)!=Y]=E[I_{g(X)!=Y}]</p>
+</blockquote>
+<p>那么，考虑最优分类器及其性质</p>
+<blockquote>
+<p>这里应该有理论上最优和基于后验最优。</p>
+</blockquote>
+<p>只考虑所有可测函数，选出最符合后验概率的，作为最优。</p>
+<blockquote>
+<p>注意这里给定任意的损失函数来做经验风险最小化。<br>首先按照条件期望展开，然后把g(X)即分类器当做变量。对损失求极值，由此可以得到最优分类器和最优风险。<br>此时就被称为贝叶斯风险和贝叶斯分类器。</p>
+</blockquote>
+<blockquote>
+<p>注意指示函数非凸不连续做不到效果，所以建议使用对数，指数和sigmoid函数。<br>如果是凸函数可以得到全局最优解。<br>各点最小，全局最小。</p>
+</blockquote>
+<ul>
+<li>这里的$\eta(x)=Pr(Y=1|X=x)$<br>一种经典的条件概率估计方法：Plug-in学习方法。<blockquote>
+<p>该学习方法是通过训练数据集来估计$\eta(x)$, 即学习器$g(x)=I[\widehat\eta(x) &gt; \frac {1}{2}]$<br>这里是训练集预测的结果差异<br>实际上理解就是少数服从多数</p>
+</blockquote>
+</li>
+</ul>
+<p>然后，将Plug-in学习器与最优分类器的错误率之差建立了与两个n(x)的差的期望</p>
+<ul>
+<li>拆分算法<blockquote>
+<p>将示例空间划分为多个互不相交的单元格A1,A2,…。对每个单元格投票的方法赋予标记，还是少数服从多数。</p>
+</blockquote>
+</li>
+</ul>
+<p>A(X)这里表示包含X的单元格。N(X)表示训练集中与示例X落入同一单元格的实例数。</p>
+<ul>
+<li><p>Box算法</p>
+</li>
+<li><p>随机森林一致性</p>
+</li>
+<li><p>替换损失函数一致性</p>
+<blockquote>
+<p>替换函数一般都需要是凸函数。<br>替换函数一致性是指替换损失的最优解接近于0,1损失的最优解<br>替代函数的种类： </p>
+<ol>
+<li>最小二乘损失函数 $(1-t)^2$</li>
+<li>Hinge损失函数 $max(0,1-t)$</li>
+<li>指数损失函数 $e^{-t}$</li>
+<li>对数损失函数 $log(1+e^{-t})$</li>
+<li>平方Hinge损失函数 $(max(0,1-t))^2$</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="9-优化"><a href="#9-优化" class="headerlink" title="9. 优化"></a>9. 优化</h2><blockquote>
+<p>监督学习目的想在未知样本中能预测到好的结果，实际上就是测试数据上的期望的性能。往往思考的时候添加个损失函数，所以就变成了是带损失的期望风险最小化。</p>
+</blockquote>
+<h3 id="9-1-凸优化"><a href="#9-1-凸优化" class="headerlink" title="9.1 凸优化"></a>9.1 凸优化</h3><blockquote>
+<p>凸优化求解经验风险最小化<br>几个概念</p>
+</blockquote>
+<ol>
+<li>凸集合</li>
+<li>凸函数的几种判定方式<blockquote>
+<p>? Jensen不等式有什么性质<br>凸函数能保证局部最优解就是全局最优解。<br>一阶条件的理解：可以想象成梯度的等温线然后来做。<br>一般地，Affine,Exponential,Powers,Powers of absolute value, Negative entropy都是凸函数<br>几种合起来的套路：<br>非负加权、线性加权、max、sup(只需要自由变元满足即可)</p>
+</blockquote>
+</li>
+<li>共轭函数<blockquote>
+<p>注意：无论原函数f是否为凸函数，共轭函数f*都为凸</p>
+</blockquote>
+</li>
+<li>对偶问题<br>KKT条件：</li>
+</ol>
+<ul>
+<li>原始问题约束</li>
+<li>对偶问题约束</li>
+<li>互补松弛条件</li>
+<li>原函数梯度为0</li>
+</ul>
+<ol start="5">
+<li>优化方法<br>对于梯度下降，目的就是为了分析其在凸函数情况下的收敛速率。<blockquote>
+<p>?</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>? 所以说可以认为凸优化在这里就对应于定步长的梯度下降。</p>
+</blockquote>
+<blockquote>
+<p>凸优化再思考，凸优化为什么表达式是最优化目标min,小于等于，还有必须是纺织函数；<br>因为Jensen不等式，所以就有加权函数值小于等于函数值加权，所以就能找到最优化目标。</p>
+</blockquote>
+<h3 id="9-2-随机优化"><a href="#9-2-随机优化" class="headerlink" title="9.2 随机优化"></a>9.2 随机优化</h3><blockquote>
+<p>随机优化是类大的引题，随机优化是一种方法，一种思想。然后在机器学习中就对应于经验风险最小化部分。</p>
+</blockquote>
+<p>随机优化求解有两种方法：样本平均近似和随机近似。</p>
+<h4 id="样本平均近似"><a href="#样本平均近似" class="headerlink" title="样本平均近似"></a>样本平均近似</h4><p>机器学习领域的经验风险最小化。<br>其核心思想是对随机变量进行独立采样，然后利用定义在m个样本上的平均函数来近似未知的目标函数</p>
+<blockquote>
+<p>?，这里的随机变量是R复杂度，还是样本值？什么鬼？</p>
+</blockquote>
+<p>然后衡量的目标就是经验风险最小化学的w，在目标函数上w与目标函数上最优解之间的误差 </p>
+<blockquote>
+<p>这里的w与F对应的是什么？</p>
+</blockquote>
+<p>然后通过不等式放缩即找<br>平常情况下的w在目标函数中的值和在样本平均中的值的差</p>
+<h4 id="随机近似"><a href="#随机近似" class="headerlink" title="随机近似"></a>随机近似</h4><blockquote>
+<p>利用目标函数F的有噪声观测直接优化问题，如果可以观测到目标函数值，则称为零阶随机优化；如果可以观测到目标函数的梯度，则称为一阶优化</p>
+</blockquote>
+<p>两个例子</p>
+<ol>
+<li><p>随机梯度下降</p>
+</li>
+<li><p>阶段随机梯度下降<br>阶段</p>
+</li>
+</ol>
+<h3 id="9-3-完全信息在线学习"><a href="#9-3-完全信息在线学习" class="headerlink" title="9.3 完全信息在线学习"></a>9.3 完全信息在线学习</h3><blockquote>
+<p>这一章以及后面就涉及到在线学习的内容了。在线学习在某种意义上可以看作是学习器与对手之间的博弈过程。完全信息在线学习能观测到全部的信息，赌博机在线学习只能观测到局部的信息。</p>
+</blockquote>
+<ol>
+<li><p>基于专家建议的预测</p>
+<blockquote>
+<p>对手给出yt, 每个专家给出自己的意见，然后统帅根据某种方法综合专家的意见（线性或者加权），这种方法带有参数，共N个专家，训练T轮。<br>如何学习最优决策？目标是统帅做出决策所获得的损失和专家的损失和相近。（就是专家最牛，希望自己的决策最终能趋近于专家的决策）</p>
+</blockquote>
+</li>
+<li><p>在线凸优化</p>
+<blockquote>
+<p>对于损失函数的选择，从某种意义上感觉来说还是与函数的性质有关。</p>
+</blockquote>
+</li>
+<li><p>在线梯度下降</p>
+<blockquote>
+<p>这里分凸函数和强凸函数</p>
+</blockquote>
+</li>
+<li><p>在线牛顿法</p>
+<blockquote>
+<p>指数凹函数</p>
+</blockquote>
+</li>
+<li><p>在线批处理转换</p>
+</li>
+</ol>
+<blockquote>
+<p>从某种意义上，可以再看看源码中怎么写的</p>
+</blockquote>
+<h3 id="9-4-赌博机在线学习"><a href="#9-4-赌博机在线学习" class="headerlink" title="9.4 赌博机在线学习"></a>9.4 赌博机在线学习</h3><blockquote>
+<p>对于赌博机来说，学习器预测错误后并不知道正确答案。</p>
+</blockquote>
+<ol>
+<li>多臂赌博机<blockquote>
+<p>学习器的遗憾就是探索和利用之间的折中；一方面，为了准确均值估计需要探索;另一方面，学习器又倾向于选择最大收益的手臂。</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>注意选择不能只是选均值大的。</p>
+</blockquote>
+<blockquote>
+<p>评价准则：首先最优选择是什么？事先知道答案，即选择了最优的。那么就是T*Ui; 其次，实际做的是什么？就是每轮真正的选择之和。</p>
+</blockquote>
+<p>一种做法就是置信上界，为每个手臂维持一个均值加一个变量，注意这个变量定的方式暂时未知。</p>
+<ol start="2">
+<li>线性赌博机<blockquote>
+<p>一个问题，噪声具有分布，怎么观测到噪声，噪声有什么用。</p>
+</blockquote>
+</li>
+</ol>
+<p>首先，这里有个目标；目标可以是最小方差。然后，可以取得一个权重，并根据这个权重找到对应的置信趋于，有置信区域找到上界。然后再根据各个标签的置信区域的上界来找到$X_{t+1}$。<br>然后提交观测的样本，再进行学习。<br>注意，一些扩展的tips，最小方差，在线最小方差。</p>
+<ol start="3">
+<li>凸赌博机</li>
+</ol>
+<p>在赌博机的设定下，学习器智能观测到损失函数$f_t$在决策$w_t$上的值$f(w_t)$,因此是无法直接应用梯度下降的。<br>所以这里引入了从函数值估计梯度的技术。<br>首先在x组成的空间中随机选择一个单位向量，然后学习器根据这个单位向量选择决策$w_t=z_t+\delta u_t$;同时，对手选择一个损失函数。学习器遭受损失，并更新$z_t$。值得注意的是这是就能从$z_t$近似来做，最终来做凸优化。</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h4 id="1-频率-vs-贝叶斯"><a href="#1-频率-vs-贝叶斯" class="headerlink" title="1.频率 vs 贝叶斯"></a>1.频率 vs 贝叶斯</h4><h4 id="频率"><a href="#频率" class="headerlink" title="频率"></a>频率</h4><blockquote>
+<p>有上帝之手的感觉，假设事物在冥冥之中服从一个分部，这个分布的参数是未知的，但是是固定的</p>
+</blockquote>
+<p>最大似然估计MLE:<br>首先假定一个分布，然后基于最大期望估计得到模型的参数。参数固定。</p>
+<h4 id="贝叶斯"><a href="#贝叶斯" class="headerlink" title="贝叶斯"></a>贝叶斯</h4><blockquote>
+<p>世界是不确定的，人们对世界先有一个预判，而后通过观测数据对这个预判进行调整。我们的目标是要找到最优的描述这个世界的概率分布。参数是一个随机变量，符合一定的概率分布。</p>
+</blockquote>
+<p>最大后验估计MAP:<br>对世界预判后，不断改变参数找到最适合的分布</p>
+<p>过拟合？频率派的专有词<br>频率学派——最大似然估计 MLE.</p>
+<blockquote>
+<p>EM算法使用的就是MLE</p>
+</blockquote>
+<p>缓解办法：</p>
+<ol>
+<li>添加正则化项</li>
+<li>模型集成</li>
+</ol>
+<p>贝叶斯学派——最大后验估计MAP</p>
+<p>缓解办法：</p>
+<ol>
+<li>引入先验，做最大后验估计？<blockquote>
+<p>认为正则化项实际是一种先验分布，比如u均值的拉普拉斯分布，0均值的高斯分布</p>
+</blockquote>
+</li>
+<li>计算后验分布的积分（相当于给不同模型进行加权组合）</li>
+</ol>
+<h3 id="三种函数的性质"><a href="#三种函数的性质" class="headerlink" title="三种函数的性质"></a>三种函数的性质</h3><p>凸函数：局部最优就是全局最优<br>强凸：只有唯一的最优值，因为表达式中涉及到二阶值，所以此时可以看出强凸有距离的概念。强凸使得前一轮的信息可以直接用到当前论</p>
+<h3 id="Nothing-is-more-practical-than-a-good-theory"><a href="#Nothing-is-more-practical-than-a-good-theory" class="headerlink" title="Nothing is more practical than a good theory!"></a>Nothing is more practical than a good theory!</h3><p>Notations</p>
+<ul>
+<li>Input space</li>
+<li>Fuction: g</li>
+<li>Risk of g: 泛化风险</li>
+<li>Regression function: 回归问题</li>
+<li>Target function: 非回归问题<blockquote>
+<p>? 后两个是最优的function</p>
+</blockquote>
+</li>
+</ul>
+<p>普通的策略都是经验风险最小化来得到最优分类器，然后防止过拟合引入正则化项。</p>
+<blockquote>
+</blockquote>
+<p>所以必然考虑到基于训练集得到的分类器的误差与最小分类器得到的误差之间的关系。</p>
+<blockquote>
+<p>最优分类器可能没在假设空间中。</p>
+</blockquote>
+<p>然后根据二次bound可以bound到<br>$R(g_n)-R_n(g_n)$,即generalization下最优误差与经验风险最小化误差的差值。</p>
+<p>如果带有损失函数用来分析一致性、稳定性之类，利用Lipschitz条件进行放缩</p>
+<p>分析$R(g_n)-R_n(g_n)$<br>利用Hoeffding’s Inequilty<br>推出假设空间为有限的界</p>
+<p>若假设空间为无限，由秧差得到R复杂度。</p>
+<blockquote>
+<p>当面对具体算法，因为是凸优化问题；就可以根据分类器即函数的性质得到收敛速率之类的事情。</p>
+</blockquote>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>未标签数据的应用：<br>四种，其中前三种已经有理论证明。</p>
+<ol>
+<li>生成式方法。<blockquote>
+<p>从有标记数据中学得参数，作用在未标记数据上。然后更新有标记数据集，进而更新参数。</p>
+</blockquote>
+</li>
+<li>半监督SVM<blockquote>
+<p>一次性读入数据，不能中间添加数据。<br>不能在采样点秘籍的地方穿过</p>
+</blockquote>
+</li>
+<li>图<blockquote>
+<p>标签传播，进行随机游走</p>
+</blockquote>
+</li>
+<li>一组分类器<blockquote>
+<p>基于不一致性进行学习；多视图学习</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="Generalization"><a href="#Generalization" class="headerlink" title="Generalization"></a>Generalization</h3><ul>
+<li>证明PAC<blockquote>
+<p>写出最优分类器，然后拆分，然后做</p>
+</blockquote>
+</li>
+<li>VC<blockquote>
+<p>打散，假设空间可自己构造</p>
+</blockquote>
+</li>
+<li>算R<blockquote>
+<p>假设带进入做期望</p>
+</blockquote>
+</li>
+<li>R的性质</li>
+</ul>
+<ol>
+<li>R(aH)=|a|R(H)</li>
+<li>R(H1+H2)=R(H1)+R(H2)</li>
+<li>R(max(h1,h2)) &lt;= R(h1) + R(h2)<blockquote>
+<p>max=$\frac{1}{2} (x+y+|x-y|)$</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>为什么对假设空间进行限制的合理？<br>因为误差会随假设空间的维度增大而减小</li>
+<li>证明最优分类器<blockquote>
+<p>把一般的表达式写出来，证明最小值即最优</p>
+</blockquote>
+</li>
+<li>稳定性<blockquote>
+<p>说明有界，并且证明$\delta$可容许</p>
+</blockquote>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -1914,1150 +3706,11 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture4-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture4-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture4-summary</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:52:19 / 修改时间：09:52:41" itemprop="dateCreated datePublished" datetime="2019-09-19T09:52:19+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>泛型程序设计</p>
-<blockquote>
-<p>类型的多态</p>
-</blockquote>
-<p>首次尝试，c使用泛型指针。c++template关键字，剩余的事情交给编译器。<br>代码写得简单，就可以当做常见的int来做，而且不容易出错。<br>封装了一层。</p>
-<p>what where who when how</p>
-<ol>
-<li><p>哪里使用？<br>普通类型，直接，在类中。<br>特殊类型——类，需要把对应的操作，构造函数，复制构造函数处理安全。</p>
-</li>
-<li><p>怎么用？<br>template&lt;class T,int size&gt; 可加非这个量。<br>不具体化，不认的。</p>
-</li>
-</ol>
-<p>类型冲突的请显式说出来</p>
-<p>注意了：实现必须写在.h中，这是代码复用；不用担心重复解释，编译器会解决；然后，全局函数其他都要把<class t>标出来，特别是友元。</class></p>
-<ol start="3">
-<li>于是，C++, STL<br>远离类型，就是实际所分析和学的数据结构和算法，所以妙啊！<br>不过遇到具体类型套而已！</li>
-</ol>
-<ul>
-<li><p>容器，常用数据结构。</p>
-<blockquote>
-<p>这里是序列化数据; 复杂的数据结构可以由这些给组合而成的，哈哈哈！</p>
-</blockquote>
-</li>
-<li><p>算法</p>
-<blockquote>
-<p>一些最常用的操作集合</p>
-</blockquote>
-</li>
-<li><p>迭代器</p>
-<blockquote>
-<p>也就是算法中对数据结构的抽象吧，主要是抽象为数组的处理一样，可以轻易找到头尾，下一个元素，以及向前，向后。</p>
-</blockquote>
-</li>
-</ul>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXVhbl82NjkvYXJ0aWNsZS9kZXRhaWxzLzIyMTAwMTY1" title="https://blog.csdn.net/liyuan_669/article/details/22100165">迭代器是一种检查容器内元素并遍历元素的数据类型<i class="fa fa-external-link"></i></span></p>
-<p>字面不要过度推理，从权限上看</p>
-<p>InputIterator: 单步迭代，不允许修改<br>相当于<code>vector&lt;int&gt;::const_iterator iter, 可以iter++, 不可以*iter=1;</code>注意区分<br><code>const vector&lt;int&gt;::iterator iter=v.beign, 可以*iter=1,不可以iter++</code> </p>
-<p>OutputIterator: 单步迭代，可以修改。</p>
-<blockquote>
-<p>突然这里对前面返回两种不同的东西有了实质的感觉，一个是正常，另一个是既不可以被修改，也不可以增加</p>
-</blockquote>
-<p>0: queue,stack,pq<br>InputI:<br>OutputI:<br>ForwardI:<br>BidrectionalI: list,map,set<br>Random-accessI: vector,deque,basic_string</p>
-<p>类型</p>
-<ul>
-<li>添加 push, insert</li>
-<li>大小 size, empty , resize,count</li>
-<li>访问 back,front, [],at,top,find</li>
-<li>删除 erase,clear,pop_back</li>
-<li>赋值与swap: =,swap, assign()//重新设置</li>
-</ul>
-<blockquote>
-<p>然后按照需要思考会用哪些？</p>
-</blockquote>
-<blockquote>
-<p>循环遍历</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">  for (it=phone_book.begin(); it != phone_book.end(); it++) </span><br><span class="line">// 注意这里 end()返回的是最后的下一个元素，按照链表来看就是null. 具体是什么值我也不知道</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>首尾元素是head, tail</p>
-</blockquote>
-<ol start="4">
-<li>todo<br>再想不同迭代器</li>
-</ol>
-<p>一种类型的定义：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5oMTIxOC9hcnRpY2xlL2RldGFpbHMvMzMzNDA5NTk=" title="https://blog.csdn.net/zhanh1218/article/details/33340959">如果需要定义真正的tuple，那就需要用const vector<int> nums(10,9); 然后用const_iterator来访问</int><i class="fa fa-external-link"></i></span></p>
-<p>C++11新增加的内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto i1 = Container.begin();  // i1 is Container&lt;T&gt;::iterator </span><br><span class="line">auto i2 = Container.cbegin(); // i2 is Container&lt;T&gt;::const_iterator</span><br></pre></td></tr></table></figure>
-
-<p>所以cbegin()的访问控制就是public</p>
-<blockquote>
-<p>不同迭代器代码上怎么看？怎么区分。对于容器来说是都返回其基类？由具体用的时候，再判断和出错.</p>
-</blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbV9zem0vYXJ0aWNsZS9kZXRhaWxzLzg5ODA4Nzk=" title="https://blog.csdn.net/sim_szm/article/details/8980879">褚略理解<i class="fa fa-external-link"></i></span></p>
-<ul>
-<li>输入。  find, accumulate;  标准库istream_iterator</li>
-<li>输出。 copy, ostream_iterator</li>
-<li>前向. replace</li>
-<li>双向。 reverse</li>
-<li>随机访问 sort, &lt;, &gt;, !=, +,-,回退多个元素<blockquote>
-<p>具体的算法有具体的应用</p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p>发现很多接口的改进点：增加了越界的判断。比如[]和at，细想真的牛逼！</p>
-</blockquote>
-<ol start="5">
-<li>算法</li>
-</ol>
-<p>分类</p>
-<ul>
-<li><p>调序算法：实现按某个要求改变容器中元素次序的操作</p>
-<blockquote>
-<p>比如sort, </p>
-</blockquote>
-</li>
-<li><p>编辑算法：实现对容器元素的复制、替换、删除、赋值等操作</p>
-<blockquote>
-<p>比如replace, transform</p>
-</blockquote>
-</li>
-<li><p>查找算法：实现在容器内查找元素或子元素序列等操作</p>
-<blockquote>
-<p>find,count_if</p>
-</blockquote>
-</li>
-<li><p>算术算法：实现在容器内进行求和、内积和、差等操作</p>
-<blockquote>
-<p>accumulate</p>
-</blockquote>
-</li>
-<li><p>集合算法：实现集合的基本运算，要求已经排好序？</p>
-</li>
-<li><p>堆算法：实现基于堆结构的容器元素，第一个元素最大</p>
-</li>
-<li><p>元素遍历算法 for_each</p>
-</li>
-</ul>
-<p>算法指定在迭代器上，妙！迭代器自身相容，妙！<br>规定，作用范围一样，src_first,src_last, dst_first</p>
-<p>函数参数：进行自定义，类型也为T</p>
-<p>一个超级有趣的例子。</p>
-<p>匹配一定条件的东西， count_if()-&gt;类-&gt;lambda表达</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture4/" class="post-title-link" itemprop="url">nju-course-cplus-lecture4</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:51:16 / 修改时间：09:53:17" itemprop="dateCreated datePublished" datetime="2019-09-19T09:51:16+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><h2 id="泛型程序设计"><a href="#泛型程序设计" class="headerlink" title="泛型程序设计"></a>泛型程序设计</h2><p>一个程序实体能对多种类型的数据进行操作或描述的特性称为类属性。具有类属性的程序实体通常有：</p>
-<ol>
-<li>类属函数</li>
-<li>类属类</li>
-</ol>
-<p>类属也是一种多态，称为参数化多态。</p>
-<p>比如说用通用指针。</p>
-<p>如上所示，C++提供了两种实现类属函数的机制</p>
-<ul>
-<li>采用通用指针类型的参数(C语言的做法)</li>
-<li>函数模板</li>
-</ul>
-<h3 id="通用指针"><a href="#通用指针" class="headerlink" title="通用指针"></a>通用指针</h3><p>整个世界就是由1构成的，可以升为万物的。<br>void *，所有的父类。通用的都是byte.</p>
-<p>这些东西然后不断地转换为其他的内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"> 函数定义：</span><br><span class="line"> void sort(void *base, unsigned int count, unsigned  int element_size, int (*cmp)(const void*, const void*))&#123;</span><br><span class="line">     // 这里函数参数和也可以诶，发现我完全想复杂了。也就是说这里的话，只要弄个函数名做参数，其实也不所谓，没有我想的那么复杂，哈哈哈！两步就可以了</span><br><span class="line">     // 取第i个元素</span><br><span class="line">     (byte *)base + i*element_size</span><br><span class="line"></span><br><span class="line">    // 比较第i个和第j个元素的大小，利用调用者提供的回调函数cmp实现</span><br><span class="line">    (*cmp)((byte *)base + i*element_size, (byte*)base + j*element_size)</span><br><span class="line"></span><br><span class="line">    // 交换第i个和第j个元素</span><br><span class="line">    byte *p1 = (byte *)base + i*element_size;</span><br><span class="line">    byte *p2 = (byte *)base + j*element_size;</span><br><span class="line">    for(int k=0;k &lt; element_size;k++)&#123;</span><br><span class="line">        byte temp=p1[k]; p1[k]=p2[k]; p2[k]=temp;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> 这里的byte为typedef unsigned char byte;</span><br><span class="line"></span><br><span class="line">void sort(void *base, //需排序的数据（数组）首地址</span><br><span class="line">             unsigned int count, //数据元素的个数</span><br><span class="line">             unsigned int element_size, //一个数据元素所需的空间大小</span><br><span class="line">             int (*cmp)(const void *, const void *) ) //比较两个元素的函数</span><br><span class="line">&#123;   //不论采用何种排序算法，一般都需要对数组进行以下操作：	</span><br><span class="line">     //取第i个元素</span><br><span class="line">        (char *)base+i*element_size</span><br><span class="line">     //比较第i个和第j个元素的大小 （利用调用者提供的回调函数cmp实现）</span><br><span class="line">        (*cmp)((char *)base+i*element_size,</span><br><span class="line">                    (char *)base+j*element_size)</span><br><span class="line">     //交换第i个和第j个元素</span><br><span class="line">        char *p1=(char *)base+i*element_size,</span><br><span class="line">	     *p2=(char *)base+j*element_size;</span><br><span class="line">        for (int k=0; k&lt;element_size; k++)</span><br><span class="line">        &#123;	char temp=p1[k]; p1[k] = p2[k]; p2[k] = temp;</span><br><span class="line">        &#125; </span><br><span class="line">&#125; //上面的char用byte替代更好！typedef unsigned char byte;</span><br></pre></td></tr></table></figure>
-
-<p>调用者需要调用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int A_compare(const void* p1, const void* v2)&#123;</span><br><span class="line">    if(*(*A)p1 &lt; *(A*)p2) return -1;</span><br><span class="line">    else if(*(*A)p1) &gt; *(A*)p2) return 1;</span><br><span class="line">    else return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 类属排序函数的使用</span><br><span class="line">int a[100];</span><br><span class="line">sort(a,100,sizeof(int),int_compare);</span><br><span class="line">double b[200];</span><br><span class="line">sort(b,200,sizeof(double), double_compare);</span><br><span class="line">A c[300]; // 如果这里A是类，就显示出了将比较符号重载的有效性</span><br><span class="line">sort(c,300,sizeof(A),A_compare)</span><br></pre></td></tr></table></figure>
-
-<p>品味！</p>
-<h3 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h3><p>函数模板是指带有类型参数的函数定义，其一般格式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template&lt;class T1, class T2,...&gt;</span><br><span class="line">&lt;返回值类型&gt; &lt;函数名&gt;(&lt;参数表&gt;)&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">template&lt;class T&gt;</span><br><span class="line">void sort(T elements[], unsigned int count)&#123;</span><br><span class="line">    // 取第i个元素</span><br><span class="line">    elements[i]</span><br><span class="line">    // 比较第i个和第j个元素的大小</span><br><span class="line">    elements[i]&lt; elemnets[j]</span><br><span class="line">    // 交换第i个和第j个元素</span><br><span class="line">    T temp = elements[i];</span><br><span class="line">    elements[i] = elements[j];</span><br><span class="line">    elements[j] = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&gt; 来一起感叹，太他妈牛逼了。这template省去了好多麻烦！好高层的一种抽象，太棒了，果然！牛逼死了</span><br><span class="line"></span><br><span class="line">int a[100];</span><br><span class="line">sort(a, 100);</span><br><span class="line">double b[200];</span><br><span class="line">sort(b,200);</span><br><span class="line">A c[300];</span><br><span class="line">sort(c, 300);</span><br></pre></td></tr></table></figure>
-
-<p>函数模板的使用——实例化</p>
-<ul>
-<li>函数模板定义了一系列重载的函数</li>
-<li>要使用函数模板所定义的函数，称为模板函数，首先必须对函数模板进行实例化：给模板参数提供一个类型作为值，从而生成具体的函数。</li>
-<li>函数模板的实例化通常是隐式的<ul>
-<li>由编译程序来做，模板实参推演</li>
-</ul>
-</li>
-</ul>
-<p>当编译程序无法根据调用时的参数类型来确定所调用的模板参数，这时，需要在程序中显式第实例化函数模板。</p>
-<p>除了类型参数外，函数模板也可以带有非类型参数，使用时需要显式实例化。<br>template&lt;class T, int size&gt;<br>void f(T a){<br>    T temp[size];<br>}</p>
-<h3 id="类模板"><a href="#类模板" class="headerlink" title="类模板"></a>类模板</h3><p>如果一个类的成员的类型可变，则该类称为类属类。在C++中，类属类用类模板实现。<br>template&lt;class T1, class T2&gt;<br>class &lt;类名&gt;{}</p>
-<p>使用<br>Stack<int> st1;</int></p>
-<p>!!! 类模板中的静态成员仅属于实例化后的类，不同类模板实例之间不共享类模板中的静态成员。<br>template <class t><br>class A{<br>    static int x;<br>}</class></p>
-<p>注意！在自己定义时，需要把模板的定义和实现都放在头文件中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// file1.h</span><br><span class="line">template &lt;class T&gt; </span><br><span class="line">class S //类模板s的定义</span><br><span class="line">&#123;  T a;</span><br><span class="line">  public:</span><br><span class="line">    void f();</span><br><span class="line">&#125;;</span><br><span class="line">template &lt;class T&gt; </span><br><span class="line">void S&lt;T&gt;::f() //类模板s的实现  如果放在对应的file1.cpp中，会显示该实例不存在</span><br><span class="line">&#123; ......</span><br><span class="line">&#125;</span><br><span class="line">extern void func();</span><br></pre></td></tr></table></figure>
-
-<p>使用者通过包含这个头文件，把模板的源代码全包含进来，以备实例化所需。<br>因此，模板是基于源代码的复用、</p>
-<ul>
-<li>重复实例的处理<br>模板的复用会导致多模块的编译结果中存在相同的实例：</li>
-</ul>
-<ol>
-<li>相同的函数模板实例</li>
-<li>相同的类模板成员函数实例<br>相同代码的存在会造成目标代码庞大！<br>如何处理？</li>
-</ol>
-<ul>
-<li>由开发环境来解决：编译第二个模块的时候不生成这个函数</li>
-<li>由连接程序来解决：舍弃多余的那一个</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">关于类模板的友元</span><br><span class="line">template &lt;class T&gt; class A;</span><br><span class="line">template &lt;class T&gt; void f3(A&lt;T&gt;&amp; a) &#123; ... &#125;</span><br><span class="line">template class&lt;T&gt;</span><br><span class="line">class A</span><br><span class="line">&#123; T x,y;</span><br><span class="line">  ......</span><br><span class="line">  friend void f1(A&lt;T&gt;&amp; a); //友元f1不是模板！</span><br><span class="line">  template &lt;class T1&gt; friend void f2(A&lt;T1&gt;&amp; a); //f2与A多对多实例化</span><br><span class="line">  friend void f3&lt;T&gt;(A&lt;T&gt;&amp; a); //f3与A一对一实例化(用相同参数类型)</span><br><span class="line">&#125;;</span><br><span class="line">void f1(A&lt;int&gt;&amp; a) &#123; ... &#125;</span><br><span class="line">template &lt;class T&gt; void f2(A&lt;T&gt;&amp; a) &#123;...&#125;</span><br><span class="line">......</span><br><span class="line">A&lt;int&gt; a1; //实例化A&lt;int&gt;</span><br><span class="line">A&lt;double&gt; a2; //实例化A&lt;double&gt;</span><br><span class="line">f1(a1); //OK，调用f1(A&lt;int&gt;&amp;)</span><br><span class="line">f1(a2); //链接错误! 调用f1(A&lt;double&gt;&amp;)，但它不存在！</span><br><span class="line">f2(a1); //实例f2&lt;int&gt;是A&lt;int&gt;和A&lt;double&gt;的友元</span><br><span class="line">f2(a2); //实例f2&lt;double&gt;是A&lt;int&gt;和A&lt;double&gt;的友元</span><br><span class="line">f3(a1); //实例f3&lt;int&gt;是A&lt;int&gt;的友元，但不是A&lt;double&gt;的友元！</span><br><span class="line">f3(a2); //实例f3&lt;double&gt;是A&lt;double&gt;的友元，但不是A&lt;int&gt;的友元！</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>总结：友元是外部，在说明友元时也需要在外部进行说明。</p>
-</blockquote>
-<h3 id="C-标准库"><a href="#C-标准库" class="headerlink" title="C++标准库"></a>C++标准库</h3><p>在C++标准库中，除了C标准库保留下来的一些功能外，其它功能大都以模板形式给出，这些模板构成了C++的标准模板库。<br>STL实现了数据结构和算法的复用，体现了泛型程序设计的精髓。<br>STL支持了一种编程思想模式。</p>
-<p>STL主要包含：</p>
-<ul>
-<li>容器类模板：用于存储序列化数据元素，比如：向量、队列、栈、集合等</li>
-<li>算法（函数）模板：用于对容器中数据元素进行一些常用的操作，如：排序、查找、求和等</li>
-<li>迭代器类模板：实现了抽象的指针功能，它用于指向容器中的元素。<ul>
-<li>迭代器是容器和算法之间的桥梁：传给算法的不是容器，而是指向容器中元素的迭代器，算法通过迭代器实现对容器中数据元素的访问和遍历。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;numeric&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()&#123;</span><br><span class="line">    vector&lt;int&gt; v;</span><br><span class="line">    int x;</span><br><span class="line">    cin&gt;&gt;x;</span><br><span class="line">    while(x&gt;0)&#123;</span><br><span class="line">        v.push_back(x);</span><br><span class="line">        cin&gt;&gt;x;</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;int&gt;::iterator it1=v.begin();</span><br><span class="line">    vector&lt;int&gt;::iterator it2=v.end();</span><br><span class="line">    cout&lt;&lt;&quot;Max= &quot;&lt;&lt;*,ax_element(it1, it2)&lt;&lt;endl;</span><br><span class="line">    cout&lt;&quot;Sum=&quot;&lt;&lt;accumulate(it1, it2, 0)&lt;&lt;endl;</span><br><span class="line">    sort(it1, it2);</span><br><span class="line"></span><br><span class="line">    cout&lt;&lt;&quot;Sorted result is:\n&quot;;</span><br><span class="line">    for_each(it1, it2,[](int x)&#123;cout&lt;&lt;x&lt;&lt;&apos;&apos;; return;&#125;)</span><br><span class="line">    cout&lt;&lt;&quot;\n&quot;;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h4><p>容器是由长度可变的同类型元素所构成的序列。<br>STL中包含了很多种容器，虽然这些容器提供了很多相同的操作，但采用了不同的内部实现方法，所以不同的容器适合不同的应用场合。<br>容器由类模板来实现</p>
-<ul>
-<li><p>vector&lt;&gt;<br>需要快速定位任意位置上的元素以及主要在元素序列的尾部增加、删除元素的场合<br>在头文件vector中定义，用动态数组实现</p>
-</li>
-<li><p>list&lt;&gt;<br>用于经常在元素序列中任意位置上插入或删除元素的场合。<br>list, 双向链表实现</p>
-</li>
-<li><p>dequeue&lt;&gt;<br>用于主要在元素序列的两端增加、删除元素以及需要快速定位任意位置上的元素的场合<br>dequeue, 用分段的连续空间结构实现</p>
-</li>
-<li><p>stack&lt;&gt;<br>用于仅在元素序列的尾部增加、删除元素的场合<br>基于deque实现</p>
-</li>
-<li><p>queue&lt;&gt;<br>用于仅在元素序列的头部增加、删除元素的场合<br>基于dequeue实现</p>
-</li>
-<li><p>priority_queue&lt;&gt;<br>与queue的操作类似，不同之处在于：每次增加，删除元素之后，它将元素位置进行调整，使得头部元素总是最大的。每次删除操作总是把最大的元素去掉。<br>在queue中定义，一般基于vector和heap实现</p>
-</li>
-<li><p>map&lt;关键字类型，值类型&gt;<br>multimap</p>
-<ul>
-<li>容器中每个元素是一个pair结构类型，该结构有两个成员：first和second，关键字对应first, 值对应second,元素是根据其关键字排序的。用于需要根据关键字来访问元素的场合</li>
-<li>对于map，不同元素的关键字不能相同；对于multimap,不同元素的关键字可以相同</li>
-<li>map中定义</li>
-</ul>
-</li>
-<li><p>set&lt;元素类型&gt;<br>multiset</p>
-<ul>
-<li>相对于map和multimap, 合一了</li>
-<li>set中定义</li>
-</ul>
-</li>
-<li><p>basic_string&lt;&gt;</p>
-<ul>
-<li>与vector类似，不同之处在于其元素作为字符类型，并提供了一系列与字符串相关的操作</li>
-<li>string和wstring分别是它的两个实例： basic_string<char>和basic_string<wchar_t></wchar_t></char></li>
-<li>在string中定义</li>
-</ul>
-</li>
-</ul>
-<h4 id="容器的操作"><a href="#容器的操作" class="headerlink" title="容器的操作"></a>容器的操作</h4><ul>
-<li>获取指定位置的元素</li>
-<li>增加元素</li>
-<li>删除元素</li>
-<li>查找元素</li>
-<li>获取容器首、尾元素的迭代器</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">T &amp;front();</span><br><span class="line">T &amp;back();  // vector, list,dequeue,queue</span><br><span class="line"></span><br><span class="line">void push_front(const T&amp;x) void pop_front;  //list,deque</span><br><span class="line">void push_back(const T&amp;x) void pop_back; //vector,list,dequeue</span><br><span class="line"></span><br><span class="line">void push(const T&amp;x) // 尾部stack, queue, priority_queue</span><br><span class="line">void pop() // 尾部stack, 头部queue, priority_queue</span><br><span class="line"></span><br><span class="line">T &amp;top();  const T&amp;top() const;  尾部stack , 头部priority_queue</span><br><span class="line"></span><br><span class="line">iterator begin();</span><br><span class="line">const_iterator begin() const;  除queue,priority queue, stack</span><br><span class="line">// 为什么有两种？有啥不一样的用的地方吗？</span><br><span class="line"></span><br><span class="line">iterator end();</span><br><span class="line">const_iterator end() const; 同上</span><br><span class="line"></span><br><span class="line">iterator insert(iterator pos, const T&amp; x);</span><br><span class="line">void insert(iterator pos, InputIt first, InputIt last);</span><br><span class="line">// pos 插入一个呼呼多个元素， vector, list, deque</span><br><span class="line"></span><br><span class="line">iterator erase(iterator pos)</span><br><span class="line">iterator erase(iterator first, iterator last);</span><br><span class="line">// vector, list, deque, map/multimap, set, basic_string</span><br><span class="line"></span><br><span class="line">T &amp;operator[](size_type pos)</span><br><span class="line">// pos上的引用， vector, deque, basic_string</span><br><span class="line"></span><br><span class="line">ValueType &amp; operator[](const KeyType&amp; key); // map</span><br><span class="line"></span><br><span class="line">T&amp; at(size_type pos);</span><br><span class="line">相比于[], 进行了越界检查； vector,deque,basic_string</span><br><span class="line"></span><br><span class="line">iterator find(const T&amp; key);</span><br><span class="line">// 根据关键字查找，找到返回；否则返回最后一个元素的下一个位置</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>值得注意的是，如果容器的元素类型是一个类，则针对该类需要：</p>
-<ol>
-<li>自定义拷贝构造函数和赋值操作符重载函数。</li>
-<li>重载比较操作符&lt;</li>
-</ol>
-</blockquote>
-<h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>迭代器是实现了抽象的指针（智能指针）。它们指向容器中的元素。</p>
-<blockquote>
-<p>哇，抽象指针，牛逼</p>
-</blockquote>
-<p>在STL中，迭代器是作为类模板来实现的，它们可以分为以下几种：</p>
-<ul>
-<li><p>输出迭代器output iterator</p>
-<ul>
-<li>用来修改它所指向的容器元素</li>
-<li>间接访问操作 *输出迭代器</li>
-<li>++操作</li>
-</ul>
-</li>
-<li><p>输入迭代器input iterator</p>
-<ul>
-<li>用于读取它指向的容器元素</li>
-<li>间接访问操作 *p</li>
-<li>元素成员间接访问-&gt;</li>
-<li>++, ==, !=操作</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>前向迭代器<blockquote>
-<p>哇，这个就应该是方向有关吧。只能一个方向，不过好奇的是这个方向有规定只能从头到尾吗？感觉上应该两种都被允许<br>用于读取、修改它所指向的容器元素<br>元素间间接访问操作和元素成员间接访问.<br>同义获取关联的对象<br>如果是int，则访问的是其值，就对应于第一种情况；如果是类，就对应于第二种情况。</p>
-</blockquote>
-</li>
-</ul>
-<p>++,==,!=操作</p>
-<ul>
-<li>双向迭代器<br>用于读取，修改它所指向的容器元素<br>元素间接访问操作和元素成员间接访问操作</li>
-</ul>
-<p>++,–,==,!=</p>
-<ul>
-<li>随机访问迭代器<br>用于读取、修改它所要指向的容器元素<br>元素间接访问操作、元素成员间接访问和随机访问元素操作</li>
-</ul>
-<p>++,–,&gt;=,&lt;,&gt;</p>
-<blockquote>
-<p>随机访问吗？应该是对于固定存储的吧？不然实现算法复杂度不一样唉，真好奇实现方法。<br>对！下面得到了回答</p>
-</blockquote>
-<p>从上到下，从派生类到基类</p>
-<p>哦，来啦</p>
-<p><strong>各容器的迭代器类型</strong></p>
-<ul>
-<li>vector,deque, basic_string,  begin/end返回的是随机访问迭代器</li>
-<li>list,map,set返回的是双向迭代器<blockquote>
-<p>这两个因为内部的物理实现结构不一样</p>
-</blockquote>
-</li>
-<li>对于queue,stack,priority_queue,不支持迭代器<blockquote>
-<p>为啥，不支持前向后向吗？queue本身支持，但是因为queue,stack有其特定的持有顺序所以不支持吗？特殊功能，而priority_queue更是由于实现复杂。每一次动荡代价不一样。</p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p>迭代器的作用就是每个变量的指示，最多的应用自己所见到的就是遍历。所以怎么说感觉上应该能得到下一个元素的地址的那种</p>
-</blockquote>
-<h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><p>分类<br>调序算法<br>编辑算法<br>查找算法<br>算术算法<br>集合算法<br>堆算法<br>元素遍历算法</p>
-<p>STL算法体现了一种高度抽象：</p>
-<ul>
-<li>每一个算法都完成一个特定的功能</li>
-<li>大部分算法都是遍历指定的容器元素，对满足条件的元素执行默认的或自定义的操作。</li>
-<li>使用者只需要提供：容器（迭代器）、操作条件以及自定义操作，而控制逻辑则有算法内部实现。循环不用操心</li>
-</ul>
-<p>算法处理的是容器的迭代器，这样的好处很明显，能够提高算法对容器的适应性。虽然容器各不相同，一个算法往往可以接受相容的多种迭代器</p>
-<p>一个算法能接收的迭代器的类型时通过算法模板参数的名字来体现的。一个算法能接收与参数类型相容的所有种类的迭代器。</p>
-<blockquote>
-<p>这里应该不是都是最大的权限即随机访问迭代器吧？这样虽然特别妙？不对指针不应该是指向基类吗？那么怎么的？感觉上应该是限定的</p>
-</blockquote>
-<p>然后就规定一下显式的操作说明吧：<br>参数容器的作用范围应该一样。一般地，参数(src_first, src_last, dst_first)</p>
-<p>自定义操作<br>有些算法要求使用者提供一个函数或函数对象作为自定义的操作条件，因为往往返回结果为false或true. 所以可以看作谓词。<br>Pred: 一元谓词，需要一个元素作为参数<br>BinPred:二元谓词，需要两个元素作为参数<br>eg: count_if(InIt first,InIt last, Pred cond);</p>
-<blockquote>
-<p>注意这里的默认参数，感觉上应该与vector<int>x, 这里的int, 即class相关。<br>即一元谓词，二元谓词的参数。对的！</int></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;numeric&gt;</span><br><span class="line">accumulate() // 累积算法,返回值</span><br><span class="line">transform() // 变换，映射算法</span><br></pre></td></tr></table></figure>
-
-<p>发现越到后面越有点像数据库的内容了。</p>
-<ul>
-<li>作业<br>STL算法应用——在学生容器中做统计<br>学生：name, sex, birth_place, major<br>功能：init, sort, display, match_major.<blockquote>
-<p>match_major内容特别多，可以考虑用函数对象来做</p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">利用函数对象来解决上面的问题</span><br><span class="line">class MatchMajor</span><br><span class="line">&#123;	   Major major;</span><br><span class="line">	public:</span><br><span class="line">	   MatchMajor (Major m)</span><br><span class="line">	   &#123;	major = m;</span><br><span class="line">	   &#125;</span><br><span class="line">	   bool operator ()(Student&amp; st)</span><br><span class="line">	   &#123; return st.get_major() == major;</span><br><span class="line">	   &#125;</span><br><span class="line">&#125;;</span><br><span class="line">count_if(students.begin(),students.end(),</span><br><span class="line">			              MatchMajor(COMPUTER))；</span><br><span class="line">count_if(students.begin(),students.end(),</span><br><span class="line">			              MatchMajor(PHYSICS))；</span><br><span class="line">count_if(students.begin(),students.end(),</span><br><span class="line">			              MatchMajor(XXX))；</span><br><span class="line"></span><br><span class="line">// 扩展</span><br><span class="line"></span><br><span class="line">    bool operator ()(Student&amp; st)</span><br><span class="line">    &#123; return st.get_major() == major &amp;&amp; st.get_sex() == sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">count_if(students.begin(),students.end(),</span><br><span class="line">             MatchMajorAndSex(COMPUTER,FEMALE)) //计算机女生</span><br><span class="line"></span><br><span class="line">// lambda表达式</span><br><span class="line">count_if(students.begin(),students.end(),</span><br><span class="line">        [](Student &amp;st) &#123; return (st.get_major() == COMPUTER)</span><br><span class="line">			     &amp;&amp; (st.get_sex() == FEMALE); &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//统计出生地为&quot;南京籍计算机专业&quot;的学生人数</span><br><span class="line">cout &lt;&lt; &quot;出生地为\&quot;南京\&quot;的学生人数是：&quot; </span><br><span class="line">      &lt;&lt; count_if(students.begin(),students.end(),</span><br><span class="line">  [](Student &amp;st) &#123; return (st.get_major() == COMPUTER) </span><br><span class="line">          &amp;&amp; (st.get_birth_place().find(&quot;南京&quot;)!= string::npos);&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这里的思想很妙，但对象作为函数传递时，默认调用的就是A()，无参数的，所以此时就显示出了重载()运算符的好处</p>
-<blockquote>
-<p>当实体完全是为了存储数据使用的时候，此时就演化为了数据库这门课程</p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture3-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture3-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture3-summary</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:50:15 / 修改时间：09:51:02" itemprop="dateCreated datePublished" datetime="2019-09-19T09:50:15+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h2><p>首先，不能考虑传统方法，即add，为什么？因为从某种意义上来讲极其不实用。</p>
-<p>所以考虑重载操作符, 下列不能重载<br>.  标志作用域的<br>sizeof() 计算内存空间的<br>?:  双判断的<br>:: 类的标志符</p>
-<h3 id="一般地"><a href="#一般地" class="headerlink" title="一般地"></a>一般地</h3><blockquote>
-<p>全局友元函数和成员函数两种方式。<br>对比来说，也就是成员函数，默认前面有类., 这其实是作为函数的默认参数this的，即const Complex&amp;</p>
-</blockquote>
-<p>那么就有一下几种操作符重载的例子，这里就只给出成员函数类型的<br>返回值、参数</p>
-<ul>
-<li>双目<br>Complex opreator # (const Complex &amp;c)</li>
-<li>单目<br>Complex opreator *();</li>
-</ul>
-<p>++i;<br>Complex &amp;opreator ++();</p>
-<blockquote>
-<p>前置++,返回运算后的结果。<br>i++;<br>Complex opreator ++(int);//注意这里直接是int，没有变量名，只是为了区分。<br>后置++，返回当前，实际+1；</p>
-</blockquote>
-<hr>
-<p>特别说明，<br>返回值的确定，当需要返回的是一个值得改变的值是用这个。<br>参数的确定</p>
-<hr>
-<h3 id="特殊地"><a href="#特殊地" class="headerlink" title="特殊地"></a>特殊地</h3><p>=</p>
-<blockquote>
-<p>区分两种不同的含义，初始化时调用拷贝构造函数；赋值时重载函数、<br>都要注意默认的指针直接复制的问题</p>
-</blockquote>
-<p>[]</p>
-<blockquote>
-<p>很简单，类似于单目运算</p>
-</blockquote>
-<p>new</p>
-<blockquote>
-<p>分配空间+调用构造函数<br>只能用静态成员来书写，static可以不用写<br>void *operator new(size_t size) {<br>    void *p=malloc(size); // 调用系统堆空间分配操作<br>    memset(p,0,size); //把系统申请到的堆空间初始化为全0<br>    return p;<br>}<br>返回类型必须为void *<br>参数size表示对象所需空间的大小，其类型为size_t（unsigned int）<br>可以选择带其他参数，此时就可以在非堆区分配空间<br>p = new (buf局部变量) A(size);</p>
-</blockquote>
-<p>delete</p>
-<blockquote>
-</blockquote>
-<blockquote>
-<p>从某种意义上说，new和delete可以提高效率。因为delete归还不是归还到堆区，而是归还原本new申请的空间. 进行空间管理</p>
-</blockquote>
-<p>()</p>
-<blockquote>
-<p>int opreator() (int x){return x+value;}  A a(3); cout&lt;&lt;a(10);<br>此时()将类对象作为了函数。有冒险用啊？<br>比如新建一个随机数对象，初始化种子后random(1)，后面每需要一个随机数random()直接产生，很快！<br>?, 这里跟函数对象有什么关系？这里是把类对象通过重载()作为函数使用</p>
-</blockquote>
-<p>而函数对象，就是lambda表达式搞的是一大堆符号，然后后面跟一些参数。而也可以直接把它作为参数传递。</p>
-<p>// 功能：求上下限为a,b的积分，步长假设为0.01<br>// 函数定义<br>double integrate(double (*f)(double),double a,double b){<br>    double sum=0;<br>    for(double i=a; i&lt;=b; i+=0.01){<br>        sum+=f(i);<br>    }<br>    return sum;<br>}</p>
-<p>// 使用：这里传入的函数对象是lambda表达式<br>integrate([](double x)-&gt;double { return x*x; },0,1);</p>
-<blockquote>
-<p>想想这真的可以做很多东西。</p>
-</blockquote>
-<p>-&gt;<br>双目，第一个为指向类或结构的指针，第二个为第一个的成员</p>
-<blockquote>
-<p>例子：获取在程序执行的某个时刻获得某个对象被访问的次数<br>注意，凡是成员对象，还有成员函数被访问都算，即暴露给外界可访问的东西。<br>对于成员函数很容易想到可以每个里面加上cout++;但是对于数据成员不好操作。<br>此时即智能指针<br>想法即是在A类外部在套了个B类，B将A作为了成员，当接到访问时， B-&gt;()-&gt;f(), 第二个才访问到A的内容， B-&gt;()。 为了完全模拟还要重载其他操作符，如*,[],… 太麻烦了！！<br>对于歧义问题即+这种操作符，一般地会进行隐式转化，但当有一方为类就很难，显式解决。</p>
-</blockquote>
-<ul>
-<li>lambda表达式</li>
-</ul>
-<blockquote>
-<p>C++11给你规定了一堆东西，你可以拿去玩。其实也就是lambda函数那一章，其实后面还可以再加lambda表达式。最后再传递参数。</p>
-</blockquote>
-<p>所以就允许你用函数作为参数，其实这就很容易了。突然想起了scala.<br>而且lambda表达式还允许你加入局部变量之类的东西。</p>
-<ul>
-<li>继承</li>
-</ul>
-<p>提出就是为了最大程度的软件复用。<br>日常有多种行为，就是很小的改动的那种。<br>比如事务按层次来分类，对概念进行组合，软件进行增量开发等等</p>
-<p>访问控制：自己，公开，继承。</p>
-<p>继承破坏了封装性。<br>耦合性是事务之间的关联程度。</p>
-<p>继承方式，过滤器</p>
-<p>多态性：<br>子类又是父类；从某种意义上说，很强大。父类指针就可以随便用。</p>
-<p>但又带来了问题了，可以随便用。但是肯定会指向自己，所以引进虚函数。允许指向未来更好的实现。</p>
-<blockquote>
-<p>高层代码完全不用修改。相比用union实现的。<br>于是有了纯虚函数，这就形成了真正意义上的抽象。</p>
-</blockquote>
-<p>然后，还有聚集的方式。</p>
-<p>总结：C++很好地用类进行数据的封装，保证了元素的私密性。<br>然后为了给外界提供一定的界限。<br>将数据的访问方式进行了分类。<br>对于获取信息的，外界全局函数就可以采用。const关键字很妙！<br>还有设置信息。</p>
-<p>类作为类型。将不变的抽象给static元素。</p>
-<p>然后，多态性。函数名，参数名。 再加上运算符号。</p>
-<p>一对一并不完全符合世界的表述所以增加了多继承的方式。</p>
-<p>然后再对类型的统一，最终就变为了泛型设计。</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture3/" class="post-title-link" itemprop="url">nju-course-cplus-lecture3</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:49:11 / 修改时间：09:49:54" itemprop="dateCreated datePublished" datetime="2019-09-19T09:49:11+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="本节课重点"><a href="#本节课重点" class="headerlink" title="本节课重点"></a>本节课重点</h1><h2 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h2><p>比如对于复数来说，怎么实现加法？</p>
-<ul>
-<li>成员函数add</li>
-<li>全局函数</li>
-</ul>
-<p>不符合数学上的习惯</p>
-<p>不可以重载的符号：“. ”， “.* ”，“?: ”，“:: ”，“sizeof ”</p>
-<p>原则：不改变操作数个数，不改变原操作符的优先级和结合性。</p>
-<p>双目操作符重载：<br>&lt;返回值类型&gt; operator # (&lt;类型&gt;); //#代表可重载的操作符<br>friend Complex operator + (const Complex&amp; c1,<br>                                const Complex&amp; c2);</p>
-<p>单目操作符重载：<br>&lt;返回值类型&gt; operator # ();<br>friend bool operator !(const Complex &amp;c);</p>
-<p>Counter&amp; operator ++()  //前置的++重载函数<br>        {    value++;<br>            return *this;<br>        }</p>
-<pre><code>const Counter operator ++(int)  //后置的++重载函数
-    {    Counter temp=*this; //保存原来的对象
-        value++; //写成：++(*this);更好！调用前置的++重载函数
-        return temp; //返回原来的对象
-    }</code></pre><ul>
-<li>=重载<br>隐私的赋值操作符重载函数：组个成员进行赋值操作</li>
-<li>对于普通成员进行常规的赋值操作。</li>
-<li>对于成员对象，则调用该成员对象类的赋值操作符重载函数进行赋值操作</li>
-<li>对于基类成员，则调用基类的赋值操作符函数进行赋值操作。</li>
-</ul>
-<p>特别注意地是，等号的情况是特别容易出错的情况。因为这里对指针的操作就是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">	int a;</span><br><span class="line">	int b;</span><br><span class="line">	int *p;</span><br><span class="line">public:</span><br><span class="line">	A()&#123;&#125;; 构造函数</span><br><span class="line">	A(const A&amp;a); //拷贝构造函数</span><br><span class="line">	~A();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">A m,n;</span><br><span class="line">m=n;  // 实际上的操作就是 m.a=n.a, m.b=n.b, m.p=n.p. 最后一个就有问题了</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>记住的就是拷贝构造函数和构造函数就是一样的，这里，不过参数不一样。拷贝构造函数参数是本身。<br>赋值运算和</p>
-</blockquote>
-<p>A&amp; operator = (const A&amp; a)<br>{    if (&amp;a == this) return *this;  //防止自身赋值。<br>    delete []p;<br>    p = new char[strlen(a.p)+1];  //注意这里指针的赋值，首先删除原有的，然后，根据长度重新找，再赋值<br>    strcpy(p,a.p);<br>   x = a.x; y = a.y;<br>    return *this;<br>}</p>
-<ul>
-<li>[]重载<br>int &amp;operator[](int i) //访问向量第i个元素。<pre><code>{    return p_data[i];
-}</code></pre></li>
-</ul>
-<p>略去new, delete, ()， -&gt;的重载</p>
-<ul>
-<li>作业： 独立完成字符串的一系列动作。</li>
-</ul>
-<h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><p>求定积分的函数：试图把函数作为参数。<br>C++11<br>double integrate(double (*f)(double),double a,double b);</p>
-<p>integrate([](double x)-&gt;double { return x*x; },0,1);</p>
-<ul>
-<li>常用格式<br>[&lt;环境变量使用说明&gt;]&lt;形式参数&gt;&lt;返回值类型指定&gt;&lt;函数体&gt;</li>
-</ul>
-<p>&lt;环境变量使用说明&gt;：指出函数体中对外层作用域中的自动变量的使用限制：<br>空：不能使用外层作用域中的自动变量。<br>&amp;：按引用方式使用外层作用域中的自动变量（可以改变这些变量的值）。<br>=：按值方式使用使用外层作用域中的自动变量（不能改变这些变量的值）。<br>&amp;和=可以用来统一指定对外层作用域中自动变量的使用方式，也可以用来单独指定可使用的外层自动变量（变量名前可以加&amp;，默认为=）。</p>
-<blockquote>
-<p>理解：将lambda表达式看作是函数对象来实现<br>怎么用啊？需要找个例子</p>
-</blockquote>
-<ul>
-<li>作用于实参<br>cout &lt;&lt; [](int x)-&gt;int { return x*x; }(3);</li>
-<li>传给其它函数<br>f([](int x)-&gt;int { return x*x; }); // 这里依然不是很明朗，需要式子</li>
-</ul>
-<h2 id="继承-派生类"><a href="#继承-派生类" class="headerlink" title="继承-派生类"></a>继承-派生类</h2><p>对事物按层次来分类，对概念进行组合，支持软件的增量开发。</p>
-<p>继承的目的进行软件复用。<br>如何扩展？<br>1、修改源代码。<br>2、继承。对一个面向对象的程序，在定义一个新的类时，把已有程序的一个或多个类的功能全部包含进来，然后再给出新功能的定义，或者重新定义。目标代码复用<br>派生类拥有除构造函数和赋值操作符重载函数外的所有成员<br>友元不能通过集成传递给派生类。<br>私有成员不能传递。<br>public-外界，即对象，实例， protected-面向继承</p>
-<blockquote>
-<p>继承和封装的矛盾</p>
-</blockquote>
-<blockquote>
-<p>protected的使用，用于今后不太可能发生变动的、有可能被派生类使用的、不适合对实例用户公开的成员声明</p>
-</blockquote>
-<blockquote>
-<p>有个问题，既然private不能直接访问，那么复制过来又有什么用？按说明是需要复制过来<br>而且还占空间</p>
-</blockquote>
-<blockquote>
-<p>如何是同名函数，则访问基类同名成员时要用基类名受限A::f()。但也可使用using A::f;声明后直接使用</p>
-</blockquote>
-<blockquote>
-<p>派生类的作用域大于基类的作用域</p>
-</blockquote>
-<blockquote>
-<p>protected, 内部和子类，以及子类。而且是兼容的状态</p>
-</blockquote>
-<blockquote>
-<p>父对象、子对象，对于包含的状态，可以允许</p>
-</blockquote>
-<blockquote>
-<p>派生类对象，先初始化子对象<br>拷贝构造函数和赋值都是采用默认的形式</p>
-</blockquote>
-<p>实例：一个公司中的职员和部门经理类的设计</p>
-<ul>
-<li>分析<br>职员  工号、名字<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h2><p>具有public继承关系的两个类，在C++中存在下面的多态：</p>
-<ul>
-<li>派生类对象的类型既可以是派生类，也可以是基类</li>
-<li>基类的指针可以指向派生类或基类<blockquote>
-<p>其实就是一个意思。</p>
-</blockquote>
-</li>
-<li>一个可以发送到基类对象的消息，也可以发送到派生类对象，怎么做到？缺例子？</li>
-</ul>
-<p>由上面的知识可以带来消息的绑定问题。</p>
-<blockquote>
-<p>向基类的指针或引用所指向或引用的对象发送消息。</p>
-</blockquote>
-<blockquote>
-<p>问题：只要显式在参数中写定了基类还是父类，发现实际。</p>
-</blockquote>
-<ul>
-<li>虚函数<br>virtual void f(){<br>}</li>
-</ul>
-<ol>
-<li>实现消息的动态绑定</li>
-<li>指出基类中可以被派生类重定义的成员函数</li>
-</ol>
-<p>构造函数不能是虚函数，析构函数可以是虚函数。只要在基类中说明了虚函数，在派生类、派生类的派生类，同型购的成员函数都是虚函数</p>
-<blockquote>
-<p>意思是基类中将某个函数设置为虚函数，那么不管它继承到哪个位置，它将会一直是虚函数。 </p>
-</blockquote>
-<p>只有通过基类的指针或引用访问基类的虚函数时才进行动态绑定。</p>
-<blockquote>
-<p>当基类设置为纯虚函数后，之后的凡是基类指针，因为自身的函数设置为了虚函数。所以，它直接就指向了派生类的对象。</p>
-</blockquote>
-<p>何时需要定义虚函数？</p>
-<blockquote>
-<p>基类设计的不好，希望使用派生类。<br>在基类中根本无法给出实现，子类往往会对应于不同的情况<br>（纯虚函数）</p>
-</blockquote>
-<ul>
-<li>纯虚函数<br>virtual int f()=0;<br>包含纯虚函数的类叫做抽象类，不能用于创建对象。<br>从某种意义上感觉像是接口的感觉。</li>
-</ul>
-<p>一般地，会把所有的函数都设置为纯虚函数，即</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Figure &#123;</span><br><span class="line">	public: </span><br><span class="line">		virtual void draw() const=0;  // 这里const是做何用的， 是注重返回值是定值吗？</span><br><span class="line">		&gt; 等下好像前面加了const, 是就限制了不能改变元素。所以，外部的全局函数就可以直接使用</span><br><span class="line">		virtual void input_data()=0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>一般的应用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">- 图形的输入</span><br><span class="line">for (count=0; count&lt;MAX_NUM_OF_FIGURES;	count++)</span><br><span class="line">&#123;	int shape;</span><br><span class="line">	do</span><br><span class="line">	&#123;	cout &lt;&lt; &quot;请输入图形的种类(0：线段，1：矩形，2：圆，-1：结束)：&quot;;</span><br><span class="line">		cin &gt;&gt; shape;</span><br><span class="line">	&#125; while (shape &lt; -1 || shape &gt; 2);</span><br><span class="line">	if (shape == -1) break;</span><br><span class="line">	switch (shape)</span><br><span class="line">	&#123;	case 0: //线</span><br><span class="line">			figures[count] = new Line;	break;</span><br><span class="line">		case 1: //矩形</span><br><span class="line">			figures[count] = new Rectangle; break;</span><br><span class="line">		case 2: //圆</span><br><span class="line">			figures[count] = new Circle; break;</span><br><span class="line"> 	&#125;</span><br><span class="line">	figures[count]-&gt;input_data(); //动态绑定到相应类的input_data</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- 图形的输出</span><br><span class="line">for (int i=0; i&lt;count; i++)	</span><br><span class="line">	figures[i]-&gt;draw();</span><br></pre></td></tr></table></figure>
-
-<p>此时可以看出，代码完全不需要改动。只需要将类的实现进行改变而已，很好地提高了效率。</p>
-<p>考虑一种低效的实现方式，即使用union来做，可以发现，当增加新的图形种类是，需要修改下述代码，增加分支</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">图形数据的输入：</span><br><span class="line">	int count;</span><br><span class="line">	for (count=0; count&lt;MAX_NUM_OF_FIGURES; count++)</span><br><span class="line">	&#123;	int shape;</span><br><span class="line">		do</span><br><span class="line">		&#123;	cout &lt;&lt; &quot;请输入图形的种类(0:线段,1:矩形,2:圆,-1:结束):&quot;;</span><br><span class="line">			cin &gt;&gt; shape;</span><br><span class="line">		&#125; while (shape &lt; -1 || shape &gt; 2);</span><br><span class="line">		if (shape == -1) break;</span><br><span class="line">		figures[count] = new TaggedFigure; //空间利用效率不高！</span><br><span class="line">		switch (shape)</span><br><span class="line">		&#123; 	case 0: //线</span><br><span class="line">				figures[count]-&gt;shape = 0;</span><br><span class="line">				input_data(figures[count]-&gt;figure.line);</span><br><span class="line">  	 			break;</span><br><span class="line">			case 1: //矩形</span><br><span class="line">				figures[count]-&gt;shape = 1;</span><br><span class="line">				input_data(figures[count]-&gt;figure.rect);</span><br><span class="line"> 				break;</span><br><span class="line"> 		  case 2: //圆形</span><br><span class="line">				figures[count]-&gt;shape = 2;</span><br><span class="line">				input_data(figures[count]-&gt;figure.circle);</span><br><span class="line">  	 		break;</span><br><span class="line">	 	&#125; //end of switch</span><br><span class="line">	&#125; //end of for</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">图形的输出：</span><br><span class="line">	for (int i=0; i&lt;count; i++)</span><br><span class="line">	&#123;	switch (figures[i]-&gt;shape)</span><br><span class="line">			&#123; case 0:</span><br><span class="line">						draw(figures[i]-&gt;figure.line);</span><br><span class="line">						break;</span><br><span class="line">				case 1:</span><br><span class="line"> 						draw(figures[i]-&gt;figure.rect);</span><br><span class="line">						break;</span><br><span class="line">				case 2:</span><br><span class="line"> 						draw(figures[i]-&gt;figure.circle);</span><br><span class="line"> 						break;</span><br><span class="line"> 			&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>作业：用抽象类为栈的两个不同实现提供一个公共接口</p>
-</li>
-<li><p>使用抽象类给类提供一个抽象接口</p>
-<blockquote>
-<p>感觉上真的，抽象类实现真正意义上的抽象。</p>
-</blockquote>
-</li>
-</ul>
-<p>class I_A{<br>    public:<br>        virtual void f(int)=0;<br>};</p>
-<p>void func(I_A *p) {<br>    p-&gt;f(2); // 这里不知道p所指向的对象有哪些数据成员，因此无法访问它的数据成员。而且保证了类的封闭性。<br>}</p>
-<blockquote>
-<p>从某种意义上感觉对事件机制有了进一步的理解。<br>所有都由一个父类继承而来。而虚函数所定义的就是信号，就可以看作基类指针，完全不知道到底派生类的谁会接收它。</p>
-</blockquote>
-<p>代码复用的另一种方式——聚集<br>继承实际就是把一个类的代码复制到另一个类中来实现，具有继承关系的两个类之间通常属于一般与特殊的关系。<br>继承不是代码复用的唯一方式，有些代码复用不宜用继承来实现。如：“飞机”类复用“发动机”类。</p>
-<p>具有聚集关系的两个类之间通常属于整体与部分的关系。</p>
-<blockquote>
-<p>访问控制仿佛如同一种过滤器一样；只能过滤到和当前一样的结果。<br>private只对自己使用。<br>protected针对继承元素。</p>
-</blockquote>
-<blockquote>
-<p>之前就一直在想一个问题，可能让你一直继承下去吗？我这个世界可不想你做这些东西？<br>实际社会上还会存在哪些要求呢？</p>
-</blockquote>
-<blockquote>
-<p>实际上来说的话，那么当一个类使用了private继承就是想不要再被其他继承下去。继承下去有毛线用，你又访问不到，所以说啊，你还不如好好使用的，有什么意思，对吧！<br>顶多是你可以.后再加上A::的作用域进行访问。如f()是A的private成员，对于B继承A，访问f()即为<code>b.A::f()</code></p>
-</blockquote>
-<p>继承与封装存在矛盾，聚集则否。<br>继承提供两种接口，而对于聚集，一个类对外只需提供一个接口</p>
-<h3 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h3><p>如何实现？</p>
-<ul>
-<li>采用单继承，概念混乱，导致A和B之间增加了层次关系。易造成不一致。</li>
-<li>聚集，不能实现子类型</li>
-</ul>
-<p>顺序<br>class C: public A, public B{}<br>即按照继承的声明方式。</p>
-<p>对于基类的指针会自动进行地址调整，也就是自动指向对应的存储空间。<br>函数名混淆，采用基类名限制。</p>
-<p>重复继承问题，原本设置不对，应该把重复继承的部分设置为基类。</p>
-<p>一种新的方式：<br>class A{<br>    int x;<br>public:<br>    A(int i){x=i;}<br>}</p>
-<p>class B:virtual public A{  // 注意没？这里出现了虚拟继承的概念<br>    int y;<br>}</p>
-<p>间接包含虚基类的类：</p>
-<p>虚基类的构造函数由该类的构造函数直接调用。（即虚基类的构造函数由最新派生出的类的构造函数调用）<br>虚基类的构造函数优先非基类的构造函数执行。</p>
-<p>虚基类的实现其实比较复杂，并不是没有它了。而是将x移到最后，在原本x的位置存储了一个x的偏移量指针。</p>
-<p>非纯虚基类，就是有自己的实现。但是允许你去用派生类的。因为自己做不好的原因。</p>
-<h3 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h3><ul>
-<li>从上面的过程话说设计模式</li>
-</ul>
-<blockquote>
-<p>那么这个世界的组织形式是什么？<br>分离，谁是谁的什么，还有或者谁组成了谁</p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture2-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/nju-course-cplus-lecture2-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture2-summary</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:47:59 / 修改时间：09:48:56" itemprop="dateCreated datePublished" datetime="2019-09-19T09:47:59+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>重点</p>
-<ol>
-<li>抽象和封装<blockquote>
-<p>抽象是外，封装是里；为什么好？栈举例，直接来，没有函数封装；结构体+函数封装，数据隐私问题，成员仍可被破坏。</p>
-</blockquote>
-</li>
-</ol>
-<p>一个重要的问题：加访问控制 public, private(默认),protected</p>
-<p>面向对象：类型和对象。程序若干个对象。对象之间关系，一是继承，传承特征；对象之间靠接口，公有函数的参数或友元来维持关系。</p>
-<p>设计几大理念：</p>
-<ol>
-<li>抽象，控制住底层的复杂度</li>
-<li>封装，同上，侧重隐藏信息</li>
-<li>模块化，抽象封装是单个，模块化则是对整个而言</li>
-<li>软件复用：可复用的东西变得更多</li>
-<li>可维护性：代码框架灵活</li>
-<li>软件模型的自然度：能对应于问题空间</li>
-</ol>
-<p>面向过程：过程即功能，特定功能集合，没有对象的概念。所有的东西会乱成一团。复用性差，太特殊</p>
-<ol start="2">
-<li>面向过程</li>
-</ol>
-<p>类型 对象（动态）</p>
-<p>系统向一个对象通信(即只调用一个对象的接口).然后不定地解决问题。</p>
-<blockquote>
-<p>不过是类的问题。</p>
-</blockquote>
-<ol start="3">
-<li>特性：多态</li>
-</ol>
-<p>函数名，类型。</p>
-<p>父类对象继承子类:<br>子类可以有两个选择<br>父类指针可以有两个指向<br>消息可以有多种发送选择</p>
-<p>访问控制的建议<br>内部的东西private, 比如类的数据成员，类内部使用的成员函数。</p>
-<p>调用未定义的类，指针+引用</p>
-<p>对象，动态和静态、全局和局部。</p>
-<ol start="4">
-<li>使用对象</li>
-</ol>
-<ul>
-<li><p>赋值</p>
-</li>
-<li><p>参数 const A &amp;</p>
-</li>
-<li><p>返回值</p>
-</li>
-<li><p>this</p>
-</li>
-<li><p>对象初始化，常量和引用一般不让初始化</p>
-</li>
-<li><p>构造函数和析构函数对应。</p>
-</li>
-<li><p>成员对象，拷贝构造函数</p>
-</li>
-<li><p>静态成员对象</p>
-</li>
-<li><p>f(const Data&amp; d){}, 然后 类的对象就分为两种：获取对象状态 const,外界元素均可访问，也要通过类的对象来操作，不够对应2那种参数可以进行使用；改变对象状态，需要类的对象来进行操作。</p>
-<blockquote>
-<p>换言之，是为常量对象而准备的</p>
-</blockquote>
-</li>
-<li><p>友元，不具有对称性和传递性，可以是类，全局函数或者类的成员函数（都行）。</p>
-<blockquote>
-<p>具体时间差没测试。效率上会消失多少？</p>
-</blockquote>
-</li>
-<li><p>类作为单独的模块，降低耦合。成员函数只向有限个元素发送。</p>
-</li>
-<li><p>作业：用类来实现矩阵和向量类型<br>矩阵：数据、行数、列数。<br>外界的获取接口：</p>
-</li>
-<li><p>获得行数和列数，int&amp; element(int x, int y), 这样是否可以通过地址来修改元素的值呢？<br><code>m.element(1,2) = m.element(1,2) + 1</code>, 不过说到底也是对的啊，进行的是值替代, 而这也是符合引用的定义的啊。</p>
-</li>
-<li><p>操作函数，对元素进行操作</p>
-</li>
-<li><p>构造函数: 对元素和空间进行检查。</p>
-</li>
-</ul>
-<blockquote>
-<p>注意：凡是函数，一定要记得对函数的输入数据进行检查和核对。</p>
-</blockquote>
-<p>向量：数据、维数。</p>
-<ul>
-<li>附录：补充<blockquote>
-<p>cout与cerr: 几次都遇到这种情况，不过我想今天应该明了。cout是控制台输出，当遇到endl，就不再缓冲，直接把数据输出。<br>cerr在命令行下，<br>linux下命令行截取的是cerr, 1&gt;&gt;log输出的是控制台，2&gt;&gt;输出的是错误信息 </p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p>缓冲，刷新的概念，集中输出，防止刷屏。可以看到缓冲好的数据，生活中有很多这样的例子。比如，电视机显式，等一段画面到来时再显示图像。<br>注意指针和实体数组，对于指针单位长度和数组元素一样。然后，new开辟的空间只能用指针来做。</p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -3105,7 +3758,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">104</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

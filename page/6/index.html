@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">99</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">104</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,1145 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture4-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-cplus-lecture4-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture4-summary</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:52:19 / 修改时间：09:52:41" itemprop="dateCreated datePublished" datetime="2019-09-19T09:52:19+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>泛型程序设计</p>
+<blockquote>
+<p>类型的多态</p>
+</blockquote>
+<p>首次尝试，c使用泛型指针。c++template关键字，剩余的事情交给编译器。<br>代码写得简单，就可以当做常见的int来做，而且不容易出错。<br>封装了一层。</p>
+<p>what where who when how</p>
+<ol>
+<li><p>哪里使用？<br>普通类型，直接，在类中。<br>特殊类型——类，需要把对应的操作，构造函数，复制构造函数处理安全。</p>
+</li>
+<li><p>怎么用？<br>template&lt;class T,int size&gt; 可加非这个量。<br>不具体化，不认的。</p>
+</li>
+</ol>
+<p>类型冲突的请显式说出来</p>
+<p>注意了：实现必须写在.h中，这是代码复用；不用担心重复解释，编译器会解决；然后，全局函数其他都要把<class t>标出来，特别是友元。</class></p>
+<ol start="3">
+<li>于是，C++, STL<br>远离类型，就是实际所分析和学的数据结构和算法，所以妙啊！<br>不过遇到具体类型套而已！</li>
+</ol>
+<ul>
+<li><p>容器，常用数据结构。</p>
+<blockquote>
+<p>这里是序列化数据; 复杂的数据结构可以由这些给组合而成的，哈哈哈！</p>
+</blockquote>
+</li>
+<li><p>算法</p>
+<blockquote>
+<p>一些最常用的操作集合</p>
+</blockquote>
+</li>
+<li><p>迭代器</p>
+<blockquote>
+<p>也就是算法中对数据结构的抽象吧，主要是抽象为数组的处理一样，可以轻易找到头尾，下一个元素，以及向前，向后。</p>
+</blockquote>
+</li>
+</ul>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXVhbl82NjkvYXJ0aWNsZS9kZXRhaWxzLzIyMTAwMTY1" title="https://blog.csdn.net/liyuan_669/article/details/22100165">迭代器是一种检查容器内元素并遍历元素的数据类型<i class="fa fa-external-link"></i></span></p>
+<p>字面不要过度推理，从权限上看</p>
+<p>InputIterator: 单步迭代，不允许修改<br>相当于<code>vector&lt;int&gt;::const_iterator iter, 可以iter++, 不可以*iter=1;</code>注意区分<br><code>const vector&lt;int&gt;::iterator iter=v.beign, 可以*iter=1,不可以iter++</code> </p>
+<p>OutputIterator: 单步迭代，可以修改。</p>
+<blockquote>
+<p>突然这里对前面返回两种不同的东西有了实质的感觉，一个是正常，另一个是既不可以被修改，也不可以增加</p>
+</blockquote>
+<p>0: queue,stack,pq<br>InputI:<br>OutputI:<br>ForwardI:<br>BidrectionalI: list,map,set<br>Random-accessI: vector,deque,basic_string</p>
+<p>类型</p>
+<ul>
+<li>添加 push, insert</li>
+<li>大小 size, empty , resize,count</li>
+<li>访问 back,front, [],at,top,find</li>
+<li>删除 erase,clear,pop_back</li>
+<li>赋值与swap: =,swap, assign()//重新设置</li>
+</ul>
+<blockquote>
+<p>然后按照需要思考会用哪些？</p>
+</blockquote>
+<blockquote>
+<p>循环遍历</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">  for (it=phone_book.begin(); it != phone_book.end(); it++) </span><br><span class="line">// 注意这里 end()返回的是最后的下一个元素，按照链表来看就是null. 具体是什么值我也不知道</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>首尾元素是head, tail</p>
+</blockquote>
+<ol start="4">
+<li>todo<br>再想不同迭代器</li>
+</ol>
+<p>一种类型的定义：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5oMTIxOC9hcnRpY2xlL2RldGFpbHMvMzMzNDA5NTk=" title="https://blog.csdn.net/zhanh1218/article/details/33340959">如果需要定义真正的tuple，那就需要用const vector<int> nums(10,9); 然后用const_iterator来访问</int><i class="fa fa-external-link"></i></span></p>
+<p>C++11新增加的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto i1 = Container.begin();  // i1 is Container&lt;T&gt;::iterator </span><br><span class="line">auto i2 = Container.cbegin(); // i2 is Container&lt;T&gt;::const_iterator</span><br></pre></td></tr></table></figure>
+
+<p>所以cbegin()的访问控制就是public</p>
+<blockquote>
+<p>不同迭代器代码上怎么看？怎么区分。对于容器来说是都返回其基类？由具体用的时候，再判断和出错.</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbV9zem0vYXJ0aWNsZS9kZXRhaWxzLzg5ODA4Nzk=" title="https://blog.csdn.net/sim_szm/article/details/8980879">褚略理解<i class="fa fa-external-link"></i></span></p>
+<ul>
+<li>输入。  find, accumulate;  标准库istream_iterator</li>
+<li>输出。 copy, ostream_iterator</li>
+<li>前向. replace</li>
+<li>双向。 reverse</li>
+<li>随机访问 sort, &lt;, &gt;, !=, +,-,回退多个元素<blockquote>
+<p>具体的算法有具体的应用</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>发现很多接口的改进点：增加了越界的判断。比如[]和at，细想真的牛逼！</p>
+</blockquote>
+<ol start="5">
+<li>算法</li>
+</ol>
+<p>分类</p>
+<ul>
+<li><p>调序算法：实现按某个要求改变容器中元素次序的操作</p>
+<blockquote>
+<p>比如sort, </p>
+</blockquote>
+</li>
+<li><p>编辑算法：实现对容器元素的复制、替换、删除、赋值等操作</p>
+<blockquote>
+<p>比如replace, transform</p>
+</blockquote>
+</li>
+<li><p>查找算法：实现在容器内查找元素或子元素序列等操作</p>
+<blockquote>
+<p>find,count_if</p>
+</blockquote>
+</li>
+<li><p>算术算法：实现在容器内进行求和、内积和、差等操作</p>
+<blockquote>
+<p>accumulate</p>
+</blockquote>
+</li>
+<li><p>集合算法：实现集合的基本运算，要求已经排好序？</p>
+</li>
+<li><p>堆算法：实现基于堆结构的容器元素，第一个元素最大</p>
+</li>
+<li><p>元素遍历算法 for_each</p>
+</li>
+</ul>
+<p>算法指定在迭代器上，妙！迭代器自身相容，妙！<br>规定，作用范围一样，src_first,src_last, dst_first</p>
+<p>函数参数：进行自定义，类型也为T</p>
+<p>一个超级有趣的例子。</p>
+<p>匹配一定条件的东西， count_if()-&gt;类-&gt;lambda表达</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-cplus-lecture4/" class="post-title-link" itemprop="url">nju-course-cplus-lecture4</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:51:16 / 修改时间：09:53:17" itemprop="dateCreated datePublished" datetime="2019-09-19T09:51:16+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h1><h2 id="泛型程序设计"><a href="#泛型程序设计" class="headerlink" title="泛型程序设计"></a>泛型程序设计</h2><p>一个程序实体能对多种类型的数据进行操作或描述的特性称为类属性。具有类属性的程序实体通常有：</p>
+<ol>
+<li>类属函数</li>
+<li>类属类</li>
+</ol>
+<p>类属也是一种多态，称为参数化多态。</p>
+<p>比如说用通用指针。</p>
+<p>如上所示，C++提供了两种实现类属函数的机制</p>
+<ul>
+<li>采用通用指针类型的参数(C语言的做法)</li>
+<li>函数模板</li>
+</ul>
+<h3 id="通用指针"><a href="#通用指针" class="headerlink" title="通用指针"></a>通用指针</h3><p>整个世界就是由1构成的，可以升为万物的。<br>void *，所有的父类。通用的都是byte.</p>
+<p>这些东西然后不断地转换为其他的内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"> 函数定义：</span><br><span class="line"> void sort(void *base, unsigned int count, unsigned  int element_size, int (*cmp)(const void*, const void*))&#123;</span><br><span class="line">     // 这里函数参数和也可以诶，发现我完全想复杂了。也就是说这里的话，只要弄个函数名做参数，其实也不所谓，没有我想的那么复杂，哈哈哈！两步就可以了</span><br><span class="line">     // 取第i个元素</span><br><span class="line">     (byte *)base + i*element_size</span><br><span class="line"></span><br><span class="line">    // 比较第i个和第j个元素的大小，利用调用者提供的回调函数cmp实现</span><br><span class="line">    (*cmp)((byte *)base + i*element_size, (byte*)base + j*element_size)</span><br><span class="line"></span><br><span class="line">    // 交换第i个和第j个元素</span><br><span class="line">    byte *p1 = (byte *)base + i*element_size;</span><br><span class="line">    byte *p2 = (byte *)base + j*element_size;</span><br><span class="line">    for(int k=0;k &lt; element_size;k++)&#123;</span><br><span class="line">        byte temp=p1[k]; p1[k]=p2[k]; p2[k]=temp;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> 这里的byte为typedef unsigned char byte;</span><br><span class="line"></span><br><span class="line">void sort(void *base, //需排序的数据（数组）首地址</span><br><span class="line">             unsigned int count, //数据元素的个数</span><br><span class="line">             unsigned int element_size, //一个数据元素所需的空间大小</span><br><span class="line">             int (*cmp)(const void *, const void *) ) //比较两个元素的函数</span><br><span class="line">&#123;   //不论采用何种排序算法，一般都需要对数组进行以下操作：	</span><br><span class="line">     //取第i个元素</span><br><span class="line">        (char *)base+i*element_size</span><br><span class="line">     //比较第i个和第j个元素的大小 （利用调用者提供的回调函数cmp实现）</span><br><span class="line">        (*cmp)((char *)base+i*element_size,</span><br><span class="line">                    (char *)base+j*element_size)</span><br><span class="line">     //交换第i个和第j个元素</span><br><span class="line">        char *p1=(char *)base+i*element_size,</span><br><span class="line">	     *p2=(char *)base+j*element_size;</span><br><span class="line">        for (int k=0; k&lt;element_size; k++)</span><br><span class="line">        &#123;	char temp=p1[k]; p1[k] = p2[k]; p2[k] = temp;</span><br><span class="line">        &#125; </span><br><span class="line">&#125; //上面的char用byte替代更好！typedef unsigned char byte;</span><br></pre></td></tr></table></figure>
+
+<p>调用者需要调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int A_compare(const void* p1, const void* v2)&#123;</span><br><span class="line">    if(*(*A)p1 &lt; *(A*)p2) return -1;</span><br><span class="line">    else if(*(*A)p1) &gt; *(A*)p2) return 1;</span><br><span class="line">    else return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 类属排序函数的使用</span><br><span class="line">int a[100];</span><br><span class="line">sort(a,100,sizeof(int),int_compare);</span><br><span class="line">double b[200];</span><br><span class="line">sort(b,200,sizeof(double), double_compare);</span><br><span class="line">A c[300]; // 如果这里A是类，就显示出了将比较符号重载的有效性</span><br><span class="line">sort(c,300,sizeof(A),A_compare)</span><br></pre></td></tr></table></figure>
+
+<p>品味！</p>
+<h3 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h3><p>函数模板是指带有类型参数的函数定义，其一般格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template&lt;class T1, class T2,...&gt;</span><br><span class="line">&lt;返回值类型&gt; &lt;函数名&gt;(&lt;参数表&gt;)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">template&lt;class T&gt;</span><br><span class="line">void sort(T elements[], unsigned int count)&#123;</span><br><span class="line">    // 取第i个元素</span><br><span class="line">    elements[i]</span><br><span class="line">    // 比较第i个和第j个元素的大小</span><br><span class="line">    elements[i]&lt; elemnets[j]</span><br><span class="line">    // 交换第i个和第j个元素</span><br><span class="line">    T temp = elements[i];</span><br><span class="line">    elements[i] = elements[j];</span><br><span class="line">    elements[j] = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&gt; 来一起感叹，太他妈牛逼了。这template省去了好多麻烦！好高层的一种抽象，太棒了，果然！牛逼死了</span><br><span class="line"></span><br><span class="line">int a[100];</span><br><span class="line">sort(a, 100);</span><br><span class="line">double b[200];</span><br><span class="line">sort(b,200);</span><br><span class="line">A c[300];</span><br><span class="line">sort(c, 300);</span><br></pre></td></tr></table></figure>
+
+<p>函数模板的使用——实例化</p>
+<ul>
+<li>函数模板定义了一系列重载的函数</li>
+<li>要使用函数模板所定义的函数，称为模板函数，首先必须对函数模板进行实例化：给模板参数提供一个类型作为值，从而生成具体的函数。</li>
+<li>函数模板的实例化通常是隐式的<ul>
+<li>由编译程序来做，模板实参推演</li>
+</ul>
+</li>
+</ul>
+<p>当编译程序无法根据调用时的参数类型来确定所调用的模板参数，这时，需要在程序中显式第实例化函数模板。</p>
+<p>除了类型参数外，函数模板也可以带有非类型参数，使用时需要显式实例化。<br>template&lt;class T, int size&gt;<br>void f(T a){<br>    T temp[size];<br>}</p>
+<h3 id="类模板"><a href="#类模板" class="headerlink" title="类模板"></a>类模板</h3><p>如果一个类的成员的类型可变，则该类称为类属类。在C++中，类属类用类模板实现。<br>template&lt;class T1, class T2&gt;<br>class &lt;类名&gt;{}</p>
+<p>使用<br>Stack<int> st1;</int></p>
+<p>!!! 类模板中的静态成员仅属于实例化后的类，不同类模板实例之间不共享类模板中的静态成员。<br>template <class t><br>class A{<br>    static int x;<br>}</class></p>
+<p>注意！在自己定义时，需要把模板的定义和实现都放在头文件中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// file1.h</span><br><span class="line">template &lt;class T&gt; </span><br><span class="line">class S //类模板s的定义</span><br><span class="line">&#123;  T a;</span><br><span class="line">  public:</span><br><span class="line">    void f();</span><br><span class="line">&#125;;</span><br><span class="line">template &lt;class T&gt; </span><br><span class="line">void S&lt;T&gt;::f() //类模板s的实现  如果放在对应的file1.cpp中，会显示该实例不存在</span><br><span class="line">&#123; ......</span><br><span class="line">&#125;</span><br><span class="line">extern void func();</span><br></pre></td></tr></table></figure>
+
+<p>使用者通过包含这个头文件，把模板的源代码全包含进来，以备实例化所需。<br>因此，模板是基于源代码的复用、</p>
+<ul>
+<li>重复实例的处理<br>模板的复用会导致多模块的编译结果中存在相同的实例：</li>
+</ul>
+<ol>
+<li>相同的函数模板实例</li>
+<li>相同的类模板成员函数实例<br>相同代码的存在会造成目标代码庞大！<br>如何处理？</li>
+</ol>
+<ul>
+<li>由开发环境来解决：编译第二个模块的时候不生成这个函数</li>
+<li>由连接程序来解决：舍弃多余的那一个</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">关于类模板的友元</span><br><span class="line">template &lt;class T&gt; class A;</span><br><span class="line">template &lt;class T&gt; void f3(A&lt;T&gt;&amp; a) &#123; ... &#125;</span><br><span class="line">template class&lt;T&gt;</span><br><span class="line">class A</span><br><span class="line">&#123; T x,y;</span><br><span class="line">  ......</span><br><span class="line">  friend void f1(A&lt;T&gt;&amp; a); //友元f1不是模板！</span><br><span class="line">  template &lt;class T1&gt; friend void f2(A&lt;T1&gt;&amp; a); //f2与A多对多实例化</span><br><span class="line">  friend void f3&lt;T&gt;(A&lt;T&gt;&amp; a); //f3与A一对一实例化(用相同参数类型)</span><br><span class="line">&#125;;</span><br><span class="line">void f1(A&lt;int&gt;&amp; a) &#123; ... &#125;</span><br><span class="line">template &lt;class T&gt; void f2(A&lt;T&gt;&amp; a) &#123;...&#125;</span><br><span class="line">......</span><br><span class="line">A&lt;int&gt; a1; //实例化A&lt;int&gt;</span><br><span class="line">A&lt;double&gt; a2; //实例化A&lt;double&gt;</span><br><span class="line">f1(a1); //OK，调用f1(A&lt;int&gt;&amp;)</span><br><span class="line">f1(a2); //链接错误! 调用f1(A&lt;double&gt;&amp;)，但它不存在！</span><br><span class="line">f2(a1); //实例f2&lt;int&gt;是A&lt;int&gt;和A&lt;double&gt;的友元</span><br><span class="line">f2(a2); //实例f2&lt;double&gt;是A&lt;int&gt;和A&lt;double&gt;的友元</span><br><span class="line">f3(a1); //实例f3&lt;int&gt;是A&lt;int&gt;的友元，但不是A&lt;double&gt;的友元！</span><br><span class="line">f3(a2); //实例f3&lt;double&gt;是A&lt;double&gt;的友元，但不是A&lt;int&gt;的友元！</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>总结：友元是外部，在说明友元时也需要在外部进行说明。</p>
+</blockquote>
+<h3 id="C-标准库"><a href="#C-标准库" class="headerlink" title="C++标准库"></a>C++标准库</h3><p>在C++标准库中，除了C标准库保留下来的一些功能外，其它功能大都以模板形式给出，这些模板构成了C++的标准模板库。<br>STL实现了数据结构和算法的复用，体现了泛型程序设计的精髓。<br>STL支持了一种编程思想模式。</p>
+<p>STL主要包含：</p>
+<ul>
+<li>容器类模板：用于存储序列化数据元素，比如：向量、队列、栈、集合等</li>
+<li>算法（函数）模板：用于对容器中数据元素进行一些常用的操作，如：排序、查找、求和等</li>
+<li>迭代器类模板：实现了抽象的指针功能，它用于指向容器中的元素。<ul>
+<li>迭代器是容器和算法之间的桥梁：传给算法的不是容器，而是指向容器中元素的迭代器，算法通过迭代器实现对容器中数据元素的访问和遍历。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;numeric&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()&#123;</span><br><span class="line">    vector&lt;int&gt; v;</span><br><span class="line">    int x;</span><br><span class="line">    cin&gt;&gt;x;</span><br><span class="line">    while(x&gt;0)&#123;</span><br><span class="line">        v.push_back(x);</span><br><span class="line">        cin&gt;&gt;x;</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;int&gt;::iterator it1=v.begin();</span><br><span class="line">    vector&lt;int&gt;::iterator it2=v.end();</span><br><span class="line">    cout&lt;&lt;&quot;Max= &quot;&lt;&lt;*,ax_element(it1, it2)&lt;&lt;endl;</span><br><span class="line">    cout&lt;&quot;Sum=&quot;&lt;&lt;accumulate(it1, it2, 0)&lt;&lt;endl;</span><br><span class="line">    sort(it1, it2);</span><br><span class="line"></span><br><span class="line">    cout&lt;&lt;&quot;Sorted result is:\n&quot;;</span><br><span class="line">    for_each(it1, it2,[](int x)&#123;cout&lt;&lt;x&lt;&lt;&apos;&apos;; return;&#125;)</span><br><span class="line">    cout&lt;&lt;&quot;\n&quot;;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h4><p>容器是由长度可变的同类型元素所构成的序列。<br>STL中包含了很多种容器，虽然这些容器提供了很多相同的操作，但采用了不同的内部实现方法，所以不同的容器适合不同的应用场合。<br>容器由类模板来实现</p>
+<ul>
+<li><p>vector&lt;&gt;<br>需要快速定位任意位置上的元素以及主要在元素序列的尾部增加、删除元素的场合<br>在头文件vector中定义，用动态数组实现</p>
+</li>
+<li><p>list&lt;&gt;<br>用于经常在元素序列中任意位置上插入或删除元素的场合。<br>list, 双向链表实现</p>
+</li>
+<li><p>dequeue&lt;&gt;<br>用于主要在元素序列的两端增加、删除元素以及需要快速定位任意位置上的元素的场合<br>dequeue, 用分段的连续空间结构实现</p>
+</li>
+<li><p>stack&lt;&gt;<br>用于仅在元素序列的尾部增加、删除元素的场合<br>基于deque实现</p>
+</li>
+<li><p>queue&lt;&gt;<br>用于仅在元素序列的头部增加、删除元素的场合<br>基于dequeue实现</p>
+</li>
+<li><p>priority_queue&lt;&gt;<br>与queue的操作类似，不同之处在于：每次增加，删除元素之后，它将元素位置进行调整，使得头部元素总是最大的。每次删除操作总是把最大的元素去掉。<br>在queue中定义，一般基于vector和heap实现</p>
+</li>
+<li><p>map&lt;关键字类型，值类型&gt;<br>multimap</p>
+<ul>
+<li>容器中每个元素是一个pair结构类型，该结构有两个成员：first和second，关键字对应first, 值对应second,元素是根据其关键字排序的。用于需要根据关键字来访问元素的场合</li>
+<li>对于map，不同元素的关键字不能相同；对于multimap,不同元素的关键字可以相同</li>
+<li>map中定义</li>
+</ul>
+</li>
+<li><p>set&lt;元素类型&gt;<br>multiset</p>
+<ul>
+<li>相对于map和multimap, 合一了</li>
+<li>set中定义</li>
+</ul>
+</li>
+<li><p>basic_string&lt;&gt;</p>
+<ul>
+<li>与vector类似，不同之处在于其元素作为字符类型，并提供了一系列与字符串相关的操作</li>
+<li>string和wstring分别是它的两个实例： basic_string<char>和basic_string<wchar_t></wchar_t></char></li>
+<li>在string中定义</li>
+</ul>
+</li>
+</ul>
+<h4 id="容器的操作"><a href="#容器的操作" class="headerlink" title="容器的操作"></a>容器的操作</h4><ul>
+<li>获取指定位置的元素</li>
+<li>增加元素</li>
+<li>删除元素</li>
+<li>查找元素</li>
+<li>获取容器首、尾元素的迭代器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">T &amp;front();</span><br><span class="line">T &amp;back();  // vector, list,dequeue,queue</span><br><span class="line"></span><br><span class="line">void push_front(const T&amp;x) void pop_front;  //list,deque</span><br><span class="line">void push_back(const T&amp;x) void pop_back; //vector,list,dequeue</span><br><span class="line"></span><br><span class="line">void push(const T&amp;x) // 尾部stack, queue, priority_queue</span><br><span class="line">void pop() // 尾部stack, 头部queue, priority_queue</span><br><span class="line"></span><br><span class="line">T &amp;top();  const T&amp;top() const;  尾部stack , 头部priority_queue</span><br><span class="line"></span><br><span class="line">iterator begin();</span><br><span class="line">const_iterator begin() const;  除queue,priority queue, stack</span><br><span class="line">// 为什么有两种？有啥不一样的用的地方吗？</span><br><span class="line"></span><br><span class="line">iterator end();</span><br><span class="line">const_iterator end() const; 同上</span><br><span class="line"></span><br><span class="line">iterator insert(iterator pos, const T&amp; x);</span><br><span class="line">void insert(iterator pos, InputIt first, InputIt last);</span><br><span class="line">// pos 插入一个呼呼多个元素， vector, list, deque</span><br><span class="line"></span><br><span class="line">iterator erase(iterator pos)</span><br><span class="line">iterator erase(iterator first, iterator last);</span><br><span class="line">// vector, list, deque, map/multimap, set, basic_string</span><br><span class="line"></span><br><span class="line">T &amp;operator[](size_type pos)</span><br><span class="line">// pos上的引用， vector, deque, basic_string</span><br><span class="line"></span><br><span class="line">ValueType &amp; operator[](const KeyType&amp; key); // map</span><br><span class="line"></span><br><span class="line">T&amp; at(size_type pos);</span><br><span class="line">相比于[], 进行了越界检查； vector,deque,basic_string</span><br><span class="line"></span><br><span class="line">iterator find(const T&amp; key);</span><br><span class="line">// 根据关键字查找，找到返回；否则返回最后一个元素的下一个位置</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>值得注意的是，如果容器的元素类型是一个类，则针对该类需要：</p>
+<ol>
+<li>自定义拷贝构造函数和赋值操作符重载函数。</li>
+<li>重载比较操作符&lt;</li>
+</ol>
+</blockquote>
+<h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>迭代器是实现了抽象的指针（智能指针）。它们指向容器中的元素。</p>
+<blockquote>
+<p>哇，抽象指针，牛逼</p>
+</blockquote>
+<p>在STL中，迭代器是作为类模板来实现的，它们可以分为以下几种：</p>
+<ul>
+<li><p>输出迭代器output iterator</p>
+<ul>
+<li>用来修改它所指向的容器元素</li>
+<li>间接访问操作 *输出迭代器</li>
+<li>++操作</li>
+</ul>
+</li>
+<li><p>输入迭代器input iterator</p>
+<ul>
+<li>用于读取它指向的容器元素</li>
+<li>间接访问操作 *p</li>
+<li>元素成员间接访问-&gt;</li>
+<li>++, ==, !=操作</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>前向迭代器<blockquote>
+<p>哇，这个就应该是方向有关吧。只能一个方向，不过好奇的是这个方向有规定只能从头到尾吗？感觉上应该两种都被允许<br>用于读取、修改它所指向的容器元素<br>元素间间接访问操作和元素成员间接访问.<br>同义获取关联的对象<br>如果是int，则访问的是其值，就对应于第一种情况；如果是类，就对应于第二种情况。</p>
+</blockquote>
+</li>
+</ul>
+<p>++,==,!=操作</p>
+<ul>
+<li>双向迭代器<br>用于读取，修改它所指向的容器元素<br>元素间接访问操作和元素成员间接访问操作</li>
+</ul>
+<p>++,–,==,!=</p>
+<ul>
+<li>随机访问迭代器<br>用于读取、修改它所要指向的容器元素<br>元素间接访问操作、元素成员间接访问和随机访问元素操作</li>
+</ul>
+<p>++,–,&gt;=,&lt;,&gt;</p>
+<blockquote>
+<p>随机访问吗？应该是对于固定存储的吧？不然实现算法复杂度不一样唉，真好奇实现方法。<br>对！下面得到了回答</p>
+</blockquote>
+<p>从上到下，从派生类到基类</p>
+<p>哦，来啦</p>
+<p><strong>各容器的迭代器类型</strong></p>
+<ul>
+<li>vector,deque, basic_string,  begin/end返回的是随机访问迭代器</li>
+<li>list,map,set返回的是双向迭代器<blockquote>
+<p>这两个因为内部的物理实现结构不一样</p>
+</blockquote>
+</li>
+<li>对于queue,stack,priority_queue,不支持迭代器<blockquote>
+<p>为啥，不支持前向后向吗？queue本身支持，但是因为queue,stack有其特定的持有顺序所以不支持吗？特殊功能，而priority_queue更是由于实现复杂。每一次动荡代价不一样。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>迭代器的作用就是每个变量的指示，最多的应用自己所见到的就是遍历。所以怎么说感觉上应该能得到下一个元素的地址的那种</p>
+</blockquote>
+<h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><p>分类<br>调序算法<br>编辑算法<br>查找算法<br>算术算法<br>集合算法<br>堆算法<br>元素遍历算法</p>
+<p>STL算法体现了一种高度抽象：</p>
+<ul>
+<li>每一个算法都完成一个特定的功能</li>
+<li>大部分算法都是遍历指定的容器元素，对满足条件的元素执行默认的或自定义的操作。</li>
+<li>使用者只需要提供：容器（迭代器）、操作条件以及自定义操作，而控制逻辑则有算法内部实现。循环不用操心</li>
+</ul>
+<p>算法处理的是容器的迭代器，这样的好处很明显，能够提高算法对容器的适应性。虽然容器各不相同，一个算法往往可以接受相容的多种迭代器</p>
+<p>一个算法能接收的迭代器的类型时通过算法模板参数的名字来体现的。一个算法能接收与参数类型相容的所有种类的迭代器。</p>
+<blockquote>
+<p>这里应该不是都是最大的权限即随机访问迭代器吧？这样虽然特别妙？不对指针不应该是指向基类吗？那么怎么的？感觉上应该是限定的</p>
+</blockquote>
+<p>然后就规定一下显式的操作说明吧：<br>参数容器的作用范围应该一样。一般地，参数(src_first, src_last, dst_first)</p>
+<p>自定义操作<br>有些算法要求使用者提供一个函数或函数对象作为自定义的操作条件，因为往往返回结果为false或true. 所以可以看作谓词。<br>Pred: 一元谓词，需要一个元素作为参数<br>BinPred:二元谓词，需要两个元素作为参数<br>eg: count_if(InIt first,InIt last, Pred cond);</p>
+<blockquote>
+<p>注意这里的默认参数，感觉上应该与vector<int>x, 这里的int, 即class相关。<br>即一元谓词，二元谓词的参数。对的！</int></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;numeric&gt;</span><br><span class="line">accumulate() // 累积算法,返回值</span><br><span class="line">transform() // 变换，映射算法</span><br></pre></td></tr></table></figure>
+
+<p>发现越到后面越有点像数据库的内容了。</p>
+<ul>
+<li>作业<br>STL算法应用——在学生容器中做统计<br>学生：name, sex, birth_place, major<br>功能：init, sort, display, match_major.<blockquote>
+<p>match_major内容特别多，可以考虑用函数对象来做</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">利用函数对象来解决上面的问题</span><br><span class="line">class MatchMajor</span><br><span class="line">&#123;	   Major major;</span><br><span class="line">	public:</span><br><span class="line">	   MatchMajor (Major m)</span><br><span class="line">	   &#123;	major = m;</span><br><span class="line">	   &#125;</span><br><span class="line">	   bool operator ()(Student&amp; st)</span><br><span class="line">	   &#123; return st.get_major() == major;</span><br><span class="line">	   &#125;</span><br><span class="line">&#125;;</span><br><span class="line">count_if(students.begin(),students.end(),</span><br><span class="line">			              MatchMajor(COMPUTER))；</span><br><span class="line">count_if(students.begin(),students.end(),</span><br><span class="line">			              MatchMajor(PHYSICS))；</span><br><span class="line">count_if(students.begin(),students.end(),</span><br><span class="line">			              MatchMajor(XXX))；</span><br><span class="line"></span><br><span class="line">// 扩展</span><br><span class="line"></span><br><span class="line">    bool operator ()(Student&amp; st)</span><br><span class="line">    &#123; return st.get_major() == major &amp;&amp; st.get_sex() == sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">count_if(students.begin(),students.end(),</span><br><span class="line">             MatchMajorAndSex(COMPUTER,FEMALE)) //计算机女生</span><br><span class="line"></span><br><span class="line">// lambda表达式</span><br><span class="line">count_if(students.begin(),students.end(),</span><br><span class="line">        [](Student &amp;st) &#123; return (st.get_major() == COMPUTER)</span><br><span class="line">			     &amp;&amp; (st.get_sex() == FEMALE); &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//统计出生地为&quot;南京籍计算机专业&quot;的学生人数</span><br><span class="line">cout &lt;&lt; &quot;出生地为\&quot;南京\&quot;的学生人数是：&quot; </span><br><span class="line">      &lt;&lt; count_if(students.begin(),students.end(),</span><br><span class="line">  [](Student &amp;st) &#123; return (st.get_major() == COMPUTER) </span><br><span class="line">          &amp;&amp; (st.get_birth_place().find(&quot;南京&quot;)!= string::npos);&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这里的思想很妙，但对象作为函数传递时，默认调用的就是A()，无参数的，所以此时就显示出了重载()运算符的好处</p>
+<blockquote>
+<p>当实体完全是为了存储数据使用的时候，此时就演化为了数据库这门课程</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture3-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-cplus-lecture3-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture3-summary</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:50:15 / 修改时间：09:51:02" itemprop="dateCreated datePublished" datetime="2019-09-19T09:50:15+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h2><p>首先，不能考虑传统方法，即add，为什么？因为从某种意义上来讲极其不实用。</p>
+<p>所以考虑重载操作符, 下列不能重载<br>.  标志作用域的<br>sizeof() 计算内存空间的<br>?:  双判断的<br>:: 类的标志符</p>
+<h3 id="一般地"><a href="#一般地" class="headerlink" title="一般地"></a>一般地</h3><blockquote>
+<p>全局友元函数和成员函数两种方式。<br>对比来说，也就是成员函数，默认前面有类., 这其实是作为函数的默认参数this的，即const Complex&amp;</p>
+</blockquote>
+<p>那么就有一下几种操作符重载的例子，这里就只给出成员函数类型的<br>返回值、参数</p>
+<ul>
+<li>双目<br>Complex opreator # (const Complex &amp;c)</li>
+<li>单目<br>Complex opreator *();</li>
+</ul>
+<p>++i;<br>Complex &amp;opreator ++();</p>
+<blockquote>
+<p>前置++,返回运算后的结果。<br>i++;<br>Complex opreator ++(int);//注意这里直接是int，没有变量名，只是为了区分。<br>后置++，返回当前，实际+1；</p>
+</blockquote>
+<hr>
+<p>特别说明，<br>返回值的确定，当需要返回的是一个值得改变的值是用这个。<br>参数的确定</p>
+<hr>
+<h3 id="特殊地"><a href="#特殊地" class="headerlink" title="特殊地"></a>特殊地</h3><p>=</p>
+<blockquote>
+<p>区分两种不同的含义，初始化时调用拷贝构造函数；赋值时重载函数、<br>都要注意默认的指针直接复制的问题</p>
+</blockquote>
+<p>[]</p>
+<blockquote>
+<p>很简单，类似于单目运算</p>
+</blockquote>
+<p>new</p>
+<blockquote>
+<p>分配空间+调用构造函数<br>只能用静态成员来书写，static可以不用写<br>void *operator new(size_t size) {<br>    void *p=malloc(size); // 调用系统堆空间分配操作<br>    memset(p,0,size); //把系统申请到的堆空间初始化为全0<br>    return p;<br>}<br>返回类型必须为void *<br>参数size表示对象所需空间的大小，其类型为size_t（unsigned int）<br>可以选择带其他参数，此时就可以在非堆区分配空间<br>p = new (buf局部变量) A(size);</p>
+</blockquote>
+<p>delete</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>从某种意义上说，new和delete可以提高效率。因为delete归还不是归还到堆区，而是归还原本new申请的空间. 进行空间管理</p>
+</blockquote>
+<p>()</p>
+<blockquote>
+<p>int opreator() (int x){return x+value;}  A a(3); cout&lt;&lt;a(10);<br>此时()将类对象作为了函数。有冒险用啊？<br>比如新建一个随机数对象，初始化种子后random(1)，后面每需要一个随机数random()直接产生，很快！<br>?, 这里跟函数对象有什么关系？这里是把类对象通过重载()作为函数使用</p>
+</blockquote>
+<p>而函数对象，就是lambda表达式搞的是一大堆符号，然后后面跟一些参数。而也可以直接把它作为参数传递。</p>
+<p>// 功能：求上下限为a,b的积分，步长假设为0.01<br>// 函数定义<br>double integrate(double (*f)(double),double a,double b){<br>    double sum=0;<br>    for(double i=a; i&lt;=b; i+=0.01){<br>        sum+=f(i);<br>    }<br>    return sum;<br>}</p>
+<p>// 使用：这里传入的函数对象是lambda表达式<br>integrate([](double x)-&gt;double { return x*x; },0,1);</p>
+<blockquote>
+<p>想想这真的可以做很多东西。</p>
+</blockquote>
+<p>-&gt;<br>双目，第一个为指向类或结构的指针，第二个为第一个的成员</p>
+<blockquote>
+<p>例子：获取在程序执行的某个时刻获得某个对象被访问的次数<br>注意，凡是成员对象，还有成员函数被访问都算，即暴露给外界可访问的东西。<br>对于成员函数很容易想到可以每个里面加上cout++;但是对于数据成员不好操作。<br>此时即智能指针<br>想法即是在A类外部在套了个B类，B将A作为了成员，当接到访问时， B-&gt;()-&gt;f(), 第二个才访问到A的内容， B-&gt;()。 为了完全模拟还要重载其他操作符，如*,[],… 太麻烦了！！<br>对于歧义问题即+这种操作符，一般地会进行隐式转化，但当有一方为类就很难，显式解决。</p>
+</blockquote>
+<ul>
+<li>lambda表达式</li>
+</ul>
+<blockquote>
+<p>C++11给你规定了一堆东西，你可以拿去玩。其实也就是lambda函数那一章，其实后面还可以再加lambda表达式。最后再传递参数。</p>
+</blockquote>
+<p>所以就允许你用函数作为参数，其实这就很容易了。突然想起了scala.<br>而且lambda表达式还允许你加入局部变量之类的东西。</p>
+<ul>
+<li>继承</li>
+</ul>
+<p>提出就是为了最大程度的软件复用。<br>日常有多种行为，就是很小的改动的那种。<br>比如事务按层次来分类，对概念进行组合，软件进行增量开发等等</p>
+<p>访问控制：自己，公开，继承。</p>
+<p>继承破坏了封装性。<br>耦合性是事务之间的关联程度。</p>
+<p>继承方式，过滤器</p>
+<p>多态性：<br>子类又是父类；从某种意义上说，很强大。父类指针就可以随便用。</p>
+<p>但又带来了问题了，可以随便用。但是肯定会指向自己，所以引进虚函数。允许指向未来更好的实现。</p>
+<blockquote>
+<p>高层代码完全不用修改。相比用union实现的。<br>于是有了纯虚函数，这就形成了真正意义上的抽象。</p>
+</blockquote>
+<p>然后，还有聚集的方式。</p>
+<p>总结：C++很好地用类进行数据的封装，保证了元素的私密性。<br>然后为了给外界提供一定的界限。<br>将数据的访问方式进行了分类。<br>对于获取信息的，外界全局函数就可以采用。const关键字很妙！<br>还有设置信息。</p>
+<p>类作为类型。将不变的抽象给static元素。</p>
+<p>然后，多态性。函数名，参数名。 再加上运算符号。</p>
+<p>一对一并不完全符合世界的表述所以增加了多继承的方式。</p>
+<p>然后再对类型的统一，最终就变为了泛型设计。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-cplus-lecture3/" class="post-title-link" itemprop="url">nju-course-cplus-lecture3</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:49:11 / 修改时间：09:49:54" itemprop="dateCreated datePublished" datetime="2019-09-19T09:49:11+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="本节课重点"><a href="#本节课重点" class="headerlink" title="本节课重点"></a>本节课重点</h1><h2 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h2><p>比如对于复数来说，怎么实现加法？</p>
+<ul>
+<li>成员函数add</li>
+<li>全局函数</li>
+</ul>
+<p>不符合数学上的习惯</p>
+<p>不可以重载的符号：“. ”， “.* ”，“?: ”，“:: ”，“sizeof ”</p>
+<p>原则：不改变操作数个数，不改变原操作符的优先级和结合性。</p>
+<p>双目操作符重载：<br>&lt;返回值类型&gt; operator # (&lt;类型&gt;); //#代表可重载的操作符<br>friend Complex operator + (const Complex&amp; c1,<br>                                const Complex&amp; c2);</p>
+<p>单目操作符重载：<br>&lt;返回值类型&gt; operator # ();<br>friend bool operator !(const Complex &amp;c);</p>
+<p>Counter&amp; operator ++()  //前置的++重载函数<br>        {    value++;<br>            return *this;<br>        }</p>
+<pre><code>const Counter operator ++(int)  //后置的++重载函数
+    {    Counter temp=*this; //保存原来的对象
+        value++; //写成：++(*this);更好！调用前置的++重载函数
+        return temp; //返回原来的对象
+    }</code></pre><ul>
+<li>=重载<br>隐私的赋值操作符重载函数：组个成员进行赋值操作</li>
+<li>对于普通成员进行常规的赋值操作。</li>
+<li>对于成员对象，则调用该成员对象类的赋值操作符重载函数进行赋值操作</li>
+<li>对于基类成员，则调用基类的赋值操作符函数进行赋值操作。</li>
+</ul>
+<p>特别注意地是，等号的情况是特别容易出错的情况。因为这里对指针的操作就是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">	int a;</span><br><span class="line">	int b;</span><br><span class="line">	int *p;</span><br><span class="line">public:</span><br><span class="line">	A()&#123;&#125;; 构造函数</span><br><span class="line">	A(const A&amp;a); //拷贝构造函数</span><br><span class="line">	~A();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">A m,n;</span><br><span class="line">m=n;  // 实际上的操作就是 m.a=n.a, m.b=n.b, m.p=n.p. 最后一个就有问题了</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>记住的就是拷贝构造函数和构造函数就是一样的，这里，不过参数不一样。拷贝构造函数参数是本身。<br>赋值运算和</p>
+</blockquote>
+<p>A&amp; operator = (const A&amp; a)<br>{    if (&amp;a == this) return *this;  //防止自身赋值。<br>    delete []p;<br>    p = new char[strlen(a.p)+1];  //注意这里指针的赋值，首先删除原有的，然后，根据长度重新找，再赋值<br>    strcpy(p,a.p);<br>   x = a.x; y = a.y;<br>    return *this;<br>}</p>
+<ul>
+<li>[]重载<br>int &amp;operator[](int i) //访问向量第i个元素。<pre><code>{    return p_data[i];
+}</code></pre></li>
+</ul>
+<p>略去new, delete, ()， -&gt;的重载</p>
+<ul>
+<li>作业： 独立完成字符串的一系列动作。</li>
+</ul>
+<h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><p>求定积分的函数：试图把函数作为参数。<br>C++11<br>double integrate(double (*f)(double),double a,double b);</p>
+<p>integrate([](double x)-&gt;double { return x*x; },0,1);</p>
+<ul>
+<li>常用格式<br>[&lt;环境变量使用说明&gt;]&lt;形式参数&gt;&lt;返回值类型指定&gt;&lt;函数体&gt;</li>
+</ul>
+<p>&lt;环境变量使用说明&gt;：指出函数体中对外层作用域中的自动变量的使用限制：<br>空：不能使用外层作用域中的自动变量。<br>&amp;：按引用方式使用外层作用域中的自动变量（可以改变这些变量的值）。<br>=：按值方式使用使用外层作用域中的自动变量（不能改变这些变量的值）。<br>&amp;和=可以用来统一指定对外层作用域中自动变量的使用方式，也可以用来单独指定可使用的外层自动变量（变量名前可以加&amp;，默认为=）。</p>
+<blockquote>
+<p>理解：将lambda表达式看作是函数对象来实现<br>怎么用啊？需要找个例子</p>
+</blockquote>
+<ul>
+<li>作用于实参<br>cout &lt;&lt; [](int x)-&gt;int { return x*x; }(3);</li>
+<li>传给其它函数<br>f([](int x)-&gt;int { return x*x; }); // 这里依然不是很明朗，需要式子</li>
+</ul>
+<h2 id="继承-派生类"><a href="#继承-派生类" class="headerlink" title="继承-派生类"></a>继承-派生类</h2><p>对事物按层次来分类，对概念进行组合，支持软件的增量开发。</p>
+<p>继承的目的进行软件复用。<br>如何扩展？<br>1、修改源代码。<br>2、继承。对一个面向对象的程序，在定义一个新的类时，把已有程序的一个或多个类的功能全部包含进来，然后再给出新功能的定义，或者重新定义。目标代码复用<br>派生类拥有除构造函数和赋值操作符重载函数外的所有成员<br>友元不能通过集成传递给派生类。<br>私有成员不能传递。<br>public-外界，即对象，实例， protected-面向继承</p>
+<blockquote>
+<p>继承和封装的矛盾</p>
+</blockquote>
+<blockquote>
+<p>protected的使用，用于今后不太可能发生变动的、有可能被派生类使用的、不适合对实例用户公开的成员声明</p>
+</blockquote>
+<blockquote>
+<p>有个问题，既然private不能直接访问，那么复制过来又有什么用？按说明是需要复制过来<br>而且还占空间</p>
+</blockquote>
+<blockquote>
+<p>如何是同名函数，则访问基类同名成员时要用基类名受限A::f()。但也可使用using A::f;声明后直接使用</p>
+</blockquote>
+<blockquote>
+<p>派生类的作用域大于基类的作用域</p>
+</blockquote>
+<blockquote>
+<p>protected, 内部和子类，以及子类。而且是兼容的状态</p>
+</blockquote>
+<blockquote>
+<p>父对象、子对象，对于包含的状态，可以允许</p>
+</blockquote>
+<blockquote>
+<p>派生类对象，先初始化子对象<br>拷贝构造函数和赋值都是采用默认的形式</p>
+</blockquote>
+<p>实例：一个公司中的职员和部门经理类的设计</p>
+<ul>
+<li>分析<br>职员  工号、名字<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h2><p>具有public继承关系的两个类，在C++中存在下面的多态：</p>
+<ul>
+<li>派生类对象的类型既可以是派生类，也可以是基类</li>
+<li>基类的指针可以指向派生类或基类<blockquote>
+<p>其实就是一个意思。</p>
+</blockquote>
+</li>
+<li>一个可以发送到基类对象的消息，也可以发送到派生类对象，怎么做到？缺例子？</li>
+</ul>
+<p>由上面的知识可以带来消息的绑定问题。</p>
+<blockquote>
+<p>向基类的指针或引用所指向或引用的对象发送消息。</p>
+</blockquote>
+<blockquote>
+<p>问题：只要显式在参数中写定了基类还是父类，发现实际。</p>
+</blockquote>
+<ul>
+<li>虚函数<br>virtual void f(){<br>}</li>
+</ul>
+<ol>
+<li>实现消息的动态绑定</li>
+<li>指出基类中可以被派生类重定义的成员函数</li>
+</ol>
+<p>构造函数不能是虚函数，析构函数可以是虚函数。只要在基类中说明了虚函数，在派生类、派生类的派生类，同型购的成员函数都是虚函数</p>
+<blockquote>
+<p>意思是基类中将某个函数设置为虚函数，那么不管它继承到哪个位置，它将会一直是虚函数。 </p>
+</blockquote>
+<p>只有通过基类的指针或引用访问基类的虚函数时才进行动态绑定。</p>
+<blockquote>
+<p>当基类设置为纯虚函数后，之后的凡是基类指针，因为自身的函数设置为了虚函数。所以，它直接就指向了派生类的对象。</p>
+</blockquote>
+<p>何时需要定义虚函数？</p>
+<blockquote>
+<p>基类设计的不好，希望使用派生类。<br>在基类中根本无法给出实现，子类往往会对应于不同的情况<br>（纯虚函数）</p>
+</blockquote>
+<ul>
+<li>纯虚函数<br>virtual int f()=0;<br>包含纯虚函数的类叫做抽象类，不能用于创建对象。<br>从某种意义上感觉像是接口的感觉。</li>
+</ul>
+<p>一般地，会把所有的函数都设置为纯虚函数，即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Figure &#123;</span><br><span class="line">	public: </span><br><span class="line">		virtual void draw() const=0;  // 这里const是做何用的， 是注重返回值是定值吗？</span><br><span class="line">		&gt; 等下好像前面加了const, 是就限制了不能改变元素。所以，外部的全局函数就可以直接使用</span><br><span class="line">		virtual void input_data()=0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一般的应用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">- 图形的输入</span><br><span class="line">for (count=0; count&lt;MAX_NUM_OF_FIGURES;	count++)</span><br><span class="line">&#123;	int shape;</span><br><span class="line">	do</span><br><span class="line">	&#123;	cout &lt;&lt; &quot;请输入图形的种类(0：线段，1：矩形，2：圆，-1：结束)：&quot;;</span><br><span class="line">		cin &gt;&gt; shape;</span><br><span class="line">	&#125; while (shape &lt; -1 || shape &gt; 2);</span><br><span class="line">	if (shape == -1) break;</span><br><span class="line">	switch (shape)</span><br><span class="line">	&#123;	case 0: //线</span><br><span class="line">			figures[count] = new Line;	break;</span><br><span class="line">		case 1: //矩形</span><br><span class="line">			figures[count] = new Rectangle; break;</span><br><span class="line">		case 2: //圆</span><br><span class="line">			figures[count] = new Circle; break;</span><br><span class="line"> 	&#125;</span><br><span class="line">	figures[count]-&gt;input_data(); //动态绑定到相应类的input_data</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- 图形的输出</span><br><span class="line">for (int i=0; i&lt;count; i++)	</span><br><span class="line">	figures[i]-&gt;draw();</span><br></pre></td></tr></table></figure>
+
+<p>此时可以看出，代码完全不需要改动。只需要将类的实现进行改变而已，很好地提高了效率。</p>
+<p>考虑一种低效的实现方式，即使用union来做，可以发现，当增加新的图形种类是，需要修改下述代码，增加分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">图形数据的输入：</span><br><span class="line">	int count;</span><br><span class="line">	for (count=0; count&lt;MAX_NUM_OF_FIGURES; count++)</span><br><span class="line">	&#123;	int shape;</span><br><span class="line">		do</span><br><span class="line">		&#123;	cout &lt;&lt; &quot;请输入图形的种类(0:线段,1:矩形,2:圆,-1:结束):&quot;;</span><br><span class="line">			cin &gt;&gt; shape;</span><br><span class="line">		&#125; while (shape &lt; -1 || shape &gt; 2);</span><br><span class="line">		if (shape == -1) break;</span><br><span class="line">		figures[count] = new TaggedFigure; //空间利用效率不高！</span><br><span class="line">		switch (shape)</span><br><span class="line">		&#123; 	case 0: //线</span><br><span class="line">				figures[count]-&gt;shape = 0;</span><br><span class="line">				input_data(figures[count]-&gt;figure.line);</span><br><span class="line">  	 			break;</span><br><span class="line">			case 1: //矩形</span><br><span class="line">				figures[count]-&gt;shape = 1;</span><br><span class="line">				input_data(figures[count]-&gt;figure.rect);</span><br><span class="line"> 				break;</span><br><span class="line"> 		  case 2: //圆形</span><br><span class="line">				figures[count]-&gt;shape = 2;</span><br><span class="line">				input_data(figures[count]-&gt;figure.circle);</span><br><span class="line">  	 		break;</span><br><span class="line">	 	&#125; //end of switch</span><br><span class="line">	&#125; //end of for</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">图形的输出：</span><br><span class="line">	for (int i=0; i&lt;count; i++)</span><br><span class="line">	&#123;	switch (figures[i]-&gt;shape)</span><br><span class="line">			&#123; case 0:</span><br><span class="line">						draw(figures[i]-&gt;figure.line);</span><br><span class="line">						break;</span><br><span class="line">				case 1:</span><br><span class="line"> 						draw(figures[i]-&gt;figure.rect);</span><br><span class="line">						break;</span><br><span class="line">				case 2:</span><br><span class="line"> 						draw(figures[i]-&gt;figure.circle);</span><br><span class="line"> 						break;</span><br><span class="line"> 			&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>作业：用抽象类为栈的两个不同实现提供一个公共接口</p>
+</li>
+<li><p>使用抽象类给类提供一个抽象接口</p>
+<blockquote>
+<p>感觉上真的，抽象类实现真正意义上的抽象。</p>
+</blockquote>
+</li>
+</ul>
+<p>class I_A{<br>    public:<br>        virtual void f(int)=0;<br>};</p>
+<p>void func(I_A *p) {<br>    p-&gt;f(2); // 这里不知道p所指向的对象有哪些数据成员，因此无法访问它的数据成员。而且保证了类的封闭性。<br>}</p>
+<blockquote>
+<p>从某种意义上感觉对事件机制有了进一步的理解。<br>所有都由一个父类继承而来。而虚函数所定义的就是信号，就可以看作基类指针，完全不知道到底派生类的谁会接收它。</p>
+</blockquote>
+<p>代码复用的另一种方式——聚集<br>继承实际就是把一个类的代码复制到另一个类中来实现，具有继承关系的两个类之间通常属于一般与特殊的关系。<br>继承不是代码复用的唯一方式，有些代码复用不宜用继承来实现。如：“飞机”类复用“发动机”类。</p>
+<p>具有聚集关系的两个类之间通常属于整体与部分的关系。</p>
+<blockquote>
+<p>访问控制仿佛如同一种过滤器一样；只能过滤到和当前一样的结果。<br>private只对自己使用。<br>protected针对继承元素。</p>
+</blockquote>
+<blockquote>
+<p>之前就一直在想一个问题，可能让你一直继承下去吗？我这个世界可不想你做这些东西？<br>实际社会上还会存在哪些要求呢？</p>
+</blockquote>
+<blockquote>
+<p>实际上来说的话，那么当一个类使用了private继承就是想不要再被其他继承下去。继承下去有毛线用，你又访问不到，所以说啊，你还不如好好使用的，有什么意思，对吧！<br>顶多是你可以.后再加上A::的作用域进行访问。如f()是A的private成员，对于B继承A，访问f()即为<code>b.A::f()</code></p>
+</blockquote>
+<p>继承与封装存在矛盾，聚集则否。<br>继承提供两种接口，而对于聚集，一个类对外只需提供一个接口</p>
+<h3 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h3><p>如何实现？</p>
+<ul>
+<li>采用单继承，概念混乱，导致A和B之间增加了层次关系。易造成不一致。</li>
+<li>聚集，不能实现子类型</li>
+</ul>
+<p>顺序<br>class C: public A, public B{}<br>即按照继承的声明方式。</p>
+<p>对于基类的指针会自动进行地址调整，也就是自动指向对应的存储空间。<br>函数名混淆，采用基类名限制。</p>
+<p>重复继承问题，原本设置不对，应该把重复继承的部分设置为基类。</p>
+<p>一种新的方式：<br>class A{<br>    int x;<br>public:<br>    A(int i){x=i;}<br>}</p>
+<p>class B:virtual public A{  // 注意没？这里出现了虚拟继承的概念<br>    int y;<br>}</p>
+<p>间接包含虚基类的类：</p>
+<p>虚基类的构造函数由该类的构造函数直接调用。（即虚基类的构造函数由最新派生出的类的构造函数调用）<br>虚基类的构造函数优先非基类的构造函数执行。</p>
+<p>虚基类的实现其实比较复杂，并不是没有它了。而是将x移到最后，在原本x的位置存储了一个x的偏移量指针。</p>
+<p>非纯虚基类，就是有自己的实现。但是允许你去用派生类的。因为自己做不好的原因。</p>
+<h3 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h3><ul>
+<li>从上面的过程话说设计模式</li>
+</ul>
+<blockquote>
+<p>那么这个世界的组织形式是什么？<br>分离，谁是谁的什么，还有或者谁组成了谁</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-cplus-lecture2-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-cplus-lecture2-summary/" class="post-title-link" itemprop="url">nju-course-cplus-lecture2-summary</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:47:59 / 修改时间：09:48:56" itemprop="dateCreated datePublished" datetime="2019-09-19T09:47:59+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>重点</p>
+<ol>
+<li>抽象和封装<blockquote>
+<p>抽象是外，封装是里；为什么好？栈举例，直接来，没有函数封装；结构体+函数封装，数据隐私问题，成员仍可被破坏。</p>
+</blockquote>
+</li>
+</ol>
+<p>一个重要的问题：加访问控制 public, private(默认),protected</p>
+<p>面向对象：类型和对象。程序若干个对象。对象之间关系，一是继承，传承特征；对象之间靠接口，公有函数的参数或友元来维持关系。</p>
+<p>设计几大理念：</p>
+<ol>
+<li>抽象，控制住底层的复杂度</li>
+<li>封装，同上，侧重隐藏信息</li>
+<li>模块化，抽象封装是单个，模块化则是对整个而言</li>
+<li>软件复用：可复用的东西变得更多</li>
+<li>可维护性：代码框架灵活</li>
+<li>软件模型的自然度：能对应于问题空间</li>
+</ol>
+<p>面向过程：过程即功能，特定功能集合，没有对象的概念。所有的东西会乱成一团。复用性差，太特殊</p>
+<ol start="2">
+<li>面向过程</li>
+</ol>
+<p>类型 对象（动态）</p>
+<p>系统向一个对象通信(即只调用一个对象的接口).然后不定地解决问题。</p>
+<blockquote>
+<p>不过是类的问题。</p>
+</blockquote>
+<ol start="3">
+<li>特性：多态</li>
+</ol>
+<p>函数名，类型。</p>
+<p>父类对象继承子类:<br>子类可以有两个选择<br>父类指针可以有两个指向<br>消息可以有多种发送选择</p>
+<p>访问控制的建议<br>内部的东西private, 比如类的数据成员，类内部使用的成员函数。</p>
+<p>调用未定义的类，指针+引用</p>
+<p>对象，动态和静态、全局和局部。</p>
+<ol start="4">
+<li>使用对象</li>
+</ol>
+<ul>
+<li><p>赋值</p>
+</li>
+<li><p>参数 const A &amp;</p>
+</li>
+<li><p>返回值</p>
+</li>
+<li><p>this</p>
+</li>
+<li><p>对象初始化，常量和引用一般不让初始化</p>
+</li>
+<li><p>构造函数和析构函数对应。</p>
+</li>
+<li><p>成员对象，拷贝构造函数</p>
+</li>
+<li><p>静态成员对象</p>
+</li>
+<li><p>f(const Data&amp; d){}, 然后 类的对象就分为两种：获取对象状态 const,外界元素均可访问，也要通过类的对象来操作，不够对应2那种参数可以进行使用；改变对象状态，需要类的对象来进行操作。</p>
+<blockquote>
+<p>换言之，是为常量对象而准备的</p>
+</blockquote>
+</li>
+<li><p>友元，不具有对称性和传递性，可以是类，全局函数或者类的成员函数（都行）。</p>
+<blockquote>
+<p>具体时间差没测试。效率上会消失多少？</p>
+</blockquote>
+</li>
+<li><p>类作为单独的模块，降低耦合。成员函数只向有限个元素发送。</p>
+</li>
+<li><p>作业：用类来实现矩阵和向量类型<br>矩阵：数据、行数、列数。<br>外界的获取接口：</p>
+</li>
+<li><p>获得行数和列数，int&amp; element(int x, int y), 这样是否可以通过地址来修改元素的值呢？<br><code>m.element(1,2) = m.element(1,2) + 1</code>, 不过说到底也是对的啊，进行的是值替代, 而这也是符合引用的定义的啊。</p>
+</li>
+<li><p>操作函数，对元素进行操作</p>
+</li>
+<li><p>构造函数: 对元素和空间进行检查。</p>
+</li>
+</ul>
+<blockquote>
+<p>注意：凡是函数，一定要记得对函数的输入数据进行检查和核对。</p>
+</blockquote>
+<p>向量：数据、维数。</p>
+<ul>
+<li>附录：补充<blockquote>
+<p>cout与cerr: 几次都遇到这种情况，不过我想今天应该明了。cout是控制台输出，当遇到endl，就不再缓冲，直接把数据输出。<br>cerr在命令行下，<br>linux下命令行截取的是cerr, 1&gt;&gt;log输出的是控制台，2&gt;&gt;输出的是错误信息 </p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>缓冲，刷新的概念，集中输出，防止刷屏。可以看到缓冲好的数据，生活中有很多这样的例子。比如，电视机显式，等一段画面到来时再显示图像。<br>注意指针和实体数组，对于指针单位长度和数组元素一样。然后，new开辟的空间只能用指针来做。</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -1542,653 +2681,11 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-np/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-course-np/" class="post-title-link" itemprop="url">algorithm course np</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:21:39 / 修改时间：09:22:25" itemprop="dateCreated datePublished" datetime="2019-09-19T09:21:39+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="NP"><a href="#NP" class="headerlink" title="NP"></a>NP</h2><blockquote>
-<p>这里思考一个问题</p>
-<ol>
-<li><p>A多项式时间可规约到B；</p>
-</li>
-<li><p>B多项式时间可规约到C</p>
-</li>
-</ol>
-<p>问A是否可以多项式时间规约到C？</p>
-<p>问题关键在于：b=f(a),  c=g(b);  多项式的复合是否还满足要求？ </p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-selecting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-course-selecting/" class="post-title-link" itemprop="url">algorithm course selecting</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:18:24 / 修改时间：09:19:11" itemprop="dateCreated datePublished" datetime="2019-09-19T09:18:24+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Selecting"><a href="#Selecting" class="headerlink" title="Selecting"></a>Selecting</h2><blockquote>
-<p>Selecting的目标是选择出阶为k的元素，即第k小的元素，注意此时寻找的应该是函数值</p>
-</blockquote>
-<blockquote>
-<p>因为是基于比较的选择，即使是选择max,min都需要(n-1)次的比较，所以下界必然是O(n).</p>
-<p>随着k的增加，很多时候很有可能到达O(n^2)</p>
-<p>所以目标是期望线性时间选择，以及最坏情况线性时间选择</p>
-</blockquote>
-<h3 id="期望线性时间选择"><a href="#期望线性时间选择" class="headerlink" title="期望线性时间选择"></a>期望线性时间选择</h3><blockquote>
-<p>!!!! 这里用到的是快速排序中的partition概念，这很符号第k小元素本身的性质。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">思想： Partition算法是采用使用第一个元素或者其他元素的方式，得到每个划分值。</span><br><span class="line"></span><br><span class="line">search(A,l,r,k)步骤：</span><br><span class="line">0. 如果l==r, 返回</span><br><span class="line">1. 使用Partition算法得到q, x=q-l+1</span><br><span class="line">2. 如果k大于x，则search(A,q+1,r,k-x+1)；如果k等于x，return A[q]; 如果k小于x， 则search(A,l,q-1,k);</span><br><span class="line"></span><br><span class="line">search(A,l,r,k)&#123;</span><br><span class="line">	if (l==r) return A[l];</span><br><span class="line">	</span><br><span class="line">	q = Partition(A,l,r);</span><br><span class="line">	x = q - l + 1;</span><br><span class="line">	</span><br><span class="line">	if(k == x) return A[q];</span><br><span class="line">	if(k &gt; x)</span><br><span class="line">		search(A,q+1,r,k-x+1)</span><br><span class="line">	if(k &lt; x)</span><br><span class="line">		search(A,l,q-1,k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="最坏情况线性选择"><a href="#最坏情况线性选择" class="headerlink" title="最坏情况线性选择"></a>最坏情况线性选择</h3><blockquote>
-<p>这里的改进点主要在于是q尽量在中位数附近。</p>
-<p>使用我们之前所学到的哪些知识。</p>
-</blockquote>
-<p>最坏情况线性选择</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">m* = select_median(A, l, r)</span><br><span class="line"></span><br><span class="line">select_median(A, l, r)&#123;</span><br><span class="line">	n = l - r;</span><br><span class="line">	if(n&lt;=5) solve_median(A,l,r);</span><br><span class="line">	else &#123;</span><br><span class="line">		cnt = floor(n/5);</span><br><span class="line">		int[] B=new int[cnt+1];</span><br><span class="line">		for i in &#123;1,..,cnt+1&#125;:</span><br><span class="line">			if i == cnt+1: </span><br><span class="line">				B[i-1]=select_median(A, l+5cnt, r)</span><br><span class="line">			else</span><br><span class="line">				B[i-1]=select_median(A, l+5(i-1), l+5i);</span><br><span class="line">		return select_median(B);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-searching/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-course-searching/" class="post-title-link" itemprop="url">algorithm course searching</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:17:17 / 修改时间：09:19:20" itemprop="dateCreated datePublished" datetime="2019-09-19T09:17:17+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Searching"><a href="#Searching" class="headerlink" title="Searching"></a>Searching</h2><h3 id="BF"><a href="#BF" class="headerlink" title="BF"></a>BF</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">search(v)&#123;</span><br><span class="line"></span><br><span class="line">	for a in array:</span><br><span class="line">		if a.value = v:</span><br><span class="line">			return true;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="BST"><a href="#BST" class="headerlink" title="BST"></a>BST</h3><blockquote>
-<p>这里研究的关键问题是searching，设为key-value对，那么目标是查找value，一般来说目的是查找该value是否存在，或者更进一步返回位置。</p>
-</blockquote>
-<blockquote>
-<p>由前面分析知，对于searching问题</p>
-<ol>
-<li>组织为原本的形式，BF O(n)</li>
-<li>组织为hash的形式，O(1)</li>
-<li>组织为树的结构，O([logn])</li>
-</ol>
-<p>我们知道，搜索的长度实际上与搜索的树的高度密切相关，所以我们希望寻找平衡的树。</p>
-</blockquote>
-<blockquote>
-<p>本身有多种平衡树的结构，我们这里RBT</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">递归定义，由递归定义无论如何是很容易地去写出原本的结构的。</span><br><span class="line"></span><br><span class="line">RB0</span><br><span class="line"></span><br><span class="line">RB: black (RB/ARB, RB/ARB)</span><br><span class="line"></span><br><span class="line">ARB: red (RB, RB)</span><br><span class="line"></span><br><span class="line">insert()</span><br><span class="line">delete()</span><br><span class="line"></span><br><span class="line">class RBTree</span><br><span class="line">	Element root;</span><br><span class="line">	RBtree leftSubtree；</span><br><span class="line">	RBtree rightSubtree;</span><br><span class="line">	int color; // red,black</span><br><span class="line">	</span><br><span class="line">	static class InsReturn</span><br><span class="line">		public RBtree newTree;</span><br><span class="line">		public int status; //ok,rbr,brb,rrb,brr</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h4 id="Insertion"><a href="#Insertion" class="headerlink" title="Insertion"></a>Insertion</h4><h3 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h3><blockquote>
-<p>这里在Insert使用均摊分析， 即ArrayDouble</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Insert</span><br><span class="line">Delete //? 删除是否需要收缩</span><br><span class="line">Find</span><br><span class="line"></span><br><span class="line">hashingInsert(H, x)&#123;</span><br><span class="line">	size = num = 0;</span><br><span class="line">	if size = 0:</span><br><span class="line">		allocate a block of size 1:</span><br><span class="line">		size = 1;</span><br><span class="line">	if num = size:</span><br><span class="line">		allocate a block of size 2size:</span><br><span class="line">		size = 2size;</span><br><span class="line">	insert x into the table;</span><br><span class="line">	num ++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-red-blackTree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-course-red-blackTree/" class="post-title-link" itemprop="url">algorithm course red-blackTree</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:16:22 / 修改时间：09:19:25" itemprop="dateCreated datePublished" datetime="2019-09-19T09:16:22+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="BST"><a href="#BST" class="headerlink" title="BST"></a>BST</h2><blockquote>
-<p>这里研究的关键问题是searching，设为key-value对，那么目标是查找value，一般来说目的是查找该value是否存在，或者更进一步返回位置。</p>
-</blockquote>
-<blockquote>
-<p>由前面分析知，对于searching问题</p>
-<ol>
-<li>组织为原本的形式，BF O(n)</li>
-<li>组织为hash的形式，O(1)</li>
-<li>组织为树的结构，O([logn])</li>
-</ol>
-<p>我们知道，搜索的长度实际上与搜索的树的高度密切相关，所以我们希望寻找平衡的树。</p>
-</blockquote>
-<blockquote>
-<p>本身有多种平衡树的结构，我们这里RBT</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">递归定义，由递归定义无论如何是很容易地去写出原本的结构的。</span><br><span class="line"></span><br><span class="line">RB0</span><br><span class="line"></span><br><span class="line">RB: black (RB/ARB, RB/ARB)</span><br><span class="line"></span><br><span class="line">ARB: red (RB, RB)</span><br><span class="line"></span><br><span class="line">insert()</span><br><span class="line">delete()</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-BruteForce/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-course-BruteForce/" class="post-title-link" itemprop="url">algorithm course BruteForce</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 09:04:00 / 修改时间：09:19:39" itemprop="dateCreated datePublished" datetime="2019-09-19T09:04:00+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-1-数学归纳法溯源与公理化思维"><a href="#1-1-数学归纳法溯源与公理化思维" class="headerlink" title="1.1 数学归纳法溯源与公理化思维"></a>1.1 数学归纳法溯源与公理化思维</h2><blockquote>
-<p>首先我们需要考虑到自然数的定义到底是什么。</p>
-<p>一般地，定义$\empty $为0，注意这里参考了维基百科</p>
-</blockquote>
-<ol>
-<li><p>well-ordering principle</p>
-<blockquote>
-<p>任何非空的自然数集合必然有最小元素，既是最基本的原则。</p>
-</blockquote>
-</li>
-<li><p>只有一种数学归纳法</p>
-<blockquote>
-<p>基于良序定理，考虑一组关于自然数的命题P(n). 如果P(n)不是关于所有的自然数都成立，那么必然有P(n)存在最小反例。</p>
-<p>如果P(n)不对所有命题都成立，则</p>
-<p>$$\exist a \geq 2, P(1) \and P(2) \and … \and \neg P(a) = True$$</p>
-<p>否命题， P(n)对所有命题都成立</p>
-<p>$$\exist a \geq 2, P(1) \and P(2) \and … \and \neg P(a) = FALSE$$</p>
-<p>逆否命题</p>
-<p>$$\exist a \geq 2, P(1) \and P(2) \and … \and P(a-1) \rightarrow P(a) =True$$</p>
-</blockquote>
-</li>
-<li><p>一个错误的数学归纳法证明</p>
-</li>
-<li><p>算法正确性证明实例</p>
-</li>
-</ol>
-<h2 id="1-2-极限、实数与-epsilon-N"><a href="#1-2-极限、实数与-epsilon-N" class="headerlink" title="1.2 极限、实数与$\epsilon -N $"></a>1.2 极限、实数与$\epsilon -N $</h2><p>$\mathbb{N} \Rightarrow \mathbb{Z}$:   减法不封闭</p>
-<p>$\mathbb{Z} \Rightarrow \mathbb{Q}$:   除法不封闭</p>
-<p>$\mathbb{Q} \Rightarrow R$:   无限，无穷概念的引入</p>
-<p>$\mathbb{R} \Rightarrow \mathbb{C}$:  引入复数域，由于是否存在根的原因 </p>
-<h2 id="1-3-从算法角度重新审视数学的概念"><a href="#1-3-从算法角度重新审视数学的概念" class="headerlink" title="1.3 从算法角度重新审视数学的概念"></a>1.3 从算法角度重新审视数学的概念</h2><h4 id="1-一些基本概念"><a href="#1-一些基本概念" class="headerlink" title="1. 一些基本概念"></a>1. 一些基本概念</h4><ul>
-<li><p>自变量， 通常是自然数</p>
-</li>
-<li><p>单调性？</p>
-</li>
-<li><p>取整 $\lceil x \rceil , \lfloor x \rfloor$, 问题的量往往是自然数级别的</p>
-</li>
-<li><p>对数$\log{n}$</p>
-<blockquote>
-<p>与之相关的现象：</p>
-<ol>
-<li><p>折半，当问题划分规模为n的问题，经过折半查找，大概$\log{n}$次循环问题的规模降为常数。</p>
-</li>
-<li><p>完美二叉树，对于一个n个节点的完美二叉树，他的高度为$\lfloor \log{n} \rfloor$.</p>
-<blockquote>
-<ul>
-<li><p>完美二叉树的概念</p>
-<p>所有外部节点的深度都相同</p>
-</li>
-</ul>
-</blockquote>
-</li>
-<li><p>二进制数的比特数。一个十进制的自然数的二进制表示所需的比特数为$\lfloor \log{n} \rfloor + 1$.</p>
-<blockquote>
-<p>从数值的角度，二进制数每向右移动一位，比特数减1，数值变为原来的$\frac{1}{2}$</p>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-</li>
-<li><p>阶乘</p>
-<blockquote>
-<p>对于n个完全不同的数，其全排列的个数为$n!$.</p>
-<p>如果阶乘是连乘形式，通常对它取对数变成求和形式。</p>
-<p>这里有个Stirling公式，因为平时用的不多，这里就不补充了</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="2-常用级数求和"><a href="#2-常用级数求和" class="headerlink" title="2. 常用级数求和"></a>2. 常用级数求和</h3><p>求和与算法分析往往关系非常密切。</p>
-<ul>
-<li><p>多项式级数</p>
-<ol>
-<li>$\sum_{i=1}^n {i} = \frac {n(n+1)}{2}$</li>
-<li>$\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}$</li>
-<li>$\sum_{i=1}^n i^k = \Theta (\frac{1}{k+1} n^{k+1})$</li>
-</ol>
-</li>
-<li><p>几何级数，等比数列，只考虑最大的那项即可</p>
-</li>
-<li><p>算术几何级数</p>
-<blockquote>
-<p>$\sum_{i=1}^k i *2^i = (k-1) 2^{k+1} + 2$</p>
-</blockquote>
-</li>
-<li><p>调和级数</p>
-<blockquote>
-<p>$\sum_{i=1}^k \frac{1}{i} = \ln k + \Upsilon + \epsilon$</p>
-</blockquote>
-</li>
-<li><p>斐波拉数列</p>
-</li>
-</ul>
-<h3 id="3-期望值，-指标随机变量，期望的线性特征"><a href="#3-期望值，-指标随机变量，期望的线性特征" class="headerlink" title="3. 期望值， 指标随机变量，期望的线性特征"></a>3. 期望值， 指标随机变量，期望的线性特征</h3><h3 id="4-蛮力算法"><a href="#4-蛮力算法" class="headerlink" title="4.  蛮力算法"></a>4.  <font color="red">蛮力算法</font></h3><ol>
-<li><p>微博名人问题: 寻找图中所有人都关注，但是不关注别人的人。</p>
-<blockquote>
-<p>BF1: 对每个人是否是名人进行判断，时间复杂度为$O(n^2)$</p>
-<p>BF2: 对每一对关系进行思考，根据一对关系，进行将名人进行筛选</p>
-<p>本质：集合中的二元关系，所以有算法下界O(n^2) ??</p>
-</blockquote>
-</li>
-<li><p>频繁项问题特例(出现次数超过一半)的线性时间解</p>
-<blockquote>
-<p>注意这里实际利用了$f \geq n/2$ 这件事，扩展思考 <strong>$f \geq n/k$</strong></p>
-</blockquote>
-</li>
-<li><p>候选：交换左右部分，最大和连续子串问题，Maxima问题的非分治解</p>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2236,7 +2733,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">104</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

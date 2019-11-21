@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">99</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">104</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,1176 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/daily-cplus-thinking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/daily-cplus-thinking/" class="post-title-link" itemprop="url">daily cplus thinking</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 13:13:45 / 修改时间：13:14:31" itemprop="dateCreated datePublished" datetime="2019-09-19T13:13:45+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/daily/" itemprop="url" rel="index"><span itemprop="name">daily</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/daily/thinking/" itemprop="url" rel="index"><span itemprop="name">thinking</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="C-多文件组织"><a href="#C-多文件组织" class="headerlink" title="C++ 多文件组织"></a>C++ 多文件组织</h2><h3 id="1-问题"><a href="#1-问题" class="headerlink" title="1. 问题"></a>1. 问题</h3><p>之前大学学习的时候也是这个问题一直在困扰自己没有得到解决。<br>主要想思考着将计算机系统基础所学知识联系起来思考。<br>首先，两个问题：</p>
+<ol>
+<li>多个cpp中调用同一个.cpp, 或者重复调用一个.h, 或者变量重复怎么办</li>
+<li>头文件中有那个#ifdef定义的怎么用</li>
+</ol>
+<blockquote>
+<p>现在已经知道的就是c++在编译的过程中是先将cpp文件进行编译（有时间再复习计算机基础的知识，结合起来进行思考）。</p>
+</blockquote>
+<h3 id="2-想法"><a href="#2-想法" class="headerlink" title="2. 想法"></a>2. 想法</h3><p>gcc编译过程有静态链接和动态链接的过程。对于动态链接就是增加已经预先编译好的东西。</p>
+<p>一般来说，编译器会做以下几个过程：</p>
+<ol>
+<li>预处理阶段</li>
+<li>词法与语法分析阶段</li>
+<li>编译阶段，首先编译成纯汇编语句，再将之汇编成跟CPU相关的二进制码，生成各个目标文件(obj文件)</li>
+<li>连接阶段，将各个目标文件中的各段代码进行绝对地址定位，生成跟特定平台相关的可执行文件</li>
+</ol>
+<p>注意，1主要是处理源文件中的宏、变量、函数声明、嵌套的头文件包含等东西，然后重新生成C文件。<br>2和3通常为一起，此时已经产生了符号表。已经将全局符号和局部变量分开了。而且在操作系统中，建立了对应的符号表以及将定义位置和引用都联系好了。同时，已将将全局变量还有程序转入了对应的程序的位置区段。</p>
+<p>哪些已经编译好的内容是指直接只差操作系统指定将代码放在哪里了，只要操作系统指定位置，那么就可以指定按行行动，然后产生文件了？</p>
+<blockquote>
+<p>刚刚看了维基百科，其实这里所表述的链接也很正常，易于理解。实际上就是所想的那样的。dll提出的初衷也就是为了复用，比如window窗口部件。直接复用就可以调用同样的功能。</p>
+</blockquote>
+<h4 id="2-1-静态编译"><a href="#2-1-静态编译" class="headerlink" title="2.1 静态编译"></a>2.1 静态编译</h4><p>首先，不管是IDE还是命令行，IDE不过是命令行的一个集成，帮你把什么东西都设置快捷了，让你来进行操作。<br>gcc .cpp .cpp<br>它会把每个cpp进行编译成.o文件，再由.o文件一起生成可执行文件。<br>main.cpp一定是在最后。</p>
+<h5 id="为什么有-h和-cpp文件？"><a href="#为什么有-h和-cpp文件？" class="headerlink" title="为什么有.h和.cpp文件？"></a>为什么有.h和.cpp文件？</h5><p>.h文件一般是放说明的，而.cpp一般是对应的实现；（同名警告！？ 是会给编译过程带来好处吗？）</p>
+<p>如果一个.h中声明太多，需要两个.cpp来书写可以吗，如果允许，这样感觉同名潜规则没必要。不允许，编译器规定死了，相关声明只能从相关同名文件中去找。然后，如果其他.cpp声明要用到该环境直接用即可。</p>
+<p>所以一般来说，那我们再构建其他文件时，只需要include .h文件就可以了啊，没有必要引入其他文件。</p>
+<p>对啊，因为你生成的是cpp文件，所以这里每个cpp对应的是.o， 它会在对应的表上记录。<br>那么对应的cpp与源文件存在依赖关系，所以这里就涉及到依赖关系。</p>
+<blockquote>
+<p>依赖关系，这里就是图的拓扑排序。还有一个问题，记得计算机系统基础中有讲过gcc 后面的参数对表的构建其实也是有影响的</p>
+</blockquote>
+<p>同时，又可以回答一个问题，在cpp中引用stdio.h也是没有问题的啊。因为这些不过是标志着它会去找文件，所以完全就没有关系。最终不过是生成.o文件是，它会把对应的库中的文件进行替换而已。</p>
+<h5 id="一些关键字作用的思考"><a href="#一些关键字作用的思考" class="headerlink" title="一些关键字作用的思考"></a>一些关键字作用的思考</h5><ol>
+<li>incline<br> ？incline声明的会先一步静态编译到程序中。<br> extern感觉上更多的用法是在一个cpp文件中使用的是另一个文件中的，然后却并不会指出是在哪个文件中定义又初始化的，不安全，不建议使用该关键字。</li>
+</ol>
+<ol start="2">
+<li><p>define<br> # define关键字的使用也相当明了了。我们的目的是什么，就是每个.h文件应该管理自己特有的变量和函数声明这样我们就能使程序避免变得杂乱无章。而且像<code>#define FILE_H</code>这种操作，只能在file.h中做啊，其他情况你为什么要这么做。而加 </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#ifndef CPLUS_LAB1_STACK_H</span><br><span class="line">#define CPLUS_LAB1_STACK_H</span><br><span class="line">stack.h特有的</span><br><span class="line">#endif //CPLUS_LAB1_STACK_H</span><br></pre></td></tr></table></figure>
+
+<p> 不过是避免犯错，编译特有的。</p>
+<p> 思考define的第二种用法，首先在命令行或者某个场合环境下，你需要说明你现在是什么环境，或者代码里定义环境。然后，在代码里使用对应的条件判断语句也就很轻易的判断出是哪个了。</p>
+<h5 id="多文件组织"><a href="#多文件组织" class="headerlink" title="多文件组织"></a>多文件组织</h5><p>多个.h之间的依赖，有什么例子吗？如果是结构体，比如有个queue的操作，现在我又要新建一个优先级queue的操作，所以可以用到queue的操作。那么就涉及到进阶的知识即抽象为类，以及类之间的关系表示。</p>
+</li>
+</ol>
+<p>一般来说书写.h文件的话没有必要那么多和复杂。而且一般是直接引用两个相对独立的.h, 共同使用它们的函数。然后其实一个cpp也可以调用多个.h的，那么这样的话，按前面的想就明了。<br>有反常情况吗？</p>
+<p>还有一个问题可以创建文件的问题，至少在clion中，因为MakeFile是自己书写，所以只用把文件路径点名即可，照样可以操作，对。</p>
+<h4 id="2-2-动态链接"><a href="#2-2-动态链接" class="headerlink" title="2.2 动态链接"></a>2.2 动态链接</h4><p>.dll未明朗解决</p>
+<h3 id="3-进一步思考和建议"><a href="#3-进一步思考和建议" class="headerlink" title="3. 进一步思考和建议"></a>3. 进一步思考和建议</h3><p>MakeFile相关的东西<br>整理以及实践的结果</p>
+<p>一点额外的东西：<br>一般情况下，程序并不关心栈的具体分配情况，但进行混合语言编程时，则要考虑不同语言在栈使用上的差别。</p>
+<blockquote>
+<ol>
+<li>还需要考虑哪些？</li>
+</ol>
+</blockquote>
+<h3 id="4-再理解的内容"><a href="#4-再理解的内容" class="headerlink" title="4. 再理解的内容"></a>4. 再理解的内容</h3><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxNjcwMzcvYXJ0aWNsZS9kZXRhaWxzLzE5NjgwODc3" title="https://blog.csdn.net/u010167037/article/details/19680877">关于如何将多个Cpp组织起来 -jamesheros<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NhbmRjcGx1c3BsdXMvYXJ0aWNsZS9kZXRhaWxzLzUzMzI2MzY4" title="https://blog.csdn.net/candcplusplus/article/details/53326368">菜鸟攻略-C语言多文件编程初探 -流沙的刺客<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xlZTI0NDg2ODE0OS9hcnRpY2xlL2RldGFpbHMvMzkzNDE3NTE=" title="https://blog.csdn.net/lee244868149/article/details/39341751">头文件与同名源文件的关系-奔跑的路<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hoYnhoYnNxL2FydGljbGUvZGV0YWlscy83ODk1NTIxNg==" title="https://blog.csdn.net/xhbxhbsq/article/details/78955216">C语言中，头文件和源文件的关系<i class="fa fa-external-link"></i></span></li>
+<li>计算机系统基础, 袁春风</li>
+<li>程序员的自我修养-链接、装载与库<blockquote>
+<p>只是被推荐，未读</p>
+</blockquote>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/machinelearning-gradient-descent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/machinelearning-gradient-descent/" class="post-title-link" itemprop="url">machinelearning gradient descent</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 13:11:31 / 修改时间：13:12:05" itemprop="dateCreated datePublished" datetime="2019-09-19T13:11:31+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/" itemprop="url" rel="index"><span itemprop="name">machinelearning</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/gradient-descent/" itemprop="url" rel="index"><span itemprop="name">gradient-descent</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>SGD ? 是只是针对一个样本做的吗？ 难道不是学习了随机</p>
+<p>无偏估计：不考虑系统误差，只有随机误差，在大数情况下有效。 也就是估计式的期望等于估计值</p>
+<p>SGD Challenges:</p>
+<ol>
+<li>收敛速度跟学习速率关系很大，大容易震荡，小收敛很慢</li>
+<li>学习速率对所有特征都是一样的。事实上，应该某些特征下降慢，有些快，没有考虑稀疏性</li>
+<li>容易陷入不太好局部最小或鞍点。</li>
+</ol>
+<p>误差曲面，权重为多维的<br>梯度与等高线的关系<br>梯度是等高线上的法向量<br>梯度是数字较低的等高线指向数值较高的等高线，梯度的模是函数在这个法线方向的方向导数<br>常见的有两种误差曲线：<br>一种一维的，一种等高线的，实际上就是反映在图像上多维的等高线<br>动量使得收敛过程更快地通过SGD来回震荡的峡谷</p>
+<p>改进</p>
+<ol>
+<li>动量： 模拟物体运动的惯性，更新时一定程度上保留之前更新的方向，同时利用当前的batch的梯度微雕最终的更新方向。增加了一定程度上的稳定性，有一定的摆脱局部最优的能力<ul>
+<li>传统：首先计算当前位置的梯度，然后再更新累加的梯度方向移动</li>
+<li>NAG: 先在之前累加的梯度方向上移动，然后再计算当前位置的梯度？<blockquote>
+<p>利用了物理中动量的思想，保持总的下降方向减小震荡，也比较容易跳出不太好的局部最小 </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>自动调节学习速率<ul>
+<li>Adagrad: Adagrad利用以前的梯度信息Gt判断对应的特征是否经常被更新， 平滑项用于防止分母为0<blockquote>
+<p>考虑了之前的梯度的累加的信息，Gt是一个对角矩阵，每个对角线(i,i)的值为累加到t次迭代的对应参数wt梯度平方和，越到后面学习率会变得越来越小</p>
+</blockquote>
+<ul>
+<li>Rmsprop: Adagrad的改进：解决Adagrad算法中学习率单调下降趋向于0的问题，把历史梯度累积窗口限定到固定的窗口</li>
+<li>Adadelta: 使用均方根来估计步长，使用临近时间窗口的步长来估计当前的步长；避免了手动调借参数<ul>
+<li>Adam： 使用一阶和二阶矩估计<blockquote>
+<p>Adam = Rmsprop + Bias-crrection + Momentum<br>初始化gradient较大，导致基于速度的算法NAG发生偏离又修正过来；具有自适应学习率的算法效果想加速版的SGD,能更加稳定地解决large initial gradient问题</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>二阶优化方法</p>
+<p>现实世界中所遇到的Hessian矩阵都是实对称的，实对称矩阵都能分解为实特征向量和实特征值<br>梯度下降无法利用含在Hessian矩阵的曲率信息。对于正曲率，梯度下降会下降得很慢；对于负曲率，梯度下降会下降得很快。当迭代点越靠近X，其搜索步长就越小，因而收敛速度越慢</p>
+<p>牛顿法，寻找收敛速度快的无约束最优化方法，在每次迭代时，用适当的二次函数去近似目标函数f</p>
+<blockquote>
+<p>更新公式，二阶和一阶的内积和？<br>二阶矩阵计算内容包含太多。</p>
+</blockquote>
+<p>牛顿法考虑走了一步后，坡度是否会变得更大。要求二阶矩阵的逆，计算量巨大k^3</p>
+<p>改进</p>
+<ul>
+<li>共轭梯度<blockquote>
+<p>避免求逆运算<br>向量共轭是正交的推广，共轭方向法最多经过N步迭代，就可以到达极小值点，二次收敛性。沿共轭方向集的每个方向顺序做line search的时候，在每个方向上都不需要做重复搜索。每个方向的移动都不会影响到在另一方向上已经找到的极小值？<br>  CG:线性搜索并不严重依赖于线性搜索寻找该方向上和真正极小值很近的一点。</p>
+</blockquote>
+</li>
+<li>拟牛顿法<blockquote>
+<p>不用二阶偏导数而构造正定对称阵<br>BFGS, 需要存储Hessian逆矩阵M, 空间复杂度O(n), 花费更少的时间改进每个线性搜索<br>  line search: 搜索方向d_k 已经是确定的，目标是如何在一个确定的d_k上，找到一个合适的a_k</p>
+</blockquote>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/spark-study-thinking-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/spark-study-thinking-1/" class="post-title-link" itemprop="url">spark study thinking</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 13:09:17 / 修改时间：13:10:05" itemprop="dateCreated datePublished" datetime="2019-09-19T13:09:17+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/thinking/" itemprop="url" rel="index"><span itemprop="name">thinking</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>spark中map就是把数据集分配到各个节点上，然后各个节点执行</p>
+<blockquote>
+<p>思考Partioner的过程是什么</p>
+</blockquote>
+<p>Partitioner感觉上是全局变量</p>
+<blockquote>
+<p>HashPartitioner就是把Hash桶做成了</p>
+</blockquote>
+<p>inputSplit, 一定要比它大，这样就可以使得每一部分执行的数据少</p>
+<p>flatMap并没有那么简单，也就是说<br>flatMap = map + flatten</p>
+<blockquote>
+<p>flatMap(t=&gt;f(t))<br>f返回的是什么类型，最终结果就是什么类型</p>
+</blockquote>
+<p>reduce(x+y=&gt;x)<br>reduceByKey(x+y=&gt;x)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mapPartitions(iter =&gt; &#123;    // mapPartitions即 Mapper端的数据进行了Combine计数</span><br><span class="line">      val pair = mutable.Map.empty[WrapArray, Long]</span><br><span class="line">      while (iter.hasNext) &#123;</span><br><span class="line">        val arr = new WrapArray(iter.next())</span><br><span class="line">        val value = pair.get(arr)</span><br><span class="line">        if (value == None) &#123;</span><br><span class="line">          pair(arr) = 1L</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          pair(arr) = value.get + 1L</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      pair.iterator   // 这种写法很精妙，进行学习</span><br><span class="line">    &#125;)</span><br><span class="line">    // 每次返回一个迭代器，下次还可以考虑继续使用这个迭代器</span><br></pre></td></tr></table></figure>
+
+<p>基本类型的迭代器可以定义</p>
+<p>自定义迭代器<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1hpYW9IZWlCbGFjay9hcnRpY2xlL2RldGFpbHMvNzcwMTQ2MjY=" title="https://blog.csdn.net/XiaoHeiBlack/article/details/77014626">https://blog.csdn.net/XiaoHeiBlack/article/details/77014626<i class="fa fa-external-link"></i></span></p>
+<p>groupByKey(): RDD, Iterable[V]<br>reduceByKey(): U+U=&gt;U</p>
+<blockquote>
+<p>思考迭代器</p>
+</blockquote>
+<p>FPGrowth思路整理</p>
+<p>MLlib做法：</p>
+<ol>
+<li>产生每个分区的数据集<blockquote>
+<p>val part = partitioner.getPartition(item), 这一步依然感觉很懵逼?<br>mapreduce中map的过程实际上就不过是map的数据集的个体变大的。所以按照自己想的就是<br>代码这里的感觉就是用的默认集群的？？？</p>
+</blockquote>
+</li>
+<li>将每个分区的数据集合并为一棵子树</li>
+<li>将所有分区合并为一个大的子树</li>
+<li>从这个大的子树中提取对应的频繁项集</li>
+</ol>
+<p>defaultParallelism(): cluster default<br>trait: 相当于接口</p>
+<p>sc.text(): 这里默认的也是这个参数</p>
+<p>FPNewDef做法</p>
+<ol>
+<li>产生对应分区的数据集</li>
+<li>对每个分区进行相同合并</li>
+<li>数据重新写为(key, value)</li>
+<li>映射到对应的分区<blockquote>
+<p>所以就要用分区内的排序来做<br>repartitionAndSortWithinPartitions<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC81OTA2ZGRiNWJmY2Q=" title="https://www.jianshu.com/p/5906ddb5bfcd">https://www.jianshu.com/p/5906ddb5bfcd<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+<li>分区内根据顺序收集，从而形成条件树<blockquote>
+<p>这里可以直接根据收集结果来产生频繁项集啊</p>
+</blockquote>
+</li>
+</ol>
+<p>NewIdea</p>
+<ol>
+<li>产生分区的数据集</li>
+<li>可选，Combine(需要开销)</li>
+<li>数据重新分为(key, value)</li>
+<li>reduceByKey<blockquote>
+<p>收集对应的key，然后直接产生条件树</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>因为类没有实现迭代器的特性，所以不能这样用？ 居然可以用排序就可以了，牛逼，牛逼<br>如果是对所有的元素做某种运算，但不需要产生最后的结果，只需要foreach</p>
+</blockquote>
+<blockquote>
+<p>第一个想法，一个是将每个(key,value)的value映射为一个FPNewNode, 然后添加，需要重新改写数据结构<br>第二个想法，reduceByKey，先收集到一个集合，然后再对该集合进行下一步做法</p>
+</blockquote>
+<p>? spark任务调用顺序</p>
+<p>spark-shell –master spark://slave033:7077 </p>
+<p>例子：<br>1 2 3 4<br>1 2 4<br>2 3<br>2 4</p>
+<p>partion: 2</p>
+<p>1:<br> 1 2 3 4  -&gt;<br> 1 2 4</p>
+<p>2:<br> 2 3<br> 2 4</p>
+<p>总结：<br>FPTree中的extract是对所有的项都要来直接求解，试着不需要。只需要对某一个地方进行求解即可。<br>然后这里的 extract又是个递归</p>
+<p>summries中包含所有元素</p>
+<blockquote>
+<p>怎么生成数据？关于大数据集的<br>slave033上的文件和hdfs上的文件有什么区别？</p>
+<blockquote>
+<p>这个问题实际上是想问这里用到的是啥？</p>
+</blockquote>
+</blockquote>
+<p>本地进行模拟运行</p>
+<h2 id="学到的知识"><a href="#学到的知识" class="headerlink" title="学到的知识"></a>学到的知识</h2><h3 id="1-spark-default-parallelism"><a href="#1-spark-default-parallelism" class="headerlink" title="1. spark.default.parallelism"></a>1. spark.default.parallelism</h3><blockquote>
+<p>如果不进行设置，默认值是底层HDFS的block数量（HDFS中有设置）; 一般这是个特别需要设置； 在默认情况下，非常小，如果不调节它就起不到分布式的效果了。通常来说也不会只调节到num_executors*executor-cores，因为相当于只给每个节点分配了对应很少的值，所以实际上的话，是在2~3倍。为什么呢，因为有的task运行速度快，有的慢，为了避免快的执行完等慢的，所以可以考虑多加进行设置，这样的话就能充分利用到集群了。<br>? hdfs block的数量？？<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRlYmxvZy5jb20vYXJjaGl2ZXMvMTY1OS5odG1s" title="https://www.iteblog.com/archives/1659.html">https://www.iteblog.com/archives/1659.html<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<h3 id="2-scala语法"><a href="#2-scala语法" class="headerlink" title="2. scala语法"></a>2. scala语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class FPTree</span><br><span class="line">  def merge(other: FPTree[T]): this.type = &#123;</span><br><span class="line">    other.transactions.foreach &#123; case (t, c) =&gt;</span><br><span class="line">      add(t, c)  // 这里就默认的是this.add()</span><br><span class="line">    &#125;</span><br><span class="line">    this</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Spark参数配置优先级"><a href="#3-Spark参数配置优先级" class="headerlink" title="3. Spark参数配置优先级"></a>3. Spark参数配置优先级</h3><ol>
+<li>SparkConf</li>
+<li>spark-submit  spark-shell</li>
+<li>spark-defaults.conf<blockquote>
+<p>在文件中进行配置</p>
+</blockquote>
+<h3 id="4-零散知识点"><a href="#4-零散知识点" class="headerlink" title="4. 零散知识点"></a>4. 零散知识点</h3></li>
+</ol>
+<h4 id="4-1-提交"><a href="#4-1-提交" class="headerlink" title="4.1 提交"></a>4.1 提交</h4><ol>
+<li>spark-shell</li>
+</ol>
+<ul>
+<li>–master spark://host:port本身的运行模式</li>
+<li>–deploy-mode: driver端位于哪里</li>
+<li>dirver-memory, dirver-cores<blockquote>
+<p>driver-memory, driver-cores指的是driver端执行的情况 </p>
+</blockquote>
+</li>
+</ul>
+<ol start="2">
+<li>运行模式</li>
+</ol>
+<ul>
+<li>standalone模式</li>
+<li>spark on yarn, dirver在本地</li>
+<li>spark on yarn, dirver在集群<blockquote>
+<p>其实standalone和其他没有什么区别吧，主要就在于standalone是主模式，而yarn各个节点都相同</p>
+</blockquote>
+</li>
+</ul>
+<ol start="3">
+<li>yarn</li>
+</ol>
+<p>yarn: 整个资源管理在一个资源池中，想要获取资源通过在资源池中进行获取</p>
+<blockquote>
+<p>这里yarn把整个集群集合在了一起，具体yarn是怎么执行的需要看居然的yarn的东西。</p>
+</blockquote>
+<p>然后，关于yarn的就有几个特别的参数：</p>
+<p>worker是资源分配单位<br>executor是任务执行单位</p>
+<p>executor的内存主要分为几块</p>
+<ol>
+<li>执行自己的代码所需要的内存,默认值20%</li>
+<li>shuffle所需要的内存，默认20%</li>
+<li>持久化的内存,默认60%</li>
+</ol>
+<p>资源参数调优:</p>
+<ol>
+<li><p>num-executors: 总的executor数</p>
+<blockquote>
+<p>总共的任务执行单元</p>
+</blockquote>
+</li>
+<li><p>executor-cores </p>
+</li>
+</ol>
+<h3 id="inputPath"><a href="#inputPath" class="headerlink" title="inputPath"></a>inputPath</h3><blockquote>
+<p>在哪里？<br>hdfs://master:port/根路径</p>
+</blockquote>
+<blockquote>
+<p>默认情况下为master节点上的9000端口</p>
+</blockquote>
+<p>注意到一个问题： aggreateByKey一直都是根据key来处理<br>reduceByKey(partioner, <em>+</em>) 可以使结果放在对应的位置上</p>
+<p>学长的代码，想法依然是那样的。感觉上还是最终落在了收集fpTree上，而且并没有什么优化啊。</p>
+<p>前面汇聚相同的什么用?</p>
+<p>在倒数第二个的时候依然是形成fpTree,然后提取</p>
+<h2 id="scala编程"><a href="#scala编程" class="headerlink" title="scala编程"></a>scala编程</h2><p>注意区分Iterator和</p>
+<h2 id="师兄代码的想法"><a href="#师兄代码的想法" class="headerlink" title="师兄代码的想法"></a>师兄代码的想法</h2><p>建树开销，即考虑的是</p>
+<p>spark-submit 默认参数在 spark-defaults.conf中<br>？ master是否进行资源的分配</p>
+<p>–dirver-memory<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vd2Vpd2VpZmVuZy9wLzgwNzM1NTMuaHRtbA==" title="https://www.cnblogs.com/weiweifeng/p/8073553.html">https://www.cnblogs.com/weiweifeng/p/8073553.html<i class="fa fa-external-link"></i></span></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/spark-study-thinking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/spark-study-thinking/" class="post-title-link" itemprop="url">spark study thinking</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 13:06:59 / 修改时间：13:07:36" itemprop="dateCreated datePublished" datetime="2019-09-19T13:06:59+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/thinking/" itemprop="url" rel="index"><span itemprop="name">thinking</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">val file_split = args(2).toInt  // 文件的切分，将文件划分为多少个mapper</span><br><span class="line">val numPartition = args(3).toInt // mapper后，形成多少个reducer</span><br><span class="line"></span><br><span class="line">// 还有其他建议参数</span><br><span class="line">// driver-memory, driver-cores 内存主要是启动内存，存储启动的数据，</span><br><span class="line">// ? driver所使用的数据，首先数据本身是可以放在多个位置吧，然后，其次，数据来源是本地文件的话，应该也可以在worker节点上，因为这样本身就可以做，在task执行时，直接就近选取接地那执行即可</span><br><span class="line">// 其而，是当执行collect()时， 数据将被拉回driver端？？？</span><br><span class="line"></span><br><span class="line">// executor-memory, executor-cores:</span><br><span class="line"></span><br><span class="line">// spark-default-parrallism: 如果一直从头默认，尽管是reduceByKey, 它有个参数partitioner也使用的是默认，那么这样看来也就是说基本上都是这个参数，除非中间设置repartitiones; 这里官方的建议是总cores的2-4倍</span><br><span class="line"></span><br><span class="line">// 然后 executor和worker,driver的对应, 首先系统会计算driver,worker剩下的内存，然后按照某种策略（一个worker装满再装下一个，还是一个一个worker地装）, 于是就形成了执行单元。</span><br><span class="line"></span><br><span class="line">// 对于每个executor, 在执行时必然需要用到数据，会采用就近原则，比如使用的是hdfs架构时，会优先从某个就近的地方读取</span><br><span class="line"></span><br><span class="line">// 分给每个executor的内存，有几个用途：1. 运行，包括代码执行, 所以有堆外内存，用于调节GC; </span><br><span class="line"></span><br><span class="line">// executor:  executor-cores， 按系统能给的最大程度在每个worker上给予的方式来分配executor. 然后executor, 然后，关于executor启动以及后面的执行又是怎么折腾的呢？怎么看出负载均衡这些东西的？ spark-ui</span><br><span class="line">https://blog.csdn.net/dandykang/article/details/48525467</span><br></pre></td></tr></table></figure>
+
+<p>所以整个并行化，spark需要关注的点</p>
+<ol>
+<li><p>mapper前的预处理操作</p>
+</li>
+<li><p>数据传送到mapper的开销</p>
+</li>
+<li><p>mapper的个数</p>
+<blockquote>
+<p>task执行完后的负载均衡, 有小任务和大任务，有的先执行完，有的后执行完</p>
+</blockquote>
+</li>
+<li><p>mapper数据汇集的通信开销</p>
+<blockquote>
+<p>这个过程又名shuffle,  shuffle read: 抓取数据, 这里涉及到将mapper的结果抓取过来，然后进一步考虑怎么搞;  shuffle write: 将数据按key值分发到各个reducer上<br>感觉上处理shuffle的是保存一个类似hash的东西来做的</p>
+</blockquote>
+</li>
+<li><p>reducer的个数</p>
+<blockquote>
+<p>reducer再将结果汇聚到driver端</p>
+</blockquote>
+</li>
+</ol>
+<p>关于一些默认的东西一般在spark安装的文件里，进行spark安装环境的解析</p>
+<p>然后具体怎么做的，就主要的想法是参照源码</p>
+<p>然后，涉及到整个系统的：</p>
+<ol>
+<li><p>环境准备，怎么将所有东西给放在一起</p>
+</li>
+<li><p>代码执行</p>
+<ul>
+<li>集群初始化：面向对象的思想，首选一个外部消息导致整个事件触发，然后如此直到达到某个结束标志<ul>
+<li>调度单位，将事情作为不同方面进行调度；比如，掌管通信的，掌管DAG的，然后，再起对应的名字；最终再进行来做</li>
+</ul>
+</li>
+<li>Dirver端执行代码，分配到mapper端，惰性求值，当在mapper端遇到需要收集数据，即需要将这个数据分离时，即认为该stage结束，则开始进行运算。 这里会进行DAG世袭图的计算。<blockquote>
+<p>DAG世袭图的提出<br>查看sparkUI</p>
+</blockquote>
+</li>
+<li>如何保证容错<blockquote>
+<p>这里的想法就是在整个Driver端维持？，还是？。不对！应该是会维持计算图，首先进行思考，优先从就近的前一步抓取未计算完的数据。所以，这就意味着把某一步的RDD计算结果放在某一个位置上于是就显得很重要了！</p>
+</blockquote>
+</li>
+<li>这里的checkpoint，已然忘记是不是说的也就是这个感觉</li>
+</ul>
+</li>
+<li><p>数据库操作，SQL层抽象，存储，hdfs存储到每个节点</p>
+</li>
+</ol>
+<p>SparkUI的几个东西： 18080;  系统： 8080</p>
+<ul>
+<li><p>jobs<br>job的概念，其实也就是一次map/reduce过程，当然也可以看作是action操作结束后。唯一需要特别注意的是，job最终即action的结果又会回到Driver端，由系统再次分配job.  一个SparkContext中一个任务，一个任务多个job.</p>
+<blockquote>
+<p>物理时，Master, Slaves<br>工作时，Driver, Worker   Dirver不等于Master，因为Dirver根据不同的执行方式，可以分布在不同的位置，比如 各种部署模式</p>
+<blockquote>
+<p>本地模型 local[4], 用来模拟线程; Client提交任务，所以我们很多时候一般都是上环境进行提交任务Driver; 在Standalone, 这里指的是master单独的意思，即spark defalut， 此时Master=Driver; 其余有两种，一种是本地为Dirver端，与集群进行交互，但是本地机器不是集群机器，当运行大量任务时，会带来很严重的开销’;一种是本地把代码提交到集群，集群再选择一个节点做Driver，注意此时每个节点的地位相同</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>event timeline: executor的执行状态 <font color="red">可以分析出来是否负载均衡</font></li>
+<li>DAG visualization: 整个的stage图，就是按宽stage和窄stage来进行划分</li>
+<li>Skipped Stages, Failed Stages</li>
+</ul>
+</li>
+<li><p>stages<br>对于每个stages由着以下的指标：</p>
+<ul>
+<li><p>任务延迟</p>
+</li>
+<li><p>持续时间</p>
+</li>
+<li><p>GC Time</p>
+</li>
+<li><p>Shuffle Red Blocked Time</p>
+</li>
+<li><p>Shuffle Read Size</p>
+</li>
+<li><p>每个executor的状态数据</p>
+</li>
+<li><p>每个tasks的执行状况</p>
+</li>
+</ul>
+</li>
+<li><p>storage<br>存储，关于在每个点或者其他点上存储的东西</p>
+</li>
+<li><p>environment</p>
+<ul>
+<li>runtime information</li>
+<li>spark properties</li>
+<li>classpath entries</li>
+</ul>
+</li>
+<li><p>Executors: 每个executors的执行状态</p>
+</li>
+</ul>
+<p>整个Spark技术内幕主要包括以下几个方面：</p>
+<ul>
+<li><p>RDD的实现</p>
+</li>
+<li><p>Scheduler模块</p>
+<blockquote>
+<p>关于调度如何实现的</p>
+</blockquote>
+</li>
+<li><p>Deplo模块</p>
+<blockquote>
+<p>消息传递，容错，运行模式</p>
+</blockquote>
+</li>
+<li><p>Executor模块</p>
+<blockquote>
+<p>分配， task的执行</p>
+</blockquote>
+</li>
+<li><p>Shuffle模块</p>
+<blockquote>
+<p>Hash Based Read/ Shuffle Write</p>
+</blockquote>
+</li>
+<li><p>Storge</p>
+<blockquote>
+<p>存储模块</p>
+</blockquote>
+</li>
+</ul>
+<p>Spark编程需要的内容</p>
+<ul>
+<li>scala常用数据类型的了解</li>
+<li>spark编程环境的问题</li>
+<li>RDD编程<blockquote>
+<p>创建RDD， RDD的各种操作，常见转化和行动操作， 持久化</p>
+</blockquote>
+</li>
+<li>键值对操作*<blockquote>
+<p>主要说的是PairRDD, 目前来说，并没遇到</p>
+</blockquote>
+</li>
+<li>数据读取和保存<blockquote>
+<p>本地和hdfs://master:9000  </p>
+</blockquote>
+</li>
+<li>进阶*<blockquote>
+<p>累加器，广播变量，基于分区操作，与外部程序间的管道，数值RDD的操作</p>
+</blockquote>
+</li>
+<li>运行spark-submit, 打包和依赖</li>
+<li>关键性能度量<ul>
+<li>并行度</li>
+<li>序列化格式： 这里好像只涉及到使用 kryo工具</li>
+<li>内存管理</li>
+<li>硬件供给</li>
+</ul>
+</li>
+<li>Spark Sql* <blockquote>
+<p>未涉及到，好像后面可以通过sql语句直接得到，所以超级简单</p>
+</blockquote>
+</li>
+</ul>
+<p>一些实战</p>
+<blockquote>
+<p>进行数据分析，从而来提高熟练度</p>
+</blockquote>
+<h2 id="2-语言编程"><a href="#2-语言编程" class="headerlink" title="2. 语言编程"></a>2. 语言编程</h2><p>数据结构</p>
+<ol>
+<li><p>变量，常量</p>
+</li>
+<li><p>物理上不同的类型</p>
+<ul>
+<li>基本类型，Int,String</li>
+<li>静态数据结构，长度不可变，比如List, Array, </li>
+<li>变长 vector, ArrayBuffer; </li>
+<li>hash结构，</li>
+<li>tree结构， 堆</li>
+<li>抽象结构，栈、队列</li>
+<li>(key, value)对<blockquote>
+<p>注意思考，一般这种的内部实现是什么样的; 比如说平衡二叉树</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>访问特性来看</p>
+<ul>
+<li>迭代器，只支持iterator</li>
+<li>travesac: 支持随机访问</li>
+<li>支持从前或者从后访问</li>
+</ul>
+</li>
+<li><p>基本操作符：  +, -,  ==, equals, &gt;=, ., -&gt;</p>
+</li>
+<li><p>扩展操作符： ++=  – </p>
+</li>
+<li><p>常见操作</p>
+<ul>
+<li>合并两个集合</li>
+<li>插入某个元素，某个元素不存在</li>
+<li>删除某个元素，元素不存在</li>
+<li>查看某个元素是否存在</li>
+<li>判断是否为空</li>
+<li>初始化</li>
+<li>是否为满</li>
+<li>清空</li>
+<li>转换为其他集合<blockquote>
+<p>默认hashCode, ==, euqals的实现, &gt;小于比较的实现</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>泛型</p>
+<ul>
+<li>支持所有类型<blockquote>
+<p>迭代器</p>
+</blockquote>
+</li>
+<li>抽象的算法</li>
+</ul>
+</li>
+<li><p>类</p>
+<ul>
+<li>抽象类， 接口</li>
+<li>抽象抽象类， traits</li>
+<li>类的继承，派生； 可以互用的方法</li>
+</ul>
+</li>
+<li><p>其他编程范式</p>
+<ul>
+<li>map(),  reduce()等以及扩展的操作，还有变量在里面或者变量在外面</li>
+</ul>
+</li>
+<li><p>基本常见语句的操作：循环，条件；特殊的语句</p>
+</li>
+<li><p>其他类别：</p>
+<ul>
+<li>文件操作，交互</li>
+<li>异常处理，捕捉<blockquote>
+<p>try, catch;  assert();  宏语句来一件更改是否执行, 继承测试</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>多文件</p>
+<ul>
+<li><p>整个项目，组；</p>
+<ul>
+<li>资源文件</li>
+<li>配置文件</li>
+<li>测试文件</li>
+<li>源代码<ul>
+<li>包的概念， 包这里的概念与C中不同可以理解为物理上的文件组织转换为了包<blockquote>
+<p>更进一步从文件上分割了各个包，使得文件的组织更加合理</p>
+</blockquote>
+<ul>
+<li>功能划分： 实体，数据库访问层，网页层，逻辑层<blockquote>
+<p>按照功能，或者考虑用其他的方式进行划分</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>类的概念</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>引用已有代码： 这里是人类的精华，使用依赖的概念。</p>
+<ul>
+<li>如何进行管理这些依赖的东西？ jar(java), .net(C++类库)</li>
+<li>在自己的工程中引用: mvn管理， pom文件配置，自动化处理包<blockquote>
+<p>将资源放在云端，maven， 需要地则通过网络拉取在编译时进行整合到程序中<br>这里是在一般机器所有层上进行扩展的。<br>比如如果是java, 首先机器上是具备有jvm虚拟机的。C++, MinGW, 所以之后的包的所有东西都是基于这些基本的接口进行调用的。所以是更上一层的抽象.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>因为涉及到各种功能，所以需要考虑计算机的基本功能进行支持，比如</p>
+<ul>
+<li>计算机网络：联网与其他计算机进行交互</li>
+<li>计算机文件系统： linux相关命令</li>
+<li>安全： 设置网络访问权限，网络防火墙，从小到大网络的权限的设置。从网络向下到各层文件，所以又涉及到各层文件的私密网络。 外加网络通信</li>
+<li>接口，与外部显示器，音箱，键盘等各种输入输出设备的兼容</li>
+</ul>
+</li>
+<li><p>再向下，计算机上层功能的实现，全都可以抽象为一台具有CPU计算，存储和输入输出的机器。输入则认为是代码，输出则认为是结果。</p>
+<blockquote>
+<p>不管是图像显示还是声音，可以看作是输出在特定物理设备上的反映。它遵从一定的物理表现形式就可以表现为某个点。声音是频率，图像是光的变化，即像素点<br>对于文件系统的功能，可以看作是有超大的一块内存，然后按某种特别地形式对文件进行组织管理，于是乎就可以抽象出各类文件。这块地方其实先划分为块，然后再划分为其他。也可以分为系统区，文件节点区，具体文件区，其他所有的不过是层抽象。<br>对于安全，不过是对输入输出进行处理。计算机网络，对输入进行处理</p>
+</blockquote>
+</li>
+<li><p>再向下，CPU可以抽象为一个累加器？，或者其他什么，这一层可以放在上层。根据图灵机知道这是可行的；然后，实际上可以由累加器来看出由0,1的基本的与，或，非，对应于各类的逻辑电路，最终然后得到各种功能的叠加</p>
+</li>
+<li><p>最向下，于是就到了逻辑管层</p>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>- 往上，编译原理，当一段抽象代码出来时机器是怎么做的呢，首先，将所有依赖的东西加进来然后构成源代码。接着，将源代码进行词法、语法分析，接着进行会形成一些底层一点的东西，进行符号表解析，最简单的理解就是把所有文件，都不歧义地翻译为一个文件的内容。当然，中间因为是对多文件进行翻译，所以需要一些基本的辅助数据结构，如符号表。因为从某种意义上来说，最终结果为汇编语言，而汇编语言并没有什么特别的语言结构，所以需要把变量和函数都给简单地组织为需要进行访问几次内存，等来做。 
+最终代码执行阶段，所谓代码执行，也就是将静态转换为动态，根据代码中初始化的东西进行分配资源，根据算法进行代码运行，然后最终出结果
+&gt; 编译器一定都是有shell终端的，所以很多时候远远可以考虑使用shell终端来进行机器</code></pre><ol start="12">
+<li>如果共享网络</li>
+</ol>
+<p>new</p>
+<ol>
+<li>算法<ul>
+<li>并行化算法</li>
+<li>串行化算</li>
+</ul>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/deeplearning-learn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/deeplearning-learn/" class="post-title-link" itemprop="url">deeplearning learn</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 13:03:19 / 修改时间：13:05:41" itemprop="dateCreated datePublished" datetime="2019-09-19T13:03:19+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>参考: 吴恩达深度学习视频和网上教程</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuenlidWx1by5jb20vaGFuYmluZ3Rhby9ub3RlLzQzMzg1NQ==" title="https://www.zybuluo.com/hanbingtao/note/433855">https://www.zybuluo.com/hanbingtao/note/433855<i class="fa fa-external-link"></i></span></p>
+<p>隐藏层大于2的神经网路叫做深度神经网络</p>
+<p>一个仅有隐藏层的神经网络可以拟合热河一个函数，但是它需要很多很多的神经元。<br>而深度网络就是考虑用少得多的神经元就能拟合同样的函数。</p>
+<p>为了拟合一个函数，要么使用浅而宽的网络，要么使用深而窄的网络。</p>
+<blockquote>
+<p>后者给节约资源</p>
+</blockquote>
+<h2 id="1-感知器"><a href="#1-感知器" class="headerlink" title="1. 感知器"></a>1. 感知器</h2><p><img src="ganzhiqi.png" alt></p>
+<h2 id="1-1-组成"><a href="#1-1-组成" class="headerlink" title="1.1 组成"></a>1.1 组成</h2><ul>
+<li>输入权值 $w_i$</li>
+<li>激活函数, 比如阶跃函数，$f(x) = z&gt;0?1:0$</li>
+<li>输出，整个感知器的公式 $$f(w \cdot x + b)$$</li>
+</ul>
+<p>如此，表示的就是一元函数。因为权值的不同取值，由此可以表达出不同的函数</p>
+<h2 id="1-2-表示能力"><a href="#1-2-表示能力" class="headerlink" title="1.2 表示能力"></a>1.2 表示能力</h2><ul>
+<li><p>and函数:  $w_1 = 0.5, w_2=0.5, b=-0.8$<br><img src="and.png" alt="and function"><br>$$y = 0.5x_1 + 0.5x_2 -0.8$$</p>
+</li>
+<li><p>or函数： $$y=0.5x_1+0.5x_2-0.3$$</p>
+</li>
+<li><p>线性分类</p>
+<blockquote>
+<p>因为它的数学表示实际上就是一条直线<br><font color="red">不能表示一维以上的，比如异或运算</font></p>
+</blockquote>
+<h2 id="1-3-训练"><a href="#1-3-训练" class="headerlink" title="1.3 训练"></a>1.3 训练</h2></li>
+</ul>
+<blockquote>
+<p>训练的主要想法就是进行更新权值</p>
+</blockquote>
+<blockquote>
+<p>更新 $w_i, w_0=b$</p>
+</blockquote>
+<p>深度学习： 反向传播是否可以保证收敛？？<br>强化学习：探索和利用</p>
+<p>budget: 总共评估多少个节点<br>随机深林</p>
+<p>算法</p>
+<p>Q-learning</p>
+<blockquote>
+<p>蒙特卡罗 + 动态规划</p>
+</blockquote>
+<h2 id="1-深度学习应用总结"><a href="#1-深度学习应用总结" class="headerlink" title="1. 深度学习应用总结"></a>1. 深度学习应用总结</h2><p>分类</p>
+<ul>
+<li>Standard NN</li>
+<li>CNN</li>
+<li>RNN</li>
+<li>Customl / Hybrid</li>
+</ul>
+<ol>
+<li>structured vs unstructured<ul>
+<li>结构化数据： 组织为表格形式，每个维度都在人类的意义下具有解释性</li>
+<li>非结构化数据：例如图像或者音频，每个细小的单位是像素点。 <blockquote>
+<p>从历史的角度来看，计算机很难解释非结构化数据。但是深度学习引入后，对非结构化数据也能解释的很好</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>why 深度学习现在火起来？<ul>
+<li>大量数据的产生</li>
+<li>越来越深的神经网络的规模的上限会表现得越来越好<blockquote>
+<p>在小规模数据上，算法的优劣性不好比较。但是在大规模数据上，深度学习是远远领先的</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>发展<ul>
+<li>Data</li>
+<li>Computation</li>
+<li>Algorithms: <ul>
+<li>特别地，从sigmoid函数到ReLu函数的改变，因为sigmoid函数在最低端和最上端点的梯度变化非常缓慢，不利于学习。可以是梯度下降得更快</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>神经网络类比于人的大脑有点过度了，没有必要，因为从某种深度学习只是人的大脑一个非常简化的近似</p>
+<h3 id="1-1-神经网络与深度学习"><a href="#1-1-神经网络与深度学习" class="headerlink" title="1.1 神经网络与深度学习"></a>1.1 神经网络与深度学习</h3><ul>
+<li>二分类</li>
+<li>Logistic Regression<blockquote>
+<p>目标改变了，是从概率上来约束，即希望$P(y=1|x)$最大，此时认为该算法是最优的</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="1-5-序列模型-Sequence"><a href="#1-5-序列模型-Sequence" class="headerlink" title="1.5 序列模型 Sequence"></a>1.5 序列模型 Sequence</h3><p><span class="exturl" data-url="aHR0cHM6Ly9tb29jLnN0dWR5LjE2My5jb20vbGVhcm4vMjAwMTI4MDAwNT90aWQ9MjAwMTM5MTAzOCZhbXA7X3RyYWNlX2NfcF9rMl89YTU2MTMzOWUwY2JmNDViNDkxZGQ5ZTEyMTA0YTg2NDEjL2xlYXJuL2NvbnRlbnQ/dHlwZT1kZXRhaWwmYW1wO2lkPTIwMDE3NzEwNTI=" title="https://mooc.study.163.com/learn/2001280005?tid=2001391038&amp;_trace_c_p_k2_=a561339e0cbf45b491dd9e12104a8641#/learn/content?type=detail&amp;id=2001771052">https://mooc.study.163.com/learn/2001280005?tid=2001391038&amp;_trace_c_p_k2_=a561339e0cbf45b491dd9e12104a8641#/learn/content?type=detail&amp;id=2001771052<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>序列模型是什么？ 其实，从某种意义上说，定义很简单。就是输入和输出的是序列。<br>从某种意义上感觉，就是原本的数据是输入有很多维特征，而现在是这些维特征从另一个角度进行解释。即比如自然语言处理，输入为一个句子。 每个单词作为输入的特征，但是这些特征并不是相互独立的。<br>机器学习中好像有要求特征必须相互独立把</p>
+</blockquote>
+<blockquote>
+<p>在这里好像又从新起了一个名字？</p>
+</blockquote>
+<blockquote>
+<p>在这里看来，每维特征姑且叫做特征吧。  这些是相关联的，有点像层次分析法，所以必须要使用神经网络来做。 这些是序列的<br>序列意味着什么？意味着之间的关系性，前后具有联系，不能割开看。<br>如何做标记？ 这里认为$x^{(i)}$表示第i个样本，$x^{(i)<t>}$表示第i个样本的第t个特征，y同理。$T_x^{(i)}$表示$x^{i}$的长度？？？<br>    - 于是意味着x的输入还可以处理为不一样？？<br>所以后面有说到，可以填充或者零填充使得每个输入语句达到同样的长度</t></p>
+</blockquote>
+<p>如何来表示这些词？ 这里的一个想法是用字典(这里通常是最常见的词，不在其中的词使用UNK来表示)，使用One-hot编码来做</p>
+<h4 id="1-1-1-RNN在NLP中的应用"><a href="#1-1-1-RNN在NLP中的应用" class="headerlink" title="1.1.1 RNN在NLP中的应用"></a>1.1.1 RNN在NLP中的应用</h4><ul>
+<li>任务： 输入一个句子，对句子做情感分析，比如评分。<br>比如：输入的x是一个句子，那么怎么感觉学习过程的有效性呢？<br>首先必须思考神经网络结构是基于什么做的？比如在图中，是基于图的整个结构做的。<br>而在NLP中这里针对的就是一个句子。</li>
+</ul>
+<p>那么，在自然中，多个句子之间是会存在相同的单词。<br>所以，当对上一个单词训练结束后，再使用下一个单词进行训练就可。此时模型</p>
+<blockquote>
+<p>特别注意，深度学习是分领域的，等于说如果这里没有给定在哪个领域内是很难的。像在这里，邻域实际上决定了学习目标是什么。<br>而这里的学习目标，以及输入，输出是什么，神经网络模型需要学习的是什么就显得非常重要了。所以这里需要特别思考</p>
+</blockquote>
+<ul>
+<li>RNN<blockquote>
+<p>这里理解的角度和自己的想象方式，从某种角度上还是出现了偏差<br>这里的时间步，说的是上一个x训练的模型的参数，然后再影响到下一个x输入的模型的参数。<br>？ 合理循环之说呢？<br>不对！错误，这里看错了标记$x^{<t>}$只的是第t步的特征，所以这里网络结构的输入依然是一个x。不可网络结构变得非常不一样，不再是每一维特征都有复杂的到最终的关系。</t></p>
+</blockquote>
+</li>
+</ul>
+<p>$$a^{&lt;1&gt;} = g(W_{aa} a^{&lt;00&gt;} + W_{ax} x_{&lt;1&gt;} + b_a$$</p>
+<p>$$y^{&lt;1&gt;} = g(W_{ya} a^{&lt;1&gt;} + b_y$$</p>
+<blockquote>
+<p>其中$a^{&lt;0&gt;}$是初始化的，$a^{&lt;1&gt;}$是循环神经网络$x^{&lt;1&gt;}$到$x^{&lt;2&gt;}$传递的参数</p>
+</blockquote>
+<p>假设输入向量的维度为x，循环体的全连接层神经网络的输入大小为h+x.</p>
+<blockquote>
+<p>做深度学习时，最重要的想法就是能够转换为矩阵运算，然后记得通过检查维度来确定正确性</p>
+</blockquote>
+<blockquote>
+<p>RNN只用到了之前的信息。即只使用了序列前面的信息，未使用序列后面的信息</p>
+</blockquote>
+<h4 id="1-2"><a href="#1-2" class="headerlink" title="1.2"></a>1.2</h4><p>梯度下降优化</p>
+<blockquote>
+<p>如果对于凸函数，是具有全局最优解的<br>为什么凸函数具有全局最优解？ $f(y)-f(x) \leq f’(x) (y-x)$<br>注意最凸优化中，把权重矩阵看成是x的参数，目标是看何时x能够降到最低点；直观上看就是，梯度下降的方向就是去往最低点的地方。因为全局只有一个最低点。</p>
+</blockquote>
+<ul>
+<li>凸函数的快速判断<ol>
+<li>判断的性质<blockquote>
+<p>一阶条件，即满足一阶不等式的公式，即证明不等式<br>二阶条件，直接对二阶求导公式需要大于等于0.  对于矩阵来说，探究的就是矩阵的二阶导矩阵，此时称为Hessian矩阵。</p>
+</blockquote>
+</li>
+<li>常见的1维凸函数<ul>
+<li>放射函数 $ax+b, a,b \in R$</li>
+<li>指数函数 </li>
+<li>对数函数 $logx$</li>
+<li>幂函数 $x^a$，绝对值幂函数</li>
+<li>负熵  xlogx</li>
+</ul>
+</li>
+<li>常见的d维凸函数有：<ul>
+<li>仿射函数</li>
+<li>范数</li>
+</ul>
+</li>
+<li>凸函数运算<ul>
+<li>非负加权求和: 所以这一点在神经网络中不能保证，所以就不是最优解</li>
+<li>与放射函数复合</li>
+<li>最大值或者上确界</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="2-各种优化器"><a href="#2-各种优化器" class="headerlink" title="2. 各种优化器"></a>2. 各种优化器</h2><p>二阶Hessian矩阵：各个的偏导数</p>
+<p>一阶倒数刻画切线的斜率，二阶倒数刻画的是切线的斜率的变化率。</p>
+<p>二阶函数能刻画函数的凹凸性</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -2020,1309 +3190,11 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/python-thinking/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/python-thinking/" class="post-title-link" itemprop="url">python thinking</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:35:34 / 修改时间：12:37:05" itemprop="dateCreated datePublished" datetime="2019-09-19T12:35:34+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/python/thinking/" itemprop="url" rel="index"><span itemprop="name">thinking</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>python学习指南</p>
-<h2 id="tuple-list-dict的基本操作"><a href="#tuple-list-dict的基本操作" class="headerlink" title="tuple, list, dict的基本操作"></a>tuple, list, dict的基本操作</h2><ol>
-<li><p>增加元素，默认</p>
-</li>
-<li><p>重新赋值元素</p>
-</li>
-<li><p>删除元素</p>
-</li>
-<li><p>查找某元素是否存在</p>
-</li>
-<li><p>list的切片</p>
-</li>
-<li><p>元素统计</p>
-</li>
-<li><p>互相转化</p>
-</li>
-</ol>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ol>
-<li><p>标准输入和文件输入</p>
-</li>
-<li><p>标准输出和文件输出</p>
-</li>
-<li><p>格式化输出<br>“%s “%(‘da’,’ada’)</p>
-</li>
-</ol>
-<h2 id="目录管理"><a href="#目录管理" class="headerlink" title="目录管理"></a>目录管理</h2><ol>
-<li>打开路径、目录生成、删除等</li>
-<li>保存</li>
-</ol>
-<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><ol>
-<li>继承，多继承</li>
-<li>多态</li>
-<li>参数化</li>
-</ol>
-<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><p>Numpy, ndarray</p>
-<ul>
-<li>数据整理和清理、子集构造和过滤、转换等</li>
-<li>数组算法，如排序、唯一化、集合运算</li>
-<li>描述统计和数据聚聚合/摘要运算</li>
-<li>异构数据集的合并/连接运算</li>
-<li>条件逻辑表述为数组运算</li>
-<li>数据的分组运算</li>
-</ul>
-<p>pandas</p>
-<p>Matpliot</p>
-<p>数学函数图形</p>
-<p>平面图</p>
-<p>散点图</p>
-<h2 id="注释与测试"><a href="#注释与测试" class="headerlink" title="注释与测试"></a>注释与测试</h2><ol>
-<li><p>文件注释</p>
-</li>
-<li><p>函数注释</p>
-</li>
-<li><p>单元测试</p>
-</li>
-</ol>
-<p>file的打开，文件的打开</p>
-<p>环境的特殊的变量的设置</p>
-<p>函数</p>
-<p>类，抽象化设计</p>
-<p>随机数</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/machinelearning-cornerstone-why-can-machines-learn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/machinelearning-cornerstone-why-can-machines-learn/" class="post-title-link" itemprop="url">machinelearning cornerstone why can machines learn</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:32:40 / 修改时间：12:34:12" itemprop="dateCreated datePublished" datetime="2019-09-19T12:32:40+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/" itemprop="url" rel="index"><span itemprop="name">machinelearning</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/cornerstone/" itemprop="url" rel="index"><span itemprop="name">cornerstone</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="5-Training-vs-Testing"><a href="#5-Training-vs-Testing" class="headerlink" title="5. Training vs Testing"></a>5. Training vs Testing</h1><h2 id="5-1-DataSize"><a href="#5-1-DataSize" class="headerlink" title="5.1 DataSize"></a>5.1 DataSize</h2><p><img src="00020.png" alt><br><img src="00021.png" alt><br><img src="00022.png" alt></p>
-<blockquote>
-<p>理解在精度下的容忍度，从而指导需要从实际情况中选择多少个样本？</p>
-</blockquote>
-<h2 id="5-2-Effective-Number-of-Lines"><a href="#5-2-Effective-Number-of-Lines" class="headerlink" title="5.2 Effective Number of Lines"></a>5.2 Effective Number of Lines</h2><blockquote>
-<p>union bound over-estimating ?</p>
-</blockquote>
-<p>如何衡量？ VC维来进行衡量，实际是哪个关注的是对数据的划分的数目。</p>
-<blockquote>
-<p>只需要可以将样本可分即可。</p>
-</blockquote>
-<p>所以不同的算法就有假设空间</p>
-<blockquote>
-<p>再次理解线性函数<br>突然想到感知机的函数，感知机这里其实就是每个样本都有一个权值。<br>？ 在图像上，可以理解权就表示的是直线的斜率。 然后，x表示向量，即原点到这里的向量，那么进行更新就好了。<br>？ 如何预测的</p>
-</blockquote>
-<p>样本点是空间分布的<br>为什么觉得样本点是空间分布的是可行的？</p>
-<blockquote>
-<p>可以样本点在各个维度上的坐标作为特征来考虑。</p>
-</blockquote>
-<p>2个<br>3个 +,-,+不可分</p>
-<blockquote>
-<p>可能有6种，可能有8种；最多8种。<br>4个，<br><img src="00025.png" alt><br>任何情况下，都最多只有8种<br>由此我们可以看出，得到了VC维的定义，在d维下存在，在d+1维下任意都不满足（考虑进行取反）。因为探究的是最多的情况</p>
-</blockquote>
-<h2 id="5-3-Effective-Number-of-Hyperthesis"><a href="#5-3-Effective-Number-of-Hyperthesis" class="headerlink" title="5.3 Effective Number of Hyperthesis"></a>5.3 Effective Number of Hyperthesis</h2><p>大致过一下<br>Why can machine learn?<br>因为错误率可用VC维或R复杂度来衡量</p>
-<p>How Can Machines Learn?<br>算法具体是怎么做的</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/" class="post-title-link" itemprop="url">machinelearning cornerstone when can machines learn</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:30:31 / 修改时间：12:33:41" itemprop="dateCreated datePublished" datetime="2019-09-19T12:30:31+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/" itemprop="url" rel="index"><span itemprop="name">machinelearning</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/cornerstone/" itemprop="url" rel="index"><span itemprop="name">cornerstone</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-The-Learning-Problem"><a href="#1-The-Learning-Problem" class="headerlink" title="1. The Learning Problem"></a>1. The Learning Problem</h1><h2 id="1-1-Introduction"><a href="#1-1-Introduction" class="headerlink" title="1.1. Introduction"></a>1.1. Introduction</h2><p>theory+technique<br>多个角度概念<br>what + why + how + better:</p>
-<h2 id="1-2-what-is-ML"><a href="#1-2-what-is-ML" class="headerlink" title="1.2. what is ML?"></a>1.2. what is ML?</h2><h3 id="1-2-1-definetion"><a href="#1-2-1-definetion" class="headerlink" title="1.2.1 definetion"></a>1.2.1 definetion</h3><p>observation-&gt;learning-&gt;skill<br>data-&gt;ml-&gt;skill</p>
-<blockquote>
-<p>so data is more like observation, will be better.<br>learning skill how to use in data</p>
-</blockquote>
-<p>learning:<br>ml:</p>
-<p>skill: improve some performance measure.</p>
-<h3 id="1-2-2-Application"><a href="#1-2-2-Application" class="headerlink" title="1.2.2 Application:"></a>1.2.2 Application:</h3><p>stock data-&gt;ML-&gt;more stock gain</p>
-<ul>
-<li>Tree Recognition<br>‘define’  trees and hand-program: difficult<br>learn from data(observations) and recognize</li>
-</ul>
-<h3 id="1-2-3-Use-Scenarios"><a href="#1-2-3-Use-Scenarios" class="headerlink" title="1.2.3 Use Scenarios"></a>1.2.3 Use Scenarios</h3><p>navigating on Mars<br>cannot’ define the solution</p>
-<blockquote>
-<p>一般世界人，都使用的是规则来判定一件事。<br>high-frequency trading<br>consumer-targeted marketing</p>
-</blockquote>
-<h3 id="1-2-4-key-essence-of-ml"><a href="#1-2-4-key-essence-of-ml" class="headerlink" title="1.2.4 key essence of ml"></a>1.2.4 key essence of ml</h3><ol>
-<li>some underlying pattern to be learned<br>exisits target<br>eg: predict whether the next cry of baby</li>
-<li>but no easy definition !<br>eg: determining whether a given graph contains a cycle</li>
-<li>this is data about the pattern<br>eg:whether the earth will be destoryed</li>
-</ol>
-<h2 id="1-3-Learning-Problem"><a href="#1-3-Learning-Problem" class="headerlink" title="1.3. Learning Problem"></a>1.3. Learning Problem</h2><ol>
-<li>Daily Needs<br>Food<br>Clothing<br>Housing<br>Transportation</li>
-<li>Education</li>
-<li>Entertainment</li>
-</ol>
-<h2 id="1-4-ML-vs-DM-AI-Statistics"><a href="#1-4-ML-vs-DM-AI-Statistics" class="headerlink" title="1.4 ML vs DM,AI,Statistics"></a>1.4 ML vs DM,AI,Statistics</h2><p>from f -&gt; ML -&gt; g.<br><img src="00001.png" alt> </p>
-<p>ML vs DM<br><img src="00002.png" alt><br>DM can help ML, and vice versa.<br>efficient computation</p>
-<p>ML vs AI<br><img src="00003.png" alt></p>
-<p>ML vs Statistics(inference )<br><img src="00004.png" alt>  </p>
-<h1 id="2-Learning-to-Answer-Yes-No"><a href="#2-Learning-to-Answer-Yes-No" class="headerlink" title="2. Learning to Answer Yes_No"></a>2. Learning to Answer Yes_No</h1><h2 id="2-1-Example"><a href="#2-1-Example" class="headerlink" title="2.1 Example"></a>2.1 Example</h2><h3 id="PLA算法设计"><a href="#PLA算法设计" class="headerlink" title="PLA算法设计"></a>PLA算法设计</h3><p><strong>设计思想</strong><br>知错能改，纠正错误的思想.<br>图形结合法来求解<br><strong>类别</strong><br>局部</p>
-<p><strong>步骤</strong><br>线性函数，感知机。<br>修正参数，w_{t+1}在错误案例上进行修正。</p>
-<blockquote>
-<p>知错能改法<br>Cyclic PLA,简单的检查是否还有错误。<br>对数据饶一圈，让这第100个人都没有犯错</p>
-</blockquote>
-<h3 id="PLA算法的正确性"><a href="#PLA算法的正确性" class="headerlink" title="PLA算法的正确性"></a>PLA算法的正确性</h3><p><strong>假设</strong></p>
-<ol>
-<li>问题具有最优解</li>
-<li>样本真实，没有噪声</li>
-</ol>
-<p><strong>收敛到最优解</strong></p>
-<p><strong>算法会停止（求迭代轮数）</strong></p>
-<p>PLA用图形的夹角来做。P8</p>
-<p>PLA是否可学习？<br>判断两个数是否接近？<br>做累积，两个向量内积越来越大</p>
-<p><img src="00005.png" alt></p>
-<p><img src="00006.png" alt></p>
-<blockquote>
-<p>资料是否是线性可分？资料这里是指D，还是实际分布</p>
-</blockquote>
-<blockquote>
-<p>从某种分布上来说，未知资料是否线性可分。</p>
-</blockquote>
-<blockquote>
-<p>理论这里对吗？就是是否线性可分</p>
-</blockquote>
-<h2 id="2-2-Learning-with-noisy-data"><a href="#2-2-Learning-with-noisy-data" class="headerlink" title="2.2 Learning with noisy data"></a>2.2 Learning with noisy data</h2><blockquote>
-<p>待测数据上有噪声<br>假设犯错率很低，那么假设没有犯错率</p>
-</blockquote>
-<p>假设没有噪声，但不知道是否可学习怎么办？<br>试图去找犯错误最小的。 NP-hard</p>
-<p>科学家的做法：找不到全局最好的解，所以考虑使用贪心。 Pocket Algorithm，在自己的口袋保留最好的算法，根据步长随机更新的思想。<br><img src="00013.png" alt></p>
-<p><img src="00007.png" alt></p>
-<blockquote>
-<p>因为是最优算法所以返回的结果必然都是最优的。对于算法的比较，记住一定从时间复杂度上看。 还有一旦是线性可分，那么就意味着算法都可以不犯错。</p>
-</blockquote>
-<h1 id="3-Types-of-Learning"><a href="#3-Types-of-Learning" class="headerlink" title="3. Types of Learning"></a>3. Types of Learning</h1><h2 id="v1-输出空间角度"><a href="#v1-输出空间角度" class="headerlink" title="v1 输出空间角度"></a>v1 输出空间角度</h2><ul>
-<li>binary classification</li>
-<li>mulitclass classification</li>
-<li>回归问题<blockquote>
-<p>对于有限的复杂的输出可以看作是多分类问题</p>
-</blockquote>
-</li>
-<li>结构学习问题：比如学习蛋白质的长相，讲的话的语法树（输出空间中具有某种结果）<blockquote>
-<p>其实从某种意义上也是划归到多分类上去。</p>
-</blockquote>
-<h2 id="v2-资料的角度"><a href="#v2-资料的角度" class="headerlink" title="v2 资料的角度"></a>v2 资料的角度</h2></li>
-</ul>
-<ol>
-<li>监督学习: 完全是有标记样本</li>
-<li>非监督学习: 未标记样本，分群<blockquote>
-<p>监督可以看作是没有答案<br>聚类，文章主题</p>
-</blockquote>
-<ul>
-<li>density estimation: {x_n}</li>
-<li>outlier detection:<blockquote>
-<p>难衡量好坏，因为没有目标</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>半监督学习：有标记样本+未标记样本。</li>
-<li>强化学习: 不断强化，给予惩罚和奖励；不断学得最终的目标。<blockquote>
-<p>喂给机器资料，对机器进行评价，好还是不好<br>partial/implicit information</p>
-</blockquote>
-</li>
-</ol>
-<p><img src="00008.png" alt></p>
-<h2 id="v3-取得样本的方式，学习的角度"><a href="#v3-取得样本的方式，学习的角度" class="headerlink" title="v3 取得样本的方式，学习的角度"></a>v3 取得样本的方式，学习的角度</h2><ol>
-<li>Batch Learning</li>
-<li>Online learing</li>
-<li>active: “question asking” –query the yn of the chosen xn<blockquote>
-<p>有技巧地问问题，可以用很少的问题学习到很多的东西。标记很贵的情况。</p>
-</blockquote>
-</li>
-</ol>
-<p><img src="00009.png" alt></p>
-<h2 id="v4-特征的角度"><a href="#v4-特征的角度" class="headerlink" title="v4 特征的角度"></a>v4 特征的角度</h2><p>二维向量：对称性、密度性</p>
-<ul>
-<li>concrete</li>
-<li>abstract 客户的编号，实际就是一种抽象了。</li>
-<li>raw<br><img src="00010.png" alt></li>
-</ul>
-<blockquote>
-<p>如何找一个最合适的特征</p>
-</blockquote>
-<blockquote>
-<p>至少可以从这些分类中寻找一个感兴趣的东西<br><img src="00011.png" alt></p>
-</blockquote>
-<h1 id="4-Feasibility-of-Learning"><a href="#4-Feasibility-of-Learning" class="headerlink" title="4. Feasibility of Learning"></a>4. Feasibility of Learning</h1><p><img src="00012.png" alt></p>
-<h2 id="4-1-Learning-is-impossible"><a href="#4-1-Learning-is-impossible" class="headerlink" title="4.1 Learning is impossible?"></a>4.1 Learning is impossible?</h2><p>adversarial teacher</p>
-<blockquote>
-<p>此时如何学习？<br>有什么问题？目标不唯一<br>这也是为什么<br>No free lunch, 我们坚持的是什么？如果我们坚持f不知道，我们要在D之外学到东西是不可能的。f一定是定下来的，否则是无法解决。再理解</p>
-</blockquote>
-<blockquote>
-<p>这个道理很常见，就像是猜数一样，一定要目标一定才可猜。</p>
-</blockquote>
-<blockquote>
-<p>这也是为什么要用机器学习算法的原因，一般地话，为什么要有测试集，就是试图用测试集来衡量训练误差。</p>
-</blockquote>
-<blockquote>
-<p>还有对于某些题的设定有问题，这其实就只是一种解释，需要更多的解释来完成这个问题</p>
-</blockquote>
-<h2 id="4-2-Inferring-Something-Unknown"><a href="#4-2-Inferring-Something-Unknown" class="headerlink" title="4.2 Inferring Something Unknown"></a>4.2 Inferring Something Unknown</h2><p>can we infer something unknown in other scenarios?</p>
-<blockquote>
-<p>随机采样，这就是为什么要用采样了？<br>参数估计，大数定理。<br>数学上的定理Hoeffding，相差很远的可能性很小；特别是当样本够大，得到的估计趋于真实的估计。<br>注意这里两个方面，看多个变量<br><img src="00014.png" alt></p>
-</blockquote>
-<blockquote>
-<p>从瓶子里去橙色球和其他颜色球，怎么知道原本中含有多少橙色球？一个想法就是通过对瓶子 的球进行采样一定数量，那么，根据采样的数量来就可以来估计真实的值。</p>
-</blockquote>
-<h2 id="4-3-Connection-to-Learning"><a href="#4-3-Connection-to-Learning" class="headerlink" title="4.3 Connection to Learning"></a>4.3 Connection to Learning</h2><p><img src="00015.png" alt></p>
-<p>注意，这里考虑了假设空间和问题空间是一致的。<br>与学习之间的联系。首先我们有一大堆的假设，并从这些假设中抽取一个假设作为真实的假设。 然后，根据这个假设我们就需要得到未来的函数。那么，想法就是从满足这些假设的数据中独立同分布地抽取多个数据。<br>首先，数据如果足够多，利用这些数据学得的假设，并且，我们有理由相信从这些东西中学得的假设。 在数据集特别大的情况下，来学习得到的假设会更好，更满足实际的情况。</p>
-<p>测试数据从某种意义上的设置就是想得到怎么样的数据？</p>
-<blockquote>
-<p>但是一般来说测试数据都是中肯的<br>还有一个方面就是用来纠正学习到的模型，因为学习到的模型有时候是过拟合的，即可解释为泛化能力。</p>
-</blockquote>
-<p><strong>Verification of One h</strong></p>
-<p><img src="00016.png" alt></p>
-<blockquote>
-<p>这里比较了real学习和根据经验误差来学习的差别。</p>
-</blockquote>
-<p>算法总是得到相同的假设，由此可以觉得该算法不好？</p>
-<blockquote>
-<p>假设空间小就意味着算法不好吗？<br>经验误差小就意味着算法好吗？从某个方面可以这样看</p>
-</blockquote>
-<p><img src="00017.png" alt></p>
-<p>ML学得的规则，不一定对过去有效，因为只是过去的抽样数据；不一定对将来有效，因为有一定误差的存在；在未来一百天中选规则也不成，因为构不成学习，不过是很多规则的累加</p>
-<h2 id="4-4-Connection-to-Real-Learning"><a href="#4-4-Connection-to-Real-Learning" class="headerlink" title="4.4 Connection to Real Learning"></a>4.4 Connection to Real Learning</h2><p>bad sample: E_in and E_out far away–can get worse when involving “choice”.</p>
-<blockquote>
-<p>注意，数据的合理性，即样本是否合理。从某种意义上来说，需要看样本是否满足一些基本的分布，详细见西瓜书。<br>就是说所选取的样本是不好的样本，从另一个角度来看，就是一个指导的感觉就是还是说的是独立同分布的问题，即是否满足独立同分布。</p>
-</blockquote>
-<blockquote>
-<p>训练的样本不是好的样本，这是一个检查的标准。</p>
-</blockquote>
-<p><strong>什么是Bad Sample</strong><br>这个和过拟合有关吗？<br>好的数据任意进行选择就可以。<br>但是坏的数据会使算法踩到雷，算法得到不好的结果。</p>
-<p>分析：假设对于每个假设都有bad example, 那么如何。</p>
-<p>就是需要选取某个数据集，所有假设基本上都不会踩到雷。</p>
-<p>评价，只要有一个不好就认为不好。<br>那么，不好的数据集的大小是多少？<br><img src="00018.png" alt></p>
-<p>M是假设的个数。</p>
-<blockquote>
-<p>结论：只有样例过多才能满足要求；<br>现实的指导意义：只有尽可能地将数据认为是正反例合理的情况，否则其他不合理。</p>
-</blockquote>
-<p>所以，当数据合理时，我们认为满足PAC，此时Ein=Eout, Eout就是在未知数据集上的表现情况；注意这里还未引入泛化误差的概念。那么，实际上就是选经验误差最小的，因为经验误差在这里认为是等于泛化的。</p>
-<p>而泛化误差是用来进行评价的。 </p>
-<p>到此为止，说明了假设空间为有限的情况，并未扩展到假设空间为无限的情况。</p>
-<p><img src="00019.png" alt></p>
-<blockquote>
-<p>理解！</p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/machinelearning-cornerstone-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/machinelearning-cornerstone-summary/" class="post-title-link" itemprop="url">machinelearning cornerstone summary</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:27:58 / 修改时间：12:33:17" itemprop="dateCreated datePublished" datetime="2019-09-19T12:27:58+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/" itemprop="url" rel="index"><span itemprop="name">machinelearning</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/cornerstone/" itemprop="url" rel="index"><span itemprop="name">cornerstone</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>what is ML?</p>
-<ol>
-<li>定义<br>人的过程，观察，学习到技能</li>
-</ol>
-<p>机器的过程，数据学习到技能</p>
-<p>技能即如何？</p>
-<ol start="2">
-<li>关键</li>
-</ol>
-<ul>
-<li>存在潜在的模式</li>
-<li>没有很简单的定义</li>
-<li>有足够的数据</li>
-</ul>
-<ol start="3">
-<li><p>应用场景<br>衣食住行</p>
-</li>
-<li><p>辨析<br>from f-&gt;ML-&gt;g: f为目标</p>
-</li>
-</ol>
-<p>ML vs DM： DM is interesting pattern, ML is find underlying pattern<br>ML vs AI: AI is 智能<br>ML vs Statistics: 统计是试图从以往数据中学习点什么出来</p>
-<ol start="5">
-<li>例子<br>PLA， Perceptron算法，线性感知机法，主要想法是进行<br>eg： 图形结合的方法找最优解<blockquote>
-<p>假设： 1. 问题具有最优解  2. 样本真实，没有噪声</p>
-</blockquote>
-</li>
-</ol>
-<p>实际问题</p>
-<ul>
-<li>算法怎么操作？</li>
-<li>算法的正确性分析——算法能达到最优解。<br>  是否存在线性可分的直线，如果存在，那么研究是否收敛到最优解。然后算法是否能停止。<blockquote>
-<p>收敛的分析，探究与最优解的接近程度，内积是一种方法<br>是否停止，即到达常数。</p>
-</blockquote>
-</li>
-<li>算法的时空复杂度分析： 对算法进行比较</li>
-</ul>
-<p>对于最优的算法，其返回结果必然是最优的。</p>
-<blockquote>
-<p>每个算法的假设空间是否是一样的呢？<br>每一个问题都有假设空间，即其中参数来确定假设空间。但是由于假设空间不一定与问题空间对应，所以不一定能得到问题空间的解</p>
-</blockquote>
-<blockquote>
-<p>这里是不是要看算法的类别？<br>对！</p>
-</blockquote>
-<p>思考<br>如果假设1，2不成立怎么办？<br>假设没有噪声，但不知道是否可学习？<br>寻找经验误差最小的。<br>此时，经验误差最小的难度是NP-hard.</p>
-<blockquote>
-<p>一种做法就是选择局部最优解来做。</p>
-</blockquote>
-<p>线性w^T形成的就只是线吗？</p>
-<blockquote>
-<p>对，只是线，这里其实是感知机模型，换句话说就只是所有样本点一起决定下的权值。<br>表示能力是否欠缺？<br>只有可以线性可分的数据集才可以用。</p>
-</blockquote>
-<p>PLA算法更新公式确实是改变了一定的角度，如何保证该改变的角度一定就引起来类别的转化？</p>
-<p>随机化算法是怎么做的？</p>
-<p>扩展：<br>假设不知道算法是否存在最优解，采用口袋算法，即<br>算法流程：<br>    step1 随机选择一个w<br>    step2 如果有错误样本进行一次修正<br>    step3 没有错误则停止，否则重复执行step2</p>
-<ol start="4">
-<li>分类</li>
-</ol>
-<ul>
-<li>输出空间<ul>
-<li>2</li>
-<li>多</li>
-<li>回归</li>
-<li>结构学习</li>
-</ul>
-</li>
-<li>资料<ul>
-<li>监督</li>
-<li>非监督</li>
-<li>半监督</li>
-<li>强化</li>
-</ul>
-</li>
-<li>学习<ul>
-<li>Batch</li>
-<li>online</li>
-<li>active</li>
-</ul>
-</li>
-<li>特征<ul>
-<li>concrete具体</li>
-<li>raw原始</li>
-<li>abstrut 过于抽象，编号信息</li>
-</ul>
-</li>
-</ul>
-<ol start="5">
-<li>学习的前提<br>需要假设存在目标，且目标是一定的<br>Learning impossible, adversarial</li>
-</ol>
-<p>于是在这里引入No Free Lunch, 目标不一定就无法进行学习，对！</p>
-<p>学习的目标不可知, 如何学习？<br>还好有样本，可以使用概率论的概念即抽样来学习。</p>
-<p>为什么可以学习？<br>利用的就是抽样。</p>
-<ul>
-<li><p>对应关系：<br>问题空间-&gt;假设空间</p>
-</li>
-<li><p>关注样本，需要好的样本</p>
-</li>
-</ul>
-<blockquote>
-<p>不好的样例和不好的事</p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/deeplearning-cs231n/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/deeplearning-cs231n/" class="post-title-link" itemprop="url">deeplearning cs231n</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:23:33 / 修改时间：12:24:46" itemprop="dateCreated datePublished" datetime="2019-09-19T12:23:33+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/deeplearning/" itemprop="url" rel="index"><span itemprop="name">deeplearning</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/deeplearning/cs231n/" itemprop="url" rel="index"><span itemprop="name">cs231n</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><ol>
-<li>A brief history of computer vision<ul>
-<li>creatures -&gt; vision</li>
-<li>camera</li>
-<li>what is the vision processing<ul>
-<li>Original picture</li>
-<li>differntiated picture</li>
-<li>Feature points selected</li>
-</ul>
-</li>
-<li>MIT research<br>  <img src="asserts/1-stagesOfvisualRepresentation.png" alt><ul>
-<li>Inpute image<ul>
-<li>preceived intensities</li>
-</ul>
-</li>
-<li>Edge image<ul>
-<li>zero crossing, blobs, edges, bars, ends, virtual lines</li>
-</ul>
-</li>
-<li>2 1/2-D sketch<ul>
-<li>local surface orentation</li>
-</ul>
-</li>
-<li>3D </li>
-</ul>
-</li>
-<li>how to recognize and represent the world</li>
-<li>image segmentation: Jitendra Malik</li>
-<li>face detection</li>
-<li>1999-2000, momentum动量, ML,  adaBoost algorithm to do real-time face detection, 2001</li>
-<li>2006, digital camera a real-time face detector</li>
-<li>SIFT feature: match and the entire object   due to camera angles, occlusion, viewppoint, lighting</li>
-<li>Spatial pyramid matching: from different parts of the image and in different resolutions and put them together in a feature </li>
-<li>HoG Histogrm of Gradients</li>
-<li>imagenet</li>
-<li>SVM, AdaBoost,  overfiting: not enought training data, cannot generalize.  benchmarking  WordNet</li>
-<li>2009  ImageNet Large-Scale Visual Recognition Challenge</li>
-</ul>
-</li>
-<li>CS231n overview<ul>
-<li>Aims<ul>
-<li>image classification</li>
-<li>object detection</li>
-<li>action classification</li>
-<li>image captioning</li>
-</ul>
-</li>
-<li>Convolutional Neural Neteworks</li>
-<li>object relationships</li>
-<li>object attributes</li>
-<li>Our philosophy<ul>
-<li>Thorough and Detailed</li>
-<li>Practical</li>
-<li>State of the art</li>
-<li>Fun</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="2-Image-Classification-pipeline"><a href="#2-Image-Classification-pipeline" class="headerlink" title="2. Image Classification pipeline"></a>2. Image Classification pipeline</h1><p>python numpy tutorial</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NzMjMxbi9jczIzMW4uZ2l0aHViLmlvL2Jsb2IvbWFzdGVyL3B5dGhvbi1udW1weS10dXRvcmlhbC5tZA==" title="https://github.com/cs231n/cs231n.github.io/blob/master/python-numpy-tutorial.md">https://github.com/cs231n/cs231n.github.io/blob/master/python-numpy-tutorial.md<i class="fa fa-external-link"></i></span></p>
-<p>gce~tutoria ?<br>google compute engine</p>
-<ol>
-<li><p>cluster</p>
-</li>
-<li><p>attempts have been made</p>
-<ul>
-<li>find edges</li>
-<li>find corners -&gt;, &lt;-, <blockquote>
-<p>not scalerable</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>Neareast Neighbor</p>
-<ul>
-<li>train: memorize all data and labels O(1)</li>
-<li>predict: predict the label of the most similar training image O(N)<blockquote>
-<p>noisy  spurious<br><img src="asserts/2-1nn.png" alt><br>just training data, 把所有测试数据可能的分类填上去<br>k-nearest neighbors<br><img src="asserts/2-knn.png" alt><br>the white place 可能选哪个都可以，随机才</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ol>
-<p>L1: coordinate system is important</p>
-<blockquote>
-<p>you know what the coordinate system meaning</p>
-</blockquote>
-<p><img src="asserts/2-knn-distance_metric.png" alt><br>numpy的基本运算</p>
-<p><span class="exturl" data-url="aHR0cDovL3Zpc2lvbi5zdGFuZm9yZC5lZHUvdGVhY2hpbmcvY3MyMzFuLWRlbW9zL2tubi8=" title="http://vision.stanford.edu/teaching/cs231n-demos/knn/">http://vision.stanford.edu/teaching/cs231n-demos/knn/<i class="fa fa-external-link"></i></span></p>
-<p>why 图像是那样的????</p>
-<blockquote>
-<p>PRML必读</p>
-</blockquote>
-<ul>
-<li>Setting Hyperparameters</li>
-</ul>
-<p>pick the best training hyperparameters performs on validation?<br>and run once on the test data, then write in the paper</p>
-<p>cross valildation<br>Useful for small datasets, but not used too frequently in deep learning</p>
-<p>有个点自己理解错了，其实是看交叉验证集上的损失怎么样？如果交叉验证集上的损失没有连续操作多少次上升？ 或者达到终止条件，则选择该超参数</p>
-<p>不过，k-cross-validation的意思是用同样的超参数训练多次，然后得到验证集的平均损失，然后更新一次吗？</p>
-<p>因为本身更新公式是作用在损失函数上的</p>
-<p>validation to check how well</p>
-<p>same methodology for collecting the data,  go and partition it randomly</p>
-<p>时间序列分割<br>shift the problem</p>
-<p><img src="asserts/2-k-cross-validation.png" alt></p>
-<p>L2 distance is really not doing a very good job</p>
-<p>cover space densely  exponential growth<br>traning examples?</p>
-<p>knn不适用与图像分类<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYWlwcDA2MDcvYXJ0aWNsZS9kZXRhaWxzLzc3OTE1Mjk4" title="https://blog.csdn.net/chaipp0607/article/details/77915298">https://blog.csdn.net/chaipp0607/article/details/77915298<i class="fa fa-external-link"></i></span></p>
-<ul>
-<li>很差的测试效率</li>
-<li>整个图像的水平距离度量可能非常不直观</li>
-</ul>
-<blockquote>
-<p>计算距离的对象不可能是像素值，因为他不能从本质上反映出人对图像的认知，比如把一张图进行位移，人觉得是一类，但是计算结果距离很大。<br>所以knn计算的应该是一些描述子生成的特征。</p>
-</blockquote>
-<p>knn总结</p>
-<ol>
-<li>对于样本不平均问题，knn相比于其他监督学习算法容忍度更低。</li>
-<li>计算和存储开销大，在线学习效率低。</li>
-</ol>
-<p>改进</p>
-<ol>
-<li>解决样本不平衡问题</li>
-<li>提高分类效率</li>
-</ol>
-<p><img src="asserts/2-hard-cases-for-alinearclassifier.png" alt></p>
-<p>mutlimodal data: different regions of space</p>
-<p>229</p>
-<h1 id="3-some-concepts"><a href="#3-some-concepts" class="headerlink" title="3. some concepts"></a>3. some concepts</h1><h2 id="3-1-loss"><a href="#3-1-loss" class="headerlink" title="3.1 loss"></a>3.1 loss</h2><ul>
-<li>SVM loss:  $L_i = \sum_{j \ne y_i} max(s_j - s_{y_i} +1)$<br>$L = \frac{1}{N} \sum_{i=1}^N L_i$</li>
-</ul>
-<p>$max(1-yf(x))$: 在分类分割线附近进行鼓励</p>
-<blockquote>
-<p>care the correct is much greater than the incorrect scores</p>
-</blockquote>
-<p>loss function; how bad are different mistakes<br>square:  bad, very, very bad<br>hinge:  a litte wrong,  a better wrong</p>
-<p>损失函数总结<br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81ODg4MzA5NQ==" title="https://zhuanlan.zhihu.com/p/58883095">https://zhuanlan.zhihu.com/p/58883095<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>设置W, 来查看Loss</p>
-</blockquote>
-<p>W, 2W  the zero loss</p>
-<h2 id="3-2-regularization-term-encourages-the-model-to-somehow-pick-a-simple-W-R-W"><a href="#3-2-regularization-term-encourages-the-model-to-somehow-pick-a-simple-W-R-W" class="headerlink" title="3.2 regularization term: encourages the model to somehow pick a simple W $R(W)$"></a>3.2 regularization term: encourages the model to somehow pick a simple W $R(W)$</h2><p><img src="asserts/3-regularization.png" alt></p>
-<p>L1 encouraging sparsity in this matrix W.<br>w1: 0.4, 0, 0.4, 0<br>w2: 0.2, 0.2, 0.2, 0.2<br>x:1,1,1,1</p>
-<p>L1:w1   L2:w2</p>
-<blockquote>
-<p>正则化项是在原本目标得到的函数的基础上，按照你想要的某种特性去构造</p>
-</blockquote>
-<p>minimize  -log P(Y=yi| X=xi)<br>multi-SVM: softmax loss </p>
-<blockquote>
-<p>min=zero,  max is infinity</p>
-</blockquote>
-<blockquote>
-<p>当出现错误的数据，如何处理？ 0应该处理为一个非常小的数<br>debuging:  minus log of one over C</p>
-</blockquote>
-<ul>
-<li>hinge-loss vs softmax loss<blockquote>
-<p>SVM-loss: margin  between different classes,  if the data point over the bar, they don’t care about it anymore if they are correct.<br>softmax-loss: drive probabiltity mass all the way to one, pile the all classes, because log loss, it tends to push correct class to 0,  imcorrect classes to infinity.<br>continually to improve the correct classes.</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="3-3-Optimization"><a href="#3-3-Optimization" class="headerlink" title="3.3 Optimization"></a>3.3 Optimization</h2><ol>
-<li>A first very bad idea solution: Random search</li>
-</ol>
-<p>cifar-10  15.5%</p>
-<ol start="2">
-<li>fllow the slope<blockquote>
-<p>scalar 标量</p>
-</blockquote>
-</li>
-</ol>
-<p>如何计算梯度？</p>
-<ul>
-<li>前向传播，然后计算一个新值，然后得到  dW<br><img src="asserts/3-gradient.png" alt></li>
-</ul>
-<blockquote>
-<p>debugging </p>
-</blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly92aXNpb24uc3RhbmZvcmQuZWR1L3RlYWNoaW5nL2NzMjMxbi1kZW1vcy9saW5lYXItY2xhc3NpZnk=" title="https://vision.stanford.edu/teaching/cs231n-demos/linear-classify">https://vision.stanford.edu/teaching/cs231n-demos/linear-classify<i class="fa fa-external-link"></i></span></p>
-<p>calclus 微分</p>
-<p><img src="asserts/3-gradient-ex.png" alt></p>
-<p>add gate: gradient distributor<br>max gate: gradient router<br>mul gate: gradient switcher</p>
-<p>back to a node is add</p>
-<p><img src="asserts/3-Jacobian.png" alt><br>4096*4096? Jacobian matrix:  diagonal matrix </p>
-<p>step 1<br><img src="asserts/3-gradient-vectorized-ex.png" alt></p>
-<p>step 2<br><img src="asserts/3-gradient-vectorized-ex-2.png" alt></p>
-<blockquote>
-<p>Always check: the gradient with respect to a variable should have the same shape as the variable.</p>
-</blockquote>
-<p><img src="asserts/3-forward_backward-api.png" alt><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JWTEMvY2FmZmUvYmxvYi9tYXN0ZXIvc3JjL2NhZmZlL2xheWVycy9jbGlwX2xheWVyLmNwcA==" title="https://github.com/BVLC/caffe/blob/master/src/caffe/layers/clip_layer.cpp">https://github.com/BVLC/caffe/blob/master/src/caffe/layers/clip_layer.cpp<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>caffer layers</p>
-</blockquote>
-<h2 id="3-4-layers-kinds"><a href="#3-4-layers-kinds" class="headerlink" title="3.4 layers kinds"></a>3.4 layers kinds</h2><p><span class="exturl" data-url="aHR0cDovL3R1dG9yaWFsLmNhZmZlLmJlcmtlbGV5dmlzaW9uLm9yZy90dXRvcmlhbC9sYXllcnMuaHRtbA==" title="http://tutorial.caffe.berkeleyvision.org/tutorial/layers.html">http://tutorial.caffe.berkeleyvision.org/tutorial/layers.html<i class="fa fa-external-link"></i></span></p>
-<ul>
-<li>vision layers<ul>
-<li>convolution</li>
-<li>pooling</li>
-<li>local response normalization(lrn)</li>
-<li>im2col</li>
-</ul>
-</li>
-<li>loss layers<ul>
-<li>softmax</li>
-<li>sum-of-squares/euclidean</li>
-<li>hinge/margin</li>
-<li>sigmoid cross-entropy</li>
-<li>accuracy and top-k</li>
-</ul>
-</li>
-<li>Activation/Neuron Layers<ul>
-<li>ReLU/Rectified-Linear and Leaky-ReLU</li>
-<li>Sigmoid  $y = \frac {1}{1 + e^{-x}}$<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JWTEMvY2FmZmUvYmxvYi9tYXN0ZXIvc3JjL2NhZmZlL2xheWVycy9zaWdtb2lkX2xheWVyLmNwcA==" title="https://github.com/BVLC/caffe/blob/master/src/caffe/layers/sigmoid_layer.cpp">https://github.com/BVLC/caffe/blob/master/src/caffe/layers/sigmoid_layer.cpp<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-</li>
-<li>TanH/Hyperbolic Tangent</li>
-<li>Absolute Value</li>
-<li>Power</li>
-<li>BNLL</li>
-</ul>
-</li>
-<li>Data Layers<ul>
-<li>In-Memory</li>
-<li>HDF5 Input</li>
-<li>Images</li>
-<li>Windows</li>
-<li>Dummy</li>
-</ul>
-</li>
-<li>Common Layers<ul>
-<li>Innner Product</li>
-<li>Splitting</li>
-<li>Flattening</li>
-<li>Concatenation</li>
-<li>Slicing</li>
-<li>Elemetwise Oprations</li>
-<li>Argmax</li>
-<li>Softmax</li>
-<li>Mean-Variance Normalization</li>
-</ul>
-</li>
-</ul>
-<p>examples<br><img src="asserts/3-svm.png" alt></p>
-<p>summary<br><img src="asserts/3-summary.png" alt></p>
-<blockquote>
-<p>upstream gradient multipy local gradient</p>
-</blockquote>
-<blockquote>
-<p>左乘优先<br>non-linearities</p>
-</blockquote>
-<p>question: templates, in fact, you don’t have to care about it, the only thing you concerned is the scores</p>
-<p><img src="asserts/3-neural_networks.png" alt></p>
-<blockquote>
-<p>Assignment2: Writing a 2-layer net</p>
-</blockquote>
-<h2 id="3-5-Activation-functions"><a href="#3-5-Activation-functions" class="headerlink" title="3.5 Activation functions"></a>3.5 Activation functions</h2><p><img src="asserts/3-activation_functions.png" alt></p>
-<blockquote>
-<p>callled 2-layer neural net</p>
-</blockquote>
-<p>matrix form, matrix-vector form</p>
-<p>Summary</p>
-<ul>
-<li>arrange neurons into fully-connected layers</li>
-<li>the abstraction of layer has the nice property that it allows us to use efficient vectorized code(e.g. matrix multiplies)</li>
-<li>neural networks are not really neural</li>
-<li>next time: convolutional neural networks</li>
-</ul>
-<h1 id="4-Convolutional-Neural-Networks"><a href="#4-Convolutional-Neural-Networks" class="headerlink" title="4. Convolutional Neural Networks"></a>4. Convolutional Neural Networks</h1><p>Deep Learning history</p>
-<ul>
-<li>1957: Perceptron, Frank Rosenblatt</li>
-<li>1960: Adaline/Madaline<blockquote>
-<p>stack these linear layer to multi-layers, no back-propagation or other rules</p>
-</blockquote>
-</li>
-<li>1986: Rumelhart et al. First time back-propagation became popular</li>
-<li>2006: Reinvigorated research in Deep Learning<blockquote>
-<p>carefully-initialized   pre-training stage </p>
-</blockquote>
-</li>
-<li>2012, first strongest results using for speech recognition</li>
-</ul>
-<p>A bit of history: CNN</p>
-<ul>
-<li>1959 electrical signal from brain<blockquote>
-<p>topographical mapping 地形学</p>
-</blockquote>
-</li>
-<li>Hierarchical organization:<blockquote>
-<p>simple cells -&gt; complex cells -&gt; hypercomplex cells</p>
-</blockquote>
-</li>
-<li>1980 complex cells-&gt;perform pooling</li>
-<li>1998 gradient-base document recognition</li>
-<li>2012, AlexNet</li>
-<li>Detection, Segmentation  R-CNN<br>reinforcement learning</li>
-</ul>
-<p>notation<br>should rorate 180<br>how to slide this over all the spatial locations</p>
-<blockquote>
-<p>卷积层得到的结果是什么<br>3 filter??,  6 filters??<br>over the image spatially<br>we’re sampling the edges and corners less than the other localtions</p>
-</blockquote>
-<blockquote>
-<p>试图去理解每一步的过程还有每一个公式的含义</p>
-</blockquote>
-<p>one filter-&gt; one activation map</p>
-<p>we call these<br><img src="asserts/4-convolutional.png" alt></p>
-<p><img src="asserts/4-output_size.png" alt></p>
-<p>Output size:<br>(N-f)/stride + 1</p>
-<blockquote>
-<p>if we use common to zero pad the border, we will get 7*7 output</p>
-</blockquote>
-<p><img src="asserts/4-outputsize-ex.png" alt></p>
-<blockquote>
-<p>what will channels do?<br>5<em>5</em>3 + 1=76 params(+1 for bias) =&gt; 76*10=760 params</p>
-</blockquote>
-<p><img src="asserts/4-outputsize_summary.png" alt></p>
-<blockquote>
-<p>概念辨析</p>
-</blockquote>
-<ul>
-<li>向量的乘法<blockquote>
-<p>点集，标量积得到内积； 叉乘，结果为向量，向量积</p>
-</blockquote>
-</li>
-<li>矩阵乘法<blockquote>
-<p>multiply: 普通的乘法<br>Hadamard product, 逐点乘法<br>Kronecker product:  tensor product</p>
-</blockquote>
-</li>
-</ul>
-<p>conv layer in torch</p>
-<blockquote>
-<p>spatial convolution</p>
-</blockquote>
-<hr>
-<p>torch, pytorch</p>
-<blockquote>
-<p>torch能够放在GPU中加速计算，前提是有合适的GPU时，使用起来跟numpy来说差别不大</p>
-</blockquote>
-<ul>
-<li><p>torch<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvcmNoL25uL2Jsb2IvbWFzdGVyL2RvYy9jb252b2x1dGlvbi5tZCNubi5TcGF0aWFsQ29udm9sdXRpb24=" title="https://github.com/torch/nn/blob/master/doc/convolution.md#nn.SpatialConvolution">https://github.com/torch/nn/blob/master/doc/convolution.md#nn.SpatialConvolution<i class="fa fa-external-link"></i></span></p>
-</li>
-<li><p>caffe<br><span class="exturl" data-url="aHR0cDovL2NhZmZlLmJlcmtlbGV5dmlzaW9uLm9yZy90dXRvcmlhbC9sYXllcnMvY29udm9sdXRpb24uaHRtbA==" title="http://caffe.berkeleyvision.org/tutorial/layers/convolution.html">http://caffe.berkeleyvision.org/tutorial/layers/convolution.html<i class="fa fa-external-link"></i></span></p>
-</li>
-</ul>
-<hr>
-<h1 id="5-Training-Neural-Networks"><a href="#5-Training-Neural-Networks" class="headerlink" title="5. Training Neural Networks"></a>5. Training Neural Networks</h1><p>Overview:</p>
-<ol>
-<li>one time setup<ul>
-<li>activation functions</li>
-<li>preprocessing</li>
-<li>weight initilization</li>
-<li>regularization</li>
-<li>gradient checking</li>
-</ul>
-</li>
-<li>Training dynamics<ul>
-<li>babysitting the learning process<br>parameter updates</li>
-<li>hyperparameter optimization</li>
-</ul>
-</li>
-<li>Evaluation<ul>
-<li>model ensembles</li>
-</ul>
-</li>
-</ol>
-<h2 id="5-1-Activation-Functions"><a href="#5-1-Activation-Functions" class="headerlink" title="5.1 Activation Functions"></a>5.1 Activation Functions</h2><ol>
-<li>sigmoid <ul>
-<li>introduction<ul>
-<li>squashes numbers to range[0,1]<blockquote>
-<p>[-5, 5]变化明显，其他位置变化就有问题了 [-10, 10]=0<br>df = f(1-f)<br>梯度就是函数图像的直线，永远不要忘了最直观的理解</p>
-</blockquote>
-</li>
-<li>historycally popluar since they have nice interpretation as a saturating “firing rate” of a neuron</li>
-</ul>
-</li>
-<li>problem<ul>
-<li>Saturated neurons “kill” the gradients </li>
-<li>Sigmoid outputs are not zero-centered<blockquote>
-<p>因为对x的范围的限制，所以不对称，同理也不能在全positive的数据上表现的很好； always the sign of the upstream gradient coming down.  inefficient weight update</p>
-</blockquote>
-</li>
-<li>exp() is bit compute expensive</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p><img src="asserts/5-sigmoid.png" alt></p>
-<p><img src="asserts/5-sigmoid-pic.png" alt></p>
-<blockquote>
-<p>avoid allways a direction</p>
-</blockquote>
-<ol start="2">
-<li>tanh 1991</li>
-</ol>
-<ul>
-<li>Squashes numbers to range[-1,1]</li>
-<li>zero centered (nice)</li>
-<li>still kills when saturated :(<br><img src="asserts/5-tanh.png" alt></li>
-</ul>
-<ol start="3">
-<li>relu 2012  rectified linear unit</li>
-</ol>
-<p><img src="asserts/5-relu.png" alt></p>
-<ul>
-<li>not zero-center output</li>
-<li>any annoyance<br>hint: what is the gradient when x&lt;0 ?</li>
-</ul>
-<blockquote>
-<p>it is fine at the begining, then at some point, it became bad and it died.</p>
-</blockquote>
-<p><img src="asserts/5-relu-problem.png" alt></p>
-<blockquote>
-<p>data cloud is just your training data.<br>wx1 + wx2上进行影响啊<br>people like to initialize relu neurons with slightly positive biaes(e.g. 0.01)</p>
-</blockquote>
-<ol start="4">
-<li><p>leaky relu<br><img src="asserts/5-prelu.png" alt></p>
-</li>
-<li><p>elu<br><img src="asserts/5-erelu.png" alt> </p>
-<blockquote>
-<p>how the $\alpha$ is defined</p>
-</blockquote>
-</li>
-<li><p>Maxout Neuron<br><img src="asserts/5-max-neuron.png" alt></p>
-</li>
-</ol>
-<p><img src="asserts/5-practice.png" alt></p>
-<h2 id="5-2-data-preprocess"><a href="#5-2-data-preprocess" class="headerlink" title="5.2 data preprocess"></a>5.2 data preprocess</h2><p>original data -&gt; zero-centered data -&gt; normalized data</p>
-<blockquote>
-<p>to do at the test data, too<br><img src="asserts/5-2_preprocess_data-1.png" alt></p>
-</blockquote>
-<p><img src="asserts/5-2_pcaAndWhitening.png" alt></p>
-<p><img src="asserts/5-2_preprocess_data-practice.png" alt></p>
-<blockquote>
-<p>per-channel  RGB<br>do this for entire train data,  once before training. don’t do this per batch</p>
-</blockquote>
-<blockquote>
-<p>how sigmoid need the zero-centered data,  it only servers for the first layer.</p>
-</blockquote>
-<h2 id="5-3-Weight-Intilization"><a href="#5-3-Weight-Intilization" class="headerlink" title="5.3 Weight Intilization"></a>5.3 Weight Intilization</h2><p>Q: what will happen if W is zero?</p>
-<blockquote>
-<ol>
-<li>will disappear<br>!!they will all do the same thing</li>
-</ol>
-</blockquote>
-<ul>
-<li>First idea: small random numbers<br>(gaussian with zero mean and 1e-2 standard deviation)<br><code>W = 0.01 * np.random.randn(D, H)</code><blockquote>
-<p>works okay for small networks, but problems with deeper networks.</p>
-</blockquote>
-</li>
-</ul>
-<p>pic1 see the hidden data is<br>pic2: see the data distribution</p>
-<blockquote>
-<p>zero</p>
-</blockquote>
-<blockquote>
-<p>All activations become zero!!</p>
-</blockquote>
-<p>What will W look like?</p>
-<p>because X is small, so the W is getting more small, they’re basically not updating.</p>
-<ul>
-<li>forward doing</li>
-<li>have gradient flows coming down<blockquote>
-<p>for each line, we chain these weight</p>
-</blockquote>
-</li>
-</ul>
-<p>cs231n: 深度视觉识别课程P6</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -3370,7 +3242,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">104</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
