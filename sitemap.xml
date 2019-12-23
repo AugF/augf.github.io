@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://augf.github.io/2019/11/01/tools-pygraphviz-study/</loc>
+    
+    <lastmod>2019-12-23T14:30:01.918Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://augf.github.io/2019/12/23/Transformer/</loc>
+    
+    <lastmod>2019-12-23T14:30:01.910Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://augf.github.io/2019/09/19/linux/</loc>
     
     <lastmod>2019-12-23T11:30:14.969Z</lastmod>
@@ -124,13 +138,6 @@
     <loc>https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-paper-read/</loc>
     
     <lastmod>2019-11-04T06:22:41.267Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://augf.github.io/2019/11/01/tools-pygraphviz-study/</loc>
-    
-    <lastmod>2019-11-03T00:37:08.636Z</lastmod>
     
   </url>
   

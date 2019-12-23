@@ -200,7 +200,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">70</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">71</span></a>
 
   </li>
       
@@ -213,7 +213,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">75</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">76</span></a>
 
   </li>
       
@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">110</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">111</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,113 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-red-blackTree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/algorithm-course-red-blackTree/" class="post-title-link" itemprop="url">algorithm course red-blackTree</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 09:16:22 / 修改时间：09:19:25" itemprop="dateCreated datePublished" datetime="2019-09-19T09:16:22+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="BST"><a href="#BST" class="headerlink" title="BST"></a>BST</h2><blockquote>
+<p>这里研究的关键问题是searching，设为key-value对，那么目标是查找value，一般来说目的是查找该value是否存在，或者更进一步返回位置。</p>
+</blockquote>
+<blockquote>
+<p>由前面分析知，对于searching问题</p>
+<ol>
+<li>组织为原本的形式，BF O(n)</li>
+<li>组织为hash的形式，O(1)</li>
+<li>组织为树的结构，O([logn])</li>
+</ol>
+<p>我们知道，搜索的长度实际上与搜索的树的高度密切相关，所以我们希望寻找平衡的树。</p>
+</blockquote>
+<blockquote>
+<p>本身有多种平衡树的结构，我们这里RBT</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">递归定义，由递归定义无论如何是很容易地去写出原本的结构的。</span><br><span class="line"></span><br><span class="line">RB0</span><br><span class="line"></span><br><span class="line">RB: black (RB/ARB, RB/ARB)</span><br><span class="line"></span><br><span class="line">ARB: red (RB, RB)</span><br><span class="line"></span><br><span class="line">insert()</span><br><span class="line">delete()</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -1470,204 +1577,11 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-thinking-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/algorithm-thinking-2/" class="post-title-link" itemprop="url">algorithm-thinking-2</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 08:50:32 / 修改时间：08:51:14" itemprop="dateCreated datePublished" datetime="2019-09-19T08:50:32+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/thinking/" itemprop="url" rel="index"><span itemprop="name">thinking</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>在这里又开始想到时间复杂度这个问题。</p>
-<p>对算法的最坏情况进行分析，隐含地给出了对任意输入的运行时间的上界。</p>
-<p>对算法的最好情况进行分析，隐含地给出了在任意输入下运行时间的下界。</p>
-<p>怎么分析问题的计算时间下界？</p>
-<p>问题的计算时间下界为$\Omega (f(n))$. 则计算时间复杂性为$O(f(n))$的算法是最优算法。</p>
-<p>例如，排序问题的计算时间下界为$\Omega(nlogn)$, 则计算时间复杂性为$O(nlogn)$的排序算法是最优算法。</p>
-<p>问题的定义是什么？除了形式化定义，还有什么类别？</p>
-<blockquote>
-<p>问题这里如果一定义大一点的话，就涉及到运筹学的问题。运筹学的本质就是对问题进行分析。</p>
-<p>最最关键的点知道是什么？就是按照自己的计划把该学的这些东西都给过一遍。</p>
-</blockquote>
-<blockquote>
-<p>知乎推荐：</p>
-<p>从本身来说，应该是听老师上课的课程，并结合自己的学习去思考这些问题。而且不能少了解决问题的这个点。</p>
-<p>Tsitsiklis的Introduction to Linear Optimization</p>
-<p>Stephen Boyd的Convex Optimization, 可以结合视频进行一起学习。</p>
-<p>可以学习到什么？</p>
-</blockquote>
-<p>问题的分类是什么？</p>
-<ol>
-<li><p>线性规划，最简单和基础的优化问题，目标函数（max）和约束条件(s.t)都是线性的，自变量x是实数变量，P问题（多项式时间可解）。</p>
-<blockquote>
-<p>注意，从所围成的可行域来说是某种范围的。</p>
-</blockquote>
-</li>
-<li><p>非线性规划，目标函数或约束条件为非线性，如2次函数；</p>
-</li>
-<li><p>凸优化，约束条件形成的可行域是凸的</p>
-</li>
-<li><p>（混合）整数规划，自变量有整数变量，NP难问题（指数级算法复杂度）</p>
-</li>
-<li><p>半正定规划，每一个自变量x代表一个矩阵</p>
-</li>
-<li><p>网络流问题，一个特殊的混合整数规划问题，满足一个节点流出流量=流入流</p>
-</li>
-<li><p>动态规划、近似算法、启发式算法、遗传算法–用来解例如整数规划等NP难优化问题的算法，后俩个通常只能得到局部最优解，最经典的当属最大流最小割定理。</p>
-</li>
-</ol>
-<p>问题求解是什么？问题求解有哪些步骤？</p>
-<p>问题的复杂度怎么分析？</p>
-<p>问题求解方法有哪些？一般优化有哪些策略？</p>
-<p>进一步，</p>
-<p>重新去审视各学科的知识，究竟重要的又是什么？</p>
-<blockquote>
-<p>软件工程中的问题求解，有意思的一点是企业版的感觉</p>
-<p>“问题求解”指描述问题，以及开发计算机程序来解决问题的整个过程，这个过程包含多个阶段，包括理解待解决的问题，从概念上设计解决方案，以及用计算机程序实现解决方案。</p>
-<p>解决方案通常由“算法”和“数据存储方式”两部分组成。“算法”指在有限时间解决问题的方法的分布描述。“数据存储方式”又称数据结构，是对数据组织存储方式上的概念。</p>
-<p>软件的生命周期</p>
-<ol>
-<li>问题描述</li>
-<li>设计</li>
-<li>风险分析</li>
-<li>验证</li>
-<li>编码</li>
-<li>测试</li>
-<li>完善解决方案</li>
-<li>生产</li>
-<li>维护</li>
-</ol>
-</blockquote>
-<blockquote>
-<p>扩展2： 数学建模</p>
-<ul>
-<li><p>整数规划：</p>
-</li>
-<li><p>线性规划，可行域通常是多面体，即由多个直线围成的多面体的感觉。最关键的一点是最优解往往在多面体的边界上。这点很棒</p>
-</li>
-<li><p>非线性规划</p>
-</li>
-<li><p>动态规划：像自己理解的一样，在这里的运用感觉上是在把问题拆分为状态和空间。进而进行低估的感觉。</p>
-</li>
-<li><p>图论：这里涉及到应用最短路问题。</p>
-</li>
-<li><p>排队论，即随机服务系统理论：</p>
-<ul>
-<li><ol>
-<li>性态问题，即研究各种排队系统的概率规律性，主要是研究队长分布、等待时间分布和忙期分布等，包括了瞬态与稳态两种情形。</li>
-<li>最优化问题，又分为静态最优和动态最优。前者指最优设计，后者指现有排队系统的最优运营。</li>
-<li>排队系统的统计推断，即判断一个给定的排队系统符合哪种模型，以便根据排队理论进行分析。</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>对策论，亦称博弈论。是研究具有斗争或竞争性质现象的数学理论和方法。对策问题的特征是参与者为利益相互冲突的各方，其结局不取决于女其中任意一方的努力而是各方所采取的策略的综合结果。</p>
-</li>
-<li><p>层次分析法：一种灵活的多决策分析方法，有点类似神经网络的感觉</p>
-</li>
-<li><p>插值与拟合：</p>
-<blockquote>
-<p>插值：求过已知有限个数据点的近似函数</p>
-<p>拟合：已知有限个数据点，求近似函数，不要求过已知数据点，只要求在某种意义下载这些点上的总偏差最小。</p>
-<p>插值和拟合的目的是根据一组数据构造一组数据选一个函数作为近似，从而进行接下来的分析。</p>
-<p>从感觉上，可以看作是连续问题即对应的函数形式，然后来解决问题</p>
-</blockquote>
-</li>
-<li><p>数理统计研究的对象是受随机因素影响的数据。统计的任务是由样本推断总体</p>
-</li>
-<li><p>模糊数学，时间序列</p>
-</li>
-</ul>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1715,7 +1629,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-count">111</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1728,7 +1642,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-count">76</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1741,7 +1655,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
