@@ -296,7 +296,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
             
-            <a href="/2019/12/23/Transformer/" class="post-title-link" itemprop="url">numpy study</a>
+            <a href="/2019/12/23/Transformer/" class="post-title-link" itemprop="url">Transformer论文阅读</a>
           
         </h2>
 
@@ -311,7 +311,7 @@
                 
               
 
-              <time title="创建时间：2019-12-23 22:10:10 / 修改时间：22:30:01" itemprop="dateCreated datePublished" datetime="2019-12-23T22:10:10+08:00">2019-12-23</time>
+              <time title="创建时间：2019-12-23 22:10:10 / 修改时间：22:44:43" itemprop="dateCreated datePublished" datetime="2019-12-23T22:10:10+08:00">2019-12-23</time>
             </span>
           
             
@@ -354,14 +354,14 @@
 <p>Transformer model是一种摒弃了循环及卷积结构，仅仅依赖于注意力机制的简洁的神经网络模型。我们知道recurrent network是一种sequential model，不能很好地解决长距离依赖的问题(序列过长时，信息在序列模型中传递时容易一点点丢失)，并且阻碍了parallelism within train example.而<font color="red">transform最引人瞩目的一点正是很好地解决了长距离依赖的问题，通过引入自注意力机制(self-attention)使得对依赖的建模与输入输出序列的距离无关，并且支持train exmaple内部的并行化。</font>注意力机制可以参考之前写的<span class="exturl" data-url="aHR0cHM6Ly9icm9va3NqLmNvbS8yMDE5LzEyLzAxL1N0YW5kZm9yZC1DUzIyNG4tTm90ZXMv" title="https://brooksj.com/2019/12/01/Standford-CS224n-Notes/">notes of cs224n lecture8<i class="fa fa-external-link"></i></span>.</p>
 <h2 id="Model-Architecture"><a href="#Model-Architecture" class="headerlink" title="Model Architecture"></a>Model Architecture</h2><p>下图1是transformer的模型架构图</p>
 <div align="center">
-    <img src="/Transformer/transformer_1.png">
+    <img src="Transformer/transformer_1.png">
 </div>
 
 <center>图1. The Transformer - model architecture</center>
 左边是encoder，右边是decoder，各有6层，下面我将讲解个人觉得比较重要的几个点。
 
 <h3 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h3><div align="center">
-    <img src="/Transformer/transformer_2.png">
+    <img src="Transformer/transformer_2.png">
 </div>
 
 <center>图2. (left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several attention layers running in parallel.
@@ -381,7 +381,7 @@
 <h3 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h3><p>由于transform model不包含循环和卷积网络，为了使模型能利用sequence的顺序信息，必须加入序列中每个subword的相对或者绝对位置信息。因此引入了Positional Encoding，它保持和embedding一样维度$d_{model}$，具体encoding的方式有很多种，主要分为学习的和固定的(learned and fixed)。在论文中使用了固定的无须学习的positional embedding，使用不同频率的cos和sin函数如下<br>$$<br>\begin{align}<br>PE_{(pos,2i)}&amp;=sin(pos/10000^{2i/d_{model}})\<br>PE_{(pos,2i+1)}&amp;=cos(pos/10000^{2i/d_{model}})<br>\end{align}<br>$$<br>其中，pos是token position in sequence，i是dimension position.之所以选择cos和sin函数是因为对于固定的偏置量$k,PE_{pos+k}$能够表示为$PE_{pos}$的线性函数，假设它可以很容易学习到相对位置引入的信息。使用cos和sin的另一个原因是它允许模型推断比训练过程中遇到的更长的序列。论文中作者表示也使用了learned positional embeddings，但是与上述的fixed positional embeddings结果基本一致，所以最终采用了fixed positional embedings，这种方式更高效，减少训练开销。</p>
 <p>最终作为模型输入的是token embeddings + positional embeddings，然后套一层dropout.</p>
 <h3 id="Why-Self-Attention"><a href="#Why-Self-Attention" class="headerlink" title="Why Self-Attention"></a>Why Self-Attention</h3><div aling="center">
-    <img src="/Transformer/transformer_3.png">
+    <img src="Transformer/transformer_3.png">
 </div>
 
 <p>如上图所示，使用self-attention机制主要有三点原因</p>
@@ -405,7 +405,7 @@
 <h3 id="LayerNormalization"><a href="#LayerNormalization" class="headerlink" title="LayerNormalization"></a>LayerNormalization</h3><p>在multi-head attention之后使用layer normlization可以加速参数训练使得模型收敛，并且可以避免梯度消失和梯度爆炸。相比BatchNormalization，LayerNormalization更适用于序列化模型比如RNN等，而BatchNormalization则适用于CNN处理图像。</p>
 <h3 id="LayerNormalization-1"><a href="#LayerNormalization-1" class="headerlink" title="LayerNormalization"></a>LayerNormalization</h3><p>在multi-head attention之后使用layer normlization可以加速参数训练使得模型收敛，并且可以避免梯度消失和梯度爆炸。相比BatchNormalization，LayerNormalization更适用于序列化模型比如RNN等，而BatchNormalization则适用于CNN处理图像。</p>
 <h3 id="Learning-Rate-with-Warmup"><a href="#Learning-Rate-with-Warmup" class="headerlink" title="Learning Rate with Warmup"></a>Learning Rate with Warmup</h3><div align="center">
-    <img src="/Transformer/transformer_4.png">
+    <img src="Transformer/transformer_4.png">
 </div>
 
 <p>Transformer使用Adam optimizer with $\beta_{1}=0.9,\beta_{2}=0.98,\epsilon=10^{-9}$.学习率在训练过程中会变动，先有一个预热，学习率呈线性增长，然后呈幂函数递减如上图所示，下面是学习率的计算公式<br>$$<br>lrate=d^{-0.5}_{model} \cdot min(step_num^{-0.5},step_num \cdot warmup_steps^{-1.5})<br>$$<br>论文中设置warmup_steps=4000.也就是说训练的前4000步线性增长，4000步后面呈幂函数递减。这么做可以加速模型训练收敛，先以上升的较大的学习率让模型快速落入一个局部收敛较优的状态，然后以较小的学习率微调参数慢慢逼近更优的状态以避免震荡。</p>
