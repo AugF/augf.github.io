@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">104</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">110</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,1943 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/18/git-using/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/18/git-using/" class="post-title-link" itemprop="url">git using</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-18 14:24:20" itemprop="dateCreated datePublished" datetime="2019-09-18T14:24:20+08:00">2019-09-18</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-02 21:23:23" itemprop="dateModified" datetime="2019-11-02T21:23:23+08:00">2019-11-02</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>更全面的请参考<br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTUvMTIvZ2l0LWNoZWF0LXNoZWV0Lmh0bWw=" title="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html<i class="fa fa-external-link"></i></span></p>
+<h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>Workspace：工作区<br>Index / Stage：暂存区  add<br>Repository：仓库区（或本地仓库） commit/fetch<br>Remote：远程仓库</p>
+<p>git reflog 查看当前分支的最近几次提交<br>git log 查看所有commit的记录</p>
+<h2 id="开始git之旅"><a href="#开始git之旅" class="headerlink" title="开始git之旅"></a>开始git之旅</h2><ol>
+<li>github上新建reposity，假设仓库名为Inbox</li>
+<li>本地化 <ul>
+<li>配置 <br><br>git config –global user.name “yourname” <br><br>git config –global user.email “youremail” <br><br><font color="red">git config –global core.editor vim</font> <br><blockquote>
+<p>这一点很重要，可以摆出Git自带的愚蠢的GNO的困扰</p>
+</blockquote>
+<ul>
+<li>两种方式<ul>
+<li>git init <br><ul>
+<li>git remote add origin <code>http://website://repo.git</code> <br><blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvRGVzaWduUGF0dGVybnMuZ2l0" title="https://github.com/AugF/DesignPatterns.git">https://github.com/AugF/DesignPatterns.git<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+<li>git push -u origin master</li>
+<li>git push origin master -f</li>
+</ul>
+</li>
+<li>git clone <code>http://website://repo.git</code><h2 id="多人开发思路："><a href="#多人开发思路：" class="headerlink" title="多人开发思路："></a>多人开发思路：</h2>git branch查看分支</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>git checkout -b fpm， 创建分支并转到分支<br>git checkout -d fpm,  删除分支</p>
+<p>所有的修改操作都在fpm分支上<br>master负责merge远程分支</p>
+<ol>
+<li>希望master分支更新fpm分支上的内容<ul>
+<li>git checkout master</li>
+<li>git merge fpm</li>
+<li>git branch 查看分支</li>
+<li><blockquote>
+<p>fpm 分支并不会消失</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>希望fpm更新到master分支上的内容<ul>
+<li>git checkout fpm</li>
+<li>git rebase master</li>
+</ul>
+</li>
+<li>希望能够显示本地分支的情况</li>
+<li>merge前和push前需要检查本地内容有没有提交，请注意一件事就是先提交</li>
+<li>更新本地分支<ul>
+<li>git pull注意不过不带参数是直接覆盖</li>
+<li>git pull origin next:master 取回origin主机的next分支与本地的master分支合并  !!!<blockquote>
+<p>或者git pull origin master<br>一种思路可以将代码全部拉到本地某个分支<br>git fetch origin + git merge origin/next</p>
+</blockquote>
+</li>
+<li>git branch –set-upstream master origin/next 自动为本地master追踪分支 </li>
+</ul>
+</li>
+<li>远程分支操作<ul>
+<li>查看远程分支： git branch -r</li>
+<li>创建运程分支： git push origin [name]</li>
+<li>删除远程分支： git push origin :[name]</li>
+</ul>
+</li>
+</ol>
+<h2 id="对别人的项目做贡献"><a href="#对别人的项目做贡献" class="headerlink" title="对别人的项目做贡献"></a>对别人的项目做贡献</h2><ol>
+<li>非Collaborators<ul>
+<li>git remote add upstream </li>
+<li>git fetch upstream</li>
+<li>git merge upstream/master</li>
+</ul>
+</li>
+</ol>
+<h2 id="对远程仓库名进行查看"><a href="#对远程仓库名进行查看" class="headerlink" title="对远程仓库名进行查看"></a>对远程仓库名进行查看</h2><ol>
+<li>git remote show <code>&lt;主机名&gt;</code> : 查看远程主机，不包含地址</li>
+<li>git remote add <code>&lt;主机名&gt;</code>: 添加远程主机</li>
+<li>git remote rm <code>&lt;主机名&gt;</code>: 删除远程主机</li>
+<li>git remote rename <code>&lt;主机名&gt;</code>: 改名</li>
+<li>git remote -v: 连带查看地址<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 列出所有tag</span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"># 新建一个tag在当前commit</span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"># 删除本地tag</span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"># 查看tag信息</span><br><span class="line">$ git show [tag]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><ol>
+<li><p>You have not concluded your merge (MERGE_HEAD exists). Exiting because of unfinished merge<br>之前的提交没有merge</p>
+<blockquote>
+<p>git reset –merge</p>
+</blockquote>
+</li>
+<li><p>无法推送一些引用到 ‘<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5dW5wYW4vbmxwLXpoLU5FUi5naXQmIzM5Ow==" title="https://github.com/wangyunpan/nlp-zh-NER.git&#39;">https://github.com/wangyunpan/nlp-zh-NER.git&#39;<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>git pull<br>git push</p>
+</blockquote>
+</li>
+<li><p>报错<br>fatal: 远程 origin 已经存在。</p>
+<blockquote>
+<p>git remote rm origin  删除远程分支</p>
+</blockquote>
+</li>
+<li><p>如果我本地一顿猛操作，然后需要更新文件，然后应该怎么办？ 不能直接git pull, 再git push, 这样会覆盖本地的文件？？</p>
+</li>
+<li><p>! [rejected]        master -&gt; master (non-fast-forward)<br>error: failed to push some refs to ‘<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvRGVzaWduUGF0dGVybnMuZ2l0JiMzOTs=" title="https://github.com/AugF/DesignPatterns.git&#39;">https://github.com/AugF/DesignPatterns.git&#39;<i class="fa fa-external-link"></i></span><br>hint: Updates were rejected because the tip of your current branch is behind</p>
+<blockquote>
+<p>git push origin master -f</p>
+</blockquote>
+</li>
+<li><p>OpenSSL: error:1409442E:SSL routines:ssl3_read_bytes:tlsv1 alert protocol version</p>
+<blockquote>
+<p>向pasa gitbucket提交出现该bug<br>按照stackoverflow上  <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTMxNTE0NTYvb3BlbnNzbC1lcnJvcjE0MDk0NDJlc3NsLXJvdXRpbmVzc3NsMy1yZWFkLWJ5dGVzdGxzdjEtYWxlcnQtcHJvdG9jb2wtdmVyc2lv" title="https://stackoverflow.com/questions/53151456/openssl-error1409442essl-routinesssl3-read-bytestlsv1-alert-protocol-versio">https://stackoverflow.com/questions/53151456/openssl-error1409442essl-routinesssl3-read-bytestlsv1-alert-protocol-versio<i class="fa fa-external-link"></i></span><br>修改  wget –secure-protocol=TLSv1_2 仍然未解决</p>
+</blockquote>
+</li>
+<li><p>如何强制将远程代码覆盖到本地</p>
+<blockquote>
+<p>git pull 并没有得到远程最新的代码<br>使用 git fetch –all &amp;&amp; git reset –hard origin/master &amp;&amp; git pull 强制覆盖本地代码</p>
+</blockquote>
+<ul>
+<li>git branch –set-upstream-to=origin/master branch</li>
+<li>git pull 远程主机名  远程分支名:本地分支名</li>
+</ul>
+</li>
+<li><p>如何将现有代码分支push到远程指定分支</p>
+<blockquote>
+<p>git push –set-upstream origin current_branch</p>
+</blockquote>
+</li>
+<li><p>fatal: protocal ‘https’ is not supported</p>
+<blockquote>
+<ol>
+<li>use ssh</li>
+<li>在git安装目录中找到libcurl-4.dll的文件位置，并移动到其他地方</li>
+</ol>
+</blockquote>
+</li>
+<li><p>error: Your local changes to the following files would be overwritten by merge:</p>
+<pre><code>graph/images/GRU_dot.png</code></pre></li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/18/study-todo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/18/study-todo/" class="post-title-link" itemprop="url">study todo</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-18 10:06:10 / 修改时间：16:45:03" itemprop="dateCreated datePublished" datetime="2019-09-18T10:06:10+08:00">2019-09-18</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/todo/" itemprop="url" rel="index"><span itemprop="name">todo</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/todo/study/" itemprop="url" rel="index"><span itemprop="name">study</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>日志，了解加使用</p>
+</li>
+<li><p>命令行</p>
+</li>
+<li><p>环境</p>
+</li>
+<li><p>计算机基础4本经典书籍</p>
+<ul>
+<li>编译原理龙书</li>
+<li>深入理解计算机系统</li>
+<li>计算网络：自顶向下</li>
+<li>现代操作系统</li>
+</ul>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/16/clean-code-reading-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/16/clean-code-reading-note/" class="post-title-link" itemprop="url">clean code: reading note</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-16 16:08:54" itemprop="dateCreated datePublished" datetime="2019-09-16T16:08:54+08:00">2019-09-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-18 16:14:31" itemprop="dateModified" datetime="2019-09-18T16:14:31+08:00">2019-09-18</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/code/" itemprop="url" rel="index"><span itemprop="name">code</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/code/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>由于自己写的代码老是感觉像屎一样烂，所以觉得不学学这方面的东西，真的是自己都看不下去了</p>
+</blockquote>
+<p>代码整洁之道  Rober C.Martin著， 韩磊译 </p>
+<blockquote>
+<p>就学习而言，自己尽可能去过了一遍知识点，以下记的内容多半是过细的内容。要真正掌握之， 还需要summary最重要的准则，牢记于大脑中，形成做事的准则。同时，并且还要加以实战，对实例进行了解才是</p>
+</blockquote>
+<p>学习参考代码·<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0YvQ2xlYW5Db2Rl" title="https://github.com/AugF/CleanCode">https://github.com/AugF/CleanCode<i class="fa fa-external-link"></i></span></p>
+<h2 id="A-概览"><a href="#A-概览" class="headerlink" title="A. 概览"></a>A. 概览</h2><ol>
+<li><p>什么是整洁代码</p>
+<ul>
+<li>Bjame (C++)<blockquote>
+<p>缺陷难以隐藏；减少依赖；分层战略处理错误代码；性能调至最优；整洁的代码只做好一件事情</p>
+</blockquote>
+</li>
+<li>Grady<blockquote>
+<p>干净利落的抽象和直截了当的控制语句</p>
+</blockquote>
+</li>
+<li>Dave Thomas<blockquote>
+<p>单元测试和验收测试；明确定义和提供清晰、尽量少的API</p>
+</blockquote>
+</li>
+<li>Ron<blockquote>
+<p>消除重复和提高表达力，提早构建简单抽象</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>重点： !!! 童子军军规：让你的营地比你来时更干净。 每次签入时，都比签出干净</p>
+</li>
+<li><p>后续阅读： 敏捷软件开发：原则、模式与实践</p>
+</li>
+<li><p>章节安排</p>
+<ul>
+<li>有意义的命名</li>
+<li>函数</li>
+<li>注释</li>
+<li>格式</li>
+<li>对象和数据结构</li>
+<li>错误处理</li>
+<li>单元测试</li>
+<li>类</li>
+<li>系统</li>
+<li>迭进</li>
+<li>并发编程</li>
+<li>逐步改进</li>
+<li>JUnit内幕</li>
+<li>重构SerialDate</li>
+<li>味道与启发 ???</li>
+</ul>
+</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/16/clean-code-reading-note/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/16/algorithm-acwing-improve/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/16/algorithm-acwing-improve/" class="post-title-link" itemprop="url">algorithm acwing improve class</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-16 14:57:57" itemprop="dateCreated datePublished" datetime="2019-09-16T14:57:57+08:00">2019-09-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-22 13:13:15" itemprop="dateModified" datetime="2019-12-22T13:13:15+08:00">2019-12-22</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/improve/" itemprop="url" rel="index"><span itemprop="name">improve</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-概览"><a href="#1-概览" class="headerlink" title="1. 概览"></a>1. 概览</h2><ol>
+<li><p>算法学习分为这几类：</p>
+<ul>
+<li>level 1 语法课, 直接题库搜索”语法课”即可进行练习<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aW5nLmNvbS9wcm9ibGVtL3NlYXJjaC8xLz9jc3JmbWlkZGxld2FyZXRva2VuPW1zVUpKNUx0eFJ2SWxkQmxzc2x2Y2hZU3c4R3JuOFVkSU0zMkYyV3RwTnMxV2l0TlRqc3ZMem5UVkZvZjhjVzImYW1wO3NlYXJjaF9jb250ZW50PSVFOCVBRiVBRCVFNiVCMyU5NSVFOSVBMiU5OA==" title="https://www.acwing.com/problem/search/1/?csrfmiddlewaretoken=msUJJ5LtxRvIldBlsslvchYSw8Grn8UdIM32F2WtpNs1WitNTjsvLznTVFof8cW2&amp;search_content=%E8%AF%AD%E6%B3%95%E9%A2%98">https://www.acwing.com/problem/search/1/?csrfmiddlewaretoken=msUJJ5LtxRvIldBlsslvchYSw8Grn8UdIM32F2WtpNs1WitNTjsvLznTVFof8cW2&amp;search_content=%E8%AF%AD%E6%B3%95%E9%A2%98<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+<li>level 2 算法基础课</li>
+<li>level 3 算法提高课 算法的应用<ul>
+<li>题目–&gt; 模型 —&gt; 相似的题目(因为整理的人太少，所以这里暂时以题目为主) 题谱</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>算法题考查两部分的内容：</p>
+<ol>
+<li>思维</li>
+<li>写代码的熟练度</li>
+</ol>
+</li>
+<li><p>非常好的网站: 衡阳七中</p>
+<blockquote>
+<p>看延迟，直接看时间就可以了</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="2-DP"><a href="#2-DP" class="headerlink" title="2. DP"></a>2. DP</h2><h3 id="2-1-数字三角形"><a href="#2-1-数字三角形" class="headerlink" title="2.1 数字三角形"></a>2.1 数字三角形</h3><ol>
+<li><p>basic </p>
+<ul>
+<li>采花生问题<blockquote>
+<p>从集合角度来考虑问题, 一个集合就代替了暴搜中的一个元素</p>
+</blockquote>
+<ul>
+<li>状态表示 f[i, j]<ul>
+<li>集合： 所有从(1, 1)走到(i, j)的路线</li>
+<li>属性： Max/Min/数量： 集合中所有集合的每个元素的最大值；<blockquote>
+<p>于是f(n, m)就是目标值;  计算该值实际上就是寻找一个拓扑排序</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>状态计算： 集合划分  分而治之<blockquote>
+<p>依据最后一步来划分</p>
+</blockquote>
+<ul>
+<li>划分依据<ul>
+<li>不重复（最值无所谓，数量必须要）</li>
+<li>不漏（所有的都必须考虑）<blockquote>
+<p>本题图的连通性</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最低通行费： 最大值往往不需要初始化，最小值需要进行考虑</li>
+</ul>
+</li>
+<li><p>improve</p>
+<ul>
+<li>方格取数：难点在于如何考虑走两次<ul>
+<li>走两次： 同时走<blockquote>
+<p>f[i1, j1, i2, j2]表示所有从(1,1), (1,1)分别走向(i1,j1),(i2,j2)的路径的最大值。 </p>
+</blockquote>
+<ul>
+<li>如何处理“同一个格子不能被重复选择”<blockquote>
+<p>只有在i1+j1=i2+j2时，两条路径的格子才可能重合；一开始考虑使用f[i1, j1, i2, j2], 但是发现可以少一维的变量!!!<br>f[k, i1, i2]表示所有从(1,1), (1,1)分别走到(i1, k-i1), (i2, k-i2)的路径的最大值， k表示两条路线当前走到的格子的横纵坐标之和</p>
+</blockquote>
+</li>
+<li>状态计算： 集合划分=下+下， 下+右， <blockquote>
+<p>(1,1)-&gt; (i1-1, j1), (i2-1,j2) -&gt; (i1, j1), (i2, j2)</p>
+</blockquote>
+<ul>
+<li>集合划分<blockquote>
+<p>将(1,1)到(k, i1, i2)的路分为两种<br>(1,1)–&gt; (i1-1, j1) -&gt; (i1, j1)<br>(1,1)–&gt; (i2-1, j2) -&gt; (i2, j2)<br>f(k-1, i1-1, i2-1), 根据(i1,j1),(i2,j2)是否是同一个格子，重合 w(i1, j1); 不重合， w(i1, j1)+w(i2, j2)</p>
+</blockquote>
+<ul>
+<li>1： 下， 2： 下</li>
+<li>1： 下， 2： 右</li>
+<li>1： 右， 2： 下</li>
+<li>1： 右， 2:  右</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-2-最长上升子序列问题"><a href="#2-2-最长上升子序列问题" class="headerlink" title="2.2 最长上升子序列问题"></a>2.2 最长上升子序列问题</h3><p>LIS(longest increase subsequence)<br>    1017 怪盗基德<br>        1014 登山，482 合唱队形<br>    1012 友好城市<br>    1016 最大上升子序列<br>    1010(+贪心) 拦截导弹<br>        187(+dfs) 导弹防御系统<br>    272(LCS) 最长公共上升子序列</p>
+<h4 id="2-2-1-basic"><a href="#2-2-1-basic" class="headerlink" title="2.2.1 basic"></a>2.2.1 basic</h4><p>895: 最长上升子序列问题</p>
+<ul>
+<li>状态表示f[i]<ul>
+<li>集合： 所有以a[i]结尾的严格单调上升子序列</li>
+<li>属性： Max</li>
+</ul>
+</li>
+<li>状态计算<ul>
+<li>划分依据：最后一个不同的点。<blockquote>
+<p>如果不能在前面很快判断，那么最基本的想法就是枚举来做，空</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>LLS实际上可以从n^2转化为nlogn, 实际与后面的一步的转化。 优化？</p>
+</blockquote>
+<p>272： 最长上升公共子序列<br>f[i,j]</p>
+<ul>
+<li>集合： 所有由第一个序列的前i个字母，第二个序列的前j个字母, 且以b[j]结尾的构成的公共子序列，Max<blockquote>
+<p>注意这里要加条件</p>
+</blockquote>
+</li>
+<li>状态计算： <ol>
+<li>所有包含a[i]的公共上升子序列 a[i]==b[j]<blockquote>
+<p>按照倒数第2类划分， 序列倒数第1个数时null, b[1], b[2], .., b[j-1]<br>进行枚举  f[i,k] + 1 因为b[j]大于，所以实际上就是</p>
+</blockquote>
+</li>
+<li>所有不包含a[i]的公共上升子序列 f[i-1, j]</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-背包问题：-背包九讲"><a href="#3-背包问题：-背包九讲" class="headerlink" title="3. 背包问题： 背包九讲"></a>3. 背包问题： 背包九讲</h2><p>01背包： 体积vi, 价值wi, 求各种放法，使得背包的总价值最大</p>
+<h3 id="3-1-basic"><a href="#3-1-basic" class="headerlink" title="3.1 basic"></a>3.1 basic</h3><ul>
+<li>01背包<ul>
+<li>完全背包<ul>
+<li>多重背包I<ul>
+<li>多重背包问题II + 二进制</li>
+<li>多重背包问题III + 单调队列（滑动窗口求最值）</li>
+</ul>
+</li>
+<li>混合背包</li>
+</ul>
+</li>
+<li>分组背包<ul>
+<li>有依赖背包 + 树形DP</li>
+</ul>
+</li>
+<li>二维费用的背包问题</li>
+<li>求具体方案</li>
+<li>求方案数</li>
+</ul>
+</li>
+</ul>
+<p>简单回顾</p>
+<p>线性DP<br>序列DP: 包含选出来的一些数，相邻的数之间有一些关系</p>
+<p>背包问题: 序列问题， 组合问题DP， 不考虑相邻元素之间的关系，考虑全局</p>
+<p>01背包问题：每个物品选择或者不选<br>f[i,j]所有只从前i个物品中选，且总体积不超过j的选法的集合<br>划分：</p>
+<ol>
+<li>选择第i个物品的所有方案 f[i-1,j-v_i] + w_i </li>
+<li>不选择第i个物品的方案 f[i-1,j]</li>
+</ol>
+<p>完全背包问题： 每个物品选0，1，2，.. 个<br>f[i,j]所有 只从前i个物品中选择，且总体积不超过j的选法<br>f[i,j] = max(f[i-1,j], f[i,j-v]+w)<br>一般当空间优化成1维后，只有完全背包问题的体积是从小到大循环的<br>for 物品<br>    for 体积<br>        for 决策</p>
+<p>多重背包问题： 每个物品选0，…, si个</p>
+<p>规律：当空间优化到1维之后，只有完全背包问题的体积是从小到大循环的。<br>完全背包问题：某个物品的个数可以选任意个</p>
+<blockquote>
+<p>f[i, j] = max(f[i - 1, j], f[i, j-v[i]]) ! 只有这种情况是从小到大循环的。</p>
+</blockquote>
+<p>多重背包问题：某个物品的个数给定</p>
+<blockquote>
+<p>实际上，可以看作滑动窗口，这里对应的代码 todo<br>实际上，解法1： f[i,j]使用二维，直接枚举； f[j]使用一维，使用二进制优化转化为01背包问题。</p>
+</blockquote>
+<p>分组背包问题： 每组中选择一个物品</p>
+<blockquote>
+<p>f[i,j] 这里的i的含义为从前i组进行选择</p>
+</blockquote>
+<p>面试算法题，设计题</p>
+<blockquote>
+<p>万能头文件 #include&lt;bits/stdc++.h&gt;<br>需要注意的就是这样做会导入很多文件，等于说会耗时</p>
+</blockquote>
+<h3 id="3-2-further"><a href="#3-2-further" class="headerlink" title="3.2 further"></a>3.2 further</h3><ul>
+<li>01背包<ul>
+<li>采药</li>
+<li>装箱问题</li>
+<li>小精灵（阅读理解）</li>
+<li>数字组合（方案数）</li>
+<li>开心的金明</li>
+<li>能量石（+贪心）</li>
+</ul>
+</li>
+<li>完全背包<ul>
+<li>买书（方案数）</li>
+<li>货币系统（方案数）<ul>
+<li>货币系统（贪心）</li>
+</ul>
+</li>
+<li>二维费用<ul>
+<li>潜水员</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多重背包<ul>
+<li>庆功会</li>
+</ul>
+</li>
+<li>分组背包<ul>
+<li>机器分配</li>
+</ul>
+</li>
+</ul>
+<p>思维过程，编程能力</p>
+<p>背包问题</p>
+<ol>
+<li>货币系统 1021</li>
+<li>货币系统 532</li>
+<li>混合背包问题</li>
+<li>有依赖的背包问题</li>
+<li>背包问题求方案数</li>
+<li>能量石 kickstart</li>
+</ol>
+<p>三种背包问题的状态表示都是一样的</p>
+<p>动态规划<br>集合全部都是只从前i件物品中选，且总体积不超过j的选法的， 价值的最大值</p>
+<ol>
+<li>状态计算</li>
+</ol>
+<ul>
+<li>01背包： f[i,j] = max(f[i-1,j], f[i-1, j-v]+w)</li>
+<li>完全背包： f[i,j] = max(f[i-1,j], f[i,j-v] + w)</li>
+<li>多重背包：<br>f[i,j] = max(f[i-1,j], f[i-1, j-v[i]] + w[i], f[i-1,j-2v[i]]+2w[i],… ,f[i-1,j-sv[i]]+s*w[i])</li>
+</ul>
+<p>不需要考虑前i件物品，只需要从第i件物品类型来分析。 </p>
+<p>k个数进行划分，如果没有依赖关系的话，有2^k种选择。如果有的话，会大大减少依赖关系。所以直接按m来划分。</p>
+<p>把每个子树看作是一个物品组</p>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>链表可以直接用结构体和指针来做，实际上都可以用数组来进行模拟。</p>
+<blockquote>
+<p>为什么要用数组，效率高！<br>用struct Node{int val;  Node *next;} 每次都要new一个新节点，效率非常低 </p>
+</blockquote>
+<p>分类</p>
+<ol>
+<li><p>单链表</p>
+<ul>
+<li>邻接表： 用来存储图和树</li>
+</ul>
+</li>
+<li><p>双链表： 用来优化某些题</p>
+</li>
+<li><p>怎么预留，把动态规划的操作留到最后一步去，看来还是dfs最牛！</p>
+</li>
+</ol>
+<h2 id="最多-vs-恰好-vs-至少"><a href="#最多-vs-恰好-vs-至少" class="headerlink" title="最多 vs 恰好 vs 至少"></a>最多 vs 恰好 vs 至少</h2><ol>
+<li>体积最多是j,Max： 全部为0， V&gt;=0</li>
+<li>体积恰好是j, Min: f[0]=0, f[i]=+inf  V&gt;=0</li>
+<li>体积至少是j, Min: f[0]=0, f[i]=+inf  f[j][k]=min(f[j][k],f[max(0,j-v1)][max(0,k-v2)]+w);<blockquote>
+<p>初始化为+inf或者-inf, 自己上是为了不使用它的值<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aW5nLmNvbS9hY3Rpdml0eS9jb250ZW50L2NvZGUvdXBkYXRlLzEzMzA1NC8=" title="https://www.acwing.com/activity/content/code/update/133054/">https://www.acwing.com/activity/content/code/update/133054/<i class="fa fa-external-link"></i></span><br>潜水员问题，记得多看几遍</p>
+</blockquote>
+</li>
+</ol>
+<p>怎么写快速判断-1，~i，取反后即全为0</p>
+<p>有依赖的背包问题<br>树形DP</p>
+<h2 id="状态机模型"><a href="#状态机模型" class="headerlink" title="状态机模型"></a>状态机模型</h2><p>多种状态，状态其实是一系列有序的事件。</p>
+<p>状态机描述的是一个过程？</p>
+<blockquote>
+<p>买入到买出</p>
+</blockquote>
+<p>背包是一个结果</p>
+<p>另类状态表示</p>
+<ul>
+<li>状态机</li>
+<li>状态DP</li>
+</ul>
+<p>以前状态计算的时候只有一个状态，现在相当于</p>
+<p>状态机的想法是完全转换为当前步依赖于前一步，然后讲前一步划分为各个状态，进而清晰的表示</p>
+<p>状态DP是当前很难用维度表示，所以将状态压缩为数字进行表示</p>
+<p>注意状态机入口也是一个很重要的部分。表明允许从哪里接入和从哪里结束</p>
+<p>一维一般不用考虑至少，恰好，至多之类的东西</p>
+<h3 id="题目概览"><a href="#题目概览" class="headerlink" title="题目概览"></a>题目概览</h3><ol>
+<li>大盗阿福<blockquote>
+<p>一个序列，序列中的两个数不能连续选择</p>
+</blockquote>
+</li>
+<li>股票买卖IV<blockquote>
+<p>股票某天买入，某天卖出； 交易不能重合；问怎么交易最好</p>
+</blockquote>
+</li>
+<li>股票买卖V<blockquote>
+<p>卖出后有一个冷冻期</p>
+</blockquote>
+</li>
+<li>设计密码： kmp + 状态DP<blockquote>
+<p>在一维上跳动</p>
+</blockquote>
+<ul>
+<li>kmp: 匹配的模板串，前缀与后缀相等所以可以移动位置<ol>
+<li>约定从1开始</li>
+<li>ne[i]=j: p[1,..j]=p[i-j+1,i]; </li>
+<li>基准： i-1与j匹配， i与j+1不匹配， 所以每轮比较的是i与j+1<ul>
+<li>失配：<br>  失配时最少移动距离，新的已匹配下标就是ne[j]; 然后再看下一个点i与j+1是否匹配，如果不匹配，继续失配递归处理</li>
+<li>匹配<ul>
+<li>i==n: 输出结果</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如何找ne[]:<blockquote>
+<p>其实就是自己串跟自己串比较；然后ne[1]=0, 递归生成；其实就是模板匹配的过程，不断地比较，处理适配，当将p[i]与p[j+1]匹配时，实际是就是p[1,..,j] == p[i-j+1,…,i], 即直接赋值ne[i]=j;</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>修复DNA： AC自动机=trie+kmp和状态DP的结合<blockquote>
+<p>在二维上跳动</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="状态压缩DP"><a href="#状态压缩DP" class="headerlink" title="状态压缩DP"></a>状态压缩DP</h2><h3 id="1-棋盘式（基于连通性）"><a href="#1-棋盘式（基于连通性）" class="headerlink" title="1. 棋盘式（基于连通性）"></a>1. 棋盘式（基于连通性）</h3><p>对于棋盘，当前这行怎么枚举，只需要考虑上行的状态即可</p>
+<ol>
+<li>骑士<blockquote>
+<p>井字形方格约束, 记i行状态为a，i-1行状态为b</p>
+</blockquote>
+<ul>
+<li>a&amp;b==0: a,b不能有相邻</li>
+<li>(a|b) 不能有相邻</li>
+</ul>
+</li>
+<li>玉米田<blockquote>
+<p>某些地不能种</p>
+</blockquote>
+</li>
+<li>炮兵布阵<blockquote>
+<p>相邻的多个行或者列不能种</p>
+</blockquote>
+</li>
+<li>愤怒的小鸟<blockquote>
+<p>关键分析两个点确定抛物线，然后查看每个抛物线能覆盖哪些顶点。DP的想法实际上是从0到最终覆盖，对非0的点进行选择，来覆盖对应的选择，即状态划分过程。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="区间DP"><a href="#区间DP" class="headerlink" title="区间DP"></a>区间DP</h2><p>感觉就是一堆数，可以按某种要求进行合并。合并在一起是具有代价的。目标就是问怎样合并能够使得总代价最小</p>
+<ol>
+<li>环形DP</li>
+<li>记录方案数</li>
+<li>高精度</li>
+<li>二维区间DP</li>
+</ol>
+<ul>
+<li>石子合并<blockquote>
+<p>一个线段上的多个数最终合并为一个数。然后可以按区间合并，看合并的代价。</p>
+</blockquote>
+<ul>
+<li>集合： f[i,j]: 所有从i到j和并的最小值。</li>
+<li>状态计算： 按照最后一步进行划分，就是两个点的分界点<blockquote>
+<p>!!! 分界点,  min(f[l,k]+f[k+1,r]+s[l,r])</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>环形石子合并<br>加分二叉树：区间DP的方案数<br>棋盘分割：二维DP<br>凸多边形： 高精度<br>能量项链</p>
+<h2 id="树形DP"><a href="#树形DP" class="headerlink" title="树形DP"></a>树形DP</h2><p>DP问题的实质是用一个点表示一类情况<br>树形DP的本质是用当前节点表示所包含子树的所有情况</p>
+<ol>
+<li><p>树的直径</p>
+<blockquote>
+<p>对于无权边而言</p>
+</blockquote>
+<ul>
+<li>任取一点作为起点，找到距离该点最远的一个点u, DFS</li>
+<li>再找到距离u最远的一个点 DFS, BFS(DFS费空间)</li>
+<li>那么u和v之间的路径就是一条直径<blockquote>
+<p>证明: 这个过程还是很有意思的。利用的树一定是连通的，所以直接设置a-&gt;u的论据，和一条最短直径的相互比较即可退出矛盾</p>
+</blockquote>
+</li>
+<li>DP 一般做法</li>
+</ul>
+</li>
+<li><p>树的中心：求最远距离的最小值。有上下两个地方的衡量，使用数组保存结果来解决问题</p>
+</li>
+<li><p>数字转换：使用筛法预处理出因素和，建模为求树上的某条最远路径</p>
+</li>
+<li><p>二叉苹果树： 有依赖的背包问题： 有依赖？选背包时选择某一件物品就必须选择另一件物品</p>
+</li>
+<li><p>战略游戏： </p>
+<blockquote>
+<p>vs 没有上司的舞会： 每条边最多选一个点，求最大权值<br>战略游戏： 每条边至少选一个点，求最小权值</p>
+</blockquote>
+</li>
+<li><p>皇宫守卫</p>
+</li>
+</ol>
+<h2 id="数位DP"><a href="#数位DP" class="headerlink" title="数位DP"></a>数位DP</h2><p>DP问题的技巧: 基本上问的都是区间问题 </p>
+<ol>
+<li>技巧1：f[N]: 1~N<blockquote>
+<p>[X, Y]: f[Y] - f[X - 1] 前缀和</p>
+</blockquote>
+</li>
+<li>技巧2：尽量用树的方式考虑</li>
+</ol>
+<p>本质上其实都还是排列组合数，但是不大好用排列组合来求<br>方案，分情况讨论</p>
+<ol>
+<li><p>度的数量： 就像摘苹果一样，每一个苹果都要小心翼翼地摘，不要漏了，也不要重了</p>
+</li>
+<li><p>不降数</p>
+<h2 id="单调队列-单调栈-其它数据结构优化的DP"><a href="#单调队列-单调栈-其它数据结构优化的DP" class="headerlink" title="单调队列/单调栈/其它数据结构优化的DP"></a>单调队列/单调栈/其它数据结构优化的DP</h2></li>
+</ol>
+<p>解决问题有限，求滑动窗口中的值。<br>首尾端点不需要固定，只需要都保持严格递增就可以</p>
+<p>把队列中所有冗余的元素去掉，会发现队列有单调的性质<br>其实，如果是最小值，往往对应的是单调上升序列</p>
+<ol>
+<li>朴素DP原理：正确性</li>
+<li>DP优化，代码等价变形，观察代码</li>
+</ol>
+<h2 id="斜率优化DP"><a href="#斜率优化DP" class="headerlink" title="斜率优化DP"></a>斜率优化DP</h2><h3 id="2-集合"><a href="#2-集合" class="headerlink" title="2. 集合"></a>2. 集合</h3><h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p>状态压缩DP是将所有的状态用一个二进制来表示了</p>
+<h2 id="3-搜素"><a href="#3-搜素" class="headerlink" title="3. 搜素"></a>3. 搜素</h2><h3 id="3-1-BFS"><a href="#3-1-BFS" class="headerlink" title="3.1 BFS"></a>3.1 BFS</h3><p>应用型算法，题目变化很多，题型很多</p>
+<p>最核心的问题：</p>
+<ol>
+<li><p>“求最小”</p>
+</li>
+<li><p>基于迭代，不会爆栈</p>
+</li>
+<li><p>迷宫：最短距离</p>
+<blockquote>
+<p>可以从地图的一个点到达另一个点</p>
+</blockquote>
+</li>
+<li><p>八数码：最小步数</p>
+<blockquote>
+<p>把整个地图看作是一个状态，实际上求的就是从一个状态到达另一个状态的</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="3-1-1-Flodd-Fill"><a href="#3-1-1-Flodd-Fill" class="headerlink" title="3.1.1 Flodd Fill"></a>3.1.1 Flodd Fill</h4><p>洪水覆盖</p>
+<p>水可以向周围覆盖。覆盖过的格子又可以覆盖。</p>
+<p>不断加入新的格子，直到不能覆盖。</p>
+<p>可以在线性时间复杂度内，找到某个点所在的连通块。<br>100个格子会导致爆栈</p>
+<p>在生产空间，栈内存可以设定到内存一样大的<br>默认1M.  1M/每一层的空间=最大层</p>
+<p>算法：思维+代码</p>
+<p>常见的连通有两种：</p>
+<ol>
+<li>四连通： 只要有公共边就叫连通  人们常认为的模型</li>
+<li>八连通： 只要有公共点就叫连通  八连通</li>
+</ol>
+<h4 id="3-1-2-最短路模型"><a href="#3-1-2-最短路模型" class="headerlink" title="3.1.2 最短路模型"></a>3.1.2 最短路模型</h4><p>这里实际上是所有边权都一样的最短路模型</p>
+<p>单源最短路</p>
+<p>在线性时间内，可以得到所有点到某点的最短路</p>
+<p>如何输出路径？</p>
+<p>对于路径的数组，其实可以pre数组。</p>
+<p>因为BFS本身就是按层搜，所以不用其他算法一样存储距离<br>很多时候从哪个点开始，其实只是为了最后处理结果方便一点而已</p>
+<p>!!! BFS实际上就是每条边权为1的最短路模型</p>
+<p>为什么可以？<br>其实来源于迪杰斯特拉最短路算法，它本身是维护一个优先队列，取队列中的最大值和最小值。而当边的权重都是1的时候。BFS所维护的队列就是一个单调增的队列，也就是说队头最小值，队尾最大值</p>
+<p>BFS队列中的顺序实际上就是到起点的距离递增的顺序来扩展的</p>
+<p>队列：</p>
+<ol>
+<li>两段性：最多有两段</li>
+<li>单调性： 初始， 假设</li>
+</ol>
+<p>证明队首出队的元素一定是最小值</p>
+<blockquote>
+<p>反证法，如果出队的元素不是最小值，那么一定是由队列中后面的元素，转了一圈后，然后连接到该点。而由队列的单调性，后面所描述的距离一定是大于之前的距离的，所以矛盾。</p>
+</blockquote>
+<p>每个元素只会入队一次，入队后值就确定，等于说它的值只会被更新一次。</p>
+<h4 id="3-1-3-多源BFS"><a href="#3-1-3-多源BFS" class="headerlink" title="3.1.3 多源BFS"></a>3.1.3 多源BFS</h4><p>实际上就是把所有多源路径距离置为0，添加到队列中即可</p>
+<h4 id="3-1-4-最小步数模型"><a href="#3-1-4-最小步数模型" class="headerlink" title="3.1.4 最小步数模型"></a>3.1.4 最小步数模型</h4><p>第二类的最短路的模型</p>
+<ol>
+<li>如何存状态？ hash法，map(c++11)<blockquote>
+<p>康拓展开, map, unordered_map</p>
+</blockquote>
+</li>
+</ol>
+<p>思路： 将整个棋盘压缩成的状态。每次按搜索策略搜索，每个走过的状态标记下已经走过。直到到达最终状态为止。</p>
+<h4 id="3-1-5-双端队列广搜"><a href="#3-1-5-双端队列广搜" class="headerlink" title="3.1.5 双端队列广搜"></a>3.1.5 双端队列广搜</h4><p>专门用来处理边权为0或1的图。</p>
+<p>怎么理解？<br>将边权为0的放到队列开头，边权为1的放到队列结尾。<br>仍然满足单调性、两段性</p>
+<p>这里因为有边权为0的边的存在，一个点可能会更新多次</p>
+<h4 id="3-1-6-双向广搜"><a href="#3-1-6-双向广搜" class="headerlink" title="3.1.6 双向广搜"></a>3.1.6 双向广搜</h4><p>对于第二类算法，其实它总共有的状态数为格子的阶乘，太多了</p>
+<p>宽搜，因为会存储当前层元素，所以会MLE. 如果状态太多，也会TLE.</p>
+<p>实际上，每一层元素是呈指数上升的</p>
+<p>双向搜素为什么有效？<br>其实可以通过图来观察搜素空间，是变小的</p>
+<p>一种直观的感受<br>6^10,   2*6^5</p>
+<p>一般来说，只会用到最小步数模型。</p>
+<p>一个优化，每次选择当前队列扩展元素较小的方向来扩展</p>
+<h4 id="3-1-7-A"><a href="#3-1-7-A" class="headerlink" title="3.1.7 A*"></a>3.1.7 A*</h4><p>目标跟双向广搜是一样的</p>
+<p>队列换成优先队列， 小根堆</p>
+<p>小根堆：<br>关键字：真实距离（从起点走到当前点的真实距离）+估价距离（从当前点到终点的估计距离）</p>
+<p>选一个关键字最小的t<br>当终点第一次出队时 break;<br>for t的所有邻边:  将邻边入队, 更新距离</p>
+<p>图中所有边权都是任何都可以，只要没有非负回路？</p>
+<p>迪杰斯特拉算法: 所有估价距离都取0的算法</p>
+<p>成立条件：</p>
+<p>d(state) + g(state)<br>d(state) + f(state)</p>
+<p>f(state) &lt;= g(state)：估价函数小于真实函数<br>必须要有解才能用<br>无解的话也需要对所有状态操作一遍，而且由于相比于BFS使用的队列是nlogn, 所以更耗时</p>
+<p>如何证明成立？<br>假设出队的元素，最小的为dist, 它不是最小的 即 dist &gt; d最优<br>那么必然存在最优路径上的某个点u（起点一定在上面）, d[u]+f[u] &lt;= d[u]+g[u]=d最优。</p>
+<p>而队列中最优距离一定是最小的数，即d[u]+f[u]一定是最小的， dist &lt;= d[u]+f[u] &lt;= d最优， 矛盾</p>
+<p>只能保证终点出队的时候，终点一定是最优的点</p>
+<blockquote>
+<p>算法进阶指南写错的一点<br>其实是最优路径上的点都是最优</p>
+</blockquote>
+<p>对于其他点，入队出队都不一定是最优距离</p>
+<!--  -->
+<p>每个点也并不是只扩展一次, 每个点入队多次  Dijkstra<br>f in [0, g]</p>
+<p>BFS: 入队的时候判重， 即不再使用<br>Dijkstra: 出队的时候判重<br>A*: 出队后不能判重，终点出队才能判重</p>
+<p>估计距离：<br>能用A*算法题目不多</p>
+<p>spfa可能会搜索空间多<br>A*是为了尽可能减少搜索空间</p>
+<h5 id="八数码"><a href="#八数码" class="headerlink" title="八数码"></a>八数码</h5><p>估价函数为当前点的位置与真实位置的曼哈顿距离之和</p>
+<h3 id="3-2-DFS"><a href="#3-2-DFS" class="headerlink" title="3.2 DFS"></a>3.2 DFS</h3><h4 id="3-2-1-DFS之连通性模型和搜索顺序"><a href="#3-2-1-DFS之连通性模型和搜索顺序" class="headerlink" title="3.2.1 DFS之连通性模型和搜索顺序"></a>3.2.1 DFS之连通性模型和搜索顺序</h4><p>BFS: 队列</p>
+<ol>
+<li>连通性</li>
+<li>内部的某个部分能否走到另一个部分</li>
+<li>整个看成一个整体</li>
+<li>搜索空间减小</li>
+</ol>
+<p>DFS: 代码短，但是第一次到达某个点<br>时间复杂度都是一样的，每个点只需要遍历一次</p>
+<p>注意爆栈问题，输入一个数据，想一下会不会在极限情况下爆栈</p>
+<p>手动地把递归改为非递归</p>
+<p>注意两种模型：<br>一种是棋盘内部搜索。棋盘内每个点只需要搜索一次， 内部搜索<br>一种是整个棋盘搜索（对于这种类型时需要恢复现场的），外部搜索</p>
+<p>外部搜索即可以处理路径数的问题，又可以处理最优化的问题</p>
+<p>暴搜： 2^n, NP完全问题</p>
+<h4 id="3-2-2-DFS之剪枝优化"><a href="#3-2-2-DFS之剪枝优化" class="headerlink" title="3.2.2 DFS之剪枝优化"></a>3.2.2 DFS之剪枝优化</h4><p>常用的剪枝策略</p>
+<ol>
+<li>优化搜索顺序：大部分情况下，我们应该优先搜索分支较少的节点</li>
+<li>排除等效冗余：不考虑顺序的情况下，尽可能使用组合</li>
+<li>可行性剪枝：搜索到一半发现不合法，提前退出</li>
+<li>最优性剪枝：无论如何当前搜索到的结果都比最优取值差，剪枝</li>
+<li>记忆化搜索(DP) *</li>
+</ol>
+<h3 id="3-3-迭代加深"><a href="#3-3-迭代加深" class="headerlink" title="3.3 迭代加深"></a>3.3 迭代加深</h3><p>BFS: 宽搜的空间复杂度，因为需要把每一层中的所有元素存下来，所以是指数级别的<br>DFS: O(n)</p>
+<p>max_depth 逐步扩大，从0开始</p>
+<p>设置一个max_depth, 走完一个，然后再走一个</p>
+<p>DFS: 具体的时间复杂度估计就行了，很难具体量算</p>
+<h2 id="4-最短路问题"><a href="#4-最短路问题" class="headerlink" title="4. 最短路问题"></a>4. 最短路问题</h2><p>最难的点在于问题的转化和抽象 0.7</p>
+<p>最大流是更难的一点</p>
+<h3 id="4-1-单源最短路"><a href="#4-1-单源最短路" class="headerlink" title="4.1 单源最短路"></a>4.1 单源最短路</h3><ol>
+<li>边权均非负<ul>
+<li>朴素Dijkstra: 稠密图，效率高<blockquote>
+<p>其实就是单源最短路问题：从一个点开始扩展，不断扩展到所有点</p>
+</blockquote>
+</li>
+<li>堆优化Dijkstra: 稀疏图</li>
+</ul>
+</li>
+<li>有负权边<ul>
+<li>Bellmair Ford</li>
+<li>Spfa</li>
+</ul>
+</li>
+</ol>
+<p>综合运用：和DFS, 二分， DP, 拓扑排序结合</p>
+<h3 id="4-2-多源最短路"><a href="#4-2-多源最短路" class="headerlink" title="4.2 多源最短路"></a>4.2 多源最短路</h3><p>关键：使用距离的三角不等式来做各种问题</p>
+<p>使用最短路来试图解决某些动态规划问题</p>
+<p>floyd<br>floyd: 多源最短路</p>
+<ol>
+<li>最短路</li>
+<li>传递闭包</li>
+<li>找最小环</li>
+<li>恰好经过k条边的最短路：倍增的思想</li>
+</ol>
+<p>floyd的原理：<br>d[i,j]==inf,  d[i,i]=0<br>for k: 1..n<br>    for i: 1..n<br>       for j: 1…n<br>           d[i,j]=min(d[i,k]+d[k,j]</p>
+<p>floyd, bellman_ford: DP<br>dijkstra: 贪心</p>
+<p>d[k,i,j]: 所有从i出发，最终走到j，且中间只经过节点编号不超过k的所有路径</p>
+<blockquote>
+<p>注意理解是节点标号. 不包含i,j<br>路径长度最小值</p>
+</blockquote>
+<p>集合划分</p>
+<ol>
+<li>中间经过k: 经过i-&gt;k. d[k-1,i, k]+d[k-1,k,j]</li>
+<li>中间不经过k: 说明经过的是d[k-1,i,j]</li>
+</ol>
+<h3 id="4-3-最小生成树"><a href="#4-3-最小生成树" class="headerlink" title="4.3 最小生成树"></a>4.3 最小生成树</h3><p>最小生成树中所有的边都是无向边</p>
+<p>在当前的连通情况下。选择未连接点中到该连通块最小的点的边。</p>
+<blockquote>
+<p>假设不是选取的最小的边。否则可以构造更小的生成树<br>根据环来做</p>
+</blockquote>
+<p>kruskal: 基于并查集，选择两个顶点不在一个连通块的情况</p>
+<p>核心证明：如果当前不选，可以在最优解（一棵树）中加上。然后形成一个环，形成一个环一定存在小于该边权的边，因此该边一定可以存在最优解中</p>
+<p>最长路：正环<br>最短路：负环<br>是否存在某个环？</p>
+<h3 id="4-4-spfa求负环"><a href="#4-4-spfa求负环" class="headerlink" title="4.4 spfa求负环"></a>4.4 spfa求负环</h3><p>负环和正环的定义其实是对称的</p>
+<p>负环是什么？<br>在求最短路时，如果原图中存在负环，那么dist[t]就会一直得到更新。</p>
+<p>如果有负环，往往最短路求的就不准了。</p>
+<p>抽屉原理。<br>求负环的常用方法, 基于spfa:</p>
+<ol>
+<li>统计每个点入队的次数，如果某个点入队n次，则说明存在负环。<blockquote>
+<p>被更新了n次以上，每个边更新点一次</p>
+</blockquote>
+</li>
+<li>统计当前每个点的最短路中所包含的边数，如果某点的最短路所包含的边数大于等于n，则也说明存在环</li>
+</ol>
+<p>推荐第二种，因为在某种情况下，1为n^2, 2为n</p>
+<p>新图上超级源点</p>
+<ol>
+<li>spfa存在负权边，会被更新，不是-inf.</li>
+<li>为什么等价于将所有点入队</li>
+</ol>
+<blockquote>
+<p>理解负环一定是在最短路上运用的！ 但是这里并不是说最短路占用更多的节点。而是利用了最短路，每次更新，实际上是根据一条新边来更新一个新点。 而负环其实就是看一个环的点数是否大于n了。  有负环，在这个算法中边一直都能被更新</p>
+</blockquote>
+<p>\sum_{fi} / \sum_{ti} 最大 =&gt;  01分数规划<br>求一个环上的。</p>
+<p>(0, 1000].</p>
+<blockquote>
+<p>mid.</p>
+</blockquote>
+<p>找一个判断的结果来做<br>\sum_{fi} &gt; Mid * \sum_{ti}</p>
+<blockquote>
+<p>点权可以放到出边或者入边上是等价的</p>
+</blockquote>
+<p>\sum_{fi - mid*ti} &gt; 0<br>图中是否正环</p>
+<p>通过最长路来做。</p>
+<h3 id="4-5-差分约束"><a href="#4-5-差分约束" class="headerlink" title="4.5 差分约束"></a>4.5 差分约束</h3><h3 id="4-6-最近公共祖先"><a href="#4-6-最近公共祖先" class="headerlink" title="4.6 最近公共祖先"></a>4.6 最近公共祖先</h3><ol>
+<li>向上标记法： 对点a向上走到根节点的路径进行标记，同时对b点做，当向上走的祖先相同时，即得到O(n)</li>
+<li>倍增fa[i,j]: 表示从i开始向上走2^j能到达的节点。 0 &lt;= j &lt;= logn; depth[i]表示深度，层数，即到根节点的距离+1<ul>
+<li>j = 0, f[i, j]=i的父节点</li>
+<li>j &gt; 0,  f[i, j] = f(f[i, j-1],j-1)<blockquote>
+<p>x,y  基于二进制拼凑的思想. t&gt;=2^k,  t包含k位<br>哨兵： 如果从i开始跳2^j步会跳过根节点，那么fa[i,j]=0, depth[0]=0<br>步骤:  预处理O(nlogn)?  查询O(logn)</p>
+<ol>
+<li>先把x,y跳到同一层。 depth[x]-depth[y].  depth(f[x,k]) &gt;= depth(y) logn。 从大到小</li>
+<li>让两个点一直往上跳，跳到同时是公共祖先的下一层为止。 跳到不等时 logn</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Tarjan: 离线求LCA O(n+m)<blockquote>
+<p>DFS，合并两个集合可以用并查集来做。 遍历，合并，查询一次。 O(1), 合并和查询的时间都是O(1)</p>
+</blockquote>
+<ul>
+<li><ol start="2">
+<li>已经搜索过的点</li>
+</ol>
+</li>
+<li><ol>
+<li>正在搜索的点</li>
+</ol>
+</li>
+<li><ol start="0">
+<li>还未搜索的点<h3 id="4-7-有向图的强连通分量"><a href="#4-7-有向图的强连通分量" class="headerlink" title="4.7 有向图的强连通分量"></a>4.7 有向图的强连通分量</h3></li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-8-二分图"><a href="#4-8-二分图" class="headerlink" title="4.8 二分图"></a>4.8 二分图</h3><h3 id="4-9-欧拉回路和欧拉路径"><a href="#4-9-欧拉回路和欧拉路径" class="headerlink" title="4.9 欧拉回路和欧拉路径"></a>4.9 欧拉回路和欧拉路径</h3><h3 id="4-10-拓扑排序"><a href="#4-10-拓扑排序" class="headerlink" title="4.10 拓扑排序"></a>4.10 拓扑排序</h3><h2 id="？-补充"><a href="#？-补充" class="headerlink" title="？ 补充"></a>？ 补充</h2><p>RSA密钥原理<br>Q*P=N<br>N作为公钥，P，Q作为密钥，P知道Q的密钥，分别被双方拥有。实际上是基于大整数分解非常困难的原因。</p>
+<blockquote>
+<p>A知道B的密钥，公钥，AB都知道，所以B就可以访问A，A就可以验证是否符合要求。</p>
+</blockquote>
+<p>井田制</p>
+<blockquote>
+<p>田字型的土地，土地由农民自己，然后向中心交税</p>
+</blockquote>
+<p>为什么炮兵的炮弹不会被山地阻挡？</p>
+<blockquote>
+<p>因为它的运动轨迹是抛物线的</p>
+</blockquote>
+<ul>
+<li>DP:<ul>
+<li>数字三角形模型：<blockquote>
+<p>当前步，简单地方格，向右走和向上走</p>
+</blockquote>
+<ul>
+<li>扩展：走k次如何计算？</li>
+</ul>
+</li>
+<li>最长上升子序列模型：<blockquote>
+<p>使用单调队列的方法构造上升子序列？？</p>
+</blockquote>
+</li>
+<li>背包问题：完全背包和多重背包，形如多少个物品，每个物品有对应的属性，多个，每个属性有自己的约束，求最值和方案数<ul>
+<li>可能扩展<ul>
+<li>预处理，预先排序。把几个属性合在一起看</li>
+<li>多重背包问题的重叠</li>
+<li>分组背包：有多个依赖：转换为离散值，当太复杂时，过渡到树形DP*</li>
+</ul>
+</li>
+<li>不熟练点<ul>
+<li>求具体方案</li>
+<li>属性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>状态机模型： 状态直接考虑会依赖到上一层以上的状态，所以将上一层分为离散的状态来考虑</li>
+<li>状态压缩DP: 将上一层的状态用二进制来表示</li>
+</ul>
+</li>
+</ul>
+<p>记忆化搜索模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int dp(int l, int r) &#123;</span><br><span class="line">    int&amp; v = f[l][r];</span><br><span class="line">    if (v &gt;= 0) return v;</span><br><span class="line">    // 计算过程</span><br><span class="line"></span><br><span class="line">    return v=get();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">return f(1, n);</span><br></pre></td></tr></table></figure>
+
+<p>现象-&gt; 逻辑（写法）：应试教育</p>
+<p>最大独立集：有很多点，很多边</p>
+<p>不包含一个字符串, KMP<br>包含多个字符串，树形DP</p>
+<p>闫式最优化问题分析法</p>
+<p>在一个有限集合中秋最值，或者个数。</p>
+<blockquote>
+<p>有可能方案是无限集，通过贪心证明，结果在有限集中<br>将所有情况划分到集合中，从而来查看集合与集合之间的关系</p>
+</blockquote>
+<p>古代的烽火传递： 现在一般都用光纤等，电波等传递信号，而古代的时候是怎么传递信号的呢。用的是可见光，即烟能够向上空飘去，点表示敌人来犯。</p>
+<p>白天用烟，晚上用火。</p>
+<p>容错机制。<br>在可见范围内多放几座信号塔</p>
+<p>物理化学是第二次工业革命的产物，信息技术才是第三四次工业革命的产物</p>
+<p>一个行业要在前几年入，但有风险是肯定的。不能有很好的晋升机会，现在大公司都在裁员</p>
+<p>一个经济周期往往会不断的波动，但是整个平均值是在提高的，平均值就是生产力的增长。<br>在不久的将来很多人就可以不工作<br>每天的需要是什么？吃饭、电力、暖气、WIFI、睡觉</p>
+<p>经济周期好的时候放债具有更好的收益。债务放出来说明整个社会的钱变多了，说明社会的平均工资变多了。<br>债务达到一个峰值没有跟生产力匹配的时候就会产生泡沫。<br>经济就会下行，资本就会进入寒冬，没有人放债。<br>当它低于一个下行值时，又会上升</p>
+<p>数组越界，爆栈</p>
+<p>错误，检查for循环的终止条件是否正确</p>
+<p>注意由于对齐原理，结构体有时间开辟的空间更大</p>
+<p>对于BFS,DFS，其实还需要考虑的一个问题就是，这个点访问几次</p>
+<p>奇怪的问题 queue<int> q; cout &lt;&lt; 一大堆数</int></p>
+<p>迪杰斯特拉在非负权边上做都可</p>
+<p>define 会多两条指令</p>
+<h3 id="最短路-vs-DP"><a href="#最短路-vs-DP" class="headerlink" title="最短路 vs DP"></a>最短路 vs DP</h3><p>两个是有着不同的交集的</p>
+<p>起点：(0,0)<br>终点: f[0,0], f[0,1], …, f[0,m]</p>
+<p>状态转移方程<br>f[i,j] = min(f[i,j], f[i-1,j] + w)<br>其实f[i,j]就可以看作是一个点。然后加的值表示权</p>
+<p>然后，好像对于方案数为什么是相加，豁然开朗</p>
+<p>f[n,m]到起点的最长路径。</p>
+<p>绝大部分DP是拓扑图上的最短路问题</p>
+<p>DP和最短路的交集就是拓扑图<br>DP未交的地方未想到例题</p>
+<p>启示：<br>DP依赖关系不具有拓扑序，可以用最短路来做<br>f[2] = min(f[1]+1, f[4]+1)<br>f[3] = f[2] + 1<br>f[4] = f[3] + 1<br>f[5] = f[4] + 1</p>
+<p>如果DP是等式的话，可以用高斯消元来解·</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/16/algorithm-basic-class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/16/algorithm-basic-class/" class="post-title-link" itemprop="url">algorithm basic class</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-16 08:02:32" itemprop="dateCreated datePublished" datetime="2019-09-16T08:02:32+08:00">2019-09-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-18 17:13:38" itemprop="dateModified" datetime="2019-09-18T17:13:38+08:00">2019-09-18</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/summary/" itemprop="url" rel="index"><span itemprop="name">summary</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>快排</p>
+<blockquote>
+<p>难分，易于归并<br>eg: 第k个数</p>
+</blockquote>
+<p>归并</p>
+<blockquote>
+<p>易分，难合<br>eg: 逆序对</p>
+</blockquote>
+<p>二分：整数，浮点数</p>
+<blockquote>
+<p>二分，多种场合，分治的取一情况。分割两种不同的性质</p>
+</blockquote>
+<p>高精度,A+B, A-B, A*a, A/a</p>
+<blockquote>
+<p>A+B, tmp临变量。 末尾存储，a[0]存个位。</p>
+</blockquote>
+<p>前缀和差分</p>
+<blockquote>
+<p>前缀和[;,r], s[r]-s[l-1]. 一维和二维。<br>一维前缀和<br>$a_l+a_{l+1}+…+a_r = S_r - S_{l-1}$<br>一次O(n),后面线性时间查询<br>差分: 多次为某个区间中的数进行操作，单位时间即可解决</p>
+</blockquote>
+<p>双指针</p>
+<blockquote>
+<p>模板很好用，找单调性</p>
+</blockquote>
+<p>位运算：<br>怎么析取每一位1，怎么找到最低位1</p>
+<blockquote>
+<p>位操作才是</p>
+</blockquote>
+<p>离散化</p>
+<blockquote>
+<p>在一个小的区间上反复做操作和查询</p>
+</blockquote>
+<p>区间合并</p>
+<blockquote>
+<p>为后面做准备。 怎么处理特殊情况？让情况考虑完全！</p>
+</blockquote>
+<p>单链表和双链表</p>
+<blockquote>
+<p>单： e[N],ne[N],idx,head=-1;   e[idx++]=x;  注意！删除头元素！ 数组中自然下标对应的是按顺序插入的值，不考虑删除的情况;</p>
+<blockquote>
+<p>注意节点的值存储在e[i]中<br>常用在图和hash表的存储中<br>双： e[N],l[N],r[N],idx,r[0]=1,l[1]=0;  e[idx++]=x; 从2开始计数，删除时直接用指针即可</p>
+</blockquote>
+</blockquote>
+<p>栈和队列</p>
+<blockquote>
+<p>栈: st[N],tt   st[++tt]=x;  tt?No:Empty<br>队列：q[N],hh,tt=-1  q[++tt]=x  hh&lt;=tt ? No: Empty</p>
+</blockquote>
+<p>单调栈和单调队列（滑动窗口）</p>
+<blockquote>
+<p>首先给出暴力做法，然后去掉没有用的元素，发现剩余的元素具有单调性。 没有用的元素考虑使用栈或者队列将其抛弃，剩余的元素则进行保留。<br>对单调性的东西，可以考虑用栈来访问最近最值元素，队列来访问全局最近最小元素？，另外由于单调性还可以用二分法进行模拟。<br>实现：<br>单调栈： 队中存储的就是元素<br>滑动窗口： 队中存储的是元素的下标<br>时间复杂度优化： 每个元素最多进栈和出栈一次，优化为了O(n);<br>? 二元关系的下界知道，怎么知道一个问题的下界是多少？</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">单调栈</span><br><span class="line">st[N], tt=0;</span><br><span class="line">for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">    int x;</span><br><span class="line">    while(tt &amp;&amp; st[tt]&gt;=x) tt--;</span><br><span class="line">    if(tt) puts(&quot;-1&quot;);</span><br><span class="line">    else printf(&quot;%d&quot;,st[tt]);</span><br><span class="line">    st[++tt]=x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">单调队列</span><br><span class="line">a[N], q[N], hh, tt=-1;</span><br><span class="line">for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">    if(hh&lt;=tt &amp;&amp; q[tt]&lt;i-k+1) hh++;</span><br><span class="line">    while(hh&lt;=tt &amp;&amp; a[q[tt]]&lt;=a[i]) tt--;</span><br><span class="line">    q[++tt]=i;</span><br><span class="line">    if(i&gt;=k-1)&#123;</span><br><span class="line">        cout&lt;&lt;q[hh]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>KMP</p>
+<blockquote>
+<p>用于搜索模板串在子串上出现的位置，思想是提前对模板串做信息标志，即利用最大后缀。<br>next[i]: 以i为终点的，最长连续后缀的长度。  next[1]=0; // 初始化<br>关键为next数组, 时间复杂度, 匹配的时候while不执行和while执行时均摊可以知道，while最多减m次 ？？？</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">for(int i=2, j=0;i&lt;=n;i++)&#123;</span><br><span class="line">    while(j &amp;&amp; p[i]!=p[j+1]) j=next[j]; //j=0,表示一个都还没成功匹配</span><br><span class="line">    if(p[i]==p[j+1]) j++;</span><br><span class="line">    next[i]=j;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for(int i=1,j=0;i&lt;=m;i++)&#123;</span><br><span class="line">    while(j &amp;&amp; s[i]!=p[j+1]) j=next[j];</span><br><span class="line">    if(s[i]==p[j+1]) j++;</span><br><span class="line">    if(j==n)&#123;</span><br><span class="line">        printf(&quot;%d&quot;,i-j+1); // 返回从1开始的s的下标</span><br><span class="line">        j=next[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Trie树</p>
+<blockquote>
+<p>利用相同的前缀，进行搜索；将每个字母当做一个节点。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">son[N][26],cnt[M],idx; // 这里M应该是最多出现的节点的个数，因为这里M是节点的计数</span><br><span class="line">这里的N是最大出现的层数，即字符串的最大长度。</span><br><span class="line">str[N];</span><br><span class="line"></span><br><span class="line">int add(char str[N])&#123;</span><br><span class="line">    p=0;</span><br><span class="line">    for(int i=0;str[i];i++)&#123;</span><br><span class="line">        int u=str[i]-&apos;a&apos;;</span><br><span class="line">        if(!son[p][u]) son[p][u]=idx++;</span><br><span class="line">        p=son[p][u];</span><br><span class="line">    &#125;</span><br><span class="line">    cnt[p]++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">时间复杂度 插入O(n),查找O(n); 可用于在大批的字符串中进行查找</span><br></pre></td></tr></table></figure>
+
+<p>并查集</p>
+<blockquote>
+<p>将两个元素合并，询问两个元素是否在一起; 用树来模拟</p>
+<ol>
+<li>如何判断根 2. 如何求x的集合编号  3. 如何合并<br>可用于一切集合合并的问题</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int find(int x)&#123;</span><br><span class="line">    if(p[x]!=x) p[x]=find(p[x]);</span><br><span class="line">    return p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for(int i=1;i&lt;=n;i++) p[i]=i;</span><br><span class="line"></span><br><span class="line">M: p[find(a)]=find(b);</span><br><span class="line">Q: find(a)==find(b);</span><br></pre></td></tr></table></figure>
+
+<p>堆</p>
+<blockquote>
+<p>down(i), up(i); i从1开始， 变小往上走，变大往下走<br>堆排序，建堆O(n), 修复一个元素O(n). O(klogk):找前k个元素？？<br>模拟堆，额外维护一个第几个插入与堆中元素的链表</p>
+</blockquote>
+<p>哈希表</p>
+<blockquote>
+<p>注意区别离散化，离散化是借助前缀和来做<br>如何哈希？ 如何解决冲突？ 开放寻址法+拉链法<br>无序性，O(1)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">关键find函数，找到元素或者找到该插入元素的位置</span><br><span class="line">拉链法</span><br><span class="line">h[N],e[N],ne[N],idx;</span><br><span class="line">int insert(int x)&#123;</span><br><span class="line">    int k=(x%N+N)%N;</span><br><span class="line">    e[idx]=x;</span><br><span class="line">    ne[idx]=h[k];</span><br><span class="line">    h[k]=idx++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int find(int x)&#123;</span><br><span class="line">    int k=(x%N+N)%N;</span><br><span class="line">    for(int i=h[k];i!=-1;i=ne[i])&#123;</span><br><span class="line">        if(e[i]==x) return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">memset(h,-1,sizeof(h));</span><br><span class="line"></span><br><span class="line">开放寻址法：找坑法</span><br><span class="line">如何填满了会出问题，所以经验上会用2-3倍空间</span><br><span class="line">const int N=200003,null=0x3f3f3f3f;</span><br><span class="line">int find(int x)&#123;</span><br><span class="line">    int k=(x%N+N)%N;</span><br><span class="line">    while(h[k]==null &amp;&amp; h[k] != x)&#123;</span><br><span class="line">        k++;</span><br><span class="line">        if(k==N) k=0;</span><br><span class="line">    &#125;</span><br><span class="line">    return k;</span><br><span class="line">&#125;</span><br><span class="line">memeset(h,0x3f,sizeof(h)); // 关键null要大于x数值的范围</span><br></pre></td></tr></table></figure>
+
+<p>字符串哈希</p>
+<blockquote>
+<p>前缀哈希，正常按高到低来。由p进制来转换为十进制数。<br>经验值： p=131,13331, Q: 2^64;<br>[l,r]的哈希值h[r]-h[l-1]*p[r-l+1]<br>所以只需要比较两个哈希值是否相等就能知道两个字符串是否相等。如果h和p提前计算好就是O(1),作用快速比较两个字符串是否相等</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ULL h[N],p[N];</span><br><span class="line">char str[N];</span><br><span class="line"></span><br><span class="line">ULL get(int l, int r)&#123;</span><br><span class="line">    return h[r]-h[l-1]*p[r-l+1];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">p[0]=1;</span><br><span class="line">for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">    p[i]=p[i-1]*p;</span><br><span class="line">    h[i]=h[i-1]*p+str[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>STL初步<br>vector 变长数组，倍增思想 size()<br>dequeue 特别慢<br>string 可用作模拟栈, pair<br>queue(), priorityqueue<br>stack<br>set有序序列，基于平衡树实现 O(logN)<br>map a[“adad”]=1, a.count()? 好用！<br>unorder_set,.._map,哈希，O(1), 单独头文件<br>bitset(): bitset&lt;10000&gt; s; ~,&amp;,|,^</p>
+<p>DFS: 回溯，暴力搜索，恢复现场</p>
+<ol>
+<li><p>简单的框架</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 回溯法: u代表了每一层</span><br><span class="line">int dfs(int u)&#123;</span><br><span class="line">    if(u==n)&#123;</span><br><span class="line">        //print</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">        if(!st[i])&#123;</span><br><span class="line">            st[i]=true;</span><br><span class="line">            dfs(u+1);</span><br><span class="line">            st[i]=false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>树和图的框架</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">h[N],e[N],ne[N],idx;</span><br><span class="line">st[N];</span><br><span class="line"></span><br><span class="line">void add(int x,int y)&#123;</span><br><span class="line">    e[idx]=y,ne[idx]=h[x],h[x]=idx++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 注意这里是图的遍历框架，所以跟前面的不一样，考虑的不是到达某一显示的层；而是将图中所有节点搜索完得到结果</span><br><span class="line">void dfs(int u)&#123;</span><br><span class="line">    st[u]=true;</span><br><span class="line"></span><br><span class="line">    for(int i=h[u];i!=-1;i=ne[i])&#123;</span><br><span class="line">        int j=e[i];</span><br><span class="line">        if(!st[j])&#123;</span><br><span class="line">            // 预处理</span><br><span class="line">            int t = dfs(j);</span><br><span class="line">            // 后处理</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>BFS: 最短路的性质</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">h[N],e[N],ne[N],idx;</span><br><span class="line">int d[N],q[N];</span><br><span class="line"></span><br><span class="line">void bfs()&#123;</span><br><span class="line">    // 声明数组</span><br><span class="line"></span><br><span class="line">    // 初始化加入第一个元素</span><br><span class="line"></span><br><span class="line">    while(queue不空)：</span><br><span class="line">        t&lt;-队头</span><br><span class="line">        枚举所有出边：</span><br><span class="line">            if(constraint(x))&#123;</span><br><span class="line">                更新d[j];</span><br><span class="line">                入队；</span><br><span class="line">            &#125;</span><br><span class="line">    </span><br><span class="line">    // 队列中的元素就是拓扑序列</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最短路问题</p>
+<ul>
+<li>单源最短路<ul>
+<li>正权边<blockquote>
+<p>Dijkstra算法 O(n^3)<br>d[i]=0;  for(i:1-n) min, S&lt;-t, update min<br>堆优化的Dijkstra算法 O(mlogN)</p>
+</blockquote>
+</li>
+<li>负权边<blockquote>
+<p>Bellman_ford()<br>spfa()</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>多源最短路 floyd, 动态规划</li>
+</ul>
+<p>最小生成树<br>Prim算法<br>朴素版 算法思想<br>d[1]=0, d[2..n]=INF<br>while(q.size())<br>(t=q.min()  for v: t-v: if(!st[v]) d[v]=min(d[v],d[t][v]);)<br>O(n^2): n轮，每轮1-m<br>Kruskal O(mlogm)<br>从小到大选边， mlogm进行排序  </p>
+<p>二分图<br>染色法 O(n+m):对所有边和点进行遍历<br>匈牙利算法O(nm)<br>找最大匹配</p>
+<p>数论<br>质数<br>从2开始具有某种性质的整数；<br>判定方法：试除法：d|n, n/d |n,  d&lt;=n/d<br>分解n的质因数：不断砍质数 &lt;=n/i<br>筛质数：筛选出2~n之间的所有质数</p>
+<ul>
+<li>从小到大筛数的倍数</li>
+<li>筛素数的倍数： 埃式筛法</li>
+<li>利用乘积来筛：线性筛法 &lt;=n</li>
+</ul>
+<p>约数<br>试除法求约数：成对出现。然后在排序，可以计算出排序的时间复杂度远小于一般情况<br>约数个数：自然数基本定理 a=p1^a1 p2^a2 … pk^ak<br>约数之和：(p1^0+…+p1^a1)(p2^0+…+p2^a2)…  (利用了组合数学)</p>
+<p>最大公约数<br>辗转相除法</p>
+<p>欧拉函数 p(n): 1~n之间与n互质的数<br>如何求？容斥原理，去掉不互质的 N-N/p1-N/p1+..进行统计 N(1-1/p1-1/p2-… + 1/p1p2)<br>然后公式改写可以得到 N(1-1/p1)(1-1/p2)…(1-1/pk)</p>
+<ul>
+<li>公式法：计算出某一个数的欧拉函数</li>
+<li>筛法：计算多个数的欧拉函数<br>phi[primes[j]<em>i]=primes[j]</em>phi[i]  // primes[j]是i的第一个质因数<br>分为质数<br>最小质因数是该数的因子<br>最小质因数不是该数的因子<br>使用线性筛法的模板来解题</li>
+</ul>
+<p>费马定理 a^(phi[p]) mod p = 1</p>
+<p>a^k mod p的快速幂: 将等比数列，等差数列之类的东西很容易用循环结构来写，这样从某种程度就会让问题的难度降低很多</p>
+<p>快速幂求逆元： aa^-1 mod p = 1  根据费马定理 a^(p-1) mod p=1, 所以逆元为a^(p-2) logP</p>
+<p>扩展欧几里得算法 ax+by=gcd(a,b)  求x和y：本身其实是有多个解的，注意这里的循环结构是非常妙的！</p>
+<p>线性同余方程 ax =b mod m,  转化为ax-my mod m=b, 然后再扩充解，如果(a,m)|b不成立的话，无解</p>
+<p>中国剩余定理： 第一种方法：使用公式法来做；第二种做法：使用线性同余方程的合并来做</p>
+<p>组合计数</p>
+<ul>
+<li>10万组 2000  递推 C(n,m)=C(n-1,m)+C(n-1,m-1) O(n^2)</li>
+<li>1万组 10^5 运用逆元的思想  fib[a] infib[b] infib[a-b] mod n, N*logN</li>
+<li>20组  10^18 使用卢斯卡定理 C(a,b)=C(a mod p, b mod p)*C(a/p, b/p) mod p  后面mod p 必须有否则不成立, p这里一般不会太大</li>
+<li>无模运算：直接求a!中p的个数, 用大整数乘法来做</li>
+</ul>
+<p>有序的01序列<br>卡特兰数，转化为图形，数轴翻转进行理解<br>(2n)! / n!(n+1)! = 1/(n+1) C(2n,n)<br>应用很多，如栈的顺序</p>
+<p>高斯消元<br>手动模拟人工计算的工程</p>
+<ol>
+<li>对列进行循环</li>
+<li>寻找首元素最大的行</li>
+<li>如果为不存在或为0， continue</li>
+<li>交换最大行和首元素行</li>
+<li>将当前行首元素置为1，从后往前循环</li>
+<li>将后面的行的首元素变为0</li>
+<li>对有多组解、无解、唯一解情况进行判断</li>
+</ol>
+<p>异或：不进位的加法</p>
+<ol>
+<li>枚举列</li>
+<li>找非零行</li>
+<li>交换</li>
+<li>消零</li>
+</ol>
+<p>容斥原理<br>韦恩图<br>有什么用？能减少枚举的数量的个数？如果找到某种性质的话<br>比如：1~n之间能被p1,p2,…等多个数整除的数的个数？使用容斥原理 k(2^k-1) 复杂度</p>
+<p>简单博弈<br>公平组合游戏<br>Nim游戏： 必败状态=0和必胜状态!=0, 自然数的异或<br>Nex游戏，sg(x)终止状态为0状态，反推最小非负整数的运算，每一个都是到不了状态</p>
+<blockquote>
+<p>每个可以根据形成一个单独图，sg(b1,b2)=sg(b1)^sg(b2)<br>实例： Nim游戏、台阶-Nim游戏、集合-Nim游戏、拆分Nim游戏</p>
+</blockquote>
+<p>背包问题</p>
+<ul>
+<li>01背包 i v max(w) 每个物品选或不选<br>f[i][v]=w: 所有只使用前i个物品且总体积小于v的取法的权重的Max  根据最后一个元素i放或不放进行拆分 f[i][v]=max(f[i][v], f[i-1][v-v[i]]+w[i])<br>N*V *1  N</li>
+<li>完全背包 每个物品可以选任意次<br>f[i][v]=w 所有只使用前i个物品且总体积小于v的取法的权重的Max  根据最后一个元素i取多少次进行限制 由容量大小确定取的次数 根据递推关系可以简单写成 f[i][v]=max(f[i][v], f[i][v-w]+w)<br>N<em>V</em>1 N</li>
+<li>多重背包问题 每个物品有si个<blockquote>
+<p>思路将0~si,用1,2,4,..,2^k,c枚举转化为01背包问题<br>NlogS<em>V</em>1 NlogS</p>
+</blockquote>
+</li>
+<li>分组背包问题 每组物品中只能选一个或不选<br>f[i][v]= N 所有只从前i组中选择且总体积不小于v的取法的权重的最大 根据每组选哪个元素来分类 f[i][v] = max(f[i][v], f[i][v-v[i][k]]+w[i][k]) // k=0~k-1<br>N<em>V</em>K N*K<blockquote>
+<p>这里用组的概念代替了单个背包，所以也多出了多种选择</p>
+</blockquote>
+</li>
+</ul>
+<p>线性DP</p>
+<blockquote>
+<p>考虑的方式都是线性的</p>
+</blockquote>
+<ul>
+<li><p>数字三角形 从上到下的权重最长的路径<br>f[i][j] 所有从起点走到(i,j)的路径的权重和的最大值 根据前一方向的来源，左上方还是右下方 f[i][j]=max(f[i-1][j], f[i-1][j-1]) + a[i][j]<br>n^2*1 n^2</p>
+<blockquote>
+<p>因为出口有多条路，所以数据结构不可缩减</p>
+</blockquote>
+</li>
+<li><p>最长上升子序列</p>
+<blockquote>
+<p>注意发现的话，可以看出这里的做法是很妙的<br>f[i] 所有以第i个数为结尾的上升子序列的结合长度的最大值 考虑上升子序列中上一元素的位置 f[i]=max(f[j]+1) j:0~i-1   n<em>n n<br>非DP,优化  n</em>logn<br>发现长度的最后一个位置具有递增关系，可以用二分法搜索进行优化<br>代码！！！</p>
+</blockquote>
+</li>
+</ul>
+<p>最长公共子序列<br>f[i][j] 所有由第一个序列的前i个字母和第二个序列的前j个字母构成的最长公共子序列的Max 根据第i个和第j个字母是最长公共子序列的结尾元素，优化后可得  f[i][j]=max(f[i-1][j],f[i][j-1], f[i-1][j-1]+1)<br>N<em>M</em>1  N*M</p>
+<p>最短编辑距离<br>f[i,j] 将a[1,i]编辑成b[1,j]的所有操作方式的集合，操作方式有插入、删除、替换 根据最后一次属于哪种操作方式进行分类 f[i,j]=min(f[i-1,j], f[i,j-1], f[i-1,j-1]+(a[i]!=b[j]))</p>
+<p>区间DP</p>
+<blockquote>
+<p>二维的i,j一般为区间的起始和终点坐标<br>石子合并 前缀和的运用 大整数相乘<br>f[i][j] 所有将第i堆石子和第j堆石子合并成一堆石子的合并方式的代价的最小值 按最后一次合并的位置进行划分<br>f[i,j] = max_k (f[i,k]+f[k,j]+pj) k=i,..,j-1 n*n n^2<br>这里循环用了len和i，值得借鉴</p>
+</blockquote>
+<p>计数类DP<br>属性为数量，直接相加得到最终结果<br>整数划分<br>f[i,j] 从0~i中选择整数，组成恰好是j的所有方式的集合的总数量 按i加入的次数进行分类 完全背包问题<br>f[i,j] = f[i-1,j] + f[i,j-v[i]]<br>ans = f[i,i]</p>
+<p>f[i,j] 使用j个元素构成的数恰好是j的所有方式的集合的数量 最小的元素是否是1<br>f[i,j] = f[i-1,j-1] + f[i-j, j]<br>ans = sum_i f[n,i]</p>
+<p>数位统计DP<br>比如计数问题，对数位上出现的数进行统计</p>
+<p>状态压缩DP<br>f[i][j], 某一个位使用二进制位来表示整体的状态方程<br>蒙德里安的梦想</p>
+<blockquote>
+<p>非常妙的一种做法，想到每个小格进行递推得到方程式<br>矩形可以有多少中1*2的小矩形的填充方法，首先考虑横着的矩形，竖着放的矩形就唯一确定了。<br>对于横着放的矩形，总共的方案数，研究每列上每个状态的情况！！ 多加理解<br>最短Hamilton路径<br>为什么要用这个？<br>f[i][j] 所以从0走到j，走过的所有点的状态是i的所有路径的长度<br>用状态压缩是因为这里的路径不是按自然序来的，可能有多种组合方式</p>
+</blockquote>
+<p>树形DP<br>没有上司的舞会<br>容易，直接用父子关系即可建立DP关系</p>
+<blockquote>
+<p>注意最大值这里可能会犯错</p>
+</blockquote>
+<p>记忆化搜索<br>滑雪</p>
+<blockquote>
+<p>非常妙的一个东西！对于方格型DP,想到了用方向来分类做，非常好</p>
+</blockquote>
+<p>贪心<br>证明<br>A=B: A&lt;=B &amp;&amp; A&gt;=B<br>区间问题</p>
+<ul>
+<li>右端点排序</li>
+</ul>
+<ol>
+<li><p>区间选点问题，数轴选最少的点覆盖所有的区间</p>
+<blockquote>
+<p>排序，从前到后枚举每个区间，ed=-2e9,如果当前区间被覆盖，即区间的左端点小于ed,下一个；否则，更新ed<br>证明：最小不用; cnt&lt;=Ans, cnt覆盖了所有不相交的点，是基本情况</p>
+</blockquote>
+</li>
+<li><p>最大不相交区间数量</p>
+<blockquote>
+<p>同上<br>证明：最大不用；cnt&gt;=Ans, Ans选择的是两两没有交集的区间，那么是点覆盖区间的基本情况，所以必然点的数量大于区间的数量</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>左端点排序</li>
+</ul>
+<ol>
+<li><p>区间选组，选择每组内部不相交组的，所分的最小组数</p>
+<blockquote>
+<p>排序， 一定是左端点最大的（意味着不可替换性）L[i] &lt;= 所有组的Max_r，则要开辟一个新的组；否则，选择其中r最小的组进行加入，并更新该组的r<br>正确性：最小不用；Ans&gt;=cnt  L[i] 成为新组前一定是形成了cnt+1个相交的区间，这些相交的区间必然花费等量的组，于是得证</p>
+</blockquote>
+</li>
+<li><p>区间覆盖，给定区间，如何用最少的相交区间将其覆盖，也就是怎么安排可以使得任务量最少</p>
+<blockquote>
+<p>排序，在所有能覆盖某一点start,选择最大右端点的，作为新的start，依次类推得到最优解<br>正确性：Ans&lt;=cnt显然， Ans&gt;cnt, 如果与该算法不同，即选择的不是最右的，那么任何最优的算法均能转换为该算法得到的结果，因此大于。</p>
+</blockquote>
+</li>
+</ol>
+<p>Huffman树，合并n组东西，如何合并才能使总代价最小。 Huffman树的结构，用层数来解决。</p>
+<p>贪心算法</p>
+<ul>
+<li>排队打水问题<blockquote>
+<p>贪心题一般是猜一个做法，然后思考为什么是对的。调整法和反对法</p>
+</blockquote>
+</li>
+</ul>
+<p>调整法，对于其实要满足某种顺序，比如正序或者降序的序列，可以假定有两个不满足该序列，然后从而推出矛盾（因为有目标值的存在）</p>
+<p>如果不是按照从小到大的顺序排序，必然存在两个逆序的数。此时得出的结果必然小于交换这两个数得出的结果</p>
+<ul>
+<li><p>货仓选址</p>
+<blockquote>
+<p>用数学和用函数来进行建模<br>f(x) = |x_1-x| + |x_2 - x| + ..<br>猜是中位数<br>考虑进行分组<br>二维，基于随机的思路；如果总和变小就有情况获取</p>
+</blockquote>
+</li>
+<li><p>推公式</p>
+<blockquote>
+<p>贪心某种常用的做法其实是推公式，然后使用不等式从而得到最优解<br>均值不等式，调和不等死，柯西不等式，绝对值不等式，几何不等式<br>贪心大多问题都是数学上研究过的问题</p>
+</blockquote>
+</li>
+</ul>
+<p>贪心得到的答案 &gt;= 最优解<br>贪心得到的答案 &lt;= 最优解</p>
+<blockquote>
+<p>同时比较大小，请注意要学会进行比较。不考虑不变项，然后加上和减去一个无关的变量<br>此贪心的策略只会使最优解结果变小</p>
+</blockquote>
+<ul>
+<li><p>从数据范围反推算法复杂度以及算法内容（一般情况下，题目的时间为1s或者2s. 所以，C++代码中的操作次数控制在1e7最佳）</p>
+<ol>
+<li>n&lt;=30, 指数级别，dfs+剪枝，状态压缩dp</li>
+<li>n&lt;=100, O(n^3) floyd, dp</li>
+<li>n&lt;=1000, O(n^2) O(n^2 logn) dp,二分</li>
+<li>n&lt;=1e4, O(n sqrt(n)) 块状链表特别难写，用不到</li>
+<li>n&lt;=1e5, 最常见的是nlogn算法。线段树和树状数组特别复杂，没讲。 求凸包、求半平面交</li>
+<li>n&lt;=1e6, O(n): hash, 双指针扫描, kmp, ac自动机; 常数比较小的O(nlogn): sort(即前面的系数特别小), 树状数组，heap, ac自动机、线性筛素数<blockquote>
+<p>树状数组和线段树都是用来解决线段的</p>
+</blockquote>
+</li>
+<li>n&lt;=1e7, O(n)</li>
+<li>n&lt;=1e9, O(sqrt(n)) 判断质数，快速幂</li>
+<li>n&lt;=1e18, O(logn) 最大公约数</li>
+</ol>
+</li>
+<li><p>如何分析代码时间复杂度?</p>
+<ol>
+<li>纯循环，dp分析</li>
+<li>递归，主定理，套公式求即可, todo</li>
+<li>logn的分析，二分</li>
+<li>双指针！！ 内层循环只加不减,两层</li>
+<li>数据结构，单链表，删除和插入O(1); 栈，O(1); 单调栈，单调队列O(1）</li>
+<li>kmp内层循环最多执行n次 22:44</li>
+<li>并查集（!!!记住），find最坏logn的效率，加状态压缩；再加按秩合并，loglogn</li>
+<li>堆，插入和删除需要up和down, 走一遍，O(logn); 原始建堆 o(n)???</li>
+<li>hash表，碰撞的概率特别低，平均来说，增删改查都是O(1)<blockquote>
+<p>和快排类似，最坏情况下非常坏，但概率低</p>
+</blockquote>
+</li>
+<li>搜索和图论：从最基本的出发<ul>
+<li>排列： 最后一层输出答案O(n), 查看树的分支来计算n!n</li>
+<li>图的遍历：遍历所有的点，然后对每个点选择遍历所有的边。O(n+m)</li>
+<li>迪杰斯特拉:n^2  mlogm (m&lt;=n^2&gt;)</li>
+<li>bellsman-ford: nm</li>
+<li>spfa, 匈牙利算法，最大流算法；? 实际很快，分析很慢</li>
+<li>floyd, prim n^2  kruskal </li>
+</ul>
+</li>
+<li>数学<ul>
+<li>欧式筛法， 调和级数 n/1+n/2+n/3 nlogn的级别，自然数的和; 如果是质数， n/1+n/2+n/3+n/5+n/7+…  nloglogn的级别</li>
+<li>最大公约数，辗转相除法，logn</li>
+<li>快速幂 logk的级别</li>
+</ul>
+</li>
+<li>动态规划问题的计算量=状态数量*状态转移的计算量<ul>
+<li>树形DP: 每个点只会遍历一次，遍历其所有的边 O(m)</li>
+<li>滑雪： n^2 * 1</li>
+</ul>
+</li>
+<li>贪心： 排序+循环</li>
+</ol>
+</li>
+</ul>
+<p>1 Byte = 8 bit<br>1 KB = 1024 Byte<br>1 MB = 1024<em>1024 Byte<br>1 GB = 1024</em>1024 Byte</p>
+<p>int 4 Byte<br>char 1 Byte<br>double, long long 8 Byte<br>*point  4Byte(32位机器)  8Byte(64位机器)<br>bool 1 Byte</p>
+<p>64MB = 2^26 Byte<br>2^26 / 4 - 2^24,  1600 0000 1e7</p>
+<p>直接用代码算即可</p>
+<blockquote>
+<p>sizeof v + sizeof w + sizeof w  单位是字节<br>但注意有时算的时候开了很大的空间，但是没用是没事的，因为操作系统不会把数据一下子全部给你, 会一点一点给。 所以memset(), 只需要设计到要用的量即可<br>注意递归栈也需要空间， logn</p>
+</blockquote>
+<blockquote>
+<p>对于网速来说， 8M/s 指的是8M位， 实际上每秒最多只能下载1MB的数据； 对于流量来说是兆字节</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>数据结构的使用<br>最值，堆<br>区间和，区间数组，树状数组，线段树<br>有序链表，平衡树，set</p>
+<p>技巧：一维转为二维</p>
+<p>开始审题很重要，不要什么都没有就往前面跑，首先心理要有一个很好的思路<br>还有模板哪些步骤一开始只是套路，越到后面越没有必要去实实在在地在意它，这样是完全地浪费功夫的感觉</p>
+<ul>
+<li>高精度压位<br>int 2<em>10^10<br>加法一般压9位<br>乘法一般压4位 10000</em>10000=1e<blockquote>
+<p>实际上的想法就是在进行高精度计算的时候，一位一位用char来做太费时间和内存了；可以考虑用int来做，<br>加法9位9位地压，乘法4位4位地压</p>
+</blockquote>
+</li>
+</ul>
+<p>从高位开始读数： 整个数一直左移</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">char str[7]=&apos;121213&apos;</span><br><span class="line">for(int i=0, t=0;i &lt; n;i++)&#123;</span><br><span class="line">    s= s*10 + str[i]-&apos;0&apos;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从低位开始读数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">char str[7]=&apos;121212&apos;</span><br><span class="line">for(int i=0, s=0,t=1;i&lt;n;i++)&#123; // t表示每一位的进制，每位的数乘以每位的进制</span><br><span class="line">    s += (a[i]-&apos;0&apos;)*t;</span><br><span class="line">    t*=10;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>DP的属性可以有布尔值之间的传递，长度，最值</p>
+<p>DFS 递归<br>BFS 队列 循环</p>
+<h1 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h1><ul>
+<li>Segmelut Flait<br>数组，全局变量局部不可访问<br>数组长度未开够<br>使用删代码法</li>
+</ul>
+<p>将函数return false; 如果问题未改变，则说明不是该函数的问题</p>
+<ul>
+<li>TLE时间受限<br>算法出错<br>局部变量初试为初始化<br>循环变量名抄错</li>
+</ul>
+<p>c++<br>inline 编译器在执行不会将其转化为函数调用，少了函数栈的空间，一般适用于简单的函数<br>register int 将变量保存在寄存器中 </p>
+<p>遍历想想也就两大类啊，深度优先和宽度优先<br>宽度优先就是层次遍历</p>
+<p>宽度优先具有最小的性质，一定能够得出到根节点的最短性。但是宽度优先需要耗费很大的空间，至少存储两层的节点，所以极其耗费空间</p>
+<p>深度优先虽然没有最小的性质，但是空间复杂度低，只需要空间复杂度为树的高度的空间</p>
+<p>书上的公式是书面语，不是大白话，讲究优美性，实际理解时往往需要抽象我们所理解的大白话。</p>
+<p>讲题的境界： 怎么想出来的？正确性</p>
+<p>动作记忆！！！</p>
+<p>C++中0，NULL，nullptr是一个东西</p>
+<p>声音越小越有气势，更重要的是听别人的东西，把别人的东西听懂</p>
+<h2 id="待做"><a href="#待做" class="headerlink" title="待做"></a>待做</h2><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTc3ODU3MC9hcnRpY2xlL2RldGFpbHMvODY0ODQwMjA=" title="https://blog.csdn.net/weixin_39778570/article/details/86484020">https://blog.csdn.net/weixin_39778570/article/details/86484020<i class="fa fa-external-link"></i></span><br>基本算法篇</p>
+<ul>
+<li>模拟</li>
+<li>枚举</li>
+<li>排序</li>
+<li>分治</li>
+<li>二分</li>
+<li>倍增</li>
+<li>贪心</li>
+</ul>
+<p>链表<br>指针<br>二叉树<br>二叉搜索树</p>
+<blockquote>
+<p>二叉搜索树，父节点， 左孩子节点的函数值严格小于父节点， 右孩子节点的函数值严格大于父节点</p>
+</blockquote>
+<p>后序遍历： 左、右、中<br>前序遍历： 中，左，右<br>中序遍历： 左，中，右</p>
+<p>进一步总结</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>DFS两种框架</p>
+<p>第一种<br>起始点未定, 用层数来表明，子节点都很清晰</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int n;</span><br><span class="line">int path[]</span><br><span class="line">dfs(int i)&#123;</span><br><span class="line">    if(i==n)&#123;</span><br><span class="line">        collect path;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for(int i=0;i&lt;n;i++)</span><br><span class="line">        if(check(i))&#123;</span><br><span class="line">            p[i] = 1;  //  赋值</span><br><span class="line"></span><br><span class="line">            dfs(s);</span><br><span class="line"></span><br><span class="line">            p[i] = 0;  // 恢复</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dfs(0)</span><br></pre></td></tr></table></figure>
+
+<p>第二种</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int st[N];</span><br><span class="line">int path[N];  //?</span><br><span class="line"></span><br><span class="line">dfs(int v)&#123;</span><br><span class="line">    st[v] = true; // 保证遍历不重复，不需要恢复</span><br><span class="line">    path[i] = f;</span><br><span class="line"></span><br><span class="line">    if(end)  collect</span><br><span class="line">    for(w: vw)</span><br><span class="line">        if(!st)  dfs(w);</span><br><span class="line"></span><br><span class="line">    path[i] = -1; // 其他变量需要恢复</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>BFS的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int fun( )&#123;</span><br><span class="line"></span><br><span class="line">    q.push(v);</span><br><span class="line">    while(q.size()) &#123;</span><br><span class="line">        auto t=q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        </span><br><span class="line">        for(int i=0;i&lt;4;i++)</span><br><span class="line">            if(check(i)) q.push(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"> // ? 层次怎么体现？？</span><br></pre></td></tr></table></figure>
+
+<p>DP的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f[0][0] = ?</span><br><span class="line">for(i:1~n)</span><br><span class="line">    for(j:1~m)</span><br><span class="line">        f[i][j] = f[i-1][j-1]</span><br><span class="line"></span><br><span class="line">cout&lt;&lt;f[n][m]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int f(int i,int j)&#123;</span><br><span class="line">    if(f[i][j]!=-1) return f[i][j];</span><br><span class="line">    if(base) &#123;</span><br><span class="line">        初值</span><br><span class="line">    &#125;</span><br><span class="line">    res=?</span><br><span class="line"></span><br><span class="line">    for(i:1~n)</span><br><span class="line">        for(j:1~m)</span><br><span class="line">            res=f(i-1,j-1);</span><br><span class="line">    return f[i][j]=res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dfs(0,0)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dp[0][0]</span><br><span class="line"></span><br><span class="line">bool dp(int i,int j)&#123;</span><br><span class="line">    if(f[x][y]!=-1) return f[x][y];</span><br><span class="line">    if(base) &#123;</span><br><span class="line">        return ; // 这里一般是f[i][j]具有某种具体含义的，比如两个字符串匹配，A的前i个字母和B的前j个字母这类极大值情况具有意义的</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dp[x][y] = dp[x+1][y+2] // 看这里的状态是否好推演</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>DP集合划分的方式总结</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/15/python-pylint/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/15/python-pylint/" class="post-title-link" itemprop="url">python pylint</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-15 13:15:11 / 修改时间：13:15:55" itemprop="dateCreated datePublished" datetime="2019-09-15T13:15:11+08:00">2019-09-15</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/coding-reference/" itemprop="url" rel="index"><span itemprop="name">coding_reference</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/coding-reference/pylint/" itemprop="url" rel="index"><span itemprop="name">pylint</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0phc29uX0xld2lzL2FydGljbGUvZGV0YWlscy83NTM4NjU5OA==" title="https://blog.csdn.net/Jason_Lewis/article/details/75386598">https://blog.csdn.net/Jason_Lewis/article/details/75386598<i class="fa fa-external-link"></i></span></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -1156,869 +3093,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/12/blog-todo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/12/blog-todo/" class="post-title-link" itemprop="url">blog:todo</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-12 13:37:22 / 修改时间：13:43:35" itemprop="dateCreated datePublished" datetime="2019-09-12T13:37:22+08:00">2019-09-12</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/todo/" itemprop="url" rel="index"><span itemprop="name">todo</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/todo/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>文字加密访问</p>
-</li>
-<li><p>收录到百度</p>
-</li>
-<li><p>new 文章时，可选参数决定是否需要创建对应的文件夹</p>
-<blockquote>
-<p>ctrl+`, 打开终端</p>
-</blockquote>
-</li>
-<li><p>仿照博客园，添加日历</p>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/12/gnn-semi-paper-code-read/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/12/gnn-semi-paper-code-read/" class="post-title-link" itemprop="url">semi-paper code read</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-12 12:47:23" itemprop="dateCreated datePublished" datetime="2019-09-12T12:47:23+08:00">2019-09-12</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-14 10:27:18" itemprop="dateModified" datetime="2019-10-14T10:27:18+08:00">2019-10-14</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/semi-gnn/" itemprop="url" rel="index"><span itemprop="name">semi-gnn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="论文1"><a href="#论文1" class="headerlink" title="论文1"></a>论文1</h2><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RraXBmL2djbg==" title="https://github.com/tkipf/gcn">https://github.com/tkipf/gcn<i class="fa fa-external-link"></i></span></p>
-<p>Data</p>
-<ul>
-<li>n<em>n   n</em>d  d=c:channels  e=f:classes</li>
-</ul>
-<ol>
-<li>gcn 文件组织结构<ul>
-<li>readme.md<ul>
-<li>data:  d=c: chanels   e=f:classes<ul>
-<li>citation network data:  cora, citeseer, pubmed</li>
-<li>nell:  revisiting semi-supervised learning with graph embedding</li>
-</ul>
-</li>
-<li>model: gcn,  gcn_cheby, dense</li>
-</ul>
-</li>
-<li>gcn<ul>
-<li>data<ul>
-<li>.tx  the feature vectors of test instances</li>
-<li>.ty  the one-hot labels</li>
-<li>.index   the indices of test instances in graph,   inductive setting</li>
-<li>.x :  the feature vectors of the labeled training instances </li>
-<li>.y :  the labeled</li>
-<li>.allx: all</li>
-<li>.ally</li>
-</ul>
-</li>
-<li>inits.py<ul>
-<li>uniform,  glorot: [input_dim, output_dim],  zeros, ones</li>
-</ul>
-</li>
-<li>metrics.py<ul>
-<li>cross_entropy + accuary</li>
-</ul>
-</li>
-<li>models.py<ul>
-<li>gcn: semi-superised </li>
-<li>gcn_cheby: convolutional</li>
-<li>dense: basic multi-layer perceptron</li>
-<li>Model<blockquote>
-<p>self.layers[0], 第一层的layer. 对第一层中的var的值，进行相加，这里的var只有weights, bias.  进行乘以固定系数相加<br>num_features_nonzero: dropout的方法也不同</p>
-</blockquote>
-<ul>
-<li>init<ul>
-<li>name, logging</li>
-<li>vars, placeholdres</li>
-<li>layers, activations</li>
-<li>inputs, outputs</li>
-<li>loss, accuary</li>
-<li>optimizer, opt_op</li>
-</ul>
-</li>
-<li>build:   tf.variable_scope(self.name)<ul>
-<li>build sequential layer model</li>
-<li>store model variables for easy access</li>
-<li>build metrics:  weight_decay: 5e-4: weight for L2 loss on embedding matrix. ???</li>
-</ul>
-</li>
-<li>predict</li>
-<li>_loss</li>
-<li>_accuracy</li>
-<li>save</li>
-<li>load</li>
-</ul>
-</li>
-<li>MLP<ul>
-<li><strong>init</strong>:  inputs: features,  input_dim, output_dim, placeholders, optimizer, build</li>
-<li>_loss: 变量的l2 loss???? += 交叉熵</li>
-<li>_build;  Dense</li>
-</ul>
-</li>
-<li>GCN<ul>
-<li>_build: GraphConvolution</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>utils.py<ul>
-<li>load_data</li>
-</ul>
-</li>
-<li>layers.py<ul>
-<li>get_layer_uid: 全场唯一uid</li>
-<li>sparse_dropout: dropout for sparse tensors????</li>
-<li>Layer<ul>
-<li>init: name, vars, logging, sparse_inputs</li>
-<li>_call: return inputs</li>
-<li>__call: add inputs, outputs ??? tf.summary.histogram()?// 为了方便展示直方图?</li>
-<li>_log_vars:  add vars in histogram</li>
-</ul>
-</li>
-<li>Dense(Layer)<ul>
-<li>__init:  input_dim, output_dim, placeholders, dropout=0., sparse_inputs, act, bias=false, featureless=false  glorot()</li>
-<li>_call<ul>
-<li>dropout:</li>
-<li>transform:  是否使用稀疏矩阵相乘</li>
-<li>bias:  self.vars[‘bias’] 没有输入的，只有输出，在隐藏层中，对结果产生影响</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>GraphConvolution: graph convolution layer(Layer)<ul>
-<li>act?  support?  bias?   featureless?  act: tensorflow activation</li>
-<li>init<ul>
-<li>support 变量的个数 weights_i:  glorot   bias=zeros</li>
-</ul>
-</li>
-<li>_call<ul>
-<li>convlve ??</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>train.py<ul>
-<li>flags<blockquote>
-<p>dataset, model, learning_rate, epochs,, hidden1-16, dropout</p>
-</blockquote>
-<ul>
-<li>weight_decay: weight for l2 loss on embedding matrix</li>
-<li>early_stopping</li>
-<li>max_degree:  Chebyshev 不等式的阶</li>
-</ul>
-</li>
-<li>placeholders<ul>
-<li>support: [preprocess_adj(adj)]<blockquote>
-<p>为什么要这么做? 因为gcn_cheby模型中每层的A实际上是不一样的</p>
-</blockquote>
-</li>
-<li>features: </li>
-<li>labels: </li>
-<li>labels_mask: </li>
-<li>dropout: 注意稀疏矩阵和稠密矩阵 dropout方法还不一样 </li>
-<li>num_feature_nonzero: </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>corn<br>    - x:  140,1433  tx: 1000,1433  ty: 1000, 7<br>    - allx: 1708  1433  ? 为何总数不相等</p>
-<pre><code>- (allx,tx) 说明这两个不相等 </code></pre><h3 id="论文2"><a href="#论文2" class="headerlink" title="论文2"></a>论文2</h3><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tpbWl5b3VuZy9wbGFuZXRvaWQ=" title="https://github.com/kimiyoung/planetoid">https://github.com/kimiyoung/planetoid<i class="fa fa-external-link"></i></span></p>
-<ul>
-<li>test_ind.py:  induce model 的测试</li>
-<li>test_trans.py:  transive model的测试</li>
-<li>ind_model.py:  model   add_data  build  gen_train_inst   gen_graph gen_lable_graph</li>
-</ul>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/12/daily-thinking/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/12/daily-thinking/" class="post-title-link" itemprop="url">daily thinking</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-12 00:22:55 / 修改时间：21:27:05" itemprop="dateCreated datePublished" datetime="2019-09-12T00:22:55+08:00">2019-09-12</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/daily/" itemprop="url" rel="index"><span itemprop="name">daily</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/daily/summary/" itemprop="url" rel="index"><span itemprop="name">summary</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>感觉不及时写写自己的想法，自己可能会对自己所犯的错误记得不够牢靠</p>
-<h2 id="一点想法"><a href="#一点想法" class="headerlink" title="一点想法"></a>一点想法</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ol>
-<li><p>前段时间，没头没脑地看似很认真地同时并行地学习tensorflow，结果发现笔记也有很多。其实还是给忘的差不多了，仍然不会；</p>
-<blockquote>
-<p>! 某段时间应该集中在一件事情上，事情不在多，在精</p>
-</blockquote>
-</li>
-<li><p>用来三天时间搭博客，前面看一些教程，东看看西看看，结果一遇到bug啥都不会。资料不是最新的，不是学习的官方的资料</p>
-<blockquote>
-<p>! 一定要自己对大纲了解，以及学习最官方的资料</p>
-</blockquote>
-</li>
-<li><p>关于论文的梯度公式看了很多篇文章以及进行推导，结果实现却花了很多时间仍未完成。</p>
-<blockquote>
-<p>! 一开始学习的途径不对，计算机最大的特点就是在于实践！每做一件事情时请务必动手</p>
-</blockquote>
-</li>
-<li><p>论文太多，太杂? 感觉看不过来</p>
-<blockquote>
-<p>! 学会慢慢地分类</p>
-</blockquote>
-</li>
-<li><p>比如画出一个图形，其实用matplotlib很好画，可就是没想通？</p>
-<blockquote>
-<p>记住别人的设计是面向对象的，图灵机，一切都是由最简单的堆叠而成</p>
-</blockquote>
-</li>
-<li><p>代码迟迟不想下手</p>
-<blockquote>
-<p>记住！代码这件事，只有不断地练习；谨记！永远不要期望第一版的代码有多好，重点是自己的想法实现了才是最重要的； 而且当你做了之后才发现自己哪些地方问题特别大</p>
-</blockquote>
-</li>
-<li><p>时间应该花在最基本的东西的学习和了解上!</p>
-<blockquote>
-<p>最基础的东西应该要反复过才行，不要贪多</p>
-</blockquote>
-</li>
-<li><p>现在的时间自己仍然不可控</p>
-<blockquote>
-<p>! 现在最重要的是能把自己的想法做完和事情做完，其他地慢慢就会会了</p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/09/12/daily-thinking/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/11/gnn-semi-gnn-relization-progress/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/11/gnn-semi-gnn-relization-progress/" class="post-title-link" itemprop="url">semi-gnn, relization progress</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-11 00:03:42" itemprop="dateCreated datePublished" datetime="2019-09-11T00:03:42+08:00">2019-09-11</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-14 10:27:09" itemprop="dateModified" datetime="2019-10-14T10:27:09+08:00">2019-10-14</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/semi-gnn/" itemprop="url" rel="index"><span itemprop="name">semi-gnn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>试图用numpy实现</p>
-</blockquote>
-<p>主要问题</p>
-<blockquote>
-<p>模拟自动微分这一块出现的问题</p>
-</blockquote>
-<p>对于softmaxarg()函数来说<br>目标即寻找一个平滑函数</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9kZWVwbm90ZXMuaW8vc29mdG1heC1jcm9zc2VudHJvcHk=" title="https://deepnotes.io/softmax-crossentropy">https://deepnotes.io/softmax-crossentropy<i class="fa fa-external-link"></i></span></p>
-<p>一个softmax的非常好的做法</p>
-<p>soft-argmax</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ib3V0aGlseC53b3JkcHJlc3MuY29tLzIwMTMvMDQvMjEvYS1zb2Z0LWFyZ21heC8=" title="https://bouthilx.wordpress.com/2013/04/21/a-soft-argmax/">https://bouthilx.wordpress.com/2013/04/21/a-soft-argmax/<i class="fa fa-external-link"></i></span></p>
-<h2 id="一些后记"><a href="#一些后记" class="headerlink" title="一些后记"></a>一些后记</h2><p>关于cs231n课程代码的一些借鉴</p>
-<ol>
-<li><p>一个pipeline</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> past.builtins <span class="keyword">import</span> xrange</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TwoLayerNet</span><span class="params">(object)</span>:</span></span><br><span class="line">  <span class="string">"""</span></span><br><span class="line"><span class="string">  A two-layer fully-connected neural network. The net has an input dimension of</span></span><br><span class="line"><span class="string">  N, a hidden layer dimension of H, and performs classification over C classes.</span></span><br><span class="line"><span class="string">  We train the network with a softmax loss function and L2 regularization on the</span></span><br><span class="line"><span class="string">  weight matrices. The network uses a ReLU nonlinearity after the first fully</span></span><br><span class="line"><span class="string">  connected layer.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  In other words, the network has the following architecture:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  input - fully connected layer - ReLU - fully connected layer - softmax</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  The outputs of the second fully-connected layer are the scores for each class.</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, input_size, hidden_size, output_size, std=<span class="number">1e-4</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Initialize the model. Weights are initialized to small random values and</span></span><br><span class="line"><span class="string">    biases are initialized to zero. Weights and biases are stored in the</span></span><br><span class="line"><span class="string">    variable self.params, which is a dictionary with the following keys:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    W1: First layer weights; has shape (D, H)</span></span><br><span class="line"><span class="string">    b1: First layer biases; has shape (H,)</span></span><br><span class="line"><span class="string">    W2: Second layer weights; has shape (H, C)</span></span><br><span class="line"><span class="string">    b2: Second layer biases; has shape (C,)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - input_size: The dimension D of the input data.</span></span><br><span class="line"><span class="string">    - hidden_size: The number of neurons H in the hidden layer.</span></span><br><span class="line"><span class="string">    - output_size: The number of classes C.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    self.params = &#123;&#125;</span><br><span class="line">    self.params[<span class="string">'W1'</span>] = std * np.random.randn(input_size, hidden_size)</span><br><span class="line">    self.params[<span class="string">'b1'</span>] = np.zeros(hidden_size)</span><br><span class="line">    self.params[<span class="string">'W2'</span>] = std * np.random.randn(hidden_size, output_size)</span><br><span class="line">    self.params[<span class="string">'b2'</span>] = np.zeros(output_size)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, X, y=None, reg=<span class="number">0.0</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Compute the loss and gradients for a two layer fully connected neural</span></span><br><span class="line"><span class="string">    network.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - X: Input data of shape (N, D). Each X[i] is a training sample.</span></span><br><span class="line"><span class="string">    - y: Vector of training labels. y[i] is the label for X[i], and each y[i] is</span></span><br><span class="line"><span class="string">      an integer in the range 0 &lt;= y[i] &lt; C. This parameter is optional; if it</span></span><br><span class="line"><span class="string">      is not passed then we only return scores, and if it is passed then we</span></span><br><span class="line"><span class="string">      instead return the loss and gradients.</span></span><br><span class="line"><span class="string">    - reg: Regularization strength.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    If y is None, return a matrix scores of shape (N, C) where scores[i, c] is</span></span><br><span class="line"><span class="string">    the score for class c on input X[i].</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    If y is not None, instead return a tuple of:</span></span><br><span class="line"><span class="string">    - loss: Loss (data loss and regularization loss) for this batch of training</span></span><br><span class="line"><span class="string">      samples.</span></span><br><span class="line"><span class="string">    - grads: Dictionary mapping parameter names to gradients of those parameters</span></span><br><span class="line"><span class="string">      with respect to the loss function; has the same keys as self.params.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># Unpack variables from the params dictionary</span></span><br><span class="line">    W1, b1 = self.params[<span class="string">'W1'</span>], self.params[<span class="string">'b1'</span>]</span><br><span class="line">    W2, b2 = self.params[<span class="string">'W2'</span>], self.params[<span class="string">'b2'</span>]</span><br><span class="line">    N, D = X.shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute the forward pass</span></span><br><span class="line">    scores = <span class="literal">None</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Perform the forward pass, computing the class scores for the input. #</span></span><br><span class="line">    <span class="comment"># Store the result in the scores variable, which should be an array of      #</span></span><br><span class="line">    <span class="comment"># shape (N, C).                                                             #</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="comment">#                              END OF YOUR CODE                             #</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># If the targets are not given then jump out, we're done</span></span><br><span class="line">    <span class="keyword">if</span> y <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">      <span class="keyword">return</span> scores</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute the loss</span></span><br><span class="line">    loss = <span class="literal">None</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Finish the forward pass, and compute the loss. This should include  #</span></span><br><span class="line">    <span class="comment"># both the data loss and L2 regularization for W1 and W2. Store the result  #</span></span><br><span class="line">    <span class="comment"># in the variable loss, which should be a scalar. Use the Softmax           #</span></span><br><span class="line">    <span class="comment"># classifier loss.                                                          #</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="comment">#                              END OF YOUR CODE                             #</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Backward pass: compute gradients</span></span><br><span class="line">    grads = &#123;&#125;</span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Compute the backward pass, computing the derivatives of the weights #</span></span><br><span class="line">    <span class="comment"># and biases. Store the results in the grads dictionary. For example,       #</span></span><br><span class="line">    <span class="comment"># grads['W1'] should store the gradient on W1, and be a matrix of same size #</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line">    <span class="comment">#                              END OF YOUR CODE                             #</span></span><br><span class="line">    <span class="comment">#############################################################################</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> loss, grads</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, X, y, X_val, y_val,</span></span></span><br><span class="line"><span class="function"><span class="params">            learning_rate=<span class="number">1e-3</span>, learning_rate_decay=<span class="number">0.95</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            reg=<span class="number">5e-6</span>, num_iters=<span class="number">100</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            batch_size=<span class="number">200</span>, verbose=False)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Train this neural network using stochastic gradient descent.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - X: A numpy array of shape (N, D) giving training data.</span></span><br><span class="line"><span class="string">    - y: A numpy array f shape (N,) giving training labels; y[i] = c means that</span></span><br><span class="line"><span class="string">      X[i] has label c, where 0 &lt;= c &lt; C.</span></span><br><span class="line"><span class="string">    - X_val: A numpy array of shape (N_val, D) giving validation data.</span></span><br><span class="line"><span class="string">    - y_val: A numpy array of shape (N_val,) giving validation labels.</span></span><br><span class="line"><span class="string">    - learning_rate: Scalar giving learning rate for optimization.</span></span><br><span class="line"><span class="string">    - learning_rate_decay: Scalar giving factor used to decay the learning rate</span></span><br><span class="line"><span class="string">      after each epoch.</span></span><br><span class="line"><span class="string">    - reg: Scalar giving regularization strength.</span></span><br><span class="line"><span class="string">    - num_iters: Number of steps to take when optimizing.</span></span><br><span class="line"><span class="string">    - batch_size: Number of training examples to use per step.</span></span><br><span class="line"><span class="string">    - verbose: boolean; if true print progress during optimization.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    num_train = X.shape[<span class="number">0</span>]</span><br><span class="line">    iterations_per_epoch = max(num_train / batch_size, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Use SGD to optimize the parameters in self.model</span></span><br><span class="line">    loss_history = []</span><br><span class="line">    train_acc_history = []</span><br><span class="line">    val_acc_history = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> it <span class="keyword">in</span> xrange(num_iters):</span><br><span class="line">      X_batch = <span class="literal">None</span></span><br><span class="line">      y_batch = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="comment"># <span class="doctag">TODO:</span> Create a random minibatch of training data and labels, storing  #</span></span><br><span class="line">      <span class="comment"># them in X_batch and y_batch respectively.                             #</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="keyword">pass</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="comment">#                             END OF YOUR CODE                          #</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line"></span><br><span class="line">      <span class="comment"># Compute loss and gradients using the current minibatch</span></span><br><span class="line">      loss, grads = self.loss(X_batch, y=y_batch, reg=reg)</span><br><span class="line">      loss_history.append(loss)</span><br><span class="line"></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="comment"># <span class="doctag">TODO:</span> Use the gradients in the grads dictionary to update the         #</span></span><br><span class="line">      <span class="comment"># parameters of the network (stored in the dictionary self.params)      #</span></span><br><span class="line">      <span class="comment"># using stochastic gradient descent. You'll need to use the gradients   #</span></span><br><span class="line">      <span class="comment"># stored in the grads dictionary defined above.                         #</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="keyword">pass</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="comment">#                             END OF YOUR CODE                          #</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> verbose <span class="keyword">and</span> it % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">'iteration %d / %d: loss %f'</span> % (it, num_iters, loss))</span><br><span class="line"></span><br><span class="line">      <span class="comment"># Every epoch, check train and val accuracy and decay learning rate.</span></span><br><span class="line">      <span class="keyword">if</span> it % iterations_per_epoch == <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># Check accuracy</span></span><br><span class="line">        train_acc = (self.predict(X_batch) == y_batch).mean()</span><br><span class="line">        val_acc = (self.predict(X_val) == y_val).mean()</span><br><span class="line">        train_acc_history.append(train_acc)</span><br><span class="line">        val_acc_history.append(val_acc)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Decay learning rate</span></span><br><span class="line">        learning_rate *= learning_rate_decay</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="string">'loss_history'</span>: loss_history,</span><br><span class="line">      <span class="string">'train_acc_history'</span>: train_acc_history,</span><br><span class="line">      <span class="string">'val_acc_history'</span>: val_acc_history,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Use the trained weights of this two-layer network to predict labels for</span></span><br><span class="line"><span class="string">    data points. For each data point we predict scores for each of the C</span></span><br><span class="line"><span class="string">    classes, and assign each data point to the class with the highest score.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - X: A numpy array of shape (N, D) giving N D-dimensional data points to</span></span><br><span class="line"><span class="string">      classify.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    - y_pred: A numpy array of shape (N,) giving predicted labels for each of</span></span><br><span class="line"><span class="string">      the elements of X. For all i, y_pred[i] = c means that X[i] is predicted</span></span><br><span class="line"><span class="string">      to have class c, where 0 &lt;= c &lt; C.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    y_pred = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement this function; it should be VERY simple!                #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment">#                              END OF YOUR CODE                           #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> y_pred</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>graph架构</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 整个Graph</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ComputationGraph</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, inputs)</span>:</span></span><br><span class="line">        <span class="comment"># 1. [pass inputs to input gates...]</span></span><br><span class="line">        <span class="comment"># 2. forward the computational graph</span></span><br><span class="line">        <span class="keyword">for</span> gate <span class="keyword">in</span> self.graph.nodes_topologically_sorted():</span><br><span class="line">            gate.forward()</span><br><span class="line">        <span class="keyword">return</span> loss</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> gate <span class="keyword">in</span> reversed(self.graph.nodes_topologically_sorted):</span><br><span class="line">            gate.backward()</span><br><span class="line">        <span class="keyword">return</span> inputs_gradients</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每个gate</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MultipyGate</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""x, y,z: scalars"""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x, y)</span>:</span></span><br><span class="line">        z = x*y</span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line">        <span class="keyword">return</span> z</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(self, dz)</span>:</span></span><br><span class="line">        dx = self.y * dz <span class="comment"># [dz/dx * dL/dz]</span></span><br><span class="line">        dy = self.x * dz <span class="comment"># [dz/dy * dL/dz]</span></span><br><span class="line">        <span class="keyword">return</span> [dx, dy]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>前向传播的一个例子</p>
-</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># assume some unit gaussian 10-D input data</span></span><br><span class="line">D = np.random.randn(<span class="number">100</span>, <span class="number">500</span>) <span class="comment"># 100， 500</span></span><br><span class="line">hidden_layer_sizes = [<span class="number">500</span>] * <span class="number">10</span></span><br><span class="line">nonlinearities = [<span class="string">'tanh'</span>] * len(hidden_layer_sizes)</span><br><span class="line"></span><br><span class="line">act = &#123;<span class="string">'relu'</span>: <span class="keyword">lambda</span> x: np.maximum(<span class="number">0</span>,x), <span class="string">'tanh'</span>: <span class="keyword">lambda</span> x: np.tanh(x)&#125;</span><br><span class="line"></span><br><span class="line">Hs = &#123;&#125;  <span class="comment"># why?</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(hidden_layer_sizes)):</span><br><span class="line">    X = D <span class="keyword">if</span> i == <span class="number">0</span> <span class="keyword">else</span> Hs[i<span class="number">-1</span>]</span><br><span class="line">    fan_in = X.shape[<span class="number">1</span>]</span><br><span class="line">    fan_out = hidden_layer_sizes[i]</span><br><span class="line">    W = np.random.randn(fan_in, fan_out) * <span class="number">0.01</span></span><br><span class="line"></span><br><span class="line">    H = np.dot(X, W)</span><br><span class="line">    H = act[nonlinearities[i]](H)</span><br><span class="line">    Hs[i] = H  <span class="comment"># cache result on this layer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ctrl + enter</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># look at distribution at each layer</span></span><br><span class="line">print(<span class="string">"input layer had mean %f and std %f"</span> % (np.mean(D), np.std(D)))</span><br><span class="line">layer_means = [np.mean(H) <span class="keyword">for</span> i, H <span class="keyword">in</span> Hs.items()] <span class="comment"># ?</span></span><br><span class="line">layer_stds = [np.std(H) <span class="keyword">for</span> i, H <span class="keyword">in</span> Hs.items()]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, H <span class="keyword">in</span> Hs.items():</span><br><span class="line">    print(<span class="string">"hiddeen layer %d had mean %f and std %f"</span> % (i + <span class="number">1</span>, layer_means[i], layer_stds[i]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot the means and standard deviations</span></span><br><span class="line"></span><br><span class="line">plt.figure()</span><br><span class="line">plt.subplot(<span class="number">121</span>)</span><br><span class="line">plt.plot(list(Hs.keys()), layer_means, <span class="string">"ob-"</span>)</span><br><span class="line">plt.title(<span class="string">"layer mean"</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>)</span><br><span class="line">plt.plot(list(Hs.keys()), layer_stds, <span class="string">"or-"</span>)</span><br><span class="line">plt.title(<span class="string">"layer std"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot the raw distribution</span></span><br><span class="line">plt.figure()</span><br><span class="line"><span class="keyword">for</span> i, H <span class="keyword">in</span> Hs.items():</span><br><span class="line">    plt.subplot(<span class="number">1</span>, len(Hs), i+<span class="number">1</span>)</span><br><span class="line">    plt.hist(H.ravel(), <span class="number">30</span>, range=(<span class="number">-1</span>,<span class="number">1</span>)) <span class="comment"># ravel, shape to (1, N)</span></span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/10/deep-learning-study/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/10/deep-learning-study/" class="post-title-link" itemprop="url">deep learning study</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-10 20:56:16" itemprop="dateCreated datePublished" datetime="2019-09-10T20:56:16+08:00">2019-09-10</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-12 19:44:34" itemprop="dateModified" datetime="2019-09-12T19:44:34+08:00">2019-09-12</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/tensorflow/" itemprop="url" rel="index"><span itemprop="name">tensorflow</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-tensorflows"><a href="#1-tensorflows" class="headerlink" title="1. tensorflows"></a>1. tensorflows</h2><p>tensorflow 数据流图  用于数值计算单开源软件库</p>
-<p>Nodes : 数学操作</p>
-<blockquote>
-<p>特别地，有数据输入和数据输出的节点， 或者是读取、写入持久变量的终点<br>persistent</p>
-</blockquote>
-<p>edges: 多维数据数组， tensor</p>
-<blockquote>
-<p>根据不同的计算, 张, 即数据的大小可变size</p>
-</blockquote>
-<p>特征</p>
-<ul>
-<li>高度的灵活性，可自己写C++</li>
-<li>可以在CPU, GPU, Docker等， Portablilty 可移植性</li>
-<li>科研和产品</li>
-<li>自动求微分<blockquote>
-<p>只需要添加数据和目标函数，可以自动计算相关的微分导数</p>
-</blockquote>
-</li>
-<li>多语言支持</li>
-<li>支持线程、队列、异步操作的支持，可以自由第将TensorFlow中的计算元素分配到不同的设备中</li>
-</ul>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/09/10/deep-learning-study/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/10/ipython-personnal-reference/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/10/ipython-personnal-reference/" class="post-title-link" itemprop="url">ipython personnal reference</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-10 16:57:52" itemprop="dateCreated datePublished" datetime="2019-09-10T16:57:52+08:00">2019-09-10</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-11 17:01:05" itemprop="dateModified" datetime="2019-09-11T17:01:05+08:00">2019-09-11</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>首先意图不过就是整理最常用和自己最关心的内容</p>
-</blockquote>
-<h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><ol>
-<li>如何保存<br><code>%save -r my-filename line_m-line_n line_r</code></li>
-</ol>
-<h3 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h3><p>有两种形式</p>
-<ol>
-<li><p>% 命令</p>
-</li>
-<li><p>: 命令</p>
-</li>
-</ol>
-<p>? -&gt; Introduction and overview of IPython’s features.<br>%quickref -&gt; Quick reference<br>help -&gt; Python’s own help system<br>object? -&gt; Details about ‘object’<br>object?? -&gt; Details about extra details</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -2071,7 +3145,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-count">110</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

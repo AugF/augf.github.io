@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <link rel="alternate" href="/atom.xml" title="AugF's Notes" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <meta name="description" content="A. 今日遗留任务： 查看GAT代码，思考是否能够直接用tensorflow multiplication来表示。 回看GGCN论文https://github.com/Diego999/pyGAT/blob/master/layers.pyGAT论文还提出一个很有意思的点，就是tensorflow只能做batch类似的操作，不能做graph并行化   pytorchtorch.mul(a,b):">
+<meta name="keywords" content="hexo, notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="daily note 11-28">
+<meta property="og:url" content="https://augf.github.io/2019/11/28/daily-note-11-28/index.html">
+<meta property="og:site_name" content="AugF&#39;s Notes">
+<meta property="og:description" content="A. 今日遗留任务： 查看GAT代码，思考是否能够直接用tensorflow multiplication来表示。 回看GGCN论文https://github.com/Diego999/pyGAT/blob/master/layers.pyGAT论文还提出一个很有意思的点，就是tensorflow只能做batch类似的操作，不能做graph并行化   pytorchtorch.mul(a,b):">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-01T04:43:17.612Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="daily note 11-28">
+<meta name="twitter:description" content="A. 今日遗留任务： 查看GAT代码，思考是否能够直接用tensorflow multiplication来表示。 回看GGCN论文https://github.com/Diego999/pyGAT/blob/master/layers.pyGAT论文还提出一个很有意思的点，就是tensorflow只能做batch类似的操作，不能做graph并行化   pytorchtorch.mul(a,b):">
+  <link rel="canonical" href="https://augf.github.io/2019/11/28/daily-note-11-28/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>daily note 11-28 | AugF's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AugF's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">70</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">75</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">110</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/11/28/daily-note-11-28/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">daily note 11-28
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-28 21:03:29" itemprop="dateCreated datePublished" datetime="2019-11-28T21:03:29+08:00">2019-11-28</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-01 12:43:17" itemprop="dateModified" datetime="2019-12-01T12:43:17+08:00">2019-12-01</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="A-今日遗留任务："><a href="#A-今日遗留任务：" class="headerlink" title="A. 今日遗留任务："></a>A. 今日遗留任务：</h2><ol>
+<li>查看GAT代码，思考是否能够直接用tensorflow multiplication来表示。 回看GGCN论文<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0RpZWdvOTk5L3B5R0FUL2Jsb2IvbWFzdGVyL2xheWVycy5weQ==" title="https://github.com/Diego999/pyGAT/blob/master/layers.py">https://github.com/Diego999/pyGAT/blob/master/layers.py<i class="fa fa-external-link"></i></span><br>GAT论文还提出一个很有意思的点，就是tensorflow只能做batch类似的操作，不能做graph并行化</li>
+</ol>
+<ul>
+<li><p>pytorch<br>torch.mul(a,b): 元素相乘    torch.mm(a,b): 矩阵相乘<br>self.W = (in_features, out_features)<br>self.a = (2*out_fatures, 1)<br>pytorch 检查成功</p>
+</li>
+<li><p>tensorflow<br>没有检查成功！<br>import tensorflow as tf<br>node1 = tf.Tensor<br>node2 = tf.Tensor<br>addr = node1 + node2<br>sess = tf.Session()<br>print(sess.run(addr))</p>
+</li>
+</ul>
+<ol start="2">
+<li>已经安装了eigen, C++数学计算库，计划在vscode中实现<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9ibG9iL21hc3Rlci90ZW5zb3JmbG93L2NvcmUva2VybmVscy9zcGFyc2UvbWF0X211bF9vcC5jYw==" title="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/kernels/sparse/mat_mul_op.cc">https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/kernels/sparse/mat_mul_op.cc<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dpbHNvbmFzcy9hcnRpY2xlL2RldGFpbHMvOTA3NTQ1MjU=" title="https://blog.csdn.net/wilsonass/article/details/90754525">https://blog.csdn.net/wilsonass/article/details/90754525<i class="fa fa-external-link"></i></span><br>多线程，相乘的感觉，没有看到具体的算法<br>g++ -I /path/to/eigen/ my_program.cpp -o my_program</li>
+</ol>
+<p>C++ 模板程序也能理解，好像直接将这个放在对应的源文件目录下就可以<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnN2ZW5oZXRpbi5jb20vYy1qdS16aGVuLXl1bi1zdWFuLWt1Lw==" title="https://blog.svenhetin.com/c-ju-zhen-yun-suan-ku/">https://blog.svenhetin.com/c-ju-zhen-yun-suan-ku/<i class="fa fa-external-link"></i></span></p>
+<p>或许应该先了解稀疏矩阵的乘法是怎么？<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vd2FuZ2t1bmRlbnRpc3kvcC85MjY3NzY0Lmh0bWw=" title="https://www.cnblogs.com/wangkundentisy/p/9267764.html">https://www.cnblogs.com/wangkundentisy/p/9267764.html<i class="fa fa-external-link"></i></span></p>
+<p>进阶：思考如何进行</p>
+<ol start="3">
+<li><p>再思考tensorflow中能够做什么</p>
+<blockquote>
+<p>其实tensorflow和pytorch中所表示的都是矩阵的运算，不过所给的卷积操作，还是其他的<br>NeuGraph中提到Certain algorithms不能直接用Tensorflow multiplication operations来表达是什么意思？<br>实际上感觉就是矩阵操作。<br>所以说初步结论：就是tensorflow中没有直接的函数，即矩阵相乘的运算可以一步到位。<br>需要借助repeat, reshape的运算。<br>再运用乘法</p>
+</blockquote>
+</li>
+<li><p>阅读GraphSage论文，思考框架<br>Inductive 归纳   deuctive 演绎    tranductive 转导的</p>
+</li>
+</ol>
+<p>transductive 特殊到特殊，测试数据也是未来出现的一部分<br>inductive learning: 测试数据只用与训练，需要归纳到一般<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzY4Mjc1OTIx" title="https://www.zhihu.com/question/68275921">https://www.zhihu.com/question/68275921<i class="fa fa-external-link"></i></span></p>
+<p>纠正一个错误：之前PPT上说inductive自己说错了。<br>应该是侧重于用途</p>
+<p>感觉inductive像是一个某类问题的模板，比如排序 without task-specific<br>transductive像是一个具体的算法，求最大值？ </p>
+<p>tocheck<br>6. 重点：讨论AliGraph, 再细看AliGraph论文，以及后面的实验部分！<br>NeuGraph思考的是如何在GPU上进行加速<br>AliGraph是针对自己的平台的多个特性按需扩展<br>skip-gram论文？ word2vec<br>word2vec: 关键问题，如何对一个词进行表示？</p>
+<p>power layer 原则，实际上的做法是</p>
+<ol start="7">
+<li><p>阅读how to read a paper, sparse</p>
+</li>
+<li><p>回顾NeuGraph<br>neugraph，重点：如何解决点划分，进而带来的每个块的负载均衡问题。<br>采用了两个策略：1</p>
+</li>
+</ol>
+<h2 id="B-现有框架的缺点："><a href="#B-现有框架的缺点：" class="headerlink" title="B. 现有框架的缺点："></a>B. 现有框架的缺点：</h2><p>NeuGraph:</p>
+<ol>
+<li>图结构一旦确定，不能改变，不支持动态</li>
+<li>不支持GAT</li>
+<li>效果真的会比GraphSage好吗？ 看实验部分！！！ 未认真看</li>
+</ol>
+<h2 id="1-Paper-Lists"><a href="#1-Paper-Lists" class="headerlink" title="1. Paper Lists"></a>1. Paper Lists</h2><h3 id="1-1-Deep-Learning-Supported-Dataflow-Frameworks"><a href="#1-1-Deep-Learning-Supported-Dataflow-Frameworks" class="headerlink" title="1.1 Deep Learning Supported Dataflow Frameworks"></a>1.1 Deep Learning Supported Dataflow Frameworks</h3><p>TensorFlow[13], PyTorch[14], MXNet[15], CNTK[16]</p>
+<h3 id="1-2-Graph-Processing-Systems"><a href="#1-2-Graph-Processing-Systems" class="headerlink" title="1.2 Graph Processing Systems"></a>1.2 Graph Processing Systems</h3><p>Pregel[1], GraphLab[2], PowerGraph[3], GraphX[4]</p>
+<h3 id="1-3-Graph-Neural-Networks"><a href="#1-3-Graph-Neural-Networks" class="headerlink" title="1.3 Graph Neural Networks"></a>1.3 Graph Neural Networks</h3><p><strong>1. Survey</strong><br>A Comprehensive Survey on Graph Neural Networks[25]</p>
+<p><strong>2. Graph Convolution Networks</strong><br>1stChebNet[26],  GGNN[27]</p>
+<p><strong>3. Others</strong><br>CommNet[28]</p>
+<h3 id="1-4-GNNs-Modeling-Frameworks"><a href="#1-4-GNNs-Modeling-Frameworks" class="headerlink" title="1.4 GNNs Modeling Frameworks"></a>1.4 GNNs Modeling Frameworks</h3><p>GraphSAGE[17], MPNN[18], GNBlock[19]</p>
+<h3 id="1-5-GNNs-Parallel-Systems"><a href="#1-5-GNNs-Parallel-Systems" class="headerlink" title="1.5 GNNs Parallel Systems"></a>1.5 GNNs Parallel Systems</h3><p>NeuGraph[29],  AliGraph[30]</p>
+<h3 id="1-6-Non-GNNs-Parallel-Works"><a href="#1-6-Non-GNNs-Parallel-Works" class="headerlink" title="1.6 Non-GNNs Parallel Works"></a>1.6 Non-GNNs Parallel Works</h3><p>AMPNet[23],  BPT-CNN[24]</p>
+<h3 id="1-7-Optimizations"><a href="#1-7-Optimizations" class="headerlink" title="1.7 Optimizations"></a>1.7 Optimizations</h3><p><strong>1. Graph Layout, Sequential Data Access, and Secondary Storage</strong><br>GraphChi[5], Grace[6], FlashGraph[7], XStream[8], Chaos[9]</p>
+<p><strong>2. Ditributed Shared Memory</strong><br>Grappa[10]</p>
+<p><strong>3. NUMA-Awareness, Scheduling, and Graph Partitioning</strong><br>PowerLyra[11], BiGraph[12]</p>
+<p><strong>4. Sparse Works</strong><br>Sparse Deep Neural Network Graph Challenge[22]</p>
+<h3 id="1-8-Others"><a href="#1-8-Others" class="headerlink" title="1.8 Others"></a>1.8 Others</h3><p><strong>1. Bridge the Gap between Graph and Traditional Machine Learning Computation</strong><br>TuX2[20]</p>
+<p><strong>2. Introduce the Vertex-Centric Programming Model into Dynamic Neural Networks</strong><br>Cavs[21]</p>
+<h3 id="1-9-AliGraph"><a href="#1-9-AliGraph" class="headerlink" title="1.9 AliGraph"></a>1.9 AliGraph</h3><h2 id="2-References"><a href="#2-References" class="headerlink" title="2. References"></a>2. References</h2><p>[1]  Elmagarmid, A. K., Agrawal, D., &amp; Association for Computing Machinery. Special Interest Group on Management of Data. (n.d.). Pregel: A System for Large-Scale Graph Processing.<br>[2]  Low, Y., Gonzalez, J., Kyrola, A., Bickson, D., Guestrin, C., &amp; Hellerstein, J. M. (2150). Distributed GraphLab: A Framework for Machine Learning and Data Mining in the Cloud.<br>[3]  Gonzalez, J. E., Low, Y., Gu, H., Bickson, D., &amp; Guestrin, C. (n.d.). PowerGraph: Distributed Graph-Parallel Computation on Natural Graphs (Vol. 12).<br>[4]  Flinn, J., Levy, H., ACM Special Interest Group in Operating Systems., USENIX Association, &amp; ACM Digital Library. (n.d.). GraphX: Graph Processing in a Distributed Dataflow Framework.<br>[5]  Kyrola, A., Blelloch, G., &amp; Guestrin, C. (n.d.). GraphChi: Large-Scale Graph Computation on Just a PC.<br>[6]  Prabhakaran, V., Wu, M., &amp; Weng, X. (2012). Managing Large Graphs on Multi-Cores With Graph Awareness Design for a Graph Management System. USENIX Annual Technical Conference.<br>[7]  Zheng, D., Mhembere, D., Burns, R., Vogelstein, J., Priebe, C. E., &amp; Szalay, A. S. (2014). FlashGraph: Processing Billion-Node Graphs on an Array of Commodity SSDs.<br>[8]  Roy, A., Mihailovic, I., &amp; Zwaenepoel, W. (2013). X-Stream: Edge-centric graph processing using streaming partitions. SOSP 2013 - Proceedings of the 24th ACM Symposium on Operating Systems Principles, 472–488.<br>[9]  Roy, A., Bindschaedler, L., Malicevic, J., &amp; Zwaenepoel, W. (2015). Chaos: Scale-out graph processing from secondary storage. SOSP 2015 - Proceedings of the 25th ACM Symposium on Operating Systems Principles, 410–424.<br>[10]  Nelson, J., Holt, B., Myers, B., Briggs, P., Ceze, L., Kahan, S., &amp; Oskin, M. (2015). Latency-Tolerant Software Distributed Shared Memory. USENIX Annual Technical Conference (ATC)<br>[11]  Chen, R., Shi, J., Chen, Y., Zang, B., Guan, H., &amp; Chen, H. (2018). PowerLyra: Differentiated graph computation and partitioning on skewed graphs. ACM Transactions on Parallel Computing, 5(3).<br>[12]  Chen, R., Shi, J. X., Chen, H. B., &amp; Zang, B. Y. (2015). Bipartite-Oriented Distributed Graph Partitioning for Big Learning. Journal of Computer Science and Technology, 30(1), 20–29.<br>[13]  Abadi, M., Barham, P., Chen, J., Chen, Z., Davis, A., Dean, J., … Zheng, X. (2016). TensorFlow: A system for large-scale machine learning.<br>[14]  PyTorch. <span class="exturl" data-url="aHR0cDovL3B5dG9yY2gub3Jn" title="http://pytorch.org">http://pytorch.org<i class="fa fa-external-link"></i></span>, Retrieved January,2019.<br>[15]  Chen, T., Li, M., Li, Y., Lin, M., Wang, N., Wang, M., … Alberta, M. U. (n.d.). MXNet: A Flexible and Efficient Machine Learning Library for Heterogeneous Distributed Systems.<br>[16]  Yu, D., Eversole, A., Seltzer, M., Yao, K., Huang, Z., Guenter, B., … Slaney, M. (2015). An Introduction to Computational Networks and the Computational Network Toolkit. In Microsoft Technical Report.<br>[17]  Hamilton, W. L., Ying, R., &amp; Leskovec, J. (2017). Inductive representation learning on large graphs. Advances in Neural Information Processing Systems, 2017-Decem(Nips), 1025–1035.<br>[18]  Gilmer, J., Schoenholz, S. S., Riley, P. F., Vinyals, O., &amp; Dahl, G. E. (2017). Neural message passing for quantum chemistry. 34th International Conference on Machine Learning, ICML 2017, 3, 2053–2070.<br>[19]  Battaglia, P. W., Hamrick, J. B., Bapst, V., Sanchez-Gonzalez, A., Zambaldi, V., Malinowski, M., … Pascanu, R. (2018). Relational inductive biases, deep learning, and graph networks. 1–40.<br>[20]  Xiao, W., Xue, J., Miao, Y., Li, Z., Chen, C., Wu, M., … Zhou, L. (2017). Tux2: Distributed Graph Computation for Machine Learning. Nsdi ’17, 669–682.<br>[21]  Xu, S., Zhang, H., Neubig, G., Dai, W., Kim, J. K., Deng, Z., … Xing, E. P. (2018). Cavs: An Efficient Runtime System for Dynamic Neural Networks. 2018 {USENIX} Annual Technical Conference ({USENIX} {ATC} 18), 937–950.<br>[22]  Kepner, J., Alford, S., Gadepally, V., Jones, M., Milechin, L., Robinett, R., &amp; Samsi, S. (n.d.). Sparse Deep Neural Network Graph Challenge.<br>[23]  Gaunt, A. L., Johnson, M. A., Riechert, M., Tarlow, D., Tomioka, R., Vytiniotis, D., &amp; Webster, S. (2017). AMPNet: Asynchronous Model-Parallel Training for Dynamic Neural Networks.<br>[24]  Chen, J., Li, K., Member, S., Bilal, K., Zhou, X., Li, K., &amp; Yu, P. S. (n.d.). A Bi-layered Parallel Training Architecture for Large-scale Convolutional Neural Networks.<br>[25]  Wu, Z., Pan, S., Chen, F., Long, G., Zhang, C., &amp; Yu, P. S. (2019). A Comprehensive Survey on Graph Neural Networks. X(X), 1–22.<br>[26]  Kipf, T. N., &amp; Welling, M. (n.d.). SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS.<br>[27]  Li, Y., Tarlow, D., Brockschmidt, M., &amp; Zemel, R. (2015). Gated Graph Sequence Neural Networks. (1), 1–20.<br>[28]  Sukhbaatar, S., Szlam, A., &amp; Fergus, R. (2016). Learning multiagent communication with backpropagation. Advances in Neural Information Processing Systems, 2252–2260.<br>[29]  Ma, L., Yang, Z., Miao, Y., Xue, J., Wu, M., Zhou, L., &amp; Dai, Y. (2019). NeuGraph: Parallel Deep Neural Network Computation on Large Graphs. 2019 USENIX Annual Technical Conference (USENIX ATC 19), 443–458.<br>[30]  Zhu, R., Zhao, K., Yang, H., Lin, W., Zhou, C., Ai, B., … Zhou, J. (2018). AliGraph: A comprehensive graph neural network platform. Proceedings of the VLDB Endowment, 12(12), 2094–2105.</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eugene Wang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://augf.github.io/2019/11/28/daily-note-11-28/" title="daily note 11-28">https://augf.github.io/2019/11/28/daily-note-11-28/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/21/gnn-parallel-AliGraph-paper-read/" rel="next" title="gnn-parallel-AliGraph-paper-read">
+                  <i class="fa fa-chevron-left"></i> gnn-parallel-AliGraph-paper-read
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/11/30/about-life/" rel="prev" title="about life">
+                  about life <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-今日遗留任务："><span class="nav-number">1.</span> <span class="nav-text">A. 今日遗留任务：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-现有框架的缺点："><span class="nav-number">2.</span> <span class="nav-text">B. 现有框架的缺点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Paper-Lists"><span class="nav-number">3.</span> <span class="nav-text">1. Paper Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Deep-Learning-Supported-Dataflow-Frameworks"><span class="nav-number">3.1.</span> <span class="nav-text">1.1 Deep Learning Supported Dataflow Frameworks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Graph-Processing-Systems"><span class="nav-number">3.2.</span> <span class="nav-text">1.2 Graph Processing Systems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Graph-Neural-Networks"><span class="nav-number">3.3.</span> <span class="nav-text">1.3 Graph Neural Networks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-GNNs-Modeling-Frameworks"><span class="nav-number">3.4.</span> <span class="nav-text">1.4 GNNs Modeling Frameworks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-GNNs-Parallel-Systems"><span class="nav-number">3.5.</span> <span class="nav-text">1.5 GNNs Parallel Systems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-Non-GNNs-Parallel-Works"><span class="nav-number">3.6.</span> <span class="nav-text">1.6 Non-GNNs Parallel Works</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-Optimizations"><span class="nav-number">3.7.</span> <span class="nav-text">1.7 Optimizations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-Others"><span class="nav-number">3.8.</span> <span class="nav-text">1.8 Others</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-AliGraph"><span class="nav-number">3.9.</span> <span class="nav-text">1.9 AliGraph</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-References"><span class="nav-number">4.</span> <span class="nav-text">2. References</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/default-avatar.png"
+      alt="Eugene Wang">
+  <p class="site-author-name" itemprop="name">Eugene Wang</p>
+  <div class="site-description" itemprop="description">Quick notes</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="GitHub &rarr; https://github.com/AugF"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOnl1bnBhbndhbmdAZ21haWwuY29t" title="E-Mail &rarr; mailto:yunpanwang@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vSm9zd3hl" title="Weibo &rarr; https://weibo.com/Joswxe"><i class="fa fa-fw fa-weibo"></i>Weibo</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==" title="https://www.google.com">Google</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jbi5iaW5nLmNvbQ==" title="https://cn.bing.com">Bing</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">Baidu</span>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

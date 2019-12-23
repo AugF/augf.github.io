@@ -1,5 +1,5 @@
-https://augf.github.io/2019/11/21/gnn-parallel-AliGraph-paper-read/
-https://augf.github.io/2019/11/13/gnn-parallel-NeuGraph-paper-read/
-https://augf.github.io/2019/11/03/torch-study/
-https://augf.github.io/2019/11/03/errors-in-c/
-https://augf.github.io/2019/11/01/tools-pygraphviz-study/
+https://augf.github.io/2019/12/11/paper-read-graphsage-1/
+https://augf.github.io/2019/12/08/The-Minto-Pyramid-Princlple/
+https://augf.github.io/2019/12/06/paper-read-graphsage/
+https://augf.github.io/2019/12/01/target-for-work/
+https://augf.github.io/2019/11/30/about-life/

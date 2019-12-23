@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">104</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">110</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -277,6 +277,734 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/11/01/tools-pygraphviz-study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/01/tools-pygraphviz-study/" class="post-title-link" itemprop="url">linux</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-01 13:28:11" itemprop="dateCreated datePublished" datetime="2019-11-01T13:28:11+08:00">2019-11-01</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-03 08:37:08" itemprop="dateModified" datetime="2019-11-03T08:37:08+08:00">2019-11-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>参考</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cDovL2dyYXBodml6Lm9yZy9kb2MvaW5mby9hdHRycy5odG1s" title="http://graphviz.org/doc/info/attrs.html">Node, Edge and Graph Attributes of Pygraphviz<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vbGlhbmcxMTAxL3AvNzY0MTk4NC5odG1s" title="https://www.cnblogs.com/liang1101/p/7641984.html">graphviz 程序生成多种类型图表详解<i class="fa fa-external-link"></i></span></li>
+</ol>
+<h2 id="I-一个完整的pipline"><a href="#I-一个完整的pipline" class="headerlink" title="I 一个完整的pipline"></a>I 一个完整的pipline</h2><ol>
+<li><p>install</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-dev graphviz libgraphviz-dev pkg-config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化</p>
+<ul>
+<li><p>.dot文件 <code>dot hello.dot -T png -o hello.png</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">strict digraph&#123;</span><br><span class="line">    graph [bb=&quot;-64.382, -82.544, 57.743, 78.934&quot;,</span><br><span class="line">        center=True,</span><br><span class="line">        label=wyp_label];</span><br><span class="line">    node [label=&quot;\n&quot;];</span><br><span class="line">    edge [label=&quot;\n&quot;]</span><br><span class="line">    1   [height=0.5,</span><br><span class="line">        pos=&quot;, &quot;]</span><br><span class="line">    2   []</span><br><span class="line">    1 -&gt; 2 [pos=&quot;&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dict <code>d = {&#39;1&#39;: {&#39;2&#39;: None}, &#39;2&#39;: {&#39;1&#39;: None, &#39;3&#39;:None}, &#39;3&#39;:{&#39;2&#39;: None}}  A=pgv.AGraph(d)</code></p>
+</li>
+<li><p>图形</p>
+<blockquote>
+<p>man <cmd>?</cmd></p>
+</blockquote>
+<ul>
+<li>dot 明确的方向性</li>
+<li>neato 缺乏反向性</li>
+<li>twopi 放射性</li>
+<li>circo 环形布局</li>
+</ul>
+</li>
+<li><p>pipline</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import pygraphviz as pgv</span><br><span class="line"># 1. init a graph</span><br><span class="line">G = pgv.AGraph(strict=, directed=) # default: strict-True</span><br><span class="line"></span><br><span class="line"># 2. set the global property</span><br><span class="line">G.graph_attr[&apos;&apos;] = &apos;&apos;</span><br><span class="line">G.node_attr[&apos;&apos;]=&apos;&apos;</span><br><span class="line">G.edge_attr[&apos;&apos;]=&apos;&apos;</span><br><span class="line"></span><br><span class="line"># 3. add node and edge</span><br><span class="line">G.add_node_from(list1)</span><br><span class="line">G.add_node(&apos;a&apos;, color=&apos;red&apos;)</span><br><span class="line">G.add_edge(&apos;b&apos;, &apos;c&apos;, color=&apos;blue&apos;)</span><br><span class="line"></span><br><span class="line"># change node or edge attributes</span><br><span class="line">n = G.get_node(&apos;f&apos;)</span><br><span class="line">n.attr[&apos;shape&apos;]=&apos;box&apos;</span><br><span class="line">e = G.get_edge(&apos;b&apos;, &apos;c&apos;)</span><br><span class="line">e.attr[&apos;color&apos;]=&apos;green&apos;</span><br><span class="line"></span><br><span class="line"># 4. set layout: dot(direction), twopi(away), circo(circle)</span><br><span class="line">G.layout(lay)</span><br><span class="line"></span><br><span class="line"># 5. save fig</span><br><span class="line">G.draw(file_path)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>属性</p>
+<ul>
+<li>node<ul>
+<li>color</li>
+<li>comment: ??</li>
+<li>fillcolor</li>
+<li>fontname: font family Times-Roman</li>
+<li>fontsize: 14</li>
+<li>label</li>
+<li>shape</li>
+</ul>
+</li>
+<li>edge<ul>
+<li>arrowhead: normal</li>
+<li>arrowsize: 1.0</li>
+<li>arrowtail</li>
+<li>color</li>
+<li>comment</li>
+<li>dir: forward, back, both</li>
+<li>fontcolor: black; fontname: ; fontsize</li>
+<li>headlabel: label near head of edge</li>
+<li>label: edge label</li>
+<li>labelfontcolor:; labelfontname:;</li>
+</ul>
+</li>
+<li>graph<ul>
+<li>bgcolor: </li>
+<li>center false</li>
+<li>comment: </li>
+<li>label</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>其他的</p>
+<ul>
+<li><p>转换为pvg<br>  <code>h=A.handle; C=pgv.AGraph(h);A.draw(&quot;a.svg&quot;);</code></p>
+</li>
+<li><p>load and save dot file</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">G = pgv.AGraph(dot_file)</span><br><span class="line">G.write(dot_file)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>string</p>
+<blockquote>
+<p>s = G.string()</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>output-format<br><span class="exturl" data-url="aHR0cHM6Ly9ncmFwaHZpei5naXRsYWIuaW8vX3BhZ2VzL2RvYy9pbmZvL291dHB1dC5odG1s" title="https://graphviz.gitlab.io/_pages/doc/info/output.html">https://graphviz.gitlab.io/_pages/doc/info/output.html<i class="fa fa-external-link"></i></span></p>
+<h2 id="待做"><a href="#待做" class="headerlink" title="待做"></a>待做</h2>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/11/01/gnn-parallel-ggsnn-code-realize/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/01/gnn-parallel-ggsnn-code-realize/" class="post-title-link" itemprop="url">gnn-parallel-ggsnn-code-realize</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-01 09:29:13" itemprop="dateCreated datePublished" datetime="2019-11-01T09:29:13+08:00">2019-11-01</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-06 22:07:32" itemprop="dateModified" datetime="2019-11-06T22:07:32+08:00">2019-11-06</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="待做"><a href="#待做" class="headerlink" title="待做"></a>待做</h2><ol>
+<li><p>表示复杂的梯度计算图</p>
+<blockquote>
+<p>根据计算图来表示，计算图有两种类型</p>
+</blockquote>
+<ul>
+<li>节点表示操作，边表示数据，如Tensorflow</li>
+<li>节点表示数据，边表示操作，如计算图 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4bDU1L2FydGljbGUvZGV0YWlscy84MzUzNzE0NA==" title="https://blog.csdn.net/zxl55/article/details/83537144">https://blog.csdn.net/zxl55/article/details/83537144<i class="fa fa-external-link"></i></span></li>
+</ul>
+</li>
+<li><p>将所有复杂的公式转变为矩阵操作，然后直接使用Tensorflow类似的想法，不过感觉上可以做得更具体点</p>
+</li>
+<li><p>剥离输入输出，模型照抄</p>
+<blockquote>
+<p>为什么远程登录是用到Anaconda中的python</p>
+</blockquote>
+</li>
+</ol>
+<h5 id="一些常量说明"><a href="#一些常量说明" class="headerlink" title="一些常量说明"></a>一些常量说明</h5><ul>
+<li>H(t-1): 上一轮的状态</li>
+<li>H(t): 最终状态</li>
+<li>Hz(t): 当前计算的状态</li>
+<li>Wa: 初始化对H(t-1)做的操作</li>
+<li>Wz, Wh, Wr: Z(t), Hz(t), R(t)关于Av(t-1)的权重</li>
+<li>Uz, Uh, Ur: Z(t), Hz(t), R(t)关于H(t-1)的权重</li>
+<li>$Av=[A_{in}, A_{out}]$</li>
+</ul>
+<h5 id="图上的操作"><a href="#图上的操作" class="headerlink" title="图上的操作"></a>图上的操作</h5><p>$Av(t-1) = Av(H(t-1)Wa)$</p>
+<h5 id="GRU单元"><a href="#GRU单元" class="headerlink" title="GRU单元"></a>GRU单元</h5><p>$Z(t) = sigmoid(Av(t-1)Wz + H(t-1)Uz)$<br>$R(t) = sigmoid(Av(t-1)Wr + H(t-1)Ur)$<br>$Hzt(t) = tanh(Av(t-1)Wh + (R(t) \odot H(t-1))Uh)$<br>$H(t-1) = (1-Z(t))\odot H(t-1) + Z(t) \odot Hzt(t)$</p>
+<h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><ol>
+<li>RuntimeWarning: overflow encountered in exp<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vemhoeTIzNjQwMC9wLzk4NzMzMjIuaHRtbA==" title="https://www.cnblogs.com/zhhy236400/p/9873322.html">https://www.cnblogs.com/zhhy236400/p/9873322.html<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/10/26/gnn-parallel-GRU/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/26/gnn-parallel-GRU/" class="post-title-link" itemprop="url">gnn-parallel-GRU</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-26 08:57:59" itemprop="dateCreated datePublished" datetime="2019-10-26T08:57:59+08:00">2019-10-26</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-31 13:23:03" itemprop="dateModified" datetime="2019-10-31T13:23:03+08:00">2019-10-31</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2015</p>
+<h2 id="1-Abstract"><a href="#1-Abstract" class="headerlink" title="1. Abstract"></a>1. Abstract</h2><p>机器翻译。<br>encoder + decoder<br>encoder: a fixed-lenght representation<br>decoder: a correct translation from this representation</p>
+<p>RNN Encoder-Decoder<br>gated recusive rconvolutional neural network</p>
+<p>the neural machine translation performs relatively well on short sentences without unknown words.<br>but degrades rapidly as the lengthe of the sentence and the number of unknown words.</p>
+<p>gated recursive convolutional networks learns a grammatical struture</p>
+<h2 id="2-Introduction"><a href="#2-Introduction" class="headerlink" title="2. Introduction"></a>2. Introduction</h2><p>SMT仅仅记忆一小部分内容<br>GRU可以记忆500MB内容</p>
+<p>没有工作来分析这些模型的属性以及表现</p>
+<p>understand the properties and behavior</p>
+<p>grConv is able to learn, without supervision, a kind of syntactic struture over the sourece language.</p>
+<blockquote>
+<p>rnn, cnn paper</p>
+</blockquote>
+<p>不懂概率的形式</p>
+<blockquote>
+<p>K是class labels 数量</p>
+</blockquote>
+<p>p(x): joint distribution</p>
+<hr>
+<p>以上抛弃</p>
+<p>Learning Phrase Representations using RNN Encoder–Decoder<br>for Statistical Machine Translation</p>
+<p>其实所谓的概率模型$p(x_1, x_2, …, x_n)$， 其实是链式法则，直接看最后一层即可，这也就是RNN实际的含义。</p>
+<p>RNN其实的目标是 maximize the conditional log-likelihood.</p>
+<hr>
+<p>LSTM</p>
+<ol>
+<li>the problem,  with conventional “Back-Propagation Through TIme).   <ul>
+<li>blow up</li>
+<li>vanish</li>
+</ul>
+</li>
+</ol>
+<p>直接已经有的知识那么用</p>
+<p>为什么RNN不能记忆知识？<br>反向传播时，&lt;1.0的数引起梯度消失， &gt;1.0的数引起梯度爆炸</p>
+<p>LSTM: 输入、忘记、输出</p>
+<p>主线剧情由输入分线进行控制</p>
+<p>输入的内容会写入主线，然后忘记的内容会影响到输入的内容</p>
+<p>RNN到底是什么？</p>
+<p>network对于sequence序列问题解决的很好<br>上一个状态和当前状态</p>
+<p>lstm使得其中cell的运算变得复杂</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1FQzNTdmZXMFpfQQ==" title="https://www.youtube.com/watch?v=EC3SvfW0Z_A">https://www.youtube.com/watch?v=EC3SvfW0Z_A<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZseWluZ0xpdHRsZVBpZy9hcnRpY2xlL2RldGFpbHMvNzIyMjkwNDE=" title="https://blog.csdn.net/FlyingLittlePig/article/details/72229041">https://blog.csdn.net/FlyingLittlePig/article/details/72229041<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>非常好，有代码实现部分</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cueXVuYWl0b25nLmNuL3VuZGVyc3RhbmRpbmctbHN0bS1uZXR3b3Jrcy5odG1s" title="https://www.yunaitong.cn/understanding-lstm-networks.html">https://www.yunaitong.cn/understanding-lstm-networks.html<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>这篇也有意思</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj04SHlDTklWUmJTVQ==" title="https://www.youtube.com/watch?v=8HyCNIVRbSU">https://www.youtube.com/watch?v=8HyCNIVRbSU<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>好像有乘积符号</p>
+</blockquote>
+<blockquote>
+<p>传统RNN: $$h = tanh(W_x \cdot x_t + W_h \cdot h_{t-1} + b)$$</p>
+</blockquote>
+<blockquote>
+<p>LSTM:</p>
+<ol>
+<li>forget gate layer<br>$f_t = \delta(W_i \cdot [h_{t-1}, x_t] + b_i)$</li>
+<li>input gate layer<br>$ i_t = \delta(W_i \cdot [h_{t-1, x_t}] + b_i) $<br>$ \tilde{C_t} = tanh(W_C \cdot [h_{t-1}, x_t] + b_C) $</li>
+<li>the current state<br>$ C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C_t} $<blockquote>
+<p>$f_t, i_t$分别表示forget gate的权重， input gate所占的权重<br>根据维度进行猜想，那么这里实际上就不是元素的乘法了？？？</p>
+</blockquote>
+</li>
+<li>output layer<br>$ o_t = \delta (W_o \cdot [h_{t-1}, x_t] + b_o)$<br>$ h_t = o_t \odot tanh(C_t)$</li>
+<li>predict<br>$ y_t = softmax(W_y \cdot h_t + b_t）$</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>GRU:<br>$z_t = \delta (W_z \cdot [h_{t-1}, x_t])$<br>$r_t = \delta(W_r \cdot [h_{t-1}, x_t])$<br>$\tilde{h}<em>t =  tanh(W \cdot [r_t \odot h</em>{t-1}, x_t])$<br>$h_t = (1-z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t$</p>
+<blockquote>
+<p>LSTM的变体，主要的改变在于， forget gate $f_t$和input gate $i_t$用了一个update gate $z_t$来替代.<br>然后， current state的变化再加了一层， $\tilde{h}<em>t = tanh(W \cdot [r_t \odot h</em>{t-1}, x_t])$,  这里引入了一个$r_t$叫做reset gate.<br>其次就是没有了output layer层，直接输出<br> 计算开销更小</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>参考</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zMjQ4MTc0Nw==" title="https://zhuanlan.zhihu.com/p/32481747">https://zhuanlan.zhihu.com/p/32481747<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueXVuYWl0b25nLmNuL3VuZGVyc3RhbmRpbmctbHN0bS1uZXR3b3Jrcy5odG1s" title="https://www.yunaitong.cn/understanding-lstm-networks.html">https://www.yunaitong.cn/understanding-lstm-networks.html<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZseWluZ0xpdHRsZVBpZy9hcnRpY2xlL2RldGFpbHMvNzIyMjkwNDE=" title="https://blog.csdn.net/FlyingLittlePig/article/details/72229041">https://blog.csdn.net/FlyingLittlePig/article/details/72229041<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1FQzNTdmZXMFpfQQ==" title="https://www.youtube.com/watch?v=EC3SvfW0Z_A">https://www.youtube.com/watch?v=EC3SvfW0Z_A<i class="fa fa-external-link"></i></span></li>
+</ol>
+</blockquote>
+<p>GGNN<br>propgagation model</p>
+<ol>
+<li><p>初始化<br>$h_v^{(1)} = [x_v^T, 0]^T$</p>
+</li>
+<li><p>图操作<br>$a_v^{(t)}= A_{v:}^T [h_1^{(t-1)T} … h_{|V|}^{(t-1)T}]^T + b$ </p>
+</li>
+<li><p>GRU<br>$z_v^t = \delta (W^z a_v^{(t)} + U^z h_v^{(t-1)})$<br>$r_v^t = \delta (W^r a_v^{(t)} + U^r h_v^{(t-1)})$<br>$\hat{h}_v^{(t)} = tanh(W a_v^{(t)} + U (r_v^t \odot h_v^{(t-1)}))$<br>$h_v^{(t)} = (1 - z_v^t) \odot h_v^{(t-1)} + z_v^t \odot \hat{h}_v^{(t)}$</p>
+</li>
+</ol>
+<h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><ol>
+<li>初始化<br>$H^{(0)} = [X_v, P]$<br>$A_v = [A_{in}, A_{out}]$<br></li>
+<li>图操作<br>$T^{(t-1)} = A_v (H^{(t-1)} W^{A})$<br></li>
+<li>节点操作<br>$H^{(t)} = $<br><font color="red">$\delta(T^{(t-1)}W^{z_a})$</font> $\odot$ <font color="red">$tanh(T^{(t-1)}W_{h_a})$</font> $ + $<br><font color="red">$\delta(T^{(t-1)}W^{z_a})$</font> $\odot$ <font color="red">$tanh{\delta[(T^{t-1)}W^{r_a} \odot H^{(t-1)})W^h]}$</font>$+$<br><font color="red">$ \delta(T^{(t-1)}W^{z_a})$</font> $ \odot\ tanh{\delta[(H^{(t-1)}W_r)\odot H^{(t-1)}] + H^{(t-1)}}  + $<br><font color="red">$ tanh(T^{(t-1)}W^{h_a})$</font> $ \odot\ \delta(H^{t-1}W^{z_h}) + $<br><font color="red">$tanh{\delta[(T^{(t-1)}W^{r_a} \odot H^{(t-1)})W^h)]} $</font> $ \odot \delta(H^{(t-1)}W^{z_a}) +\ \delta(H^{(t-1)}W^{z_h}) \odot tanh{\delta[(H^{(t-1)}W^{r_h} \odot H^{(t-1)})W^h]- H^{(t-1)} } + H^{(t-1)}$</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/10/17/论文思考-Gated-Graph-Sequence-Neural-Networks-ICLR-2016/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/17/论文思考-Gated-Graph-Sequence-Neural-Networks-ICLR-2016/" class="post-title-link" itemprop="url">论文思考: Gated Graph Sequence Neural Networks, ICLR 2016</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-17 18:42:18 / 修改时间：18:42:56" itemprop="dateCreated datePublished" datetime="2019-10-17T18:42:18+08:00">2019-10-17</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>综述进行论述的点:<br>实际上就是从是否可以得到数学上精确的解出发。</p>
+<ol>
+<li>无限步</li>
+<li>有限步</li>
+</ol>
+<p>是否有数据？<br>监督学习、非监督学习、无监督学习。</p>
+<p>学习过程就是对一组数据进行评价，评价往往是预测值与真实值之间的关系。<br>其次，关于是否学习，其实就是看</p>
+<hr>
+<p>GNNs 2009</p>
+<ol>
+<li><p>y是什么意思？</p>
+</li>
+<li><p>f为什么要放缩，f对边来说实际上就是简单的相加</p>
+</li>
+<li><p>gnns 使用Almeida-Pineda算法实现的，特点在于，首先通过传播过程使得整个图收敛，然后在收敛解上计算相应的梯度。</p>
+<blockquote>
+<p>这里的收敛是保证了什么意思?</p>
+</blockquote>
+</li>
+<li><p>gg-nn把收敛的更新次数固定了T,并不能保证图的最终状态会达到不动点。由于更新次数T变成了固定值，因此GG-NN可以直接使用BPTT算法来进行梯度的计算</p>
+</li>
+</ol>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zODA1MTQ1OA==" title="https://zhuanlan.zhihu.com/p/38051458">https://zhuanlan.zhihu.com/p/38051458<i class="fa fa-external-link"></i></span>  其中包含GNN的历史。细想下，semi-gnn其实也没有保证收敛性，只是第一篇由想到这个。  那么实际上CNN有保证收敛性吗？？</p>
+<blockquote>
+<p>这里的实际的例子所说的是某个点的坐标(0,1), 经过图转移到了目的点(0,1)去，所以从某种意义上来说这里也没有错</p>
+</blockquote>
+<ol start="5">
+<li>为什么提出GGS-NN? 其实理解上来看就是信念传播的想法<blockquote>
+<p>观看每一步，信息在图中到底传到哪里去了</p>
+</blockquote>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/10/14/tools-latex-MathJax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/14/tools-latex-MathJax/" class="post-title-link" itemprop="url">tools-latex-MathJax</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-14 10:34:04 / 修改时间：13:00:08" itemprop="dateCreated datePublished" datetime="2019-10-14T10:34:04+08:00">2019-10-14</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/latex/" itemprop="url" rel="index"><span itemprop="name">latex</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><span class="exturl" data-url="aHR0cHM6Ly9jb2xvYnUuY29tLzIwMTQvMDgvMTcvTWF0aEpheC1xdWljay1yZWZlcmVuY2Uv" title="https://colobu.com/2014/08/17/MathJax-quick-reference/">https://colobu.com/2014/08/17/MathJax-quick-reference/<i class="fa fa-external-link"></i></span></p>
+<p>MathJax是一个JavaScript引擎，用来显示网络上的数学公式。它支持大部分主流的浏览器，对大部分用户而言它不需要安装，既没有插件需要下载也没有软件需要安装，属于Apache。MathJax使用网络字体去产生高质量的排版，使其在所有分辨率都可缩放和显示，这远比包含公式的图片更有效得多。使用MathJax显示数学公式是基于文本的，而非图片。他可以被搜索引擎使用，这意味着方程式和页面上的文字一样是可以被搜索的。MathJax允许页面作者使用Tex、 LaTex符号和MathML或者AsciiMath去书写公式。 转化为MathML格式你可以赋值粘贴它们到其他程序中。<br>MathJax是模块化的，所以它仅仅在需要时才加载它的组件，同时也可以被扩展以实现更多功能。MathJax同时也是高度可配置的，允许作者做出更适宜网站自身的定义。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jb2xvYnUuY29tLzIwMTQvMDgvMTcvTWF0aEpheC1xdWljay1yZWZlcmVuY2Uv" title="https://colobu.com/2014/08/17/MathJax-quick-reference/">MathJax中文文档<i class="fa fa-external-link"></i></span></p>
+<ol>
+<li><p>希腊字母 </p>
+<ul>
+<li>lower<br><code>\alpha, \beta, \gamma, \delta, \epsilon(\varepsilon), \zeta, \eta, \theta(\vartheta), \iota, \kappa, \lambda, \mu, \xi, o, \pi, \rho(\varrho), \sigma, \tau, \upsilon, \phi(\varphi), \chi, \psi, \omega</code><br>$$\alpha, \beta, \gamma, \delta, \epsilon(\varepsilon), \zeta, \eta, \theta(\vartheta), \iota, \kappa, \lambda, \mu, \xi, o, \pi, \rho(\varrho), \sigma, \tau, \upsilon, \phi(\varphi), \chi, \psi, \omega$$</li>
+<li>upper<br><code>A, B, \Gamma, \Delta, E, Z, H, \Theta, I, K, \Lambda, M(N), \Xi, O, \Pi, P, \Sigma, T, \Upsilon, \Phi, X, \Psi, \Omega</code><br>$$A, B, \Gamma, \Delata, E, Z, H, \Theta, I, K, \Lambda, M(N), \Xi, O, \Pi, P, \Sigma, T, \Upsilon, \Phi, X, \Psi, \Omega$$</li>
+</ul>
+</li>
+<li><p>字体</p>
+<ul>
+<li><code>\mathbb, \Bbb</code>黑板体  $\mathbb{Z}, \Bbb{Z}$</li>
+<li><code>\mathbf</code>粗体  $\mathbf{Z}$</li>
+<li><code>\mathtt</code>打印体 $\mathtt{Z}$</li>
+<li><code>\mathrm</code>罗马体 $\mathrm{Z}$</li>
+<li><code>\mathcal</code> $\mathcal{Z}$</li>
+<li><code>\mathscr</code> $\mathscr{Z}$</li>
+<li><code>\mathfrak</code> $\mathfrak{Z}$</li>
+</ul>
+</li>
+<li><p>一大堆符号</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9waWMucGxvdmVyLmNvbS9NSVNDL3N5bWJvbHMucGRm" title="https://pic.plover.com/MISC/symbols.pdf">https://pic.plover.com/MISC/symbols.pdf<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<ul>
+<li>常用</li>
+</ul>
+</li>
+<li><p>中途空格 <code>\quad, \qquad</code></p>
+</li>
+<li><p><code>\hat, \widehat, \bar, \overline, \vec, \overrightarrow, \dot, \ddot</code></p>
+<blockquote>
+<p>$\hat{x}, \widehat{xy}, \bar{x}, \overline{xyz}, \vec{x}, \overrightarrow{xyz}, \dot{x}, \ddot{x}$</p>
+</blockquote>
+</li>
+<li><p>矩阵 <code>\begin{matrix} ... \end{matrix}</code></p>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -523,6 +1251,368 @@
 <li>上篇是node-level 分类任务，这篇是graph-level任务，即node-selection.</li>
 </ol>
 <p>好像是为了偷懒，所以才用三维，把对应的给空着</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-code-read/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/10/gnn-parallel-ggsnn-code-read/" class="post-title-link" itemprop="url">gnn-parallel-ggsnn-code-read</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-10 21:16:00" itemprop="dateCreated datePublished" datetime="2019-10-10T21:16:00+08:00">2019-10-10</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 00:18:56" itemprop="dateModified" datetime="2019-11-11T00:18:56+08:00">2019-11-11</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gnn-parallel/" itemprop="url" rel="index"><span itemprop="name">gnn-parallel</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-torch-lua"><a href="#1-torch-lua" class="headerlink" title="1. torch lua"></a>1. torch lua</h2><p>th test.lua to test all the modules in the ggnn and run libraries</p>
+<ol>
+<li>go into “babi/data”, run’bash get_10_fold_data.sh” to get 10 folds of bAbI data for 5 tasks (4, 15, 16, 18, 19) and do some preprocessing</li>
+<li>go into ‘babi/data/extra_seq_tasks’, run’bash generate_10_fold_data.sh’ to get 10 folds of data for the two extra sequence tasks</li>
+<li>go back to ‘babi/‘ and use ‘run_experiments.py’ to run the GGNN/GGS-NN</li>
+<li>Use ‘run_rnn_baselines.py babi18 lstm’ runs LSTM on bAbI task 18 for all 10 folds of data</li>
+</ol>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><ul>
+<li>run_rnn_baselines babi18 lstm</li>
+<li>run_experiments /  bash generate_10_fold_data.sh</li>
+<li>get_10_fold_data.sh: do some preprocessing预处理</li>
+</ul>
+<h3 id="实际执行"><a href="#实际执行" class="headerlink" title="实际执行"></a>实际执行</h3><ul>
+<li><p>babi4</p>
+<ul>
+<li><p>run_q4()</p>
+<ul>
+<li>babi_train.lua<ul>
+<li>paras <ul>
+<li>nsteps: number of propagation iterations</li>
+<li>learnrate: learning rate 0.01</li>
+<li>momentum: ? for adam ？</li>
+<li>mb: minibatch size</li>
+<li>maxiters: maximum number of weight updates  100</li>
+<li>printafter: save checkpoint after this amount of weight updates</li>
+<li>saveafter: save checkpoint after this amount of weight updates  100</li>
+<li>optim: adam</li>
+<li>statedim: dimensionality of the node representations</li>
+<li>evaltrain: evaluate on training set during training if set to 1</li>
+<li>nthreads: set the number of threads to use with this process</li>
+<li>ntrain: number of training instances 50</li>
+<li>nval: number of validation instances 50</li>
+<li>annotationdim: dimensionality of the node annotations 节点annotations的维度</li>
+<li>outputdir: output directory</li>
+<li>mode: {selectnode, classifygraph, seqclass, shareprop_seqclass} selectnode</li>
+<li>datafile: should contain lists of edges and questions in standard format</li>
+<li>seed: random seed.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">preprocess其实就是edges上的属性，点的属性</span><br><span class="line">color = require &apos;trepl.colorize&apos;</span><br><span class="line">babi_data = require &apos;babi_data&apos;</span><br><span class="line">eval_util = require &apos;eval_util&apos;</span><br><span class="line">ggnn = require &apos;,,/ggnn&apos;</span><br><span class="line">1. prepare data</span><br><span class="line">math.randomseed(opt.seed)</span><br><span class="line">torch.manualSeed(opt.seed)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>eval_q4()</p>
+<ul>
+<li>babi_eval.lua</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>todo: 看具体是怎么做的?</p>
+<h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h3><pre><code>python rnn_preprocess.py processed_$fold/train/${i}_graphs.txt processed_$fold/rnn/train/${i}_tokens.txt --mode graph --nval 50</code></pre><h3 id="bAbi使用"><a href="#bAbi使用" class="headerlink" title="bAbi使用"></a>bAbi使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">babi-tasks PathFinding --path-length 3 --decoys 1</span><br><span class="line">babi-tasks Size --steps 3</span><br><span class="line"></span><br><span class="line"> ./babi-tasks $i 1000 --symbolic true &gt; symbolic_$fold/train/$&#123;i&#125;.txt</span><br><span class="line"></span><br><span class="line">--symbolic true</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-pytorch"><a href="#2-pytorch" class="headerlink" title="2. pytorch"></a>2. pytorch</h2><p>论文中总共4个数据集<br>task 4<br>task 15<br>task 16<br>task 18  只有0.3386</p>
+<ul>
+<li><p>main.py</p>
+<ul>
+<li>grid(opt)<ul>
+<li>main(opt)<ul>
+<li>run(opt)<ul>
+<li>net = GGNN (model.py)</li>
+<li>train_loss = train(epoch, train_dataloader, net, criterion, optimitzer, opt)</li>
+<li>test_loss, numerator, denomitor = test(test_dataloader, net, criterion, optimizer, opt)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>model.py</p>
+<ul>
+<li>GGNN<ul>
+<li>incoming and outgoing edge embedding</li>
+<li>propogation model</li>
+<li>output model</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>task4<br>基本数据集</p>
+<ul>
+<li>edge_types</li>
+<li>labels.txt: true or false</li>
+<li>node_ids.txt:</li>
+<li>question_types.txt:</li>
+<li>graphs.txt<ul>
+<li>n1 e6 n2</li>
+<li>? n1 n2 2<br>数据主要从graphs.txt中提取<br>graphs.txt中的数据<br>n_edges_type  2<br>n_tasks 4 问题的类型<br>n_node 4</li>
+</ul>
+</li>
+</ul>
+<p>item[1] = {task_type, _, task_output}<br>annotation = np.zeros([n_nodes, n_annotation_dim])  # [4, 1]<br>annotation[target][0] = 1</p>
+<blockquote>
+<p>这里的annotation是怎么设置的？ 这样设置有什么用？</p>
+</blockquote>
+<p>task_data_list[task_type-1].append([edge_list,annotation,task_output])</p>
+<blockquote>
+<p>每次只使用一种类型的task_id进行训练</p>
+</blockquote>
+<p>一些提前设置的参数<br>-D: denmensions 50<br>-H: hidden layer size 50</p>
+<p>然后进行变换的参数是<br>bAbIDataloder(train_dataset, batch_size, shuffle, num_workers)<br>batch_size = 1,   num_workers = 2</p>
+<h3 id="pytorch数据处理的通路"><a href="#pytorch数据处理的通路" class="headerlink" title="pytorch数据处理的通路"></a>pytorch数据处理的通路</h3><p>基于task4</p>
+<ol>
+<li><p>原始含义-&gt;graphs.txt</p>
+<ul>
+<li>单条数据<blockquote>
+<p>1 1 2: node_1 e_type node_2  fact<br>3 1 1    fact<br>? 1 1 2: ? qustion_node qustion_type(&lt;=edge_type) question_target</p>
+</blockquote>
+</li>
+<li>根据quetsion_type, 每次指示某个task_type进行运行GGNN模型</li>
+<li>统计数据<ul>
+<li>n_edges_type 2</li>
+<li>n_node 4</li>
+<li>n_tasks 4</li>
+</ul>
+</li>
+<li>返回结果<ul>
+<li>edges: (node_1, edges, node_2)</li>
+<li>annotation:  [n_nodes, n_annotation_dim]<blockquote>
+<p>这里n_annotation_dim由用户自己指定，这里为1<br>question_node对应位为1<br>这里值得注意  n_annotation_dim=2,   结果为<code>[[1, 0, 0, 0], [0, 0, 0, 0]]</code>, 只指示<code>[question_node - 1][0]</code>为1</p>
+</blockquote>
+</li>
+<li>target: question_target<blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>dataset -&gt; dataloader(batch_size=1, shuffle=True, num_workers=2):</p>
+<blockquote>
+<p>猜想是转换为邻接矩阵，或者其他？  介绍的是 产生multi-process iterable</p>
+</blockquote>
+<ul>
+<li><p>dataset</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> &lt;class &apos;list&apos;&gt;: [[[1, 1, 2], [3, 1, 1]], array([[1.],</span><br><span class="line">[0.],</span><br><span class="line">[0.],</span><br><span class="line">[0.]]), 2]</span><br><span class="line">&lt;class &apos;list&apos;&gt;: [[[3, 1, 2], [1, 1, 3]], array([[0.],</span><br><span class="line">[0.],</span><br><span class="line">[1.],</span><br><span class="line">[0.]]), 2]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dataloader</p>
+<blockquote>
+<p>num_samples 15???</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[[[0., 0., 1., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0.],</span><br><span class="line"> [1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span><br><span class="line"> [0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0.],</span><br><span class="line"> [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]]]</span><br><span class="line"> // [1, 4, 16]</span><br><span class="line"> [[[1.],</span><br><span class="line"> [0.],</span><br><span class="line"> [0.],</span><br><span class="line"> [0.]]]</span><br><span class="line"> </span><br><span class="line"> [1]</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>adj_matrix:  (1, 4, 16):  [A_in, A_out]</li>
+<li>annotation (1, 4, 1)<blockquote>
+<p>这里前面的1是与那个有关</p>
+</blockquote>
+</li>
+<li>target:  按索引开始排列，-1, 从0开始 (1,)</li>
+</ul>
+</li>
+<li><p>train.py对代码使用</p>
+<ul>
+<li>padding: (n_nodes, n_nodes, opt.state_dim - opt.annotation_dim)  (1, 4, 3)<blockquote>
+<p>len(): 取的一直都是第一位<br>? 有什么用<br>opt.state_dim: 论文中有提到的关于每个节点要设置多少个的东西<br>所以这个是关于前面的补充？？</p>
+</blockquote>
+</li>
+<li>init_input = (annotation, padding)</li>
+<li>output = net(init_input, annotation, adj_matrix)<blockquote>
+<p>shape: [1, 4],  估计里面存储的是softmax值</p>
+</blockquote>
+<ul>
+<li>GGNN mode: Select node???<ul>
+<li>forward(prop_state, annotation, A)<ul>
+<li>prop_state: (1,4,3)</li>
+<li>annotation: (1,4,1)</li>
+<li>A: (1, 4, 16)<blockquote>
+<p>A的猜测对了，但是in_states, out_states还没检查</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>main.py中相关参数</p>
+<ul>
+<li>opt.state_dim: default 4</li>
+<li>opt.n_steps: propogation: 4</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>pytorch用法小结<br>torch.cat((x, x, x), 1)<br>torch.stack((x, x, x), 2) 进行数据的封装<br>transpose(x, 0, 1) 进行转置</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82NDU1MTQxMg==" title="https://zhuanlan.zhihu.com/p/64551412">https://zhuanlan.zhihu.com/p/64551412<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<p>view(1,6) 按照所想的内容进行填充</p>
+<blockquote>
+<p>view(-1, 1, 2): 如果为-1表示这个位置由其他位置的数字来推断<br>nn.Linear(): 权重自己给定</p>
+</blockquote>
+<h2 id="torch"><a href="#torch" class="headerlink" title="torch"></a>torch</h2><ol>
+<li>ggnn.NodeSelectionGGNN(state_dim, annotation_dim, prop_net_h_sizes, output_net_h_sizes, n_edge_types)<ul>
+<li>state_dim = opt.statedim 4</li>
+<li>annotation: opt 1</li>
+<li>prop_net_h_sizes: {}</li>
+<li>output_net_h_sizes: {state_dim} 4<blockquote>
+<p>输出的每个节点的大小</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="something-new"><a href="#something-new" class="headerlink" title="something new"></a>something new</h2><ol>
+<li>学习方式的问题</li>
+</ol>
+<p>测试集和训练集分开的。<br>测试集和训练集</p>
+<p>测试集上是全部关于一个图的局部的训练数据。</p>
+<p>所以实际上对于每个图的获取方式都不一样</p>
+<p>训练数据是原本图上的一部分</p>
+<ol start="2">
+<li>edge-type训练还是question_type训练</li>
+</ol>
+<p>edge-type不对，这里是边类型直接进行处理了</p>
+<p>question_id 进行训练</p>
+<p>这里question_id实际上是边的type类型，跟之前的理解是一样的</p>
+<ol start="3">
+<li><p>sequence 观测点的想法: 对的，刚刚看了下论文，发现确实是这样的！ 应该是中间的标注能够知道。</p>
+</li>
+<li><p>是否有初始维度之说。 对的，没错！！！</p>
+</li>
+<li><p>训练模式</p>
+<blockquote>
+<p>这又回到了传统的训练方式，不过是借助了图的模型而已。还是进行一个图形一个图形地进行训练</p>
+</blockquote>
+</li>
+<li><p>跟原始的有什么区别，原始的一大串进行考虑，结果发现怎么根据边来传播，发现这样做是最成功的</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2></li>
+<li><p>普通的机器学习 vs 图神经网络</p>
+</li>
+</ol>
+<p>普通机器学习过程即学习一个函数，然后有很多数据都是关于这个函数的。<br>然后，用一个数据会产生loss, 然后根据loss进行反向传播，更新梯度。<br>然后，不断地用多组数据不停地进行训练。</p>
+<p>图神经网络<br>一部分图的数据，一部分图的标签来模拟常见操作。</p>
+<p>不对是一组数据进行学习的过程。</p>
+<ol start="2">
+<li>导数更新<br>对于传统的机器学习。导数更新实际上是由公式算出来的导数，然后导数更新公式上赋值上一堆权重。问题就是如何进行更新。</li>
+</ol>
+<p>对于一般情况来说，如果是一个训练数据直接使用一个数据进行训练即可。如果是多个训练数据，则loss来进行更新</p>
+<ol start="3">
+<li>分析<br>相比于传统的图数据处理方式，GNN, GG-NN等模型可以有效地利用图的拓扑结构信息。</li>
+</ol>
+<p>这些模型在每个传播时间步都需要展开所有的节点，因而这些模型也可以用于处理各种图（包括有向图、无向图、有环图、无环图等）。</p>
+<p>而且有以下问题：</p>
+<blockquote>
+<ol>
+<li>在每个时间步都要展开图中所有节点，效率降低；</li>
+<li>GG-NN将传播时间固定，可能只会得到有效的信息。</li>
+</ol>
+</blockquote>
+<ol start="4">
+<li>总结<blockquote>
+<p>实际是每步即根据出度和入度矩阵进行标签传播，然后每一步都是在图上，从一个节点走到另外的节点。但是这样图上的信息传输也因此受到了约束。<br>而且只是对特定的点给予信息，这意味着只能这些点的信息进行向前传播</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="10-28总结"><a href="#10-28总结" class="headerlink" title="10.28总结"></a>10.28总结</h2><p>对GGNN总结主要如下：<br>所谓的A_in, 实际上就是每个节点新一轮的表示是按照当前边的in边，将in边的节点的值进行加和，从而得到最终的结果。</p>
+<blockquote>
+<p>详细可见矩阵相乘的运算 </p>
+</blockquote>
+<p>关于训练集和验证集、测试集的思考：<br>经过实践发现，其实训练集和验证集是一直用的。<br>然后</p>
 
         
       
@@ -1042,1934 +2132,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/24/tensorflow-variable/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/24/tensorflow-variable/" class="post-title-link" itemprop="url">tensorflow variable</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-24 16:23:33" itemprop="dateCreated datePublished" datetime="2019-09-24T16:23:33+08:00">2019-09-24</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-26 16:56:04" itemprop="dateModified" datetime="2019-09-26T16:56:04+08:00">2019-09-26</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/tensorflow/" itemprop="url" rel="index"><span itemprop="name">tensorflow</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoZW54aWFvbHUxOTg0L2FydGljbGUvZGV0YWlscy81MjgxNTY0MQ==" title="https://blog.csdn.net/shenxiaolu1984/article/details/52815641">https://blog.csdn.net/shenxiaolu1984/article/details/52815641<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>tensorflow变量相关</p>
-</blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1cWlud2VJOTg3L2FydGljbGUvZGV0YWlscy84Mjc3MTUyMQ==" title="https://blog.csdn.net/huqinweI987/article/details/82771521">https://blog.csdn.net/huqinweI987/article/details/82771521<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>tensorflow自动训练简介和选择训练</p>
-</blockquote>
-<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>tf.Optimizer只优化tf.GraphKeys.TRAINABLE_VARIABLES变量</p>
-<p>init=tf.initialize_all_variables()<br>sess.run(init)  // 初始化之后Variable中的值生成完毕，不再变化</p>
-<p>v = tf.all_variables() // 查看所有tf.GraphKeys.VARIABLES<br>v = tf.get_collection(tf.GraphKeys.VARIABLES)</p>
-<h2 id="各类Variable"><a href="#各类Variable" class="headerlink" title="各类Variable"></a>各类Variable</h2><ul>
-<li>获取训练的变量 方式1<ul>
-<li>tf.all_variables()<blockquote>
-<p>直接在某种状态下进行运行即可</p>
-</blockquote>
-</li>
-<li>tf.trainable_variables()</li>
-</ul>
-</li>
-<li>获取训练的变量 方式2<ul>
-<li>tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)</li>
-<li>优化特定的变量:  optimizer.minimize(cost, var_list)</li>
-</ul>
-</li>
-</ul>
-<p>sess: how to get a default sess</p>
-<p>tf.gradients()</p>
-<blockquote>
-<p>需要注意的是grad_weights这里返回得到的是list</p>
-</blockquote>
-<p>使用一个未知的函数时，请务必详细地查看参数</p>
-<p>想想tensorflow, 真的是厉害， 把模型具体给抽象出来</p>
-<p>做事之前先想清楚，比如说对这段时间科研进行总结的话</p>
-<p>一件事情不要测试过多，过于复杂</p>
-<p>首要目标应该是把事情做完。</p>
-<p>而且遇到挫折，不要扔，可以暂时转移，应该是想如何解决问题</p>
-<p>ctrl+shift+f 全局搜索</p>
-<p>一定要精确度到最细</p>
-<p>而且要把测试代码单独拿出来，没做一次改变进行一次测试</p>
-<p>git 使用中扩展思路总结:</p>
-<ol>
-<li>代码在当前版本，然后进行两部分分别测试，那么可以考虑创建两个分支</li>
-<li>代码提交的版本最好是能够运行的</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/linux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/linux/" class="post-title-link" itemprop="url">linux</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 13:28:11" itemprop="dateCreated datePublished" datetime="2019-09-19T13:28:11+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-01 23:34:06" itemprop="dateModified" datetime="2019-11-01T23:34:06+08:00">2019-11-01</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="强大的常用命令-find-grep"><a href="#强大的常用命令-find-grep" class="headerlink" title="强大的常用命令: find, grep"></a>强大的常用命令: find, grep</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vc2t5bmV0L2FyY2hpdmUvMjAxMC8xMi8yNS8xOTE2ODczLmh0bWw=" title="https://www.cnblogs.com/skynet/archive/2010/12/25/1916873.html">https://www.cnblogs.com/skynet/archive/2010/12/25/1916873.html<i class="fa fa-external-link"></i></span></p>
-<p>find主要用于查找文件<br>grep(global search regular expression and print out the line): 强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p>
-<h3 id="1-find"><a href="#1-find" class="headerlink" title="1. find"></a>1. find</h3><p>man:<br>find [-H] [-L] [-P] [-D debugs] [-Olevel] [path] [experssion]</p>
-<p>find [path] [experssion]</p>
-<ul>
-<li>path: find命令所查找的目录路径</li>
-<li>experssion: expression可以分为”-options [-print -exec -ok…]”</li>
-<li>-options, 制定find命令下的常用选项</li>
-<li>-print, find命令将匹配的文件输出到标准输出</li>
-<li>-exec, find命令对匹配的文件执行该参数所给出的shell命令</li>
-</ul>
-<p>常用选项以及实例</p>
-<blockquote>
-<p>可以不用加-print也可以正常输出，那么-print到底有啥用呢<br>在本地测试时发现一个问题，bash test.sh, ok, 但是 ./test.sh permission denied, 不知道是怎么回事</p>
-</blockquote>
-<ul>
-<li>-name: 按照文件名查找文件<ul>
-<li>find /dir -name filename 在/dir目录及其子目录下面查找名字为filename的文件</li>
-<li>find . -name “*.c” 在当前目录及其子目录下查找任何扩展名为”c”的文件（即支持正则表达式）</li>
-</ul>
-</li>
-<li>-perm 按照文件权限来查找文件  <ul>
-<li>find . -perm 755 -print 在当前目录下查找文件权限为755的文件，即文件拥有者可以读、写、执行，其他用户可以读、执行的文件</li>
-</ul>
-</li>
-<li>-prune 使用这一选项可以使find命令不在当前指定的目录中查找，如果同时使用-depth选项，那么-prune将被find命令忽略<ul>
-<li>find /apps -path “apps/bin” -prune -o -name “a.txt” -print 在/apps目录下查找a.txt，但不希望在/apps/bin目录下查找<blockquote>
-<p>对的！不过必须要-print, -o才行，位置也不能错，todo, -o, -print到底是什么作用啊？</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>-user: 根据文件拥有者来查找文件<ul>
-<li>find ~ -user sam -print 在$HOME目录中查找文件拥有者为sam的文件</li>
-</ul>
-</li>
-<li>-mtime -n +n: 根据文件的更改时间来查找文件，-n表示文件更改时间在距现在n天以内，+n 表示文件更改时间距离n天以前<ul>
-<li>find / -mtime -5 -print 在系统根目录下查找更改时间在5日以内的文件</li>
-<li>find /var/adm -mtime +3 -print 在/var/adm目录下查找更改时间在3日以前的文件</li>
-</ul>
-</li>
-<li>type: 查找某一类型的文件<ul>
-<li>类型<blockquote>
-<p>b块设备文件， d目录， c字符设备文件， p管道文件, l符号链接文件，f普通文件</p>
-</blockquote>
-</li>
-<li>find /etc -type d -print 在/etc目录下查找所有的目录</li>
-<li>find . !-type d -print 在当前目录下查找除目录以外的所有类型的文件</li>
-<li>find /etc -type l -print </li>
-</ul>
-</li>
-<li>-size n[c]: 查找文件长度为n块的文件，带有c时表示文件长度以字节计，不常用<ul>
-<li>find . -size +10000c -print +表示大于</li>
-<li>find /home/apache -size 100c print  正好</li>
-<li>find . -size -10 -print 在当前目录下查找长度不超过10块的文件（一块等于100字节）</li>
-</ul>
-</li>
-<li>-depth: 在查找文件时，首先查找当前目录中的文件，然后再在其子目录中查找<ul>
-<li>find / -name “CON.FILE” -depth -print 它将首先匹配所有的文件然后再进入子目录中查找</li>
-</ul>
-</li>
-<li>-mount: 查找文件时不跨越文件系统mount点 <ul>
-<li>find . -name “*.XC” -mount -print 从当前目录查找位于本文件系统文件名以XC结尾的文件</li>
-</ul>
-</li>
-</ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
-<li>最常用<ul>
-<li>查找文件, 可过滤一些文件，？？是否可以用正则表达式<br>  -name 通配多种文件</li>
-<li>时间、目录<ul>
-<li>-mtime 过滤时间</li>
-<li>-prune 过滤目录</li>
-</ul>
-</li>
-<li>大小、类型<ul>
-<li>-size</li>
-<li>-type</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>高级<ul>
-<li>控制权限<ul>
-<li>-perm 过滤文件自身权限</li>
-<li>-user 过滤拥有者的权限，</li>
-</ul>
-</li>
-<li>访问顺序<ul>
-<li>-depth</li>
-</ul>
-</li>
-<li>挂载点<ul>
-<li>-mount</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="2-grep"><a href="#2-grep" class="headerlink" title="2. grep"></a>2. grep</h3><p>grep [options] pattern [file..]<br>grep [options] [-e pattern] [-f file] [file …]</p>
-<h2 id="作业相关"><a href="#作业相关" class="headerlink" title="作业相关"></a>作业相关</h2><p>jobs 查看正在进行的job<br>ps 查看正在进行的进程</p>
-<p>jobs 挂起<br>kill -stop PID<br>kill %job_num<br>kill pid</p>
-<blockquote>
-<p>先经过ps查看一下</p>
-</blockquote>
-<h2 id="查看端口"><a href="#查看端口" class="headerlink" title="查看端口"></a>查看端口</h2><ol>
-<li><p>linux<br>netstat -lnp | grep 8080<br>ps -aef | grep tomcat</p>
-</li>
-<li><p>windows</p>
-</li>
-</ol>
-<p>netstat -ano | findstr 8080<br>taskkill /F /pid 1088</p>
-<h2 id="ssh使用"><a href="#ssh使用" class="headerlink" title="ssh使用"></a>ssh使用</h2><ol>
-<li>查看ip地址， ifconfig</li>
-<li>sudo apt install openssh-server</li>
-</ol>
-<h2 id="apt-install"><a href="#apt-install" class="headerlink" title="apt install"></a>apt install</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vaGFueGluZy9wLzM5OTYxMDMuaHRtbA==" title="https://www.cnblogs.com/hanxing/p/3996103.html">https://www.cnblogs.com/hanxing/p/3996103.html<i class="fa fa-external-link"></i></span></p>
-<h3 id="1-安装位置"><a href="#1-安装位置" class="headerlink" title="1. 安装位置"></a>1. 安装位置</h3><p>/var/cache/apt/archieve 软件的安装缓存<br>sudo apt-get autoclean 只删除低版本的deb包<br>sudo apt-get clean 全部删除</p>
-<blockquote>
-<p>为了以后安装系统方便，可以将这些deb包保存在其他地方</p>
-</blockquote>
-<p>一般的deb包都安装在/usr 或 /usr/share /usr/local中。<br>自己下载的压缩包或编译的包，有些可以选择安装目录， 一般放在/usr/local. 有时也放在/opt中。</p>
-<p>如果想知道具体位置， dpkg -L XXX.deb</p>
-<blockquote>
-<p>eg: dpkg -L firefox</p>
-</blockquote>
-<p>如果想知道apt-get install 安装的软件<br>dpkg -S softwarenmae | grep cnf$</p>
-<ol>
-<li>dpkg -L  </li>
-<li>dpkg -S  apt-get install<blockquote>
-<p>whereis 查看命令位置</p>
-</blockquote>
-</li>
-<li>/usr,  /usr/share,  /usr/local, /opt</li>
-</ol>
-<p>!!!! usr/share correct!!!</p>
-<h3 id="2-apt-get"><a href="#2-apt-get" class="headerlink" title="2. apt-get"></a>2. apt-get</h3><p>apt-get: advanced packaging tools</p>
-<blockquote>
-<p>apt-get需要root,  apt只需要当前用户</p>
-</blockquote>
-<p><code>apt-get &lt;command&gt; [&lt;option&gt;] pkg1 [pkg2..]</code></p>
-<ol>
-<li>command:<ul>
-<li>update 重新获取软件包列表，很多时候软件安装不上就要先进行update一下</li>
-<li>upgrade 进行更新</li>
-<li>install, remove</li>
-<li>autoremove: 自动移除全部不使用的软件包</li>
-<li>purget 移除软件包和配置文件诶见</li>
-<li>source 下载源码档案</li>
-<li>autoclean</li>
-</ul>
-</li>
-<li>args<ul>
-<li>-h 帮助文件</li>
-<li>-q 输出到日志 无进展指示</li>
-<li>-qq 不输出信息，错误除外</li>
-<li>-d 仅下载， 不安装或解压归档文件</li>
-</ul>
-</li>
-<li>常用实例<ul>
-<li>apt-cache search pkg</li>
-</ul>
-</li>
-</ol>
-<h2 id="3-add-a-path-to-PATH"><a href="#3-add-a-path-to-PATH" class="headerlink" title="3. add a path to PATH"></a>3. add a path to PATH</h2><p>~/bin: some distributions automatically put in your PATH if it exists</p>
-<ol>
-<li>add a path to PATH:  <code>PATH=$PATH:~/opt/bin</code><ul>
-<li>way1: 需要重启<ul>
-<li>~/.profile 当前用户<blockquote>
-<p>profile 侧面，轮廓</p>
-</blockquote>
-</li>
-<li>/etc/profile 所有用户</li>
-</ul>
-</li>
-<li>way2: ~/.bashrc<ul>
-<li>vim ~/.bashrc</li>
-<li>source ~/.bashrc</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>check the path<ul>
-<li>echo $PATH 检查环境变量<blockquote>
-<p>echo 重复，反射； 回应</p>
-</blockquote>
-<h2 id="4-snap-？？？-什么东西"><a href="#4-snap-？？？-什么东西" class="headerlink" title="4. snap ？？？ 什么东西"></a>4. snap ？？？ 什么东西</h2>add /snap/bin to $PATH</li>
-</ul>
-</li>
-</ol>
-<p>then can directly use</p>
-<h2 id="5-lua环境安装"><a href="#5-lua环境安装" class="headerlink" title="5. lua环境安装"></a>5. lua环境安装</h2><ol>
-<li>sudo apt-get install lua5.3</li>
-<li>sudo apt-get install luarocks<blockquote>
-<p>luarocks install gnuplot: install torch first</p>
-</blockquote>
-</li>
-<li>git clone torch<blockquote>
-<p>bash install-deps<br>lua5.2  torch7<br>th 快捷命令</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h2><ol>
-<li><p>proxy problem: 开机手动设置</p>
-</li>
-<li><p>查看后台进程</p>
-<ul>
-<li>ps</li>
-<li>service<blockquote>
-<p>chkconfig –list<br>no find!!!</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>uname -a: 查看当前版本信息</p>
-</li>
-<li><p>chrome 快速定位到搜索栏: ctrl+L, alt+D</p>
-</li>
-<li><p>最小化所有窗口 win + d ？ 最小化当前窗口， 终端重启一个</p>
-</li>
-<li><p>to add deepin some memory</p>
-</li>
-<li><p>mv 使用正则表达式</p>
-</li>
-<li><p>关于硬盘：rename没有必要</p>
-</li>
-<li><p>linux关于安装系统的命令</p>
-<ul>
-<li>ln命令： 功能是为某一个文件在另一个位置建议一个同步的链接<ul>
-<li>例子<ul>
-<li>ln -s link1 link2request to <span class="exturl" data-url="aHR0cHM6Ly9yZWdpc3RyeS5ucG1qcy5vcmcvaGV4by1jbGk=" title="https://registry.npmjs.org/hexo-cli">https://registry.npmjs.org/hexo-cli<i class="fa fa-external-link"></i></span> failed, reason: Client network socket disconnected before secure TLS connection was established<blockquote>
-<p>为link1文件创建软链接link2, 如果link1丢失，link2将会失效</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>百度网盘使用有问题，aria2使用频率不高，放弃</p>
-</li>
-<li><p>安装linux版的hexo</p>
-<blockquote>
-<p>配置文件一般是有全局配置文件的，在～/.npmrc这些内容之下</p>
-</blockquote>
-</li>
-<li><p>vscode</p>
-<blockquote>
-<p>配置总是让输入user和passwd, git config –global credential.helper store</p>
-</blockquote>
-</li>
-<li><p>lantern</p>
-<blockquote>
-<p>what is proxy IP? 是否会影响其他的安装</p>
-</blockquote>
-</li>
-<li><p>在linux上安装pip <code>sudo apt-get install python-pip(python2)</code></p>
-</li>
-<li><p><code>scp</code> 加-r, 上传，下载目录； 不加-r上传，下载文件</p>
-</li>
-<li><p><code>sudo apt-get install fim</code>: 展示图片，测试git bash不行; 终端显示ok</p>
-</li>
-<li><p>linux远程登录windows  todo</p>
-<blockquote>
-<p>基于rdesktop: 但是好像不是命令行  <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTEwNTQzMzMvYXJ0aWNsZS9kZXRhaWxzLzc5OTA1MTAy" title="https://blog.csdn.net/u011054333/article/details/79905102">https://blog.csdn.net/u011054333/article/details/79905102<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-<ul>
-<li>设置允许远程连接到计算机<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9qaW5neWFuLmJhaWR1LmNvbS9hcnRpY2xlL2IwYjYzZGJmMzIxYzIyNGE0OTMwNzA2Mi5odG1s" title="https://jingyan.baidu.com/article/b0b63dbf321c224a49307062.html">https://jingyan.baidu.com/article/b0b63dbf321c224a49307062.html<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-<ul>
-<li>scp不行 5s内</li>
-<li></li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/vim/" class="post-title-link" itemprop="url">vim</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 13:25:19 / 修改时间：13:26:10" itemprop="dateCreated datePublished" datetime="2019-09-19T13:25:19+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h1><h2 id="光标移动"><a href="#光标移动" class="headerlink" title="光标移动"></a>光标移动</h2><ol start="0">
-<li><p>整篇文章<br>gg: 开头<br>G: 末尾<br>123+gg: 跳转到指定行</p>
-</li>
-<li><p>屏幕<br>H屏幕顶行，J合并两行 L屏幕底行<br>M屏幕中间行<br>ctr+f  pagedown<br>ctrl+b  pageup</p>
-</li>
-<li><p>行列上下<br>左、下、上、右 h, j,k,l</p>
-</li>
-<li><p>单词<br>w:开头, 向后<br>b:开头，向前<br>e:末尾，向后</p>
-</li>
-<li><p>缩进</p>
-<blockquote>
-<blockquote>
-<p>缩进  &lt;&lt;</p>
-</blockquote>
-</blockquote>
-</li>
-<li><p>行前，行尾<br>行前，行尾 ^,  $</p>
-</li>
-<li><p>段前，段后<br>{段前  }段后: 跳过开头<br>(  ): 会经过开头行</p>
-<h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2><p>v: 行选择<br>ctrl+v: 列选择</p>
-</li>
-</ol>
-<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><ol>
-<li>插入<br>i: 当前字母前插入<br>I: 当前行前插入</li>
-</ol>
-<p>a: 当前字母后插入<br>A: 当前字母后插入</p>
-<p>o: 下一行插入<br>O: 上一行插入</p>
-<ol start="2">
-<li><p>复制<br>y: 复制选中内容<br>yy: 复制当前行<br>123+yy: 向下复制多少行</p>
-</li>
-<li><p>剪切<br>无，=复制+删除</p>
-</li>
-<li><p>删除<br>y: 复制选中内容<br>yy: 复制当前行<br>123+yy: 向下复制多少行</p>
-</li>
-<li><p>粘贴<br>y: 复制选中内容<br>yy: 复制当前行<br>123+yy: 向下复制多少行</p>
-</li>
-</ol>
-<h2 id="操作撤销和恢复"><a href="#操作撤销和恢复" class="headerlink" title="操作撤销和恢复"></a>操作撤销和恢复</h2><p>u: 撤销操作undo<br>ctr+r 重做redo</p>
-<h2 id="全局查找、替换"><a href="#全局查找、替换" class="headerlink" title="全局查找、替换"></a>全局查找、替换</h2><ol>
-<li><p>查找<br>/word 回车<br>N查看上一处<br>n查看下一处</p>
-</li>
-<li><p>替换<br>:{作用范围}s/{目标}/{替换}/{替换标志}</p>
-</li>
-</ol>
-<ul>
-<li><p>作用范围<br>全局范围<code>:%s/</code><br>当前行s<br>选区 <code>:&#39;&lt;,&#39;&gt;/</code><br>当前行<code>.</code>与接下来的两行<code>+2</code>: <code>:.,+2s</code></p>
-</li>
-<li><p>替换标志<br>g: global替换所有的出现<br>空：从光标位置开始替换<br>gc: 需要进行确认</p>
-</li>
-<li><p>块选择<br>v 光标移动过的位置直接进行选择。可以操作  ctrl+v 列选择<br>y复制， p粘贴 </p>
-</li>
-</ul>
-<p>该模式下移动光标的感觉跟查看下一样</p>
-<p>参考<br><span class="exturl" data-url="aHR0cHM6Ly9oYXJ0dGxlLmxhbmQvMjAxNi8wNy8xOC9pbnRyby10by1yZWdleHAuaHRtbA==" title="https://harttle.land/2016/07/18/intro-to-regexp.html">https://harttle.land/2016/07/18/intro-to-regexp.html<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>正则表达式这篇写得很好！！</p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/deeplearning-tensorflow-study/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/deeplearning-tensorflow-study/" class="post-title-link" itemprop="url">deeplearning tensorflow study</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 13:22:41 / 修改时间：13:23:42" itemprop="dateCreated datePublished" datetime="2019-09-19T13:22:41+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/tensorflow/" itemprop="url" rel="index"><span itemprop="name">tensorflow</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="一个pipeline"><a href="#一个pipeline" class="headerlink" title="一个pipeline"></a>一个pipeline</h1><blockquote>
-<p>一层封装，但还是仍然比较繁琐<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI4OTY2MjcvYXJ0aWNsZS9kZXRhaWxzLzcyODc0Njc4" title="https://blog.csdn.net/u012896627/article/details/72874678">https://blog.csdn.net/u012896627/article/details/72874678<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-<ol>
-<li>建立一个sess=tf.Session<blockquote>
-<p>交互式会话跟全局会话有什么区别<br>tf.Session.init()</p>
-</blockquote>
-<ul>
-<li>tf.Session vs tf.InteractiveSession<blockquote>
-<p>原本每个张量的计算，以及最后的取值都需要在默认的Session中，而且最终的运行也离不开Session.run(); 采用InteractiveSession后， 本身就为默认的session, 此时距直接tensor.eval() 即可运行， vai.init.run()即可运行</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>中间涉及到的张量Tensor, 主要相关的其实就是矩阵运算<ul>
-<li>tensor类型<ul>
-<li>tf.placeholder()  // 通常用于小数据集的输入, 在后面的feed_back={} 将进行制定</li>
-<li>tf.Variable(name=, intilizer=)  // 可用于梯度 更新的内容 </li>
-<li>tf.constant(name= , shape=)</li>
-</ul>
-</li>
-<li>tensor初始化<ul>
-<li>获取指定分布的值<ul>
-<li>random_normal 正态分布 random_uniform 聚云分布 truncated_normal</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>区分不同作用域的变量<ul>
-<li>with tf.variable_scope(scope_name, resue=):  v1=””</li>
-</ul>
-</li>
-<li>小技巧<ul>
-<li>tensor.eval() // 查看tensor的numpy矩阵</li>
-<li>tensor.shape  // 查看形状</li>
-<li>v.assign()  assign(  )</li>
-<li>tf.get_variable(name): 获取指定名称的var</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Tensor之间的运算, 即边<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI4OTY2MjcvYXJ0aWNsZS9kZXRhaWxzLzcyODc0Njc4" title="https://blog.csdn.net/u012896627/article/details/72874678">https://blog.csdn.net/u012896627/article/details/72874678<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-<ul>
-<li>矩阵变换, 这个本身可以用numpy来做？<ul>
-<li>tf.expands_dims(arr, 1), 在指定的轴， 比如axis=1，增加一维，原数据不变？ 如其名，</li>
-<li>tf.concat(arr1, arr2, axis=1) 在某一维上将两个向量合并。 (2,3)-&gt;(2,6), (4,3) 发现对于0来说是倒着来的</li>
-<li>tf.sparse_to_dense()</li>
-<li>tf.random_shuffle()  按照axis=0, 进行制定shuffle</li>
-<li>tf.argmax/ arg.min 找到最大最小所对应的的位置</li>
-<li>tf.equal 判断两个tensor是否每个元素都相等，返回bool的tensor</li>
-<li>tf.cast 将x的数据格式转化为dtype</li>
-<li>tf.matul 用来做举证乘法</li>
-</ul>
-</li>
-<li>神经网络<ul>
-<li>tf.nn.embedding_lookup 将一个数字序列转化为embedding序列表示？举证</li>
-<li>tf.trainable_variables 返回多个有训练的变量</li>
-<li>tf.gradients 用来计算导数</li>
-<li>tf.nn.dropout 防止过拟合</li>
-</ul>
-</li>
-<li>普通操作<ul>
-<li>tf.linrange()  tf.range()</li>
-</ul>
-</li>
-<li>规范化<ul>
-<li>tf.variable_scope</li>
-<li>tf.getvariale_scope</li>
-</ul>
-</li>
-<li></li>
-</ul>
-</li>
-<li>变量的初始化操作<ul>
-<li>Session.run(vari.initilizer)  // 进行变量的初始化</li>
-<li>tf.initialize_all_variables().run()</li>
-</ul>
-</li>
-<li>损失函数和梯度下降<ul>
-<li>损失函数为图的最后一个tensor</li>
-<li>优化器. optimizer = tf.train.GradientDesecentOptimizer(0.5)</li>
-<li>train = ptimizer.minimize(cross_entropy)</li>
-</ul>
-</li>
-<li>tensorflow运行<ul>
-<li>sess.run(fetches, feed_dict,  options)  // <ul>
-<li>fetches: tensor_node</li>
-<li>feed_dict</li>
-<li>return: fetches中的值</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>预测<ul>
-<li>tf.equal(tf.argmax(a, 1), tf.argmax(g,1))</li>
-<li>accuary = tf.reduce_mean()</li>
-</ul>
-</li>
-<li>tensor.close()</li>
-</ol>
-<blockquote>
-<p>另外，所谓的tf.Graph; 每个tensor都可以产生一个graph; 或者定义一个graph, 之后都在该作用域下进行声明tensor </p>
-</blockquote>
-<p>tf快捷配置命令行参数</p>
-<blockquote>
-<p>并不是技术，用在了很多方面</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 声明</span><br><span class="line">FLAGS = tf.app.flags.FLAGS</span><br><span class="line">tf.app.flags.DEFINE_string(props_str, default_str) // DEFINE_TYPE</span><br><span class="line"></span><br><span class="line">// 使用</span><br><span class="line">FLAGS.props</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>查看GPU<br>nvidia-smi</p>
-</li>
-<li><p>以后计划任务，务必注意查看需要花费的时间</p>
-</li>
-</ul>
-<p>什么是skip-gram算法？<br> skip-gram算法是什么，在给出目标单词的情况下，预测它的上下文单词，这里会给定指定窗口大小。<br> 思想：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yOTMwNTQ2NA==" title="https://zhuanlan.zhihu.com/p/29305464">https://zhuanlan.zhihu.com/p/29305464<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>没看懂，还是没明白第一个矩阵W是V*d, 是当前矩阵的什么。还有就是用到邻接矩阵的向量？？</p>
-</blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNzIzNDA3OA==" title="https://zhuanlan.zhihu.com/p/27234078">https://zhuanlan.zhihu.com/p/27234078<i class="fa fa-external-link"></i></span></p>
-<p>扩展，一点想法，代理是什么？<br>代理服务，代理协议，代理端口<br>首先代理服务，有邮件<br>代理协议就是像常见的http/https协议等等<br>代理端口也就是所用的代理端口的感觉</p>
-<p>两个问题：现在已经测试了可以开启代理服务器的方式允许各种方式的网络配置。<br>已经测试了同局域网下可以访问，如何允许私网段以及不同局域网访问呢？按理说是能做到的</p>
-<p>ssh连接远程访问也可以通过代理服务器来做，也就是说如果解决了不同局域网的访问，那么就可以访问到集群</p>
-<p>很多配置相关的文件都在~/.ssh下</p>
-<p>现在所配置的代理不过都是私网地址，即局域网内允许使用的地址<br>另外有一种情况就是NAT，地址映射协议，由某一地址统一管理。如果其他计算机需要访问的话，需要首先在主节点上进行说明。</p>
-<ul>
-<li>docker是什么？有什么用？<br>相关概念：虚拟机，操作系统<br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTgvMDIvZG9ja2VyLXR1dG9yaWFsLmh0bWw=" title="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html">http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html<i class="fa fa-external-link"></i></span><br>虚拟机是在一个操作系统之上再嵌套一个操作系统。</li>
-</ul>
-<p>对于虚拟机来说，它管理很多方面，有着很多方面的高效性。就是一个操作系统，并且能够提供各种服务，比如文件服务、网络</p>
-<p>而docker是进行进程的模拟，所以提供的服务会很快。启动快，占用资源少<br>有什么用？<br>提供一次性的环境， 提供弹性的云服务， 组件微服务架</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/spark-study/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/spark-study/" class="post-title-link" itemprop="url">spark study</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 13:18:49 / 修改时间：13:19:20" itemprop="dateCreated datePublished" datetime="2019-09-19T13:18:49+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/study/" itemprop="url" rel="index"><span itemprop="name">study</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>sc.textFile(,numpartition)</p>
-<p>如果numpartition参数比实际划分的SplitSize小的化，则按照SplitSize的数目在每个executor上执行；否则就按照numpartition参数进行执行；</p>
-<p>一定要区分资源调度和任务执行</p>
-<p>在任务执行阶段，每个executor只会按照其对应的InputSize单位来执行数据。如果有多个executor, 则按照多个的executor来进行执行</p>
-<h1 id="写代码要考虑的事"><a href="#写代码要考虑的事" class="headerlink" title="写代码要考虑的事"></a>写代码要考虑的事</h1><p>代码之前——环境，环境如何配置？<br>代码载体——IDE, 有哪些特点？<br>代码语言——常用操作和模板进行总结，语法特性要能表达出来，用语言能够实现出任意自己想实现的犯方法</p>
-<ul>
-<li>角度1<ul>
-<li>数据结构<blockquote>
-<ol>
-<li>对基本数据结构操作的了解</li>
-<li>这些操作的输入、输出参数是什么？如何实现的？快慢如何</li>
-<li>如何自己定义？</li>
-</ol>
-</blockquote>
-</li>
-<li>算法<blockquote>
-<p>设计算法，算法正确性，算法的时间空间复杂度，算法的实现，代码复杂度</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>角度2<br>基本数据结构，字符串，数组，元祖，列表，字典这些抽象的数据结构；<br>对象，多态，操作符重载，<br>异常，<br>debug</li>
-</ul>
-<p>代码调试——如何测试自己的代码是否正确<br>    &gt; 测试语句，继承测试<br>代码维护——Git, 版本控制<br>代码执行——编译器执行的角度（一般不用去考虑）<br>代码上线——命令行设置</p>
-<blockquote>
-<p>非设计算法，主要调用接口，那么关注代码的含义，代码对应着实际上有哪些操作</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import spark</span><br><span class="line">// 前面一系列的环境配置先耍开</span><br><span class="line"></span><br><span class="line">def main()&#123;</span><br><span class="line">    </span><br><span class="line">    val conf = new SparkConf().setAppName().setMaster</span><br><span class="line">    conf.set()  // 这里可以配置哪些项？这些项又表示着什么？</span><br><span class="line"></span><br><span class="line">    val sc = new SparkContext()   // 2.3之后spark是怎么执行的</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>计算模式中节点故障和慢节点容错处理<br>特别是在流和交互式SQL查询中</p>
-<p>RDD能够保存世系图，而且提供保存到各个部分的功能。<br>所以RDD能够很好地处理并行计算中的数据共享</p>
-<p>spark编程中开发者需要编写一个驱动程序来链接到工作进程，驱动程序定义一个或者多个RDD以及相关行动操作，驱动程序同时记录RDD的继承关系。<br>工作进程是一直运行的进程</p>
-<p>操作</p>
-<ul>
-<li>定义操作，创建RDD，来自于内存集合和外部存储系统，转换操作生成的RDD</li>
-<li>转换操作，只是转换，并未生成</li>
-<li>控制操作，进行持久化</li>
-<li>行动操作，触发spark运行的程序</li>
-</ul>
-<p>分区，注意到分区是一个逻辑概念</p>
-<p>分区的多少，往往意味着并行计算的粒度<br>如果是从本地文件创建，则默认值为程序所分配到的CPU数；如果是从hdfs上建立，则为文件的数据块数</p>
-<p>RDD首选位置<br>Spark形成任务有向无环图时，会尽可能地把计算分配到靠近数据的位置，减少数据网络传输</p>
-<h2 id="2-scala"><a href="#2-scala" class="headerlink" title="2. scala"></a>2. scala</h2><p><span class="exturl" data-url="aHR0cHM6Ly9sZWFybnhpbnltaW51dGVzLmNvbS9kb2NzL3NjYWxhLw==" title="https://learnxinyminutes.com/docs/scala/">https://learnxinyminutes.com/docs/scala/<i class="fa fa-external-link"></i></span></p>
-<ul>
-<li>:help 查看所有的帮助</li>
-<li>:type (true, 2.0)<blockquote>
-<p>查看类型</p>
-</blockquote>
-</li>
-<li>保存和加载 repl文件<ul>
-<li>:save /sites/repl-test.scala</li>
-<li>:load /sites/rep1-test.scala</li>
-</ul>
-</li>
-<li>查看历史 :h?<blockquote>
-<p>怎么使用历史中的文件呢？</p>
-</blockquote>
-<ul>
-<li>:history number</li>
-</ul>
-</li>
-<li>编写长代码<ul>
-<li>:paste <blockquote>
-<p>怎么加载文件中代码还是不会 </p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>退出<ul>
-<li>quit</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-1-类型"><a href="#2-1-类型" class="headerlink" title="2.1 类型"></a>2.1 类型</h3><ul>
-<li><p>val z:Type = value</p>
-<blockquote>
-<p>val, var</p>
-</blockquote>
-<ul>
-<li>Type: Int, Long, Double</li>
-<li>类型继承体系<br><img src="asserts/scala_type.png" alt><ul>
-<li>列表中没有元素了即, Nil = List[Nothing], 它是List[T]的子类</li>
-<li>Null类型的唯一实例是null值，可以将null赋值给任何引用但是不能赋值给值类型的变量</li>
-<li>与Java基本类型相对应的类，以及Unit类型，都扩展自AnyVal</li>
-<li>Any类定义了，A.isInstanceOf[B] 来判断A是否是类别B</li>
-<li>A.getClass.getSimpleName</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>String</p>
-<blockquote>
-<p>raw” “ 不含转义字符</p>
-</blockquote>
-<ul>
-<li>基本<ul>
-<li>属性<ul>
-<li>length</li>
-</ul>
-</li>
-<li>init<ul>
-<li>直接赋值</li>
-<li>Char[],   copyValueOf(char[], offset, count)</li>
-</ul>
-</li>
-<li>增<ul>
-<li>尾部增加元素或元组 str = str.concat(str2);  str = str+str2</li>
-</ul>
-</li>
-<li>删<ul>
-<li>转变为替换或者查拼接</li>
-</ul>
-</li>
-<li>改<ul>
-<li>改特定群组的值  str.replace(regex, “”) //前面可以接正则表达式</li>
-</ul>
-</li>
-<li>查<ul>
-<li>按索引查 str(i)  str.charAt(i)</li>
-<li>按值查  str.indexof(c1)  str.lastindexof(c1)</li>
-<li>查范围的值 <ul>
-<li>只要求前面  str.take()</li>
-<li>只要求后面 str.drop()</li>
-<li>同时  str.substring(start_index, end_index)  str.slice()</li>
-</ul>
-</li>
-<li>查是否满足要求<ul>
-<li>str.startsWith()   str.endsWith()</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>高级<ul>
-<li>预处理  trim()</li>
-<li>切分 split()</li>
-<li>格式化  <ul>
-<li>s”${expression}” expression可以为上文的变量之类的<blockquote>
-<p>对于输出的各种类型的操作为使用变量的toString参数</p>
-</blockquote>
-</li>
-<li>f”${}%1.0f dada”</li>
-<li>raw”  “</li>
-<li>regr.r内置了正则表达式, 如 <code>&quot;(.*)@(.*)&quot;.r</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>函数 def fun(x:Int, y:Int=4):Int={}</p>
-<ul>
-<li>默认参数</li>
-<li>可变参数, 由变量直接指定</li>
-<li>匿名函数 val sq: Int-&gt;Int   =  (x:Int)-&gt;x*x</li>
-<li>允许多返回值</li>
-<li>可以省略参数，可以省略返回值</li>
-</ul>
-</li>
-<li><p>flow control</p>
-<ul>
-<li>range(5): (1 to 5 by 1) start to end by steo</li>
-<li>循环<ul>
-<li>().foreach{}</li>
-<li>while() {}</li>
-<li>for(a&lt;-array){}</li>
-</ul>
-</li>
-<li>条件<ul>
-<li>简单本 val a = if(x==10) “” else “ “</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Data Structures</p>
-<ul>
-<li>物理: 数组、链表</li>
-<li>不变的<ul>
-<li>Array()  List()<ul>
-<li>sortBy,  sortWith{case (a,b)} // 自定义</li>
-<li>distince</li>
-</ul>
-</li>
-<li>Map()<ul>
-<li>sort: Map()没有sort函数，所以需要<br>用list</li>
-<li>获取值<ul>
-<li>apply() 返回默认方法，不知道谁制定的,  default() 会进行定义默认值</li>
-<li>getOrElse(v,defalut) 返回默认值</li>
-</ul>
-</li>
-<li>增加，以及更新<ul>
-<li>错误： map(key) = new_value<blockquote>
-<p>注意这条命令只能对于mutable的集合可用</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>删除<ul>
-<li>remove(key)</li>
-</ul>
-</li>
-<li>其他<ul>
-<li>keys, values</li>
-<li>isEmpty</li>
-<li>max, min, filter, find</li>
-<li>sum,size</li>
-<li>++添加一个新的</li>
-<li>clear(), clone()</li>
-<li>count(): 技术</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Set()<ul>
-<li>操作</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>类 Classes</p>
-<ul>
-<li>构造函数： 直接在类的开头声明<br>class Dog(br: String) {<br>  var breed: String = br  // 这里即构造函数<br>}</li>
-<li>变量和函数默认的访问控制权限是public<blockquote>
-<p>特别地，可以private def fun(): Type={}  ？？？protect</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>同名Object, 实际上是该类的一个单例对象，在其他语言中往往对应的是静态方法，静态变量之类的东西。</p>
-<blockquote>
-<p>两者的区别感觉上说也就是Class需要new产生，而Object因为是静态的，所以可以直接使用</p>
-</blockquote>
-</li>
-<li><p>case classes</p>
-<blockquote>
-<p>vs Classes, 如何使用？ Classes强调的是封装，多态和行为。这些值在类中通常是私有的，方法是可扩展的。 // 即默认情况下<br>而case classes的目的是来持有不可变对象，它们往往有很少的方法，而且这些方法基本上没有副作用。  使用起来定义简单，有点像结构体的感觉，pair<br>case class Person(name: String, phoneNumber:String)</p>
-</blockquote>
-</li>
-<li><p>trait 特征，实际上就是抽象类或者接口的概念；</p>
-<blockquote>
-<p>只需要定义值或方法的属性或者返回值即可。 由继承它的类来自行扩展<br>class A extends Dog with Bark {}  // 扩展两个接口</p>
-</blockquote>
-</li>
-<li><p>继承</p>
-<blockquote>
-<p>继承利用的也是extends关键字，不过在scala中继承实体类有以下的要求：</p>
-</blockquote>
-<ul>
-<li>def只能重写另一个def</li>
-<li>val只能重写另一个val或不带参数的def(?,应该不会涉及到)</li>
-<li>var只能重写另一个抽象的var<blockquote>
-<p>可以定义自己的方法</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>Pattern Matching</p>
-<blockquote>
-<p>scala特有的, 利用了case结构; 这样的想法就是使得省去了break语句</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"> // Pattern matching might look familiar to the switch statements in the C family</span><br><span class="line">// of languages, but this is much more powerful. In Scala, you can match much</span><br><span class="line">// more:</span><br><span class="line">def matchEverything(obj: Any): String = obj match &#123;</span><br><span class="line">  // You can match values:</span><br><span class="line">  case &quot;Hello world&quot; =&gt; &quot;Got the string Hello world&quot;</span><br><span class="line"></span><br><span class="line">  // You can match by type:</span><br><span class="line">  case x: Double =&gt; &quot;Got a Double: &quot; + x</span><br><span class="line"></span><br><span class="line">  // You can specify conditions:</span><br><span class="line">  case x: Int if x &gt; 10000 =&gt; &quot;Got a pretty big number!&quot;</span><br><span class="line"></span><br><span class="line">  // You can match case classes as before:</span><br><span class="line">  case Person(name, number) =&gt; s&quot;Got contact info for $name!&quot;</span><br><span class="line"></span><br><span class="line">  // You can match regular expressions:</span><br><span class="line">  case email(name, domain) =&gt; s&quot;Got email address $name@$domain&quot;</span><br><span class="line"></span><br><span class="line">  // You can match tuples:</span><br><span class="line">  case (a: Int, b: Double, c: String) =&gt; s&quot;Got a tuple: $a, $b, $c&quot;</span><br><span class="line"></span><br><span class="line">  // You can match data structures:</span><br><span class="line">  case List(1, b, c) =&gt; s&quot;Got a list with three elements and starts with 1: 1, $b, $c&quot;</span><br><span class="line"></span><br><span class="line">  // You can nest patterns:</span><br><span class="line">  case List(List((1, 2, &quot;YAY&quot;))) =&gt; &quot;Got a list of list of tuple&quot;</span><br><span class="line"></span><br><span class="line">  // Match any case (default) if all previous haven&apos;t matched</span><br><span class="line">  case _ =&gt; &quot;Got unknown object&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>函数式编程</p>
-<ul>
-<li>map</li>
-<li>foreach</li>
-<li>filter  (1 to 15 by 2).filter(_%2==0)</li>
-<li>reduce<blockquote>
-<p>等价于 for{n&lt;-s} yield sq(n)<br>// 所有scala这门语言本身就支持 惰性求值, 想想真的nb</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>implicit</p>
-<blockquote>
-<p>commonplace 频繁<br>怎么说呢？ 实际上就是一种潜在的标记的感觉。默认的全局的变量。<br>对于方法，如果有一个参数通常是平凡的，但是又可能改变。这是就可以使用implicit作为参数。<br>编译器会自动向前寻找该标记然后进行解析</p>
-</blockquote>
-<ul>
-<li>def sendGreetings(toWhom:String)(implicit howMany:Int) = toWhom + howMany<blockquote>
-<p>sendGreetings(“wang”)  // “wang 100”</p>
-</blockquote>
-</li>
-<li>implicit val myImplicitInt=100<blockquote>
-<p>? 怎么用，不知道</p>
-</blockquote>
-</li>
-<li>implicit def myImplicitFucion(breed:String) = new Dog(“Golder”+breed)<blockquote>
-<p>“wyp” // “Golder wyp”<br>从理解上看，为什么不用默认形参或者指定参数，不会就只为了少点代码吧？？</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>Misc</p>
-<ul>
-<li>import scala.collection</li>
-<li>import scala.collectin.immutable._</li>
-<li>import scala.collection.immutable.{List,Map}</li>
-<li>import scala.collection.immutable.{List=&gt;Li}  // rename</li>
-<li>import scala.collection.immutable.{Map=&gt;<em>, Set=&gt;</em>, _}  // 排序Map,Set</li>
-</ul>
-</li>
-<li><p>Input / Output</p>
-<ul>
-<li>读<br>import scala.io.Source<br>for(line &lt;- Source.fromFile(“myfile”).getLines()) println(line)</li>
-<li>写<br>val writer = new PrinterWriter(“myfile.txt”)<br>writer.write(“  “ + util.Properties.lineSeparator)<br>writer.close(</li>
-</ul>
-</li>
-</ul>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/python-study/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/python-study/" class="post-title-link" itemprop="url">python-study</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 13:17:33" itemprop="dateCreated datePublished" datetime="2019-09-19T13:17:33+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-08 15:20:30" itemprop="dateModified" datetime="2019-11-08T15:20:30+08:00">2019-11-08</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/study/" itemprop="url" rel="index"><span itemprop="name">study</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-vscode的好处"><a href="#1-vscode的好处" class="headerlink" title="1. vscode的好处"></a>1. vscode的好处</h2><ol>
-<li>显示思路过程</li>
-<li>实时性显示</li>
-<li>块编程</li>
-<li>批处理</li>
-</ol>
-<h2 id="2-机器学习常用的库"><a href="#2-机器学习常用的库" class="headerlink" title="2. 机器学习常用的库"></a>2. 机器学习常用的库</h2><ul>
-<li><p>核心库与统计：Numpy、Scipy、Pandas、StatsModels。</p>
-</li>
-<li><p>可视化：Matplotlib、Seaborn、Plotly、Bokeh、Pydot、Scikit-learn、XGBoost/LightGBM/CatBoost、Eli5。</p>
-</li>
-<li><p>深度学习：Tensorflow、PyTorch、Keras。</p>
-</li>
-<li><p>分布式深度学习：Dist-keras/elephas/spark-deep-learning。</p>
-</li>
-</ul>
-<p>自然语言处理：NLTK、SpaCy、Gensim。</p>
-<p>数据抓取：Scrapy。</p>
-<h2 id="3-python使用总结"><a href="#3-python使用总结" class="headerlink" title="3. python使用总结"></a>3. python使用总结</h2><p>jupyter</p>
-<ul>
-<li>b? 查看文档</li>
-<li>b?? 查看源码</li>
-<li>%shell命令 <ul>
-<li>qucikref 快捷查看</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-1-基本类型"><a href="#3-1-基本类型" class="headerlink" title="3.1 基本类型"></a>3.1 基本类型</h3><h4 id="3-1-1-null类型"><a href="#3-1-1-null类型" class="headerlink" title="3.1.1 null类型"></a>3.1.1 null类型</h4><p>注意一个想法，python中万物均可对象化，这么说的意思就是所有东西都有它的类型和值。</p>
-<blockquote>
-<p>特别需要注意的是，哪些时候使用引用即可，哪些使用必须使用一个新的对象</p>
-</blockquote>
-<blockquote>
-<p>dir() 查看参数的方法, type() 查看类型, id()=hashCode,</p>
-</blockquote>
-<ul>
-<li>==: value equality</li>
-<li>is: reference equality<blockquote>
-<p>is是==加上两个对象的位置是一样<br>== isinstance(some_object, (int, float)) &amp;&amp; value</p>
-</blockquote>
-</li>
-</ul>
-<p>None表示不是对象？什么时候会碰到？？</p>
-<blockquote>
-<p>比如函数参数时，什么都没有传递过来，都是有默认值的情况！！！<br>表示空对象, 类型是NoneType, 值是为空<br>if(None) =False // 一般是None的话，最好事先说出。<br>True和Flase类型也跟None不一样，他们是bool类型</p>
-</blockquote>
-<p>NULL: 表示空字符，str</p>
-<p>“”:<br>0:<br>False:<br>True: </p>
-<h4 id="3-1-2-值和引用"><a href="#3-1-2-值和引用" class="headerlink" title="3.1.2 值和引用"></a>3.1.2 值和引用</h4><ul>
-<li><p>值类型: 数值、字符串、元组(注意这里是元组)</p>
-<blockquote>
-<p>即只能自己改自己，不能因为赋值就改变自己，因为赋值它始终是产生了一个新的内存地址</p>
-</blockquote>
-</li>
-<li><p>引用类型： 列表、集合、字典</p>
-<blockquote>
-<p>本身允许被改变</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="3-1-3-and-or替代了-amp-amp-amp-依然是按位操作，-它的优先级始终是小于比较，大于赋值的"><a href="#3-1-3-and-or替代了-amp-amp-amp-依然是按位操作，-它的优先级始终是小于比较，大于赋值的" class="headerlink" title="3.1.3 and, or替代了&amp;&amp;, ||;  &amp;,|依然是按位操作， 它的优先级始终是小于比较，大于赋值的"></a>3.1.3 and, or替代了&amp;&amp;, ||;  &amp;,|依然是按位操作， 它的优先级始终是小于比较，大于赋值的</h4><blockquote>
-<p>python中int之间的and, or; 始终是按照先将其转化为bool类型，然后按照实际的and,or判断逻辑，不行则返回即返回值</p>
-</blockquote>
-<h4 id="3-1-4"><a href="#3-1-4" class="headerlink" title="3.1.4"></a>3.1.4</h4><ul>
-<li>可执行的伪代码</li>
-<li>使用缩进而不是括号</li>
-<li>万物皆可对象</li>
-<li>动态引用，强类型</li>
-<li>鸭子类型，不关注具体类型，而是关注能做什么</li>
-<li>属性和方法<ul>
-<li>getattr(a, attr)(x): 反射，属于强类型</li>
-</ul>
-</li>
-<li>可变 vs 不可变</li>
-<li>单值，即标量类型<ul>
-<li>None</li>
-<li>str</li>
-<li>bytes</li>
-<li>float</li>
-<li>bool</li>
-<li>int</li>
-</ul>
-</li>
-<li>数值类型<ul>
-<li>**, 平方</li>
-<li>7.2324</li>
-<li>6.78e-5</li>
-<li>3 / 2: 实际的除法</li>
-<li>3 // 2: 整除</li>
-</ul>
-</li>
-<li>字符串<ul>
-<li>‘, “, “””</li>
-<li>r’ ‘,  “\“  字面值和转义</li>
-<li>不可变的，即s[1]=2是错误的。<ul>
-<li>hash(): 可行；</li>
-<li>=：产生一个新的对象</li>
-</ul>
-</li>
-<li>基本操作<ul>
-<li>长度 len()</li>
-<li>清空 str=””</li>
-<li>判断某种属性<ul>
-<li>isalnum() // 数字和单词</li>
-<li>isalpha() // 单词</li>
-<li>isdecimal() // 数字 byte</li>
-<li>islower() // 小写</li>
-</ul>
-</li>
-<li>字母相关操作<ul>
-<li>lower()</li>
-<li>captialize()</li>
-<li>upper()</li>
-</ul>
-</li>
-<li>常见操作<ul>
-<li>查找<ul>
-<li>次数， count(substr,start, end)</li>
-<li>位置<ul>
-<li>index(str, ) rindex  // 异常</li>
-<li>find(str, ) rfind // lower,  -1</li>
-<li>endswith, startswith</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>去空格<ul>
-<li>strip(),  rstrip()</li>
-</ul>
-</li>
-<li>划分为列表： split,  rsplit</li>
-<li>替换， replace(A, B)</li>
-<li>合并两个字符串<ul>
-<li>join</li>
-</ul>
-</li>
-<li>格式化<ul>
-<li>{0:.2f}, {0:s}, {2:d}</li>
-</ul>
-</li>
-<li>encode, decode</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-2-元组-集合-列表-字典"><a href="#3-2-元组-集合-列表-字典" class="headerlink" title="3.2. 元组(), 集合{}, 列表[], 字典{}"></a>3.2. 元组(), 集合{}, 列表[], 字典{}</h3><h4 id="3-2-1-list"><a href="#3-2-1-list" class="headerlink" title="3.2.1 list []"></a>3.2.1 list []</h4><ul>
-<li>长度<blockquote>
-<p>特别地，长度一般是有多种方法，具体哪种一般来说看源代码怎么定义的，对于Tree结构，习惯性地包括定义size,那么使用size方法绝对是最优秀的</p>
-</blockquote>
-<ul>
-<li><strong>len</strong>方法</li>
-</ul>
-</li>
-<li>插入<ul>
-<li>尾部， apppend</li>
-<li>任意， insert(index, value) </li>
-</ul>
-</li>
-<li>删除<ul>
-<li>尾部， pop()</li>
-<li>任意， del li[index]</li>
-<li>值， remove(value)</li>
-</ul>
-</li>
-<li>查找<ul>
-<li>单点查找<ul>
-<li>是否存在 in</li>
-<li>index:  li.index(value)</li>
-<li>value:   li[index]</li>
-</ul>
-</li>
-<li>范围查找<ul>
-<li>d[start:end:step] // 可为负</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>合并list<ul>
-<li>+性能低</li>
-<li>extend(list2)</li>
-</ul>
-</li>
-<li>其他<ul>
-<li>li.sort(key=) // 原地排序</li>
-<li>sorted(li) // 返回副本</li>
-<li>reversed</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>允许范围查找，赋值，删除，即切片</p>
-</blockquote>
-<h4 id="3-2-2-dict"><a href="#3-2-2-dict" class="headerlink" title="3.2.2 dict {}"></a>3.2.2 dict {}</h4><blockquote>
-<p>key必须是可以hashtable的数据，即唯一性, 可以通过hash来检验; 一般来说只有值类型可哈希<br><strong>doc</strong> , 查看文档中的使用说明，输入与输出<br>isinstance(1, set) 查看是否是需要的类型</p>
-</blockquote>
-<ul>
-<li><p>插入</p>
-<ul>
-<li>set(key, defalut) // 存在不改变值<blockquote>
-<p>可加后续操作 set(key, default).appende(key)</p>
-</blockquote>
-</li>
-<li>di[key]=value  // 存在改变值</li>
-</ul>
-</li>
-<li><p>删除</p>
-<ul>
-<li>del d[key]</li>
-<li>di.pop(key) // 返回当前元素</li>
-</ul>
-</li>
-<li><p>查看</p>
-<ul>
-<li>存在： in di // 默认在keys()中查看</li>
-<li>di[key] // KeyError 异常 </li>
-<li>do.get(key, default_value) // 不存在返回特定的值</li>
-</ul>
-</li>
-<li><p>合并dict</p>
-<ul>
-<li>update(di2)  // 完全舍弃旧值</li>
-</ul>
-</li>
-<li><p>输出</p>
-<ul>
-<li>di.keys() // Iterable类型</li>
-<li>di.values()</li>
-</ul>
-</li>
-<li><p>由两个列表创建</p>
-<ul>
-<li>di = {k:v  for k,v in  zip(list1, list2)}  // 会吞并重复元素</li>
-<li>di = dict(zip(list1, list2))<blockquote>
-<p>li = list(zip(list1, list2)) // [( ), ( )] 此时内部为元组</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>分解为两个列表</p>
-<ul>
-<li>list1, list2 = dict.keys(), dict.values() // python3是对应的顺序<blockquote>
-<p>list1, list2 = zip(*li)  // li为列表时</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>一些进一步简化的操作</p>
-<ul>
-<li>defaultdict // 可设置value默认值<blockquote>
-<p>from collections import defaultdict<br>by_letter=defaultdict(list) // 中间传入的为类型</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>一个很神奇的现象, di = {1:2, 2:5} ci=di</p>
-<ol>
-<li>di = {} ,  ci =&gt; {1:2, 2:5}</li>
-<li>di[1]=5  ci[1]=&gt;5</li>
-</ol>
-</blockquote>
-<p><font color="red">defaultdict</font></p>
-<blockquote>
-<p>可以用来指定value的类型</p>
-</blockquote>
-<h4 id="3-2-3-集合-set"><a href="#3-2-3-集合-set" class="headerlink" title="3.2.3 集合 set{}"></a>3.2.3 集合 set{}</h4><blockquote>
-<p>特殊的字典，只有健没有值; 同样不可重复.<br>没有特定的位置性.  像元组则是序列数据，即可重复出现</p>
-</blockquote>
-<ul>
-<li>插入： add(x)</li>
-<li>删除： remove(x)</li>
-<li>清空： clear()</li>
-<li>合并集合： a.update({1,2})</li>
-<li>清楚首元素： a.pop() // 默认最小元素， 可以做堆</li>
-<li>两个集合的运算<ul>
-<li>A是B的子集： A.issubset(B)</li>
-<li>A是B的父集： A.issuperset(B)</li>
-<li>并集<ul>
-<li>|</li>
-<li>union</li>
-</ul>
-</li>
-<li>交集<ul>
-<li>&amp;</li>
-<li>intersection</li>
-</ul>
-</li>
-<li>差集， -,  不够减为空</li>
-<li>异或 ^</li>
-<li>支持 &amp;=</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-2-4-推导式"><a href="#3-2-4-推导式" class="headerlink" title="3.2.4 推导式"></a>3.2.4 推导式</h4><ul>
-<li><p>list </p>
-</li>
-<li><p>tuple: !!! 有个特别好的特性就是generator, 即满足惰性求值; 而且是值类型</p>
-<blockquote>
-<p>所以这里得到的结果不是tuple类型，而是generator</p>
-</blockquote>
-</li>
-<li><p>{} 结果两种</p>
-<ul>
-<li>dict</li>
-<li>set</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-2-5-复制"><a href="#3-2-5-复制" class="headerlink" title="3.2.5  复制"></a>3.2.5  复制</h4><ul>
-<li>copy只复制一层</li>
-<li>深度复制<blockquote>
-<p>import copy<br>di = copy.deepcopy(my_dict)</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="3-2-6-一些好的方法"><a href="#3-2-6-一些好的方法" class="headerlink" title="3.2.6 一些好的方法"></a>3.2.6 一些好的方法</h4><ul>
-<li><strong>mro_</strong> ：动态类型， 判断属于哪些类型</li>
-<li>isinstance(A, type): 判断是否属于某个类型</li>
-<li>if,  <strong>len</strong>, 查看是否为0,  and都是转变为bool类型来做</li>
-<li><strong>doc</strong>: 查看基本的函数输入，输出文档</li>
-<li>dir(): 查看所拥有的方法</li>
-</ul>
-<h3 id="3-3-语句"><a href="#3-3-语句" class="headerlink" title="3.3 语句"></a>3.3 语句</h3><ul>
-<li>if A: pass  elif: pass else: pass</li>
-<li>while A: pass</li>
-<li>for i in range(2):</li>
-<li>try:   except Exception:  finally<h3 id="3-4-函数"><a href="#3-4-函数" class="headerlink" title="3.4 函数"></a>3.4 函数</h3></li>
-</ul>
-<h4 id="3-4-1-基本"><a href="#3-4-1-基本" class="headerlink" title="3.4.1 基本"></a>3.4.1 基本</h4><ul>
-<li>参数<ul>
-<li>顺序性， 有默认值的放在最后</li>
-<li><em>args, *</em>kwargs  默认为None</li>
-<li>可为函数</li>
-<li>字典式指定值<blockquote>
-<p>无参数时，为None</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>变量： 严格作用域</li>
-<li>返回值：<ul>
-<li>多值</li>
-<li>字典</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-4-2-匿名函数"><a href="#3-4-2-匿名函数" class="headerlink" title="3.4.2 匿名函数"></a>3.4.2 匿名函数</h4><p><code>lambda paras: return_value</code><br><code>lambda x,y : x+y</code></p>
-<blockquote>
-<p>可以引用在任何需要使用函数作为参数的情况中<br>如 map,  reduce, sort<br>reduce 还是不大好理解</p>
-</blockquote>
-<h4 id="3-4-3-柯里化"><a href="#3-4-3-柯里化" class="headerlink" title="3.4.3 柯里化"></a>3.4.3 柯里化</h4><p>部分参数应用<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add_number = lambda x,y: x+y</span><br><span class="line">from functools import partial</span><br><span class="line">add_five = partial(add_numbers, 5)  // 相比于默认参数，是动态默认参数</span><br></pre></td></tr></table></figure></p>
-<h4 id="3-4-4-生成器"><a href="#3-4-4-生成器" class="headerlink" title="3.4.4 生成器"></a>3.4.4 生成器</h4><p> generaotr 惰性求值</p>
-<ul>
-<li><p>return =&gt; yeild</p>
-</li>
-<li><p>gen = ( )</p>
-<h4 id="3-4-5-itertools模块"><a href="#3-4-5-itertools模块" class="headerlink" title="3.4.5 itertools模块"></a>3.4.5 itertools模块</h4><blockquote>
-<p>用于许多常见数据算法的生成器</p>
-</blockquote>
-</li>
-</ul>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubGlhb3h1ZWZlbmcuY29tL3dpa2kvMTAxNjk1OTY2MzYwMjQwMC8xMDE3NzgzMTQ1OTg3MzYw" title="https://www.liaoxuefeng.com/wiki/1016959663602400/1017783145987360">https://www.liaoxuefeng.com/wiki/1016959663602400/1017783145987360<i class="fa fa-external-link"></i></span></p>
-<ul>
-<li><p>combinations(, k): 产生组合数</p>
-</li>
-<li><p>permutations(): 产生排列数</p>
-</li>
-<li><p>groupby, 将相同的字符串给弄出来</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for key, group in itertools.groupby(&apos;AAABBBCCAAA&apos;):</span><br><span class="line">...     print(key, list(group))</span><br><span class="line">...</span><br><span class="line">A [&apos;A&apos;, &apos;A&apos;, &apos;A&apos;]</span><br><span class="line">B [&apos;B&apos;, &apos;B&apos;, &apos;B&apos;]</span><br><span class="line">C [&apos;C&apos;, &apos;C&apos;]</span><br><span class="line">A [&apos;A&apos;, &apos;A&apos;, &apos;A&apos;]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>chain(iter1, iter2[,..]): 串联多个iter</p>
-</li>
-<li><p>repeat(‘A’,n): 重复n次</p>
-</li>
-<li><p>cycle(“ABC”): 循环，直到ctrl+c退出 </p>
-<h4 id="3-4-6-字节、位运算"><a href="#3-4-6-字节、位运算" class="headerlink" title="3.4.6 字节、位运算"></a>3.4.6 字节、位运算</h4><p>(n &amp; 0x3f3f3) &gt;&gt;1: 人可用</p>
-</li>
-</ul>
-<h3 id="3-5-类"><a href="#3-5-类" class="headerlink" title="3.5 类"></a>3.5 类</h3><ul>
-<li>命名特点<ul>
-<li>属性: 名词</li>
-<li>方法：动词, 注意要加括号</li>
-<li></li>
-</ul>
-</li>
-</ul>
-<h3 id="3-6-其他模块"><a href="#3-6-其他模块" class="headerlink" title="3.6 其他模块"></a>3.6 其他模块</h3><h4 id="3-6-1-正则表达式"><a href="#3-6-1-正则表达式" class="headerlink" title="3.6.1 正则表达式"></a>3.6.1 正则表达式</h4><ul>
-<li>模式: r”  “<ul>
-<li>替换：str = re.sub(origin_str, res_str, str)</li>
-<li>匹配首个结果 re.match(, test) None(False)</li>
-<li>划分 li = re.split(r’ ‘,str)</li>
-<li>分组 li = re.group(r’ ‘, str)  //group(0)为原始, 1-k为分组结果</li>
-</ul>
-</li>
-<li>方法<ul>
-<li>单个字母匹配<ul>
-<li>\d 数字</li>
-<li>\s 空格</li>
-<li>\w 字母或数字</li>
-<li>. 任意</li>
-<li>0<del>9,a</del>z 特别</li>
-<li>. 转义， 匹配原字符</li>
-</ul>
-</li>
-<li>次数<ul>
-<li>a  1次</li>
-<li>a+ &gt;=1</li>
-<li>a* &gt;=0</li>
-<li>a{n} n次</li>
-<li>a{n,m} n~m次</li>
-</ul>
-</li>
-<li>特别<ul>
-<li>^\d: 指定必须从数字开头</li>
-<li>\d$: 指定必须数字结尾</li>
-</ul>
-</li>
-<li>范围<ul>
-<li>[ABC]: A,B,C任意模式</li>
-<li>(A|B)： 两个可选<blockquote>
-<p>() 子表达式的开始和结束，在分组时起到特别的作用，一个括号表示一个group</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>特别说明：正则表达式匹配为贪婪模式</li>
-</ul>
-<h4 id="3-6-2-文件模块"><a href="#3-6-2-文件模块" class="headerlink" title="3.6.2 文件模块"></a>3.6.2 文件模块</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i in open(path): // i默认有行结束符，记住用rstrip()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>f.read(121)</p>
-</li>
-<li><p>f.tell()</p>
-</li>
-<li><p>f.seek(3): 移动指针到指定字节</p>
-</li>
-<li><p>模式： r, w, a, r+, b, U</p>
-</li>
-</ul>
-<h4 id="3-6-3-collections"><a href="#3-6-3-collections" class="headerlink" title="3.6.3 collections"></a>3.6.3 collections</h4><ul>
-<li><p>namedtuple</p>
-<blockquote>
-<p>为tuple的每一项起名字</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from collections import namedtuple</span><br><span class="line">Point = namedtuple(&apos;Point&apos;,[&apos;x&apos;,&apos;y&apos;])</span><br><span class="line">p = Point(1,2)</span><br><span class="line">p.x  # 1</span><br><span class="line">p.y # 2</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>deque</p>
-<blockquote>
-<p>list支持的太过分, deque缩小限制，只允许两端插入和删除</p>
-</blockquote>
-<ul>
-<li>append, appendleft</li>
-<li>pop , popleft</li>
-</ul>
-</li>
-<li><p>defaultdict</p>
-<blockquote>
-<p>设置默认的值<br>dd = defaultdict(lambda: “N/A”)</p>
-</blockquote>
-</li>
-<li><p>OrderedDict</p>
-<blockquote>
-<p> 保证先进先出的顺序，可以当做队列用</p>
-</blockquote>
-</li>
-<li><p>ChainMap</p>
-<blockquote>
-<p>将多个dict, 合为一个逻辑dict</p>
-</blockquote>
-<h2 id="4-优化"><a href="#4-优化" class="headerlink" title="4. 优化"></a>4. 优化</h2></li>
-</ul>
-<p><span class="exturl" data-url="aHR0cHM6Ly9weXRob24td2ViLWd1aWRlLnJlYWR0aGVkb2NzLmlvL3poL2xhdGVzdC9pZGlvbS9pZGlvbS5odG1sI3RydWUtZmFsc2Utbm9uZQ==" title="https://python-web-guide.readthedocs.io/zh/latest/idiom/idiom.html#true-false-none">https://python-web-guide.readthedocs.io/zh/latest/idiom/idiom.html#true-false-none<i class="fa fa-external-link"></i></span></p>
-<h3 id="a-链式：1-lt-a-lt-7"><a href="#a-链式：1-lt-a-lt-7" class="headerlink" title="a. 链式：1&lt;a&lt;7"></a>a. 链式：1&lt;a&lt;7</h3><h3 id="b-b-a-if-a-gt-b-else-b"><a href="#b-b-a-if-a-gt-b-else-b" class="headerlink" title="b. b=a if a&gt;b else b"></a>b. b=a if a&gt;b else b</h3><h3 id="c-x-y-y-x"><a href="#c-x-y-y-x" class="headerlink" title="c. x,y=y,x"></a>c. x,y=y,x</h3><h3 id="d-str-”myname-my-age-”-format-name-age"><a href="#d-str-”myname-my-age-”-format-name-age" class="headerlink" title="d. str=”myname:{} my age {}”.format(name, age)"></a>d. str=”myname:{} my age {}”.format(name, age)</h3><h3 id="e-list-dict使用"><a href="#e-list-dict使用" class="headerlink" title="e. list, dict使用[], {}"></a>e. list, dict使用[], {}</h3><p>odd_list=[e for e in mulist if e%2==1]</p>
-<p>user_list = [{‘name’: ‘lucy’, ‘email’: ‘lucy@g.com’}, {‘name’: ‘lily’, ‘email’: ‘lily@g.com’}]<br>user_email = {user[‘name’]:user[‘email’] for user in user_list if ‘email’ in user}</p>
-<h3 id="f-if-None-特别说明"><a href="#f-if-None-特别说明" class="headerlink" title="f. if None 特别说明"></a>f. if None 特别说明</h3><p>if() : pass 实际调用的是l.<strong>len</strong>()==0</p>
-<p>if something is None:  // None是单例对象<br>// 注意</p>
-<h3 id="g-index变量访问-enumerate"><a href="#g-index变量访问-enumerate" class="headerlink" title="g. index变量访问, enumerate;"></a>g. index变量访问, enumerate;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for index,  element int enumerate(my_container)</span><br></pre></td></tr></table></figure>
-
-<h3 id="h-避免使用可变变量作为函数参数的默认初始化值-None"><a href="#h-避免使用可变变量作为函数参数的默认初始化值-None" class="headerlink" title="h. 避免使用可变变量作为函数参数的默认初始化值, None"></a>h. 避免使用可变变量作为函数参数的默认初始化值, None</h3><p>// 可以使用None作为可变对象的占位符</p>
-<h3 id="i-函数参数即函数"><a href="#i-函数参数即函数" class="headerlink" title="i. 函数参数即函数"></a>i. 函数参数即函数</h3><p>// 一切都可对象，可以把参数作为函数使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import operator as op</span><br><span class="line">def print_table(operator):</span><br><span class="line">    for x in range(1, 3):</span><br><span class="line">        for y in range(1, 3):</span><br><span class="line">            print(str(operator(x, y)) + &apos;\n&apos;)</span><br><span class="line"></span><br><span class="line">for operator in (op.add, op.sub, op.mul, op.div):</span><br><span class="line">    print_table(operator)</span><br></pre></td></tr></table></figure>
-
-<h3 id="j-防御式编程-不断检查参数"><a href="#j-防御式编程-不断检查参数" class="headerlink" title="j. 防御式编程, 不断检查参数"></a>j. 防御式编程, 不断检查参数</h3><h3 id="k-dict实现switch-case"><a href="#k-dict实现switch-case" class="headerlink" title="k. dict实现switch..case.."></a>k. dict实现switch..case..</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># bad</span><br><span class="line">def apply_operation(left_operand, right_operand, operator):</span><br><span class="line">    if operator == &apos;+&apos;:</span><br><span class="line">        return left_operand + right_operand</span><br><span class="line">    elif operator == &apos;-&apos;:</span><br><span class="line">        return left_operand - right_operand</span><br><span class="line">    elif operator == &apos;*&apos;:</span><br><span class="line">        return left_operand * right_operand</span><br><span class="line">    elif operator == &apos;/&apos;:</span><br><span class="line">        return left_operand / right_operand</span><br><span class="line"># good</span><br><span class="line">def apply_operation(left_operand, right_operand, operator):</span><br><span class="line">    import operator as op</span><br><span class="line">    operator_mapper = &#123;&apos;+&apos;: op.add, &apos;-&apos;: op.sub, &apos;*&apos;: op.mul, &apos;/&apos;: op.truediv&#125;</span><br><span class="line">    return operator_mapper[operator](left_operand, right_operand)</span><br></pre></td></tr></table></figure>
-
-<h3 id="l-namedtuple"><a href="#l-namedtuple" class="headerlink" title="l. namedtuple ?"></a>l. namedtuple ?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># bad</span><br><span class="line">rows = [(&apos;lily&apos;, 20, 2000), (&apos;lucy&apos;, 19, 2500)]</span><br><span class="line">for row in rows:</span><br><span class="line">    print &apos;&#123;&#125;`age is &#123;&#125;, salary is &#123;&#125; &apos;.format(row[0], row[1], row[2])</span><br><span class="line"></span><br><span class="line"># good</span><br><span class="line">from collections import  namedtuple</span><br><span class="line">Employee = namedtuple(&apos;Employee&apos;, &apos;name, age, salary&apos;)</span><br><span class="line">for row in rows:</span><br><span class="line">    employee = Employee._make(row)</span><br><span class="line">    print &apos;&#123;&#125;`age is &#123;&#125;, salary is &#123;&#125; &apos;.format(employee.name, employee.age, employee.salary)</span><br></pre></td></tr></table></figure>
-
-<h3 id="m-isinstance"><a href="#m-isinstance" class="headerlink" title="m. isinstance"></a>m. isinstance</h3><h3 id="n-with"><a href="#n-with" class="headerlink" title="n. with"></a>n. with</h3><h3 id="o-yeild关键字-惰性求值"><a href="#o-yeild关键字-惰性求值" class="headerlink" title="o. yeild关键字, 惰性求值"></a>o. yeild关键字, 惰性求值</h3><p>([ expression ]) // 本身就是惰性求值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># bad</span><br><span class="line">def f():</span><br><span class="line">    # ...</span><br><span class="line">    return biglist</span><br><span class="line"></span><br><span class="line"># good</span><br><span class="line">def f():</span><br><span class="line">    # ...</span><br><span class="line">    for i in biglist:</span><br><span class="line">        yield i</span><br></pre></td></tr></table></figure>
-
-<h3 id="p-Wraper"><a href="#p-Wraper" class="headerlink" title="p. Wraper"></a>p. Wraper</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">from functools import wraps</span><br><span class="line"></span><br><span class="line">ef beg(target_function):</span><br><span class="line">    @wraps(target_function)</span><br><span class="line">    def wrapper(*args, **kwargs):</span><br><span class="line">        msg, say_please = target_function(*args, **kwargs)</span><br><span class="line">        if say_please:</span><br><span class="line">            return &quot;&#123;&#125; &#123;&#125;&quot;.format(msg, &quot;Please! I am poor :(&quot;)</span><br><span class="line">        return msg</span><br><span class="line"></span><br><span class="line">    return wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@beg</span><br><span class="line">def say(say_please=False):</span><br><span class="line">    msg = &quot;Can you buy me a beer?&quot;</span><br><span class="line">    return msg, say_please</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-好用的工具"><a href="#5-好用的工具" class="headerlink" title="5. 好用的工具"></a>5. 好用的工具</h2><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L21vcXNpZW4vYXJ0aWNsZS9kZXRhaWxzLzc5NTQ0ODc2" title="https://blog.csdn.net/moqsien/article/details/79544876">https://blog.csdn.net/moqsien/article/details/79544876<i class="fa fa-external-link"></i></span></p>
-<h2 id="6-一些其他"><a href="#6-一些其他" class="headerlink" title="6. 一些其他"></a>6. 一些其他</h2><h3 id="6-1-二分搜索和维护已排序的列表"><a href="#6-1-二分搜索和维护已排序的列表" class="headerlink" title="6.1 二分搜索和维护已排序的列表"></a>6.1 二分搜索和维护已排序的列表</h3><p>bitsect: 二分搜索</p>
-<p>bitsect.bitsect(c, 2) // 搜索插入的位置<br>bitsect.insort(c,5) // 插入元素</p>
-<h3 id="6-2-排序"><a href="#6-2-排序" class="headerlink" title="6.2 排序"></a>6.2 排序</h3><p>a.sort(key=len)<br>sorted(a)</p>
-<h3 id="6-3-zip-将多个列表、元组或其它序列成对组合为一个元组列表-zip-list-解压"><a href="#6-3-zip-将多个列表、元组或其它序列成对组合为一个元组列表-zip-list-解压" class="headerlink" title="6.3 zip: 将多个列表、元组或其它序列成对组合为一个元组列表; zip(*list), 解压"></a>6.3 zip: 将多个列表、元组或其它序列成对组合为一个元组列表; zip(*list), 解压</h3><p>seq1 = [‘foo’, ‘bar’, ‘baz’]<br>seq2 = [‘a’, ‘b’, ‘c’]<br>zip(seq1, seq2)</p>
-<blockquote>
-<p>type zip</p>
-</blockquote>
-<p>a = list(zip(seq1,seq2))</p>
-<p>解压<br>seq1, seq2 = zip(*a)</p>
-<h3 id="6-4-reversed翻转"><a href="#6-4-reversed翻转" class="headerlink" title="6.4 reversed翻转"></a>6.4 reversed翻转</h3><p>另外，注意range也是一种类型</p>
-<p>关于relu的倒数可以直接用</p>
-<h2 id="7-关于Python解释器"><a href="#7-关于Python解释器" class="headerlink" title="7. 关于Python解释器"></a>7. 关于Python解释器</h2><ol>
-<li>脚本语言 vs 编译语言</li>
-</ol>
-<p>首先，脚本语言需要能够实时运行，与编译语言来说有何不同？ 脚本语言需要进行保存上下文变量</p>
-<blockquote>
-<p>特别地， C vs Python<br>    1. 没有类型： 在实现阶段，那么需要进行多层的类型匹配。这会花费大量的时间<br>    2. 函数参数？ python中对参数是如何进行解释的？ 如果按照python来参数是进行怎么解释的<br>    3. ？</p>
-</blockquote>
-<ol start="2">
-<li>解释器<br>？ 解释器是如何实现的<ul>
-<li>CPython: 使用C语言对python进行解释</li>
-<li>IPython: 在CPython的基础上向上封装了一些高级接口<blockquote>
-<p>另外，还有一些其他的接口，比如JPython, 用jav来做</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="8-关于其他"><a href="#8-关于其他" class="headerlink" title="8. 关于其他"></a>8. 关于其他</h2><p> 当显示Microsoft Visual C++ 14.0 is required.时，可到以下网站进行安装<br> <span class="exturl" data-url="aHR0cHM6Ly93d3cubGZkLnVjaS5lZHUvfmdvaGxrZS9weXRob25saWJzLyNweWdyYXBodml6" title="https://www.lfd.uci.edu/~gohlke/pythonlibs/#pygraphviz">https://www.lfd.uci.edu/~gohlke/pythonlibs/#pygraphviz<i class="fa fa-external-link"></i></span></p>
-<p> 查看某个属性或者方法是否可以调用？<br> hasattr(obj, attr)</p>
-<p> callable(getattr(obj, funcName))</p>
-<p> numpy注意使用浮点数</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -3022,7 +2184,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-count">110</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
