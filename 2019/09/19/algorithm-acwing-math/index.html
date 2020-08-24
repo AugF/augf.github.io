@@ -72,17 +72,19 @@
 </script>
 
   <meta name="description" content="1. 数论1.1 质数，合数从2开始的整数的定义在大于1的整数中，如果只包含1和本身这两个约数，就变成质数，就就叫做素数  质数的判定——试除法  1–n-1 d | n,  n/d | n,  d&amp;lt;=n/dsqrt(n)   分解质因数  只需要从小到大模拟logn-sqrt(n) 思想： 当碰见第一个质数时，它肯定是，因为前面都不成立，说明它与前面的任意数都不互质。然后怎么搞，我把目标数">
-<meta name="keywords" content="acwing,algorithm,math">
+<meta name="keywords" content="algorithm,acwing,math">
 <meta property="og:type" content="article">
 <meta property="og:title" content="algorithm acwing math">
 <meta property="og:url" content="https://augf.github.io/2019/09/19/algorithm-acwing-math/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
 <meta property="og:description" content="1. 数论1.1 质数，合数从2开始的整数的定义在大于1的整数中，如果只包含1和本身这两个约数，就变成质数，就就叫做素数  质数的判定——试除法  1–n-1 d | n,  n/d | n,  d&amp;lt;=n/dsqrt(n)   分解质因数  只需要从小到大模拟logn-sqrt(n) 思想： 当碰见第一个质数时，它肯定是，因为前面都不成立，说明它与前面的任意数都不互质。然后怎么搞，我把目标数">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-19T04:15:20.373Z">
+<meta property="og:image" content="https://pic.leetcode-cn.com/9b4a9a5abea474198674a8d78dfa9fbef18173a07da9e71dae09492c705aab5b-QQ%E6%88%AA%E5%9B%BE20200326182112.png">
+<meta property="og:updated_time" content="2020-03-26T10:24:16.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="algorithm acwing math">
 <meta name="twitter:description" content="1. 数论1.1 质数，合数从2开始的整数的定义在大于1的整数中，如果只包含1和本身这两个约数，就变成质数，就就叫做素数  质数的判定——试除法  1–n-1 d | n,  n/d | n,  d&amp;lt;=n/dsqrt(n)   分解质因数  只需要从小到大模拟logn-sqrt(n) 思想： 当碰见第一个质数时，它肯定是，因为前面都不成立，说明它与前面的任意数都不互质。然后怎么搞，我把目标数">
+<meta name="twitter:image" content="https://pic.leetcode-cn.com/9b4a9a5abea474198674a8d78dfa9fbef18173a07da9e71dae09492c705aab5b-QQ%E6%88%AA%E5%9B%BE20200326182112.png">
   <link rel="canonical" href="https://augf.github.io/2019/09/19/algorithm-acwing-math/">
 
 
@@ -201,7 +203,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">70</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">71</span></a>
 
   </li>
       
@@ -214,7 +216,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">75</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">74</span></a>
 
   </li>
       
@@ -227,7 +229,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">111</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">109</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -312,11 +314,19 @@
                 
               
 
-              <time title="创建时间：2019-09-19 12:14:45 / 修改时间：12:15:20" itemprop="dateCreated datePublished" datetime="2019-09-19T12:14:45+08:00">2019-09-19</time>
+              <time title="创建时间：2019-09-19 12:14:45" itemprop="dateCreated datePublished" datetime="2019-09-19T12:14:45+08:00">2019-09-19</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-26 18:24:16" itemprop="dateModified" datetime="2020-03-26T18:24:16+08:00">2020-03-26</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -409,11 +419,11 @@
 </ul>
 </li>
 </ul>
-<p>线性筛法理解：<br>对于每一个n，它会执行。<br>如果是合数，将小于它的最小质数的乘积，删掉。<br>如果是质数，会先加入，然后，删掉它乘以它的质数。</p>
-<p>有两个问题？为什么筛到最小质数就可以？<br>因为将质因子从小到大排序，肯定一定有序了。<br>只用筛到最小即可，因为其他的有后面大的在构造过程中就会删掉。<br>比如考虑： 2<em>3</em>3, 实际在9时就会筛掉<br>而 2<em>2</em>2, 会被2*4筛掉，所以不用担心某个质因子的个数很多的情况</p>
+<p>线性筛法理解：<br>对于每一个n，它会执行。<br>如果是合数，将小于它的最小质数的乘积，删掉。<br>如果是质数，会先加入，然后，删掉它乘以它的质数。<br>int<br>有两个问题？为什么筛到最小质数就可以？<br>因为将质因子从小到大排序，肯定一定有序了。<br>只用筛到最小即可，因为其他的有后面大的在构造过程中就会删掉。<br>比如考虑： 2<em>3</em>3, 实际在9时就会筛掉<br>而 2<em>2</em>2, 会被2*4筛掉，所以不用担心某个质因子的个数很多的情况</p>
 <p>用素数负责增加新的质因子的种类。</p>
 <p>为什么要到n/i即可？<br>为什么范围是n/i, 因为i%n, n/i %n,  当到达一定大的程度i会很大，此时只需要用小的质因子就可以了。<br>因为是取等于，如果是质因子可以将其筛掉；</p>
-<p>朴素筛法：未注意到合数可以分解为质因子之积的规律（自然数基本定理）<br>埃式筛法：简单地用加法来对质因子进行删除<br>线性筛法：使用了乘法的结论进一步对筛法进行了优化, 前面未保证唯一删去一个数数</p>
+<p>朴素筛法：未注意到合数可以分解为质因子之积的规律（自然数基本定理）<br>埃式筛法：简单地用加法来对质因子进行删除 n loglogn<br>线性筛法：使用了乘法的结论进一步对筛法进行了优化, i只会被它的最小质因子筛掉<br>当第一次出现i%primes[j]==0, 因为是从最小开始枚举，所以primes[j]一定是i<em>primes[j]的最小质因子<br>i % primes[j] != 0, 从小到大枚举，并且枚举0-primes[j], 所以prims[j]</em>i的质因子最小的一定是primes[j]</p>
+<p>为什么是n/i, 当数据范围变大的时候，枚举的数的数量其实没那么多，因为最小质因子变大了。<br>如何定的？一定会在i*primes[j] &lt;= n, 停下来<br>为什么不加j<cnt><br>i是合数，在其最小质因子处停下来<br>i是质数，在primes[j]=i的时候停下来，所以无论如何一定是满足条件的</cnt></p>
 <h2 id="1-2-约数"><a href="#1-2-约数" class="headerlink" title="1.2 约数"></a>1.2 约数</h2><p>一个数的约数是成对出现的 d % n, n/d % n</p>
 <ol>
 <li>试除法求约数<br>sqrt(n) 把每一步的时间复杂度都要计算一下</li>
@@ -674,7 +684,8 @@
 <blockquote>
 <p>100*10000</p>
 </blockquote>
-
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p><img src="https://pic.leetcode-cn.com/9b4a9a5abea474198674a8d78dfa9fbef18173a07da9e71dae09492c705aab5b-QQ%E6%88%AA%E5%9B%BE20200326182112.png" alt="QQ截图20200326182112.png"></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trailingZeroes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 2,5成对出现，才会产生一个0</span></span><br><span class="line">        <span class="comment">// 统计有多少个5, 因为2的个数远大于5的个数</span></span><br><span class="line">        <span class="keyword">return</span> helper(n);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123; <span class="comment">// n!中5的个数</span></span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">5</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> helper(n / <span class="number">5</span>) + n / <span class="number">5</span>; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -707,9 +718,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/acwing/" rel="tag"><i class="fa fa-tag"></i> acwing</a>
-            
               <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+            
+              <a href="/tags/acwing/" rel="tag"><i class="fa fa-tag"></i> acwing</a>
             
               <a href="/tags/math/" rel="tag"><i class="fa fa-tag"></i> math</a>
             
@@ -731,8 +742,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/09/19/algorithm-acwing-basic/" rel="prev" title="algorithm acwing basic">
-                  algorithm acwing basic <i class="fa fa-chevron-right"></i>
+                <a href="/2019/09/19/algorithm-acwing-basic/" rel="prev" title="基础算法">
+                  基础算法 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -789,7 +800,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-数论"><span class="nav-number">1.</span> <span class="nav-text">1. 数论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-质数"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 质数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-约数"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 约数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-组合计数"><span class="nav-number">2.</span> <span class="nav-text">2. 组合计数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-高斯消元"><span class="nav-number">3.</span> <span class="nav-text">3. 高斯消元</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-容斥原理"><span class="nav-number">4.</span> <span class="nav-text">4. 容斥原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">4.1.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-简单博弈"><span class="nav-number">5.</span> <span class="nav-text">5. 简单博弈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#额外"><span class="nav-number">6.</span> <span class="nav-text">额外</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-数论"><span class="nav-number">1.</span> <span class="nav-text">1. 数论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-质数"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 质数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-约数"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 约数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-组合计数"><span class="nav-number">2.</span> <span class="nav-text">2. 组合计数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-高斯消元"><span class="nav-number">3.</span> <span class="nav-text">3. 高斯消元</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-容斥原理"><span class="nav-number">4.</span> <span class="nav-text">4. 容斥原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">4.1.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-简单博弈"><span class="nav-number">5.</span> <span class="nav-text">5. 简单博弈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#额外"><span class="nav-number">6.</span> <span class="nav-text">额外</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">6.0.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">6.0.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -807,7 +818,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">109</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -820,7 +831,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-count">74</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -833,7 +844,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

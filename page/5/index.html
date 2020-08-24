@@ -200,7 +200,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">70</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">71</span></a>
 
   </li>
       
@@ -213,7 +213,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">75</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">74</span></a>
 
   </li>
       
@@ -226,7 +226,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">111</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">109</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -282,759 +282,6 @@
   
   
   <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/machinelearning-cornerstone-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/machinelearning-cornerstone-summary/" class="post-title-link" itemprop="url">machinelearning cornerstone summary</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:27:58 / 修改时间：12:33:17" itemprop="dateCreated datePublished" datetime="2019-09-19T12:27:58+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/" itemprop="url" rel="index"><span itemprop="name">machinelearning</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/machinelearning/cornerstone/" itemprop="url" rel="index"><span itemprop="name">cornerstone</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>what is ML?</p>
-<ol>
-<li>定义<br>人的过程，观察，学习到技能</li>
-</ol>
-<p>机器的过程，数据学习到技能</p>
-<p>技能即如何？</p>
-<ol start="2">
-<li>关键</li>
-</ol>
-<ul>
-<li>存在潜在的模式</li>
-<li>没有很简单的定义</li>
-<li>有足够的数据</li>
-</ul>
-<ol start="3">
-<li><p>应用场景<br>衣食住行</p>
-</li>
-<li><p>辨析<br>from f-&gt;ML-&gt;g: f为目标</p>
-</li>
-</ol>
-<p>ML vs DM： DM is interesting pattern, ML is find underlying pattern<br>ML vs AI: AI is 智能<br>ML vs Statistics: 统计是试图从以往数据中学习点什么出来</p>
-<ol start="5">
-<li>例子<br>PLA， Perceptron算法，线性感知机法，主要想法是进行<br>eg： 图形结合的方法找最优解<blockquote>
-<p>假设： 1. 问题具有最优解  2. 样本真实，没有噪声</p>
-</blockquote>
-</li>
-</ol>
-<p>实际问题</p>
-<ul>
-<li>算法怎么操作？</li>
-<li>算法的正确性分析——算法能达到最优解。<br>  是否存在线性可分的直线，如果存在，那么研究是否收敛到最优解。然后算法是否能停止。<blockquote>
-<p>收敛的分析，探究与最优解的接近程度，内积是一种方法<br>是否停止，即到达常数。</p>
-</blockquote>
-</li>
-<li>算法的时空复杂度分析： 对算法进行比较</li>
-</ul>
-<p>对于最优的算法，其返回结果必然是最优的。</p>
-<blockquote>
-<p>每个算法的假设空间是否是一样的呢？<br>每一个问题都有假设空间，即其中参数来确定假设空间。但是由于假设空间不一定与问题空间对应，所以不一定能得到问题空间的解</p>
-</blockquote>
-<blockquote>
-<p>这里是不是要看算法的类别？<br>对！</p>
-</blockquote>
-<p>思考<br>如果假设1，2不成立怎么办？<br>假设没有噪声，但不知道是否可学习？<br>寻找经验误差最小的。<br>此时，经验误差最小的难度是NP-hard.</p>
-<blockquote>
-<p>一种做法就是选择局部最优解来做。</p>
-</blockquote>
-<p>线性w^T形成的就只是线吗？</p>
-<blockquote>
-<p>对，只是线，这里其实是感知机模型，换句话说就只是所有样本点一起决定下的权值。<br>表示能力是否欠缺？<br>只有可以线性可分的数据集才可以用。</p>
-</blockquote>
-<p>PLA算法更新公式确实是改变了一定的角度，如何保证该改变的角度一定就引起来类别的转化？</p>
-<p>随机化算法是怎么做的？</p>
-<p>扩展：<br>假设不知道算法是否存在最优解，采用口袋算法，即<br>算法流程：<br>    step1 随机选择一个w<br>    step2 如果有错误样本进行一次修正<br>    step3 没有错误则停止，否则重复执行step2</p>
-<ol start="4">
-<li>分类</li>
-</ol>
-<ul>
-<li>输出空间<ul>
-<li>2</li>
-<li>多</li>
-<li>回归</li>
-<li>结构学习</li>
-</ul>
-</li>
-<li>资料<ul>
-<li>监督</li>
-<li>非监督</li>
-<li>半监督</li>
-<li>强化</li>
-</ul>
-</li>
-<li>学习<ul>
-<li>Batch</li>
-<li>online</li>
-<li>active</li>
-</ul>
-</li>
-<li>特征<ul>
-<li>concrete具体</li>
-<li>raw原始</li>
-<li>abstrut 过于抽象，编号信息</li>
-</ul>
-</li>
-</ul>
-<ol start="5">
-<li>学习的前提<br>需要假设存在目标，且目标是一定的<br>Learning impossible, adversarial</li>
-</ol>
-<p>于是在这里引入No Free Lunch, 目标不一定就无法进行学习，对！</p>
-<p>学习的目标不可知, 如何学习？<br>还好有样本，可以使用概率论的概念即抽样来学习。</p>
-<p>为什么可以学习？<br>利用的就是抽样。</p>
-<ul>
-<li><p>对应关系：<br>问题空间-&gt;假设空间</p>
-</li>
-<li><p>关注样本，需要好的样本</p>
-</li>
-</ul>
-<blockquote>
-<p>不好的样例和不好的事</p>
-</blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/deeplearning-cs231n/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eugene Wang">
-      <meta itemprop="description" content="Quick notes">
-      <meta itemprop="image" content="/images/default-avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AugF's Notes">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/19/deeplearning-cs231n/" class="post-title-link" itemprop="url">deeplearning cs231n</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-19 12:23:33 / 修改时间：12:24:46" itemprop="dateCreated datePublished" datetime="2019-09-19T12:23:33+08:00">2019-09-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/deeplearning/" itemprop="url" rel="index"><span itemprop="name">deeplearning</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/deeplearning/cs231n/" itemprop="url" rel="index"><span itemprop="name">cs231n</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><ol>
-<li>A brief history of computer vision<ul>
-<li>creatures -&gt; vision</li>
-<li>camera</li>
-<li>what is the vision processing<ul>
-<li>Original picture</li>
-<li>differntiated picture</li>
-<li>Feature points selected</li>
-</ul>
-</li>
-<li>MIT research<br>  <img src="asserts/1-stagesOfvisualRepresentation.png" alt><ul>
-<li>Inpute image<ul>
-<li>preceived intensities</li>
-</ul>
-</li>
-<li>Edge image<ul>
-<li>zero crossing, blobs, edges, bars, ends, virtual lines</li>
-</ul>
-</li>
-<li>2 1/2-D sketch<ul>
-<li>local surface orentation</li>
-</ul>
-</li>
-<li>3D </li>
-</ul>
-</li>
-<li>how to recognize and represent the world</li>
-<li>image segmentation: Jitendra Malik</li>
-<li>face detection</li>
-<li>1999-2000, momentum动量, ML,  adaBoost algorithm to do real-time face detection, 2001</li>
-<li>2006, digital camera a real-time face detector</li>
-<li>SIFT feature: match and the entire object   due to camera angles, occlusion, viewppoint, lighting</li>
-<li>Spatial pyramid matching: from different parts of the image and in different resolutions and put them together in a feature </li>
-<li>HoG Histogrm of Gradients</li>
-<li>imagenet</li>
-<li>SVM, AdaBoost,  overfiting: not enought training data, cannot generalize.  benchmarking  WordNet</li>
-<li>2009  ImageNet Large-Scale Visual Recognition Challenge</li>
-</ul>
-</li>
-<li>CS231n overview<ul>
-<li>Aims<ul>
-<li>image classification</li>
-<li>object detection</li>
-<li>action classification</li>
-<li>image captioning</li>
-</ul>
-</li>
-<li>Convolutional Neural Neteworks</li>
-<li>object relationships</li>
-<li>object attributes</li>
-<li>Our philosophy<ul>
-<li>Thorough and Detailed</li>
-<li>Practical</li>
-<li>State of the art</li>
-<li>Fun</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="2-Image-Classification-pipeline"><a href="#2-Image-Classification-pipeline" class="headerlink" title="2. Image Classification pipeline"></a>2. Image Classification pipeline</h1><p>python numpy tutorial</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NzMjMxbi9jczIzMW4uZ2l0aHViLmlvL2Jsb2IvbWFzdGVyL3B5dGhvbi1udW1weS10dXRvcmlhbC5tZA==" title="https://github.com/cs231n/cs231n.github.io/blob/master/python-numpy-tutorial.md">https://github.com/cs231n/cs231n.github.io/blob/master/python-numpy-tutorial.md<i class="fa fa-external-link"></i></span></p>
-<p>gce~tutoria ?<br>google compute engine</p>
-<ol>
-<li><p>cluster</p>
-</li>
-<li><p>attempts have been made</p>
-<ul>
-<li>find edges</li>
-<li>find corners -&gt;, &lt;-, <blockquote>
-<p>not scalerable</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>Neareast Neighbor</p>
-<ul>
-<li>train: memorize all data and labels O(1)</li>
-<li>predict: predict the label of the most similar training image O(N)<blockquote>
-<p>noisy  spurious<br><img src="asserts/2-1nn.png" alt><br>just training data, 把所有测试数据可能的分类填上去<br>k-nearest neighbors<br><img src="asserts/2-knn.png" alt><br>the white place 可能选哪个都可以，随机才</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ol>
-<p>L1: coordinate system is important</p>
-<blockquote>
-<p>you know what the coordinate system meaning</p>
-</blockquote>
-<p><img src="asserts/2-knn-distance_metric.png" alt><br>numpy的基本运算</p>
-<p><span class="exturl" data-url="aHR0cDovL3Zpc2lvbi5zdGFuZm9yZC5lZHUvdGVhY2hpbmcvY3MyMzFuLWRlbW9zL2tubi8=" title="http://vision.stanford.edu/teaching/cs231n-demos/knn/">http://vision.stanford.edu/teaching/cs231n-demos/knn/<i class="fa fa-external-link"></i></span></p>
-<p>why 图像是那样的????</p>
-<blockquote>
-<p>PRML必读</p>
-</blockquote>
-<ul>
-<li>Setting Hyperparameters</li>
-</ul>
-<p>pick the best training hyperparameters performs on validation?<br>and run once on the test data, then write in the paper</p>
-<p>cross valildation<br>Useful for small datasets, but not used too frequently in deep learning</p>
-<p>有个点自己理解错了，其实是看交叉验证集上的损失怎么样？如果交叉验证集上的损失没有连续操作多少次上升？ 或者达到终止条件，则选择该超参数</p>
-<p>不过，k-cross-validation的意思是用同样的超参数训练多次，然后得到验证集的平均损失，然后更新一次吗？</p>
-<p>因为本身更新公式是作用在损失函数上的</p>
-<p>validation to check how well</p>
-<p>same methodology for collecting the data,  go and partition it randomly</p>
-<p>时间序列分割<br>shift the problem</p>
-<p><img src="asserts/2-k-cross-validation.png" alt></p>
-<p>L2 distance is really not doing a very good job</p>
-<p>cover space densely  exponential growth<br>traning examples?</p>
-<p>knn不适用与图像分类<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYWlwcDA2MDcvYXJ0aWNsZS9kZXRhaWxzLzc3OTE1Mjk4" title="https://blog.csdn.net/chaipp0607/article/details/77915298">https://blog.csdn.net/chaipp0607/article/details/77915298<i class="fa fa-external-link"></i></span></p>
-<ul>
-<li>很差的测试效率</li>
-<li>整个图像的水平距离度量可能非常不直观</li>
-</ul>
-<blockquote>
-<p>计算距离的对象不可能是像素值，因为他不能从本质上反映出人对图像的认知，比如把一张图进行位移，人觉得是一类，但是计算结果距离很大。<br>所以knn计算的应该是一些描述子生成的特征。</p>
-</blockquote>
-<p>knn总结</p>
-<ol>
-<li>对于样本不平均问题，knn相比于其他监督学习算法容忍度更低。</li>
-<li>计算和存储开销大，在线学习效率低。</li>
-</ol>
-<p>改进</p>
-<ol>
-<li>解决样本不平衡问题</li>
-<li>提高分类效率</li>
-</ol>
-<p><img src="asserts/2-hard-cases-for-alinearclassifier.png" alt></p>
-<p>mutlimodal data: different regions of space</p>
-<p>229</p>
-<h1 id="3-some-concepts"><a href="#3-some-concepts" class="headerlink" title="3. some concepts"></a>3. some concepts</h1><h2 id="3-1-loss"><a href="#3-1-loss" class="headerlink" title="3.1 loss"></a>3.1 loss</h2><ul>
-<li>SVM loss:  $L_i = \sum_{j \ne y_i} max(s_j - s_{y_i} +1)$<br>$L = \frac{1}{N} \sum_{i=1}^N L_i$</li>
-</ul>
-<p>$max(1-yf(x))$: 在分类分割线附近进行鼓励</p>
-<blockquote>
-<p>care the correct is much greater than the incorrect scores</p>
-</blockquote>
-<p>loss function; how bad are different mistakes<br>square:  bad, very, very bad<br>hinge:  a litte wrong,  a better wrong</p>
-<p>损失函数总结<br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81ODg4MzA5NQ==" title="https://zhuanlan.zhihu.com/p/58883095">https://zhuanlan.zhihu.com/p/58883095<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>设置W, 来查看Loss</p>
-</blockquote>
-<p>W, 2W  the zero loss</p>
-<h2 id="3-2-regularization-term-encourages-the-model-to-somehow-pick-a-simple-W-R-W"><a href="#3-2-regularization-term-encourages-the-model-to-somehow-pick-a-simple-W-R-W" class="headerlink" title="3.2 regularization term: encourages the model to somehow pick a simple W $R(W)$"></a>3.2 regularization term: encourages the model to somehow pick a simple W $R(W)$</h2><p><img src="asserts/3-regularization.png" alt></p>
-<p>L1 encouraging sparsity in this matrix W.<br>w1: 0.4, 0, 0.4, 0<br>w2: 0.2, 0.2, 0.2, 0.2<br>x:1,1,1,1</p>
-<p>L1:w1   L2:w2</p>
-<blockquote>
-<p>正则化项是在原本目标得到的函数的基础上，按照你想要的某种特性去构造</p>
-</blockquote>
-<p>minimize  -log P(Y=yi| X=xi)<br>multi-SVM: softmax loss </p>
-<blockquote>
-<p>min=zero,  max is infinity</p>
-</blockquote>
-<blockquote>
-<p>当出现错误的数据，如何处理？ 0应该处理为一个非常小的数<br>debuging:  minus log of one over C</p>
-</blockquote>
-<ul>
-<li>hinge-loss vs softmax loss<blockquote>
-<p>SVM-loss: margin  between different classes,  if the data point over the bar, they don’t care about it anymore if they are correct.<br>softmax-loss: drive probabiltity mass all the way to one, pile the all classes, because log loss, it tends to push correct class to 0,  imcorrect classes to infinity.<br>continually to improve the correct classes.</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="3-3-Optimization"><a href="#3-3-Optimization" class="headerlink" title="3.3 Optimization"></a>3.3 Optimization</h2><ol>
-<li>A first very bad idea solution: Random search</li>
-</ol>
-<p>cifar-10  15.5%</p>
-<ol start="2">
-<li>fllow the slope<blockquote>
-<p>scalar 标量</p>
-</blockquote>
-</li>
-</ol>
-<p>如何计算梯度？</p>
-<ul>
-<li>前向传播，然后计算一个新值，然后得到  dW<br><img src="asserts/3-gradient.png" alt></li>
-</ul>
-<blockquote>
-<p>debugging </p>
-</blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly92aXNpb24uc3RhbmZvcmQuZWR1L3RlYWNoaW5nL2NzMjMxbi1kZW1vcy9saW5lYXItY2xhc3NpZnk=" title="https://vision.stanford.edu/teaching/cs231n-demos/linear-classify">https://vision.stanford.edu/teaching/cs231n-demos/linear-classify<i class="fa fa-external-link"></i></span></p>
-<p>calclus 微分</p>
-<p><img src="asserts/3-gradient-ex.png" alt></p>
-<p>add gate: gradient distributor<br>max gate: gradient router<br>mul gate: gradient switcher</p>
-<p>back to a node is add</p>
-<p><img src="asserts/3-Jacobian.png" alt><br>4096*4096? Jacobian matrix:  diagonal matrix </p>
-<p>step 1<br><img src="asserts/3-gradient-vectorized-ex.png" alt></p>
-<p>step 2<br><img src="asserts/3-gradient-vectorized-ex-2.png" alt></p>
-<blockquote>
-<p>Always check: the gradient with respect to a variable should have the same shape as the variable.</p>
-</blockquote>
-<p><img src="asserts/3-forward_backward-api.png" alt><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JWTEMvY2FmZmUvYmxvYi9tYXN0ZXIvc3JjL2NhZmZlL2xheWVycy9jbGlwX2xheWVyLmNwcA==" title="https://github.com/BVLC/caffe/blob/master/src/caffe/layers/clip_layer.cpp">https://github.com/BVLC/caffe/blob/master/src/caffe/layers/clip_layer.cpp<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>caffer layers</p>
-</blockquote>
-<h2 id="3-4-layers-kinds"><a href="#3-4-layers-kinds" class="headerlink" title="3.4 layers kinds"></a>3.4 layers kinds</h2><p><span class="exturl" data-url="aHR0cDovL3R1dG9yaWFsLmNhZmZlLmJlcmtlbGV5dmlzaW9uLm9yZy90dXRvcmlhbC9sYXllcnMuaHRtbA==" title="http://tutorial.caffe.berkeleyvision.org/tutorial/layers.html">http://tutorial.caffe.berkeleyvision.org/tutorial/layers.html<i class="fa fa-external-link"></i></span></p>
-<ul>
-<li>vision layers<ul>
-<li>convolution</li>
-<li>pooling</li>
-<li>local response normalization(lrn)</li>
-<li>im2col</li>
-</ul>
-</li>
-<li>loss layers<ul>
-<li>softmax</li>
-<li>sum-of-squares/euclidean</li>
-<li>hinge/margin</li>
-<li>sigmoid cross-entropy</li>
-<li>accuracy and top-k</li>
-</ul>
-</li>
-<li>Activation/Neuron Layers<ul>
-<li>ReLU/Rectified-Linear and Leaky-ReLU</li>
-<li>Sigmoid  $y = \frac {1}{1 + e^{-x}}$<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JWTEMvY2FmZmUvYmxvYi9tYXN0ZXIvc3JjL2NhZmZlL2xheWVycy9zaWdtb2lkX2xheWVyLmNwcA==" title="https://github.com/BVLC/caffe/blob/master/src/caffe/layers/sigmoid_layer.cpp">https://github.com/BVLC/caffe/blob/master/src/caffe/layers/sigmoid_layer.cpp<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-</li>
-<li>TanH/Hyperbolic Tangent</li>
-<li>Absolute Value</li>
-<li>Power</li>
-<li>BNLL</li>
-</ul>
-</li>
-<li>Data Layers<ul>
-<li>In-Memory</li>
-<li>HDF5 Input</li>
-<li>Images</li>
-<li>Windows</li>
-<li>Dummy</li>
-</ul>
-</li>
-<li>Common Layers<ul>
-<li>Innner Product</li>
-<li>Splitting</li>
-<li>Flattening</li>
-<li>Concatenation</li>
-<li>Slicing</li>
-<li>Elemetwise Oprations</li>
-<li>Argmax</li>
-<li>Softmax</li>
-<li>Mean-Variance Normalization</li>
-</ul>
-</li>
-</ul>
-<p>examples<br><img src="asserts/3-svm.png" alt></p>
-<p>summary<br><img src="asserts/3-summary.png" alt></p>
-<blockquote>
-<p>upstream gradient multipy local gradient</p>
-</blockquote>
-<blockquote>
-<p>左乘优先<br>non-linearities</p>
-</blockquote>
-<p>question: templates, in fact, you don’t have to care about it, the only thing you concerned is the scores</p>
-<p><img src="asserts/3-neural_networks.png" alt></p>
-<blockquote>
-<p>Assignment2: Writing a 2-layer net</p>
-</blockquote>
-<h2 id="3-5-Activation-functions"><a href="#3-5-Activation-functions" class="headerlink" title="3.5 Activation functions"></a>3.5 Activation functions</h2><p><img src="asserts/3-activation_functions.png" alt></p>
-<blockquote>
-<p>callled 2-layer neural net</p>
-</blockquote>
-<p>matrix form, matrix-vector form</p>
-<p>Summary</p>
-<ul>
-<li>arrange neurons into fully-connected layers</li>
-<li>the abstraction of layer has the nice property that it allows us to use efficient vectorized code(e.g. matrix multiplies)</li>
-<li>neural networks are not really neural</li>
-<li>next time: convolutional neural networks</li>
-</ul>
-<h1 id="4-Convolutional-Neural-Networks"><a href="#4-Convolutional-Neural-Networks" class="headerlink" title="4. Convolutional Neural Networks"></a>4. Convolutional Neural Networks</h1><p>Deep Learning history</p>
-<ul>
-<li>1957: Perceptron, Frank Rosenblatt</li>
-<li>1960: Adaline/Madaline<blockquote>
-<p>stack these linear layer to multi-layers, no back-propagation or other rules</p>
-</blockquote>
-</li>
-<li>1986: Rumelhart et al. First time back-propagation became popular</li>
-<li>2006: Reinvigorated research in Deep Learning<blockquote>
-<p>carefully-initialized   pre-training stage </p>
-</blockquote>
-</li>
-<li>2012, first strongest results using for speech recognition</li>
-</ul>
-<p>A bit of history: CNN</p>
-<ul>
-<li>1959 electrical signal from brain<blockquote>
-<p>topographical mapping 地形学</p>
-</blockquote>
-</li>
-<li>Hierarchical organization:<blockquote>
-<p>simple cells -&gt; complex cells -&gt; hypercomplex cells</p>
-</blockquote>
-</li>
-<li>1980 complex cells-&gt;perform pooling</li>
-<li>1998 gradient-base document recognition</li>
-<li>2012, AlexNet</li>
-<li>Detection, Segmentation  R-CNN<br>reinforcement learning</li>
-</ul>
-<p>notation<br>should rorate 180<br>how to slide this over all the spatial locations</p>
-<blockquote>
-<p>卷积层得到的结果是什么<br>3 filter??,  6 filters??<br>over the image spatially<br>we’re sampling the edges and corners less than the other localtions</p>
-</blockquote>
-<blockquote>
-<p>试图去理解每一步的过程还有每一个公式的含义</p>
-</blockquote>
-<p>one filter-&gt; one activation map</p>
-<p>we call these<br><img src="asserts/4-convolutional.png" alt></p>
-<p><img src="asserts/4-output_size.png" alt></p>
-<p>Output size:<br>(N-f)/stride + 1</p>
-<blockquote>
-<p>if we use common to zero pad the border, we will get 7*7 output</p>
-</blockquote>
-<p><img src="asserts/4-outputsize-ex.png" alt></p>
-<blockquote>
-<p>what will channels do?<br>5<em>5</em>3 + 1=76 params(+1 for bias) =&gt; 76*10=760 params</p>
-</blockquote>
-<p><img src="asserts/4-outputsize_summary.png" alt></p>
-<blockquote>
-<p>概念辨析</p>
-</blockquote>
-<ul>
-<li>向量的乘法<blockquote>
-<p>点集，标量积得到内积； 叉乘，结果为向量，向量积</p>
-</blockquote>
-</li>
-<li>矩阵乘法<blockquote>
-<p>multiply: 普通的乘法<br>Hadamard product, 逐点乘法<br>Kronecker product:  tensor product</p>
-</blockquote>
-</li>
-</ul>
-<p>conv layer in torch</p>
-<blockquote>
-<p>spatial convolution</p>
-</blockquote>
-<hr>
-<p>torch, pytorch</p>
-<blockquote>
-<p>torch能够放在GPU中加速计算，前提是有合适的GPU时，使用起来跟numpy来说差别不大</p>
-</blockquote>
-<ul>
-<li><p>torch<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvcmNoL25uL2Jsb2IvbWFzdGVyL2RvYy9jb252b2x1dGlvbi5tZCNubi5TcGF0aWFsQ29udm9sdXRpb24=" title="https://github.com/torch/nn/blob/master/doc/convolution.md#nn.SpatialConvolution">https://github.com/torch/nn/blob/master/doc/convolution.md#nn.SpatialConvolution<i class="fa fa-external-link"></i></span></p>
-</li>
-<li><p>caffe<br><span class="exturl" data-url="aHR0cDovL2NhZmZlLmJlcmtlbGV5dmlzaW9uLm9yZy90dXRvcmlhbC9sYXllcnMvY29udm9sdXRpb24uaHRtbA==" title="http://caffe.berkeleyvision.org/tutorial/layers/convolution.html">http://caffe.berkeleyvision.org/tutorial/layers/convolution.html<i class="fa fa-external-link"></i></span></p>
-</li>
-</ul>
-<hr>
-<h1 id="5-Training-Neural-Networks"><a href="#5-Training-Neural-Networks" class="headerlink" title="5. Training Neural Networks"></a>5. Training Neural Networks</h1><p>Overview:</p>
-<ol>
-<li>one time setup<ul>
-<li>activation functions</li>
-<li>preprocessing</li>
-<li>weight initilization</li>
-<li>regularization</li>
-<li>gradient checking</li>
-</ul>
-</li>
-<li>Training dynamics<ul>
-<li>babysitting the learning process<br>parameter updates</li>
-<li>hyperparameter optimization</li>
-</ul>
-</li>
-<li>Evaluation<ul>
-<li>model ensembles</li>
-</ul>
-</li>
-</ol>
-<h2 id="5-1-Activation-Functions"><a href="#5-1-Activation-Functions" class="headerlink" title="5.1 Activation Functions"></a>5.1 Activation Functions</h2><ol>
-<li>sigmoid <ul>
-<li>introduction<ul>
-<li>squashes numbers to range[0,1]<blockquote>
-<p>[-5, 5]变化明显，其他位置变化就有问题了 [-10, 10]=0<br>df = f(1-f)<br>梯度就是函数图像的直线，永远不要忘了最直观的理解</p>
-</blockquote>
-</li>
-<li>historycally popluar since they have nice interpretation as a saturating “firing rate” of a neuron</li>
-</ul>
-</li>
-<li>problem<ul>
-<li>Saturated neurons “kill” the gradients </li>
-<li>Sigmoid outputs are not zero-centered<blockquote>
-<p>因为对x的范围的限制，所以不对称，同理也不能在全positive的数据上表现的很好； always the sign of the upstream gradient coming down.  inefficient weight update</p>
-</blockquote>
-</li>
-<li>exp() is bit compute expensive</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p><img src="asserts/5-sigmoid.png" alt></p>
-<p><img src="asserts/5-sigmoid-pic.png" alt></p>
-<blockquote>
-<p>avoid allways a direction</p>
-</blockquote>
-<ol start="2">
-<li>tanh 1991</li>
-</ol>
-<ul>
-<li>Squashes numbers to range[-1,1]</li>
-<li>zero centered (nice)</li>
-<li>still kills when saturated :(<br><img src="asserts/5-tanh.png" alt></li>
-</ul>
-<ol start="3">
-<li>relu 2012  rectified linear unit</li>
-</ol>
-<p><img src="asserts/5-relu.png" alt></p>
-<ul>
-<li>not zero-center output</li>
-<li>any annoyance<br>hint: what is the gradient when x&lt;0 ?</li>
-</ul>
-<blockquote>
-<p>it is fine at the begining, then at some point, it became bad and it died.</p>
-</blockquote>
-<p><img src="asserts/5-relu-problem.png" alt></p>
-<blockquote>
-<p>data cloud is just your training data.<br>wx1 + wx2上进行影响啊<br>people like to initialize relu neurons with slightly positive biaes(e.g. 0.01)</p>
-</blockquote>
-<ol start="4">
-<li><p>leaky relu<br><img src="asserts/5-prelu.png" alt></p>
-</li>
-<li><p>elu<br><img src="asserts/5-erelu.png" alt> </p>
-<blockquote>
-<p>how the $\alpha$ is defined</p>
-</blockquote>
-</li>
-<li><p>Maxout Neuron<br><img src="asserts/5-max-neuron.png" alt></p>
-</li>
-</ol>
-<p><img src="asserts/5-practice.png" alt></p>
-<h2 id="5-2-data-preprocess"><a href="#5-2-data-preprocess" class="headerlink" title="5.2 data preprocess"></a>5.2 data preprocess</h2><p>original data -&gt; zero-centered data -&gt; normalized data</p>
-<blockquote>
-<p>to do at the test data, too<br><img src="asserts/5-2_preprocess_data-1.png" alt></p>
-</blockquote>
-<p><img src="asserts/5-2_pcaAndWhitening.png" alt></p>
-<p><img src="asserts/5-2_preprocess_data-practice.png" alt></p>
-<blockquote>
-<p>per-channel  RGB<br>do this for entire train data,  once before training. don’t do this per batch</p>
-</blockquote>
-<blockquote>
-<p>how sigmoid need the zero-centered data,  it only servers for the first layer.</p>
-</blockquote>
-<h2 id="5-3-Weight-Intilization"><a href="#5-3-Weight-Intilization" class="headerlink" title="5.3 Weight Intilization"></a>5.3 Weight Intilization</h2><p>Q: what will happen if W is zero?</p>
-<blockquote>
-<ol>
-<li>will disappear<br>!!they will all do the same thing</li>
-</ol>
-</blockquote>
-<ul>
-<li>First idea: small random numbers<br>(gaussian with zero mean and 1e-2 standard deviation)<br><code>W = 0.01 * np.random.randn(D, H)</code><blockquote>
-<p>works okay for small networks, but problems with deeper networks.</p>
-</blockquote>
-</li>
-</ul>
-<p>pic1 see the hidden data is<br>pic2: see the data distribution</p>
-<blockquote>
-<p>zero</p>
-</blockquote>
-<blockquote>
-<p>All activations become zero!!</p>
-</blockquote>
-<p>What will W look like?</p>
-<p>because X is small, so the W is getting more small, they’re basically not updating.</p>
-<ul>
-<li>forward doing</li>
-<li>have gradient flows coming down<blockquote>
-<p>for each line, we chain these weight</p>
-</blockquote>
-</li>
-</ul>
-<p>cs231n: 深度视觉识别课程P6</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-search-graph/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1064,11 +311,19 @@
                 
               
 
-              <time title="创建时间：2019-09-19 12:17:32 / 修改时间：12:18:38" itemprop="dateCreated datePublished" datetime="2019-09-19T12:17:32+08:00">2019-09-19</time>
+              <time title="创建时间：2019-09-19 12:17:32" itemprop="dateCreated datePublished" datetime="2019-09-19T12:17:32+08:00">2019-09-19</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-07 12:26:23" itemprop="dateModified" datetime="2020-08-07T12:26:23+08:00">2020-08-07</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -1173,7 +428,7 @@
 <li><p>所有边权都是正数</p>
 <ul>
 <li><p>朴素Dijkstra O(n^2) 稠密</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for v: 1-n:</span><br><span class="line">    t&lt;- 不在S中的距离最近的点 n-i  st[i]:n</span><br><span class="line">    s&lt;-t, 共n次</span><br><span class="line">    用t来更新其他顶点 t-&gt;v， 共m次</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for v: 1-n:</span><br><span class="line">    t&lt;- 不在S中的距离最近的点 n-i  st[i]:n</span><br><span class="line">    s&lt;-t, 共n次</span><br><span class="line">    用t来更新其他顶点 t-&gt;v， 共m次 //</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>堆优化版Dijstra O(mlogn) 稀疏</p>
 <blockquote>
@@ -1299,7 +554,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
             
-            <a href="/2019/09/19/algorithm-acwing-basic/" class="post-title-link" itemprop="url">algorithm acwing basic</a>
+            <a href="/2019/09/19/algorithm-acwing-basic/" class="post-title-link" itemprop="url">基础算法</a>
           
         </h2>
 
@@ -1314,46 +569,20 @@
                 
               
 
-              <time title="创建时间：2019-09-19 12:15:53 / 修改时间：12:16:58" itemprop="dateCreated datePublished" datetime="2019-09-19T12:15:53+08:00">2019-09-19</time>
+              <time title="创建时间：2019-09-19 12:15:53" itemprop="dateCreated datePublished" datetime="2019-09-19T12:15:53+08:00">2019-09-19</time>
             </span>
           
             
 
             
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-03 12:55:59" itemprop="dateModified" datetime="2020-03-03T12:55:59+08:00">2020-03-03</time>
               </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithm/acwing/basic/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a></span>
-
-                
-                
-              
-            </span>
+            
           
 
           
@@ -1367,11 +596,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-快排"><a href="#1-快排" class="headerlink" title="1. 快排"></a>1. 快排</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#incldue&lt;stdio.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=1e6+10;</span><br><span class="line">int n;</span><br><span class="line">int q[N];</span><br><span class="line"></span><br><span class="line">void swap(int &amp;x,int &amp;y)&#123;</span><br><span class="line">    int t=x;</span><br><span class="line">    x=y;</span><br><span class="line">    y=t;</span><br><span class="line">&#125;</span><br><span class="line">void quick_sort(int q[], int l, int r)&#123;</span><br><span class="line">    if(l&gt;=r) return;  // 注意边界条件不可少</span><br><span class="line"></span><br><span class="line">    int x=q[l], i=l-1, j=r+1; // 或q[(1+r)/2], q[r]</span><br><span class="line">    // 这里赋初值是为了后面对称的情况</span><br><span class="line">    while(i&lt;j) &#123;</span><br><span class="line">        do i++; while(q[i]&lt;x);</span><br><span class="line">        do j--; while(q[i]&gt;x);</span><br><span class="line">        if(i&lt;j) swap(q[i],q[j]); // 注意这里要加一个判断</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    quick_sort(q, l, j);  // </span><br><span class="line">    quick_sort(q, j+1, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;n);</span><br><span class="line">    for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;, &amp;q[i]);</span><br><span class="line">    quick_sort(q,0,n-1);</span><br><span class="line">    for(int i=0;i&lt;n;i++) printf(&quot;%d&quot;, q[i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <p>[toc]</p>
+<h3 id="十大排序算法"><a href="#十大排序算法" class="headerlink" title="十大排序算法"></a>十大排序算法</h3><h4 id="算法分类"><a href="#算法分类" class="headerlink" title="算法分类"></a>算法分类</h4><p>十种常见排序算法可以分为两大类：</p>
+<ol>
+<li>比较类排序：通过比较来决定元素间的相对次序，由于其时间复杂度不能突破O(nlogn), 所以又称为非线性时间比较类排序</li>
+<li>非比较类排序：不通过比较来决定元素间的相对次序，它可以突破基于比较排序的时间下界，所以称为线性时间非比较类排序。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void quick_sort(int q[], int l, int r)&#123;</span><br><span class="line">    if(l&gt;=r) return;  // 注意边界条件不可少</span><br><span class="line"></span><br><span class="line">    int x=q[l], i=l-1, j=r+1; // 或q[(1+r)/2], q[r]</span><br><span class="line">    // 这里赋初值是为了后面对称的情况</span><br><span class="line">    while(i&lt;j) &#123;</span><br><span class="line">        do i++; while(q[i]&lt;x);</span><br><span class="line">        do j--; while(q[i]&gt;x);</span><br><span class="line">        if(i&lt;j) swap(q[i],q[j]); // 注意这里要加一个判断</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    quick_sort(q, l, j);  // </span><br><span class="line">    quick_sort(q, j+1, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-归并"><a href="#2-归并" class="headerlink" title="2. 归并"></a>2. 归并</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=1e6+10;</span><br><span class="line">int n;</span><br><span class="line">int q[N], tmp[N];</span><br><span class="line"></span><br><span class="line">void merge_sort(int q[],int l, int r)&#123;</span><br><span class="line">    if(l&gt;=r) return;</span><br><span class="line">    int mid=l+r&gt;&gt;1;</span><br><span class="line">    merge(q, l, mid);</span><br><span class="line">    merge(q, mid+1,r);</span><br><span class="line"></span><br><span class="line">    int k=0, i=l, j=mid+1;</span><br><span class="line">    while(i&lt;=mid&amp;&amp;j&lt;=r)&#123;</span><br><span class="line">        if(q[i]&lt;q[j]) tmp[k++]=q[i++];</span><br><span class="line">        else tmp[k++]=q[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    while(i&lt;=mid) tmp[k++]=q[i++];</span><br><span class="line">    while(j&lt;=r) tmp[k++]=q[j++];</span><br><span class="line"></span><br><span class="line">    for(i=l,j=0;i&lt;=r;i++,j++) q[i]=tmp[j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;,&amp;q[i]);</span><br><span class="line">    merge_sort(q,0,n-1);</span><br><span class="line">    for(int i=0;i&lt;n;i++) printf(&quot;%d&quot;, q[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-归并"><a href="#2-归并" class="headerlink" title="2. 归并"></a>2. 归并</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=1e6+10;</span><br><span class="line">int n;</span><br><span class="line">int q[N], tmp[N];</span><br><span class="line"></span><br><span class="line">void merge_sort(int q[],int l, int r)&#123;</span><br><span class="line">    if(l&gt;=r) return;</span><br><span class="line">    int mid=l+r&gt;&gt;1;</span><br><span class="line">    merge(q, l, mid);</span><br><span class="line">    merge(q, mid+1,r);</span><br><span class="line"></span><br><span class="line">    int k=0, i=l, j=mid+1;</span><br><span class="line">    while(i&lt;=mid&amp;&amp;j&lt;=r)&#123;</span><br><span class="line">        if(q[i]&lt;q[j]) tmp[k++]=q[i++];</span><br><span class="line">        else tmp[k++]=q[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    while(i&lt;=mid) tmp[k++]=q[i++];</span><br><span class="line">    while(j&lt;=r) tmp[k++]=q[j++];</span><br><span class="line"></span><br><span class="line">    for(i=l,j=0;i&lt;=r;i++,j++) q[i]=tmp[j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(int i=0;i&lt;n;i++) scanf(&quot;%d&quot;,&amp;q[i]);</span><br><span class="line">    merge_sort(q,0,n-1);</span><br><span class="line">    for(int i=0;i&lt;n;i++) printf(&quot;%d&quot;, q[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-二分"><a href="#3-二分" class="headerlink" title="3. 二分"></a>3. 二分</h2><h3 id="整数二分"><a href="#整数二分" class="headerlink" title="整数二分"></a>整数二分</h3><p>// 整数二分，有单调性一定可以二分；但是没有单调性也可以二分<br>// 在区间上定义上某种性质，将区间分为两部分，左边满足某种性质，右边不满足某种性质；二分法可以用来寻找不满足性质和满足性质的边界<br>？</p>
+<h3 id="3-二分"><a href="#3-二分" class="headerlink" title="3. 二分"></a>3. 二分</h3><h4 id="整数二分"><a href="#整数二分" class="headerlink" title="整数二分"></a>整数二分</h4><p>// 整数二分，有单调性一定可以二分；但是没有单调性也可以二分<br>// 在区间上定义上某种性质，将区间分为两部分，左边满足某种性质，右边不满足某种性质；二分法可以用来寻找不满足性质和满足性质的边界<br>？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">int bsearch_1(int l,int r)&#123;</span><br><span class="line">    while(l&lt;r)&#123;</span><br><span class="line">        int mid=l+r&gt;&gt;1; // 下取整</span><br><span class="line">        if(check(mid)) r=mid; // [l,mid]</span><br><span class="line">        else l=mid+1;</span><br><span class="line">    &#125;</span><br><span class="line">    return l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int bsearch_2(int l, int r)&#123;</span><br><span class="line">    while(l&lt;r)&#123;</span><br><span class="line">        int mid=l+r+1&gt;&gt;1;</span><br><span class="line">        if(check(mid)) l=mid;</span><br><span class="line">        else r=mid-1;</span><br><span class="line">    &#125;</span><br><span class="line">    return l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">如何判断死循环</span><br><span class="line">mid=l=r时，是否陷入死循环</span><br></pre></td></tr></table></figure>
 
 <p>整数二分的问题一定可以用这个模板来解决。<br>每次二分，能找到一个答案的区间；当区间的长度是1时，即是解</p>
@@ -1382,7 +617,7 @@
 <blockquote>
 <p>性质的寻找， 如果a[mid] &lt; x, 怎么办？实际上就是看目标的数在a[mid]与x之间，比如靠近x最大的数， 此时l=mid; 如果是找x相等的左边界，在a[mid]<br>在a[mid] &gt; x, 比如<br>??? 有点模糊</p>
 </blockquote>
-<h3 id="浮点数二分simple"><a href="#浮点数二分simple" class="headerlink" title="浮点数二分simple"></a>浮点数二分simple</h3><blockquote>
+<h4 id="浮点数二分simple"><a href="#浮点数二分simple" class="headerlink" title="浮点数二分simple"></a>浮点数二分simple</h4><blockquote>
 <p>这里就不用+1，-1<br>求平方根</p>
 </blockquote>
 <blockquote>
@@ -1390,7 +625,7 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()&#123;</span><br><span class="line">    double x;</span><br><span class="line">    cin&gt;&gt;x;</span><br><span class="line"></span><br><span class="line">    double l=0, r=x; // r=max(1,x);</span><br><span class="line">    while(r-l&gt;1e-8)&#123;  // 这里比要求的有效数字多2</span><br><span class="line">    // 这里用迭代次数来停止也可以，比如100，即除以2^100.</span><br><span class="line">        double mid=(1+r)/2;</span><br><span class="line">        if(mid*mid &gt;= x) r=mid;</span><br><span class="line">        else l=mid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printf(&quot;%lf\n&quot;,l); </span><br><span class="line">    // 这里l或者r</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="4-高精度"><a href="#4-高精度" class="headerlink" title="4. 高精度"></a>4. 高精度</h2><p>A+B： len(A)=1e6<br>A-B:<br>A*a 1e6  a-10000<br>A/a </p>
+<h3 id="4-高精度"><a href="#4-高精度" class="headerlink" title="4. 高精度"></a>4. 高精度</h3><p>A+B： len(A)=1e6<br>A-B:<br>A*a 1e6  a-10000<br>A/a </p>
 <p>存储，倒序存储<br>在末位加上一位，下标为0的存个位。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">A+B</span><br><span class="line">int a[N],b[N],sum[N];</span><br><span class="line">int cnt=0;</span><br><span class="line">for(int i=0,j=0;i&lt;n&amp;&amp;j&lt;m;i++,j++)&#123;</span><br><span class="line">    sum[i]=(a[i]+b[j]+cnt)%10;</span><br><span class="line">    cnt=(a[i]+b[j]+cnt)&gt;10?1:0;</span><br><span class="line">&#125;</span><br><span class="line">if(cnt) a[n+1]=1;</span><br><span class="line"></span><br><span class="line">A-B</span><br><span class="line">len(A)&gt;=len(B)</span><br></pre></td></tr></table></figure>
 
@@ -1398,7 +633,7 @@
 <p>高精度减法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">t=(t + A[i])/b;</span><br><span class="line">c.push_back(t%10);  //?</span><br><span class="line">t=A[i]%b;</span><br><span class="line"></span><br><span class="line">for (int i=A.size()-1;i&gt;=0;i--)</span><br><span class="line">t=10t+A[i];</span><br><span class="line">if((t/b)) c.push_back(t/b);  </span><br><span class="line">t %= b;</span><br><span class="line">t</span><br></pre></td></tr></table></figure>
 
-<h2 id="5-前缀和和差分"><a href="#5-前缀和和差分" class="headerlink" title="5. 前缀和和差分"></a>5. 前缀和和差分</h2><ul>
+<h3 id="5-前缀和和差分"><a href="#5-前缀和和差分" class="headerlink" title="5. 前缀和和差分"></a>5. 前缀和和差分</h3><ul>
 <li>前缀和<br>a1, a2, a3,…, an<br>S0, S1, S2,…, Sn<br>a_{i}= S_{i}- S_{i-1}<br>S0=0;<br>当S0=0时，特别好定义边界。<br>前缀和 Si = Si-S0. </li>
 </ul>
 <p>因此，可以很容易地求片段和。</p>
@@ -1415,7 +650,7 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="6-双指针算法"><a href="#6-双指针算法" class="headerlink" title="6. 双指针算法"></a>6. 双指针算法</h2><p>两类： 一个数组两个指针；两个数组同时处理。<br>代码框架</p>
+<h3 id="6-双指针算法"><a href="#6-双指针算法" class="headerlink" title="6. 双指针算法"></a>6. 双指针算法</h3><p>两类： 一个数组两个指针；两个数组同时处理。<br>代码框架</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for(i=0,j=0;i&lt;n;i++)&#123;</span><br><span class="line">    while(j&lt;i &amp;&amp; check(i,j)) j++;</span><br><span class="line">    res=max(res, j-i+1);</span><br><span class="line">    // 每道题的具体逻辑</span><br><span class="line">&#125;</span><br><span class="line">O(n+m) </span><br><span class="line">这里i和j具有单调性，i和j只向一个方向发展。</span><br></pre></td></tr></table></figure>
 
 <p>核心思想</p>
@@ -1431,14 +666,14 @@
 <blockquote>
 <p>数组元素的目标和为什么限制为一个解，因为如果是多个解时。对于<br> <code>1 1 1 1 1, 1 1 1 1 , 2</code>本身就要O(n*m),算法必然为O(n^2)的。<br>????</p>
 </blockquote>
-<h2 id="7-位运算"><a href="#7-位运算" class="headerlink" title="7. 位运算"></a>7. 位运算</h2><p>从个位开始算,(11111)_2</p>
+<h3 id="7-位运算"><a href="#7-位运算" class="headerlink" title="7. 位运算"></a>7. 位运算</h3><p>从个位开始算,(11111)_2</p>
 <blockquote>
 <p>先把第k位移到最后一位<br>n&gt;&gt;k &amp; 1 看一下n的第k位是几？</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for(int k=3;k&gt;=0;k--)</span><br><span class="line">    cout&lt;&lt;(n&gt;&gt;k&amp;1)&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
 
 <p>lowbit(x): 返回x的最后一位1<br>x&amp;(~x+1)= x&amp;-x</p>
-<h2 id="8-离散化，整数的离散化"><a href="#8-离散化，整数的离散化" class="headerlink" title="8. 离散化，整数的离散化"></a>8. 离散化，整数的离散化</h2><p>10^9 稀疏的值域，映射到从0开始的自然数 10^5<br>注意这里映射的话的思想实际上就是按照个数索引来映射的感觉。</p>
+<h3 id="8-离散化，整数的离散化"><a href="#8-离散化，整数的离散化" class="headerlink" title="8. 离散化，整数的离散化"></a>8. 离散化，整数的离散化</h3><p>10^9 稀疏的值域，映射到从0开始的自然数 10^5<br>注意这里映射的话的思想实际上就是按照个数索引来映射的感觉。</p>
 <p>a-&gt;b</p>
 <blockquote>
 <ol>
@@ -1449,13 +684,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; alls;</span><br><span class="line">sort(alls.begin(), alls.end());</span><br><span class="line">alls.erase(unique(alls.begin(), alls.end()),alls.end()) // 去重</span><br><span class="line">&gt; ?这里unique返回的就是改变后的alls, 且alls后面的重复的元素都放在最后部分</span><br><span class="line"></span><br><span class="line">// 二分求出x对应的离散</span><br><span class="line">int find(int x)&#123; // 找第一个大于等于x的位置</span><br><span class="line">    int l=0, r=all.size()-1;</span><br><span class="line">    while(l&lt;r)&#123;</span><br><span class="line">        int mid=l+r&gt;&gt;1;</span><br><span class="line">        if(x&lt;=all[mid]) r=mid;</span><br><span class="line">        else l=mid+1;</span><br><span class="line">    &#125;</span><br><span class="line">    return r+1; // 这里是否加1都无所谓，这里从1开始映射；1,2,3,4,..,n</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>注意，一般的离散化的目标就是所有会用到的坐标<br>区间和 n+2m(l,r)</p>
-<h2 id="9-合并区间"><a href="#9-合并区间" class="headerlink" title="9. 合并区间"></a>9. 合并区间</h2><ol>
+<h3 id="9-合并区间"><a href="#9-合并区间" class="headerlink" title="9. 合并区间"></a>9. 合并区间</h3><ol>
 <li>按区间做变短排序</li>
 <li>总共有三种情况<br><code>ri&lt;ri+1, ri+1&lt;ri, ri&lt;li+1</code><br>一般是贪心，优先对左右端点进行排序</li>
 </ol>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>java输入输出比较慢</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>java输入输出比较慢</p>
 <p>编译语言和即时编译<br>小数据 javascript,python快<br>大数据 go,c,c++快<br>javascript&gt;python&gt;go=C++&gt;java</p>
-<h3 id="错误类型"><a href="#错误类型" class="headerlink" title="错误类型"></a>错误类型</h3><ul>
+<h4 id="错误类型"><a href="#错误类型" class="headerlink" title="错误类型"></a>错误类型</h4><ul>
 <li>Segmentation Fault<br>基本情况是否没有考虑<br>数组是否越界<br>没有输入</li>
 </ul>
 <ul>
@@ -1515,11 +750,19 @@
                 
               
 
-              <time title="创建时间：2019-09-19 12:14:45 / 修改时间：12:15:20" itemprop="dateCreated datePublished" datetime="2019-09-19T12:14:45+08:00">2019-09-19</time>
+              <time title="创建时间：2019-09-19 12:14:45" itemprop="dateCreated datePublished" datetime="2019-09-19T12:14:45+08:00">2019-09-19</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-26 18:24:16" itemprop="dateModified" datetime="2020-03-26T18:24:16+08:00">2020-03-26</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -1604,11 +847,11 @@
 </ul>
 </li>
 </ul>
-<p>线性筛法理解：<br>对于每一个n，它会执行。<br>如果是合数，将小于它的最小质数的乘积，删掉。<br>如果是质数，会先加入，然后，删掉它乘以它的质数。</p>
-<p>有两个问题？为什么筛到最小质数就可以？<br>因为将质因子从小到大排序，肯定一定有序了。<br>只用筛到最小即可，因为其他的有后面大的在构造过程中就会删掉。<br>比如考虑： 2<em>3</em>3, 实际在9时就会筛掉<br>而 2<em>2</em>2, 会被2*4筛掉，所以不用担心某个质因子的个数很多的情况</p>
+<p>线性筛法理解：<br>对于每一个n，它会执行。<br>如果是合数，将小于它的最小质数的乘积，删掉。<br>如果是质数，会先加入，然后，删掉它乘以它的质数。<br>int<br>有两个问题？为什么筛到最小质数就可以？<br>因为将质因子从小到大排序，肯定一定有序了。<br>只用筛到最小即可，因为其他的有后面大的在构造过程中就会删掉。<br>比如考虑： 2<em>3</em>3, 实际在9时就会筛掉<br>而 2<em>2</em>2, 会被2*4筛掉，所以不用担心某个质因子的个数很多的情况</p>
 <p>用素数负责增加新的质因子的种类。</p>
 <p>为什么要到n/i即可？<br>为什么范围是n/i, 因为i%n, n/i %n,  当到达一定大的程度i会很大，此时只需要用小的质因子就可以了。<br>因为是取等于，如果是质因子可以将其筛掉；</p>
-<p>朴素筛法：未注意到合数可以分解为质因子之积的规律（自然数基本定理）<br>埃式筛法：简单地用加法来对质因子进行删除<br>线性筛法：使用了乘法的结论进一步对筛法进行了优化, 前面未保证唯一删去一个数数</p>
+<p>朴素筛法：未注意到合数可以分解为质因子之积的规律（自然数基本定理）<br>埃式筛法：简单地用加法来对质因子进行删除 n loglogn<br>线性筛法：使用了乘法的结论进一步对筛法进行了优化, i只会被它的最小质因子筛掉<br>当第一次出现i%primes[j]==0, 因为是从最小开始枚举，所以primes[j]一定是i<em>primes[j]的最小质因子<br>i % primes[j] != 0, 从小到大枚举，并且枚举0-primes[j], 所以prims[j]</em>i的质因子最小的一定是primes[j]</p>
+<p>为什么是n/i, 当数据范围变大的时候，枚举的数的数量其实没那么多，因为最小质因子变大了。<br>如何定的？一定会在i*primes[j] &lt;= n, 停下来<br>为什么不加j<cnt><br>i是合数，在其最小质因子处停下来<br>i是质数，在primes[j]=i的时候停下来，所以无论如何一定是满足条件的</cnt></p>
 <h2 id="1-2-约数"><a href="#1-2-约数" class="headerlink" title="1.2 约数"></a>1.2 约数</h2><p>一个数的约数是成对出现的 d % n, n/d % n</p>
 <ol>
 <li>试除法求约数<br>sqrt(n) 把每一步的时间复杂度都要计算一下</li>
@@ -1869,7 +1112,8 @@
 <blockquote>
 <p>100*10000</p>
 </blockquote>
-
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p><img src="https://pic.leetcode-cn.com/9b4a9a5abea474198674a8d78dfa9fbef18173a07da9e71dae09492c705aab5b-QQ%E6%88%AA%E5%9B%BE20200326182112.png" alt="QQ截图20200326182112.png"></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trailingZeroes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 2,5成对出现，才会产生一个0</span></span><br><span class="line">        <span class="comment">// 统计有多少个5, 因为2的个数远大于5的个数</span></span><br><span class="line">        <span class="keyword">return</span> helper(n);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123; <span class="comment">// n!中5的个数</span></span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">5</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> helper(n / <span class="number">5</span>) + n / <span class="number">5</span>; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
         
       
     </div>
@@ -2127,7 +1371,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-15 12:58:28" itemprop="dateModified" datetime="2019-12-15T12:58:28+08:00">2019-12-15</time>
+                <time title="修改时间：2020-08-07 15:10:12" itemprop="dateModified" datetime="2020-08-07T15:10:12+08:00">2020-08-07</time>
               </span>
             
           
@@ -3381,11 +2625,917 @@ map(key, ts) // ts为一个测试样本
   </article>
 
     
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-distributed-system/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-distributed-system/" class="post-title-link" itemprop="url">nju-course distributed system</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:04:16 / 修改时间：12:07:27" itemprop="dateCreated datePublished" datetime="2019-09-19T12:04:16+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/distributedSystem/" itemprop="url" rel="index"><span itemprop="name">distributedSystem</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="分布式系统模型"><a href="#分布式系统模型" class="headerlink" title="分布式系统模型"></a>分布式系统模型</h2><ol>
+<li>什么是分布式系统？</li>
+</ol>
+<ul>
+<li>分布式系统是若干个独立的计算机的集合，这些计算机对于用户来说就像是单个相关的系统</li>
+</ul>
+<ol start="2">
+<li>为什么要分布式？</li>
+</ol>
+<ul>
+<li>让用户连接到资源;</li>
+<li>保证资源在网络上分布的透明性;</li>
+<li>分布式系统是开放的</li>
+<li>分布式系统是可扩展的</li>
+</ul>
+<ol start="3">
+<li>分布式系统透明性和开放性的含义</li>
+</ol>
+<p>透明性可以运用到分布式系统中的各个方面</p>
+<ul>
+<li>访问，隐藏数据表示形式的不同以及资源访问方式的不同</li>
+<li>位置，隐藏资源所在位置</li>
+<li>迁移，隐藏资源是否移动到另一个位置</li>
+<li>重定位，隐藏资源是否在使用过程中移动到另一个位置</li>
+<li>复制，隐藏是否对资源进行复制</li>
+<li>并发，隐藏资源是否由若干个相互竞争的用户共享</li>
+<li>故障，隐藏资源的故障和恢复</li>
+<li>持久性，隐藏资源在内存中还是在硬盘中</li>
+</ul>
+<p>（未答透明性的级别）</p>
+<p>开发性的含义</p>
+<p>一个开发是系统应该是一个这样的系统，它根据一系列准则来提供服务，这些准则描述了所提供服务的语法和语义</p>
+<ul>
+<li>能够与其他开放系统的富户及你想嗯交互，与潜在的环境无关<ul>
+<li>系统应该遵守明确的接口定义</li>
+<li>系统应该支持应用的可移植性</li>
+<li>系统应该能够易于交互</li>
+</ul>
+</li>
+<li>它必须是灵活的，要能够方便地把有不同的开发人员开发的不同组件组合成整个系统。</li>
+</ul>
+<ol start="4">
+<li>分布式系统、网络操作系统和基于中间件的系统</li>
+</ol>
+<ul>
+<li>分布式操作系统，紧耦合的操作系统，用于多处理器系统和同构式多计算机系统，主要目标是隐藏及管理硬件资源</li>
+<li>网络操作系统，松耦合的操作系统，用于异构式多计算机系统（LAN和WAN），主要目标是向远程客户提供本地服务</li>
+<li>中间件，位于网络操作系统通用服务上的附加层，主要目标是提供分布式透明性</li>
+</ul>
+<ol start="5">
+<li>分布式系统的类型</li>
+</ol>
+<ul>
+<li>Distributed computing systems（云计算LAN，网格计算）</li>
+<li>Distributed information systems（TP monitor）</li>
+<li>Distributed pervasive systems (分布式普适系统,移动计算系统等等)</li>
+</ul>
+<ol start="6">
+<li>机制和策略的理解</li>
+</ol>
+<ul>
+<li>需要对不同策略的支持<ul>
+<li>对客户端cache数据一直性要求有多高</li>
+<li>可以允许下载代码执行哪些操作</li>
+<li>面对不同带宽，如何调整QoS的要求</li>
+<li>通信过程需要什么程度的加密</li>
+</ul>
+</li>
+<li>理想上，分布式系统仅仅提供机制<ul>
+<li>允许动态设置缓存测绿</li>
+<li>支持不同程度的移动代码信任</li>
+<li>每个数据流提供可调的QoS参数</li>
+<li>提供不同的加密算法</li>
+</ul>
+</li>
+<li>机制与策略分离原则<ul>
+<li>机制由系统实现，策略由用户完成</li>
+<li>机制放在底层，策略放在高层</li>
+<li>机制集中在少数模块，策略散布在多处</li>
+</ul>
+</li>
+</ul>
+<h2 id="分布式系统架构"><a href="#分布式系统架构" class="headerlink" title="分布式系统架构"></a>分布式系统架构</h2><ol>
+<li>分布式系统架构风格</li>
+</ol>
+<ul>
+<li>组织为逻辑上不同的部分，每个部分分布在不同的机器上<ul>
+<li>层次结构</li>
+<li>面向对象式的结构<ul>
+<li>在空间上或者时间上对进程进行的分离</li>
+</ul>
+</li>
+<li>事件总线，发布订阅模式</li>
+<li>共享数据空间</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>分布式系统组织形式</li>
+</ol>
+<ul>
+<li>中心式<ul>
+<li>C/S模式</li>
+</ul>
+</li>
+<li>非中心式<ul>
+<li>结构化P2P</li>
+<li>非结构化P2P</li>
+</ul>
+</li>
+<li>混合式(BitTorrent）</li>
+</ul>
+<ol start="3">
+<li><p>客户-服务器模式和对等模式</p>
+</li>
+<li><p>分布式系统组织为中间件</p>
+</li>
+</ol>
+<h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2><ol>
+<li>进程 vs 线程<br>程序是静态的代码和数据<br>进程是动态的代码和数据的实例</li>
+</ol>
+<p>进程时具有独立功能的程序关于某个数据集合的一次进行活动，是资源分配和调度的基本单位<br>线程是进程的实体，是CPU调度的基本单位</p>
+<ol start="2">
+<li>代码迁移</li>
+</ol>
+<ul>
+<li>强迁移 vs 弱迁移<br>定义： 将整个进程从一台机器搬到另一台机器上<br>强迁移：迁移后的程序可以从当前开始执行<br>弱迁移：迁移后的程序必须从初始状态开始执行</li>
+</ul>
+<ol start="3">
+<li>代码迁移vs虚拟机迁移</li>
+</ol>
+<ul>
+<li>优势： 代码迁移最多包含代码，数据，执行状态的迁移，总传输量远小于一个虚拟机，所以轻量，网络负载小，无需引入其他中间语言</li>
+<li>不足：在异构系统中可能不适合执行迁移的代码，进程/线程/处理器上下文可能高度依赖于本地硬件，OS和运行时系统</li>
+</ul>
+<h2 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h2><ol>
+<li>通信的类型</li>
+</ol>
+<ul>
+<li>远程调用RPC</li>
+<li>基于消息的通信</li>
+</ul>
+<ol start="2">
+<li>远程调用RPC<br>注意：对于基本的RPC调用，client要有进入localOS中。</li>
+</ol>
+<ul>
+<li>RPC工作过程：<ul>
+<li>客户过程以正常方式调用客户存根</li>
+<li>客户存根生成一个消息，然后调用本地操作系统</li>
+<li>客户端操作系统发送消息给远程操作系统</li>
+<li>服务器存根将参数提取出来，然后调用服务器</li>
+<li>服务器执行要求的操作，操作完成后将结果返回给服务器存根</li>
+<li>服务器存根把结果打包为一个消息，然后调用本地操作系统</li>
+<li>服务器操作系统将含有结果的消息发送给客户端操作系统</li>
+<li>客户端操作系统将消息交给客户存根</li>
+<li>客户存根将结果从消息中提取出来，返回给调用它的客户过程</li>
+</ul>
+</li>
+<li>故障处理<ul>
+<li>客户无法定位到服务器<ul>
+<li>解决：使用特定的返回值/异常处理</li>
+</ul>
+</li>
+<li>客户发给服务器的请求消息丢失<ul>
+<li>解决：设置一个timer, 超时重发</li>
+</ul>
+</li>
+<li>服务器发给客户的应答消息丢失<ul>
+<li>解决：设置一个 timer,对于不幂等的请求，为客户请求分配序号，服务器区别不同的请求</li>
+</ul>
+</li>
+<li>服务器在收到消息后崩溃<br>1 接受后，执行前崩溃<br>2 执行后，发送前崩溃<ul>
+<li>解决：等待服务器启动,然后重发请求/立即放弃并报告失败/不做任何保证</li>
+</ul>
+</li>
+<li>客户机在发送消息后崩溃<ul>
+<li>解决：根绝 extermination: 在日志文件中纪录 RPC 请求，重启后清除孤儿再生 reincarnation: 将时间划分成不同时期，重启后广播新的时期开始。一旦收到广播消息， kill所有 remote computations.温和再生 gentle reincarnation: 将时间划分成不同时期，重启后广播新的时期开始。收到广播消息时，定位 remote computations 的 owner，kill 没有 owner 的。过期 expiration: 赋予每个 RPC 一个一个执行时间 T，未完成任务需显式申请附加配额。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>动态绑定<ul>
+<li>client寻找server过程使用，client提供paras(versionm), handler处理</li>
+<li>为什么？<ul>
+<li>（1）灵活性</li>
+<li>（2）可以支持多个服务器提供相同接口</li>
+<li>（3）binder（具有粘结剂的意思）可以确认客户端和服务器使用相同的接口版本</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>（1）输出、引入接口需要额外管理，花费时间</li>
+<li>（2）在大型分布式系统中，binder的存在可能会是通信瓶颈</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>基于消息的通信</li>
+</ol>
+<ul>
+<li>暂时（一旦发出接收后便不再存在无论是否被接收） vs 永久（信息在中间件永久存在，如邮件系统）</li>
+<li>异步（local buffer暂时保留，qq离线消息） vs 同步（对话， blocked）</li>
+</ul>
+<ol start="4">
+<li>流数据</li>
+</ol>
+<ul>
+<li>视频、音频，雷达;对时间敏感</li>
+<li>流数据+QoS（服务质量，评价指标）<ul>
+<li>需要传输的数据的位数</li>
+<li>通信之间的延迟</li>
+<li>end-to-end的延迟</li>
+<li>最大延迟时间</li>
+</ul>
+</li>
+<li>可能考点：组播通信两种方式<ul>
+<li>Application-level：<ul>
+<li>chord-based tree building</li>
+<li>覆盖网</li>
+<li>epidemic algortihms</li>
+</ul>
+</li>
+<li>Gossip-based data dissemination</li>
+</ul>
+</li>
+</ul>
+<h2 id="同步与资源管理"><a href="#同步与资源管理" class="headerlink" title="同步与资源管理"></a>同步与资源管理</h2><ol>
+<li>同步问题</li>
+</ol>
+<ul>
+<li>系统需要决定谁先谁后</li>
+</ul>
+<ol start="2">
+<li>时钟同步机制</li>
+</ol>
+<ul>
+<li>系统标准时间UTC</li>
+<li>网络同步（T1-T0-I）/2</li>
+<li>The Berkeley Algorithm:公认时间，平均时间</li>
+<li>Averaging Algorithm:去掉最高和最低</li>
+</ul>
+<ol>
+<li>逻辑时钟</li>
+</ol>
+<ul>
+<li>Lamport算法</li>
+<li>向量时撮</li>
+</ul>
+<ol start="2">
+<li>分布式系统中的互斥访问</li>
+</ol>
+<ul>
+<li>集中式算法</li>
+<li>分布式算法</li>
+<li></li>
+</ul>
+<ol start="3">
+<li>分布式系统中的选举机制</li>
+</ol>
+<h2 id="复制与一致性"><a href="#复制与一致性" class="headerlink" title="复制与一致性"></a>复制与一致性</h2><ol>
+<li>复制的优势与不足</li>
+<li>数据一致性模型</li>
+<li>数据一致性协议实例<ol>
+<li>基于法定数量的协议</li>
+</ol>
+</li>
+</ol>
+<h2 id="容错"><a href="#容错" class="headerlink" title="容错"></a>容错</h2><ol>
+<li>可信系统</li>
+<li>提高系统可信性的途径</li>
+<li>K容错系统</li>
+<li>拜占庭问题</li>
+<li>系统回复<ol>
+<li>回退恢复</li>
+<li>前向恢复</li>
+</ol>
+</li>
+<li>检查点</li>
+</ol>
+<h2 id="大数据处理系统"><a href="#大数据处理系统" class="headerlink" title="大数据处理系统"></a>大数据处理系统</h2><p>Big data analytics: making sense of complex data</p>
+<p>Input: unstructured, multimodal, Hig-dimensional, interconneccted, growing fast in volume</p>
+<p>Goal: discover interpretable patterns; understand causal relationships; make informed predictions and decisions</p>
+<p>Challenge：</p>
+<ul>
+<li>the growth of data volume</li>
+<li>the complexity of analytics</li>
+<li>limitied cluster resources</li>
+</ul>
+<p>Solution overview</p>
+<ul>
+<li>Normalize quality metrics</li>
+<li>Pedict quality improvent</li>
+<li>Quality-driven scheduling</li>
+</ul>
+<h2 id="物联网"><a href="#物联网" class="headerlink" title="物联网"></a>物联网</h2><ol>
+<li><p>物联网的概念<br>物联网是一个基于互联网、传统电信网等信息载体，让所有能够被独立寻址的普通物理对象实现互联互通的网络</p>
+</li>
+<li><p>物联网分类<br>普通对象设备化<br>自治终端互联化<br>普适服务智能化</p>
+</li>
+<li><p>物联网四层模型</p>
+</li>
+</ol>
+<ul>
+<li>综合应用层：从以数据服务为主要特征的文件传输到以用户为中心的应用</li>
+<li>管理服务层：将大规模数据组织起来，为上层应用提供支撑</li>
+<li>网络构建层：吧下层设备接入互联网，供上层服务使用，包括3G、4G、Wifi、蓝牙、NFC等通信技术</li>
+<li>感知识别层：联系物理世界和信息世界，包括RIFD、无限传感器、移动终端等感知设备。射频识别技术</li>
+</ul>
+<p>基于目标定位的微动作感知识别机制</p>
+<h2 id="云计算"><a href="#云计算" class="headerlink" title="云计算"></a>云计算</h2><ol>
+<li>简要说明虚拟化技术所解决的问题，并说明虚拟化技术与云计算的关系</li>
+</ol>
+<ul>
+<li>虚拟化技术所解决的问题：虚拟化是由位于下层的软件模块，将其封装或抽象，提供一个物理或软件的接口，使得上层的软件可以直接运行在这个虚拟的环境和运行在原来的环境一样</li>
+<li>虚拟化技术与云计算的关系：<ul>
+<li>虚拟化具有以下优点，有利于云计算<ul>
+<li>封装与隔离的特点，保证每个用户有安全可信的工作环境</li>
+<li>多实例的特点，保证较高的资源利用率，为服务器合并提供基础</li>
+<li>硬件无关性的特点，整合异构硬件资源，可实现虚拟机迁移，使资源调度、负载平衡容易实现</li>
+</ul>
+</li>
+<li>特权功能的特点，用于云计算的入侵检测和病毒检测</li>
+<li>动态调整资源特点，便于云计算的细粒度的可扩展性</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><p>Openstack为代表的基本功能是什么<br>IaaS，基础设施即服务组件，让任何人都可以自行建立和提供云端运算服务。此外，openstack也用作建立防火墙内的“私有云”，提供机构或企业内各部门共享资源。以openstack为代表的IaaS的功能：为IT行业创造虚拟的计算和数据中心，使得其能够把计算单元、存储器、I/O设备、带宽等计算机基础设施，集中起来成为一个虚拟的资源池来为整个网络提供服务。</p>
+</li>
+<li><p>应用场景一适合，应用场景二不适合。OpenStack是基于虚拟化的IaaS云平台，提供的是有性能损耗的虚拟化资源，适用于资源类型较为单一、资源需求实时变化的系统，不适用于高性能计算。</p>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/nju-course-mlt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/19/nju-course-mlt/" class="post-title-link" itemprop="url">nju-course mlt</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-19 12:02:37 / 修改时间：12:07:42" itemprop="dateCreated datePublished" datetime="2019-09-19T12:02:37+08:00">2019-09-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/course/nju/mlt/" itemprop="url" rel="index"><span itemprop="name">mlt</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-BasicInequality"><a href="#1-BasicInequality" class="headerlink" title="1. BasicInequality"></a>1. BasicInequality</h2><p>有哪些不等式？<br>这些不等式是为了解决什么样的问题的？</p>
+<p>凸函数：杰森不等式说明函数的期望大于期望的函数，这说明了什么？</p>
+<p>a. 基本不等式</p>
+<ul>
+<li>杰森不等式<blockquote>
+<p>杰森不等式即变量的期望的函数小于函数的期望</p>
+</blockquote>
+</li>
+<li>Markov不等式<blockquote>
+<p>将$P{X \geq a}$的概率与期望联系在一起</p>
+</blockquote>
+</li>
+<li>chernoff不等式<blockquote>
+<p>将指数以及指数的性质引入。</p>
+</blockquote>
+</li>
+<li>大数定理<blockquote>
+<p>说明了大概率事件的问题</p>
+</blockquote>
+</li>
+<li>信息熵不等式<blockquote>
+<p>有什么用处，暂时未知</p>
+</blockquote>
+</li>
+</ul>
+<p>b. Concentration</p>
+<blockquote>
+<p>研究期望与样本均值之间的关系</p>
+</blockquote>
+<p>c. Martingale不等式</p>
+<blockquote>
+<p>结论很有意思，得到了函数与函数期望之间关系的不等式<br>McDiarmid不等式<br>A martingale is a sequence of random variables for which, at a particular time in the realized sequence, the expectation of the next value in the sequence is equal to the present observed value even given knowledge of all prior observed values.</p>
+</blockquote>
+<h2 id="3-PAC理论"><a href="#3-PAC理论" class="headerlink" title="3. PAC理论"></a>3. PAC理论</h2><p>PAC理论是什么？<br>主要应对的是什么问题？</p>
+<p>PAC是概率近似正确的表达式。首先对于衡量的指标，泛化误差也就是在未知样本上预测结果与真实结果的差异性，如果预测函数是真实的概念类，那么泛化误差应该为0. 经验误差是在已知有限样本数据上的真实与否的一个估计值。<br>PAC学习假设数据原本是存在某一个分布的，而且手上的数据集是通过iid采样得到的。那么，<br>经验误差的期望就应该与泛化误差相等，由于iid条件和期望的线性性。</p>
+<p>注意到，这里的经验误差的计算方式非常简单。</p>
+<p>对于PAC可学习，即我们希望尽可能学习到真实的概念，此时就提出了以$1-\delta$ 满足泛化误差小于某个常数</p>
+<p>但是，我们知道学习任务实际上是有两类的：<br>第一类，简单的，可以在假设空间中学习到概念，此时使用的就是PAC理论<br>第二类，困难的，不可以在假设空间中学习到概念。这种情况往往就是假设空间不合理，不可知PAC可学习。</p>
+<p>对于不可知PAC可学习，此时采用的方法就是使用集中不等式，有给出期望与数据样本的均值之间的关系，所以可以采用就将泛化误差与训练误差之间联系在一起。<br>这也是为什么实际上做的时候，训练样本不断使样本的误差达到最小，从而在未知样本上保持好的性能。</p>
+<p>有什么用？<br>某任务在什么样的条件下可学得较好的模型？需要多少训练样例才能获得较好的模型？</p>
+<p>因为机器学习是在假设空间中寻找概念，所以最重要的一个因素就是衡量假设空间的复杂度。</p>
+<blockquote>
+<p>注意在实际问题中，假设空间其实就是问题的定义域。假设空间可分就是目标概念在假设空间中可以找到，然后实际上就是&gt;证明算法，若算法给定就选该算法，若算法未给定，一般考虑选择经验风险最小化的算法。<br>然后根据定义即证明了可分<br>如果假设空间复杂度有限，用个数来衡量<br>由前面的PAC可学习公式我们就可以得到样本复杂度。<br>一般来说都解题步骤就是首先得到算法，然后图形结合得到泛化整个集合的泛化误差，然后通过独立同分布得到与单个泛化误差之间的关系，最终即可得到样本复杂度。</p>
+</blockquote>
+<h2 id="4-复杂度"><a href="#4-复杂度" class="headerlink" title="4. 复杂度"></a>4. 复杂度</h2><ul>
+<li><p>为什么可以用PAC理论来得到学习算法？<br>当认为处理每个样本的时间是常数，则算法的复杂度就与样本复杂度相关。又由PAC定义，如果概念在假设空间中可以由假设空间复杂度得到样本复杂度。</p>
+</li>
+<li><p>如果假设空间无限，引入假设空间，增长函数和VC维。</p>
+<blockquote>
+<p>无限假设空间的另一种理解方法就是定义域往往是无穷的<br>无限假设空间被有限大小的数据集限制。<br>增长函数即指该概念可以出现多少不同类的情况，则增长函数一定小于H_D<br>VC维就是log_2 {增长函数}</p>
+</blockquote>
+</li>
+<li><p>增长函数可以通过不等式放缩。</p>
+</li>
+<li><p>研究数据分布相关的假设空间复杂度</p>
+<blockquote>
+<p>考虑到现实中的某些标记不一定是真实标记，此时选择事先考虑随机噪声的假设更好。为什么这样更好？因为这里也是往往认为这种时间是具有一定分布的，即是随机噪声。<br>常见的噪声的取值为0.5的概率取某值，当然在其他情况下，噪声可能有其他的分布。<br>为什么要用上界来衡量？如同增长函数的感觉，上界来衡量的感觉就是去找最大的情况，而所有做的过程都是这样来做的。</p>
+</blockquote>
+</li>
+</ul>
+<p>注意有两种复杂度：<br>第一种，经验复杂度，即在随机噪声上的期望<br>第二种，分布复杂度，即在具体分布上的期望</p>
+<p>几个复杂度求解的例子。</p>
+<p>作业1-习题3：<br>求R复杂度时注意关于期望的运算最好使用期望原本的公式。</p>
+<h2 id="5-泛化性"><a href="#5-泛化性" class="headerlink" title="5. 泛化性"></a>5. 泛化性</h2><p>机器学习模型在未见数据上的预测能力。泛化性的好坏可由泛化误差界来表示。<br>所以泛化性的评价标准就是泛化误差。<br>由前面的分析可知，泛化误差区分可分和不可分两种情况。<br>对于可分的情况，样本复杂度是关于名同事我们还可以知道泛化误差的收敛速率<br>对于不可分的情况，此时用的是误差经验最小化来查看结果。</p>
+<blockquote>
+<p>注意不可分与假设空间无限两个概念不要弄混。</p>
+</blockquote>
+<p>无限空间泛化误差界：</p>
+<ul>
+<li>基于VC维的泛化误差界</li>
+<li>基于Rademacher复杂度的泛化误差界</li>
+</ul>
+<p>在研究SVM的VC维时，引入间隔理论，即</p>
+<p>假设x的直径的最大长度为r，权向量的最大模为某个定值。最终根据不等式的放缩、期望以及期望的性质最终可得大小关系式。</p>
+<p>评价：所求的泛化性是对所欲算法都适用的，与具体的学习算法无关。</p>
+<h2 id="6-稳定性"><a href="#6-稳定性" class="headerlink" title="6. 稳定性"></a>6. 稳定性</h2><p>$\zeta_D$: 算法基于样本集返回的假设。<br>z: 代指实际的标签(x,y)<br>关于移除样本的$\beta$-稳定性和替换样本$\gamma$。</p>
+<p>因为稳定性的定义是两个误差的绝对值，所以趋于稳定即这个值越小越好。那么想要基于稳定性的算法具有收敛性，从某个角度理解就是需要该算法能够随着样本的增大而缩小，因为只有样本容量这一个大小。</p>
+<p>定理6.1利用McDiamnd不等式给出了基于稳定性所学的假设的泛化误差界。<br>给出了泛化误差界与训练误差界之间的关系。</p>
+<ul>
+<li>稳定性与可学习性之间有什么关系？<br>稳定性关注点是算法输出的假设的误差，并不考虑空间中所有假设。<br>一个结论：若果学习算法是ERM且稳定的，那么假设空间是PAC可学习的。<br>为什么？<br>因为从稳定性的定义来看就是损失函数上套了一层。</li>
+</ul>
+<p>次梯度，即实际函数与函数的点的切线的距离。<br>这里的关键是有次梯度的关系表达式，即泰勒级数的一阶展开式。将$B_F$和稳定性定义，以及梯度联系在一起。<br>特别说明地是，这里在证明稳定性的上界的时候可以发现，首先是证明了$\Delta h$的最大值的上界。<br>然后再用$\delta$可容许将稳定性的误差放缩为$\Delta h$，最终得到稳定性的范围。<br>注意这里是讨论了基于核正则化算法的稳定性。</p>
+<p>注意到定理6.1,可以发现最关键的就是分析损失函数的上界以及替换误差.</p>
+<p>课文中只给出了基于再生核的泛化误差界，没有给出其他。<br>还有一点就是本文的讨论都是基于均匀稳定性导出的泛化误差界，但均匀稳定性并不是算法奏效的必要条件，</p>
+<h2 id="7-AdaBoost分析"><a href="#7-AdaBoost分析" class="headerlink" title="7. AdaBoost分析"></a>7. AdaBoost分析</h2><p>集成学习即利用某种规则将各个学习结果进行整合从而获得比单个学习器显著优越的泛化性能。</p>
+<p>弱学习器的定义：弱学习器是指在多项式时间内存在一个学习器，其错误率低于50%，即存在比随机猜略好的学习方法。</p>
+<p>简单版的AdaBoost算法<br>在每一轮迭代中，产生一个弱学习器ht,该学习器比随机猜的性能略好，然后根据产生的弱学习器ht，每一个样本被赋予一个权重，如果样本点被正确地分类，那么它的权重越小，表明在下一轮训练中被选中的概率越低。相反，如果某样本点没有被准确地分类，那么它的权重就会提高，然后更显样本集并用于下一轮的学习训练，整个训练过程如此迭代，最后将所有得到的弱分类器通过权重结合起来。</p>
+<p>这里是使用了最优化，使泛化误差去极小值，最终得到权值的更新公式。</p>
+<p><strong>泛化误差反应的是在未知结果上的好坏，而函数空间复杂度则反应的是学习的程度如何，比如是否过拟合之类的信息</strong></p>
+<p><strong>奥卡姆剃刀原理</strong>：在于经验数据一致的模型中，模型越简单，泛化性越好；模型越复杂，泛化性越差。</p>
+<ul>
+<li>AdaBoost间隔<br>AdaBoost间隔理论的定义：<br>间隔定义为正确/错误分类样本(x,y)的基分类器权重之差，在一定程度上了反映了分类器的可信度。<br>有种执行区间的感觉。</li>
+</ul>
+<p>AdaBoost间隔结论<br>学习器在真实分布上的泛化错误率与在训练集上的间隔有关，与训练集的大小，基学习器的个数有关。<br>所以说明了AdaBoost算法但训练错误率时不停止训练，可以进一步增大间隔，从而提高学习方法的泛化性而没有过拟合。<br>也就是AdaBoost算法不易引起过拟合现象。想想真的是超级神奇了。</p>
+<ul>
+<li><p>AdaBoost VC维泛化误差性<br>由VC维得到结论：随着迭代轮数的增加，学习器函数空间复杂度增加，从而导致发生过拟合风险。不过这是有问题的。</p>
+</li>
+<li><p>AdaBoost Rademaer泛化误差性<br>可以发现，这里所用的都是利普西子条件来分析的。</p>
+<h2 id="8-一致性"><a href="#8-一致性" class="headerlink" title="8. 一致性"></a>8. 一致性</h2><p>结构风险，1范数-稀疏性，2范数-平均性</p>
+</li>
+</ul>
+<p>一致性这里研究的就是模型和测试的结果之间是否一致，至少在理论上提供保证。</p>
+<p>KNN 经验风险最小化。<br>Tree 拆分法</p>
+<p>所以这里的问题的起点变为了首先给定样本空间和标记空间。D是这两个空间的笛卡尔积的一个联合分布。分布D可分解为边缘分布和条件概率，为什么？</p>
+<blockquote>
+<p>因为联合分布的定义就是边缘分布乘以条件概率</p>
+</blockquote>
+<p>若函数给出一个分类器或决策函数，其错误率定义为</p>
+<blockquote>
+<p>R(g)=Pr[g(X)!=Y]=E[I_{g(X)!=Y}]</p>
+</blockquote>
+<p>那么，考虑最优分类器及其性质</p>
+<blockquote>
+<p>这里应该有理论上最优和基于后验最优。</p>
+</blockquote>
+<p>只考虑所有可测函数，选出最符合后验概率的，作为最优。</p>
+<blockquote>
+<p>注意这里给定任意的损失函数来做经验风险最小化。<br>首先按照条件期望展开，然后把g(X)即分类器当做变量。对损失求极值，由此可以得到最优分类器和最优风险。<br>此时就被称为贝叶斯风险和贝叶斯分类器。</p>
+</blockquote>
+<blockquote>
+<p>注意指示函数非凸不连续做不到效果，所以建议使用对数，指数和sigmoid函数。<br>如果是凸函数可以得到全局最优解。<br>各点最小，全局最小。</p>
+</blockquote>
+<ul>
+<li>这里的$\eta(x)=Pr(Y=1|X=x)$<br>一种经典的条件概率估计方法：Plug-in学习方法。<blockquote>
+<p>该学习方法是通过训练数据集来估计$\eta(x)$, 即学习器$g(x)=I[\widehat\eta(x) &gt; \frac {1}{2}]$<br>这里是训练集预测的结果差异<br>实际上理解就是少数服从多数</p>
+</blockquote>
+</li>
+</ul>
+<p>然后，将Plug-in学习器与最优分类器的错误率之差建立了与两个n(x)的差的期望</p>
+<ul>
+<li>拆分算法<blockquote>
+<p>将示例空间划分为多个互不相交的单元格A1,A2,…。对每个单元格投票的方法赋予标记，还是少数服从多数。</p>
+</blockquote>
+</li>
+</ul>
+<p>A(X)这里表示包含X的单元格。N(X)表示训练集中与示例X落入同一单元格的实例数。</p>
+<ul>
+<li><p>Box算法</p>
+</li>
+<li><p>随机森林一致性</p>
+</li>
+<li><p>替换损失函数一致性</p>
+<blockquote>
+<p>替换函数一般都需要是凸函数。<br>替换函数一致性是指替换损失的最优解接近于0,1损失的最优解<br>替代函数的种类： </p>
+<ol>
+<li>最小二乘损失函数 $(1-t)^2$</li>
+<li>Hinge损失函数 $max(0,1-t)$</li>
+<li>指数损失函数 $e^{-t}$</li>
+<li>对数损失函数 $log(1+e^{-t})$</li>
+<li>平方Hinge损失函数 $(max(0,1-t))^2$</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="9-优化"><a href="#9-优化" class="headerlink" title="9. 优化"></a>9. 优化</h2><blockquote>
+<p>监督学习目的想在未知样本中能预测到好的结果，实际上就是测试数据上的期望的性能。往往思考的时候添加个损失函数，所以就变成了是带损失的期望风险最小化。</p>
+</blockquote>
+<h3 id="9-1-凸优化"><a href="#9-1-凸优化" class="headerlink" title="9.1 凸优化"></a>9.1 凸优化</h3><blockquote>
+<p>凸优化求解经验风险最小化<br>几个概念</p>
+</blockquote>
+<ol>
+<li>凸集合</li>
+<li>凸函数的几种判定方式<blockquote>
+<p>? Jensen不等式有什么性质<br>凸函数能保证局部最优解就是全局最优解。<br>一阶条件的理解：可以想象成梯度的等温线然后来做。<br>一般地，Affine,Exponential,Powers,Powers of absolute value, Negative entropy都是凸函数<br>几种合起来的套路：<br>非负加权、线性加权、max、sup(只需要自由变元满足即可)</p>
+</blockquote>
+</li>
+<li>共轭函数<blockquote>
+<p>注意：无论原函数f是否为凸函数，共轭函数f*都为凸</p>
+</blockquote>
+</li>
+<li>对偶问题<br>KKT条件：</li>
+</ol>
+<ul>
+<li>原始问题约束</li>
+<li>对偶问题约束</li>
+<li>互补松弛条件</li>
+<li>原函数梯度为0</li>
+</ul>
+<ol start="5">
+<li>优化方法<br>对于梯度下降，目的就是为了分析其在凸函数情况下的收敛速率。<blockquote>
+<p>?</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>? 所以说可以认为凸优化在这里就对应于定步长的梯度下降。</p>
+</blockquote>
+<blockquote>
+<p>凸优化再思考，凸优化为什么表达式是最优化目标min,小于等于，还有必须是纺织函数；<br>因为Jensen不等式，所以就有加权函数值小于等于函数值加权，所以就能找到最优化目标。</p>
+</blockquote>
+<h3 id="9-2-随机优化"><a href="#9-2-随机优化" class="headerlink" title="9.2 随机优化"></a>9.2 随机优化</h3><blockquote>
+<p>随机优化是类大的引题，随机优化是一种方法，一种思想。然后在机器学习中就对应于经验风险最小化部分。</p>
+</blockquote>
+<p>随机优化求解有两种方法：样本平均近似和随机近似。</p>
+<h4 id="样本平均近似"><a href="#样本平均近似" class="headerlink" title="样本平均近似"></a>样本平均近似</h4><p>机器学习领域的经验风险最小化。<br>其核心思想是对随机变量进行独立采样，然后利用定义在m个样本上的平均函数来近似未知的目标函数</p>
+<blockquote>
+<p>?，这里的随机变量是R复杂度，还是样本值？什么鬼？</p>
+</blockquote>
+<p>然后衡量的目标就是经验风险最小化学的w，在目标函数上w与目标函数上最优解之间的误差 </p>
+<blockquote>
+<p>这里的w与F对应的是什么？</p>
+</blockquote>
+<p>然后通过不等式放缩即找<br>平常情况下的w在目标函数中的值和在样本平均中的值的差</p>
+<h4 id="随机近似"><a href="#随机近似" class="headerlink" title="随机近似"></a>随机近似</h4><blockquote>
+<p>利用目标函数F的有噪声观测直接优化问题，如果可以观测到目标函数值，则称为零阶随机优化；如果可以观测到目标函数的梯度，则称为一阶优化</p>
+</blockquote>
+<p>两个例子</p>
+<ol>
+<li><p>随机梯度下降</p>
+</li>
+<li><p>阶段随机梯度下降<br>阶段</p>
+</li>
+</ol>
+<h3 id="9-3-完全信息在线学习"><a href="#9-3-完全信息在线学习" class="headerlink" title="9.3 完全信息在线学习"></a>9.3 完全信息在线学习</h3><blockquote>
+<p>这一章以及后面就涉及到在线学习的内容了。在线学习在某种意义上可以看作是学习器与对手之间的博弈过程。完全信息在线学习能观测到全部的信息，赌博机在线学习只能观测到局部的信息。</p>
+</blockquote>
+<ol>
+<li><p>基于专家建议的预测</p>
+<blockquote>
+<p>对手给出yt, 每个专家给出自己的意见，然后统帅根据某种方法综合专家的意见（线性或者加权），这种方法带有参数，共N个专家，训练T轮。<br>如何学习最优决策？目标是统帅做出决策所获得的损失和专家的损失和相近。（就是专家最牛，希望自己的决策最终能趋近于专家的决策）</p>
+</blockquote>
+</li>
+<li><p>在线凸优化</p>
+<blockquote>
+<p>对于损失函数的选择，从某种意义上感觉来说还是与函数的性质有关。</p>
+</blockquote>
+</li>
+<li><p>在线梯度下降</p>
+<blockquote>
+<p>这里分凸函数和强凸函数</p>
+</blockquote>
+</li>
+<li><p>在线牛顿法</p>
+<blockquote>
+<p>指数凹函数</p>
+</blockquote>
+</li>
+<li><p>在线批处理转换</p>
+</li>
+</ol>
+<blockquote>
+<p>从某种意义上，可以再看看源码中怎么写的</p>
+</blockquote>
+<h3 id="9-4-赌博机在线学习"><a href="#9-4-赌博机在线学习" class="headerlink" title="9.4 赌博机在线学习"></a>9.4 赌博机在线学习</h3><blockquote>
+<p>对于赌博机来说，学习器预测错误后并不知道正确答案。</p>
+</blockquote>
+<ol>
+<li>多臂赌博机<blockquote>
+<p>学习器的遗憾就是探索和利用之间的折中；一方面，为了准确均值估计需要探索;另一方面，学习器又倾向于选择最大收益的手臂。</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>注意选择不能只是选均值大的。</p>
+</blockquote>
+<blockquote>
+<p>评价准则：首先最优选择是什么？事先知道答案，即选择了最优的。那么就是T*Ui; 其次，实际做的是什么？就是每轮真正的选择之和。</p>
+</blockquote>
+<p>一种做法就是置信上界，为每个手臂维持一个均值加一个变量，注意这个变量定的方式暂时未知。</p>
+<ol start="2">
+<li>线性赌博机<blockquote>
+<p>一个问题，噪声具有分布，怎么观测到噪声，噪声有什么用。</p>
+</blockquote>
+</li>
+</ol>
+<p>首先，这里有个目标；目标可以是最小方差。然后，可以取得一个权重，并根据这个权重找到对应的置信趋于，有置信区域找到上界。然后再根据各个标签的置信区域的上界来找到$X_{t+1}$。<br>然后提交观测的样本，再进行学习。<br>注意，一些扩展的tips，最小方差，在线最小方差。</p>
+<ol start="3">
+<li>凸赌博机</li>
+</ol>
+<p>在赌博机的设定下，学习器智能观测到损失函数$f_t$在决策$w_t$上的值$f(w_t)$,因此是无法直接应用梯度下降的。<br>所以这里引入了从函数值估计梯度的技术。<br>首先在x组成的空间中随机选择一个单位向量，然后学习器根据这个单位向量选择决策$w_t=z_t+\delta u_t$;同时，对手选择一个损失函数。学习器遭受损失，并更新$z_t$。值得注意的是这是就能从$z_t$近似来做，最终来做凸优化。</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h4 id="1-频率-vs-贝叶斯"><a href="#1-频率-vs-贝叶斯" class="headerlink" title="1.频率 vs 贝叶斯"></a>1.频率 vs 贝叶斯</h4><h4 id="频率"><a href="#频率" class="headerlink" title="频率"></a>频率</h4><blockquote>
+<p>有上帝之手的感觉，假设事物在冥冥之中服从一个分部，这个分布的参数是未知的，但是是固定的</p>
+</blockquote>
+<p>最大似然估计MLE:<br>首先假定一个分布，然后基于最大期望估计得到模型的参数。参数固定。</p>
+<h4 id="贝叶斯"><a href="#贝叶斯" class="headerlink" title="贝叶斯"></a>贝叶斯</h4><blockquote>
+<p>世界是不确定的，人们对世界先有一个预判，而后通过观测数据对这个预判进行调整。我们的目标是要找到最优的描述这个世界的概率分布。参数是一个随机变量，符合一定的概率分布。</p>
+</blockquote>
+<p>最大后验估计MAP:<br>对世界预判后，不断改变参数找到最适合的分布</p>
+<p>过拟合？频率派的专有词<br>频率学派——最大似然估计 MLE.</p>
+<blockquote>
+<p>EM算法使用的就是MLE</p>
+</blockquote>
+<p>缓解办法：</p>
+<ol>
+<li>添加正则化项</li>
+<li>模型集成</li>
+</ol>
+<p>贝叶斯学派——最大后验估计MAP</p>
+<p>缓解办法：</p>
+<ol>
+<li>引入先验，做最大后验估计？<blockquote>
+<p>认为正则化项实际是一种先验分布，比如u均值的拉普拉斯分布，0均值的高斯分布</p>
+</blockquote>
+</li>
+<li>计算后验分布的积分（相当于给不同模型进行加权组合）</li>
+</ol>
+<h3 id="三种函数的性质"><a href="#三种函数的性质" class="headerlink" title="三种函数的性质"></a>三种函数的性质</h3><p>凸函数：局部最优就是全局最优<br>强凸：只有唯一的最优值，因为表达式中涉及到二阶值，所以此时可以看出强凸有距离的概念。强凸使得前一轮的信息可以直接用到当前论</p>
+<h3 id="Nothing-is-more-practical-than-a-good-theory"><a href="#Nothing-is-more-practical-than-a-good-theory" class="headerlink" title="Nothing is more practical than a good theory!"></a>Nothing is more practical than a good theory!</h3><p>Notations</p>
+<ul>
+<li>Input space</li>
+<li>Fuction: g</li>
+<li>Risk of g: 泛化风险</li>
+<li>Regression function: 回归问题</li>
+<li>Target function: 非回归问题<blockquote>
+<p>? 后两个是最优的function</p>
+</blockquote>
+</li>
+</ul>
+<p>普通的策略都是经验风险最小化来得到最优分类器，然后防止过拟合引入正则化项。</p>
+<blockquote>
+</blockquote>
+<p>所以必然考虑到基于训练集得到的分类器的误差与最小分类器得到的误差之间的关系。</p>
+<blockquote>
+<p>最优分类器可能没在假设空间中。</p>
+</blockquote>
+<p>然后根据二次bound可以bound到<br>$R(g_n)-R_n(g_n)$,即generalization下最优误差与经验风险最小化误差的差值。</p>
+<p>如果带有损失函数用来分析一致性、稳定性之类，利用Lipschitz条件进行放缩</p>
+<p>分析$R(g_n)-R_n(g_n)$<br>利用Hoeffding’s Inequilty<br>推出假设空间为有限的界</p>
+<p>若假设空间为无限，由秧差得到R复杂度。</p>
+<blockquote>
+<p>当面对具体算法，因为是凸优化问题；就可以根据分类器即函数的性质得到收敛速率之类的事情。</p>
+</blockquote>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>未标签数据的应用：<br>四种，其中前三种已经有理论证明。</p>
+<ol>
+<li>生成式方法。<blockquote>
+<p>从有标记数据中学得参数，作用在未标记数据上。然后更新有标记数据集，进而更新参数。</p>
+</blockquote>
+</li>
+<li>半监督SVM<blockquote>
+<p>一次性读入数据，不能中间添加数据。<br>不能在采样点秘籍的地方穿过</p>
+</blockquote>
+</li>
+<li>图<blockquote>
+<p>标签传播，进行随机游走</p>
+</blockquote>
+</li>
+<li>一组分类器<blockquote>
+<p>基于不一致性进行学习；多视图学习</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="Generalization"><a href="#Generalization" class="headerlink" title="Generalization"></a>Generalization</h3><ul>
+<li>证明PAC<blockquote>
+<p>写出最优分类器，然后拆分，然后做</p>
+</blockquote>
+</li>
+<li>VC<blockquote>
+<p>打散，假设空间可自己构造</p>
+</blockquote>
+</li>
+<li>算R<blockquote>
+<p>假设带进入做期望</p>
+</blockquote>
+</li>
+<li>R的性质</li>
+</ul>
+<ol>
+<li>R(aH)=|a|R(H)</li>
+<li>R(H1+H2)=R(H1)+R(H2)</li>
+<li>R(max(h1,h2)) &lt;= R(h1) + R(h2)<blockquote>
+<p>max=$\frac{1}{2} (x+y+|x-y|)$</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>为什么对假设空间进行限制的合理？<br>因为误差会随假设空间的维度增大而减小</li>
+<li>证明最优分类器<blockquote>
+<p>把一般的表达式写出来，证明最小值即最优</p>
+</blockquote>
+</li>
+<li>稳定性<blockquote>
+<p>说明有界，并且证明$\delta$可容许</p>
+</blockquote>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -3433,7 +3583,7 @@ map(key, ts) // ts为一个测试样本
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">109</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -3446,7 +3596,7 @@ map(key, ts) // ts为一个测试样本
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-count">74</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -3459,7 +3609,7 @@ map(key, ts) // ts为一个测试样本
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

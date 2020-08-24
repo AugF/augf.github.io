@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <link rel="alternate" href="/atom.xml" title="AugF's Notes" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<script>
+    (function(){
+        if(){
+            if (prompt(请输入文章密码) !== ){
+                alert(密码错误！);
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <meta name="description" content="AliGraph 数据模型 算法框架 系统框架 图存储 图采样 计算     NeuGraph 编程模型 系统实现 Graph-Aware Dataflow Translation Streaming Processing out of GPU core Parallel Multi-GPU Processing Propagation Engine 其他技巧   实验评估   DGL Arch">
+<meta name="keywords" content="hexo, notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="survey-of-gnn-systems">
+<meta property="og:url" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/index.html">
+<meta property="og:site_name" content="AugF&#39;s Notes">
+<meta property="og:description" content="AliGraph 数据模型 算法框架 系统框架 图存储 图采样 计算     NeuGraph 编程模型 系统实现 Graph-Aware Dataflow Translation Streaming Processing out of GPU core Parallel Multi-GPU Processing Propagation Engine 其他技巧   实验评估   DGL Arch">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AliGraph-Fig2.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AliGraph-Alg1.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AliGraph-Fig3.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AliGraph-Alg2.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AliGraph-Fig4.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AliGraph-Fig8.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AliGraph-Fig9.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AliGraph-Fig6.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AliGraph-Tab4.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AliGraph-Tab5.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/neugraph-fig2.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/neugraph-fig3.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/neugraph-fig5.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/neugraph-fig6.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/neugraph-fig8.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/neugraph-paragraph.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/neugraph-tab2.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/neugraph-fig17.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AIGNN-Fig3.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AIGNN-Tab2.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AIGNN-Fig5.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AIGNN-Fig2.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AIGNN-Fig6.png">
+<meta property="og:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AIGNN-Tab3.png">
+<meta property="og:updated_time" content="2020-08-24T14:11:02.079Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="survey-of-gnn-systems">
+<meta name="twitter:description" content="AliGraph 数据模型 算法框架 系统框架 图存储 图采样 计算     NeuGraph 编程模型 系统实现 Graph-Aware Dataflow Translation Streaming Processing out of GPU core Parallel Multi-GPU Processing Propagation Engine 其他技巧   实验评估   DGL Arch">
+<meta name="twitter:image" content="https://augf.github.io/2020/06/24/survey-of-gnn-systems/survey-of-gnn-systems.assets/AliGraph-Fig2.png">
+  <link rel="canonical" href="https://augf.github.io/2020/06/24/survey-of-gnn-systems/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>survey-of-gnn-systems | AugF's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AugF's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">71</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">74</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">109</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2020/06/24/survey-of-gnn-systems/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eugene Wang">
+      <meta itemprop="description" content="Quick notes">
+      <meta itemprop="image" content="/images/default-avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AugF's Notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">survey-of-gnn-systems
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-06-24 22:10:26" itemprop="dateCreated datePublished" datetime="2020-06-24T22:10:26+08:00">2020-06-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-24 22:11:02" itemprop="dateModified" datetime="2020-08-24T22:11:02+08:00">2020-08-24</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li><a href="#aligraph">AliGraph</a><ul>
+<li><a href="#%e6%95%b0%e6%8d%ae%e6%a8%a1%e5%9e%8b">数据模型</a></li>
+<li><a href="#%e7%ae%97%e6%b3%95%e6%a1%86%e6%9e%b6">算法框架</a></li>
+<li><a href="#%e7%b3%bb%e7%bb%9f%e6%a1%86%e6%9e%b6">系统框架</a><ul>
+<li><a href="#%e5%9b%be%e5%ad%98%e5%82%a8">图存储</a></li>
+<li><a href="#%e5%9b%be%e9%87%87%e6%a0%b7">图采样</a></li>
+<li><a href="#%e8%ae%a1%e7%ae%97">计算</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#neugraph">NeuGraph</a><ul>
+<li><a href="#%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%9e%8b">编程模型</a></li>
+<li><a href="#%e7%b3%bb%e7%bb%9f%e5%ae%9e%e7%8e%b0">系统实现</a><ul>
+<li><a href="#graph-aware-dataflow-translation">Graph-Aware Dataflow Translation</a></li>
+<li><a href="#streaming-processing-out-of-gpu-core">Streaming Processing out of GPU core</a></li>
+<li><a href="#parallel-multi-gpu-processing">Parallel Multi-GPU Processing</a></li>
+<li><a href="#propagation-engine">Propagation Engine</a></li>
+<li><a href="#%e5%85%b6%e4%bb%96%e6%8a%80%e5%b7%a7">其他技巧</a></li>
+</ul>
+</li>
+<li><a href="#%e5%ae%9e%e9%aa%8c%e8%af%84%e4%bc%b0">实验评估</a></li>
+</ul>
+</li>
+<li><a href="#dgl">DGL</a></li>
+<li><a href="#architectural-implications-of-graph-neural-networks">Architectural Implications of Graph Neural Networks</a></li>
+<li><a href="#characterizing-and-understanding-gcns-on-gpu-yan-2020">Characterizing and Understanding GCNs on GPU [Yan-2020]</a></li>
+<li><a href="#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae">参考文献</a></li>
+</ul>
+<h1 id="AliGraph"><a href="#AliGraph" class="headerlink" title="AliGraph"></a><a href="#ref-aligraph">AliGraph</a></h1><h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><p>AliGraph面向的数据模型为Attributed Heterogeneous Graph (AHG)。</p>
+<p><img src="survey-of-gnn-systems.assets/AliGraph-Fig2.png" alt></p>
+<h2 id="算法框架"><a href="#算法框架" class="headerlink" title="算法框架"></a>算法框架</h2><p>AliGraph所支持的通用GNN框架。在该框架中，每一层的GNN被拆解为三个基本算子：Sample, Aggregate和Combine。其中Aggregate进行边计算，而Combine进行点计算。</p>
+<p><img src="survey-of-gnn-systems.assets/AliGraph-Alg1.png" alt></p>
+<blockquote>
+<p> 注意：在该算法框架中，每一层（hop）都采用了相同的Sample/Aggregate/Combine算子，其不允许不同层采用不同的算子进行组合。</p>
+</blockquote>
+<h2 id="系统框架"><a href="#系统框架" class="headerlink" title="系统框架"></a>系统框架</h2><p>AliGraph的系统架构如下。最上面是Aggregate和Combine算子的实现，中间是Sampling方法，最下面是图存储。目前的AliGraph主要运行在CPU环境中。</p>
+<p><img src="survey-of-gnn-systems.assets/AliGraph-Fig3.png" alt></p>
+<h3 id="图存储"><a href="#图存储" class="headerlink" title="图存储"></a>图存储</h3><p>AliGraph采用的是vertex-cut的划分方案，即不同的边被分到不同的机器上。</p>
+<p><img src="survey-of-gnn-systems.assets/AliGraph-Alg2.png" alt></p>
+<p>图中顶点和边的属性与图的邻接表<strong>分开存储</strong>，见图<a href="#fig-AliGraph-Fig4">AliGraph-Fig4</a>。原因有二：</p>
+<ol>
+<li><p>属性信息更占据存储空间。</p>
+</li>
+<li><p>不同顶点/边的属性有很大的重叠。例如大量顶点都具有共同的标签，例如“男性”、“洗漱用品”等。</p>
+</li>
+</ol>
+<p>通过为顶点属性和边属性建立Index，将图的拓扑信息与图的属性信息建立关联。为了减少对属性信息的访问开销，在每台机器上会对Index中的属性条目建立cache，cache采用LRU替换策略。</p>
+<p><img src="survey-of-gnn-systems.assets/AliGraph-Fig4.png" alt><a name="fig-AliGraph-Fig4"></a></p>
+<p>同时，每台机器会<strong>缓存</strong>重要顶点的邻接表。采用如下的公式为每个顶点v，确定其k-重要性（k-th importance），其中$D_i^{(k)}(v)$和$D_o^{(k)}(v)$表示顶点v的k跳出/入邻域的大小。每台机器只缓存重要性大于阈值$\tau_k$的顶点v的出边邻接表。实际实践表明考虑至多2跳邻域就足够了，阈值$\tau_k$设置为0.2就效果很好。<br>$$<br>Imp^{(k)}(v)=\frac{D_i^{(k)}(v)}{D_o^{(k)}(v)}<br>$$<br>与重要性指标相关的一个定理是：如果顶点的度数服从幂率分布，则其k跳邻域的规模也服从幂率分布，从而k-重要性也服从<em>幂率分布</em>。</p>
+<blockquote>
+<p> 对于无向图这个指标无法适用。</p>
+</blockquote>
+<p><a href="#fig-AliGraph-Fig8">实验</a>表明因为Importance指标遵从Power-law分布，因此较低的threshold就能够cache足够数量的顶点。同时<a href="#fig-AliGraph-Fig9">缓存替换策略</a>的实验基于importance指标的cache策略比随机替换和LRU替换都有效，更适合图神经网络。Importance策略和随机替换策略都是静态策略，其会预先cache相应的顶点邻接表。而LRU策略因为其动态特性，会经常剔除、替换已经cache的邻接表，导致额外开销。</p>
+<p><a name="fig-AliGraph-Fig8"><img src="survey-of-gnn-systems.assets/AliGraph-Fig8.png" alt></a></p>
+<p><a name="fig-AliGraph-Fig9"><img src="survey-of-gnn-systems.assets/AliGraph-Fig9.png" alt></a></p>
+<blockquote>
+<p> 如何制定适合图分析的cache策略也是研究方向之一。</p>
+</blockquote>
+<p>在实现时，将边按照source vertex划分成不同的组，每一个组绑定到一个core上。对于该组顶点邻接表的访问与更新操作被组织到一个request-flow桶中，该桶由<strong><a href="#fig-AliGraph-Fig6">lock-free的队列实现</a></strong>。</p>
+<p><a name="fig-AliGraph-Fig6"><img src="survey-of-gnn-systems.assets/AliGraph-Fig6.png" alt></a></p>
+<h3 id="图采样"><a href="#图采样" class="headerlink" title="图采样"></a>图采样</h3><p>AliGraph中支持3种图采样策略，同时也运行以plugin的形式扩展。</p>
+<ol>
+<li><p>Traverse：从一个图分区中采样一批顶点。可以直接从当前服务器的分区中生成。</p>
+</li>
+<li><p>Neighborhood：采样某个顶点的1跳或多跳邻域。如果顶点邻域跨服务器，则分批地从其他图服务器获取邻接表。</p>
+</li>
+<li><p>Negative：生成负采样样本，加速收敛。通常可在本地服务器上完成，按需地查询远程服务器以获得邻接表。</p>
+</li>
+</ol>
+<p>Sampler中的权重也允许根据梯度进行更新。</p>
+<p>经过采样，每个顶点的邻域大小被<strong>对齐</strong>，使其可以很容易地被处理。</p>
+<p><a href="#fig-aligraph-tab4">实验表明</a>通过分布式采样（Batch size=512，Cache size=20%），即使是很大的图，也能非常快地采样完毕。</p>
+<p>Neighborhood采样因为要涉及服务器之间的通讯，速度会比另外两个采样慢很多。</p>
+<p>采样技术的性能对数据规模不敏感，及时图规模增大6倍，采样时间的变化也不大。</p>
+<p><a name="fig-aligraph-tab4"><img src="survey-of-gnn-systems.assets/AliGraph-Tab4.png" alt></a></p>
+<h3 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h3><p>编程模型中与计算相关的是Aggregate和Combine。AliGraph也允许以plugin的形式扩展实现这两个算子。需要注意的是，这两个算子需要同时实现其forward计算和backward计算的逻辑。</p>
+<p>在计算的过程中，会保存每个顶点v在当前mini-batch中的最新的中间特征向量：$h_v^{(1)}, \dots, h_v^{(kmax)}$。</p>
+<p><a href="#fig-aligraph-tab5">实验表明</a>cache mini-batch的中间特征向量对于提升两个算子的计算速度非常重要。</p>
+<p><a name="fig-aligraph-tab5"><img src="survey-of-gnn-systems.assets/AliGraph-Tab5.png" alt></a></p>
+<h1 id="NeuGraph"><a href="#NeuGraph" class="headerlink" title="NeuGraph"></a><a href="#ref-NeuGraph">NeuGraph</a></h1><p>NeuGraph是微软亚洲研究院提出的面向单机多GPU环境的并行图神经网络训练框架，该框架基于TensorFlow实现。NeuGraph主要面相transductive的setting，即整个图参与训练，在目前的系统中没有考虑sample，但作者说可以集成sample到框架中。</p>
+<h2 id="编程模型"><a href="#编程模型" class="headerlink" title="编程模型"></a>编程模型</h2><p>NeuGraph为图神经网络训练提出了SAGA-NN（Scatter-ApplyEdge-Gather-ApplyVertex with Neural Networks）编程模型。SAGA-NN模型将图神经网络中每一层的前向计算划分为4个阶段：Scatter、ApplyEdge、Gather和ApplyVertex，如<a href="#fig-neugraph-fig2">Figure 2</a>所示。其中ApplyEdge和ApplyVertex阶段执行用户提供的基于神经网络的边特征向量和点特征向量的计算。Scatter和Gather是由NeuGraph系统隐式触发的阶段，这两个阶段为ApplyEdge和ApplyVertex阶段准备数据。</p>
+<p><a name="fig-neugraph-fig2"><img src="survey-of-gnn-systems.assets/neugraph-fig2.png" alt></a></p>
+<p>在编程时，用户只需利用给定的算子实现ApplyEdge和ApplyVertex函数，并指定Gather方式，即可利用NeuGraph自动地完成GNN的训练。<a href="#fig-neugraph-fig3">Figure 3</a>展示了利用SAGA-NN编程模型表达Gated-GCN的编程示例。</p>
+<p><a name="fig-neugraph-fig3"><img src="survey-of-gnn-systems.assets/neugraph-fig3.png" alt></a></p>
+<h2 id="系统实现"><a href="#系统实现" class="headerlink" title="系统实现"></a>系统实现</h2><h3 id="Graph-Aware-Dataflow-Translation"><a href="#Graph-Aware-Dataflow-Translation" class="headerlink" title="Graph-Aware Dataflow Translation"></a>Graph-Aware Dataflow Translation</h3><p>NeuGraph采用2D图划分方法，其将顶点集划分为<strong>P</strong>个分区（trunk），边集（邻接矩阵）划分为$P\times P$个分区，其中边分区$E_{ij}$保存了连接点分区$V_i$和$V_j$的边。NeuGraph基于chunk构建数据流图，如<a href="#fig-neugraph-fig5">Figure 5</a>所示。</p>
+<p><a name="fig-neugraph-fig5"><img src="survey-of-gnn-systems.assets/neugraph-fig5.png" alt></a></p>
+<p>其中Scatter算子接收1个边分区和2个对应的点分区，将数据整理成[src, dst,data]的元组形式，该元组形式将传递给ApplyEdge函数进行处理。</p>
+<p>在Forward阶段会产生大量中间计算结果（例如ApplyEdge中的矩阵乘法的结果），NeuGraph为了避免中间结果占用大量的GPU显存，其会将中间结果从GPU端显存上传到Host端的内存中，在Backward阶段再传回GPU端。</p>
+<p>为了能在Gather阶段中复用数据，NeuGraph在Forward（Backward）阶段中采用列（行）优先的顺序处理边分区。例如为了在Forward阶段持续累加V0点分区中的点特征向量，其依次处理E(0,0), E(1,0), …, E(n,0)边分区。</p>
+<p>NeuGraph在不超过GPU显存容量限制的情况下选择尽可能小的分区数$P$。</p>
+<h3 id="Streaming-Processing-out-of-GPU-core"><a href="#Streaming-Processing-out-of-GPU-core" class="headerlink" title="Streaming Processing out of GPU core"></a>Streaming Processing out of GPU core</h3><p>为了能让GPU处理超过其显存容量的数据，必须将数据动态地在GPU和Host端进行交换。</p>
+<p><strong>Selective Scheduling技巧</strong>：一个边分区可能只与对应点分区中少量的点发生关联，因此在从CPU端向GPU端发送点分区数据时，可以只传递点分区中的少部分数据。NeuGraph根据CPU端内存拷贝的带宽、CPU-GPU端数据交换的带宽，动态地确定阈值，来确定是向GPU发送整个点分区，还是只发送点分区中的部分数据。</p>
+<p><strong>Pipeline Scheduling技巧</strong>：将一个边分区进一步划分为sub-trunk，流水线地向GPU发送sub-trunk并在GPU端并发地进行sub-trunk的计算。为了使计算和HtoD数据传输充分地重叠，NeuGraph采用一个基于profile的sub-trunk调度方案，其在头几轮迭代中profile各个sub-trunk的计算开销和数据传输开销，并根据开销计算出更优的调度方案，如<a href="#fig-neugraph-fig6">Figure 6</a>所示。</p>
+<p><a name="fig-neugraph-fig6"><img src="survey-of-gnn-systems.assets/neugraph-fig6.png" alt></a></p>
+<h3 id="Parallel-Multi-GPU-Processing"><a href="#Parallel-Multi-GPU-Processing" class="headerlink" title="Parallel Multi-GPU Processing"></a>Parallel Multi-GPU Processing</h3><p>在拥有多GPU卡的环境中，可以充分利用各GPU卡之间的高速P2P PCIe通信来降低Host端PCIe总线带宽压力。NeuGraph将共享PCIe Switch的GPU卡视作一个虚拟GPU卡组，点分区、边分区的数据从Host memory中广播到各个虚拟GPU卡的第一个物理GPU中（例如Figure 8中的GPU0和GPU2）。第一个物理GPU在对该点分区进行处理的同时，并发地将数据发送给同一个虚拟GPU中的下一个物理GPU（例如<a href="#fig-neugraph-fig8">Figure 8</a>中的GPU1和GPU3），并发地从Host Device载入下一批Vertex Chunk和Edge Chunk数据。流水线地处理，直到所有点分区和边分区均处理完。</p>
+<p><a name="fig-neugraph-fig8"><img src="survey-of-gnn-systems.assets/neugraph-fig8.png" alt></a></p>
+<h3 id="Propagation-Engine"><a href="#Propagation-Engine" class="headerlink" title="Propagation Engine"></a>Propagation Engine</h3><p>NeuGraph在GPU上实现Graph Propagation时额外采用了如下优化手段：</p>
+<ul>
+<li>在ApplyEdge中出现的只与source vertex或destination vertex相关的计算移动到上一步中的ApplyVertex中进行。这样避免对于每一条边都进行相应的计算。</li>
+<li>在GPU上实现高效的Scatter和Gather kernel。</li>
+<li>Scatter-ApplyEdge-Gather算子融合：当ApplyEdge算子是element-wise的简单逻辑时，其整个SAG的过程被直接替换为Fused-Gather算子，该算子直接将source vertex和edge data读入到kernel的register中，并在register中完成ApplyEdge的计算，计算结果累加如destination vertex的accumulation向量。通过融合可以避免将中间计算结果保存回GPU显存，节省GPU内存访问开销。</li>
+</ul>
+<h3 id="其他技巧"><a href="#其他技巧" class="headerlink" title="其他技巧"></a>其他技巧</h3><ul>
+<li>模型参数每个GPU一份，通过all-reduce在各GPU之间保持同步。</li>
+<li>GPU之间通过P2P通信。</li>
+</ul>
+<h2 id="实验评估"><a href="#实验评估" class="headerlink" title="实验评估"></a>实验评估</h2><ul>
+<li>实验在点分类任务上进行，我们可以借鉴论文中的叙述来说明。<br>  <img src="survey-of-gnn-systems.assets/neugraph-paragraph.png" alt></li>
+<li>数据集的平均度数影响Graph Propagation的时间开销，平均度数越高的数据集其Propagation的开销越高。</li>
+<li>系统实验中的优化技巧是有效的，能够比单纯在TensorFlow上实现SAGA模型快2.4~4.9倍。</li>
+<li>“The results under other models are similar”这句表达可以借鉴。</li>
+<li>Selectively scheduling适合sparse graph而graph kernel optimization适合dense graph。</li>
+<li>即使采用了IO（GPU与Host端数据交换）和GPU kernel互相重叠的优化，IO耗时依然长于GPU kernel计算耗时。<br>  <img src="survey-of-gnn-systems.assets/neugraph-tab2.png" alt></li>
+<li>Chain-based mechanism对于多GPU卡的扩展性至关重要。<br>  <img src="survey-of-gnn-systems.assets/neugraph-fig17.png" alt></li>
+<li>当GPU卡数量上来时，被多GPU共享的CPU和Memory带宽将成为制约多GPU扩展性的瓶颈。</li>
+<li>NeuGraph的speedup曲线虽然是线性的，但距离理想的线性可扩展性还有差距。当其GPU卡数量从1增加到8时，其Speedup的增长远没有到8倍。</li>
+</ul>
+<h1 id="DGL"><a href="#DGL" class="headerlink" title="DGL"></a><a href="#ref-DGL">DGL</a></h1><p>DGL是支持多后端（MXNet、TensorFlow、PyTorch）的一个面向深度图神经网络的计算框架。</p>
+<p>DGL也采用基于message-passing的编程模型，用户提供自定义的message function（边计算）、update function（点计算）和reduce operation （消息规约操作）。但与PyG不同的是，DGL支持用户提供自定义的reduce operation，而不局限于sum、mean、max等少数几种。</p>
+<p>DGL引用了文献<a href="#ref-Xu-2018">(Xu-2018)</a>表明aggregator（即reduce）所支持的复杂度与图神经网络的表达能力密切相关。</p>
+<p>DGL支持sampling机制，该机制通过指定active vertex/set set实现，以data loader的形式提供给用户。</p>
+<p>用户提供的message function和update function必须是向量化的，即可以对多个顶点同时操作。</p>
+<p>kernel fusion是一个提高计算性能的有效技巧。</p>
+<ul>
+<li>kernel fusion将message function与update function合并进行，从而避免生成message的实体中间结果，从而大幅降低计算开销和GPU显存使用量。</li>
+<li>kernel fusion要求message function非常简单，不能使用任何参数。</li>
+<li>实验表明DGL相比PyG的主要性能提升即来自kernel fusion。</li>
+</ul>
+<h1 id="Architectural-Implications-of-Graph-Neural-Networks"><a href="#Architectural-Implications-of-Graph-Neural-Networks" class="headerlink" title="Architectural Implications of Graph Neural Networks"></a><a href="#ref-Zhang-ICAL-2020">Architectural Implications of Graph Neural Networks</a></h1><p>GNN吸引人的一个优点是end-to-end的训练能力。</p>
+<p>作者认为computation-intensive GEMM kernel不是GNN的性能热点。<strong>这个结论要和我们的实验结果对照一下</strong>。</p>
+<p>本文关注<strong>inference</strong>阶段的性能热点。</p>
+<p>如<a href="#fig-aignn-fig3">Fig. 3</a>所示，实际GNN中用到的基本算子的种类是有限的，各算子经过组合得到丰富的GNN架构。<br>  <a name="fig-aignn-fig3"><img src="survey-of-gnn-systems.assets/AIGNN-Fig3.png" alt></a></p>
+<p>DGL中允许Gather阶段采用任何的累加函数，包含LSTM，因此作者论文中覆盖了GraphSAGE-LSTM版本。</p>
+<p><a href="#fig-aignn-tab2">Tab 2</a>中列出了实验中采用数据集情况。在列图数据集的情况后，可以把Graph Type也列上，如[Tab 2] (#fig-aignn-tab2)所示。</p>
+<p><a name="fig-aignn-tab2"><img src="./survey-of-gnn-systems.assets/AIGNN-Tab2.png" alt></a></p>
+<blockquote>
+<p>作者选用的数据集平均度数有些低。<br>采用sampling技巧后，处理的图的平均度数也可能很低，需要结合实验。<br>我感觉图的平均度数可能会是影响性能的重要指标。</p>
+</blockquote>
+<p>GPU硬件资源的利用率与图规模和隐向量的规模密切相关。</p>
+<p>作者认为GNN没有固定的性能瓶颈，性能瓶颈会随着数据集和算法的不同而变化，因此各阶段都需要优化，都有优化的价值。</p>
+<p>本文在处理GAT时，其ApplyEdge只有简单的矩阵向量乘法，而将耗时的softmax阶段算到Gather里，因此作者的实验结果中GAT的Gather阶段非常耗时，如<a href="#fig-aignn-fig5">Fig. 5</a>所示。</p>
+<p><a name="fig-aignn-fig5"><img src="./survey-of-gnn-systems.assets/AIGNN-Fig5.png" alt="aignn-fig5"></a></p>
+<p>本文确认了Scatter阶段（对应于PyG的collect阶段）中只有数据拷贝，没有计算，并给出了该阶段的实现<a href="#fig-aignn-fig2">示意图</a>。</p>
+<p><a name="fig-aignn-fig2"><img src="./survey-of-gnn-systems.assets/AIGNN-Fig2.png" alt="aignn-fig2"></a></p>
+<p>相比传统的图分析计算PageRank、SCC等，因为GNN中每个顶点和边上都是向量，因此对于硬件cache来说locality比较好。</p>
+<p>本文进一步验证了kernel fusion对于性能提升的重要性，如<a href="#fig-aignn-fig6">Fig.6</a>所示。fused gattern kernel是由稀疏矩阵乘法实现，因此是可微的。</p>
+<p><a name="fig-aignn-fig6"><img src="survey-of-gnn-systems.assets/AIGNN-Fig6.png" alt="aignn-fig6"></a></p>
+<p>GNN相比传统DL的最大特点是引入了Sparse Matrix Operation。</p>
+<p>文中<a href="#fig-aignn-tab3">Tab 3</a>中总结了各阶段算子的Kernel和计算特性，这与我们的结论互相对照一下。</p>
+<p><a name="fig-aignn-tab3"><img src="survey-of-gnn-systems.assets/AIGNN-Tab3.png" alt="aignn-tab3"></a></p>
+<h1 id="Characterizing-and-Understanding-GCNs-on-GPU-Yan-2020"><a href="#Characterizing-and-Understanding-GCNs-on-GPU-Yan-2020" class="headerlink" title="Characterizing and Understanding GCNs on GPU [Yan-2020]"></a>Characterizing and Understanding GCNs on GPU [<a href="#ref-Yan-2020">Yan-2020</a>]</h1><p>本文分析了GCN类的算法在inference阶段的特性，同时与经典的图分析算法（PageRank）和基于MLP的经典神经网络做了特性对比分析。</p>
+<p>GCN顶点和边上的属性值是特征向量（维度至少为几十），而PageRank中顶点和边上的属性是标量。</p>
+<ul>
+<li>特征向量带来了更加良好的locality（一个顶点的数据被连续的访问）。</li>
+<li>特征向量带来了更高的顶点内的并行性。</li>
+</ul>
+<p>本文利用sgemm实现GCN中特征向量（稀疏）与权重矩阵的乘法。</p>
+<p>本文发现在GCN算法中的每一层$H=AXW$中，先计算$X’=XW$再计算$H=AX’$会带来更好的性能，因为$X$的纬度一般很高，而$W$的维度一般较低。</p>
+<blockquote>
+<p>但是这样做会带来$X$也要参与$W$的梯度计算的问题，反而可能会得不偿失。</p>
+</blockquote>
+<p>本文发现实际图中的顶点度数分布符合幂律分布的特性，因此缓存高度数的顶点，有可能可以提升硬件Cache的命中率。</p>
+<p>因为aggregation阶段需要并发地、原子地更新顶点的输出特征向量，因此向量化原子访问有可能可以提升aggregation阶段的效率。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<li><p><a name="ref-aligraph">[AliGraph]</a>ZHU R, ZHAO K, YANG H, 等. AliGraph: A Comprehensive Graph Neural Network Platform[J]. Proceedings of the VLDB Endowment, 2019, 12(12): 2094–2105. DOI:10.14778/3352063.3352127.</p>
+</li>
+<li><p><a name="ref-NeuGraph">[NeuGraph]</a>MA L, YANG Z, MIAO Y, 等. NeuGraph: Parallel Deep Neural Network Computation on Large Graphs[C/OL]//2019 USENIX Annual Technical Conference (USENIX ATC 19). Renton, WA: USENIX Association, 2019: 443–458. <span class="exturl" data-url="aHR0cHM6Ly93d3cudXNlbml4Lm9yZy9jb25mZXJlbmNlL2F0YzE5L3ByZXNlbnRhdGlvbi9tYQ==" title="https://www.usenix.org/conference/atc19/presentation/ma">https://www.usenix.org/conference/atc19/presentation/ma<i class="fa fa-external-link"></i></span>.</p>
+</li>
+<li><p><a name="ref-DGL">[DGL]</a>WANG M, YU L, ZHENG D, 等. Deep Graph Library: Towards Efficient and Scalable Deep Learning on Graphs[J/OL]. arXiv:1909.01315 [cs, stat], 2019[2020–06–20]. <span class="exturl" data-url="aHR0cDovL2FyeGl2Lm9yZy9hYnMvMTkwOS4wMTMxNQ==" title="http://arxiv.org/abs/1909.01315">http://arxiv.org/abs/1909.01315<i class="fa fa-external-link"></i></span>.</p>
+</li>
+<li><p><a name="ref-Xu-2018">[Xu-2018]</a>XU K, HU W, LESKOVEC J, 等. How Powerful are Graph Neural Networks?[C/OL]//7th International Conference on Learning Representations, ICLR 2019, New Orleans, LA, USA, May 6-9, 2019. . <span class="exturl" data-url="aHR0cHM6Ly9vcGVucmV2aWV3Lm5ldC9mb3J1bT9pZD1yeUdzNmlBNUtt" title="https://openreview.net/forum?id=ryGs6iA5Km">https://openreview.net/forum?id=ryGs6iA5Km<i class="fa fa-external-link"></i></span>.</p>
+</li>
+<li><p><a name="ref-Zhang-ICAL-2020">[Zhang-ICAL-2020]</a>Z. ZHANG, J. LENG, L. MA, 等. Architectural Implications of Graph Neural Networks[J]. IEEE Computer Architecture Letters, 2020, 19(1): 59–62. DOI:10.1109/LCA.2020.2988991.</p>
+</li>
+<li><p><a name="ref-Yan-2020">[Yan-2020]</a>M. YAN, Z. CHEN, L. DENG, 等. Characterizing and Understanding GCNs on GPU[J]. IEEE Computer Architecture Letters, 2020, 19(1): 22–25. DOI:10.1109/LCA.2020.2970395.</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eugene Wang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://augf.github.io/2020/06/24/survey-of-gnn-systems/" title="survey-of-gnn-systems">https://augf.github.io/2020/06/24/survey-of-gnn-systems/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/03/20/algorithm-acwing-improve-datastruture/" rel="next" title="algorithm-acwing-improve-datastruture">
+                  <i class="fa fa-chevron-left"></i> algorithm-acwing-improve-datastruture
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AliGraph"><span class="nav-number">1.</span> <span class="nav-text">AliGraph</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据模型"><span class="nav-number">1.1.</span> <span class="nav-text">数据模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法框架"><span class="nav-number">1.2.</span> <span class="nav-text">算法框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统框架"><span class="nav-number">1.3.</span> <span class="nav-text">系统框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图存储"><span class="nav-number">1.3.1.</span> <span class="nav-text">图存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图采样"><span class="nav-number">1.3.2.</span> <span class="nav-text">图采样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算"><span class="nav-number">1.3.3.</span> <span class="nav-text">计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NeuGraph"><span class="nav-number">2.</span> <span class="nav-text">NeuGraph</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程模型"><span class="nav-number">2.1.</span> <span class="nav-text">编程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统实现"><span class="nav-number">2.2.</span> <span class="nav-text">系统实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph-Aware-Dataflow-Translation"><span class="nav-number">2.2.1.</span> <span class="nav-text">Graph-Aware Dataflow Translation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Streaming-Processing-out-of-GPU-core"><span class="nav-number">2.2.2.</span> <span class="nav-text">Streaming Processing out of GPU core</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Multi-GPU-Processing"><span class="nav-number">2.2.3.</span> <span class="nav-text">Parallel Multi-GPU Processing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Propagation-Engine"><span class="nav-number">2.2.4.</span> <span class="nav-text">Propagation Engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他技巧"><span class="nav-number">2.2.5.</span> <span class="nav-text">其他技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验评估"><span class="nav-number">2.3.</span> <span class="nav-text">实验评估</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DGL"><span class="nav-number">3.</span> <span class="nav-text">DGL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architectural-Implications-of-Graph-Neural-Networks"><span class="nav-number">4.</span> <span class="nav-text">Architectural Implications of Graph Neural Networks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Characterizing-and-Understanding-GCNs-on-GPU-Yan-2020"><span class="nav-number">5.</span> <span class="nav-text">Characterizing and Understanding GCNs on GPU [Yan-2020]</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/default-avatar.png"
+      alt="Eugene Wang">
+  <p class="site-author-name" itemprop="name">Eugene Wang</p>
+  <div class="site-description" itemprop="description">Quick notes</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F1Z0Y=" title="GitHub &rarr; https://github.com/AugF"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOnl1bnBhbndhbmdAZ21haWwuY29t" title="E-Mail &rarr; mailto:yunpanwang@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vSm9zd3hl" title="Weibo &rarr; https://weibo.com/Joswxe"><i class="fa fa-fw fa-weibo"></i>Weibo</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==" title="https://www.google.com">Google</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jbi5iaW5nLmNvbQ==" title="https://cn.bing.com">Bing</span>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29t" title="https://www.baidu.com">Baidu</span>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eugene Wang</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://augf.github.io/2020/01/12/test/</loc>
-    <lastmod>2020-01-12</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/11/30/about-life/</loc>
-    <lastmod>2020-01-12</lastmod>
+    <loc>https://augf.github.io/2020/06/24/survey-of-gnn-systems/</loc>
+    <lastmod>2020-08-24</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/16/algorithm-acwing-improve/</loc>
-    <lastmod>2020-01-02</lastmod>
+    <lastmod>2020-08-07</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/16/algorithm-basic-class/</loc>
+    <lastmod>2020-08-07</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-dp/</loc>
+    <lastmod>2020-08-07</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-search-graph/</loc>
+    <lastmod>2020-08-07</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/11/01/gnn-parallel-ggsnn-code-realize/</loc>
+    <lastmod>2020-06-10</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/18/easy-offer-details/</loc>
+    <lastmod>2020-04-03</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-math/</loc>
+    <lastmod>2020-03-26</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2020/03/20/algorithm-acwing-improve-datastruture/</loc>
+    <lastmod>2020-03-20</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/11/03/errors-in-c/</loc>
+    <lastmod>2020-03-04</lastmod>
+  </url>  <url>
+    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-basic/</loc>
+    <lastmod>2020-03-03</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/19/linux/</loc>
     <lastmod>2019-12-24</lastmod>
@@ -16,19 +40,10 @@
     <loc>https://augf.github.io/2019/11/01/tools-pygraphviz-study/</loc>
     <lastmod>2019-12-23</lastmod>
   </url>  <url>
-    <loc>https://augf.github.io/2019/11/03/errors-in-c/</loc>
-    <lastmod>2019-12-15</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-dp/</loc>
-    <lastmod>2019-12-15</lastmod>
-  </url>  <url>
     <loc>https://augf.github.io/2019/09/19/python-study/</loc>
     <lastmod>2019-12-12</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/12/06/paper-read-graphsage/</loc>
-    <lastmod>2019-12-11</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/12/11/paper-read-graphsage-1/</loc>
     <lastmod>2019-12-11</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/12/08/The-Minto-Pyramid-Princlple/</loc>
@@ -52,9 +67,6 @@
     <loc>https://augf.github.io/2019/10/10/gnn-parallel-ggsnn-code-read/</loc>
     <lastmod>2019-11-10</lastmod>
   </url>  <url>
-    <loc>https://augf.github.io/2019/11/01/gnn-parallel-ggsnn-code-realize/</loc>
-    <lastmod>2019-11-06</lastmod>
-  </url>  <url>
     <loc>https://augf.github.io/2019/11/03/torch-study/</loc>
     <lastmod>2019-11-06</lastmod>
   </url>  <url>
@@ -72,9 +84,6 @@
   </url>  <url>
     <loc>https://augf.github.io/2019/09/19/algorithm-acwing-greedy/</loc>
     <lastmod>2019-10-29</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/10/17/%E8%AE%BA%E6%96%87%E6%80%9D%E8%80%83-Gated-Graph-Sequence-Neural-Networks-ICLR-2016/</loc>
-    <lastmod>2019-10-17</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/10/14/tools-latex-MathJax/</loc>
     <lastmod>2019-10-14</lastmod>
@@ -155,15 +164,6 @@
     <lastmod>2019-09-19</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/19/nju-course-cplus-lecture6/</loc>
-    <lastmod>2019-09-19</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-search-graph/</loc>
-    <lastmod>2019-09-19</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-basic/</loc>
-    <lastmod>2019-09-19</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/09/19/algorithm-acwing-math/</loc>
     <lastmod>2019-09-19</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/19/algorithm-acwing-data-struture/</loc>
@@ -283,16 +283,10 @@
     <loc>https://augf.github.io/2019/09/18/english-todo/</loc>
     <lastmod>2019-09-18</lastmod>
   </url>  <url>
-    <loc>https://augf.github.io/2019/09/18/easy-offer-details/</loc>
-    <lastmod>2019-09-18</lastmod>
-  </url>  <url>
     <loc>https://augf.github.io/2019/09/18/design-pattern-summary/</loc>
     <lastmod>2019-09-18</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/18/design-pattern-details/</loc>
-    <lastmod>2019-09-18</lastmod>
-  </url>  <url>
-    <loc>https://augf.github.io/2019/09/16/algorithm-basic-class/</loc>
     <lastmod>2019-09-18</lastmod>
   </url>  <url>
     <loc>https://augf.github.io/2019/09/18/study-todo/</loc>

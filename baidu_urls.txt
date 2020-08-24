@@ -1,5 +1,5 @@
-https://augf.github.io/2020/01/12/test/
-https://augf.github.io/2019/12/11/paper-read-graphsage-1/
+https://augf.github.io/2020/06/24/survey-of-gnn-systems/
+https://augf.github.io/2020/03/20/algorithm-acwing-improve-datastruture/
 https://augf.github.io/2019/12/08/The-Minto-Pyramid-Princlple/
 https://augf.github.io/2019/12/06/paper-read-graphsage/
 https://augf.github.io/2019/12/01/target-for-work/

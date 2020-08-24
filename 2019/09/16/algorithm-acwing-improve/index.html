@@ -72,14 +72,14 @@
 </script>
 
   <meta name="description" content="1. 概览 算法学习分为这几类：  level 1 语法课, 直接题库搜索”语法课”即可进行练习 https://www.acwing.com/problem/search/1/?csrfmiddlewaretoken=msUJJ5LtxRvIldBlsslvchYSw8Grn8UdIM32F2WtpNs1WitNTjsvLznTVFof8cW2&amp;amp;search_content=%E8%AF">
-<meta name="keywords" content="acwing,algorithm,improve">
+<meta name="keywords" content="algorithm,acwing,improve">
 <meta property="og:type" content="article">
 <meta property="og:title" content="algorithm acwing improve class">
 <meta property="og:url" content="https://augf.github.io/2019/09/16/algorithm-acwing-improve/index.html">
 <meta property="og:site_name" content="AugF&#39;s Notes">
 <meta property="og:description" content="1. 概览 算法学习分为这几类：  level 1 语法课, 直接题库搜索”语法课”即可进行练习 https://www.acwing.com/problem/search/1/?csrfmiddlewaretoken=msUJJ5LtxRvIldBlsslvchYSw8Grn8UdIM32F2WtpNs1WitNTjsvLznTVFof8cW2&amp;amp;search_content=%E8%AF">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-02T01:00:21.654Z">
+<meta property="og:updated_time" content="2020-08-07T13:19:29.601Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="algorithm acwing improve class">
 <meta name="twitter:description" content="1. 概览 算法学习分为这几类：  level 1 语法课, 直接题库搜索”语法课”即可进行练习 https://www.acwing.com/problem/search/1/?csrfmiddlewaretoken=msUJJ5LtxRvIldBlsslvchYSw8Grn8UdIM32F2WtpNs1WitNTjsvLznTVFof8cW2&amp;amp;search_content=%E8%AF">
@@ -201,7 +201,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">70</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">71</span></a>
 
   </li>
       
@@ -214,7 +214,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">75</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">74</span></a>
 
   </li>
       
@@ -227,7 +227,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">111</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">109</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -323,7 +323,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-02 09:00:21" itemprop="dateModified" datetime="2020-01-02T09:00:21+08:00">2020-01-02</time>
+                <time title="修改时间：2020-08-07 21:19:29" itemprop="dateModified" datetime="2020-08-07T21:19:29+08:00">2020-08-07</time>
               </span>
             
           
@@ -525,8 +525,7 @@
 </li>
 </ul>
 <p>简单回顾</p>
-<p>线性DP<br>序列DP: 包含选出来的一些数，相邻的数之间有一些关系</p>
-<p>背包问题: 序列问题， 组合问题DP， 不考虑相邻元素之间的关系，考虑全局</p>
+<p>线性DP<br>序列DP: 包含选出来的一些数，相邻的数之间有一些关系<br>背包问题: 序列问题， 组合问题DP， 不考虑相邻元素之间的关系，考虑全局</p>
 <p>01背包问题：每个物品选择或者不选<br>f[i,j]所有只从前i个物品中选，且总体积不超过j的选法的集合<br>划分：</p>
 <ol>
 <li>选择第i个物品的所有方案 f[i-1,j-v_i] + w_i </li>
@@ -974,12 +973,13 @@
 </blockquote>
 <p>\sum_{fi - mid*ti} &gt; 0<br>图中是否正环</p>
 <p>通过最长路来做。</p>
-<h3 id="4-5-差分约束"><a href="#4-5-差分约束" class="headerlink" title="4.5 差分约束"></a>4.5 差分约束</h3><h3 id="4-6-最近公共祖先"><a href="#4-6-最近公共祖先" class="headerlink" title="4.6 最近公共祖先"></a>4.6 最近公共祖先</h3><ol>
+<h3 id="4-5-差分约束"><a href="#4-5-差分约束" class="headerlink" title="4.5 差分约束"></a>4.5 差分约束</h3><p>最短路径：最长路的最小值</p>
+<h3 id="4-6-最近公共祖先"><a href="#4-6-最近公共祖先" class="headerlink" title="4.6 最近公共祖先"></a>4.6 最近公共祖先</h3><ol>
 <li>向上标记法： 对点a向上走到根节点的路径进行标记，同时对b点做，当向上走的祖先相同时，即得到O(n)</li>
 <li>倍增fa[i,j]: 表示从i开始向上走2^j能到达的节点。 0 &lt;= j &lt;= logn; depth[i]表示深度，层数，即到根节点的距离+1<ul>
 <li>j = 0, f[i, j]=i的父节点</li>
 <li>j &gt; 0,  f[i, j] = f(f[i, j-1],j-1)<blockquote>
-<p>x,y  基于二进制拼凑的思想. t&gt;=2^k,  t包含k位<br>哨兵： 如果从i开始跳2^j步会跳过根节点，那么fa[i,j]=0, depth[0]=0<br>步骤:  预处理O(nlogn)?  查询O(logn)</p>
+<p>x,y  基于二进制拼凑的思想. t&gt;=2^k,  t包含k位<br>哨兵： 如果从i开始跳2^j步会跳过根节点，那么fa[i,j]=0, depth[0]=0<br>步骤:  预处理O(nlogn)?  查询O(mlogn)</p>
 <ol>
 <li>先把x,y跳到同一层。 depth[x]-depth[y].  depth(f[x,k]) &gt;= depth(y) logn。 从大到小</li>
 <li>让两个点一直往上跳，跳到同时是公共祖先的下一层为止。 跳到不等时 logn</li>
@@ -988,7 +988,7 @@
 </li>
 </ul>
 </li>
-<li>Tarjan: 离线求LCA O(n+m) <blockquote>
+<li>Tarjan: 离线求LCA 查询O(n+m) <blockquote>
 <p>DFS，合并两个集合可以用并查集来做。 遍历，合并，查询一次。 O(1), 合并和查询的时间都是O(1)</p>
 </blockquote>
 <ul>
@@ -1001,13 +1001,77 @@
 </ol>
 </li>
 <li><ol start="0">
-<li>还未搜索的点<h3 id="4-7-有向图的强连通分量"><a href="#4-7-有向图的强连通分量" class="headerlink" title="4.7 有向图的强连通分量"></a>4.7 有向图的强连通分量</h3></li>
+<li>还未搜索的点<blockquote>
+<p>根据并查集来做！</p>
+</blockquote>
+</li>
 </ol>
 </li>
 </ul>
 </li>
 </ol>
-<h3 id="4-8-二分图"><a href="#4-8-二分图" class="headerlink" title="4.8 二分图"></a>4.8 二分图</h3><h3 id="4-9-欧拉回路和欧拉路径"><a href="#4-9-欧拉回路和欧拉路径" class="headerlink" title="4.9 欧拉回路和欧拉路径"></a>4.9 欧拉回路和欧拉路径</h3><h3 id="4-10-拓扑排序"><a href="#4-10-拓扑排序" class="headerlink" title="4.10 拓扑排序"></a>4.10 拓扑排序</h3><h2 id="？-补充"><a href="#？-补充" class="headerlink" title="？ 补充"></a>？ 补充</h2><p>RSA密钥原理<br>Q*P=N<br>N作为公钥，P，Q作为密钥，P知道Q的密钥，分别被双方拥有。实际上是基于大整数分解非常困难的原因。</p>
+<h3 id="4-7-有向图的强连通分量"><a href="#4-7-有向图的强连通分量" class="headerlink" title="4.7 有向图的强连通分量"></a>4.7 有向图的强连通分量</h3><p>一般来说，对于一般的图很难做。所以我们常见的想法就是先将一个图缩点为有向芜湖安图DAG, 拓扑图，然后用关键路径来做</p>
+<p>求连通分量</p>
+<p>DFS:<br>在搜索过程中这四种边</p>
+<ul>
+<li>树枝边 (x, y)</li>
+<li>前向边 (x, y)</li>
+<li>后向边 (x, y)</li>
+<li>横叉边 (x, y)<blockquote>
+<p>注意，向左是横叉边，但是向右就不是横叉边了；因为右边的横叉边；<br>后向边都是往回走的；前向边不用管</p>
+</blockquote>
+</li>
+</ul>
+<p>? x它是否在某个强连通分量SCC中<br>情况1：存在后向边，指向祖先节点<br>情况2：走到了横叉边，横叉边走到了祖先节点。</p>
+<p>时间戳</p>
+<p>以前的方法是：一遍DFS，再BFS来着<br>Tarjan算法求强连通分量SCC<br>对每个点定义两个时间戳<br>dfn[u]表示遍历到u的时间戳<br>low[u]表示从u开始走，所能遍历到的最小时间戳<br>u是其所在的强联通分量的最高点，等价于dfn[u] == low[u]<br>此时就把当前的连通分量找出来</p>
+<p>时间复杂度 O(n + m)</p>
+<p>后续做法：</p>
+<ol>
+<li>缩点: DAG<br>for i = 1, i &lt;=n, i ++<br> for i的所有领点j:<pre><code>if i,j 不在同一SCC中
+    加一条新边，id(i) -&gt; id(j);</code></pre>按照连通分量递减的顺序就是拓扑序列<br>所有到这个点的顺序已经确定</li>
+</ol>
+<p>求拓扑序列：<br>深度搜索，宽度搜索</p>
+<h3 id="4-8-无向图连通分量"><a href="#4-8-无向图连通分量" class="headerlink" title="4.8 无向图连通分量"></a>4.8 无向图连通分量</h3><ol>
+<li>边双连通分量 e-DCC<br>极大的不包含桥的连通块<br>极大：不存在一个包含它的并且比它多的连通分量</li>
+</ol>
+<p>tarjan算法：</p>
+<ul>
+<li>树枝边</li>
+<li>前向边</li>
+<li>后向边<br>时间戳的思想： dfn[x], low[x]<br>如何找到桥？<br>x-y是桥 &lt;-&gt; dfn[x] &lt; low[y]<br>如何找所有边的双连通分量？</li>
+<li>将所有桥删掉，剩下的连通分支都是</li>
+<li>使用栈来找 dfn[x]==low[x]:  x所包含的子树就是双连通分量</li>
+</ul>
+<p>冗余路径：如果两个路径没有公共边，等价于边的双连通分量<br>最少加几条边可以构成边的双连通分量<br>缩点后其实就是一棵树，所有度数为1的点都至少要加一条边。<br>ceil(cnt/2) = (cnt+1)/2<br>证明：<br>充分性：反证法<br>必要性：</p>
+<ol start="2">
+<li>点双连通分量 v-DCC<br>极大的不包含割点的连通块</li>
+</ol>
+<p>反直觉，每个割点至少属于两个连通分量<br>两个割点之间的边不一定是桥<br>任何桥的两个端点不一定是割点，如两个点的情况<br>点连通分量不一定是边连通分量<br>边连通分量不一定是点连通分量</p>
+<p>如何求割点？<br>x-&gt;y:<br>low[y] &gt;= dfn[x]</p>
+<ol>
+<li>如果x不是根节点，那么x是割点</li>
+<li>如果x是根节点，那么至少有两个子节点yi, 满足low[yi] &gt;= dfn[x]<br>电力：统计连通块个数 cnt；依次枚举从哪个块中删，再枚举删除哪个点？s.<br>依次枚举每个割点然后求全局最大值</li>
+</ol>
+<p>如何求双连通分量？<br>if (dfn[x] &lt;= low[y]) {<br>    cnt ++;<br>    if (x非根节点 || cnt &gt; 1) x是割点<br>    将栈中元素弹出，直至弹出y为止<br>    且x也属于该“点双连通分量”<br>}<br>如果是个孤点的话也是双连通分量。</p>
+<p>难点在于答案是怎么算出来的？</p>
+<h3 id="4-8-二分图"><a href="#4-8-二分图" class="headerlink" title="4.8 二分图"></a>4.8 二分图</h3><ol>
+<li>二分图、不存在奇数环，染色法不存在矛盾</li>
+<li>匈牙利算法、匹配、最大匹配、匹配点，增广路径</li>
+<li>最小点覆盖、最大独立集、最小路径点覆盖、最小路径重复点覆盖<br>最大匹配数 = 最小点覆盖 = 总点数 - 最大独立集 = 总点数 - 最小路径覆盖</li>
+</ol>
+<p>点覆盖：每个边都能找到一个点覆盖<br>最大独立集：选出最多的点，使得选出的点之间没有边<br>最大团：选出最多的点，使得选出的点两两都有边</p>
+<ol start="4">
+<li>最优匹配，KM  最小费用流</li>
+<li>多重匹配，每个点可以匹配多个点 最大流</li>
+</ol>
+<h3 id="4-9-欧拉回路和欧拉路径"><a href="#4-9-欧拉回路和欧拉路径" class="headerlink" title="4.9 欧拉回路和欧拉路径"></a>4.9 欧拉回路和欧拉路径</h3><h3 id="4-10-拓扑排序"><a href="#4-10-拓扑排序" class="headerlink" title="4.10 拓扑排序"></a>4.10 拓扑排序</h3><h2 id="5-基本数据结构"><a href="#5-基本数据结构" class="headerlink" title="5. 基本数据结构"></a>5. 基本数据结构</h2><h3 id="5-1-并查集"><a href="#5-1-并查集" class="headerlink" title="5.1 并查集"></a>5.1 并查集</h3><p>两个优化：路径优化，按秩合并</p>
+<ol>
+<li>记录每个集合大小：绑定到根节点上</li>
+<li>每个点到根节点的距离，绑定到每个元素上</li>
+</ol>
+<p>带权并查集: 相对距离<br>扩展域 O(k): 枚举的思想</p>
+<h2 id="6-补充"><a href="#6-补充" class="headerlink" title="6 补充"></a>6 补充</h2><p>RSA密钥原理<br>Q*P=N<br>N作为公钥，P，Q作为密钥，P知道Q的密钥，分别被双方拥有。实际上是基于大整数分解非常困难的原因。</p>
 <blockquote>
 <p>A知道B的密钥，公钥，AB都知道，所以B就可以访问A，A就可以验证是否符合要求。</p>
 </blockquote>
@@ -1083,8 +1147,7 @@
 <p>f[n,m]到起点的最长路径。</p>
 <p>绝大部分DP是拓扑图上的最短路问题</p>
 <p>DP和最短路的交集就是拓扑图<br>DP未交的地方未想到例题</p>
-<p>启示：<br>DP依赖关系不具有拓扑序，可以用最短路来做<br>f[2] = min(f[1]+1, f[4]+1)<br>f[3] = f[2] + 1<br>f[4] = f[3] + 1<br>f[5] = f[4] + 1</p>
-<p>如果DP是等式的话，可以用高斯消元来解·</p>
+<p>启示：<br>DP依赖关系不具有拓扑序，可以用最短路来做</p>
 
     </div>
 
@@ -1118,9 +1181,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/acwing/" rel="tag"><i class="fa fa-tag"></i> acwing</a>
-            
               <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+            
+              <a href="/tags/acwing/" rel="tag"><i class="fa fa-tag"></i> acwing</a>
             
               <a href="/tags/improve/" rel="tag"><i class="fa fa-tag"></i> improve</a>
             
@@ -1200,7 +1263,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概览"><span class="nav-number">1.</span> <span class="nav-text">1. 概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-DP"><span class="nav-number">2.</span> <span class="nav-text">2. DP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-数字三角形"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 数字三角形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-最长上升子序列问题"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 最长上升子序列问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-basic"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 basic</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-背包问题：-背包九讲"><span class="nav-number">3.</span> <span class="nav-text">3. 背包问题： 背包九讲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-basic"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-further"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 further</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备注"><span class="nav-number">4.</span> <span class="nav-text">备注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最多-vs-恰好-vs-至少"><span class="nav-number">5.</span> <span class="nav-text">最多 vs 恰好 vs 至少</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态机模型"><span class="nav-number">6.</span> <span class="nav-text">状态机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目概览"><span class="nav-number">6.1.</span> <span class="nav-text">题目概览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态压缩DP"><span class="nav-number">7.</span> <span class="nav-text">状态压缩DP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-棋盘式（基于连通性）"><span class="nav-number">7.1.</span> <span class="nav-text">1. 棋盘式（基于连通性）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区间DP"><span class="nav-number">8.</span> <span class="nav-text">区间DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树形DP"><span class="nav-number">9.</span> <span class="nav-text">树形DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数位DP"><span class="nav-number">10.</span> <span class="nav-text">数位DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单调队列-单调栈-其它数据结构优化的DP"><span class="nav-number">11.</span> <span class="nav-text">单调队列/单调栈/其它数据结构优化的DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#斜率优化DP"><span class="nav-number">12.</span> <span class="nav-text">斜率优化DP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-集合"><span class="nav-number">12.1.</span> <span class="nav-text">2. 集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对比"><span class="nav-number">12.2.</span> <span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-搜素"><span class="nav-number">13.</span> <span class="nav-text">3. 搜素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-BFS"><span class="nav-number">13.1.</span> <span class="nav-text">3.1 BFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-Flodd-Fill"><span class="nav-number">13.1.1.</span> <span class="nav-text">3.1.1 Flodd Fill</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-最短路模型"><span class="nav-number">13.1.2.</span> <span class="nav-text">3.1.2 最短路模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-多源BFS"><span class="nav-number">13.1.3.</span> <span class="nav-text">3.1.3 多源BFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-4-最小步数模型"><span class="nav-number">13.1.4.</span> <span class="nav-text">3.1.4 最小步数模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-5-双端队列广搜"><span class="nav-number">13.1.5.</span> <span class="nav-text">3.1.5 双端队列广搜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-6-双向广搜"><span class="nav-number">13.1.6.</span> <span class="nav-text">3.1.6 双向广搜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-7-A"><span class="nav-number">13.1.7.</span> <span class="nav-text">3.1.7 A*</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#八数码"><span class="nav-number">13.1.7.1.</span> <span class="nav-text">八数码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-DFS"><span class="nav-number">13.2.</span> <span class="nav-text">3.2 DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-DFS之连通性模型和搜索顺序"><span class="nav-number">13.2.1.</span> <span class="nav-text">3.2.1 DFS之连通性模型和搜索顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-DFS之剪枝优化"><span class="nav-number">13.2.2.</span> <span class="nav-text">3.2.2 DFS之剪枝优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-迭代加深"><span class="nav-number">13.3.</span> <span class="nav-text">3.3 迭代加深</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-最短路问题"><span class="nav-number">14.</span> <span class="nav-text">4. 最短路问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-单源最短路"><span class="nav-number">14.1.</span> <span class="nav-text">4.1 单源最短路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-多源最短路"><span class="nav-number">14.2.</span> <span class="nav-text">4.2 多源最短路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-最小生成树"><span class="nav-number">14.3.</span> <span class="nav-text">4.3 最小生成树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-spfa求负环"><span class="nav-number">14.4.</span> <span class="nav-text">4.4 spfa求负环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-差分约束"><span class="nav-number">14.5.</span> <span class="nav-text">4.5 差分约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-最近公共祖先"><span class="nav-number">14.6.</span> <span class="nav-text">4.6 最近公共祖先</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-有向图的强连通分量"><span class="nav-number">14.7.</span> <span class="nav-text">4.7 有向图的强连通分量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-8-二分图"><span class="nav-number">14.8.</span> <span class="nav-text">4.8 二分图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-9-欧拉回路和欧拉路径"><span class="nav-number">14.9.</span> <span class="nav-text">4.9 欧拉回路和欧拉路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-10-拓扑排序"><span class="nav-number">14.10.</span> <span class="nav-text">4.10 拓扑排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#？-补充"><span class="nav-number">15.</span> <span class="nav-text">？ 补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最短路-vs-DP"><span class="nav-number">15.1.</span> <span class="nav-text">最短路 vs DP</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概览"><span class="nav-number">1.</span> <span class="nav-text">1. 概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-DP"><span class="nav-number">2.</span> <span class="nav-text">2. DP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-数字三角形"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 数字三角形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-最长上升子序列问题"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 最长上升子序列问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-basic"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 basic</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-背包问题：-背包九讲"><span class="nav-number">3.</span> <span class="nav-text">3. 背包问题： 背包九讲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-basic"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-further"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 further</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备注"><span class="nav-number">4.</span> <span class="nav-text">备注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最多-vs-恰好-vs-至少"><span class="nav-number">5.</span> <span class="nav-text">最多 vs 恰好 vs 至少</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态机模型"><span class="nav-number">6.</span> <span class="nav-text">状态机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目概览"><span class="nav-number">6.1.</span> <span class="nav-text">题目概览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态压缩DP"><span class="nav-number">7.</span> <span class="nav-text">状态压缩DP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-棋盘式（基于连通性）"><span class="nav-number">7.1.</span> <span class="nav-text">1. 棋盘式（基于连通性）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区间DP"><span class="nav-number">8.</span> <span class="nav-text">区间DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树形DP"><span class="nav-number">9.</span> <span class="nav-text">树形DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数位DP"><span class="nav-number">10.</span> <span class="nav-text">数位DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单调队列-单调栈-其它数据结构优化的DP"><span class="nav-number">11.</span> <span class="nav-text">单调队列/单调栈/其它数据结构优化的DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#斜率优化DP"><span class="nav-number">12.</span> <span class="nav-text">斜率优化DP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-集合"><span class="nav-number">12.1.</span> <span class="nav-text">2. 集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对比"><span class="nav-number">12.2.</span> <span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-搜素"><span class="nav-number">13.</span> <span class="nav-text">3. 搜素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-BFS"><span class="nav-number">13.1.</span> <span class="nav-text">3.1 BFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-Flodd-Fill"><span class="nav-number">13.1.1.</span> <span class="nav-text">3.1.1 Flodd Fill</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-最短路模型"><span class="nav-number">13.1.2.</span> <span class="nav-text">3.1.2 最短路模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-多源BFS"><span class="nav-number">13.1.3.</span> <span class="nav-text">3.1.3 多源BFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-4-最小步数模型"><span class="nav-number">13.1.4.</span> <span class="nav-text">3.1.4 最小步数模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-5-双端队列广搜"><span class="nav-number">13.1.5.</span> <span class="nav-text">3.1.5 双端队列广搜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-6-双向广搜"><span class="nav-number">13.1.6.</span> <span class="nav-text">3.1.6 双向广搜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-7-A"><span class="nav-number">13.1.7.</span> <span class="nav-text">3.1.7 A*</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#八数码"><span class="nav-number">13.1.7.1.</span> <span class="nav-text">八数码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-DFS"><span class="nav-number">13.2.</span> <span class="nav-text">3.2 DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-DFS之连通性模型和搜索顺序"><span class="nav-number">13.2.1.</span> <span class="nav-text">3.2.1 DFS之连通性模型和搜索顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-DFS之剪枝优化"><span class="nav-number">13.2.2.</span> <span class="nav-text">3.2.2 DFS之剪枝优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-迭代加深"><span class="nav-number">13.3.</span> <span class="nav-text">3.3 迭代加深</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-最短路问题"><span class="nav-number">14.</span> <span class="nav-text">4. 最短路问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-单源最短路"><span class="nav-number">14.1.</span> <span class="nav-text">4.1 单源最短路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-多源最短路"><span class="nav-number">14.2.</span> <span class="nav-text">4.2 多源最短路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-最小生成树"><span class="nav-number">14.3.</span> <span class="nav-text">4.3 最小生成树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-spfa求负环"><span class="nav-number">14.4.</span> <span class="nav-text">4.4 spfa求负环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-差分约束"><span class="nav-number">14.5.</span> <span class="nav-text">4.5 差分约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-最近公共祖先"><span class="nav-number">14.6.</span> <span class="nav-text">4.6 最近公共祖先</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-有向图的强连通分量"><span class="nav-number">14.7.</span> <span class="nav-text">4.7 有向图的强连通分量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-8-无向图连通分量"><span class="nav-number">14.8.</span> <span class="nav-text">4.8 无向图连通分量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-8-二分图"><span class="nav-number">14.9.</span> <span class="nav-text">4.8 二分图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-9-欧拉回路和欧拉路径"><span class="nav-number">14.10.</span> <span class="nav-text">4.9 欧拉回路和欧拉路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-10-拓扑排序"><span class="nav-number">14.11.</span> <span class="nav-text">4.10 拓扑排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-基本数据结构"><span class="nav-number">15.</span> <span class="nav-text">5. 基本数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-并查集"><span class="nav-number">15.1.</span> <span class="nav-text">5.1 并查集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-补充"><span class="nav-number">16.</span> <span class="nav-text">6 补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最短路-vs-DP"><span class="nav-number">16.1.</span> <span class="nav-text">最短路 vs DP</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -1218,7 +1281,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">109</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1231,7 +1294,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-count">74</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1244,7 +1307,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
