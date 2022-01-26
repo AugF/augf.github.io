@@ -336,6 +336,7 @@ t}\psi=-\frac{\hbar^2}{2m}\nabla^2\psi+V\psi
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -481,8 +482,10 @@ t}\psi=-\frac{\hbar^2}{2m}\nabla^2\psi+V\psi
     </span>
     <span title="站点阅读时长">1 分钟</span>
 </div>
+
+<!--
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
-  </div>
+  </div>!-->
 
         
 <div class="busuanzi-count">
@@ -614,6 +617,26 @@ t}\psi=-\frac{\hbar^2}{2m}\nabla^2\psi+V\psi
     
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'MyBlog',
+      owner       : 'AugF',
+      admin       : [''],
+      id          : 'fac95d9b49475a146afe436c2086e0eb',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
