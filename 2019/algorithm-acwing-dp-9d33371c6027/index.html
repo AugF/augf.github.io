@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ypwang.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="转换为背包问题 线性DP, 区间DP, 计数类DP， 数位统计DP, 状态 压缩DP, 树形DP, 记忆化搜索  01背包 N, V vi, wi &gt; 每件物品仅用一次  总体积一定的时候求最大价值  完全背包问题 每件物品有无限个 多重背包问题 每个物品有si个 优化 分组背包问题 物品有n组，每组有若干个。 每组中最多选一个。  1 DP问题 1.1 基本形式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="algorithm acwing dp">
+<meta property="og:url" content="https://ypwang.github.io/2019/algorithm-acwing-dp-9d33371c6027/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="转换为背包问题 线性DP, 区间DP, 计数类DP， 数位统计DP, 状态 压缩DP, 树形DP, 记忆化搜索  01背包 N, V vi, wi &gt; 每件物品仅用一次  总体积一定的时候求最大价值  完全背包问题 每件物品有无限个 多重背包问题 每个物品有si个 优化 分组背包问题 物品有n组，每组有若干个。 每组中最多选一个。  1 DP问题 1.1 基本形式">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-19T04:12:04.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="acwing">
+<meta property="article:tag" content="dp">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://ypwang.github.io/2019/algorithm-acwing-dp-9d33371c6027/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>algorithm acwing dp | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ypwang.github.io/2019/algorithm-acwing-dp-9d33371c6027/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          algorithm acwing dp
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-19 12:12:04" itemprop="dateCreated datePublished" datetime="2019-09-19T12:12:04+08:00">2019-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/acwing/basic/dp/" itemprop="url" rel="index"><span itemprop="name">dp</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>转换为背包问题 线性DP, 区间DP, 计数类DP， 数位统计DP, 状态 压缩DP,
+树形DP, 记忆化搜索</p>
+<ol type="1">
+<li>01背包 N, V vi, wi &gt; 每件物品仅用一次</li>
+</ol>
+<p>总体积一定的时候求最大价值</p>
+<ol start="2" type="1">
+<li><p>完全背包问题 每件物品有无限个</p></li>
+<li><p>多重背包问题 每个物品有si个 优化</p></li>
+<li><p>分组背包问题 物品有n组，每组有若干个。
+每组中最多选一个。</p></li>
+</ol>
+<h1 id="dp问题">1 DP问题</h1>
+<h2 id="基本形式">1.1 基本形式</h2>
+<blockquote>
+<p>问题是什么？从n个物品中选，体积为V的最大价值。 所求一般为函数值。</p>
+</blockquote>
+<h3 id="状态表示fij">1.1.1 状态表示f(i,j)</h3>
+<ol type="1">
+<li>集合： 考虑的是状态的哪一个集合， 所有选法的一个集合 条件</li>
+</ol>
+<ul>
+<li>只从前i个物品选</li>
+<li>选出来的物品总体积小于等于j</li>
+</ul>
+<ol start="2" type="1">
+<li>属性： Max, Min, 数量</li>
+</ol>
+<blockquote>
+<p>f[n,v]即所求</p>
+</blockquote>
+<h4 id="状态计算-如何一步步地把每个状态算出来">1.1.2 状态计算：
+如何一步步地把每个状态算出来</h4>
+<p>集合划分：如何转化为更小的集合 &gt; 划分有什么方法吗？？？
+这里是对第i个分析，然后对前面的方法进行 &gt;
+每个问题有多种理解方式，尽量往简单走</p>
+<p>原则：
+不重复（某个元素属于某一个特定集合），不漏（每个元素必须都给分配了）
+&gt;
+一般情况只要满足不漏就可以，如果是对元素个数考虑则要满足不重复的原则</p>
+<p>f(i,j): 含i 和 不含i 不含i: i-1, j f(i-1, j) 含i： i-1, j-wi
+f(i-1,j-wi)+wi</p>
+<p>f(i,j) = max(f(i-1,j), f(i-1,j-vi)+wi ) 发现这里i-&gt;(i-1),
+所以只需要考虑i-1的状态就可以，f(0,j)=0</p>
+<blockquote>
+<p>f(i,j) 只用到了f(i-1,j) j-vi&lt;=j. 可以用滚动数组来做</p>
+</blockquote>
+<p>f[j] =max(f[j], f[j-v[i]]+w[i]); //
+当前有可选和不可选两种情况，单背包的01问题 &gt;
+为什么对j循环，因为需要对不同的容量进行循环判断</p>
+<blockquote>
+<p>i-&gt; i-1, 变小的，正序 j-&gt; j-v[i], 反向</p>
+</blockquote>
+<h4 id="优化对代码或计算方程做等价变形">1.1.3
+优化：对代码或计算方程做等价变形</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">for(int i=1;i&lt;=n;i++)</span><br><span class="line">    for(int j=0;j&lt;=m;j++)&#123;</span><br><span class="line">        f[i][j] =f[i-1][j];</span><br><span class="line">        if(j&gt;=v[i]) f[i][j] =max(f[i][j], f[i-1][j-v[i]]+w[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">for(int i=1;i&lt;=n;i++)</span><br><span class="line">    for(int j=m;j&gt;=v[i];j--)&#123;</span><br><span class="line">        f[j] =max(f[j], f[j-v[i]]+w[i]); //f[i-1][j-vi]-&gt;f[j]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&gt; 正常顺序下把f[i-1][j-v[i]]变成f[j-v[i]], 有问题，因为需要保证它是i-1层循环做的事情。而对于i层，如果j递增，那么在f[j]之前， f[j-v[i]]就已经被更新了； 所以这里使用反向，可以保证用到的就是上一层更新的内容，妙！！</span><br></pre></td></tr></table></figure>
+<p>滚动数组</p>
+<p>f(i)-&gt;f(i-1) &gt;
+那么考虑用f(2,N)来表示，那么就只用了两维就对原始问题进行了解释。就很方便，空间容量就下降了</p>
+<h1 id="背包问题">2 背包问题</h1>
+<h2 id="背包问题-每件物品只能选一个">2.0 01背包问题：
+每件物品只能选一个</h2>
+<p>i, v, max_w 2维 f[i,j] 状态表示 - 集合：
+所有只考虑了前i个物品，其总体积不大于j的所有选法的集合 - 属性：Max
+状态计算 - 集合分解 看第i个物品选或不选</p>
+<p>时间复杂度 状态数量<em>每个状态所耗的时间 n^2 </em> 1</p>
+<h2 id="完全背包问题每件物品可以选任意个">2.1
+完全背包问题：每件物品可以选任意个</h2>
+<h3 id="状态表示">1. 状态表示</h3>
+<p>集合：所有只考虑了前i个物品，且体积不大于j的所有选法 属性:Max</p>
+<h3 id="状态计算">2. 状态计算</h3>
+<p>集合的划分 f[i,j]:0,1,2,...,k &gt;
+第i个物品选多少个？k这里有体积进行限制</p>
+<p>f[i-1,j] 曲线救国： 1. 去掉k个物品i 2. 求Max, f[i-1,j-k*v[i]] 3.
+再加回来k个物品i f[i-1,j-k*v[i]] + k*w[i].</p>
+<p>f[i][j]=max(f[i][j], f[i-1][j-v[i]*k]+k*w[i]);</p>
+<p>// 三重循环</p>
+<h3 id="优化">3. 优化：</h3>
+<p>f[i,j] = Max(f[i-1,j], f[i-1,j-v]+w,f[i-1,j-2v]+2w,...)
+f[i,j-v]=Max(f[i-1,j-v], f[i-1,j-2v]+w,...)</p>
+<p>发现 f[i,v]=Max(f[i-1,j], f[i,j-v]+w);</p>
+<blockquote>
+<p>为什么不用单调队列来优化？因为这里不是求滑动窗口的最大值，所以没有必要</p>
+</blockquote>
+<h2 id="多重背包问题每件物品最多可以选k个">2.2
+多重背包问题：每件物品最多可以选k个</h2>
+<p>f[i,j] ### 2.2.1 状态表示
+集合：所有只从前i个物品中选，且总体积不超过j的选法</p>
+<p>属性：最大值</p>
+<h3 id="状态计算-1">2.2.2 状态计算</h3>
+<p>集合划分 &gt; 第i个物品最多选多少个 f[i,j] = max(f[i-1,j-kv]+kw)
+k=0,1,2,...,s[i]</p>
+<h3 id="优化-1">2.2.3 优化</h3>
+<p>f[i,j] = Max(f[i-1,j],
+f[i-1,j-v]+w,f[i-1,j-2v]+2w,...,f[i-1,j-sv]+sw) f[i,j-v]=Max(f[i-1,j-v],
+f[i-1,j-2v]+w,..., f[i-1,j-(s+1)v]+(s+1)w)</p>
+<p>二进制的优化方式 s=1023</p>
+<p>1,2,4,8,...,512</p>
+<p>0~1023 &gt;
+把多种背包某个物品有s次，转化为logS的物品的01背包问题，因此可以拼凑出问题的解</p>
+<p>注意这里的凑数，最后一个是剩余的解 如 s=200 1,2,4,8,16,32,64,73</p>
+<p>1~127 73~200 所以只凑出了0-200的解</p>
+<p>s 1,2,4,8,..,2^k,c c=s-(2^{k+1}-1)</p>
+<p>c&lt;2^{k+1} s&lt;=2^{k+2}-1;</p>
+<p>优化步骤 总物品数：NlogS 时间： VNlogS</p>
+<h2 id="分组背包问题">2.3 分组背包问题</h2>
+<h3 id="状态表示-1">2.3.1 状态表示</h3>
+<ul>
+<li>集合： 只从前i组物品中选，且总体积不大于j的所有做法</li>
+<li>属性： Max</li>
+</ul>
+<h3 id="状态计算-2">2.3.2 状态计算</h3>
+<p>f[i,j] 集合划分,对第i个组怎么操作？</p>
+<p>对于第i组，不选，选第1个物品，选第2个物品，..., 选第k个物品</p>
+<p>f[i-1,j] , f[i-1, j-v[i,k]] + w[i,k] k</p>
+<blockquote>
+<p>用的是上层状态则从大到小枚举，用的是本层状态则从小到大枚举</p>
+</blockquote>
+<h1 id="线性dp">3 线性DP</h1>
+<h2 id="数字三角形">3.1 数字三角形</h2>
+<h3 id="状态表示-2">3.1.2 状态表示</h3>
+<p>f[i,j] - 集合 所有从起点，走到(i,j)的路径</p>
+<ul>
+<li>属性： Max</li>
+</ul>
+<h3 id="状态计算-3">3.1.2 状态计算</h3>
+<p>f[i,j]</p>
+<p>集合分类: 往前追溯 来自左上方，来自右下方 &gt; 曲线救国？ &gt; f[i,j]
+= max(f[i-1,j], f[i-1,j-1]) + a[i,j] &gt; 下标涉及到i-1，从1开始</p>
+<p>时间复杂度：状态数量<em>转移的计算量 n^2 </em> 1</p>
+<h2 id="最长上升子序列">3.2 最长上升子序列</h2>
+<ul>
+<li>维度选取标准 &gt; 目标：从小到大考虑维度是否合适 ### 3.2.1 状态表示
+f[i] 集合：所有以第i个数为结尾上升子序列的集合 属性：集合长度的Max &gt;
+关键！一定要把集合说明白和清楚，突然明白了为什么要这么说？</li>
+</ul>
+<h3 id="状态计算-4">3.2.2 状态计算</h3>
+<p>f[i]： 集合划分 &gt; 考虑多种划分思想
+对上升子序列的集合进行划分，如何讨论</p>
+<p>首先，一定把第i个元素放入，那么这个上升子序列的集合是哪个呢？对0,1,2,..,i-1元素进行讨论
+aj &lt;= ai, j: 0~i-1 f[i] = max(f[j]+1) j=0, f[0]=1;</p>
+<ul>
+<li>时间复杂度 状态数量*转移的计算量, n*n</li>
+</ul>
+<blockquote>
+<p>记录转移位置：为最大值进行标记
+这里的感觉是潜在的状态转移方程的感觉</p>
+</blockquote>
+<h3 id="优化-2">3.2.3 优化</h3>
+<p>考虑求的过程是否有某种性质？在计算过程中是否有重复计算 k:1 2 3 4 5 6
+7 a:3 1 2 1 8 5 6</p>
+<p>思考3和1的情况，凡是能接到3后面的序列，一定可以接到1后面</p>
+<p>所以考虑换个角度，即对每个长度，存储索引k小的位置
+随着长度增加，结尾的值一定是单调递增的</p>
+<blockquote>
+<p>目标：找某个衡量值的单调性，比如这里的ai的单调性。一旦有了单调性就可以进行存储，就可以用二分法来做，就会大大地提升速度。</p>
+</blockquote>
+<blockquote>
+<p>直接将ai更新到q就可以</p>
+</blockquote>
+<p>从某种程度上更像贪心一点！ nlogn</p>
+<p>直接求解问题 ## 3.3 最长公共子序列
+从两个长度为N和M的字符串A和B，求既是A的子序列又是B的子序列的字符串最长子序列</p>
+<h3 id="状态表示-3">状态表示</h3>
+<p>f[i,j]</p>
+<p>集合：所有由第一个序列的前i个字母和第二个序列的前j个字母构成的最长公共子序列</p>
+<p>属性： Max</p>
+<h3 id="状态计算-5">状态计算</h3>
+<p>f[i,j] 集合划分 标准，是否选a[i],b[j] &gt; 00 f[i-1,j-1] 01
+f[i-1,j-1]+1 : 以b[j]结尾 &gt; f[i-1,j]
+不代表这种情况，因为b[j]不一定为结尾 &gt; 01 包含在f[i-1,j]中，
+f[i-1,j]包含在f[i,j]中 10 &gt; f[i,j-1] 11 f[i-1,j-1] + 1</p>
+<blockquote>
+<p>然后我们可以用f[i-1,j],f[i,j-1]替换01， 10；
+此时这两种情况与00会有重叠，但是没有关系
+因为包含了f[i-1,j],f[i,j-1]包含了00， 所以一般就不写f[i-1,j-1]这种情况
+因为max是不需要分开的部分独立的，比如求三个数的最大值，max(a,b,c)=max(max(a,b),max(b,c)),
+b用了两次</p>
+</blockquote>
+<p>int a+1; abcd拼成的整数的存储</p>
+<h2 id="最短编辑距离">3.4 最短编辑距离</h2>
+<ul>
+<li><p>状态表示 f[i,j] 集合：所有将a[1~i]变到b[1~j]的操作方式的集合,
+操作方式有插入、删除、替换 属性：集合的长度的最小值</p></li>
+<li><p>状态计算 f[i,j] 集合划分 可以从集合的最后一步考虑:</p>
+<ul>
+<li>删除， a[1,i-1]与b[1,j]匹配 len(a)=len(b)-1,
+但是这里是动态变化的，所以没有必要进行这个当前len的判断，f[i-1,j]+1</li>
+<li>添加一个新字母， a[i+1]=b[j], 添之前a[1,i]与b[1,j-1]匹配
+len(a)=len(b)+1 f[i,j-1]+1</li>
+<li>改， a[i]!=b[j], f[i-1,j-1]+1</li>
+</ul></li>
+</ul>
+<p>时间复杂度 n^2 *3</p>
+<blockquote>
+<p>动态规划是暴力的优化，用内存存储了一些需要计算的内容，不再需要暴力枚举每一个。但还有优化的空间，什么呢？就是没有保证某个计算只是一个
+# 4. 区间DP</p>
+</blockquote>
+<h2 id="石子合并">4.1 石子合并</h2>
+<p>一堆石子，每次合并都会包含一定的代价，问如何合并，体力消耗最小；
+类似于大整数相乘的感觉</p>
+<h3 id="状态表示-4">状态表示</h3>
+<p>f[i,j]: i,j表示的区间的开始长度和结束长度</p>
+<p>集合：所有将第i堆石子到第j堆石子合并成一堆石子的合并方式</p>
+<p>属性：Min, 合并方式的代价的最小值</p>
+<h3 id="状态计算-6">状态计算</h3>
+<p>f[i,j]</p>
+<p>集合划分 以最后一次合并的分解线来合并</p>
+<p>左边k-i+1， 右边j-k+1 [i,k], [k+1,j]</p>
+<p>f[i,j] = max_k (f[i,k]+f[k,j]+pj); k=i,..,j-1</p>
+<blockquote>
+<p>前缀和，来表示区间和 时间复杂度： n^2 n 300^3=2.7*10^9</p>
+</blockquote>
+<p>每次可以合并m堆 目标是枚举一次合并，用暴力，C_k^{m-1}堆，
+总共有m-1个划分位置 &gt;
+问题其实可以进一步转化为将一个区间分为m份，如何划分最优，使用dp来做，g(i,j)将前i个数分为j组的最小代价
+n^3 *m</p>
+<blockquote>
+<p>注意计算的顺序，计算方式所依赖的状态应该先计算出来才行</p>
+</blockquote>
+<blockquote>
+<p>动态规划有两个写法：
+递归方式的学名叫记忆化搜索，循环方式为常见写法，会快一个常数
+区间长度的DP一般循环方式有两个，一个
+动态规划用一个状态表示一堆状态的集合， dfs遍历的则是每一个状态；</p>
+</blockquote>
+<p>C++一般可以算10^7, 10^8</p>
+<h1 id="计数类dp">5. 计数类DP</h1>
+<blockquote>
+<p>属性是数量</p>
+</blockquote>
+<h2 id="整数划分问题">5.1 整数划分问题</h2>
+<h3 id="解法1">解法1</h3>
+<p>无序的 物品：n 物体的体积：1,2,..,n 每个物品可以放任意次 -&gt;
+完全背包问题 把复杂的问题转化为简单的已知的问题</p>
+<ul>
+<li>状态表示 集合：所有从1~i中选，和恰好是j的集合 属性：数量</li>
+<li>状态计算 i-1 选多少个 j=n f(i-1,j)+ sum_k f(i-1,j-k*i) 即：
+f[i,j]=f[i-1,j]+f[i,j-v[i]]</li>
+</ul>
+<p>时间复杂度 当体积是i是，k=n/i k1+k2+...+kn = lnn+c; 时间复杂度为
+nlogn</p>
+<p>进一步简化 注意这里属性是长度，所以 f[j] = (f[j]+f[i-j]) mod p;
+这里就直接是相加，也就是为什么需要分类互斥了</p>
+<h3 id="解法2">解法2</h3>
+<p>f[i,j] 集合：所有总和是i，并且恰好表示为j个数的和的方案
+属性：数量</p>
+<p>集合划分 最小值是1 f[i-1,j-1] 最小值大于1 f[i-j,j] &gt;
+这里不是考虑这个最小值为多少，而是不断去逼近这个最小值 f[i-j,j]
+将每个数都减1,其方案数应该一样 f[i,j] = f[i-1,j-1] + f[i-j,j]
+ans=f[n,1]+f[n,2]+f[n,3]+...+f[n,n]</p>
+<h1 id="数位统计dp">5. 数位统计DP</h1>
+<h2 id="计数问题">5.1 计数问题</h2>
+<p>统计两个整数数位之间0~9的出现次数 数据范围 0-1e8 &gt;
+小学奥数问题</p>
+<p>分情况讨论 [a,b] 0~9</p>
+<p>count(n,x) 1~n中x出现的次数</p>
+<p>count(b,x)-count(a-1,x) &gt;
+当问题区间不好求时，经常的一种思路就是使用前缀和的思路</p>
+<p>分别求出1在每一位上出现的次数</p>
+<p>求1在第4位上出现的次数 1&lt;= xxx1yyy &lt;= abcdefg</p>
+<p>按前3位取值来分类的： 1) xxx=001~abc-1, yyy=000~999, *1000 2) xxx=abc
+d&lt;1, abc1yyy&gt;abc0efg, 0 d=1, abc1, yyy=0~efg, efg+1 d&gt;1, abc1,
+yyy=0~999, 1000</p>
+<p>所有情况 abc<em>1000 + 0 + efg+1 + 1000 = (abc+1)</em>1000 +
+efg+1</p>
+<p>因此可以求出1在任意一位出现的次数</p>
+<p>时间复杂度：10组数据，每组2个数，每个数有8位，最多循环10次</p>
+<p>实际例子： 从1~111 0出现的次数</p>
+<p>对于111的例子: 1. 统计个位上的0, 十位去01-10 10</p>
+<h1 id="状态压缩dp">6. 状态压缩DP</h1>
+<blockquote>
+<p>状态是一个整数，却要将其看成一个二进制数</p>
+</blockquote>
+<h2 id="蒙德里安的梦想">6.1 蒙德里安的梦想</h2>
+<p>状态压缩的经典应用</p>
+<blockquote>
+<p>可以横着放，也可以竖着放
+横着放完后，竖着摆放小方格就确定了，只有一种情况。所以考虑横着放置的小方格的情况</p>
+</blockquote>
+<p>f[i,j] 现在要摆第i列 j是哪一列申出了小方格 j 0~31,
+5位二进制数？？？</p>
+<p>这里是状态，所以就是数量进行相加</p>
+<p>每一种选取都是一种方案数，下一个状态加上现在的状态所以就构成了问题的最后的结果，并且保证每次的状态都是一定的</p>
+<blockquote>
+<p>检查，先看状态是否是对的！这种做法很优秀！！</p>
+</blockquote>
+<h2 id="最短hamilton路径">6.2 最短Hamilton路径</h2>
+<p>0~n-1, 从0到n-1不重不漏地恰好经过每个点一次</p>
+<p>n!n &gt; 乘以路径的长度，为什么是n？ 20! * 20 时间复杂度非常高</p>
+<p>跟上个题一样，用一个整数表示一个状态</p>
+<p>f[i,j]</p>
+<ul>
+<li>状态表示 集合：所有从0走到j，走过的所有点的状态是i的所有路径的长度
+&gt; i是二进制数，表示所有点的状态数 &gt; 0到j，j是具体哪个点的标号</li>
+</ul>
+<p>属性：Min</p>
+<ul>
+<li>状态计算 f[i,j] 集合划分 倒数第二个点来分类 0-&gt;k-&gt;j f[i,j] =
+min_k f[i-{j},k] + a[k][j]</li>
+</ul>
+<blockquote>
+<p>这里为什么用状态压缩，而没有用其他情况来做，因为这里的走到j节点，不一定从小的点走到，可能从更多的大的点走到</p>
+</blockquote>
+<h1 id="树形dp">7. 树形DP</h1>
+<h2 id="没有上司的舞会">7.1 没有上司的舞会</h2>
+<p>f[u,0] 集合： 所有从以u为根的子树中选择，并且不选u这个点的方案
+f[u,1]: 所有以u为根的子树中选择并且选择u这个点的方案</p>
+<p>属性： Max</p>
+<p>u-&gt; s1,s2 f(u,0) = sum_s max((f(s1,0), f(s1,1)) f(u,1) = sum_s
+f(s1,0) + a(u) &gt; 这里sum
+实际上求的就是边，所以计算量就是枚举所有的边，而对于树的所有边之和为n-1.
+即u的范围为n-1, 每个单位为2， 即为常数 因此复杂度为O(n)</p>
+<blockquote>
+<p>树形DP的感觉就是，其实关心还是两个状态之间的关系，不过这里的状态转换为了树。
+考虑当前与上一节点的关系，就相当于考虑父节点与子节点之间的关系</p>
+</blockquote>
+<h1 id="记忆化搜索">8. 记忆化搜索</h1>
+<h2 id="滑雪">8.1 滑雪</h2>
+<ul>
+<li>状态表示 f[i,j] 所有从(i,j)开始滑的路径</li>
+</ul>
+<p>Max - 状态计算 f[i,j] 按第一步开始滑的路径 按方向分 f[i,j] i,j -&gt;
+i,j+1 f[i,j+1]开始滑的最大长度</p>
+<blockquote>
+<p>拓扑图，不能成环； 怎么判断实际的情况？</p>
+</blockquote>
+<p>注意到记忆化搜索代码很有意思</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+              <a href="/tags/acwing/" rel="tag"># acwing</a>
+              <a href="/tags/dp/" rel="tag"># dp</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/algorithm-acwing-data-struture-95ca5642476a/" rel="prev" title="algorithm acwing data-struture">
+      <i class="fa fa-chevron-left"></i> algorithm acwing data-struture
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/algorithm-acwing-greedy-81d4cce0967a/" rel="next" title="algorithm acwing greedy">
+      algorithm acwing greedy <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dp%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">1 DP问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 基本形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%A1%A8%E7%A4%BAfij"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1 状态表示f(i,j)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%AE%A1%E7%AE%97-%E5%A6%82%E4%BD%95%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%9C%B0%E6%8A%8A%E6%AF%8F%E4%B8%AA%E7%8A%B6%E6%80%81%E7%AE%97%E5%87%BA%E6%9D%A5"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">1.1.2 状态计算：
+如何一步步地把每个状态算出来</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%AF%B9%E4%BB%A3%E7%A0%81%E6%88%96%E8%AE%A1%E7%AE%97%E6%96%B9%E7%A8%8B%E5%81%9A%E7%AD%89%E4%BB%B7%E5%8F%98%E5%BD%A2"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">1.1.3
+优化：对代码或计算方程做等价变形</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">2 背包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98-%E6%AF%8F%E4%BB%B6%E7%89%A9%E5%93%81%E5%8F%AA%E8%83%BD%E9%80%89%E4%B8%80%E4%B8%AA"><span class="nav-number">2.1.</span> <span class="nav-text">2.0 01背包问题：
+每件物品只能选一个</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%AF%8F%E4%BB%B6%E7%89%A9%E5%93%81%E5%8F%AF%E4%BB%A5%E9%80%89%E4%BB%BB%E6%84%8F%E4%B8%AA"><span class="nav-number">2.2.</span> <span class="nav-text">2.1
+完全背包问题：每件物品可以选任意个</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 状态表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%AE%A1%E7%AE%97"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. 状态计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.3.</span> <span class="nav-text">3. 优化：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%AF%8F%E4%BB%B6%E7%89%A9%E5%93%81%E6%9C%80%E5%A4%9A%E5%8F%AF%E4%BB%A5%E9%80%89k%E4%B8%AA"><span class="nav-number">2.3.</span> <span class="nav-text">2.2
+多重背包问题：每件物品最多可以选k个</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%AE%A1%E7%AE%97-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.2.2 状态计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96-1"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.2.3 优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-number">2.4.</span> <span class="nav-text">2.3 分组背包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%A1%A8%E7%A4%BA-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">2.3.1 状态表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%AE%A1%E7%AE%97-2"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.3.2 状态计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7dp"><span class="nav-number">3.</span> <span class="nav-text">3 线性DP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E4%B8%89%E8%A7%92%E5%BD%A2"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 数字三角形</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%A1%A8%E7%A4%BA-2"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.2 状态表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%AE%A1%E7%AE%97-3"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 状态计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 最长上升子序列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%AE%A1%E7%AE%97-4"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.2 状态计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96-2"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.3 优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%A1%A8%E7%A4%BA-3"><span class="nav-number">3.2.3.</span> <span class="nav-text">状态表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%AE%A1%E7%AE%97-5"><span class="nav-number">3.2.4.</span> <span class="nav-text">状态计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB"><span class="nav-number">3.3.</span> <span class="nav-text">3.4 最短编辑距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6"><span class="nav-number">3.4.</span> <span class="nav-text">4.1 石子合并</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%A1%A8%E7%A4%BA-4"><span class="nav-number">3.4.1.</span> <span class="nav-text">状态表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%AE%A1%E7%AE%97-6"><span class="nav-number">3.4.2.</span> <span class="nav-text">状态计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E7%B1%BBdp"><span class="nav-number">4.</span> <span class="nav-text">5. 计数类DP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E5%88%92%E5%88%86%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">5.1 整数划分问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B3%951"><span class="nav-number">4.1.1.</span> <span class="nav-text">解法1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B3%952"><span class="nav-number">4.1.2.</span> <span class="nav-text">解法2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E4%BD%8D%E7%BB%9F%E8%AE%A1dp"><span class="nav-number">5.</span> <span class="nav-text">5. 数位统计DP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E9%97%AE%E9%A2%98"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 计数问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9dp"><span class="nav-number">6.</span> <span class="nav-text">6. 状态压缩DP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%92%99%E5%BE%B7%E9%87%8C%E5%AE%89%E7%9A%84%E6%A2%A6%E6%83%B3"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 蒙德里安的梦想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%9F%ADhamilton%E8%B7%AF%E5%BE%84"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 最短Hamilton路径</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E5%BD%A2dp"><span class="nav-number">7.</span> <span class="nav-text">7. 树形DP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89%E4%B8%8A%E5%8F%B8%E7%9A%84%E8%88%9E%E4%BC%9A"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 没有上司的舞会</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2"><span class="nav-number">8.</span> <span class="nav-text">8. 记忆化搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BB%91%E9%9B%AA"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 滑雪</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : 'afd80995f5101a96859dbdf8848d0d43',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

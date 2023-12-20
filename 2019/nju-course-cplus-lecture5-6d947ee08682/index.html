@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ypwang.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="重点 9. 输入&#x2F;输出 输入、输出具体的实现会音操作系统和计算机硬件的不同而有所不同，与平台相关。 在C++中，一种基于字节流的操作。 分为： 1. 面向控制台的I&#x2F;O iostream - istream, ostream 2. 面向文件的I&#x2F;O fstream, ifstream, ofstream 3. 面向字符串变量的I&#x2F;O strstream, istrstream, ost">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nju-course-cplus-lecture5">
+<meta property="og:url" content="https://ypwang.github.io/2019/nju-course-cplus-lecture5-6d947ee08682/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="重点 9. 输入&#x2F;输出 输入、输出具体的实现会音操作系统和计算机硬件的不同而有所不同，与平台相关。 在C++中，一种基于字节流的操作。 分为： 1. 面向控制台的I&#x2F;O iostream - istream, ostream 2. 面向文件的I&#x2F;O fstream, ifstream, ofstream 3. 面向字符串变量的I&#x2F;O strstream, istrstream, ost">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-19T01:53:37.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta property="article:tag" content="nju">
+<meta property="article:tag" content="course">
+<meta property="article:tag" content="cplus">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://ypwang.github.io/2019/nju-course-cplus-lecture5-6d947ee08682/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>nju-course-cplus-lecture5 | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ypwang.github.io/2019/nju-course-cplus-lecture5-6d947ee08682/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          nju-course-cplus-lecture5
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-19 09:53:37" itemprop="dateCreated datePublished" datetime="2019-09-19T09:53:37+08:00">2019-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>14 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="重点">重点</h1>
+<h2 id="输入输出">9. 输入/输出</h2>
+<p>输入、输出具体的实现会音操作系统和计算机硬件的不同而有所不同，与平台相关。
+在C++中，一种基于字节流的操作。</p>
+<p>分为： 1. 面向控制台的I/O iostream - istream, ostream 2.
+面向文件的I/O fstream, ifstream, ofstream 3. 面向字符串变量的I/O
+strstream, istrstream, ostrstream</p>
+<p>在c++中，ios_base基类，ios派生。 I/O类都是用类模板来实现的</p>
+<blockquote>
+<p>因为输入输出通常会设计到外设，即经常考虑把程序所需要运行的数据输出到外设和从外设输入。
+C++STL中的输入输出被C++编译程序所接受。但是，因为具体平台相关性，还可以采用其他方式进行输入输出。例如：Visual
+C++提供的MFC基础类中包含了具有输入、输出功能的类。
+但是，指定注意的一点就是以非C++标准库方式进行输入输出不利于C++程序的移植</p>
+</blockquote>
+<h3 id="面向控制台的io">9.1 面向控制台的I/O</h3>
+<h4 id="基于函数库的控制台输入输出">9.1.1
+基于函数库的控制台输入、输出</h4>
+<p>C语言标准库的功能，C++保留了这些功能 - 输出 putchar(int ch);</p>
+<p>int puts(const char *p);</p>
+<blockquote>
+<p>什么是标准输入平台？这里应该就是控制台输入输出的意思。</p>
+</blockquote>
+<p>printf() // 返回输出 字符个数或返回负数 注意printf("")这里如果是%s,
+不接受空格和回车的，如果需要空格%[0-9a-zA-Z ]这样显式指定。 &gt;
+记得字符又被分为了好几种，比如打印字符，什么字符之类。</p>
+<ul>
+<li>printf常用格式控制字符及其含义</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>控制字符</th>
+<th>类型</th>
+<th>输出格式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>%c</td>
+<td>int</td>
+<td>字符</td>
+</tr>
+<tr class="even">
+<td>%d</td>
+<td>int</td>
+<td>有符号十进制整数</td>
+</tr>
+<tr class="odd">
+<td>%u</td>
+<td>unsigned int</td>
+<td>无符号十进制整数</td>
+</tr>
+<tr class="even">
+<td>%x, %X</td>
+<td>unsigned int</td>
+<td>无符号16进制</td>
+</tr>
+<tr class="odd">
+<td>%o</td>
+<td>unsigned int</td>
+<td>无符号8进制</td>
+</tr>
+<tr class="even">
+<td>%s</td>
+<td>char*</td>
+<td>字符串</td>
+</tr>
+<tr class="odd">
+<td>%e,%E</td>
+<td>double</td>
+<td>科学计数法的形式</td>
+</tr>
+<tr class="even">
+<td>%f</td>
+<td>double</td>
+<td>一般形式</td>
+</tr>
+<tr class="odd">
+<td>%%</td>
+<td></td>
+<td>字符%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>输入 // 操作失败返回EOF int getchar();</li>
+</ul>
+<p>// 成功返回p，否则null char <em>gets(char </em>p);</p>
+<blockquote>
+<p>平台怎么处理空格和回车？是否会纳入考虑 scanf() //
+返回实际输入并保存的数据个数或返回EOF %5f,
+好像是指定位数来着？？测试</p>
+</blockquote>
+<h4 id="基于类库的控制台io">9.1.2 基于类库的控制台I/O</h4>
+<p>C++的改变，用类来做。
+问题：用库函数scanf和printf需要实现基本数据类型数据的输入和输出，实际操作的是格式串。
+printf,scanf等于说是多参数，即输入的参数个数时可变的。这样冲某种意义上破坏了C++强类型的特点
+&gt; C++强类型有什么特点？ &gt; 从某种意义上是不是有安全的概念？
+另外，scanf和printf还有一个特点就是不能对用户自定义，只能操作基础的数据类型
+。
+而I/O类库提供了更为方便和安全的输入、输出操作，并且这些操作可以很容易地扩充到用户自定义类型的数据。</p>
+<h5 id="预定义的控制台对象">1). 预定义的控制台对象</h5>
+<p>在I/O类库中预定义了4个I/O对象，cin,cout,cerr以及clog，利用这些对象可以直接进行控制台的输入输出。
+cin-&gt;istream. cout,cerr,clog-&gt;ostream
+cout敌营这计算机系统的用于输出程序正常运行结果的标准输出设备，而cerr和clog则对应着计算即系统的用于输出程序错误信息的设备，通常都对应着显式器，但是cerr和clog不受输出重定向的影响。
+&gt; linux的输出命令的感觉吗？ &gt;
+重定向，也就是原本默认的标准输入，从新定义输出到文件。不受是不可操作的意思吗？？？？
+并且cerr不对输出信息进行缓存，因此它有较快的响应效果。</p>
+<h6 id="输出">输出</h6>
+<p>对于指针的输出有一个特例，即输出指向字符串的指针时，不输出字符串的首地址，，而是输出字符串。</p>
+<p>进一步，为了对输出格式进行进一步的控制，可以通过输出一些操纵符来实现。
+例如： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;iomanip&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int x =10;</span><br><span class="line">cout&lt;&lt;hex&lt;&lt;x&lt;&lt;endl; // 以十六进制输出x的值，然后换行。</span><br></pre></td></tr></table></figure> 其中，对于浮点数float,double和long
+double,当输出格式为ios::scientific或ios::fixed时，精度设置操纵符setprecision用于设置小数点后的位数。
+当什么没有时，用于设置浮点数有效数字的个数。</p>
+<p>!!! 只对浮点数有效 &gt; setiosflags(ios::scientific) // 设置输出格式
+&gt; resetiosflags(ios::scientific) // 取消输出格式</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>操作符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>endl</td>
+<td>输出换行符，并执行flush操作</td>
+</tr>
+<tr class="even">
+<td>flush</td>
+<td>使输出缓存的内容立即输出？？？</td>
+</tr>
+<tr class="odd">
+<td>dec</td>
+<td>十进制输出</td>
+</tr>
+<tr class="even">
+<td>oct</td>
+<td>八</td>
+</tr>
+<tr class="odd">
+<td>hex</td>
+<td>16</td>
+</tr>
+<tr class="even">
+<td>setprecision(int n)</td>
+<td>设置浮点数的精度</td>
+</tr>
+<tr class="odd">
+<td>setiosflags(long flage)</td>
+<td>设置/取消输出格式，flags的取值可以是:ios:scientific(指数形式),
+ios:fixed(小数形式)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意: 设置一遍后均有效，然后应该是就近原则吧！
+初始状态下，输出格式为自动方式，输出精度为6位有效数字。</p>
+</blockquote>
+<blockquote>
+<p>很好奇cout是怎么解析&lt;&lt;符的？按照空格回车然后进行分隔吗？还是怎么的？</p>
+</blockquote>
+<blockquote>
+<p>还存在其他类型吗？这样只对double类型进行了处理，一般来说输出应该不需要其他情况的输出了吧，对！
+一般只有两种类型，double, str 还有其他需要控制输出的吗？？？</p>
+</blockquote>
+<blockquote>
+<p>突然想起，输出扩展需要的有比如输出的数据对齐指定？待安排 ###### 输入
+任何基本数据类型都可以通过cin对象和抽取操作符&gt;&gt;来进行输入。
+在输入每个数据之间用空白符分开，最后输入一个回车符。另外也可以用一些操作控制符来控制输入的行为。
+对于输入来说，感觉上也就字符串数据需要进行控制了吧，setw()用于指定输入字符的最大个数。</p>
+</blockquote>
+<blockquote>
+<p>对，还需要清空输出吧？感觉上 cin &gt;&gt; setw(10) &gt;&gt; str; //
+把输入的前9个字符和一个'\0'放入str中</p>
+</blockquote>
+<p>!!!!果然不出所料，果然对于输入流来说，当输入流没有用完时是接着用输入流的</p>
+<p>get(), getline(*p, cout,delim) read() cin.get(ch); read();</p>
+<blockquote>
+<p>感觉这些输入地方太容易出错了，我之前就是这里老出错。不要有只取多少位数据的情况。</p>
+</blockquote>
+<p>特别地，cin的输入操作是无法读入空白符的，这时才可用上面的成员函数实现空白符的读入。
+&gt; 所以此时一般扩展用getline</p>
+<p>cin的输入操作是带输入缓存的，只有当用户输入“回车”时，输入的数据才会放入程序的变量中。
+需要注意的是，基于类库的输入、输出操作中可能遇到问题（如没有正确输入数据等）。
+因此，在操作后可通过下面的函数来判断操作是否成功。 bool ios::fail();
+//true表示操作失败 怎么用？ &gt;
+(cin&gt;&gt;ch2)返回的不是基本类型int,bool &gt; cin.fail()
+那什么操作失败呢？ &gt; 比如int, 输入字符串</p>
+<h4 id="抽取插入操作符和的重载">9.1.3
+抽取、插入操作符&gt;&gt;和&lt;&lt;的重载。</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">    int x,y;</span><br><span class="line">    friend ostream&amp; operator &lt;&lt;(ostream&amp; out, const A &amp;a);</span><br><span class="line">public:</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ostream&amp; operator &lt;&lt;(ostream&amp; out, const A &amp;a)</span><br></pre></td></tr></table></figure>
+<p>//
+从某种意义上理解，ostream是stream的子类，所以可行。这里是类为啥又可以？</p>
+<p>一般来说，只做输出。</p>
+<p>有几种方法，如何在继承下使有效？ 1.
+如果在基类定义，而没有在派生类定义，派生类只能输出一部分值。 2.
+如果在派生类定义，不能解决间接调用的情况
+特别是用基类的指针，不知道会动态绑定到哪种情况的时候，考虑使用封装。
+即在每个类里面重载display()函数，在&lt;&lt;中只需要调用display()函数即可。</p>
+<h3 id="面向文件的输入输出">9.2 面向文件的输入，输出</h3>
+<p>程序运行结果有时需要永久地保存起来，以供其他程序或本程序下一次运行时使用:程序运行所需要的数据也常常要从其他程序或本程序上衣词运行所保存的数据中获得。用于永久保存数据的设备称为外部存储器，如磁盘、磁带、光盘等。</p>
+<h4 id="文件概述">9.2.1 文件概述</h4>
+<p>在外部存储器中保存数据的方式通常由两种：文件和数据库。
+本程序设计教程只介绍一文件方式永久性地保存数据，数据库由其他专门的课程介绍。在C++中，把文件看成由一系列字节构成的字节串，称为流式文件，对文件中数据的操作通常是逐个字节顺序进行。在对文件数据进行读写前，首先要打开文件，打开文件的目的是：把程序内部一个表示文件的变量与外部的一个具体文件关系起来，并创建内存缓冲区，每个打开的文件都有一个隐式的读写位置指针，它指向文件的当前读写位置。在进行读写操作时，每读入，写出一个字节，文件位置指针会自动往后移动一个字节的位置。
+文件读写完毕后，通常需要关闭文件，其目的是把暂存在内存缓冲区中的内容写入文件，并归还打开文件是申请的内存资源。
+在文件中，数据的存储方式有两种，文本方式和二进制方式。
+文本方式一般用于存储具有行结构的文字数据，如源程序或纯文本格式的数据等。二进制方式一般用于存储无显式结构的数据，数据的格式由应用程序来解释，如目标代码程序以及二进制数据等。
+这两种方式的主要区别是，文本文件中只包含可显示字符和有限的几个控制字符（如,;而二进制文件可以包含任意的没有显式含义的二进制文件。为了进一步区分两种存储方式，我们用一个例子来说明。
+对于一个还只能输123457，可以用来种方式保存到文件中： 1.
+文本方式：依次把1,2,3,4,5,6,7的ASCII玛写入文件（共7个字节） 2.
+二进制方式：把整数123457的计算机内部表示（如补码）分解为字节写入文件（如果整数内部为32位，则为4个字节）。
+&gt; 以二进制方式组织的文件不利于文件在不同计算机平台上使用。 &gt;
+因为不同计算机平台的内部表示不一样 &gt;
+关于文件的压缩的思路估计也有这样的一份。</p>
+<h4 id="基于函数库的文件io">9.2.2 基于函数库的文件I/O</h4>
+<p>C++从C语言标准库中保留下来的输入、输出函数库包含了对文件进行输入、输出操作的函数。
+<code>#include&lt;cstdio&gt;</code> ##### 1) 文件的输出操作 - 打开文件
+打开外部文件输出数据fopen <code>FILE *fopen(const char *filename, const
+char *mode); // 打开文件</code> mode表示打开方式：
+w:打开一个外部文件用于写操作。如果外部文件已经存在，则首先把它的内容清除；否则先创建该外部文件。
+a:打开一个外部文件用于添加（从文件末尾）操作。如果不存在，则首先创建文件
+另外，在打开方式的后面还可以加上b,指出以二进制方式打开文件。默认打开方式为文本方式。对一文本方式打开的文件，当输出字符为，在某些平台（如DOS和Windows平台）将自动转换为'''两个字符写入外部文件
+一般来说，以文本方式组织的文件要用文本方式打开；以二进制方式组织的文件要用二进制方式打开。
+以w方式打开文件时，文件位置指针指向文件的头；以a方式打开文件时，文件位置指针指向文件的尾。
+文件打开成功后，fopen将返回一个费控的"FILE*"指针，该指针指向与打开文件有关的一些信息（如文件的内存缓冲区等），它将被之后的文件输出操作函数使用。
+&gt;
+就是实际上内存是按块组织的，这个指针会指向一些节点。当不断输出文件时，需要进行改变指针以扩大文件写的内容，还有更改好多相关的东西。
+如果文件打开失败，则fopen返回空指针NULL. - 输出操作</p>
+<p>文件打开成功后就可以往文件中写入数据了。往文件中写入数据的函数主要有以下几个。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 输出一个字符，输出成功时返回输出的字符</span><br><span class="line">int fputc(int c, FILE *stream);</span><br><span class="line"></span><br><span class="line">// 输出一个字符串，输出成功时返回一个非负整数。</span><br><span class="line">int fputs(const char *string, FILE*stream);</span><br><span class="line"></span><br><span class="line">// 输出基本类型数据，返回输出的字符数</span><br><span class="line">int fprintf(FILE *stream, const char *format[,argument]...)</span><br><span class="line">// 看来这里我搞错了，</span><br><span class="line"></span><br><span class="line">// 按字节输出数据。参数size为字节块的尺寸；cout为字节块的个数。返回实际输出的字节块的个数</span><br><span class="line">size_t fwrite(const void *buffer, size_t size, size_t count, FILE *stream);// size_t:unsigned int;</span><br></pre></td></tr></table></figure> &gt;
+感觉操作系统，最难的一块就在于要计算好待数据内容的大小。 &gt;
+数据存储也是按字节方式的，所以fwrite也是二进制方式，对!</p>
+<p>在上面的函数中，都有一个FILE*类型的指针参数，该指针参数是fopen成功打开文件后返回的。
+前三个函数主要以文本方式输出数据，而第4个函数则是以二进制方式。</p>
+<ul>
+<li><p>关闭文件 <code>fclose(FILE *stream);</code></p></li>
+<li><p>作业
+从键盘键入一批学生的成绩信息并把他们以文本格式存入外部文件:scores.txt。
+//
+注意这里为什么是字符串输入。因为这些字符都是可显式字符，所以可以显式指定，就在文件中看见这些内容</p></li>
+</ul>
+<blockquote>
+<p>扩展版本：使用C++中的类 请务必注意循环输入的判断条件
+还有一些系统目录是没有权限，怎么说吧，除非知道相对目录很清楚的情况外，都用绝对目录来做吧</p>
+</blockquote>
+<h5 id="文件的输入操作">2) 文件的输入操作</h5>
+<ol type="1">
+<li>打开文件 打开外部文件输入数据要用下面的函数来实现 <code>FILE *fp =
+fopen(const char *filename, char *mode)</code>;
+filename是要打开的外部文件名；mode是打开方式。 它可以是'r',
+表示打开一个外部文件用于读操作，这时外部文件必须存在，否则打开文件失败。
+另外，可以在后面加上b，表示以二进制方式打开文件，默认打开方式为文本方式，在进行输入操作时，外部文件中连续两个字符(Window)自动转换为一个字符.
+读入字符0x1A(Ctrl+Z)时表示文件结束。
+文件打开成功后，fopen将返回一个非空的"FILE
+*"类型的指针，该指针用于今后的文件输入操作函数。文件打开失败后，fopen返回空指针
+文件打开成功后，文件位置指针指向文件头。</li>
+<li>输入操作 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 输入一个字符，然后返回字符的编码</span><br><span class="line">fgetc(FILE *stream);</span><br><span class="line">&gt; 哇，这个操作完全可以用来做循环条件啊，牛逼</span><br><span class="line"></span><br><span class="line">// 输入一个字符串，函数正常结束时返回string的值，否则返回NULL。</span><br><span class="line">char *fgets(char *string, int n, FILE *stream)</span><br><span class="line"></span><br><span class="line">// 输入基本类型的数据，返回值表示读入并存储的数据个数</span><br><span class="line">fscanf()</span><br><span class="line"></span><br><span class="line">// 按字节输入数据。</span><br><span class="line">size_t fread(const void *buffer, size_t size, size_t count, FILE *stream);</span><br><span class="line"></span><br><span class="line">// 判断文件结束。当文件位置指针在文件末尾时，继续进行读操作会使得feof返回非零(true)</span><br><span class="line">int feof(FILE *stream);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>当从文件中读取数据时，必须知道文件的存储格式，包括数据的类型和存储方式等。
+&gt; fscanf和fprintf(文本文件), fread和fwrite(二进制文件)对应 3.
+关闭文件 fclose(FILE *stream)</p>
+<ul>
+<li>小练习
+读取上一个中的数据，计算每个学生的平均成绩；统计男生人数。</li>
+</ul>
+<h5 id="文件的输入输出操作">3) 文件的输入、输出操作</h5>
+<blockquote>
+<p>在上面注意到一个点，输入和输出都涉及到文件打开方式，那么文件打开方式是否与实际情况相符合了呢？</p>
+</blockquote>
+<p>以w和a方式打开的文件只能对其进行输出操作；以r打开的文件只能进行输入操作。</p>
+<p>mode扩展： - r+ 读写，文件必须存在 - w+ 读写。
+文件不存在会创建一个空文件，否则情况一寸照的文件 &gt;
+前面这两种不过是+号更多了一种功能，跟本身功能关系很大的 - a+
+打开一个外部文件用于读、添加操作。如果文件不存在，则首先创建一个空文件。以这种方式打开的文件，输出操作总是在文件尾进行。</p>
+<p>另外，在这些后面可以加上t,b, 文本，二进制。对！已经测试过！"w+b"</p>
+<h5 id="随机输入输出">4) 随机输入/输出</h5>
+<p>一般情况下，文件的读写操作都是顺序进行的，即在进行输入输出操作时，必须按顺序读入，这样降低了文件访问的小。
+每个打开的文件都有一个位置指针，指向当前读写文字，每读入或写出一个字符，文件的位置指针都会自动往后移动一个位置。
+<code>fseek(FILE *stream, long offset,int origin)</code>
+其中，origin指出参考位置，它可以是SEEK_CUR, SEEK_END,
+SEEK_SET;offset是移动的字节偏移量，正值往后移动，负值往前移动。
+fseek返回值为0表示移动成功，否则表示移动失败。
+当前位置可以通过<code>ftell(FILE *stream)</code> &gt; ?
+是返回的基于开头的字节数吗？？？ &gt; 需要练习 <strong>练习</strong>
+读入第二个学生的信息，把该学生的专业修改为COMPUTER。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">...// 省略了Sex,Date,Major及Student的定义</span><br><span class="line">int main()&#123;</span><br><span class="line">    FILE *fp = fopen(&quot;d:\\students.dat&quot;, &quot;r+b&quot;)</span><br><span class="line">    if( fp==NULL) &#123;</span><br><span class="line">        printf(&quot;打开文件失败&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Student st;</span><br><span class="line">if (fseek(fp,sizeof(st),SEEK_SET)==0)&#123; // 文件指针指向第二个学生数据</span><br><span class="line">    fread(&amp;st,sizeof(st), 1,fp); //读入第二个学生信息</span><br><span class="line">    st.major=COMPUTER;</span><br><span class="line">    fseek(fp,-sizeof(st),SEEK_CUR);</span><br><span class="line">    fwrite(&amp;st,sizeof(st),1,fp); //修改后的第二个学生数据写入文件</span><br><span class="line">&#125;</span><br><span class="line">fclose(fp);  // 这里student 为结构体，所以不用重载，sizeof直接可以用，如果是类是否需要重载呢？</span><br><span class="line">return 0;</span><br></pre></td></tr></table></figure> ####
+9.3.3 基于类库的文件I/O
+前面展示了C的部分，下面展示使用I/O类库进行外部文件的输入、输出。
+<code>#incldue&lt;iostream&gt;,  #include&lt;fstream&gt;</code> ##### 1)
+输出
+首先创建一个ofstream类(是ostream的派生对象)，使之与某个外部文静建立联系：
+1. 直接方式 <code>ofstream outfile(文件名，打开方式)</code> 2. 间接方式
+<code>ofstream outfile; outfile.open()</code> 打开方式ios::out 同w,
+ios::app同a
+打开方式还可以是上面的值与ios::binary按位或|的结果。默认为文本方式。
+打开文件是否成功判断 <code>if(!out_file) 失败;   out_file.fail(),
+!out_file.is_open()</code>
+文件成功打开后，可以使用插入操作符“&lt;&lt;”,或ofstream的一些成员函数来进行输出操作.
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">out_file&lt;&lt;x;</span><br><span class="line">out_file.write((char *)&amp;x, sizeof(x));// 以二进制方式输出数据。</span><br><span class="line">out_file.close();</span><br></pre></td></tr></table></figure> <strong>练习</strong> 用I/O类库来实现9-1的程序功能。</p>
+<blockquote>
+<p>值得注意的是，对ostream和istream重载的插入操作符也能是ofstream和ifstream的对象。</p>
+</blockquote>
+<h5 id="输入">2) 输入</h5>
+<p>同输出， 打开方式ios::in，同r。
+<code>in_file.read((char*)&amp;x,sizeof(x));
+//以二进制形式读入文件</code> 判断文件是否结束 <code>ios::eof(); //
+返回非0表示上一次读操作中遇到了文件末尾</code></p>
+<p><strong>练习</strong> ##### 3) 输入/输出与随机存取 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">istream&amp; istream::seekg(&lt;位置&gt;) // 指定绝对位置</span><br><span class="line">istream&amp; istream::seekg(&lt;位置&gt;, &lt;参照位置&gt;) // 指定相对位置</span><br><span class="line">streampos istream::tellg(); // 获取指针位置</span><br><span class="line"></span><br><span class="line">ostream&amp; ostream::seekg(&lt;位置&gt;) // 指定绝对位置</span><br><span class="line">ostream&amp; ostream::seekg(&lt;位置&gt;, &lt;参照位置&gt;) // 指定相对位置</span><br><span class="line">streampos ostream::tellg(); // 获取指针位置</span><br><span class="line"></span><br><span class="line">参照位置ios::beg, ios::cur, ios::end</span><br></pre></td></tr></table></figure></p>
+<h3 id="面向字符串变量的输入输出">9.4 面向字符串变量的输入/输出</h3>
+<p>有时，程序中有些数据并不直接输出到标准输出设备或文件，而是需要保存在程序中的某个字符变量中；程序中有些数据有时也不直接从标准输入设备或文件中获得，而是需要从程序中的某个字符变量中获得。这时，可以采用C++标准库的基于字符串变量的输入输出功能。
+基于字符串变量的输入/输出功能的主要是sscanf和sprintf <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int sprintf(char *buffer, const char *format);</span><br><span class="line">int sscanf(char *buffer, const char *format);</span><br></pre></td></tr></table></figure>
+与文件输入/输出不同，这里的输入源和输出目标不是文件，而是内存中一个区域:buffer.
+比如说把int型变量转换为一个字符串存入字符数组a中.</p>
+<p>对于基于I/O类库的字符串变量输入/输出操作，首先需要创建类istream,ostrstream或strstream的一个对象。
+&gt; 在新的标准中被istringstream,
+ostringstream和stringstream（头文件sstream）代替</p>
+<p>// 输出 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;strstream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">ostrstream str_buf; // 默认构造采用可扩充的内部缓冲</span><br><span class="line">或</span><br><span class="line">char buf[1000];</span><br><span class="line">ostrstream str_buf(buf,100);</span><br><span class="line"></span><br><span class="line">int x,y;</span><br><span class="line">str_buf&lt;&lt;x&lt;&lt;y&lt;&lt;endl;  // 通过该途径使得x和y获得了值</span><br><span class="line">char *p = str_buf.str(); // 可获取str_buf中字符串缓存的首地址</span><br></pre></td></tr></table></figure></p>
+<p>// 输入 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;strstream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">char buf[100];</span><br><span class="line">... // 通过某种途径在buf中存放了一些字符串</span><br><span class="line">istrstream str_buf(buf);</span><br><span class="line">或</span><br><span class="line">istrstream str_buf(buf,100);</span><br><span class="line">// 如果str_buf对象的构造没有给出长度，则认为它的缓存中的内容以&#x27;\0&#x27;结束</span><br></pre></td></tr></table></figure></p>
+<p>另外，也可使用抽取操作符或者其他操作符。 &gt;
+用处：就是用一个东西来进行收集的感觉。然后可以用，对是这样的感觉。</p>
+<h3 id="其它点">9.5 其它点</h3>
+<blockquote>
+<p>怎么查看C++的版本？</p>
+</blockquote>
+<blockquote>
+<p>Linux输出平台参数一般是怎么设置的？看起来有什么快捷的地方？有没有一本好书？</p>
+</blockquote>
+<blockquote>
+<p>一般对于继承C中的输入，输出元素，返回结果如果为非负数表示正常，具体有什么含义？返回EOF表示出问题。其他有什么函数类似？</p>
+</blockquote>
+<blockquote>
+<p>观察到一个点，如果正常结束的话是Process finished with exit code 0;
+非正常结束返回的是一个有问题的数</p>
+</blockquote>
+<blockquote>
+<p>wostream 是干什么用的？</p>
+</blockquote>
+<blockquote>
+<p>ostream &lt;CharT, class_traits&gt;有什么用？ 为什么不能进行ostream
+a; 使用 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename charT, type traints=char_traits&lt;charT&gt;</span><br><span class="line">class basic_string;</span><br><span class="line">class basci_istram</span><br><span class="line"></span><br><span class="line">// traits 特征，性状。</span><br><span class="line">basic_string&lt;char&gt; string;</span><br><span class="line">basic_string&lt;TCHAR&gt; string;</span><br><span class="line">// 这里TCHAR可以自己指定</span><br></pre></td></tr></table></figure> -
+https://stackoverflow.com/questions/5319770/what-is-the-point-of-stl-character-traits</p>
+</blockquote>
+<ul>
+<li>http://www.cplusplus.com/reference/string/char_traits/</li>
+</ul>
+<p>解释 官方给的定义是： Character traits: Character traits classes
+specify character properties and provide specific semantics for certain
+operations on characters and sequences of characters.
+换而言之，这里的意思就是对字符串这个操作特别放宽了要求，允许你过滤或者定义特殊化的字符串。
+其实，平时我们都是需要什么就进行什么过滤，而这里的感觉就是给你了机会，让你将其定义为类型，然后操作起来更简便。
+这里是最初开始设计的内容，后面都是在这基础上的延伸。</p>
+<blockquote>
+<p>模式匹配问题，记得刷leetcode,感觉上就有这样类似的问题。即如何进行模式匹配，实际上就是涉及到DFA和NFA，有限自动机和无限自动机。然后可以发现有限自动机方式，是按照回溯的方法解析的，所以会超级耗费内存。这样一想也解释通了。</p>
+</blockquote>
+<blockquote>
+<p>路径名问题，在Windows中为, /.有两种写法\,或者/(linux).
+其实主要原因在于编译器如果进行解释吧！</p>
+</blockquote>
+<h2 id="异常处理">异常处理</h2>
+<p>异常概述 C++的异常处理机制 程序调试</p>
+<ul>
+<li>程序的错误通常包括：
+<ul>
+<li>语法错误：程序的书写不符合语言的语法规则。这类错误可由编译程序发现。例如：
+<ul>
+<li>使用了未定义或未声明的标识符</li>
+<li>左右括号不匹配</li>
+</ul></li>
+<li>逻辑错误：程序设计部当造成程序没有完成预期的功能。这类错误可通过对程序进行静态分析和动态测试发现。
+<ul>
+<li>把两个数相加写成了相乘</li>
+<li>排序功能未能正确排序 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bool strlonger(char *str1,char *str2)&#123;</span><br><span class="line">    return strlen(str1)-strlen(str2)&gt;0;</span><br><span class="line">&#125;   </span><br><span class="line">strlonger(&quot;abc&quot;,&quot;1234&quot;) //?</span><br><span class="line">因为strlen()返回的是unsigned int, -1&gt;0这个被认为是真。 两个unsigned int运算结果不会进行自动转换。</span><br><span class="line">修改 (int)(strlen(str1)-strlen(str2))&gt;0</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li>运行异常：程序设计对程序运行环境考虑不周而造成的程序运行错误。
+<ul>
+<li>对于x/y操作，y输入了零</li>
+<li>由内存空间不足导致的访问空指针：int <em>p=new int; </em>p=10;</li>
+<li>输入数据的数量超过存放它们的数组的大小导致数组下标越界</li>
+<li>多任务环境可能导致的文件操作错误</li>
+<li>给一个采用二分法查找的函数提供了一个未排序的数组</li>
+<li>数据超出了其类型所允许的范围（溢出）</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>语法错误，编辑器会编译不通过. 逻辑错误：环境正常，结果不正确。
+运行异常：环境正常，结果正确。环境不正常，结果不正确</p>
+<p>在程序运行环境正常的情况下，导致运行异常的错误是不会出现的。
+程序异常错误往往是由于程序设计者对程序运行环境的一些特殊情况考虑不足所造成的。</p>
+<p>导致程序运行异常的情况是可以预料的，但它是无法避免的。</p>
+<p>为了保证程序的鲁棒性，必须在程序中对可能的异常进行预见性处理。 &gt;
+比如在输入的输入对输入的各种情况进行排查，原本的一个例子就是输入文件，然后文件路径不存在。</p>
+<h3 id="处理异常的策略">处理异常的策略</h3>
+<blockquote>
+<p>思考：有时间异常不是错误，所以没有必要当场处理；而且，有可能当场有重要的事情，那么这样做的话其实是非常草率的一件事情。还有用exit或abort,
+这种每次都一下子退出了，完全不知道出现了什么问题，对程序员来说是一种特别懵逼的状态。</p>
+</blockquote>
+<p>就地处理, 在发现错误的地方处理异常。
+异地处理，在其他地方（非异常发现地）处理异常。</p>
+<p>异常的就地处理</p>
+<p>常见做法是调用C++标准库中的函数exit或abort -
+abort立即终止程序的执行，不做任何的善后处理工作 -
+exit在终止程序的运行前，会做关闭被程序打开的文件、调用全局对象和static存储类的局部对象的析构函数等工作。
+注意：不要在对象类的析构函数中调用exit，否则该析构函数不能调用。</p>
+<p>不管是abort还是exit，都"not user-friendly"</p>
+<p>异常的异地处理。</p>
+<p>发现异常时，在发现地（如在被调用的函数中）有时不知道如何处理这个异常，或者不能很好地处理这个异常，要由程序的其它地方（如函数的调用者）来处理。
+例如，前面的函数f中打开文件失败，这时可以由调用者重新提供一个文件来解决。</p>
+<h3 id="如何实现异常的异地处理">如何实现异常的异地处理？</h3>
+<ol type="1">
+<li>通过函数的返回值，或指针、引用类型的参数，或全局变量把异常情况通知函数的调用者，由调用者处理。在计算机网络中很多情况都是这样处理的。
+&gt; 该途径的不足： &gt;
+通过函数的返回值返回异常情况会导致正常返回值和异常返回值交叉在一起。
+&gt;
+通过指针，引用类型的参数返回异常情况，需要引入额外的参数，给设计带来负担
+&gt;
+通过全局变量返回异常情况会导致使用者忽视这个全局变量的问题，不知道它的存在。
+&gt; 程序的可读性差！程序的正常处理与异常处理混杂在一起</li>
+<li>通过语言提供的结构化异常处理机制进行处理 C++异常处理机制
+把有可能遭遇异常的一系列操作（语句或函数调用）构成一个try语句块
+如果try语句块中的某个操作在执行中发现了异常，则通过执行一个throw语句抛出一个异常对象，之后的操作不再进行。
+抛置的异常对象将由能够处理这个异常的地方通过catch语句块来捕获并处理之。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">void f(char *filename)&#123;</span><br><span class="line">    ifstream file(filename);</span><br><span class="line">    if (file.fail())  throw filename(); // 产生异常</span><br><span class="line">    int x;</span><br><span class="line">    cin&gt;&gt;x;</span><br><span class="line">    ...</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> int main()&#123;</span><br><span class="line">     char str[100];</span><br><span class="line">     ...</span><br><span class="line">     try&#123;</span><br><span class="line">         f(str); // 启动异常处理机制</span><br><span class="line">         // 如果在函数f中抛掷了char*类型的异常，则程序转到try后面的catch(char*str)处理</span><br><span class="line">     &#125; catch(char *fn)&#123; // 捕获异常</span><br><span class="line">         ...// 处理异常</span><br><span class="line">     &#125;</span><br><span class="line">     ...// 正常情况</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure> &gt;
+一种直观的感觉，等于说try语句这里把所有的异常进行了传递，然后所有子的对象都会返回回来。如果从运行的角度来思考也很正常。然后，还有一个点，类也可以实现，即基类的指针一直指回基类？对吗？</li>
+</ol>
+<h3 id="try语句">try语句</h3>
+<p>try语句块的作用是启动异常处理机制。其格式为： try{ 语句序列 }</p>
+<p>上述的语句序列中可以有函数调用。</p>
+<h3 id="throw语句">throw语句</h3>
+<p>throw语句用于在发现异常情况时产生异常对象。 throw <表达式>
+表达式为任意类型的C++表达式。 例如： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void f(char *filename)&#123;</span><br><span class="line">    ifstream file(filename);</span><br><span class="line">    if (file.fail())  throw filename(); // 产生异常</span><br><span class="line">    // 注意这里异常的对象为一个字符串指针，这里是与catch中的类型相互对应的。</span><br><span class="line">    int x;</span><br><span class="line">    cin&gt;&gt;x;</span><br><span class="line">    ...</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+执行throw后，接在其后的语句将不再继续执行，而是转向异常处理（由某个catch语句给出）
+&gt; 这里也好理解，当出错的时候肯定是这样处理了啊 一个问题？
+这样做属于异常的异地处理了。怎么说来看的话是封装了一层。即实际上也是用的全局变量，但是不是在返回一层时调用，可能是返回多层时进行调用的。细想一下，震惊了哈哈哈。
+挺好，用本身自带的变量不好，重新开辟一个浪费，如果是全局变量则被忽视，所以倒不如由底层处理好了再说，真棒！</p>
+<h3 id="catch语句">catch语句</h3>
+<p>catch语句块用于捕获throw产生的异常对象并处理相应的异常。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">catch(&lt;类型&gt;[&lt;变量&gt;])</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+类型用于指出捕获何种异常对象，它与异常对象的类型匹配规则如若函数重载。
+变量用于存储异常对象，它可以缺省，缺省时表明catch语句块只关心异常对象的类型，而不考虑具体的异常对象。
+&gt;
+这里想到了实际上做的时候确实只关心了异常对象的类型，而且是将类型分为了唯一的积累，这样处理起来就方便了很多。</p>
+<p>catch语句块要紧接在某个try语句的后面。</p>
+<p>一个try语句块可以跟多个catch语句块，用于捕获不同类型的异常对象并进行处理。
+&gt;
+这里做的是类型其实也还可以，但是很是不行，因为处理的准则应该是对应于哪种错误，关于类型直接反馈不到处理上。</p>
+<p>关于try、throw和catch几点注意 -
+在try语句块的语句序列执行中如果没有抛出异常对象，则其后的catch语句不执行，而是继续执行try语句块之后的非catch语句。
+- 在try语句块的语句序列执行中如果抛掷了异常对象 -
+该try语句块之后有能够捕获该异常对象的catch语句，则执行这个catch语句中的语句序列，然后继续执行这个catch语句之后的非catch语句
+-
+该try语句块之后没有能够捕获该异常对象的catch语句，则由函数调用链的上一层函数中的try语句的相应catch来捕获。
+&gt; 这就是用到的向上层抛出异常。</p>
+<ul>
+<li><p>如果抛除异常对象的throw语句不是由程序的某个try语句块中的语句序列调用的，则抛掷的异常不会被程序中的catch捕获
+&gt;
+也就是不在try语句中，所以就要注意了，必须代码在检测范围中才能被检测啊，这是很浅显的道理了啊！</p></li>
+<li><p>异常处理的嵌套 try语句是可以嵌套的</p></li>
+<li><p>当在内层的try语句的执行中产生了异常，则首先在内层try语句块之后的catch语句中找，否则想上处理</p></li>
+<li><p>如果抛掷的异常对象没有，则调用系统的terminate函数进行标准化异常处理。默认情况下，terminate函数将会去调用abort函数。</p></li>
+</ul>
+<p>还有一个很重大的问题，有时候终止程序需要很大的代价，那么是否可以做到程序不终止，一直到获得正确的数据为止呢？
+&gt; ?????上层一直while循环</p>
+<h2 id="程序调试">程序调试</h2>
+<ul>
+<li>一个处于开发阶段的程序可能会含有很多错误（逻辑或异常）。</li>
+<li>发现和找出这些错误的一种手段是在程序中的某些地方家伙少年宫一些输出语句，在程序运行时把一些调试信息（如变量的值）输出到显示器。</li>
+</ul>
+<blockquote>
+<p>啊啊，我现在都一直用的是这种笨办法</p>
+</blockquote>
+<p>这种方式存在以下问题： -
+调试者必须对输出的值做一定的分析才能知道程序是否有错。 -
+在开发结束后，去掉调试信息有时是一件很繁琐的工作 &gt; 难道是用 Debug,
+或者调试工具？哇撒</p>
+<p>？断言
+实际上，在调试程序时输出程序中的某些变量或表达式的值，其目的是为了确认程序输出的这些值与预期的值是否相符。
+上述的目的可以让程序设计者在程序的一些关键或容易出错的点上插入一些相关的断言来表达
+- 断言是一个逻辑表达式，它描述了程序执行到断言处应该满足的条件 -
+如果条件满足则程序继续执行下去，否则程序执行异常终止。
+在程序测试阶段，断言可以帮助测试这发现程序的逻辑错误，也可以用来发现一些异常错误。</p>
+<blockquote>
+<p>语法错误首先X,然后的话异常只能按自己是否能够预知下得到。然后的断言最大的好处真的在可以发现程序的逻辑错误啊，真牛逼！其实这等同于输出的，就是每次debug这样真的好麻烦好吗？而且没有意思，哇咔咔，这样真有趣！</p>
+</blockquote>
+<blockquote>
+<p>哇，想起了java的测试工具类，python的测试工具包，终于浮出水面了吗？</p>
+</blockquote>
+<p>宏assert</p>
+<p>C++标准库提供的一个宏assert(cassert, assert.h),可以实现断言。
+宏assert要求一个关系，逻辑表达式作为其参数，当assert执行时， -
+如果表达式的值为false，则会显示出相应的表达式、它所在的源文件名以及所在的行号等诊断信息，然后调用库函数abort终止
+- 当表达式的值为true时，程序继续执行</p>
+<p>例如，下面的宏assert调用表示程序执行到该宏调用处变量x的值应等于1：
+assert(x==1)
+当程序执行到该调用处，如果x的值不等于1，则它会显示下面的信息并终止：
+Assertion failed:x=1,fileXXX,line YYY 可以返现异常错误，如
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int divide(int x,int y)&#123;</span><br><span class="line">    assert(y==0);</span><br><span class="line">    return x/y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这是真的是超级好用的一个东西。
+宏assert的实现是通过条件编译预处理命令来实现的： cassert, <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#ifdef NDEBUG</span><br><span class="line">#define assert(exp) ((void)0)</span><br><span class="line">#else</span><br><span class="line">#define assert(exp) ((exp)?(void)0:&lt;输出诊断信息并调用库函数abort&gt;)</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+&gt;
+解释，也就是说宏assert只有在宏名NDEBUG没有定义时才有效，这时，程序一般处于开发、测试阶段。程序开发结束提交时，应该让宏名NDEBUG有定义。然后重新编译程序，这样，assert就不再有效了。</p>
+<blockquote>
+<p>在思考，#DEBUG有啥用？</p>
+</blockquote>
+<h3 id="一点有意思的记录">一点有意思的记录</h3>
+<p>char <em>p="adad"; </em>p指向的是字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">strlen(p); // 传入指针就行，能想清楚。</span><br><span class="line">// 这本身就是其功能规定的，所以这里也不多说什么。觉得就这样吧，是对的。</span><br><span class="line">cout&lt;&lt;p;  //正常输出</span><br><span class="line">printf(&quot;%s&quot;,p); // 输出</span><br></pre></td></tr></table></figure>
+<p>//
+等下，我好想这里搞错了什么，或者说把一些事情。也就是说这里指针是没错的。因为这里是统一处理输入输出的函数。</p>
+<p>// 另一个方面讲</p>
+<p>太棒了，刚说自己想多了，结果才发现这里有说明的。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/nju/" rel="tag"># nju</a>
+              <a href="/tags/course/" rel="tag"># course</a>
+              <a href="/tags/cplus/" rel="tag"># cplus</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/nju-course-cplus-lecture4-summary-3c575f3819fe/" rel="prev" title="nju-course-cplus-lecture4-summary">
+      <i class="fa fa-chevron-left"></i> nju-course-cplus-lecture4-summary
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/nju-course-cplus-lecture5-summary-e0699417912f/" rel="next" title="nju-course-cplus-lecture5-summary">
+      nju-course-cplus-lecture5-summary <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">重点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">1.1.</span> <span class="nav-text">9. 输入&#x2F;输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%9A%84io"><span class="nav-number">1.1.1.</span> <span class="nav-text">9.1 面向控制台的I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%87%BD%E6%95%B0%E5%BA%93%E7%9A%84%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">9.1.1
+基于函数库的控制台输入、输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%B1%BB%E5%BA%93%E7%9A%84%E6%8E%A7%E5%88%B6%E5%8F%B0io"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">9.1.2 基于类库的控制台I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E7%9A%84%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.1.2.1.</span> <span class="nav-text">1). 预定义的控制台对象</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BE%93%E5%87%BA"><span class="nav-number">1.1.1.2.1.1.</span> <span class="nav-text">输出</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%BD%E5%8F%96%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%92%8C%E7%9A%84%E9%87%8D%E8%BD%BD"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">9.1.3
+抽取、插入操作符&gt;&gt;和&lt;&lt;的重载。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">1.1.2.</span> <span class="nav-text">9.2 面向文件的输入，输出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">9.2.1 文件概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%87%BD%E6%95%B0%E5%BA%93%E7%9A%84%E6%96%87%E4%BB%B6io"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">9.2.2 基于函数库的文件I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.2.2.1.</span> <span class="nav-text">2) 文件的输入操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.2.2.2.</span> <span class="nav-text">3) 文件的输入、输出操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">1.1.2.2.3.</span> <span class="nav-text">4) 随机输入&#x2F;输出</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BE%93%E5%85%A5"><span class="nav-number">1.1.2.2.4.</span> <span class="nav-text">2) 输入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%98%E9%87%8F%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">1.1.3.</span> <span class="nav-text">9.4 面向字符串变量的输入&#x2F;输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E7%82%B9"><span class="nav-number">1.1.4.</span> <span class="nav-text">9.5 其它点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8%E7%9A%84%E7%AD%96%E7%95%A5"><span class="nav-number">1.2.1.</span> <span class="nav-text">处理异常的策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BC%82%E5%B8%B8%E7%9A%84%E5%BC%82%E5%9C%B0%E5%A4%84%E7%90%86"><span class="nav-number">1.2.2.</span> <span class="nav-text">如何实现异常的异地处理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#try%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.2.3.</span> <span class="nav-text">try语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#throw%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.2.4.</span> <span class="nav-text">throw语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#catch%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.2.5.</span> <span class="nav-text">catch语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%B0%83%E8%AF%95"><span class="nav-number">1.3.</span> <span class="nav-text">程序调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E7%82%B9%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E8%AE%B0%E5%BD%95"><span class="nav-number">1.3.1.</span> <span class="nav-text">一点有意思的记录</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : 'df0a213e002b587b82a2e1625a639873',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

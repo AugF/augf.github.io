@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ypwang.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="总结  找出数组中重复的数字 注意这里的题目给的长度为n的数组，数组所有的数字都在0~n-1范围内 找出重复的元素，一种非常简单的思想就是hash，看hash位置上是否对应元素出现了两次。 而这里给的题明显有针对性，就是探讨能否在原数组上做hash之类的工作，于是想到了可以不断填坑。当遇到了非对应的那个坑但是有重复元素则退出 不修改数组找出重复的数字 注意到这里的题给的也有意思，数组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="easy offer details">
+<meta property="og:url" content="https://ypwang.github.io/2019/easy-offer-details-f4221b619b04/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="总结  找出数组中重复的数字 注意这里的题目给的长度为n的数组，数组所有的数字都在0~n-1范围内 找出重复的元素，一种非常简单的思想就是hash，看hash位置上是否对应元素出现了两次。 而这里给的题明显有针对性，就是探讨能否在原数组上做hash之类的工作，于是想到了可以不断填坑。当遇到了非对应的那个坑但是有重复元素则退出 不修改数组找出重复的数字 注意到这里的题给的也有意思，数组">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-18T11:39:11.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="easy-offer">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://ypwang.github.io/2019/easy-offer-details-f4221b619b04/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>easy offer details | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ypwang.github.io/2019/easy-offer-details-f4221b619b04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          easy offer details
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-18 19:39:11" itemprop="dateCreated datePublished" datetime="2019-09-18T19:39:11+08:00">2019-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/easy-offer/" itemprop="url" rel="index"><span itemprop="name">easy-offer</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>总结</p>
+<ol type="1">
+<li><p>找出数组中重复的数字
+注意这里的题目给的长度为n的数组，数组所有的数字都在0~n-1范围内
+找出重复的元素，一种非常简单的思想就是hash，看hash位置上是否对应元素出现了两次。
+而这里给的题明显有针对性，就是探讨能否在原数组上做hash之类的工作，于是想到了可以不断填坑。当遇到了非对应的那个坑但是有重复元素则退出</p></li>
+<li><p>不修改数组找出重复的数字
+注意到这里的题给的也有意思，数组的长度为n+1, 所有的数均在1~n.</p></li>
+</ol>
+<p>这里是二分法非数组索引的应用，对于数值来说，中位数的一边一定存在实际的计数大于所在的坑位</p>
+<p>这里二分法就是一个递归的过程</p>
+<ol start="3" type="1">
+<li><p>二维数组的查找 分治也可以做，但是比较麻烦</p></li>
+<li><p>从尾到头打印链表 查看vector一些常用的东西</p></li>
+<li><p>重建二叉树 层次遍历怎么实现的？</p></li>
+<li><p>二叉树的下一个节点 循环的再次理解</p></li>
+</ol>
+<p>while(p-&gt;left){</p>
+<p>} 通常需要对p再进行输出处理，p是有实际含义的值</p>
+<p>while(p){</p>
+<p>}
+通常对p判断是否为空，来查看里面的循环的执行情况；而真正的返回值的情况应该在括号内</p>
+<p>理解这两个之间的不同！！！</p>
+<ol start="7" type="1">
+<li><p>用两个栈实现队列 队列需要什么功能？
+入队，出队，返回top元素，所以这里我们就只需要考虑这些情况就可以了 &gt;
+入栈，当要压入元素时直接进行压入；当要处理末尾元素时，考虑怎么处理，后如的再压栈，那么栈顶就是队首元素</p></li>
+<li><p>旋转数组的最小数字 算法步骤：</p></li>
+</ol>
+<ul>
+<li>如果长度不合法，返回不正确的结果</li>
+<li>如果尾部等于头结点的元素</li>
+<li>排除掉不存在解的情况 while(n&gt;0 &amp;&amp; nums[n]=nums[0]) n-- //
+这里为什么是n&gt;0, 很有讲究的！！！</li>
+<li>使用二分法查找问题的解</li>
+</ul>
+<ol start="9" type="1">
+<li>矩阵中的路径 是否有某个解</li>
+</ol>
+<ul>
+<li>首先找到起始元素，即找到某个连通分支图的起点。
+可能图中有多个连通分支</li>
+<li>dfs(matrix, str, len, x,y){ // 使用这个框架，每个点不能往回走 //
+<ul>
+<li>不等， 返回true</li>
+<li>达到尺寸，返回false</li>
+<li>对可能的情况进行枚举，并且进一步进行求解， 递归每个点 }</li>
+</ul></li>
+</ul>
+<ol start="10" type="1">
+<li><p>机器人的运动范围 机器人能到达多少格子？ BFS, 标志状态位，
+对分支的限制函数的加法</p></li>
+<li><p>剪绳子 数学知识， 分为多个3的做法</p></li>
+<li><p>二进制1中的做法
+注意，统计1的时候负数不可，直接对无符号数进行统计即可 待做：</p></li>
+<li><p>数值的整数次方 记得负数进行取倒数即可</p></li>
+<li><p>在O(1)时间删除链表节点 直接进行交换链表的值即可</p></li>
+<li><p>删除链表重复的节点 双指针算法，而且注意给出虚拟头指针。
+i指向上一个的头，j指向下下一个的开始</p></li>
+<li><p>正则表达式匹配 &gt;
+说明一个问题，啥问题？凡是字符串匹配都可以用这种动态规划的思想来思考</p></li>
+</ol>
+<p>s=aa p=a.*</p>
+<p>f[i][j] 所有s[1-i], p[1-j]是否匹配，布尔值 集合划分 f[i][j] 以p为标准
+- p[j]='.':f[i][j] = f[i+1][j+1] - p[j]==s[i] f[i][j] = f[i+1][j+1] -
+p[j+1] = * f[i][j] = f[i][j+2]（匹配0个） || f[i+1][j](匹配多个) &gt;
+这里用了递归的思想</p>
+<p>f[n][m] = true;</p>
+<p>f[0][0]</p>
+<ol start="17" type="1">
+<li><p>表示数值的字符串！！！ 分情况讨论的顶点</p></li>
+<li><p>调整数组顺序使奇数位于偶数前面
+快排思想的运用，一次划分两个不同性质的集合
+二分法，找到两个不同不相交性质的中点</p></li>
+<li><p>树的子结构 递归理解的经典版本
+https://www.acwing.com/problem/content/35/ &gt;
+判断一棵树是否是另一棵树的子结构，怎么判断？
+如果该点是，返回；否则，对左孩子和右孩子进行判定</p></li>
+<li><p>二叉树的镜像</p></li>
+<li><p>对称的二叉树</p></li>
+<li><p>顺时针打印矩阵 方向的运用</p></li>
+<li><p>包含min函数的栈 单调栈</p></li>
+<li><p>栈的压入、弹出序列 模拟</p></li>
+<li><p>不分行从上往下打印二叉树 &gt;
+感觉队列不能存储空节点，而dfs很轻易做到；但是可以标记一下的</p></li>
+<li><p>分行从上往下打印二叉树 nullptr</p></li>
+<li><p>之字形从上往下打印二叉树 flag=fasle; flag=!flag;</p></li>
+<li><p>二叉树搜索树的后序遍历序列
+给定一个整数数组，判断该数组是否为某二叉搜索树的后序遍历结果
+[1,2,3,43,3,3] &gt;
+同前面给定前序遍历或者中序遍历数组一样，首先是关键要找到一个代表元素，然后找到切分位置
+思路: <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ans = <span class="built_in">dfs</span>(nums, <span class="number">0</span>, s.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(nums, l, r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l&gt;=r) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">int</span> root=nums[r];</span><br><span class="line">    <span class="keyword">int</span> k=l; <span class="comment">// 找到分界点</span></span><br><span class="line">    <span class="keyword">while</span>(k&lt;=r &amp;&amp; nums[k] &lt; root) k++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=k;i &lt; r;i++)</span><br><span class="line">        <span class="keyword">if</span>(nums[i] &lt; root) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">dfs</span>(nums, l, k<span class="number">-1</span>) &amp;&amp; <span class="built_in">dfs</span>(nums, k, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>二叉树的和为某一值的路径 dfs判断路径是否符合,
+进行值减去即可</p></li>
+<li><p>复杂链表的复刻
+在原链表的基础上每个节点还有一个额外的指针指向链表中随机的节点</p></li>
+<li><p>二叉搜索树与双向链表 通过二叉搜索树建立一个双向链表</p></li>
+<li><p>序列化二叉树</p></li>
+<li><p>数字排列
+输入一组数字（可能包含重复数字），输出其具有的所有排列方式</p></li>
+<li><p>数组中出现次数超过一半的数字 O(n), O(1)
+注意就是代码的复杂度.分情况讨论，当</p></li>
+<li><p>最小的k个数</p></li>
+<li><p>数据流中的中位数</p></li>
+<li><p>连续子数组的最大和</p></li>
+<li><p>从1到n整数中1出现的次数</p></li>
+<li><p>数字序列中某一位的数字</p></li>
+<li><p>把数组排成最小的数</p></li>
+<li><p>把数字翻译成字符串</p></li>
+<li><p>礼物的最大价值</p></li>
+<li><p>最长不含重复字符的子字符串</p></li>
+<li><p>丑数</p></li>
+<li><p>字符串中第一个只出现一次的字符</p></li>
+<li><p>字符流中第一个只出现一次的字符</p></li>
+<li><p>数组中的逆序对数</p></li>
+<li><p>两个链表的第一个公共结点</p></li>
+<li><p>数字在排序数组中出现的次数</p></li>
+<li><p>0到n-1中缺失的数字</p></li>
+<li><p>数组中数值和下标相等的元素</p></li>
+<li><p>二叉搜索树的第k个节点</p></li>
+<li><p>二叉树的深度</p></li>
+<li><p>平衡二叉树</p></li>
+<li><p>数组中只出现一次的数字</p></li>
+<li><p>和为S的两个数字</p></li>
+<li><p>和为S的连续正数序列</p></li>
+<li><p>翻转单词顺序</p></li>
+<li><p>左旋转字符串</p></li>
+<li><p>滑动窗口的最大值</p></li>
+<li><p>骰子的点数</p></li>
+<li><p>扑克牌的顺子</p></li>
+<li><p>圆圈中最后剩下的数字</p></li>
+<li><p>股票的最大利润</p></li>
+<li><p>计算1+2+..+n</p></li>
+<li><p>不用加减乘除做加法</p></li>
+<li><p>构建乘积数组</p></li>
+<li><p>把字符串转换为整数</p></li>
+<li><p>树中两个节点的最低公共祖先</p></li>
+</ol>
+<h2 id="总结">总结</h2>
+<ul>
+<li>复习栈、队列和</li>
+</ul>
+<p>变量重名，大忌！！ 注意检查这个错误 函数参数名一般不要为i,j</p>
+<p>c++运算符优先级</p>
+<p>大致感觉 1 :: 2 a++ () {} [] . -&gt; 3 ++a ! ~ <em>a &amp;a sizeof
+new 4 .</em> -&gt;<em> 5 </em> / % 6 + - 7 &lt;&lt; &gt;&gt; 8 &lt;=
+&gt;= 9 &amp; 9.5 == != 10 ^ 11 | 12 &amp;&amp; 13 || 14 +=</p>
+<p>再思考用栈模拟递归 ## 递归的精妙之处</p>
+<p>快排 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void quick_sort(int l,int r) &#123;</span><br><span class="line">    if(l&gt;=r) return; // basic</span><br><span class="line">    int x=a[l],i=l,j=r;</span><br><span class="line">    while(i&lt;j)&#123; // 这里为什么是i&lt;j</span><br><span class="line">        while(a[i]&lt;x) i++;</span><br><span class="line">        while(a[j]&lt;x) j--;</span><br><span class="line">        if(i&lt;j) swap(a[i],a[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    quick_sort(l,i);</span><br><span class="line">    quick_sort(i+1,r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>归并 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">merge_sort(int l,int r)&#123;</span><br><span class="line">    if(base) //base;</span><br><span class="line">    merge_sort(1);</span><br><span class="line">    merge_sort(2);</span><br><span class="line">    combine;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>扩展欧几里得算法 ax+by=d,<br />
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int exgcd(int a,int b,int &amp;x,int &amp;y)&#123;</span><br><span class="line">    if(!b)&#123;</span><br><span class="line">        x = 1, y= 0;</span><br><span class="line">        return a;</span><br><span class="line">    &#125;</span><br><span class="line">    int res = exgcd(b, a%b, y, x);  </span><br><span class="line">    y -= a/b *x; // 合并结果对结果进行改进</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>递归分治和DFS之间的感觉 分治强调范围的缩小 &gt;
+也可以理解为特殊的DFS,
+层数是通过区间长度为base来限制。划分技巧定的，导致每次一个点到其他点的方法都是确定，即确定的区间划分策略
+&gt; 二叉树的遍历则可以认为物理确定了划分策略就为左右子树 &gt;
+递归则可以看作划分的不均匀，也就是单位1和剩余，不过降低了规模而已。比如，路径缩短一点。
+&gt; 动态规划是一种本身就有拓扑路径的结构</p>
+<blockquote>
+<p>循环也是一种递归，条件写在最前面，前后更新等等都有很多种讲究
+DFS则是层数限制，每层展开是每个点的可行路径</p>
+</blockquote>
+<p>BFS-队列</p>
+<p>递归-栈 &gt;
+栈不断压入当前根节点等内容，直到最基本的情况，然后用解决最基本的情况，不断倒着解决，直到解决原本的问题，基本问题有解。需要回溯计算压存的解的计算公式，有特殊的返回值</p>
+<p>DFS-栈 &gt;
+DFS感觉有点不一样的就是，每层的东西都可以算，一定不断得到结果，到最后一层于是就得到了最终结果；然后，如果没有，则回溯再找解。
+DFS到达根节点的感觉就是无返回值返回的感觉</p>
+<p>两者相同的点最终都是返回原问题的解</p>
+<p>中序遍历 左,中，右-栈 &gt;
+是递归的感觉，相当于不是一次压栈结束的，到达了底层的一个节点又需要返回，然后再压数据，再找一次底层；这里底层的标志就是是否为空</p>
+<p>二叉树的中序遍历等多种遍历方式的刷题</p>
+<p>所谓循环：base, k, dfs()</p>
+<p>调试代码的几种方法： 1. printf大法，输出所有东西</p>
+<ol start="2" type="1">
+<li>没有东西的时候，注释代码，或者删代码法，知道没有错误为止</li>
+</ol>
+<p>RunTime Exlimit:
+其他语言有注释的，即有堆栈显示哪里出现了错误，所以可以得到直接更改</p>
+<p>注意，DFS中节点有特别重要有意思的一点就是节点的状态是可以进行用二进制数来表示，进行优化的</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+              <a href="/tags/easy-offer/" rel="tag"># easy-offer</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/design-pattern-summary-939a5b5b5373/" rel="prev" title="design pattern summary">
+      <i class="fa fa-chevron-left"></i> design pattern summary
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/english-todo-1349869961d4/" rel="next" title="english todo">
+      english todo <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : '41ddd249b5844fd728a4f70604516ff3',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ypwang.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="重点 Windows简介 消息驱动的程序结构 基于Windows API的过程式Window应用陈旭设计 基于MFC和&quot;文档-视&quot;结构的面向对象Windows应用程序设计 Windows简介 Window是一种基于图形界面的多任务操作系统 - 系统中可以同时运行多个应用程序 - 每个应用程序通过窗口与用户进行交互 - 用户通过鼠标的单击，双击，拖放，菜单选择以及键盘输入来进行操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nju-course-cplus-lecture6">
+<meta property="og:url" content="https://ypwang.github.io/2019/nju-course-cplus-lecture6-0d4b502fed85/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="重点 Windows简介 消息驱动的程序结构 基于Windows API的过程式Window应用陈旭设计 基于MFC和&quot;文档-视&quot;结构的面向对象Windows应用程序设计 Windows简介 Window是一种基于图形界面的多任务操作系统 - 系统中可以同时运行多个应用程序 - 每个应用程序通过窗口与用户进行交互 - 用户通过鼠标的单击，双击，拖放，菜单选择以及键盘输入来进行操作">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ypwang.github.io/2019/nju-course-cplus-lecture6-0d4b502fed85/00001.png">
+<meta property="og:image" content="https://ypwang.github.io/2019/nju-course-cplus-lecture6-0d4b502fed85/00002.png">
+<meta property="og:image" content="https://ypwang.github.io/2019/nju-course-cplus-lecture6-0d4b502fed85/00003.png">
+<meta property="og:image" content="https://ypwang.github.io/2019/nju-course-cplus-lecture6-0d4b502fed85/00004.png">
+<meta property="og:image" content="https://ypwang.github.io/2019/nju-course-cplus-lecture6-0d4b502fed85/00005.png">
+<meta property="article:published_time" content="2019-09-19T01:56:10.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta property="article:tag" content="nju">
+<meta property="article:tag" content="course">
+<meta property="article:tag" content="cplus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ypwang.github.io/2019/nju-course-cplus-lecture6-0d4b502fed85/00001.png">
+
+<link rel="canonical" href="https://ypwang.github.io/2019/nju-course-cplus-lecture6-0d4b502fed85/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>nju-course-cplus-lecture6 | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ypwang.github.io/2019/nju-course-cplus-lecture6-0d4b502fed85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          nju-course-cplus-lecture6
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-19 09:56:10" itemprop="dateCreated datePublished" datetime="2019-09-19T09:56:10+08:00">2019-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/nju/" itemprop="url" rel="index"><span itemprop="name">nju</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/nju/cplus/" itemprop="url" rel="index"><span itemprop="name">cplus</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>16k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>15 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="重点">重点</h1>
+<p>Windows简介 消息驱动的程序结构 基于Windows
+API的过程式Window应用陈旭设计
+基于MFC和"文档-视"结构的面向对象Windows应用程序设计</p>
+<h2 id="windows简介">Windows简介</h2>
+<p>Window是一种基于图形界面的多任务操作系统 -
+系统中可以同时运行多个应用程序 - 每个应用程序通过窗口与用户进行交互 -
+用户通过鼠标的单击，双击，拖放，菜单选择以及键盘输入来进行操作</p>
+<p>Windows功能以两种方式提供： -
+工具（应用程序）：资源管理器、记事本、画图，。。。直接使用 - 函数库:
+作为Windows的API。</p>
+<p>单文档应用 - 只能对一个文档的数据进行操作 -
+只有结束当前文档的操作后，才能进行下一个文档的操作 多文档应用 -
+可以同时对多个文档的数据进行操作 -
+不必等到一个文档的所有操作结束，就可以对其它文档进行操作，对不同文档的操作是在不同的子窗口进行的
+对话框应用 - 以对话框的形式操作一个文档数据 -
+对文档数据的操作以各种control空间来实现 -
+程序以按确定或取消等按钮来结束</p>
+<p>Windows应用程序的结构属于消息（事件）驱动的结构：
+程序的任何一个动作都是在接受到一条消息后发生的</p>
+<p>Windows的消息有： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">WM_KEYDOWN/WM_KEYUP（键盘按键）</span><br><span class="line">WM_CHAR（字符）</span><br><span class="line">WM_LBUTTONDOWN/WM_LBUTTONUP/WM_LBUTTONDBLCLK/WM_MOUSEMOVE （鼠标按键）</span><br><span class="line">WM_COMMAND（菜单）</span><br><span class="line">WM_PAINT（窗口内容刷新）</span><br><span class="line">WM_TIMER（定时器消息）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+每个Windows应用程序都有一个消息队列，Windows系统会把各个应用程序的消息放入各自的消息队列。
+大部分的消息都关联到某个窗口 - 每个窗口都有一个消息处理函数</p>
+<p>Windows应用程序不断从自己的消息队列中获取消息并调用相应窗口中的消息处理函数来处理获得的消息。
+这个“取消息-处理消息”的过程构成了消息循环。
+当取到某个特定消息后，消息循环结束。</p>
+<p>主程序 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//初始化</span><br><span class="line">...</span><br><span class="line">// 进入消息循环</span><br><span class="line">while(取消息)   消息队列</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    //处理消息 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 消息处理函数：
+注意：每个消息的处理时间不宜太长，否则会造成程序"假死"现象(程序不响应其它消息)
+&gt;
+这个消息队列应该是最外面的队列吧，那么对于最里面的队列。每个队列都是这样做的吗？好奇！</p>
+<h2 id="基于window-api的过程式windows应用程序设计">基于Window
+API的过程式Windows应用程序设计</h2>
+<p>每个Windows应用程序都必须提供一个主函数WinMain，其主要功能是: -
+注册窗口类：窗口的基本信息：名字、基本风格、消息处理函数、图标、光标、背景颜色;
+每类窗口都需要注册 - 创建应用程序的主窗口，其他窗口等需要时再创建 -
+进入消息循环，直到接收到WM_QUIT消息后，消息循环结束。</p>
+<p>程序还要为每类窗口提供一个消息处理函数，用于处理发送到它的消息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;windows.h&gt;</span><br><span class="line">int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR IpCmdLine, int nCmdShow // 主窗口显式方式)</span><br><span class="line">WinMain()&#123;</span><br><span class="line">    // 注册窗口类</span><br><span class="line">    RegisterClass(.., WindowProc, &quot;my window class&quot;);</span><br><span class="line">    ...</span><br><span class="line">    // 创建主窗口</span><br><span class="line">    HWND hWnd;</span><br><span class="line">    hWnd = CreateWindow(&quot;my window class&quot;, ..., x,y, width,height,...)</span><br><span class="line">    ShowWindow(hWnd, nCmdShow)</span><br><span class="line">    ...</span><br><span class="line">    // 进入消息循环</span><br><span class="line">    while(GetMessage(&amp;msg, NULL, 0, 0))&#123; // 消息队列</span><br><span class="line">        ...</span><br><span class="line">        DispatchMessage(&amp;msg) // 消息处理函数</span><br><span class="line">    &#125;</span><br><span class="line">    return msg.wParam;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 窗口处理函数</span><br><span class="line">LRESULT CALLBACK WindowProc(HWND hWnd, // 窗口标志 </span><br><span class="line">                            UINT message, // 消息标识, WPARAM wParam, LPARAM lParam...) &#123;</span><br><span class="line">    switch(message) &#123;</span><br><span class="line">        case WM_KEYDOWN:</span><br><span class="line">            wParam   //wParam为按键在键盘上的位置，扫描码</span><br><span class="line">        case WM_CHAR: // 字符健消息</span><br><span class="line">            wParam</span><br><span class="line">        case WM_COMMAND: // 菜单消息</span><br><span class="line">            switch(wParam) //wParam是菜单项的标识</span><br><span class="line">            &#123;</span><br><span class="line">                case ID_FILE_OPEN:</span><br><span class="line">                case ID_START_TIMER:</span><br><span class="line">            &#125;</span><br><span class="line">        case WM_LBUTTONDOWN: // 鼠标左键按下消息</span><br><span class="line">            IParam</span><br><span class="line">        case WM_PAINT: // 窗口刷新消息</span><br><span class="line">        case WM_TIMER: // 定时器消息</span><br><span class="line">        case WM_CLOSE: // 请求关闭窗口消息</span><br><span class="line">            DestoryWindow(hWnd); // 撤销窗口</span><br><span class="line">            break;</span><br><span class="line">        case WM_DESTROY: // 窗口被关闭消息</span><br><span class="line">            PostQuitMessage(0);</span><br><span class="line">            break;</span><br><span class="line">        defalut:</span><br><span class="line">            return DefWindowProc();</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>消息处理函数中还可以生成新的消息，方式有两种: - PostMessage
+消息放入消息队列 - SendMessage 直接调用消息处理函数 他们的参数为: HWND
+hWnd, UINT Msg, WPARAM wParam, LPARAM lParam. 消息参数1和2 &gt;
+hWnd接收消息的窗口标识，应该是把窗口进行了分类的感觉吧。Msg实际也是将消息标识进行了分类</p>
+<p>消息处理函数应是可再入的
+由于消息处理在处理一条消息时可能会主动产生一些新消息，这些消息并不放入消息队列，而是直接调用消息处理函数来处理这些消息，遮掩，就有可能导致小夏处理函数的一次执行还未结束，另一次执行就开始的现象，这可能会引起数据的不一致错误。
+&gt;
+这里消息的概念是平行的，假设每个消息可能对实际的函数产生不一样的结果。</p>
+<p>因此，消息处理函数应该是一个可重入函数，即函数调用者要自带工作区（数据空间）：
+- 函数需要的数据需要通过参数来传递 - 函数不能有static存储类的局部变量 -
+在函数中访问全局变量也可能导致函数不可再入 &gt;
+实话说，不懂什么意思，函数需要自己调用吗？还是怎么的？</p>
+<p>资源 每个Windows应用程序，除了程序代码外，还包含一些资源描述：
+菜单：菜单ID, 菜单项ID/显示文字 对话框:对话框类型，尺寸与位置</p>
+<p>资源描述有规定的格式，存储在相应的资源文件(.rc)中，经编译后将作为Windows应用程序的一部分被链接到应用程序的目标文件中。
+资源可以用VC++的资源管理器来进行可视化编辑。 &gt;
+这里的资源也就对应着C++的内容</p>
+<h3
+id="面向对象的windows应用程序设计">面向对象的Windows应用程序设计</h3>
+<p>基于Windows API的程序设计是一种基于过程抽象的程序设计范式。
+通过调用API函数编写程序的粒度太细、太繁琐，开发效率不高。
+如何以更大粒度的程序元素（如对象）来开发Windows应用程序？ -
+Microsoft的MFC类库提供了以面向对象范式进行应用程序开发的支持。</p>
+<p>窗口对象 - 显示程序的处理数据 - 处理Windows的消息、实现与用户的交互 -
+窗口对象之间可以存在聚集关系</p>
+<p>文档对象 - 管理在各个窗口中显示和处理的数据 -
+文档对象与窗口对象之间可以存在着一对多的关系</p>
+<p>应用程序对象 - 管理属于它的窗口对象和文档对象 - 实现消息循环 -
+与他的窗口对象及文档对象之间构成 聚集关系。</p>
+<blockquote>
+<p>聚集关系实际上就是指窗口之间的互相联系。
+理解：窗口对象主要是显示程序，窗口对象之间可以互相存在关系；文档对象即主要指的是每个窗口中的数据，可以考虑窗口中的数据。
+窗口就是数据的显示层，而文档就是指的具体数据。应用程序对象就是main函数的感觉。</p>
+</blockquote>
+<p>对Windows应用，应用程序对象和主窗口对象只有一个，子窗口对象和文档对象则可以有多个，它们在程序运行的不同时刻创建。</p>
+<p>例如，对于一个多文档的Windows应用程序 -
+在程序开始运行时，首先创建应用程序对象; -
+由应用程序对象来创建主窗口对象； -
+在程序运行过程中，用户选择主窗口菜单项"文档|打开"，创建一个稳定那个对象以及相应的子窗口对象。
+&gt; 也就是说文档对象其实是叶节点的感觉，是最底层的东西。</p>
+<p>MFC Microsoft Foundation Class library 微软基础类库</p>
+<p>MFC是微软公司提供的支持以面向对象范式进行Windows应用程序开发的一个基础类库
+-
+MFC提供了一些类来描述应用中对象的基本功能，应用程序可以通过集成这些类来实现各自的特殊功能。
+&gt; 在这里，想起qt中，本身有Dialog, Frame等对象，实际上感觉也是如此的。
+- MFC还提供了一种基于"文档-视"结构的应用框架。 &gt;
+所谓框架需要进行好好理解，所谓框架一般来说是指的在实际问题过程中不断向前发展。一般来说最好了解框架的历史。但是实际上如果一开始接触不到这个信息的话，只有先进行框架的原理和功能，以及如何使用等方面进行先理解。当理解明白后，直接使用。注意！不要迷信框架，最后把如何从很复杂的东西抽象到框架的过程理解明白。当然，第一步肯定是要会用框架。</p>
+<p><img data-src="00001.png" /> &gt;
+由图可以看出，首先CObject分为了应用的框架Application Architecture,
+异常Exceptions, 文件服务File Services, 基本类型Arrays, Lists, Maps,
+Internet Services, 以及Graphical Drawing, Control Support, Menus, ODBC
+Database Support, DAO Database Support, Synchronization, Windows
+Sockets等高级专题。 &gt; 对于Application
+Architecture用可以分为CCmdTarget即能处理Windows消息的类，往下派生CWind,分为以下几类，
+Frame Windows, Control Bars, Property Sheets以及 Dialog Boxes
+以及Views以及Controls等等。 &gt;
+还有一部分Class不是从CObject派生的，也就是说不是采用的面向对象范式。
+&gt; Internet Server API, Run-time Object Model Support, Structures,
+Support Classes, Typed Template Collections, OLE Type Wrappers, OLE
+Automation Typesm Synchronization.</p>
+<p><img data-src="00002.png" /> &gt;
+可以看出CCmdTarget被分为了好几类，CWinThread, CWinApp 线程的，
+CDocument文档的， CDocTemplate文档类型的。 <img data-src="00003.png" /></p>
+<h4 id="mfc提供的主要类">MFC提供的主要类</h4>
+<ul>
+<li>窗口类
+<ul>
+<li>基本窗口类CWnd
+<ul>
+<li>实现窗口的基本功能: &gt;
+一般的消息处理、窗口大小和位置管理、菜单管理、坐标系管理、滚动条管理、剪切板管理、窗口状态管理、窗口间位置关系管理，等等
+&gt; 是其他窗口类的基类</li>
+</ul></li>
+<li>框架窗口类
+<ul>
+<li>提供对标题栏、菜单栏、工具栏、状态栏以及属于它的子窗口的管理功能。</li>
+<li>CFrameWnd: 提供了单文档应用主窗口的基本功能</li>
+<li>CMDIFrameWnd: 提供了多文档应用主窗口的基本功能</li>
+<li>CMDIChildWnd: 提供了多文档应用子窗口的基本功能 &gt;
+一个窗口中有多个CView,CMDIChildWnd和CMDIFrameWnd一定对应吗？</li>
+</ul></li>
+<li>视类CView
+<ul>
+<li>实现程序数据的显示功能以及操作数据时与用户的交互功能</li>
+<li>视窗口位于单文档应用主窗口CFrameWnd和多文档应用子窗口CMDIChildWnd的客户区（可显示区）</li>
+</ul></li>
+<li>对话框类CDialog
+<ul>
+<li>对话框是一种特殊的窗口，用于获取用户的输入信息。</li>
+<li>每个对话框都包含了一些对话框控件（如：按钮、列表框、单选/多选框等），这些控件属于对话框对象的成员对象。</li>
+<li>CDialog类封装了对话框的基本功能，它构成了所有对话框的基类。</li>
+</ul></li>
+</ul></li>
+<li>文档类CDocument
+<ul>
+<li>对程序要处理的数据进行管理，包括磁盘文件I/O.</li>
+<li>一个CDocument类的对象至少要对应一个CView类的对象 &gt;
+这里也就是所谓的数据-展示的感觉 &gt;
+刚刚最开始自己的感觉就是应该是数据与文档对应</li>
+</ul></li>
+<li>应用框架类 &gt; 这里是怎么组织的，真让人好奇
+<ul>
+<li>文档模板类
+<ul>
+<li>实现对文档、视窗口和框架窗口所构成的对象组的管理功能。（用于支持基于“文档=视”结构的应用框架）</li>
+<li>CDocTemplate: 文档模板的基类 &gt; CView+CDocument</li>
+<li>CSingleDocTemplate: 单文档模板基类</li>
+<li>CMultiDocTemplate: 多文档模板类 &gt;
+这里跟自己的理解是一样的吗？它的意思是这里进行管理的功能？</li>
+</ul></li>
+<li>应用类CWinApp
+<ul>
+<li>提供了对Windows应用程序的各部分进行组合和管理的功能，其中包括对主窗口和文档模板的管理以及实现消息循环等、
+&gt;
+换言之，应用类调用文档模板类，实现消息循环。文档模板类实现对文档、视窗口、框架窗口所构成的对象组的管理。文档即数据，视窗口即文档的数据，框架窗口即整个菜单栏，状态栏以及其他的等等</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><img data-src="00004.png" /> - 绘图类 - 绘图环境类CDC -
+实现Windows应用程序中的绘图功能：文本以及几何图形（线、矩形、椭圆等）的输出
+- 要关联一个窗口以及一些绘图工具 - 绘图工具类CPen, CFont, CBrush -
+实现笔、字体、刷子等绘图所需的绘图元素。 - 文件输入 -
+CFile类：实现了基于字节流的文件I/O -
+CArchive类：通过重载操作符&lt;<和>&gt;实现了对基本数据类型和MFC类对象的文件I/O.
+- 常用数据类型 -
+CPoint点坐标，CRect矩形信息，CSize矩形的宽度/高度，点之间的偏移量等 -
+字符串类CString</p>
+<h4 id="文档-视结构">文档-视结构</h4>
+<ul>
+<li>文档
+<ul>
+<li>用于存储和管理程序中的数据。</li>
+</ul></li>
+<li>视
+<ul>
+<li>显示文档数据以及实现对文档数据进行操作时与用户的交互功能</li>
+</ul></li>
+<li>文档与视一起可以实现：
+<ul>
+<li>数据的内部存储形式和数据的外部表现形式相互独立</li>
+<li>一个文档对象对应一个或多个视对象，即，对于同一个文档数据可以用不同的方式进行显示和操作</li>
+</ul></li>
+</ul>
+<p>MFC提供了一个基于“文档-视”结构的应用框架，主要由以下类构成： - CView
+- CDocument - CFrameWnd - CDocTemplate - CWinApp
+应用框架规定了各个组成部分之间的关系，它带来的好处是简化了程序的控制流程设计。</p>
+<p>基于“文档-视”结构的多文档应用框架的控制逻辑 -
+首先创建一个CWinApp类的应用对象，然后 -
+调用CWinApp类的成员函数InitInstance类对应用对象进行初始化： -
+创建一个CMultiDocTemplate类的文档模板对象，并调用CWinApp类的成员函数AddDocTemplate把它加入到应用对象中。
+-
+创建一个CMDIFramWnd类的主框架窗口对象，并记录在应用对象的数据成员m_pMainWnd中。
+- 调用CWinApp类的成员函数Run,进入消息循环。 &gt; 也就是说CWinApp-&gt;
+InitInstance;
+类文档模板对象，主框架窗口对象。然后容纳其他的。最后就是进行消息循环，其实也是Run的一个封装。
+- 用户选择菜单项"文件|打开"后，调用CWinApp类的成员函数OnFileOpen: -
+显示打开文件对话框，让用户选择要打开的文件 -
+根据文档模板创建三个对象：文档CDoument,子框架窗口CMDIChildWnd和视CView,
+并建立起他们之间的关联。 -
+调用CDocument对象的成员函数OnOpenDocument从磁盘文件读取数据: -
+创建一个CArchive类的对象。 -
+以CArchive类的对象作为参数调用CDocument的成员函数Serialize从磁盘读入数据并存放在文档对象中。
+-
+调用对应CView对象的成员函数OnInitialUpdate通知相应的视进行数据显示，这时，CView类的成员函数OnUpdate将会被调用，它会向CView对象发送WM_PAINT消息
+- CView对象收到WM_PAINT消息后将调用CView的成员函数OnDraw显示文档的数据
+&gt;
+这里他们三者之间的联系未说明白。首先，前面已经说到了管理的是消息队列。现在就是当面对具体的消息(事件)时的动作，此时是如果选择文件/打开后，首先会建立CDoucent,
+CView, CMDIChildren.
+然后，在想这里的子框架的作用是否是打开不断的目录。其次，这里的CView类的成员函数发送WM_PAINT，应该会等待CDocument的一个消息后才会启动OnDraw吧，感觉上是这样的
+- CView对象(视)与CDocument对象(文档)之间的交互 -
+通过CView对象的成员函数GetDocument可获得相应的文档对象 -
+通过CDocument对象的成员函数GetFirstViewPosition和GetNextView可获得相应
+的视(可以有多个) -
+修改文档数据后，可以通过CDocument对象的成员函数SetModifiedFlag设置修改标记为true,并调用CDocument对象的成员函数UpdateAllViews通知相应的视刷新显示
+- 这时，CView对象的成员函数OnUpdate和OnDraw将会被调用。 &gt; 理解：
+等于那个动作会调度CView，CView然后是CDocument的父亲，通过这些就可以显示函数。
+- 用户选择菜单项“文件|保存” -
+调用CDocument对象的成员函数OnSaveDoucument把文档数据保存到磁盘中： -
+创建一个CArchive类的对象 -
+以CArchive类的对象作为参数调用CDocument对象的成员函数Serialize把文档中的数据写入磁盘
+- 调用CDocument对象的成员函数SetModifiedFlag设置修改标记为false. -
+用户选择菜单项“文件|关闭” - 调用CDocument对象的成员函数OnFileClose; -
+调用CDocument对象的成员函数IsModified判断文档是否被修改，如果被修改，提示用户保存数据，然后按菜单项"文件|保存"处理
+- 调用CDocument对象的成员函数OnCloseDocument撤销相应的视和子框架窗口 -
+撤销文档对象 - 用户选择菜单项“文件|退出”或关闭主窗口： -
+向应用的主窗口（CMDIFrameWnd类的框架窗口）发送一条WM_CLOSE消息。 -
+主窗口收到WM_CLOSE: - 关闭所打开的文档（包括相应的视和子框架窗口） -
+撤销主窗口 - 向应用发送一条WM_QUIT消息 -
+在CWinApp类的成员函数Run的消息循环中收到WM_QUIT消息后， - 退出消息循环 -
+调用CWinApp对象的成员函数ExitInstance做程序退出前的一些处理。</p>
+<p>CView <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- CDocument *m_pDocument;</span><br><span class="line">// 存储对应文档对象的指针</span><br><span class="line">- CDocument *GetDocument() const;</span><br><span class="line">// 获得对应的文档对象</span><br><span class="line">- virtual void onDraw(CDC *pDC)=0;</span><br><span class="line">// 处理窗口刷新消息:WM_PAINT;</span><br><span class="line">- virtual void onInitialUpdate();</span><br><span class="line">// 视对象创建时被调用</span><br><span class="line">- virtual void OnUpdate(CView *pSender, LPARAM IHint, CObject* pHint);</span><br><span class="line">// 文档对象的数据发生改变时调用该函数刷新相应的视对象。默认处理: 发送WM_PAINT消息。</span><br></pre></td></tr></table></figure> &gt; 不亏为抽象类的感觉</p>
+<ul>
+<li>CDocument <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">- void AddView(CView *pView);</span><br><span class="line">// 给文档对象增加一个关联的CView类的对象，双向注册的感觉？.  通过参数的形式组合，倒也很正常。 不过是有GetDocument来调用它</span><br><span class="line">- void RemoveView(CView *pView);</span><br><span class="line">// 使一个CView类的对象脱离于文档对象的关联</span><br><span class="line">- virtual POSITION GetFirstViewPosition() const;</span><br><span class="line">// 获取关联的第一个CView对象的位置</span><br><span class="line">- virtual CView* GetNextView(POSITION&amp; rPosition) const;</span><br><span class="line">// 获取指定位置的CView对象，rPosition自动往后移动一个位置</span><br><span class="line">- void UpdateAllViews(CView* pSender, LPARAM IHint=0L, CObject* pHint=NULL);</span><br><span class="line">// 向关联的CView对象发送刷新消息。当pSender为NULL时，向关联的所有CView对象发送刷新消息。</span><br><span class="line">&gt; 怎么实现刷新？首先思考，这个刷新肯定是由某个动作触发的，那么把它加在其余的后面就可以了呗。对！</span><br><span class="line"></span><br><span class="line">void SetModifiedFlag(BOOL bModified=TRUE);</span><br><span class="line">设置文档修改标记。</span><br><span class="line">BOOL IsModified( );</span><br><span class="line">判断文档是否被修改。</span><br><span class="line">virtual BOOL OnSaveDocument(LPCTSTR 							lpszPathName ); </span><br><span class="line">把文档中数据保存到文件名为lpszPathName 的文件中去。</span><br><span class="line">virtual BOOL OnOpenDocument(LPCTSTR 							lpszPathName );</span><br><span class="line">从文件名为lpszPathName 的文件中读取文档数据。</span><br><span class="line">virtual BOOL OnNewDocument( );</span><br><span class="line">对文档数据进行初始化。</span><br><span class="line">virtual void OnCloseDocument( ); </span><br><span class="line">关闭文档。</span><br><span class="line">virtual void Serialize( CArchive&amp; ar ); </span><br><span class="line">用于文档数据的序列化（写入磁盘文件或从磁盘文件读出）。</span><br><span class="line">一般由OnSaveDocument和OnOpenDocument来调用</span><br></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CArchive档案类</span><br><span class="line">// 实现对基本数据类型和从CObject继承的对象的文件输入/输出操作</span><br><span class="line">CArchive重载了操作符&lt;&lt;和&gt;&gt;</span><br><span class="line">IsLoading();  // 输入</span><br><span class="line">IsStoring();  // 输出</span><br></pre></td></tr></table></figure>
+<p>CDocTemplate文档模板类 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CDocTemplate类的构造函数（其参数为文档、视以及框架窗口的类信息）：</span><br><span class="line">CDocTemplate(UINT nIDResource,</span><br><span class="line">	  	CRuntimeClass* pDocClass, </span><br><span class="line"> 		CRuntimeClass* pFrameClass, </span><br><span class="line">	       CRuntimeClass* pViewClass );</span><br></pre></td></tr></table></figure></p>
+<p>CWinApp <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">virtual BOOL InitInstance(); </span><br><span class="line">应用程序初始化，包括注册窗口类、创建/显示主窗口等。它由WinMain调用。</span><br><span class="line">virtual int Run();</span><br><span class="line">实现消息循环。它由WinMain调用</span><br><span class="line">virtual int ExitInstance();</span><br><span class="line">应用程序结束处理，由Run调用。</span><br><span class="line">virtual CWnd *GetMainWnd( ); </span><br><span class="line">获得主窗口对象指针。</span><br><span class="line">void AddDocTemplate(CDocTemplate* Template );</span><br><span class="line">把一个文档模板加入到CWinApp类的对象中</span><br><span class="line">afx_msg void OnFileNew( );</span><br><span class="line">提供对“File|New”菜单消息的处理功能。</span><br><span class="line">afx_msg void OnFileOpen( );</span><br><span class="line">提供对“File|Open”菜单消息的处理功能。</span><br></pre></td></tr></table></figure></p>
+<p>Application Wizard应用向导 -
+要在程序中建立应用框架中各对象的创建和操作代码将是一件很麻烦的工作。
+VC++提供了一个应用向导，基于MFC的多文档应用程序，会自动建立5个雷，并分别为这些类写了一些必要的代码:
+CMyApp CMainFrame CChildFrame CMyView CMyDoc
+在应用向导建立的应用程序中有一个CMyApp类的全局对象theApp,它将在WinMain执行之前创建。
+为了体现"纯"面向对象特性，在应用向导建立的应用程序中隐藏了主函数WinMain.
+在隐藏的WinMain中， -
+首先调用theApp的成员函数InitInstance对应用程序进行初始化 -
+然后去调用theApp的成员函数Run进入消息循环
+消息循环结束之后，将会调用theApp的成员函数ExitInstance进行程序结束前的一些处理。
+在应用向导建立的应用程序中对消息处理函数进行了结构化处理: -
+通过消息映射机制把Windows消息与相应类的成员函数关联起来 -
+各个消息的处理分别由相应类的一个成员函数来实现。</p>
+<p>类向导 为应用程序中从MFC派生的类增加/删除成员 -
+消息处理成员函数（菜单、窗口、键盘、鼠标） - 基类中可重定义的成员函数 -
+新定义数据成员（成员变量） - 对话框类与各个“控件”所对应的数据成员
+为应用程序增加/删除基于MFC的类</p>
+<h4 id="图形用户接口设计gui">图形用户接口设计GUI</h4>
+<ul>
+<li>菜单</li>
+<li>对话框</li>
+<li>绘图</li>
+<li>坐标变换</li>
+</ul>
+<h5 id="菜单">菜单</h5>
+<p>菜单是执行程序功能的一种手段。 -
+一个程序可以有多个菜单，每个菜单都有一个标识。 -
+菜单有菜单项构成，每个菜单项包含： - 标识 - 显示文字和提示文字 -
+处理函数 - 菜单的外观设计可以用资源编辑器来完成 -
+菜单处理函数可以用类向导来添加。 ##### 对话框
+对话框是一种窗口，它是Windows应用程序与用户进行交互的一种重要手段。
+每个对话框都包含了一些对话框控件（如：按钮、编辑、列表、组合等），这些控件属于对话框对象的成员对象（子窗口）
+&gt; 子窗口这个概念原来等效于成员对象啊？
+一个对话框往往需要对应一个对话框模板 - 每个对话框模板都有一个标识 -
+对话框模板描述了对话框的组成，包括：对话框的标识和尺寸；对话框中各个控件的标识、类型、尺寸与位置等
+- 对话框模板可用资源编辑器来设计 &gt;
+哪些东西是可以机器化的呢？比如说，这里利用机器，UI来设计，其实就是应用了这里的东西的感觉。其实莫过于最奇妙的东西就是，消息的发送和传递。谁是参数？在注册的时候需要些什么东西？</p>
+<p>每个对话框都对应着一个对话框类，它可以用类向导来管理： -
+为对话框控件指定消息处理函数 - 为对话框指定成员变量</p>
+<p>CDialog对话框类
+程序中需要打开对话框时，首先要创建一个对话框类的对象，然后调用该类的成员函数DoMadal.如:
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CMyDlg dlg; // 创建一个对话框类的对象dlg.</span><br><span class="line">dlg.m_...=...; //通过dlg的成员变量设置对话框中各控制的初试内容。</span><br><span class="line">...</span><br><span class="line">if((dlg.DoModal()==IDOK)) // 显示对话框，返回值可以为IDOK何IDCANCEL &#123;</span><br><span class="line">    ... = dlg.m_...; // 取对话框控制中的内容。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 公共的对话框类 - CFileDialog: 文件打开/保存对话框 -
+CFontDialog: 字体选择对话框 - CColorDialog: 颜色选择对话框 -
+CPrintDialog: 打印设置对话框 - CFindReplaceDialog: 查找/替换对话框</p>
+<h5 id="绘图--cdc类">绘图--CDC类</h5>
+<p>设备环境类CDC用于实现Windows应用程序中的绘图功能。
+进行绘图时，首先要创建一个CDC类或其派生类的对象，该对象将包含绘图时所需要的各种元素，包括:
+- 绘图函数，如：输出文字、画线、画矩形、画椭圆等 -
+绘图工具，如：字体、颜色、笔、刷子等
+在创建CDC类或其派生类的对象时需要指出它所对应的窗口对象，绘图操作将在相应窗口中进行。
+应用框架在调用CView的OnDraw成员函数时，会自动创建一个CDC类的对象，作为参数传给OnDraw.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">文本输出函数 </span><br><span class="line">virtual BOOL TextOut(int x,int y,LPCTSTR lpszString,int nCount);</span><br><span class="line">BOOL TextOut(int x,int y,const CString&amp; str);</span><br><span class="line">virtual int DrawText(LPCTSTR lpszString,int nCount,LPRECT lpRect,UINT nFormat );</span><br><span class="line">int DrawText(const CString&amp; str,LPRECT lpRect,UINT nFormat);</span><br><span class="line">设置字符和背景颜色</span><br><span class="line">virtual COLORREF SetTextColor( COLORREF crColor ); </span><br><span class="line">virtual COLORREF SetBkColor( COLORREF crColor ); </span><br><span class="line">COLORREF类型的值可以用宏“RGB(red,green,blue)”来表示，例如，RGB(255,0,0)表示红色；RGB(0,255,0)表示绿色； RGB(255,255,255)表示白色。</span><br><span class="line"></span><br><span class="line">几何图形输出函数</span><br><span class="line">画线段</span><br><span class="line">//定线段的起点坐标</span><br><span class="line">CPoint MoveTo( int x, int y );</span><br><span class="line">CPoint MoveTo( POINT point );</span><br><span class="line">//从起点坐标开始画线直到指定的终点坐标</span><br><span class="line">BOOL LineTo( POINT point );</span><br><span class="line">BOOL LineTo( int x, int y );</span><br><span class="line"></span><br><span class="line">画矩形。</span><br><span class="line">BOOL Rectangle( int x1, int y1, int x2, int y2 );</span><br><span class="line">BOOL Rectangle( LPCRECT lpRect );</span><br><span class="line"></span><br><span class="line">画椭圆，参数为外接矩形。</span><br><span class="line">BOOL Ellipse( int x1, int y1, int x2, int y2 );</span><br><span class="line">BOOL Ellipse( LPCRECT lpRect ); </span><br><span class="line"></span><br><span class="line">选择绘图工具函数</span><br><span class="line">选择系统提供的绘图工具</span><br><span class="line">virtual CGdiObject* SelectStockObject(int nIndex); </span><br><span class="line">选择自定义的笔。返回CDC中原来的笔的指针。</span><br><span class="line">CPen* SelectObject( CPen* pPen ); </span><br><span class="line">选择自定义的刷子。返回CDC中原来的刷子的指针。</span><br><span class="line">CBrush* SelectObject( CBrush* pBrush ); </span><br><span class="line">选择自定义的字体，返回CDC中原来的字体的指针。</span><br><span class="line">virtual CFont* SelectObject( CFont* pFont );</span><br><span class="line">注意：用完绘图工具之后，要把绘图工具从CDC类的对象中选出来，以免CDC类对象消亡时重复撤销它包含的绘图工具！ </span><br></pre></td></tr></table></figure>
+<p>绘图工具 - 画笔（用于画线） - 构造函数的参数为笔型、笔宽以及颜色
+<code>CPen(int nPenStyle, int nWidth, COLORREF crColor);</code> -
+刷子（用于填充封闭图形） - 构造函数的参数为刷子的颜色
+<code>CBrush(COLORREF crColor);</code> - 字体 -
+先创建一个默认构造的CFont类的对象，然后调用该类的CreatePointFont成员函数完成字体的构造
+<code>CFont();</code> <code>bool CFont::CreatePointFont(int nPointSize,
+LPCTSTR lpszFaceName, CDC* pDC=NULL);</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">void CMyView::OnDraw(CDC* pDC)</span><br><span class="line">&#123;	COLORREF old_text_color=pDC-&gt;SetTextColor(RGB(255,0,0)); 					//把字符颜色设置成“红”色。</span><br><span class="line">	COLORREF old_bk_color=pDC-&gt;SetBkColor(RGB(0,255,0)); 					//把字符背景颜色设置成“绿”色。</span><br><span class="line">	pDC-&gt;TextOut(0,0,&quot;hello&quot;); //在位置(0,0)处显示字符串&quot;hello&quot;</span><br><span class="line">	CPen pen(PS_SOLID,2,RGB(0,255,0)),*old_pen; //创建一个绿色的实线笔</span><br><span class="line">    old_pen = pDC-&gt;SelectObject(&amp;pen); //把新笔选进CDC类的对象中</span><br><span class="line">	CBrush brush(RGB(0,0,255)),*old_brush; //创建一个蓝色的刷子</span><br><span class="line">	old_brush = pDC-&gt;SelectObject(&amp;brush); //把新刷子选进CDC类的对象中</span><br><span class="line">    pDC-&gt;MoveTo(0,0); pDC-&gt;LineTo(200,200); //画一个绿色的线段</span><br><span class="line">	pDC-&gt;Rectangle(0,50,100,150); //画一个内部为蓝色、边为绿色的矩形</span><br><span class="line">	pDC-&gt;SelectObject(old_pen); //把原来的笔选回到CDC类的对象中</span><br><span class="line">	pDC-&gt;SelectObject(old_brush); //把原来的刷子选回到CDC类的对象中</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void CStudentsView::OnDraw(CDC* pDC)</span><br><span class="line">&#123; CStudentsDoc* pDoc = GetDocument();</span><br><span class="line">   CFont *old_font=(CFont *)pDC-&gt;SelectStockObject(ANSI_FIXED_FONT);</span><br><span class="line">   for (int i=0,num=pDoc-&gt;get_num_of_students(); i &lt; num; i++)</span><br><span class="line">  &#123; STUDENT_TYPE st;</span><br><span class="line">    pDoc-&gt;get_student(i,st);</span><br><span class="line">    CString temp;</span><br><span class="line">    temp.Format(&quot;%-10.10s%-10.10s%-4.4s%-10.10s%-20.20s%-40.40s&quot;,</span><br><span class="line">                st.number,st.name,st.sex,st.birthdate,st.birthplace,st.address);</span><br><span class="line">    if (i != current_student)</span><br><span class="line">    &#123; pDC-&gt;SetTextColor(RGB(0,0,0));</span><br><span class="line">       pDC-&gt;SetBkColor(RGB(255,255,255));</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123; pDC-&gt;SetBkColor(RGB(0,0,0));</span><br><span class="line">       pDC-&gt;SetTextColor(RGB(255,255,255));</span><br><span class="line">    &#125;</span><br><span class="line">    pDC-&gt;TextOut(0,i*20,temp);</span><br><span class="line">  &#125;</span><br><span class="line">  pDC-&gt;SelectObject(old_font);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>CView的一些派生类 - CScrollView(带滚动功能的视) -
+CEditView(具有编辑功能的视) - CFormView(具有表格功能的视) -
+CHtmlView(具有Web浏览功能的视)</p>
+<h5 id="坐标转换">坐标转换</h5>
+<p>CScrollView <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">void CScrollView::SetScrollSizes( </span><br><span class="line">  		int nMapMode, </span><br><span class="line">  		SIZE sizeTotal, </span><br><span class="line">  		const SIZE&amp; sizePage = sizeDefault, </span><br><span class="line">  		const SIZE&amp; sizeLine = sizeDefault );</span><br><span class="line">nMapMode：映射方式（坐标的逻辑单位，坐标轴方向）</span><br><span class="line">例如：MM_TEXT（逻辑单位为像素点，坐标原点位于左上角，x轴从左向右，y轴从上往下。</span><br><span class="line">sizeTotal：文档内容的大小</span><br><span class="line">sizePage：文档滚动页的大小</span><br><span class="line">sizeLine：文档滚动行的大小</span><br><span class="line">需要在CScrollView的OnUpdate和OnSize中调用。</span><br><span class="line"></span><br><span class="line">void CStudentsView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint) </span><br><span class="line">&#123; // TODO: Add your specialized code here and/or call the base class</span><br><span class="line">  CStudentsDoc* pDoc = GetDocument();</span><br><span class="line">  </span><br><span class="line">  // TODO: calculate the total size of this view</span><br><span class="line">  CSize sizeTotal,sizePage,sizeLine;   </span><br><span class="line">  sizeTotal.cx = 100; //文本宽度固定</span><br><span class="line">  sizeTotal.cy = pDoc-&gt;get_num_of_students()*20; //文本长度</span><br><span class="line">  RECT rect;</span><br><span class="line">  GetClientRect(&amp;rect); //获取视窗口的大小</span><br><span class="line">  sizePage.cx = rect.right-rect.left-8; //页宽度</span><br><span class="line">  sizePage.cy = rect.bottom-rect.top-20; //页长度</span><br><span class="line">  sizeLine.cx = 8; //行宽度</span><br><span class="line">  sizeLine.cy = 20; //行高度</span><br><span class="line"></span><br><span class="line">  SetScrollSizes(MM_TEXT,sizeTotal,sizePage,sizeLine);</span><br><span class="line"></span><br><span class="line">  Invalidate();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void CStudentsView::OnSize(UINT nType, int cx, int cy) </span><br><span class="line">&#123; CScrollView::OnSize(nType, cx, cy);</span><br><span class="line">	</span><br><span class="line">  // TODO: Add your message handler code here</span><br><span class="line">  CStudentsDoc* pDoc = GetDocument();</span><br><span class="line">  </span><br><span class="line"> // TODO: calculate the total size of this view</span><br><span class="line">  CSize sizeTotal, sizePage, sizeLine; </span><br><span class="line">  sizeTotal.cx = 100;</span><br><span class="line">  sizeTotal.cy = pDoc-&gt;get_num_of_students()*20;</span><br><span class="line">  sizePage.cx = cx-8;</span><br><span class="line">  sizePage.cy = cy-20;</span><br><span class="line">  sizeLine.cx = 8;</span><br><span class="line">  sizeLine.cy = 20;</span><br><span class="line">  </span><br><span class="line">  SetScrollSizes(MM_TEXT,sizeTotal,sizePage,sizeLine);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> <img data-src="00005.png" /> 坐标转换函数
+OnPrepareDC(&amp;dc,NULL); 为ScrollView初始化dc dc.DPtoLP(&amp;point);
+从物理坐标转换到逻辑坐标 dc.LPtoDP(&amp;point);
+从逻辑坐标转换到物理坐标</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">void CStudentsView::OnLButtonDown(UINT nFlags,</span><br><span class="line">                                                       CPoint point) </span><br><span class="line">&#123;</span><br><span class="line">  // TODO: Add your message handler code here </span><br><span class="line">  // and/or call default</span><br><span class="line">  </span><br><span class="line">  CClientDC dc(this);</span><br><span class="line">  OnPrepareDC(&amp;dc,NULL); //transform dc to   </span><br><span class="line">                                        //scrollview</span><br><span class="line">  dc.DPtoLP(&amp;point); // 物理坐标转逻辑坐标</span><br><span class="line"></span><br><span class="line">  current_student = point.y/20;   </span><br><span class="line"> </span><br><span class="line">  Invalidate(); //重新显示视窗口内容，OnDraw将被调用</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="一点反思">一点反思</h3>
+<p>学习的几个过程 1.
+首先，如果课件足够好，也可以不用记笔记，这样的效率高，但是能够记住吗？但是感觉上最有用的可能就是反思吧？也就是说并不意味着一定要记很多笔记。
+记住，衡量的标准一直是上课预估后面不会做的易错点，还有精华的地方自己是否掌握了，这才是最重要的。</p>
+<p>按照以前的学习态度，如果是自己在乎的知识。
+首先，第一次一定要要么有好的课本，或者材料特别好。
+看书，并且记自己不懂的地方。
+第一次看书下来，主要讲什么的大体的脉络要清晰。</p>
+<p>然后还要衡量所花的时间等诸多因素。</p>
+<p>然后，再将笔记进一步总结。练过所有需要练习的局部知识点，然后开始自己。
+学习知识点还有几遍，然后就是大量地做题，直到做到彻底掌握这个知识点为止。
+最后，如果时间充裕再看其他知识点进行迁移，弄明白整个过程。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/nju/" rel="tag"># nju</a>
+              <a href="/tags/course/" rel="tag"># course</a>
+              <a href="/tags/cplus/" rel="tag"># cplus</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/nju-course-cplus-lecture5-summary-e0699417912f/" rel="prev" title="nju-course-cplus-lecture5-summary">
+      <i class="fa fa-chevron-left"></i> nju-course-cplus-lecture5-summary
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/nju-course-cplus-lecture6-summary-0bbddf9f302b/" rel="next" title="nju-course-cplus-lecture6-summary">
+      nju-course-cplus-lecture6-summary <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">重点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">Windows简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Ewindow-api%E7%9A%84%E8%BF%87%E7%A8%8B%E5%BC%8Fwindows%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.2.</span> <span class="nav-text">基于Window
+API的过程式Windows应用程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84windows%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.2.1.</span> <span class="nav-text">面向对象的Windows应用程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mfc%E6%8F%90%E4%BE%9B%E7%9A%84%E4%B8%BB%E8%A6%81%E7%B1%BB"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">MFC提供的主要类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%A1%A3-%E8%A7%86%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">文档-视结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1gui"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">图形用户接口设计GUI</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8F%9C%E5%8D%95"><span class="nav-number">1.2.1.3.1.</span> <span class="nav-text">菜单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%98%E5%9B%BE--cdc%E7%B1%BB"><span class="nav-number">1.2.1.3.2.</span> <span class="nav-text">绘图--CDC类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9D%90%E6%A0%87%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.2.1.3.3.</span> <span class="nav-text">坐标转换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E7%82%B9%E5%8F%8D%E6%80%9D"><span class="nav-number">1.2.2.</span> <span class="nav-text">一点反思</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : 'e9e0966cbde5e8cb50f81866307cde7a',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

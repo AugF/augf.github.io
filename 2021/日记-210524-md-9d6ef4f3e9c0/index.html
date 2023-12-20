@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ypwang.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="待思考的地方 P38: 结论应该怎么写？ 讲稿 各位答辩老师下午好，我是王云攀，我的毕业论文题目是基于GPU的&#x2F;图神经网络计算性能&#x2F;优化研究，指导老师是黄宜华教授 我将从5个方面展开 首先来看研究背景&#x2F;和相关工作 图神经网络是一种基于深度学习&#x2F;处理图域数据&#x2F;的方法，广泛应用于多个领域。 众多图神经网络系统，采样技术&#x2F;和基于采样的训练推理流程被提出。 本文重点研究&#x2F;面向GPU环境的图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日记-210524.md">
+<meta property="og:url" content="https://ypwang.github.io/2021/%E6%97%A5%E8%AE%B0-210524-md-9d6ef4f3e9c0/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="待思考的地方 P38: 结论应该怎么写？ 讲稿 各位答辩老师下午好，我是王云攀，我的毕业论文题目是基于GPU的&#x2F;图神经网络计算性能&#x2F;优化研究，指导老师是黄宜华教授 我将从5个方面展开 首先来看研究背景&#x2F;和相关工作 图神经网络是一种基于深度学习&#x2F;处理图域数据&#x2F;的方法，广泛应用于多个领域。 众多图神经网络系统，采样技术&#x2F;和基于采样的训练推理流程被提出。 本文重点研究&#x2F;面向GPU环境的图">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-24T13:24:29.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://ypwang.github.io/2021/%E6%97%A5%E8%AE%B0-210524-md-9d6ef4f3e9c0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>日记-210524.md | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ypwang.github.io/2021/%E6%97%A5%E8%AE%B0-210524-md-9d6ef4f3e9c0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          日记-210524.md
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-24 21:24:29" itemprop="dateCreated datePublished" datetime="2021-05-24T21:24:29+08:00">2021-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="待思考的地方">待思考的地方</h2>
+<p>P38: 结论应该怎么写？</p>
+<h2 id="讲稿">讲稿</h2>
+<p>各位答辩老师下午好，我是王云攀，我的毕业论文题目是基于GPU的/图神经网络计算性能/优化研究，指导老师是黄宜华教授</p>
+<p>我将从5个方面展开</p>
+<p>首先来看研究背景/和相关工作</p>
+<p>图神经网络是一种基于深度学习/处理图域数据/的方法，广泛应用于多个领域。
+众多图神经网络系统，采样技术/和基于采样的训练推理流程被提出。</p>
+<p>本文重点研究/面向GPU环境的图神经网络计算性能优化。</p>
+<p>现有的性能评估工作对图神经网络训练推理过程计算效率方面的性能瓶颈研究不充分，如未涵盖训练阶段，且未考虑采样方法对性能瓶颈的影响</p>
+<p>而目前的采样方法重点关注于优化采样方式，以降低采样对模型精度的影响，对算法流程上的计算效率缺乏关注</p>
+<p>现有的分布式系统对GPU支持有限，单机多GPU系统也未关注到基于采样的训练推理流程中的内存开销问题。</p>
+<p>本文的工作概述如下：</p>
+<p>针对计算效率性能瓶颈不明确、缺乏相关分析工作的问题，研究设计了一系列实验，对基于GPU的图神经网络计算性能瓶颈做了系统性的分析。</p>
+<p>性能分析发现，边计算是主要的性能瓶颈。高额的内存使用限制了图神经网络的数据扩展性。采样技术能有效降低内存使用，但基于采样的计算流程存在额外开销占比大导致GPU利用率低、内存波动大导致个别批次可能出现内存溢出两大问题。</p>
+<p>针对训练推理流程GPU利用率低的问题，研究提出了基于流水线并行的训练推理流程优化方法。采样流程的流水线并行优化有效解决了采样流程额外开销大的问题。训练与评估步骤的流水线并行优化有效解决了评估步骤耗时长的问题。最终的实验结果证实了该优化方法的有效性。</p>
+<p>针对不同批次内存开销波动大以及个别批次可能出现内存溢出风险的问题，研究提出了内存使用可控的训练推理流程优化方法。利用基于线性模型和随机森林的内存开销模型有效识别出可能带来内存风险的采样子图，并针对这些子图采取基于度数和PageRank的超限子图剪枝策略缩减子图规模，确保内存开销不超限。实验结果表明，两种预测模型有着非常高的精度，超限子图剪枝策略能有效限制子图的内存开销，且对模型精度的影响小于随机剪枝策略。</p>
+<p>第二章将介绍性能瓶颈分析工作。</p>
+<p>本文根据边/点复杂度将主流图神经网络算法划分在了四个象限，并选取了各个象限的代表算法GaAN,
+GGNN, GCN, GAT作为评估算法。</p>
+<p>选取了七个性能评估中常用的数据集用于实验</p>
+<p>以下是具体的实验设置，基于PyG实现了所有算法，并设计了统一的两层网络结构。</p>
+<p>接着，我们从时间分解分析、内存使用分析，采样对性能的影响分析三个方面进行了性能瓶颈分析。</p>
+<p>通过观察四个算法在图神经网络层的耗时分解，我们可以发现对于大多数情况，边计算占据了主要的耗时。</p>
+<p>在PyG中，边计算被分解为了四个步骤，收集、消息传递、聚集和向量更新。</p>
+<p>从边计算层耗时分解中可以分析，对于边计算复杂度高的算法（GAT和GaAN），消息传递是主要性能瓶颈。但边计算复杂度低时，收集和聚集步骤也占据了相当比例的耗时。</p>
+<p>对于内存使用来说，定义内存膨胀比例为峰值内存与数据加载内存的壁纸，从图中可以看出，图神经网络计算过程存在着高额的内存开销。</p>
+<p>基于采样的图神经网络训练推理流程以分批方式进行。单个批次包含了三个步骤：CPU端的采样，CPU端到GPU端的数据传输和GPU端的训练与推理。</p>
+<p>通过比较不同批规模与全数据训练的内存使用，我们发现采样技术的确能显著减少内存使用！</p>
+<p>在对单个批次训练耗时进行分解后，可以发现基于采样的训练推理存在的一个问题：采样和数据传输步骤占到了相当大的比例，该额外开销直接降低了GPU利用率。</p>
+<p>通过内存使用分布箱线图可以发现基于采样的训练推理中的另一个问题：不同批次的内存开销波动很大，其中极个别批次可能导致内存溢出风险。</p>
+<p>基于上述分析可以总结如下：
+（1）边计算是大多数的图神经网络的性能瓶颈。
+（2）高额内存使用限制了图神经网络的数据扩展性，采样技术能显著减少内存使用，将图神经网络扩展到大规模图数据集。但是，采样流程存在两大性能问题。第三章和第四章将分别解决这两大问题。</p>
+<p>本部分的完整工作已在CCF-C类期刊上全文发表。</p>
+<p>第三章将对基于流水线并行的训练推理流程优化方法进行介绍。</p>
+<p>时间方面，对于图神经网络训练推理流程，除了采样流程的额外开销显著外，还存在着训练过程的评估步骤耗时较长的问题。本章将通过流水线的方式解决这两大性能问题。</p>
+<p>如图所示，通过理论加速比的分析可以发现，理论加速比与总计算批次、采样、数据传输步骤的耗时占比关。</p>
+<p>对于该优化具体实现，本文使用了基于CUDA流实现了采样和数据传输步骤的并发执行。基于数据预取技术，借助双线程和队列实现了采样数据传输步骤和GPU计算步骤的并发执行。</p>
+<p>对于训练与评估步骤的流水线并行优化，同理，可以发现理论加速比与训练轮数和评估耗时占比相关。</p>
+<p>对于具体实现，基于多进程和本地文件数据共享进行了实现。总共维护了三个进程，主进程负责总控制，训练进程负责模型训练，评估进程负责模型评估。训练进程和评估进程通过本地文件进行数据交换。</p>
+<p>由于实际中采样、数据传输、评估耗时占比一直发生变化，实际加速比的代表意义不强。这里将优化效果定义为了实际加速比与理论加速比的比值。</p>
+<p>其他设置与第二章保持一致。</p>
+<p>从图中可以发现，优化效果只与总耗时相关，随总耗时增加而增加，其他因素通过影响总耗时影响优化效果。这是因为实现本身的额外开销一定，总耗时越多，意味着额外开销占比越少，从而优化效果更好。</p>
+<p>在训练与评估步骤的优化效果评估中，同理观察到了类似的结论。</p>
+<p>对于叠加优化效果评估，虽然具体的优化比值存在差异，在大多数情况下，优化1+优化2的组合可以取得更好的优化效果。</p>
+<p>第四章将介绍内存使用可控的训练推理流程优化方法。</p>
+<p>GPU内存有限，如何在有限的条件下安全地实现大规模的图神经网络训练推理变得至关重要。由第二章分析知，基于采样的训练推理流程能大幅降低计算过程中的内存开销。但该流程存在不同批次内存波动大从而个别批次触发内存溢出风险问题。</p>
+<p>从内存安全角度，研究内存使用可控的图神经网络训练推理流程变得非常重要。</p>
+<p>下图展示了总流程设计。</p>
+<p>我们在单个批次的常规训练流程中加入了内存超限处理步骤，负责发现和处理超限采样子图。面对不同的应用场景，我们提出了两种不同的预测模型：线性模型和随机森林。由于推理阶段必须对采样子图推理，推理阶段直接进入剪枝处理机制。为了避免对模型精度的影响，对于训练阶段，会尝试一定次数的重采样，再执行剪枝处理机制。</p>
+<p>确定超参数场景指算法的超参数、数据集规模和批规模等所有均确定的场景，常出现于图神经网络应用阶段或开发阶段的某个具体步骤。</p>
+<p>基于峰值内存开销与输入图的二元线性关系，在此场景下，可直接基于边数和点数的二元线性模型预测内存开销。</p>
+<p>非确定超参数场景指仅图神经网络结构确定（算法确定），其他均可以不确定的场景，常出现与图神经网络的设计阶段。基于多个参数对具体值建模，本质上为回归问题。</p>
+<p>通过对多种已有的机器学习方法比较，随机森林综合表现最好，选择其作为了预测模型。</p>
+<p>为了获得较为精确的模型，在训练或推理之前会构造一定数量的样本预训练模型。
+为了进一步提高模型的精度，在训练或推理过程中，会基于确定阈值对模型进行在线更新。</p>
+<p>基于对峰值内存与图的边数的线性关系，可以使用二分搜索作为采样子图规模上界预测方法。</p>
+<p>对于采样子图剪枝处理总流程，在通过规模上界预测方法得到剪枝边数后，会基于边的重要性评估所有边并剪枝掉重要性低的边以缩减采样子图。这里设计了基于度数和PageRank信息设计了两种边重要性衡量方法，其基本思想是一条边的两个顶点越重要，那么其边越不重要。</p>
+<p>预测模型的评价指标，误差方面选取了MAPE(平均绝对百分比误差)；准确率方面选取了R2决定系数指标。其他设置与第二章保持一致。</p>
+<p>从线性模型的测试集上的分析结果可以发现，线性模型表现出来非常好的性能，误差小于0.006，
+准确率均在99%以上。（）</p>
+<p>如图展示了随机森林与其他机器学习方面对比，可以发现，随着训练集规模的增加，随机森林在两个指标上表现最好。</p>
+<p>对于预测模型的额外开销，可以发现，额外开销很稳定，而且值也很小。</p>
+<p>同时，我们展示了实际模拟情况下的预测效果，可以发现，两种模型所有批次的内存开销均成功控制在了指定GPU内存限制内。</p>
+<p>如图展示了推理阶段使用采样子图规模上界预测方法和随机剪枝策略后的内存分布箱线图，可以看出，所有批次的内存开销均控制在了指定GPU内存限制内</p>
+<p>首先，我们评估了不同剪枝比例下的各个算法的精度情况。可以发现，绝大多数情况下，两种剪枝的精度均优于随机剪枝。同时，使用剪枝可能取得更好的模型精度！</p>
+<p>对实际情况来说，除了PageRank剪枝在ClusterGCN算法和ogbn-products数据集上的情况外，两种剪枝精度均优于随机剪枝。</p>
+<p>由于本文提出了剪枝策略使用了多余的信息，所以两种剪枝策略耗时高于随机剪枝。但由于实际情况中剪枝策略发生的比例非常小（如表所示，实际情况中均小于14%），所以不会带来太多的额外开销！</p>
+<p>本文工作总结如下：
+第一，研究设计了一系列实验，对基于GPU的图神经网络计算性能进行了系统性的分析。选取了四个代表性算法，从时间、内存和采样对性能的影响三个方面进行了分析</p>
+<p>第二，研究了提出了基于流水线并行的训练推理流程优化方法。实现了采样流程的流水线优化和训练与评估步骤的流水线优化，实验证实了该优化方法的有效性。</p>
+<p>第三，研究提出了内存使用可控的训练推理流程优化方法。提出了基于线性模型和随机森林的内存开销预测模型；提出了基于二分搜素的采样子图规模上界预测方法和基于度数和PageRank的超限子图剪枝策略。实验证实了该优化方法的有效性。</p>
+<p>未来工作考虑从三个方面展开： 1.
+多GPU或分布式环境下的训练推理流程性能优化。 2.
+面向具有动态拓扑结构的时空图数据集的性能优化 3.
+新兴的图神经网络编程模型的性能差异</p>
+<p>这是我在研究生期间的主要工作</p>
+<p>最后，感谢各位老师和同学，以上就是我的硕士论文答辩</p>
+<h2 id="todo">TODO</h2>
+<ol type="1">
+<li>前面研究背景还存在很大的问题 &gt; 这里需要添加的内容太多了</li>
+</ol>
+<p>优先级：先完成必须要改的，然后再考虑怎么改</p>
+<ol start="2" type="1">
+<li>“研究背景与动机”应该怎么写？ &gt; ?</li>
+</ol>
+<h2 id="安排">安排</h2>
+<ol type="1">
+<li><p>先第一遍把自己觉得有问题的地方改正</p></li>
+<li><p>写一遍稿子，从而来检查自己的通顺程度</p></li>
+<li><p>调格式，调字体 &gt; 1,2,3目标为将PPT完成好 &gt;
+不能出现不通顺，错别字等问题</p></li>
+<li><p>反复修改演讲稿</p></li>
+<li><p>背演讲稿（反复累计10遍）</p></li>
+<li><p>累计10遍以后</p></li>
+<li><p>计时排练（争取在10分钟左右），同时详略得当</p></li>
+<li><p>现场放映，并观看PPT的显示是否有问题，是否需要调整PPT的字体。</p></li>
+</ol>
+<h2 id="纠正自己的作息">纠正自己的作息</h2>
+<p>认识自己，坚持做一件事！</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/%E6%97%A5%E8%AE%B0-210518-10b781ce206c/" rel="prev" title="日记-210518">
+      <i class="fa fa-chevron-left"></i> 日记-210518
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/hello-world-1939fef88a09/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%85%E6%80%9D%E8%80%83%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="nav-number">1.</span> <span class="nav-text">待思考的地方</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%B2%E7%A8%BF"><span class="nav-number">2.</span> <span class="nav-text">讲稿</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#todo"><span class="nav-number">3.</span> <span class="nav-text">TODO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E6%8E%92"><span class="nav-number">4.</span> <span class="nav-text">安排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A0%E6%AD%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BD%9C%E6%81%AF"><span class="nav-number">5.</span> <span class="nav-text">纠正自己的作息</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : '0eed46d638d0a10729e35806b12ec600',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

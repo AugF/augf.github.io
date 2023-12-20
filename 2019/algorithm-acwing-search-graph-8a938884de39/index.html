@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ypwang.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1. BFS&#x2F;DFS 1. DFS stack O(h) 不具有最短性 回溯，剪枝 思路比较奇怪的都有DFS来做 俗称暴力搜索！ 关键：使用什么顺序来进行搜索 &gt; 一个很执着的人！，回溯法，出去，回来务必注意需要恢复现场 有些题会判断最优，有些题不需要 12345678910111213141516171819202122232425262728#include&lt;iostre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="algorithm acwing search graph">
+<meta property="og:url" content="https://ypwang.github.io/2019/algorithm-acwing-search-graph-8a938884de39/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="1. BFS&#x2F;DFS 1. DFS stack O(h) 不具有最短性 回溯，剪枝 思路比较奇怪的都有DFS来做 俗称暴力搜索！ 关键：使用什么顺序来进行搜索 &gt; 一个很执着的人！，回溯法，出去，回来务必注意需要恢复现场 有些题会判断最优，有些题不需要 12345678910111213141516171819202122232425262728#include&lt;iostre">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-19T04:17:32.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="acwing">
+<meta property="article:tag" content="search">
+<meta property="article:tag" content="graph">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://ypwang.github.io/2019/algorithm-acwing-search-graph-8a938884de39/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>algorithm acwing search graph | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ypwang.github.io/2019/algorithm-acwing-search-graph-8a938884de39/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          algorithm acwing search graph
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-19 12:17:32" itemprop="dateCreated datePublished" datetime="2019-09-19T12:17:32+08:00">2019-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/acwing/basic/search-graph/" itemprop="url" rel="index"><span itemprop="name">search_graph</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="bfsdfs">1. BFS/DFS</h1>
+<h2 id="dfs">1. DFS</h2>
+<p>stack O(h) 不具有最短性 回溯，剪枝 思路比较奇怪的都有DFS来做
+俗称暴力搜索！ 关键：使用什么顺序来进行搜索 &gt;
+一个很执着的人！，回溯法，出去，回来务必注意需要恢复现场
+有些题会判断最优，有些题不需要 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=10;</span><br><span class="line">int n;</span><br><span class="line">int path[N];</span><br><span class="line">bool st[N];</span><br><span class="line"></span><br><span class="line">void dfs(int u)&#123; // 这里与path对应</span><br><span class="line">    if(u==n)&#123;</span><br><span class="line">        for(int i=0;i&lt;n;i++) printf(&quot;%d &quot;,path[i]);</span><br><span class="line">        puts(&quot;&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=1;i&lt;=n;i++)&#123; // 这里与st对应</span><br><span class="line">        if(!st[i])&#123;</span><br><span class="line">            path[u]=i;</span><br><span class="line">            st[i]=true;</span><br><span class="line">            dfs(u+1);</span><br><span class="line">            st[i]=false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    dfs(0);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 八皇后法：依旧使用框架 n*n!
+2<sup>(n</sup>2)</p>
+<p>DP是无环的最短路问题
+深搜可以保证一次搜索到终点，但是不能保证搜索到的路径是最短的
+深度搜索可能随机搜索到一条路</p>
+<h3 id="统一考虑的格式">1.1 统一考虑的格式</h3>
+<p>数据范围 N 最优解： 需要输出的东西 约束条件</p>
+<h3 id="全排列问题">1.1 全排列问题</h3>
+<p>DFS, 全排列问题 顺序！！ <em>, </em>, <em>, </em>
+要以什么样的顺序来遍历所有的方案，这里很简单地就是每一位到底选什么的方案
+DFS就是递归 &gt;
+当初始状态不属于什么具体的含义的时候，往往恢复现场写在，展开每个子树那里</p>
+<p>N=20 最优解： path[N] 约束条件: st[N]</p>
+<h3 id="n皇后问题">1.2 n皇后问题</h3>
+<p>N=20 最优解： g[N][N] 棋盘 约束条件: col[N], dg[N*2] udg[N*2]</p>
+<h2 id="bfs">BFS</h2>
+<p>queue O(2^h) 最短性，当所有边的权都为0,1时是。</p>
+<p>迷宫问题： 保证了一定存在路 技巧就在于少写循环判断语句</p>
+<p>如何输出路径？就是在该输出的位置增加链表</p>
+<p>八数码问题： BFS求最短路
+把每个方格看作个体，当前棋盘的所有的方格组合而成为整个棋盘的状态，然后每个状态之间有路可走，研究的点就是如何进行搜索，使得能够从一个状态到达另一个状态，并且进行搜索！</p>
+<p>所以问题的关键： 1. 状态表示复杂 2. 如何记录两个状态之间的距离</p>
+<p>求最短路</p>
+<p>最短路简单的做法： q[N],d[N]</p>
+<blockquote>
+<p>d[N]是什么，d[N]是BFS中用于搜索，用来更新距离计算公式的</p>
+</blockquote>
+<p>那么需要考虑 - 如何存储 - 如何定义最短距离 距离数组的小标如何表示
+queue<string> dict: 字典，哈希表unordered_map&lt;string,int&gt;</p>
+<p>queue<string> 如何从一个字符串到达另一个字符串？ 移动，恢复 # 2.
+树和图 ## 2.1 存储方式 邻接矩阵: 稠密图
+邻接表：拉链法，存储每个点可以走到哪个点 &gt;
+可以用vector来做，但是就效率而言没有数组模拟的快， 稀疏图</p>
+<h2 id="遍历方式">2.2 遍历方式</h2>
+<p>O(n+m)</p>
+<p>注意最大值最小 最小值最大两者的区别</p>
+<blockquote>
+<p>在图里，进行遍历，如果有环，怎么进行统计数？？？，想想真是一个问题！！！
+在图中，因为有n个顶点，所以对于n个顶点，每两个边之间最多只可能有两种情况，所以根据握手定理，出度与入度之和就为顶点数的二倍</p>
+</blockquote>
+<p>深度优先和宽度优先</p>
+<p>如何将一维扩展到二维，以及多维，实际上就是在多维空间中寻找一种顺序，使得这种顺序可以通过一维的方式来进行模拟</p>
+<p>BFS: h[N],e[M],ne[M],idx; d[N],q[N]; //
+d[N]==-1,表示是否进行了遍历</p>
+<p>应用：有向图的拓扑序列。 拓扑序列的两种求的方法 拓扑排序的算法流程
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">queue&lt;- 所有入度为0的点</span><br><span class="line">while(queue不空)</span><br><span class="line">    t&lt;-队头</span><br><span class="line">    枚举t的所有出边t-&gt;j:</span><br><span class="line">        删除t-&gt;j, d[j]--;</span><br><span class="line">        if(d[j]==0) queue&lt;-j;</span><br></pre></td></tr></table></figure></p>
+<p>DFS: h[N],e[M],ne[M],idx st[N]</p>
+<p>搜索的扩展：人工智能技术的树</p>
+<h1 id="最短路问题">3. 最短路问题</h1>
+<ol type="1">
+<li>单源最短路</li>
+</ol>
+<ul>
+<li>所有边权都是正数
+<ul>
+<li>朴素Dijkstra O(n^2) 稠密 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for v: 1-n:</span><br><span class="line">    t&lt;- 不在S中的距离最近的点 n-i  st[i]:n</span><br><span class="line">    s&lt;-t, 共n次</span><br><span class="line">    用t来更新其他顶点 t-&gt;v， 共m次 // </span><br></pre></td></tr></table></figure></li>
+<li>堆优化版Dijstra O(mlogn) 稀疏 &gt; 看哪些地方可以优化 &gt;
+手写堆，可以保证n个元素 &gt; pq, 不支持修改元素， m个元素</li>
+</ul></li>
+<li>存在负权边
+<ul>
+<li>Bellman-ford O(nm) <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">struct&#123;</span><br><span class="line">    int a,b,w;</span><br><span class="line">&#125; edge[M];</span><br></pre></td></tr></table></figure> &gt; (a, b): w &gt; dist[b] =
+min(dist[b], dist[a] + w); 松弛操作 &gt; 对所有的边都满足 dist[b]&lt;=
+dist[a]+w 三角不等式</li>
+</ul>
+<blockquote>
+<p>如果有负权回路不一定存在。n+1 条边，存在负环 O(nm)
+特解的题：最多k条边的题
+当存在负环时，不存在最短路径。如果负环为自环则无所谓
+因为更新会发生串联，所以需要备份，backup[N]. &lt;1,2&gt;:1,
+&lt;2,3&gt;:1, &lt;1.3&gt;: 3
+只要有负环存在，可以不断更新负环中的数值，最终到达负无穷</p>
+</blockquote>
+<ul>
+<li>SPFA 一般：O(m) 最坏：O(nm) &gt; bellman_ford 不一定 &gt;
+这里利用了宽搜， BFS, 只有前面的点变小了，后面的点才有可能变小 &gt;
+网格特别容易卡spfa</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>应用： 1. 最短路 2. 判断负权回路（指回路的总长度为负数）
+在2时，因为2本身一个环里的权会不断减小，所以没有必要赋初值</p>
+</blockquote>
+</blockquote></li>
+</ul>
+<ol start="2" type="1">
+<li>多源最短路- Floyd O(n^3) &gt; 基于动态规划，三维 &gt; d[k,i,j]:
+只经过k节点，从i到达j的路径 &gt; d[k,i,j] = min{d[k-1,i,j],
+d[k-1,i,k]+d[k-1,k,j]}
+https://www.cnblogs.com/chenying99/p/3932877.html</li>
+</ol>
+<p>稠密图：m~n^2 稀疏图：m~n &gt;
+考虑无重边和自环的话，那么最多的边则就是完全图，即n^2; &gt;
+考查的点不会是正确性，从背景中抽象为最短路问题</p>
+<blockquote>
+<p>无向图是一种特殊的有向图</p>
+</blockquote>
+<h1 id="最小生成树">4. 最小生成树</h1>
+<p>Prim算法 - 朴素版 稠密图 O(n^2)</p>
+<p>Kruskal算法 O(mlogm) 稀疏图 1. 对边进行排序O(mlogm) 2.
+从小到大选取边，若该边与生成树形成环则不加入，否则加入；
+直到加入了n-1条边即结束 &gt;
+和bellman-ford一样只需要用结构体存储边即可</p>
+<blockquote>
+<p>选择，稠密图用Prim算法；稀疏图用Kruskal算法</p>
+</blockquote>
+<h1 id="二分图">5. 二分图</h1>
+<ul>
+<li><p>染色法 O(n+m) &gt; 对图中的点染色，深度和宽度优先均可。 &gt;
+如果一个点出现两个颜色，则说明该图不是二分图</p></li>
+<li><p>匈牙利算法 O(nm) &gt; 实际运行时间一般远小于O(nm) &gt;
+只会找左边所有点所对应的边 &gt; st[N],
+存储当前使用匹配时是否用到该点；在寻找下一轮时，需要更新为0</p></li>
+</ul>
+<p>复杂图论的题 &gt; 二分图： 棋盘覆盖 ## Error Seg F:
+纯随机，然后利用minmax来求解 &gt;
+当输入输出规模到达100万时一般才开始考虑用scanf(),而不用cin</p>
+<p>检查：</p>
+<p>初始化，代码逻辑，赋值等是否出错。
+最需要注意的一件事就是尽量用空格来划分代码的逻辑</p>
+<p>有问题怎么办？首先确信一部分代码一定是对的，不要怀疑</p>
+<p>函数中的变量务必注意要初始化，否则是会出错的！！！</p>
+<p>前面的题难点在思路上 图论难点在代码实现上</p>
+<p>为之半个小时的调试，发现是一个变量给写错了，唉，就在for循环那里</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+              <a href="/tags/acwing/" rel="tag"># acwing</a>
+              <a href="/tags/search/" rel="tag"># search</a>
+              <a href="/tags/graph/" rel="tag"># graph</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/algorithm-acwing-basic-77364f848063/" rel="prev" title="基础算法">
+      <i class="fa fa-chevron-left"></i> 基础算法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/deeplearning-cs231n-560b20fcf310/" rel="next" title="deeplearning cs231n">
+      deeplearning cs231n <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bfsdfs"><span class="nav-number">1.</span> <span class="nav-text">1. BFS&#x2F;DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dfs"><span class="nav-number">1.1.</span> <span class="nav-text">1. DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E8%80%83%E8%99%91%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 统一考虑的格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E6%8E%92%E5%88%97%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.1 全排列问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#n%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.2 n皇后问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bfs"><span class="nav-number">1.2.</span> <span class="nav-text">BFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">2.2 遍历方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">3. 最短路问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">4. 最小生成树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE"><span class="nav-number">4.</span> <span class="nav-text">5. 二分图</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : '2d25f49485fdff08411e8bf776b4ff25',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
