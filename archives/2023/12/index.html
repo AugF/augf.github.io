@@ -21,16 +21,14 @@
   </script>
 
   <meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://augf.github.io/about/index.html">
+<meta property="og:title" content="Life&#39;s Notes">
+<meta property="og:url" content="https://augf.github.io/archives/2023/12/index.html">
 <meta property="og:site_name" content="Life&#39;s Notes">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-26T12:54:45.000Z">
-<meta property="article:modified_time" content="2022-01-26T12:55:06.358Z">
 <meta property="article:author" content="Yun-Pan Wang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://augf.github.io/about/">
+<link rel="canonical" href="https://augf.github.io/archives/2023/12/">
 
 
 <script id="page-configurations">
@@ -43,8 +41,7 @@
   };
 </script>
 
-  <title>about | Life's Notes
-</title>
+  <title>归档 | Life's Notes</title>
   
 
 
@@ -189,66 +186,57 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content archive">
             
 
-    
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <span class="collection-header">嗯..! 目前共计 1 篇日志。 继续努力。</span>
+      </div>
 
-<h1 class="post-title" itemprop="name headline">about
-</h1>
+      
+    <div class="collection-year">
+      <span class="collection-header">2023</span>
+    </div>
 
-<div class="post-meta">
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2023-12-20T22:43:28+08:00"
+              content="2023-12-20">
+          12-20
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2023/12/20/hello/" itemprop="url">
+            <span itemprop="name">hello</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+
+    </div>
+  </div>
+  
+  
   
 
-</div>
+  
 
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          
-
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>
           
-      <div class="tabs tabs-comment">
-        <ul class="nav-tabs">
-            <li class="tab"><a href="#comment-livere">livere</a></li>
-            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane livere" id="comment-livere">
-              
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
-  </div>
-  
-            </div>
-            <div class="tab-pane gitalk" id="comment-gitalk">
-              <div class="comments" id="gitalk-container"></div>
-            </div>
-        </div>
-      </div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -459,42 +447,18 @@
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://augf.github.io/archives/2023/12/',]
+      });
+      });
+  </script>
 
-<script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
-  window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-});
-</script>
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '9552a863f697c06e137f',
-      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
-      repo        : 'augf.github.io',
-      owner       : 'AugF',
-      admin       : ['AugF'],
-      id          : '3be7aa98d992907175cbd79c194399f2',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
 
 </body>
 </html>
