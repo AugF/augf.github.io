@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"augf.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="贪心 无套路而言，最难的是证明其正确性 试下还是有套路的 一般来说，举例看是否能证明正确性 一般区间问题，先排序 1. 按区间左右端点排序，或者双关键字排序 区间选点  数轴选最少的点覆盖所有的区间   将每个区间按右端点从小到大排序 从前往后依次枚举每一个区间 如果当前区间已经包含点，则直接pass 否则，选择当前区间的右端点  A&#x3D;B A&lt;&#x3D;B A&gt;&#x3D;B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="algorithm acwing greedy">
+<meta property="og:url" content="https://augf.github.io/2019/09/19/algorithm-acwing-greedy/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="贪心 无套路而言，最难的是证明其正确性 试下还是有套路的 一般来说，举例看是否能证明正确性 一般区间问题，先排序 1. 按区间左右端点排序，或者双关键字排序 区间选点  数轴选最少的点覆盖所有的区间   将每个区间按右端点从小到大排序 从前往后依次枚举每一个区间 如果当前区间已经包含点，则直接pass 否则，选择当前区间的右端点  A&#x3D;B A&lt;&#x3D;B A&gt;&#x3D;B">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-19T04:13:13.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="acwing">
+<meta property="article:tag" content="greedy">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://augf.github.io/2019/09/19/algorithm-acwing-greedy/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>algorithm acwing greedy | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-greedy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          algorithm acwing greedy
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-19 12:13:13" itemprop="dateCreated datePublished" datetime="2019-09-19T12:13:13+08:00">2019-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/acwing/basic/greedy/" itemprop="url" rel="index"><span itemprop="name">greedy</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="贪心">贪心</h1>
+<p>无套路而言，最难的是证明其正确性</p>
+<p>试下还是有套路的 一般来说，举例看是否能证明正确性</p>
+<p>一般区间问题，先排序 1. 按区间左右端点排序，或者双关键字排序</p>
+<h2 id="区间选点">区间选点</h2>
+<blockquote>
+<p>数轴选最少的点覆盖所有的区间</p>
+</blockquote>
+<ol type="1">
+<li>将每个区间按右端点从小到大排序</li>
+<li>从前往后依次枚举每一个区间 如果当前区间已经包含点，则直接pass
+否则，选择当前区间的右端点</li>
+</ol>
+<p>A=B A&lt;=B A&gt;=B</p>
+<p>Ans问题的最优解 ans实际问题的解 最小值</p>
+<p>Ans &lt;= cnt &gt; cnt是一种可行方案，而Ans是所有可行方案中最小的。
+显然! Ans &gt;= cnt &gt;
+找到了cnt相互没有交集的区间，每选一个点最多覆盖一个区间。所有可行解必定大于cnt
+&gt; 关键证明，算法得到的是最基本的情况！！！</p>
+<h2 id="最大不相交区间数量">最大不相交区间数量</h2>
+<p>贪心策略： 按右端点选取 最大值</p>
+<p>Ans &gt;= cnt: 证明cnt是可行方案， Ans &lt;= cnt: 假设Ans&gt;cnt,
+反证法</p>
+<p>Ans选择出的是两两没有交集的区间，那一定被第一题的解给覆盖，所以Ans应该&lt;=cnt的.
+所以矛盾</p>
+<blockquote>
+<p>考虑问题的转化，记住简单问题证明的模板，把其他复杂的问题转化成原本的问题</p>
+</blockquote>
+<h2 id="区间选组">区间选组</h2>
+<p>贪心：左端点 1. 将所有区间按左端点从小到大排序 2.
+从前往后处理每个区间 判断能否将其放到某个现有的组中 如果L[i]&lt;=
+min{r},则不能加入，于是建立新组；否则加入并更新</p>
+<p>考虑数据结构:</p>
+<p>问题： 最小组数 证明： 1. Ans &lt;= cnt cnt是可行解,
+每个组内都没有交集 2. Ans &gt;= cnt 当与任何一个区间都没有交集</p>
+<p>cnt-1 Max_r &gt;= Li. 因为是按L排序，所以Li&gt;=L0~i-1</p>
+<p>意味着整个cnt组都有公共点，所以对这些基本的组来说，问题的解至少得花cnt,
+因此Ans&gt;=cnt</p>
+<blockquote>
+<p>练习题 https://www.acwing.com/problem/content/113/</p>
+</blockquote>
+<blockquote>
+<p>左端点相交的最大个数，右端点不相交的最大个数 再练习一遍</p>
+</blockquote>
+<h2 id="区间覆盖">区间覆盖</h2>
+<p>用最少的区间将给定区间排序</p>
+<p>贪心：将左端点从小到大排序</p>
+<ol type="1">
+<li>将所有区间从左端点从小到大排序</li>
+<li>从前往后依次枚举每个区间，在所有能覆盖start的区间中，选择一个右端点最大的区间;
+此时更新新的start点</li>
+</ol>
+<p>Ans&lt;=cnt: 假设有解,
+因为我们每次选择区间都是没有空隙的，所以一定能找到方案成为可行解。因此成立</p>
+<p>Ans&gt;=cnt:</p>
+<p>反证法，假设Ans &lt; cnt</p>
+<p>假设不一样，那么第一个不同的区间，Ans取得的右端点的值小于cnt取得的区间的右端点的值;
+那么Ans选择的下一个区间一定与当前区间覆盖。即最优解中选出的区间一定能够替换成算法的区间。而且总的Ans数不会变，而且可能Ans大于cnt。</p>
+<p>任何一个最优解都可以通过等价变化得到算法的解，而且每次的变换都不会增加区间的数量，所以算法最终得到的cnt数量一定和Ans相等</p>
+<h2 id="合并果子">合并果子</h2>
+<p>叶节点被算的次数 = 层数 如何合理的安排使得最终的权值最小？
+每次贪心地选择两个最小的数进行合并</p>
+<ol type="1">
+<li>最小的两个点一定深度最深，且可以互为兄弟。 &gt;
+如果有多个兄弟可以互相交换，并不影响结果；意味着第一步选择两个最小的元素是对的！</li>
+</ol>
+<p>如何证明？
+交换任意两个节点，一定会使结果变大。所以当前策略采取的一定是最优的</p>
+<ol start="2" type="1">
+<li>n个点是最优解，如何证明n-1的最优解是n的最优解 f(n)=f(n-1)+a+b &gt;
+因为第一次一定选a,b两个点，所以代价必然是这个 目标是求f(n)的最小值 &gt;
+因为所有的方案都是合并a和b,所以这里f(n)就等价于f(n-1)
+因此，数学归纳法就成立</li>
+</ol>
+<p>耍杂技的牛</p>
+<p>一种想法就是如何进行排列？ 1. 猜想1： 根据左端点 2. 猜想2：
+根据右端点 3. 猜想3： 根据左右端点的加和 Min 贪心得到的答案 &gt;
+最优解</p>
+<p>贪心得到的答案 &lt;= 最优解 &gt; 假设不是，调整得到最优 &gt;
+证明的过程就是比较值，然后比较的技巧就在于抛去一些无关因素的影响</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+              <a href="/tags/acwing/" rel="tag"># acwing</a>
+              <a href="/tags/greedy/" rel="tag"># greedy</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/09/19/algorithm-acwing-dp/" rel="prev" title="algorithm acwing dp">
+      <i class="fa fa-chevron-left"></i> algorithm acwing dp
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/09/19/algorithm-acwing-math/" rel="next" title="algorithm acwing math">
+      algorithm acwing math <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83"><span class="nav-number">1.</span> <span class="nav-text">贪心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E9%80%89%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">区间选点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E4%B8%8D%E7%9B%B8%E4%BA%A4%E5%8C%BA%E9%97%B4%E6%95%B0%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">最大不相交区间数量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E9%80%89%E7%BB%84"><span class="nav-number">1.3.</span> <span class="nav-text">区间选组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E8%A6%86%E7%9B%96"><span class="nav-number">1.4.</span> <span class="nav-text">区间覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E6%9E%9C%E5%AD%90"><span class="nav-number">1.5.</span> <span class="nav-text">合并果子</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : 'd1a3e8a9f2f242e9e97199db28140879',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

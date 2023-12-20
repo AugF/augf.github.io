@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"augf.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1. 数论 1.1 质数 ，合数从2开始的整数的定义 在大于1的整数中，如果只包含1和本身这两个约数，就变成质数，就就叫做素数  质数的判定——试除法  1--n-1 d | n, n&#x2F;d | n, d&lt;&#x3D;n&#x2F;d sqrt(n)  分解质因数  只需要从小到大模拟 logn-sqrt(n) &gt; 思想： 当碰见第一个质数时，它肯定是，因为前面都不成立，说明它与前">
+<meta property="og:type" content="article">
+<meta property="og:title" content="algorithm acwing math">
+<meta property="og:url" content="https://augf.github.io/2019/09/19/algorithm-acwing-math/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="1. 数论 1.1 质数 ，合数从2开始的整数的定义 在大于1的整数中，如果只包含1和本身这两个约数，就变成质数，就就叫做素数  质数的判定——试除法  1--n-1 d | n, n&#x2F;d | n, d&lt;&#x3D;n&#x2F;d sqrt(n)  分解质因数  只需要从小到大模拟 logn-sqrt(n) &gt; 思想： 当碰见第一个质数时，它肯定是，因为前面都不成立，说明它与前">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-19T04:14:45.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="acwing">
+<meta property="article:tag" content="math">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://augf.github.io/2019/09/19/algorithm-acwing-math/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>algorithm acwing math | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-acwing-math/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          algorithm acwing math
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-19 12:14:45" itemprop="dateCreated datePublished" datetime="2019-09-19T12:14:45+08:00">2019-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/acwing/" itemprop="url" rel="index"><span itemprop="name">acwing</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/acwing/basic/" itemprop="url" rel="index"><span itemprop="name">basic</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/acwing/basic/math/" itemprop="url" rel="index"><span itemprop="name">math</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="数论">1. 数论</h1>
+<h2 id="质数">1.1 质数</h2>
+<p>，合数从2开始的整数的定义
+在大于1的整数中，如果只包含1和本身这两个约数，就变成质数，就就叫做素数</p>
+<ul>
+<li><p>质数的判定——试除法</p>
+<ul>
+<li>1--n-1</li>
+<li>d | n, n/d | n, d&lt;=n/d sqrt(n)</li>
+</ul></li>
+<li><p>分解质因数</p>
+<ul>
+<li>只需要从小到大模拟 logn-sqrt(n) &gt; 思想：
+当碰见第一个质数时，它肯定是，因为前面都不成立，说明它与前面的任意数都不互质。然后怎么搞，我把目标数有它的因子全给搞完，那么得到的这个新数就一定不再整除这个质数了。于是，碰到下一个整除的数必然又满足前面的性质。
+&gt;
+还有这里的上界依然是砍一半，为什么呢，因为这里不可能会有两个大于的数，所以这里就是用的一个大于的数来做的，这样就很清晰了</li>
+</ul></li>
+<li><p>筛质数 一种考虑方法，将一个数和它的倍数全部删掉，最终留下一些值
+调和级数：1+1/2+1/3+...=lnn + c, c欧拉常数 &gt; nlnn --&gt; &lt; nlogn
+&gt; 任何合数都可以写成质因数乘积之和 &gt; 质数定理： 1-n中n/lnn个质数。
+&gt; 真实的复杂度： nloglogn</p>
+<ul>
+<li><p>朴素筛法</p></li>
+<li><p>埃式筛法</p></li>
+<li><p>线性筛法 &gt; 1. i%pj==0, pj一定是i的最小正因子 &gt; 2. i%pj!=0,
+pj也一定小于pj*i的最小正因子 &gt; 对于一个合数x，
+pi是x的最小质因子，当枚举到n/i时一定会被删掉 &gt; ? 为什么枚举的值是n/i.
+i&gt;pj</p></li>
+</ul></li>
+</ul>
+<p>线性筛法理解： 对于每一个n，它会执行。
+如果是合数，将小于它的最小质数的乘积，删掉。
+如果是质数，会先加入，然后，删掉它乘以它的质数。 int
+有两个问题？为什么筛到最小质数就可以？
+因为将质因子从小到大排序，肯定一定有序了。
+只用筛到最小即可，因为其他的有后面大的在构造过程中就会删掉。 比如考虑：
+2<em>3</em>3, 实际在9时就会筛掉 而 2<em>2</em>2,
+会被2*4筛掉，所以不用担心某个质因子的个数很多的情况</p>
+<p>用素数负责增加新的质因子的种类。</p>
+<p>为什么要到n/i即可？ 为什么范围是n/i, 因为i%n, n/i %n,
+当到达一定大的程度i会很大，此时只需要用小的质因子就可以了。
+因为是取等于，如果是质因子可以将其筛掉；</p>
+<p>朴素筛法：未注意到合数可以分解为质因子之积的规律（自然数基本定理）
+埃式筛法：简单地用加法来对质因子进行删除 n loglogn
+线性筛法：使用了乘法的结论进一步对筛法进行了优化,
+i只会被它的最小质因子筛掉 当第一次出现i%primes[j]==0,
+因为是从最小开始枚举，所以primes[j]一定是i<em>primes[j]的最小质因子 i %
+primes[j] != 0, 从小到大枚举，并且枚举0-primes[j],
+所以prims[j]</em>i的质因子最小的一定是primes[j]</p>
+<p>为什么是n/i,
+当数据范围变大的时候，枚举的数的数量其实没那么多，因为最小质因子变大了。
+如何定的？一定会在i*primes[j] &lt;= n, 停下来 为什么不加j<cnt>
+i是合数，在其最小质因子处停下来
+i是质数，在primes[j]=i的时候停下来，所以无论如何一定是满足条件的</p>
+<h2 id="约数">1.2 约数</h2>
+<p>一个数的约数是成对出现的 d % n, n/d % n</p>
+<ol type="1">
+<li>试除法求约数 sqrt(n) 把每一步的时间复杂度都要计算一下</li>
+</ol>
+<p>约数个数：1到n有多少个约数，讨论倍数 n+n/2+n/3+....n/n= nlogn
+期望：logn 排序：lognloglogn &lt;&lt; &gt;
+int范围内的整数，最多的约数大概1500左右过</p>
+<p>调和级数 1+1/2+1/3+...+1/n = lnn +c 欧拉常数0.5772</p>
+<p>很关键：只有每一步都不超时才可以做 20000 2ms</p>
+<ol start="2" type="1">
+<li><p>约数个数 自然数基本定理：(a1+1)(a2+1)(a3+1)...(ak+1)
+乘法原理</p></li>
+<li><p>约数之和 乘法原理与乘法展开之间的联系 (p^0 + p^1 + p^2 + ... +
+p<sup>h1)(p</sup>0 + p^1 + ... + p<sup>h2)...(p</sup>0 + p^1 + ... +
+p^hk)</p></li>
+</ol>
+<p>logK用来求快速幂 p<sup>0+p</sup>1+p<sup>2..+p</sup>k // logK的求法
+&gt; 所有因子都是2，所以最大值logn &gt; 忌杀鸡用牛刀 4. 最大公约数：
+欧几里得算法 辗转相除法 logN d|a, d|b, 则 d|ax+by (a, b) = (b, a mod
+b)=(b, a-cb)</p>
+<p>递归终点：(a,0)=a 因为0可以整除任何数</p>
+<ol start="5" type="1">
+<li>欧拉函数</li>
+</ol>
+<ul>
+<li>公式法： 计算出某一个数的欧拉函数 p(n): 1-n之间与n互质的数 &gt;
+互质的数即两个数之间的最大公约数为1 如何求？ 容斥原理 &gt;
+去掉不互质的，留互质的</li>
+<li>从1~N中去掉p1,p2,..,pk的所有倍数 &gt;
+这里p1,p2,p3,...pk是由算术基本定理得出的 &gt; N- N/p1 - N/p2</li>
+<li>加上所有pi*pj的倍数 &gt; + N/pipj</li>
+<li>减去所有pi<em>pj</em>pk的倍数</li>
+<li>一直做下去</li>
+</ul>
+<blockquote>
+<p>p(n) = N(1-1/p1)(1-1/p2)...(1-1/pN), 把后面看作是乘积进行取数</p>
+</blockquote>
+<ul>
+<li>筛法：计算出多个数的欧拉函数</li>
+</ul>
+<p>欧拉函数的用处： 欧拉定理：如果a,n互质， 则有a^(phi[n]) mod n =
+1;<br />
+证明： 欧拉函数的定义是跟n互质的小于n的数的个数<br />
+求余的公式： a mod n = b mod n = ab mod n = (ax+bx) mod n &gt;
+模和约数互相的关系 &gt; 学数学一定是自己推一遍！！！</p>
+<p>a^(phi[p]) mod p = 1; p为质数 &gt; 费马定理，证明就很容易！！！</p>
+<ol start="6" type="1">
+<li>快速幂 求 a^k mod p: O(logK) 思想：反复平方法 &gt; 预处理出
+a<sup>{2</sup>0} mod p, ..., a<sup>(2</sup>logk) mod p</li>
+</ol>
+<p>每一个数都是上一个数的平方mod p 即 a mod n = c, 则 a^b mod n = (a mod
+n)^b mod n 加法变成了乘法</p>
+<p>a^k mod p = a^(101)_2 mod p =(a<sup>{2</sup>0} mod p )
+(a<sup>{2</sup>2} mod p) mod p</p>
+<ol start="7" type="1">
+<li>快速幂求逆元 a/b = ax mod m. 则称x为b的逆元。 a/b这里是整除 &gt;
+把所有除b的情况转化为乘上一个数的情况，记作x=b^-1 &gt;
+a和m互质，b和m互质。 有什么用呢？ &gt; bb^-1 = 1 mod m 问题即 bx mod m
+=1, x为最小值</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(a +  b) % p = (a%p +  b%p) %p  （对）</span><br><span class="line"></span><br><span class="line">(a  -  b) % p = (a%p  -  b%p) %p  （对）</span><br><span class="line"></span><br><span class="line">(a  *  b) % p = (a%p *  b%p) %p  （对）</span><br><span class="line"></span><br><span class="line">(a  /  b) % p = (a%p  /  b%p) %p  （错）</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>数论是用来研究整数的东西
+一般来说，会让求b关于p的逆元，p保证是一个质数。 根据费马定理，b^p-1 mod
+p =1 , 则如果p|b不成立，则就由 b^-1 = b^p-2 mod p.</p>
+</blockquote>
+<ol start="8" type="1">
+<li><p>扩展欧几里得算法 裴属定理： 对于任意正整数a,b,
+一定存在非零整数x,y, 使得ax+by=gcd(a,b) ax+by=d,
+a(x-k<em>b/d)+b(y+k</em>a/d)=d 于是就有了多个答案 &gt;
+注意这里是等于，这里x,y可以取负数 &gt; 利用辗转相除法的版子
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int exgcd(int a,int b,int &amp;x,int &amp;y)&#123;</span><br><span class="line">    if(!b)&#123;</span><br><span class="line">        x = 1, y= 0;</span><br><span class="line">        return a;</span><br><span class="line">    &#125;</span><br><span class="line">    int d = exgcd(b, a%b, y, x);  </span><br><span class="line">    y -= a/b *x;</span><br><span class="line">    return d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> &gt; 妙不可言，这里返回的最终结果是最小公约数</p></li>
+<li><p>线性同余方程 ax = b(mod m) 存在整数y, 使得ax=my+b, 记 ax-my=b,
+什么时候有解？ (a,m)|b &gt; 可能无解 解：设d=(a,m), 由ax+my=d, 可得
+(ax+my)<em>b/d mod m= b mod m 则 x </em>(b/d) mod m</p></li>
+<li><p>中国剩余定理 m1,m2,..., mk两两互质 且 x = a1 mod m1 x = a2 mod m2
+... x = ak mod mk</p></li>
+</ol>
+<p>证明：
+利用前面的扩展欧几里得将两个构造出一个解，然后写出两个的通解，最终构造出所有的通解
+通解： 由逆运算可知： M = m1m2...mk Mi = M/mi</p>
+<p>Mi^-1是M1关于m1的逆元 &gt; 通解： ai<em>Mi</em>Mi^{-1} +...+...</p>
+<blockquote>
+<p>由费马定理， Mi^-1 = M1^{mi-2} mod mi, 由此转换为快速求幂</p>
+</blockquote>
+<p>练习题：表达整数的奇怪方法</p>
+<h1 id="组合计数">2. 组合计数</h1>
+<blockquote>
+<p>C() 组合数 2000*10000 内存爆掉，怎么做？
+考虑预处理，所求解数之间的关系</p>
+</blockquote>
+<p>核心：把一个问题优化到1s可以算出来 &gt;
+之间做会很费时，所以可以考虑预处理来做</p>
+<p>规律 C(n,m) = n! / m!(n-m)! = n(n-1)..(n-m+1)/b！ C(n,m) = C(n-1,m)+
+C(n-1, m-1) &gt; 考虑当前第一个选择是否包含，即可推出该结论</p>
+<p>分类： 数据范围 1. 10万组 2000 递推 N^2 2. 1万 10^5 预处理 NlogN &gt;
+foot[i] = i! mod (10^9 + 7); 逆元 3. 20 a 10^18, p 10^5: log_p^N p logP
+&gt; 卢斯卡定理, 10^5 * &gt; c[a,b]=c[a mod p,b mod p]* C[a/p, b/p] mod
+p &gt; 证明： <span class="math inline">\((1+x)^p\ mod\ p = 1+x^p mod
+p\)</span> $ a= a_{k-1} p^k + ... + a_0 p^0 $ <span
+class="math inline">\((1+x)^a = (1+x)^{a_0} ((1+x)^p)^{a_1}...
+=(1+x)^{a_0} (1+x^p)^{a_1}...\ mod\ p\)</span> <span
+class="math inline">\(b: b_0, b_1,...\)</span> <span
+class="math inline">\(C_a^b = C_{a_k}^{b_k} C_{a_{k-1}}^{b_{k-1}}...
+(mod\ p)\)</span> 只要a1&gt;b1, <span class="math inline">\(C_a^b
+=0\)</span></p>
+<ol start="4" type="1">
+<li><p>无模运算，直接求 &gt; 分解质因数 &gt; a!= a/p + a/p^2 +... +
+a/p^k</p></li>
+<li><p>有序的0、1序列 &gt; n个0和n个1， 保证任意前缀0的个数不少于1的个数
+&gt; 太难了！表格来做 &gt; (0,0) -&gt; (n,n):
+将排列转换为路径，往右走是0，往上走1. &gt; 卡特兰数 (0,0)-&gt;(6,6)
+不合法的路径延y=x+1直线第一次超过的线轴对称总能到达(5,7)
+(即(6,6)关于直线的对称点)
+那么就可以说凡是到达(5,7)的路径都是不合法的路径。</p></li>
+</ol>
+<p>因此，总的路径为<span class="math inline">\(C_{12}^6 -
+C_{12}^5\)</span> &gt; (2n)! / n!(n+1)! = 1/(n+1) C(2n,n)
+应用很多，比如火车进站问题</p>
+<h1 id="高斯消元">3. 高斯消元</h1>
+<p>即求解线性方程组 n*(n+1)</p>
+<p>初等行列变换： 1. 某一行乘上一个非零的数 2. 交换某2行 3.
+把某行的若干倍加到另一行上</p>
+<p>把方程组变成上三角矩阵， &gt; 将第一行做成绝对值最大的行，
+然后对2-n-1行对1行进行消除第1个元素，以此类推，对第2行做这样的运算，最终得到上三角矩阵</p>
+<p>最终从最后一个x解起</p>
+<p>最终的方程： 1. 完美阶梯型——唯一解 2. 存在一个方程0=非零， 无解 3.
+存在一个方程0=0, 有多解</p>
+<p>异或：不进位的加法</p>
+<ol type="1">
+<li>枚举列</li>
+<li>找非零行</li>
+<li>交换</li>
+<li>下面消零 # 4. 容斥原理 韦恩图 |S|: 集合元素的个数</li>
+</ol>
+<p>|S1 U S2 U S3|=|S1|+|S2|+|S3|-|S1 ^ S2|-|S2 ^ S3| - |S3 ^ S1| +
+|S1<sup>S2</sup>S3|</p>
+<blockquote>
+<p>任意x属于左边，一共会算几次呢？ 1次</p>
+</blockquote>
+<blockquote>
+<p>有多少项？ Cn,1 + Cn,2 + Cn,3 +...=2^n -1</p>
+</blockquote>
+<blockquote>
+<p>从n个数中选任意个数的方案</p>
+</blockquote>
+<p>组合数学公式的证明：从实际意义出发</p>
+<h2 id="实例">实例</h2>
+<p>1-n中能被p1,p2,...等多个数整除的数的个数？</p>
+<p>直接枚举: n 容斥元素 |p1 ^ p2 <sup>...</sup> pk| 只需要枚举 2^k -
+1项， 每项O(k)</p>
+<p>容斥原理有多种证明方法？ # 5. 简单博弈 公平组合游戏 - 有双方交替进行
+- 在游戏进展的任意时刻，可以进行的合法行动与轮到的玩家无关 -
+不能行动的玩家判负
+Nim游戏，普通棋类游戏不是公平游戏，每次下的颜色不一样</p>
+<p>有向图游戏 -
+给定一个有向无环图，图中有唯一起点，在起点放有一枚棋子，两名玩家交替把这枚棋子延有向边移动，每次可以移动一步，无法移动者判负。任何一个公平组合游戏可以转化为有向图游戏。具体方法是把每个局面看作图中的一个节点，并且从每个局面向沿着合法行动能够到达的下一个局面连有向边</p>
+<p>Nim游戏：每个人都可以拿石子，拿完石子，问先手有没有必赢策略。</p>
+<p>先手必胜状态：可以走到某一个必败状态
+先手必败状态：走不到任何一个必败状态</p>
+<p>a0<sup>a1</sup>...^an=0 先手必败 a0<sup>a1</sup>...^an=x !=0
+先手必胜</p>
+<p>所有数成对异或结果一定是0，反之不成立
+这里的异或是二进制位进行异或。</p>
+<blockquote>
+<p>异或做为什么对?
+首先对于x的某最高位为1，一定能找到某个ai的对应某最高位为1. 反证法
+对这个最高位进行一下操作， 拿走ai-ai^x; 于是ai变成了ai^x,
+此时必然为必败状态。</p>
+</blockquote>
+<blockquote>
+<p>所以对于先手必败状态，做任何操作，必然是结果不为0；对于先手必胜转态，必然存在某种做法达到先手必败状态</p>
+</blockquote>
+<blockquote>
+<p>总结：为什么用异或来做？ 因为异或是对的，一种可行
+k-Nim游戏：由别人发明的， 明白了为什么用异或做</p>
+</blockquote>
+<p>Mex运算 &gt;
+设S表示一个非负整数集合。定义mex(S)为求出不属于集合S的最小非负整数的运算，即：
+mex(S) = min{x}, x属于自然数，且x不属于S</p>
+<p>局面：x = {y1,y2,...,yk}</p>
+<p>SG(终点)=0 SG(x)=mex({SG(y1),SG(y2),...,SG(yn)}) &gt;
+任何一个非零状态可以到达零状态；任何一个零状态到达不了零状态</p>
+<p>这里是单个图</p>
+<p>如果有多个图可以操作呢？ SG(x1)<sup>SG(x2)</sup>....=0 必败 &gt;
+x1,x2表示起点 &gt; SG(xi) &lt; x SG(xi)=k, 可以遍历到0-k中任意一个数</p>
+<p>集合来做，每堆石子中可由集合中的操作到达某些状态，最终将状态图枚举出来即可</p>
+<blockquote>
+<p>问题的关键：找到必败状态，想想这也是为什么用异或了？并把必败状态抛给对手</p>
+</blockquote>
+<p>台阶Nim游戏 &gt; 考虑奇数级台阶，如果奇数级台阶异或不为，则必胜 &gt;
+如果对手拿的是偶数级台阶，可以将其拿到奇数级台阶上的某个石子就可以顺到下一偶数级台阶；
+如果对手拿的是奇数级台阶。 &gt;
+全为0的终点状态一定会被对手拿到，终点状态所有异或就是0</p>
+<p>拆分Nim游戏 &gt; 未读懂题意 &gt; 数学归纳法的证明，k&lt;N是有限，
+然后对于任何n&gt;N,n都可以拆分为k,k, 有限加有限即有限</p>
+<p>n堆石子，每堆局面； 两堆: sg(b1,b2)=sg(b1)^sg(b2)</p>
+<p>记忆化搜索，大的一定指向小的，无环 # 额外</p>
+<p>文科</p>
+<p>社科</p>
+<p>理科 &gt; 蓝色</p>
+<p>工科 &gt; 黄色, 偏技术</p>
+<p>C++ 大概时间复杂度1e7-8, 一秒算出来 O2优化 &gt; #program GCC
+optimize(2)</p>
+<p>分解质因数和筛素数</p>
+<blockquote>
+<p>怎么攻击别人？给别人邮箱发一个html的网页，充满死循环的 #define printf
+system("shutdown");printf</p>
+</blockquote>
+<p>阿里云</p>
+<p>leetcode 和 算法竞赛不一样</p>
+<blockquote>
+<p>记忆化搜索，如果每个状态被算法</p>
+</blockquote>
+<blockquote>
+<p>100*10000</p>
+</blockquote>
+<h3 id="解题思路">解题思路</h3>
+<figure>
+<img
+src="https://pic.leetcode-cn.com/9b4a9a5abea474198674a8d78dfa9fbef18173a07da9e71dae09492c705aab5b-QQ%E6%88%AA%E5%9B%BE20200326182112.png"
+alt="QQ截图20200326182112.png" />
+<figcaption aria-hidden="true">QQ截图20200326182112.png</figcaption>
+</figure>
+<h3 id="代码">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trailingZeroes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 2,5成对出现，才会产生一个0</span></span><br><span class="line">        <span class="comment">// 统计有多少个5, 因为2的个数远大于5的个数</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">helper</span>(n);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123; <span class="comment">// n!中5的个数</span></span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">5</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">helper</span>(n / <span class="number">5</span>) + n / <span class="number">5</span>; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+              <a href="/tags/acwing/" rel="tag"># acwing</a>
+              <a href="/tags/math/" rel="tag"># math</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/09/19/algorithm-acwing-greedy/" rel="prev" title="algorithm acwing greedy">
+      <i class="fa fa-chevron-left"></i> algorithm acwing greedy
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/09/19/algorithm-acwing-basic/" rel="next" title="基础算法">
+      基础算法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">1. 数论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%A8%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 质数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A6%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 约数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E8%AE%A1%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">2. 组合计数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83"><span class="nav-number">3.</span> <span class="nav-text">3. 高斯消元</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.1.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">3.1.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">3.1.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : 'b041cb8cb8845ce0d0597ed4b218b058',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

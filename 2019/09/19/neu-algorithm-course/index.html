@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"augf.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="NEU-Algorithm 主要是为了对比这学期学的算法书与本科学习的清华大学之间教材的区别。 清华大学教材  递归分治 动态规划 贪心策略 回溯法，一种复杂版的蛮力的感觉 分支限界法 随机化算法 线性规划与网络流  还有一个思考点： 常规思路： 问题， BF1， BF2， 改进，...... 大量的题之后  对于某道题，什么样的解法能将其搞定？什么样的解法能直觉">
+<meta property="og:type" content="article">
+<meta property="og:title" content="neu algorithm course">
+<meta property="og:url" content="https://augf.github.io/2019/09/19/neu-algorithm-course/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="NEU-Algorithm 主要是为了对比这学期学的算法书与本科学习的清华大学之间教材的区别。 清华大学教材  递归分治 动态规划 贪心策略 回溯法，一种复杂版的蛮力的感觉 分支限界法 随机化算法 线性规划与网络流  还有一个思考点： 常规思路： 问题， BF1， BF2， 改进，...... 大量的题之后  对于某道题，什么样的解法能将其搞定？什么样的解法能直觉">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-19T01:23:01.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="course">
+<meta property="article:tag" content="neu">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://augf.github.io/2019/09/19/neu-algorithm-course/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>neu algorithm course | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/neu-algorithm-course/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          neu algorithm course
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-19 09:23:01" itemprop="dateCreated datePublished" datetime="2019-09-19T09:23:01+08:00">2019-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/neu/" itemprop="url" rel="index"><span itemprop="name">neu</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/neu/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="neu-algorithm">NEU-Algorithm</h2>
+<p>主要是为了对比这学期学的算法书与本科学习的清华大学之间教材的区别。</p>
+<p>清华大学教材</p>
+<ol type="1">
+<li>递归分治</li>
+<li>动态规划</li>
+<li>贪心策略</li>
+<li>回溯法，一种复杂版的蛮力的感觉</li>
+<li>分支限界法</li>
+<li>随机化算法</li>
+<li>线性规划与网络流</li>
+</ol>
+<p>还有一个思考点：</p>
+<p>常规思路：</p>
+<p>问题， BF1， BF2， 改进，......</p>
+<p>大量的题之后</p>
+<ol type="1">
+<li>对于某道题，什么样的解法能将其搞定？什么样的解法能直觉达到最优</li>
+<li>这些方法的适用范围以及时间复杂度</li>
+</ol>
+<h3 id="回溯法">4. 回溯法</h3>
+<blockquote>
+<p>从某种意义上感觉，回溯法是用来明确定义了问题的解空间。比如背包问题，有n个物品，则解空间就是{0,1}^N。
+但这样下来感觉上有一个问题就是时间复杂度与n有关，不也不一定这样说，应该是说解空间为最多可以容纳多少个解。</p>
+<p>！！！这里就涉及到问题的表示方法，即一个问题究竟怎样可以表示地最优</p>
+</blockquote>
+<p>利用了DFS框架，首先将代解的问题看作一棵搜索树。</p>
+<h4 id="对应的问题定义是什么">1）对应的问题定义是什么？</h4>
+<p>问题的解向量：回溯法希望一个问题的解可以表示为一个n元式(x1,x2,...,xn)的形式</p>
+<p>显约束：对分量Xi的取值限定</p>
+<p>隐约束：对于问题的一个实例，解向量满足现实约束条件的所有多元组，构成了该实例的一个解空间。</p>
+<p>注意：同一个问题可以有多种表示n，有些表示方法更简单，所需表示的状态空间更小（存储量少，搜索方法简单）p(n)</p>
+<h4 id="相关的一些定义">2） 相关的一些定义</h4>
+<p>扩展节点：正在产生儿子的节点，即第一类灰色节点，当前最小灰色节点</p>
+<p>活节点：一个自身已生成但其儿子还没有全部生成的节点，
+即第二类灰色节点，非直系灰色节点</p>
+<p>死节点：黑色节点</p>
+<h4 id="实现方法">3）实现方法</h4>
+<p>问题状态生成方法：</p>
+<p>如果对一个扩展节点R，一旦产生了它的一个儿子C，就把C当做新的扩展节点。在完成对子树C的穷尽搜索之后，将R重新变成扩展节点，继续生成下一个儿子。</p>
+<p>回溯法：为了避免发生那些不可能产生最佳解的问题状态，要不断地利用限界函数（bounding
+function）来处死那些实际上不可能产生所需解的活节点，以减少问题的计算量。</p>
+<p>具有限界函数的深度优先方法称为回溯法</p>
+<h4 id="基本思想">4）基本思想</h4>
+<ul>
+<li><p>针对所给问题，定义问题的解空间</p></li>
+<li><p>确定易于搜素的解空间结构</p></li>
+<li><p>以深度优先方式搜素解空间，并在搜素过程中用剪枝函数避免无效搜素。</p>
+<blockquote>
+<p>常用剪枝函数：用约束函数在扩展节点处剪去不满足约束的子树；用限界函数剪去得不到最优解的子树。</p>
+<p>即两个条件：</p>
+<ul>
+<li>每个值本身的约束</li>
+<li>是否能得到最优解的约束</li>
+</ul>
+</blockquote></li>
+</ul>
+<h4 id="时空复杂度分析">5）时空复杂度分析</h4>
+<p>空间：由于在搜素过程中是动态产生问题的解空间。所以，在任何时刻，算法只保存从根节点到当前扩展节点的路径即可。所以如果解空间树中从根节点到叶节点的最长路径的长度为h(n)，那么回溯法所需的计算空间通常为O(h(n))。而显式地存储整个解空间需要O(2^{h(n)})或O(h(n)!)内存空间。</p>
+<p>时间：</p>
+<blockquote>
+<p>待处理？</p>
+<p>两种分析方法，第一种，从树出发，即本身形成的结构，然后通过树的节点来分析复杂度；第二种，由代码出发，即代码往往能表示很多东西，从代码出发可以</p>
+<p>感觉上是 O(2^n), O(n!), 这里n应该是最小表示来说</p>
+<p>基于全局，从全局的所有结构中寻找结果，那么可以发现其性能复杂度是高于分支限界法的。</p>
+<p>跟动态规划一样是万能解的感觉？</p>
+</blockquote>
+<h4 id="代码框架">6） 代码框架</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">backtrack-wrapper()&#123;</span><br><span class="line">  bestw = 0</span><br><span class="line">  backtrack(1);</span><br><span class="line">  cout&gt;&gt;bestw&gt;&gt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void backtrack(int t)</span><br><span class="line">&#123;</span><br><span class="line">	if(t&gt;n || solution(x)) &#123;   // 注意这里t&gt;n, solution(x)应该在上一层更好，但是这里也没事。</span><br><span class="line">		temp = output(x); //已经搜索到叶节点; 这里只是输出的当前可行解。</span><br><span class="line">		if (temp &gt; bestw)</span><br><span class="line">			update bestw, bestx;</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">		// 排列树，例如任务的调度问题求最节约时间的任务调度，那么实际上求得的结果就是任务的排列。在这里做时考虑将边作为任务。</span><br><span class="line">		for(int i=t;i&lt;=n ;i++ )  //排列数由边构成</span><br><span class="line">			// 这里说明有n个孩子，注意问题已经发生改变</span><br><span class="line">			&lt;对x[i]相关统计量进行处理&gt; </span><br><span class="line">			// 前面的选择在x[i-1]中。</span><br><span class="line">			x[i] = i; // 注意这里需要进行定义</span><br><span class="line">			if (问题仍然未得到解决)</span><br><span class="line">			&#123;</span><br><span class="line">			swap(x[t],x[i]);</span><br><span class="line">			if (legal[t]) backtrack(t+1);</span><br><span class="line">			swap(x[t],x[i]) // 进行恢复</span><br><span class="line">			&#125;</span><br><span class="line">			&lt;对x[i]相关统计量进行恢复&gt;</span><br><span class="line">// 输出 backtrack(1) n=2</span><br><span class="line">// </span><br><span class="line">		</span><br><span class="line">		// 子集树</span><br><span class="line">		if(第一颗子树) &#123;</span><br><span class="line">				//动态变化的结果，等于说这里其实存储的是临时第t层的; 这里是遍历子树</span><br><span class="line">				// 这里会产生带到下一层的变量, 比如说当前使用量cw</span><br><span class="line">				if(constraint(x[t])&amp;&amp;bound(x[t]))  		                          backtrack(t+1);</span><br><span class="line">				//这里是进行子树回溯。为下一阶段同等的子节点做准备		</span><br><span class="line">		&#125;</span><br><span class="line">		if(第二颗子树) &#123;</span><br><span class="line">				...</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		for(int i=f(n,t);i&lt;=g(n,t);i++)  // 所以这里循环的次数就是子节点的个数。</span><br><span class="line">			x[t]=h(i);  h(i)为从f(n,t)到g(n,t)的选择，比如0,1</span><br><span class="line">			具体来说，这里应该再增加一个进行可以对各个子节点记性处理的操作。（</span><br><span class="line">			注意！该操作为什么要加在这里，肯定是在这里啊，想想递归思路）</span><br><span class="line">			if(constraint(x[t])&amp;&amp;bound(x[t]))  		                          backtrack(t+1);</span><br><span class="line">			// 这里可以加某一统计变量，比如说或选址少1啦</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">n表示最大递归深度</span><br><span class="line">t表示当前递归深度</span><br><span class="line">i为当前节点对应的子节点</span><br><span class="line">f(n,t): 当前扩展节点未搜索过的子树起始编号；难道还要重新搞起始节点？？？</span><br><span class="line">g(n,t): 当前扩展节点未搜索过的子树终止编号</span><br><span class="line">h(i)为第i个可选的问题表示</span><br><span class="line">x[t]这里是临时变量，可以替代很多情况的。</span><br><span class="line"></span><br><span class="line">constraint: 关于x[t]的约束，只有当前节点的值有关。</span><br><span class="line">bound: 关于能否产生解的约束，与x[t]有关，实际上还与前面的某个统计量有关。这里开始有点联想到那个什么矩阵,一般与剩余量有关。</span><br><span class="line"></span><br><span class="line">n为全局变量，需要提前得出来。</span><br><span class="line">bestw也为全局变量</span><br><span class="line"></span><br><span class="line">思考点： </span><br><span class="line">1. 进行进一步理解？有啥意义</span><br><span class="line">  进行问题结果建模，其中产生了问题结果状态树。所以此时时间复杂度分析是树节点的个数，同时需要考虑其他那些附加函数的复杂度。如果把他们看作1的话，易于分析。</span><br><span class="line">2. 与DFS框架来说有什么关系？</span><br><span class="line">  这里就是一种简单的树的结构，即仅仅只是对树进行DFS遍历而已。而DFS的精华在于对图的处理上。</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">进一步求解最优解和最优路径！</span><br></pre></td></tr></table></figure>
+<p>7）其他</p>
+<p>优点本质：</p>
+<p>回溯法的约束条件是所有解都应满足的条件，所以从某种意义上来说回溯法可以得到所有解，其中包括最优解。</p>
+<blockquote>
+<p>这个跟图遍历不一样哟。</p>
+</blockquote>
+<p>但无限界bound函数时，该问题是判定问题，不是最优化问题</p>
+<p>8）例子</p>
+<p>按解空间为子集树和排列树进行划分</p>
+<ul>
+<li><p>子集树</p>
+<blockquote>
+<p>为什么叫子集树？答案的解是问题的解的子集。</p>
+<p>问题：</p>
+<p>一批n个集装箱要装上重量为c1和c2的轮船，每个集装箱i的重量为wi。且有</p>
+<p><span class="math inline">\(\sum_{i=1}^n w_i \leq c_1 +
+c_2\)</span>.</p>
+<p>试图找出一种方案满足：</p>
+<ol type="1">
+<li>首先将第一艘轮船尽可能装满</li>
+<li>将剩余的集装箱装上第二艘轮船</li>
+</ol>
+<p>目标：bestw，</p>
+<p>其余设置量：cw, bestx, r</p>
+<p>解题：</p>
+<p>框架的层数对应n。 solution</p>
+<p>根节点有两颗子树，选或不选（0/1）</p>
+<p>可行性约束函数：<span class="math inline">\(\sum_{i=1}^n w_i x_i \leq
+c_1\)</span></p>
+<p>上界函数（不选择当前元素）：</p>
+<p>当前载重量cw+剩余集装箱的重量r <span
+class="math inline">\(\leq\)</span> 当前最优载重量bestw</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">*W</span><br><span class="line">*x</span><br><span class="line">*bestx</span><br><span class="line">bestw</span><br><span class="line">cw = 0</span><br><span class="line"></span><br><span class="line">backtrack-wrapper()&#123;</span><br><span class="line">	backtrack(1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">backtrack(int t)&#123;</span><br><span class="line">	if(t&gt;n || solution(x)) &#123;</span><br><span class="line">		查看是否需要更新</span><br><span class="line">		*bestx = *x;</span><br><span class="line">		bestw = cw;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		if(cw + x[t] &lt;= c) // 搜索左子树</span><br><span class="line">			x[t] = 1;</span><br><span class="line">			cw += x[t];</span><br><span class="line">			backtrack(t+1);</span><br><span class="line">		if(cw + x[t] &gt; c) // 搜素右子树</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote></li>
+<li><p>排列树</p>
+<blockquote>
+<p>为什么叫排列树？答案的解是问题的解的排列。</p>
+<p>问题:</p>
+<p>批处理作业调度：给定n个作业的集合{<span
+class="math inline">\(J_1,J_2, ..., J_n\)</span>}.
+每个作业必须先由机器1处理，然后由机器2处理。作业<span
+class="math inline">\(J_i\)</span>需要机器j的处理时间为<span
+class="math inline">\(t_{ji}\)</span>。要求对于给定的n个作业，制定最佳作业调度方案，使其完成时间和达到最小。</p>
+<p>例子：</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(t_{j i}\)</span></th>
+<th>j1</th>
+<th>j2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>i1</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>i2</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>i3</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>数据结构：</p>
+<p>存储: <span class="math inline">\(M[i][j]\)</span>,
+注意i表示第i个作业，j表示机器j</p>
+<p>注意这里有个问题就是j1上一个结束就可以执行下一个，而j2的话必须是上一个任务结束，下一个任务才能开始。所以数据结构</p>
+<p>f1: 当前任务结束时间</p>
+<p>f2*: f2[i] = max(f2[i-1], f1) + t2(i-1)</p>
+<p>? 这题是否有问题？感觉并不需要最终相加啊</p>
+<p>则由此可给出回溯法版的算法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">inital M;</span><br><span class="line">bestf</span><br><span class="line">*f2</span><br><span class="line">f1</span><br><span class="line">f</span><br><span class="line">*x</span><br><span class="line">*bestx</span><br><span class="line"></span><br><span class="line">backtrack-wrapper()</span><br><span class="line">&#123;</span><br><span class="line">backtrack(1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">backtrack(int t)&#123;</span><br><span class="line">	if(t&gt;n) &#123; // 已经将事情安排完</span><br><span class="line">		*bestx=*x</span><br><span class="line">		bestf=f</span><br><span class="line">		//</span><br><span class="line">	&#125;</span><br><span class="line">	else&#123;</span><br><span class="line">		for(int j=t;j&lt;=n;j++)&#123;</span><br><span class="line">			f1 += M[x[j]][1];</span><br><span class="line">			f2[i] = Max(f2[i-1], f1)+M[x[j]][2];</span><br><span class="line">			f += f2[i];</span><br><span class="line">			if(f &lt; bestf)&#123;</span><br><span class="line">				swap(x[t],x[i]);</span><br><span class="line">				backtrack(t+1);</span><br><span class="line">				swap(x[t],x[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			f1 += M[x[j]][1];</span><br><span class="line">			f2[i] = Max(f2[i-1], f1)+M[x[j]][2];</span><br><span class="line">			f += f2[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote></li>
+</ul>
+<p>其他例子</p>
+<ul>
+<li>最大团问题</li>
+</ul>
+<blockquote>
+<p>感觉上进入右子树的时机给的很有问题。</p>
+</blockquote>
+<ul>
+<li>图的m着色问题</li>
+</ul>
+<blockquote>
+<p>教训就是要区分判定问题还是最优化问题</p>
+</blockquote>
+<h4 id="回溯法效率分析">7）回溯法效率分析</h4>
+<p>回溯法取决于以下因素：</p>
+<ul>
+<li>产生x[k]的时间</li>
+<li>满足显约束x[k]值的个数</li>
+<li>计算约束函数的时间</li>
+<li>计算上界函数的时间</li>
+<li>满足约束函数和上界函数约束的所有x[k]的个数</li>
+</ul>
+<blockquote>
+<p>由此可见，在选择约束函数式通常存在生成节点数与约束函数计算量之间的折中。</p>
+</blockquote>
+<h3 id="分支限界法">5. 分支限界法</h3>
+<p>利用BFS框架</p>
+<p>试图去寻找问题的一个解或者最优解。</p>
+<blockquote>
+<p>在分支限界法中，每个活结点只有一次机会成为扩展节点。活节点一旦成为扩展节点，就一次性生成器所有儿子节点。在这些儿子节点中，导致不可行解或导致非最优解的儿子节点被舍弃，其余儿子节点加入活节点链表。</p>
+<p>感觉上有点像BestFS的框架的感觉，比较奇妙的以及感觉需要深入思考的就是这里怎么把一些兄弟节点给排除的。</p>
+<p>剪枝策略：在算法扩展节点中，一旦发现一个节点的下界不小于当前找到的最短路长，则算法剪去以该节点为根的子树。所以从某种意义上来说是等于还是在基于之前的信息进行剪枝。
+所以这里的剪枝函数必然是某种与路径相关的变量。</p>
+</blockquote>
+<p>2）算法框架</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pq;</span><br><span class="line">cw;</span><br><span class="line">bestw;</span><br><span class="line"></span><br><span class="line">branchBound(s)  // 注意s可以是随机开始的一个点</span><br><span class="line">&#123;</span><br><span class="line">	pq Q;</span><br><span class="line">	Q.add(-1);</span><br><span class="line">	Ew=0;</span><br><span class="line">	bestw=0;</span><br><span class="line">	while(true) &#123;</span><br><span class="line">		for every w of v:</span><br><span class="line">			if(bound(w)) Q.add(w,..);//注意这里可以添加一些其他变量之类的东西。</span><br><span class="line">		// 注意这里可以做一些更新操作。</span><br><span class="line">		Q.delete(v);</span><br><span class="line">		if(v == -1) &#123;</span><br><span class="line">			if(Q.isEmpty) return bestw;</span><br><span class="line">			Q.add(-1);</span><br><span class="line">			Q.delete(Ew);</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3）算法直观感觉</p>
+<p>分支限界法常用来解离散最优解的问题。</p>
+<p>算法过程：首先，队列中有第一个元素。然后，对队列中选取的节点的子节点加入到队列中。按照优先级选取某个元素，凡是操作某个元素，对应的临时变量进行更新；当到达叶子节点时，说明开始取得某个最优值。所以此时考虑对队列中小于最优值的进行剪枝。</p>
+<p>一个问题就是对于离散树和排列树两种不同的情况应该如何考虑。</p>
+<ul>
+<li>单源最短路径</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">Graph &#123;</span><br><span class="line">n; //顶点数</span><br><span class="line">*prev //前驱顶点数组</span><br><span class="line">**c  // 邻接矩阵</span><br><span class="line">*dist //最短距离数组</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MinHeapNode&#123;</span><br><span class="line">i; // 顶点编号</span><br><span class="line">length; //当前路长</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main()&#123;</span><br><span class="line">ShortestPath(s)</span><br><span class="line">// 找出s到其他所有顶点的最短路径。结果在*dist中。</span><br><span class="line">&#125;</span><br><span class="line">ShortestPath(int v)</span><br><span class="line">&#123;</span><br><span class="line">MinHeap&lt;&lt;MinHeapNode&gt;&gt; H(100);</span><br><span class="line">MinHeapNode E;</span><br><span class="line">E.i=v;</span><br><span class="line">E.length=0;</span><br><span class="line">dist[v]=0;</span><br><span class="line">while(true)&#123;</span><br><span class="line">for(int j=1; j&lt;=n;j++)&#123;</span><br><span class="line">	if(c[E.i][j]&lt;inf &amp;&amp; E.length+c[E.i][j]&lt;dist[j]) &#123;</span><br><span class="line">	// 第一个条件表示有边存在， 第二个情况表示比当前的dist[j]还要短</span><br><span class="line">		dist[j] = E.length+c[E.i][j];</span><br><span class="line">		prev[i]=E.i;</span><br><span class="line">		// 加入活节点列表</span><br><span class="line">		MinHeapNode N;</span><br><span class="line">		N.i =i;</span><br><span class="line">		N.length=dist[j]; // 注意这里的更新</span><br><span class="line">		H.Insert(N)</span><br><span class="line">	&#125;</span><br><span class="line">	try &#123;H.DeleteMin(E);&#125; // 这里蕴含了取下一个节点。</span><br><span class="line">	catch(OutOfBounds)&#123;break;&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>分支限界法有种感觉就是利用层次遍历，首先取一个节点，然后找它的儿子节点。对每个儿子节点扩充，因为是队列，所以处理起来感觉像是并行处理。如果两个节点扩展到同一个节点，那么选取最优的节点，而删除非最优的节点。</p>
+<p>从某种意义上说，当源点的多条路遍历结果到达某个节点时，进行比对，选择最优的。</p>
+<p>而跟bestfs不同的是，bestfs比较是同时发生一下选定的，而分支限界法是异步发生，异步选定的。</p>
+</blockquote>
+<h3 id="随机化算法">6. 随机化算法</h3>
+<blockquote>
+<p>随机化算法的特征是对所求解问题的同一个实例用同一随机化算法求解两次可能得到完全不同的效果。但是会在很大程度上降低时间复杂度。</p>
+<p>常见的随机化算法：</p>
+<ol type="1">
+<li>数字随机化算法，常用于数值问题的求解</li>
+<li>蒙特卡洛算法，常用于求问题的精确解</li>
+<li>拉斯维加斯算法，不会得到不正确的解</li>
+<li>舍伍德算法，求解的算法总是正确的。</li>
+</ol>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+              <a href="/tags/course/" rel="tag"># course</a>
+              <a href="/tags/neu/" rel="tag"># neu</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/09/19/algorithm-course-np/" rel="prev" title="algorithm course np">
+      <i class="fa fa-chevron-left"></i> algorithm course np
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/09/19/neu-ai-course/" rel="next" title="neu ai course">
+      neu ai course <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#neu-algorithm"><span class="nav-number">1.</span> <span class="nav-text">NEU-Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">4. 回溯法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E5%BA%94%E7%9A%84%E9%97%AE%E9%A2%98%E5%AE%9A%E4%B9%89%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.1.</span> <span class="nav-text">1）对应的问题定义是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">2） 相关的一些定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">3）实现方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-number">1.1.4.</span> <span class="nav-text">4）基本思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E7%A9%BA%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">1.1.5.</span> <span class="nav-text">5）时空复杂度分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%A1%86%E6%9E%B6"><span class="nav-number">1.1.6.</span> <span class="nav-text">6） 代码框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF%E6%B3%95%E6%95%88%E7%8E%87%E5%88%86%E6%9E%90"><span class="nav-number">1.1.7.</span> <span class="nav-text">7）回溯法效率分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E9%99%90%E7%95%8C%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">5. 分支限界法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%8C%96%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">6. 随机化算法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : '524db26efc952ae2325ad33ca693bdc8',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

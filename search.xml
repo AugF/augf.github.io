@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Hello World</title>
-    <url>/2022/hello-world-1939fef88a09/</url>
+    <url>/2022/01/24/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
 first post. Check <a href="https://hexo.io/docs/">documentation</a> for
 more info. If you get any problems when using Hexo, you can find the
@@ -30,13 +30,13 @@ href="https://hexo.io/docs/deployment.html">Deployment</a></p>
   </entry>
   <entry>
     <title>About me</title>
-    <url>/2019/About-me-b2883e66631a/</url>
+    <url>/2019/09/10/About-me/</url>
     <content><![CDATA[<p>一个正在行进中的人</p>
 ]]></content>
   </entry>
   <entry>
     <title>GraphSampling Directions</title>
-    <url>/2020/GraphSampling-Directions-9c9446de6884/</url>
+    <url>/2020/12/17/GraphSampling-Directions/</url>
     <content><![CDATA[<p>未来的方向：</p>
 <ol type="1">
 <li>采样算法的选择： 精度高 有理论保证 按照自己的想法做</li>
@@ -54,7 +54,7 @@ href="https://hexo.io/docs/deployment.html">Deployment</a></p>
   </entry>
   <entry>
     <title>C-SAW论文阅读</title>
-    <url>/2020/C-SAW%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-316f3c062f95/</url>
+    <url>/2020/12/17/C-SAW%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</url>
     <content><![CDATA[<h1
 id="c-saw-a-framework-for-graph-sampling-and-random-walk-on-gpus">C-SAW:
 A Framework for Graph Sampling and Random Walk on GPUs</h1>
@@ -77,7 +77,7 @@ Performance evaluation</p>
   </entry>
   <entry>
     <title>TOEFL word details</title>
-    <url>/2019/TOEFL-word-details-706dbe9b044c/</url>
+    <url>/2019/09/19/TOEFL-word-details/</url>
     <content><![CDATA[<h1 id="总课程">总课程</h1>
 <h2 id="词汇">2. 词汇</h2>
 <p>按规则出牌</p>
@@ -1437,7 +1437,7 @@ herself of my advice. avail of = take advantage of available invalid
   </entry>
   <entry>
     <title>TOEFL listening</title>
-    <url>/2019/TOEFL-listening-b27330092a01/</url>
+    <url>/2019/09/18/TOEFL-listening/</url>
     <content><![CDATA[<h1 id="概述">1. 概述</h1>
 <p>书籍推荐： 林强新托福听力真经之TPO超详解析 ## 1.1 考试 1. 题型 30： 1
 conversation + 2 lecturers 2*30 英语加试 1+2</p>
@@ -1686,7 +1686,7 @@ isolation I think. &gt; 语速, 看句子， meant ? &gt; a sense of
   </entry>
   <entry>
     <title>TOEFL word</title>
-    <url>/2019/TOEFL-word-d079bf0f3ef9/</url>
+    <url>/2019/09/18/TOEFL-word/</url>
     <content><![CDATA[<h2 id="词汇发音">1. 词汇发音</h2>
 <p>如何发重音 https://zhuanlan.zhihu.com/p/48251386</p>
 <h2 id="词汇记忆">2. 词汇记忆</h2>
@@ -2679,7 +2679,7 @@ symmetrical对称的 -&gt; asymmetrical不对称的 为什么要去掉e？
   </entry>
   <entry>
     <title>TOEFL word overview</title>
-    <url>/2019/TOEFL-word-overview-395610c497f2/</url>
+    <url>/2019/09/19/TOEFL-word-overview/</url>
     <content><![CDATA[<h1 id="词缀">词缀</h1>
 <p>五星级词缀 - im,in: 否定，进入，加强 - dis: 低级别 no, 高级别 away;
 apart - ad: to， toward - re: back - a+p: 强调，一再 - mis: bad -
@@ -2869,7 +2869,7 @@ vail,val=valid,be of use; strong,value avail valuable evaluate</p>
   </entry>
   <entry>
     <title>The Minto Pyramid Princlple</title>
-    <url>/2019/The-Minto-Pyramid-Princlple-f2d0ed39c855/</url>
+    <url>/2019/12/08/The-Minto-Pyramid-Princlple/</url>
     <content><![CDATA[<p>金字塔结构</p>
 <p>金字塔结构是什么？</p>
 <p>金字塔有什么用？ 为什么？</p>
@@ -2897,7 +2897,7 @@ vail,val=valid,be of use; strong,value avail valuable evaluate</p>
   </entry>
   <entry>
     <title>基础算法</title>
-    <url>/2019/algorithm-acwing-basic-77364f848063/</url>
+    <url>/2019/09/19/algorithm-acwing-basic/</url>
     <content><![CDATA[<p>[toc]</p>
 <h3 id="十大排序算法">十大排序算法</h3>
 <h4 id="算法分类">算法分类</h4>
@@ -3004,7 +3004,7 @@ javascript&gt;python&gt;go=C++&gt;java</p>
   </entry>
   <entry>
     <title>algorithm acwing data-struture</title>
-    <url>/2019/algorithm-acwing-data-struture-95ca5642476a/</url>
+    <url>/2019/09/19/algorithm-acwing-data-struture/</url>
     <content><![CDATA[<p>数据结构</p>
 <h1 id="链表与邻接表">1. 链表与邻接表</h1>
 <p>strut Node{ int val; Node *next; }; //不讲！</p>
@@ -3306,7 +3306,7 @@ any()判断至少有一个1 none()判断是否全为0 set() 把所有位置为1 
   </entry>
   <entry>
     <title>algorithm acwing dp</title>
-    <url>/2019/algorithm-acwing-dp-9d33371c6027/</url>
+    <url>/2019/09/19/algorithm-acwing-dp/</url>
     <content><![CDATA[<p>转换为背包问题 线性DP, 区间DP, 计数类DP， 数位统计DP, 状态 压缩DP,
 树形DP, 记忆化搜索</p>
 <ol type="1">
@@ -3650,7 +3650,7 @@ i,j+1 f[i,j+1]开始滑的最大长度</p>
   </entry>
   <entry>
     <title>algorithm acwing greedy</title>
-    <url>/2019/algorithm-acwing-greedy-81d4cce0967a/</url>
+    <url>/2019/09/19/algorithm-acwing-greedy/</url>
     <content><![CDATA[<h1 id="贪心">贪心</h1>
 <p>无套路而言，最难的是证明其正确性</p>
 <p>试下还是有套路的 一般来说，举例看是否能证明正确性</p>
@@ -3746,13 +3746,13 @@ min{r},则不能加入，于是建立新组；否则加入并更新</p>
   </entry>
   <entry>
     <title>algorithm-acwing-improve-datastruture</title>
-    <url>/2020/algorithm-acwing-improve-datastruture-375e087e6827/</url>
+    <url>/2020/03/20/algorithm-acwing-improve-datastruture/</url>
     <content><![CDATA[
 ]]></content>
   </entry>
   <entry>
     <title>algorithm acwing improve class</title>
-    <url>/2019/algorithm-acwing-improve-6d207cf48427/</url>
+    <url>/2019/09/16/algorithm-acwing-improve/</url>
     <content><![CDATA[<h2 id="概览">1. 概览</h2>
 <ol type="1">
 <li>算法学习分为这几类：
@@ -4437,7 +4437,7 @@ A知道B的密钥，公钥，AB都知道，所以B就可以访问A，A就可以�
   </entry>
   <entry>
     <title>algorithm acwing math</title>
-    <url>/2019/algorithm-acwing-math-af807b2e83fc/</url>
+    <url>/2019/09/19/algorithm-acwing-math/</url>
     <content><![CDATA[<h1 id="数论">1. 数论</h1>
 <h2 id="质数">1.1 质数</h2>
 <p>，合数从2开始的整数的定义
@@ -4734,7 +4734,7 @@ alt="QQ截图20200326182112.png" />
   </entry>
   <entry>
     <title>algorithm acwing search graph</title>
-    <url>/2019/algorithm-acwing-search-graph-8a938884de39/</url>
+    <url>/2019/09/19/algorithm-acwing-search-graph/</url>
     <content><![CDATA[<h1 id="bfsdfs">1. BFS/DFS</h1>
 <h2 id="dfs">1. DFS</h2>
 <p>stack O(h) 不具有最短性 回溯，剪枝 思路比较奇怪的都有DFS来做
@@ -4880,7 +4880,7 @@ https://www.cnblogs.com/chenying99/p/3932877.html</li>
   </entry>
   <entry>
     <title>algorithm basic class</title>
-    <url>/2019/algorithm-basic-class-848088d6b8a0/</url>
+    <url>/2019/09/16/algorithm-basic-class/</url>
     <content><![CDATA[<p>快排 &gt; 难分，易于归并 &gt; eg: 第k个数</p>
 <p>归并 &gt; 易分，难合 &gt; eg: 逆序对</p>
 <p>二分：整数，浮点数 &gt;
@@ -5229,7 +5229,7 @@ register int 将变量保存在寄存器中</p>
   </entry>
   <entry>
     <title>algorithm course BruteForce</title>
-    <url>/2019/algorithm-course-BruteForce-a40add18aad0/</url>
+    <url>/2019/09/19/algorithm-course-BruteForce/</url>
     <content><![CDATA[<h2 id="数学归纳法溯源与公理化思维">1.1 数学归纳法溯源与公理化思维</h2>
 <blockquote>
 <p>首先我们需要考虑到自然数的定义到底是什么。</p>
@@ -5361,7 +5361,7 @@ n/k\)</span></strong></p>
   </entry>
   <entry>
     <title>algorithm course EquivalenceClass</title>
-    <url>/2019/algorithm-course-EquivalenceClass-467192978733/</url>
+    <url>/2019/09/19/algorithm-course-EquivalenceClass/</url>
     <content><![CDATA[<h2 id="union-find">Union-Find</h2>
 <blockquote>
 <p>主要是解决等价类关系的，一般来说是具有代表元素的。</p>
@@ -5381,7 +5381,7 @@ n/k\)</span></strong></p>
   </entry>
   <entry>
     <title>algorithm course Greedy</title>
-    <url>/2019/algorithm-course-Greedy-8097c6860da3/</url>
+    <url>/2019/09/19/algorithm-course-Greedy/</url>
     <content><![CDATA[<h2 id="greedy">Greedy</h2>
 <blockquote>
 <p>Greedy就是BestFS</p>
@@ -5410,7 +5410,7 @@ n/k\)</span></strong></p>
   </entry>
   <entry>
     <title>algorithm course Graph</title>
-    <url>/2019/algorithm-course-Graph-d0f637c0fdcd/</url>
+    <url>/2019/09/19/algorithm-course-Graph/</url>
     <content><![CDATA[<h2 id="图论与网络流">图论与网络流</h2>
 <p>k连通和k-边连通的区别与联系</p>
 <p>图论几大问题</p>
@@ -5452,7 +5452,7 @@ n/k\)</span></strong></p>
   </entry>
   <entry>
     <title>algorithm course bfs</title>
-    <url>/2019/algorithm-course-bfs-78364eda456a/</url>
+    <url>/2019/09/19/algorithm-course-bfs/</url>
     <content><![CDATA[<h2 id="bfs">BFS</h2>
 <blockquote>
 <p>注意BFS这里使用的队列所具备的性质：</p>
@@ -5511,7 +5511,7 @@ n/k\)</span></strong></p>
   </entry>
   <entry>
     <title>algorithm course MST</title>
-    <url>/2019/algorithm-course-MST-a96c3075543f/</url>
+    <url>/2019/09/19/algorithm-course-MST/</url>
     <content><![CDATA[<h2 id="mst">MST</h2>
 <blockquote>
 <p>注意，MST从某种意义上是图上的应用关于贪心策略的一部分。</p>
@@ -5562,7 +5562,7 @@ MST\)</span></p>
   </entry>
   <entry>
     <title>algorithm course dp</title>
-    <url>/2019/algorithm-course-dp-cb4116395333/</url>
+    <url>/2019/09/19/algorithm-course-dp/</url>
     <content><![CDATA[<h2 id="dp">DP</h2>
 <blockquote>
 <p>DP是一种思想，就是通过构建图的模型来解决。但是有一个问题就是任何问题都可以表示为合法的图结构（只要是合法的图结构），即实际问题为有向图，一定存在入度为0的点和出度为0的点。那么根据依赖，就可以通过入门级动态规划得到解决的。</p>
@@ -5667,7 +5667,7 @@ O(n). <span class="math inline">\(\Omega(2^n)\)</span></p>
   </entry>
   <entry>
     <title>algorithm divideAndConquer</title>
-    <url>/2019/algorithm-course-divideAndConquer-cca913faeb8c/</url>
+    <url>/2019/09/19/algorithm-course-divideAndConquer/</url>
     <content><![CDATA[<h2 id="divideandconquer">DivideAndConquer</h2>
 <h3 id="recursion">1. Recursion</h3>
 <blockquote>
@@ -5693,7 +5693,7 @@ O(n). <span class="math inline">\(\Omega(2^n)\)</span></p>
   </entry>
   <entry>
     <title>algorithm course dfs</title>
-    <url>/2019/algorithm-course-dfs-1bd1be953ca6/</url>
+    <url>/2019/09/19/algorithm-course-dfs/</url>
     <content><![CDATA[<h2 id="dfs">DFS</h2>
 <blockquote>
 <p>配合笔记使用，这里假设为简单图</p>
@@ -5735,7 +5735,7 @@ O(n). <span class="math inline">\(\Omega(2^n)\)</span></p>
   </entry>
   <entry>
     <title>algorithm course red-blackTree</title>
-    <url>/2019/algorithm-course-red-blackTree-c70c88c9dedb/</url>
+    <url>/2019/09/19/algorithm-course-red-blackTree/</url>
     <content><![CDATA[<h2 id="bst">BST</h2>
 <blockquote>
 <p>这里研究的关键问题是searching，设为key-value对，那么目标是查找value，一般来说目的是查找该value是否存在，或者更进一步返回位置。</p>
@@ -5766,7 +5766,7 @@ O(n). <span class="math inline">\(\Omega(2^n)\)</span></p>
   </entry>
   <entry>
     <title>algorithm course np</title>
-    <url>/2019/algorithm-course-np-b6717eca6b1f/</url>
+    <url>/2019/09/19/algorithm-course-np/</url>
     <content><![CDATA[<h2 id="np">NP</h2>
 <blockquote>
 <p>这里思考一个问题</p>
@@ -5790,7 +5790,7 @@ O(n). <span class="math inline">\(\Omega(2^n)\)</span></p>
   </entry>
   <entry>
     <title>algorithm course searching</title>
-    <url>/2019/algorithm-course-searching-9db73638d59c/</url>
+    <url>/2019/09/19/algorithm-course-searching/</url>
     <content><![CDATA[<h2 id="searching">Searching</h2>
 <h3 id="bf">BF</h3>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">search(v)&#123;</span><br><span class="line"></span><br><span class="line">	for a in array:</span><br><span class="line">		if a.value = v:</span><br><span class="line">			return true;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -5830,7 +5830,7 @@ O(n). <span class="math inline">\(\Omega(2^n)\)</span></p>
   </entry>
   <entry>
     <title>algorithm course selecting</title>
-    <url>/2019/algorithm-course-selecting-b482f0d63853/</url>
+    <url>/2019/09/19/algorithm-course-selecting/</url>
     <content><![CDATA[<h2 id="selecting">Selecting</h2>
 <blockquote>
 <p>Selecting的目标是选择出阶为k的元素，即第k小的元素，注意此时寻找的应该是函数值</p>
@@ -5866,7 +5866,7 @@ O(n). <span class="math inline">\(\Omega(2^n)\)</span></p>
   </entry>
   <entry>
     <title>algorithm-thinking-2</title>
-    <url>/2019/algorithm-thinking-2-669b6099891a/</url>
+    <url>/2019/09/19/algorithm-thinking-2/</url>
     <content><![CDATA[<h2 id="basic">Basic</h2>
 <p>在这里又开始想到时间复杂度这个问题。</p>
 <p>对算法的最坏情况进行分析，隐含地给出了对任意输入的运行时间的上界。</p>
@@ -5966,7 +5966,7 @@ class="math inline">\(O(nlogn)\)</span>的排序算法是最优算法。</p>
   </entry>
   <entry>
     <title>algorithm-thinking</title>
-    <url>/2019/algorithm-thinking-d2c4a48ec47b/</url>
+    <url>/2019/09/19/algorithm-thinking/</url>
     <content><![CDATA[<h2 id="v2">v2</h2>
 <blockquote>
 <ol type="1">
@@ -6091,7 +6091,7 @@ class="math inline">\(O(nlogn)\)</span>的排序算法是最优算法。</p>
   </entry>
   <entry>
     <title>blog:todo</title>
-    <url>/2019/blog-todo-669568eee92d/</url>
+    <url>/2019/09/12/blog-todo/</url>
     <content><![CDATA[<ol type="1">
 <li><p>文字加密访问</p></li>
 <li><p>收录到百度</p></li>
@@ -6111,7 +6111,7 @@ class="math inline">\(O(nlogn)\)</span>的排序算法是最优算法。</p>
   </entry>
   <entry>
     <title>course-algorithm lecture 1</title>
-    <url>/2019/course-algorithm-15428e969c0b/</url>
+    <url>/2019/09/19/course-algorithm/</url>
     <content><![CDATA[<h2 id="总览">总览</h2>
 <p><img data-src="C:\Users\Dell\Pictures\QQ截图20190522162200.png" /></p>
 <p>算法课上的问题有两种：</p>
@@ -6205,7 +6205,7 @@ alt="1558514755914" />
   </entry>
   <entry>
     <title>clean code: reading note</title>
-    <url>/2019/clean-code-reading-note-2724f049b984/</url>
+    <url>/2019/09/16/clean-code-reading-note/</url>
     <content><![CDATA[<blockquote>
 <p>由于自己写的代码老是感觉像屎一样烂，所以觉得不学学这方面的东西，真的是自己都看不下去了</p>
 </blockquote>
@@ -6791,7 +6791,7 @@ ASM之类工具通过编程来装置代码。 专门使用单个类来做。</li
   </entry>
   <entry>
     <title>course-algorithm lecture2</title>
-    <url>/2019/course-algorithm-lecture2-8d2f51eeb29f/</url>
+    <url>/2019/09/19/course-algorithm-lecture2/</url>
     <content><![CDATA[<h2 id="l2.-asympototic">L2. Asympototic</h2>
 <h3 id="growth-rate-of-functions">1. growth rate of functions</h3>
 <ol type="1">
@@ -6955,7 +6955,7 @@ class="math inline">\(f(bn) \in O(f(n))\)</span></p>
   </entry>
   <entry>
     <title>daily cplus thinking</title>
-    <url>/2019/daily-cplus-thinking-f792bd59e5ea/</url>
+    <url>/2019/09/19/daily-cplus-thinking/</url>
     <content><![CDATA[<h2 id="c-多文件组织">C++ 多文件组织</h2>
 <h3 id="问题">1. 问题</h3>
 <p>之前大学学习的时候也是这个问题一直在困扰自己没有得到解决。
@@ -7043,7 +7043,7 @@ href="https://blog.csdn.net/xhbxhbsq/article/details/78955216">C语言中，头�
   </entry>
   <entry>
     <title>daily note 11-28</title>
-    <url>/2019/daily-note-11-28-69bb52eae150/</url>
+    <url>/2019/11/28/daily-note-11-28/</url>
     <content><![CDATA[<h2 id="a.-今日遗留任务">A. 今日遗留任务：</h2>
 <ol type="1">
 <li>查看GAT代码，思考是否能够直接用tensorflow multiplication来表示。
@@ -7215,7 +7215,7 @@ platform. Proceedings of the VLDB Endowment, 12(12), 2094–2105.</p>
   </entry>
   <entry>
     <title>daily thinking</title>
-    <url>/2019/daily-thinking-7d135d21c29f/</url>
+    <url>/2019/09/12/daily-thinking/</url>
     <content><![CDATA[<p>感觉不及时写写自己的想法，自己可能会对自己所犯的错误记得不够牢靠</p>
 <h2 id="一点想法">一点想法</h2>
 <h3 id="问题">问题</h3>
@@ -7281,7 +7281,7 @@ platform. Proceedings of the VLDB Endowment, 12(12), 2094–2105.</p>
   </entry>
   <entry>
     <title>deep learning study</title>
-    <url>/2019/deep-learning-study-68ede45a5372/</url>
+    <url>/2019/09/10/deep-learning-study/</url>
     <content><![CDATA[<h2 id="tensorflows">1. tensorflows</h2>
 <p>tensorflow 数据流图 用于数值计算单开源软件库</p>
 <p>Nodes : 数学操作 &gt; 特别地，有数据输入和数据输出的节点，
@@ -7910,7 +7910,7 @@ line.set_data([],[]) point.set_data([],[])
   </entry>
   <entry>
     <title>deeplearning dropout</title>
-    <url>/2019/deeplearning-dropout-48098b712722/</url>
+    <url>/2019/09/12/deeplearning-dropout/</url>
     <content><![CDATA[<p>dropout的总结
 https://blog.csdn.net/stdcoutzyx/article/details/49022443</p>
 <p>bias &gt; output += bias</p>
@@ -7926,7 +7926,7 @@ https://blog.csdn.net/stdcoutzyx/article/details/49022443</p>
   </entry>
   <entry>
     <title>deeplearning cs231n</title>
-    <url>/2019/deeplearning-cs231n-560b20fcf310/</url>
+    <url>/2019/09/19/deeplearning-cs231n/</url>
     <content><![CDATA[<h1 id="introduction">1. Introduction</h1>
 <ol type="1">
 <li>A brief history of computer vision
@@ -8354,7 +8354,7 @@ weight</li>
   </entry>
   <entry>
     <title>deeplearning learn</title>
-    <url>/2019/deeplearning-learn-dc64da181b72/</url>
+    <url>/2019/09/19/deeplearning-learn/</url>
     <content><![CDATA[<blockquote>
 <p>参考: 吴恩达深度学习视频和网上教程</p>
 </blockquote>
@@ -8532,7 +8532,7 @@ class="math inline">\(f(y)-f(x) \leq f&#39;(x) (y-x)\)</span>
   </entry>
   <entry>
     <title>deeplearning tensorflow study</title>
-    <url>/2019/deeplearning-tensorflow-study-c596b3b82490/</url>
+    <url>/2019/09/19/deeplearning-tensorflow-study/</url>
     <content><![CDATA[<h1 id="一个pipeline">一个pipeline</h1>
 <blockquote>
 <p>一层封装，但还是仍然比较繁琐
@@ -8682,7 +8682,7 @@ http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html
   </entry>
   <entry>
     <title>design pattern summary</title>
-    <url>/2019/design-pattern-summary-939a5b5b5373/</url>
+    <url>/2019/09/18/design-pattern-summary/</url>
     <content><![CDATA[<p>参考书籍： head first 之设计模式</p>
 <p>相关实现代码： https://github.com/AugF/DesignPatterns</p>
 <h2 id="a.-概览">A. 概览</h2>
@@ -8968,7 +8968,7 @@ view内部的组件实际上是组合模式。控制器只要与顶层组件进�
   </entry>
   <entry>
     <title>design pattern details</title>
-    <url>/2019/design-pattern-details-403772281a6e/</url>
+    <url>/2019/09/18/design-pattern-details/</url>
     <content><![CDATA[<p>参考书籍： head first 之设计模式</p>
 <p>相关实现代码： https://github.com/AugF/DesignPatterns</p>
 <h2 id="设计模式入门">1. 设计模式入门</h2>
@@ -9743,7 +9743,7 @@ Handler此时就像switch语句的编译实现一样，Handler有多个具体的
   </entry>
   <entry>
     <title>easy offer details</title>
-    <url>/2019/easy-offer-details-f4221b619b04/</url>
+    <url>/2019/09/18/easy-offer-details/</url>
     <content><![CDATA[<p>总结</p>
 <ol type="1">
 <li><p>找出数组中重复的数字
@@ -9936,7 +9936,7 @@ DFS到达根节点的感觉就是无返回值返回的感觉</p>
   </entry>
   <entry>
     <title>english todo</title>
-    <url>/2019/english-todo-1349869961d4/</url>
+    <url>/2019/09/18/english-todo/</url>
     <content><![CDATA[<h2 id="英语学习">英语学习</h2>
 <h3 id="目的是什么">目的是什么？</h3>
 <ol type="1">
@@ -10011,7 +10011,7 @@ strategy is ... for example</p>
   </entry>
   <entry>
     <title>english pronuncation</title>
-    <url>/2019/english-pronuncation-6323d5ac4b92/</url>
+    <url>/2019/09/19/english-pronuncation/</url>
     <content><![CDATA[<p>音标复习</p>
 <p><img data-src="pronuncation.jpg" /></p>
 <h1 id="单元音">1. 单元音</h1>
@@ -10135,7 +10135,7 @@ strategy is ... for example</p>
   </entry>
   <entry>
     <title>errors in c++</title>
-    <url>/2019/errors-in-c-dbd4f74843ee/</url>
+    <url>/2019/11/03/errors-in-c/</url>
     <content><![CDATA[<h2 id="bugs">bugs</h2>
 <ol type="1">
 <li><p>Segmentation Falut 删代码法, 段错误，溢出；
@@ -10189,7 +10189,7 @@ reverse()</p>
   </entry>
   <entry>
     <title>gnn-parallel-gnn-overview-paper-summary</title>
-    <url>/2019/gnn-gnn-parallel-gnn-overview-paper-summary-163378634a76/</url>
+    <url>/2019/09/19/gnn-gnn-parallel-gnn-overview-paper-summary/</url>
     <content><![CDATA[<p>[TOC] # 1. 序言 图有着复杂的关系和交互依赖</p>
 <p>2D卷积: 邻居的决定由filter size w = 平均，
 邻居有序，可以按照一定的序列来看且有固定的尺寸</p>
@@ -10506,7 +10506,7 @@ Strutual-RNN: 语义组，GCN瞬时；nodeRNN接edgeRNN输出空间</p>
   </entry>
   <entry>
     <title>git using</title>
-    <url>/2019/git-using-4af7f078a057/</url>
+    <url>/2019/09/18/git-using/</url>
     <content><![CDATA[<p>更全面的请参考
 http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html</p>
 <h2 id="绪论">绪论</h2>
@@ -10638,7 +10638,7 @@ overwritten by merge: graph/images/GRU_dot.png</p></li>
   </entry>
   <entry>
     <title>gnn-parallel-AliGraph-paper-read</title>
-    <url>/2019/gnn-parallel-AliGraph-paper-read-785c163859e1/</url>
+    <url>/2019/11/21/gnn-parallel-AliGraph-paper-read/</url>
     <content><![CDATA[<h2 id="引用论文列表">引用论文列表</h2>
 ]]></content>
       <categories>
@@ -10650,7 +10650,7 @@ overwritten by merge: graph/images/GRU_dot.png</p></li>
   </entry>
   <entry>
     <title>gnn-parallel-GRU</title>
-    <url>/2019/gnn-parallel-GRU-9a9ca13e91f9/</url>
+    <url>/2019/10/26/gnn-parallel-GRU/</url>
     <content><![CDATA[<p>2015 ## 1. Abstract 机器翻译。 encoder + decoder encoder: a
 fixed-lenght representation decoder: a correct translation from this
 representation</p>
@@ -10780,7 +10780,7 @@ tanh(T<sup>{(t-1)}W</sup>{h_a})$</font> $  (H<sup>{t-1}W</sup>{z_h}) + $
   </entry>
   <entry>
     <title>gnn-parallel-NeuGraph-paper-read</title>
-    <url>/2019/gnn-parallel-NeuGraph-paper-read-b5cd69a0bf99/</url>
+    <url>/2019/11/13/gnn-parallel-NeuGraph-paper-read/</url>
     <content><![CDATA[<p>NeuGraph: Parallel Deep Neural Network Computation on Large
 Graphs</p>
 <p>深度学习四大框架</p>
@@ -10796,7 +10796,7 @@ Graphs</p>
   </entry>
   <entry>
     <title>gnn-parallel-ggsnn-code-read</title>
-    <url>/2019/gnn-parallel-ggsnn-code-read-41f35521ee50/</url>
+    <url>/2019/10/10/gnn-parallel-ggsnn-code-read/</url>
     <content><![CDATA[<h2 id="torch-lua">1. torch lua</h2>
 <p>th test.lua to test all the modules in the ggnn and run libraries</p>
 <ol type="1">
@@ -11049,7 +11049,7 @@ GG-NN等模型可以有效地利用图的拓扑结构信息。</li>
   </entry>
   <entry>
     <title>gnn-parallel-communication_neural_network-read</title>
-    <url>/2019/gnn-parallel-communication-neural-network-read-4a90a35cefcb/</url>
+    <url>/2019/09/30/gnn-parallel-communication-neural-network-read/</url>
     <content><![CDATA[<h2 id="abstract">Abstract</h2>
 <p>很多任务在Ai中都需要多个智能体之间的交互。特别地，这些相互交互的协议往往是提前手动特化好的，不能随着训练而改变。
 在这篇文章， 提出一个简单的神经模型 CommNet,
@@ -11258,7 +11258,7 @@ junctiontask中，两个主要的成分的交流向量c在多轮运行中的结�
   </entry>
   <entry>
     <title>gnn-parallel-ggsnn-code-realize</title>
-    <url>/2019/gnn-parallel-ggsnn-code-realize-72209def8480/</url>
+    <url>/2019/11/01/gnn-parallel-ggsnn-code-realize/</url>
     <content><![CDATA[<h2 id="待做">待做</h2>
 <ol type="1">
 <li><p>表示复杂的梯度计算图 &gt; 根据计算图来表示，计算图有两种类型</p>
@@ -11367,7 +11367,7 @@ Layer后进行了特征到隐向量维度的转换，在Prediction Layer前进�
   </entry>
   <entry>
     <title>gnn-parallel-ggsnn-paper-read</title>
-    <url>/2019/gnn-parallel-ggsnn-paper-read-d28823966db5/</url>
+    <url>/2019/10/10/gnn-parallel-ggsnn-paper-read/</url>
     <content><![CDATA[<h2 id="摘要">摘要</h2>
 <p>图结构广泛出现在化学、自然语言语义、社交网络和知识结构中。
 在这篇工作中，我们学习了关于图结构输入的特征学习方法。
@@ -11791,7 +11791,7 @@ https://zhuanlan.zhihu.com/p/38051458</p>
   </entry>
   <entry>
     <title>semi-gnn, relization progress</title>
-    <url>/2019/gnn-semi-gnn-relization-progress-4a32edb8b631/</url>
+    <url>/2019/09/11/gnn-semi-gnn-relization-progress/</url>
     <content><![CDATA[<blockquote>
 <p>试图用numpy实现</p>
 </blockquote>
@@ -11822,7 +11822,7 @@ https://zhuanlan.zhihu.com/p/38051458</p>
   </entry>
   <entry>
     <title>gnn-parallel-gnn-overview-paper-summarygnn summary paper read</title>
-    <url>/2019/gnn-parallel-gnn-overview-paper-details-b934e0fb32e6/</url>
+    <url>/2019/09/19/gnn-parallel-gnn-overview-paper-details/</url>
     <content><![CDATA[<h1 id="abstract">1. Abstract</h1>
 <ol type="1">
 <li>深度学习应用很广，特别是在图像分类和视频过程识别以及自然语言理解</li>
@@ -12530,7 +12530,7 @@ Directions 图的复杂性 ## Go Deep
   </entry>
   <entry>
     <title>gnn-parallel gnn semi-gnn paper read</title>
-    <url>/2019/gnn-parallel-gnn-semi-gnn-paper-read-1c84427ec79e/</url>
+    <url>/2019/09/19/gnn-parallel-gnn-semi-gnn-paper-read/</url>
     <content><![CDATA[<h2 id="introduction">1. Introduction</h2>
 <p>半监督学习步骤： 1. 选取标记数据，划分为训练集、验证集和测试集 2.
 根据数据进行学习、训练模型</p>
@@ -12738,7 +12738,7 @@ https://blog.csdn.net/tsyccnh/article/details/79163834</p>
   </entry>
   <entry>
     <title>semi-paper code read</title>
-    <url>/2019/gnn-semi-paper-code-read-44546d201ff5/</url>
+    <url>/2019/09/12/gnn-semi-paper-code-read/</url>
     <content><![CDATA[<h2 id="论文1">论文1</h2>
 <p>https://github.com/tkipf/gcn</p>
 <p>Data - n<em>n n</em>d d=c:channels e=f:classes</p>
@@ -12905,7 +12905,7 @@ gen_lable_graph</li>
   </entry>
   <entry>
     <title>ipython personnal reference</title>
-    <url>/2019/ipython-personnal-reference-963c36810358/</url>
+    <url>/2019/09/10/ipython-personnal-reference/</url>
     <content><![CDATA[<blockquote>
 <p>首先意图不过就是整理最常用和自己最关心的内容</p>
 </blockquote>
@@ -12933,7 +12933,7 @@ Details about 'object' object?? -&gt; Details about extra details</p>
   </entry>
   <entry>
     <title>hexo_study</title>
-    <url>/2019/hexo-study-678ad92c1ed5/</url>
+    <url>/2019/09/10/hexo-study/</url>
     <content><![CDATA[<p>sudo apt-get install nodejs sudo apt-get install node</p>
 <p>Node.js: 在服务器端的javascript npm: 软件管理包 cnpm</p>
 <h1 id="目录">目录</h1>
@@ -13209,7 +13209,7 @@ https://search.google.com/search-console?resource_id=https%3A%2F%2Faugf.github.i
   </entry>
   <entry>
     <title>linux keyboard using</title>
-    <url>/2019/linux-keyboard-using-e7578316642f/</url>
+    <url>/2019/10/09/linux-keyboard-using/</url>
     <content><![CDATA[<p>快捷键： hot key</p>
 <p>https://www.cnblogs.com/EasonJim/p/7119214.html</p>
 <p>如何查看？ 在桌面空白位置长按Win</p>
@@ -13228,7 +13228,7 @@ https://search.google.com/search-console?resource_id=https%3A%2F%2Faugf.github.i
   </entry>
   <entry>
     <title>machinelearning cornerstone summary</title>
-    <url>/2019/machinelearning-cornerstone-summary-8aa3eeac18fd/</url>
+    <url>/2019/09/19/machinelearning-cornerstone-summary/</url>
     <content><![CDATA[<p>what is ML?</p>
 <ol type="1">
 <li>定义 人的过程，观察，学习到技能</li>
@@ -13336,7 +13336,7 @@ adversarial</li>
   </entry>
   <entry>
     <title>linux</title>
-    <url>/2019/linux-fbd371a191e1/</url>
+    <url>/2019/09/19/linux/</url>
     <content><![CDATA[<h2 id="强大的常用命令-find-grep">强大的常用命令: find, grep</h2>
 <p>https://www.cnblogs.com/skynet/archive/2010/12/25/1916873.html</p>
 <p>find主要用于查找文件 grep(global search regular expression and print
@@ -13564,7 +13564,7 @@ https://jingyan.baidu.com/article/b0b63dbf321c224a49307062.html
   </entry>
   <entry>
     <title>lua learning</title>
-    <url>/2019/lua-learning-b6b3f852624d/</url>
+    <url>/2019/10/02/lua-learning/</url>
     <content><![CDATA[<p>https://www.runoob.com/lua/lua-miscellaneous-operator.html</p>
 <ol type="1">
 <li>data struture:
@@ -13651,7 +13651,7 @@ https://www.runoob.com/lua/lua-strings.html</li>
   </entry>
   <entry>
     <title>machinelearning cornerstone when can machines learn</title>
-    <url>/2019/machinelearning-cornerstone-when-can-machines-learn-0a6b615fd984/</url>
+    <url>/2019/09/19/machinelearning-cornerstone-when-can-machines-learn/</url>
     <content><![CDATA[<h1 id="the-learning-problem">1. The Learning Problem</h1>
 <h2 id="introduction">1.1. Introduction</h2>
 <p>theory+technique 多个角度概念 what + why + how + better:</p>
@@ -13854,7 +13854,7 @@ Eout就是在未知数据集上的表现情况；注意这里还未引入泛化�
   </entry>
   <entry>
     <title>machinelearning cornerstone why can machines learn</title>
-    <url>/2019/machinelearning-cornerstone-why-can-machines-learn-41772de6ff2b/</url>
+    <url>/2019/09/19/machinelearning-cornerstone-why-can-machines-learn/</url>
     <content><![CDATA[<h1 id="training-vs-testing">5. Training vs Testing</h1>
 <h2 id="datasize">5.1 DataSize</h2>
 <p><img data-src="00020.png" /> <img data-src="00021.png" /> <img
@@ -13898,7 +13898,7 @@ Hyperthesis</h2>
   </entry>
   <entry>
     <title>machinelearning gradient descent</title>
-    <url>/2019/machinelearning-gradient-descent-cdac096ff45e/</url>
+    <url>/2019/09/19/machinelearning-gradient-descent/</url>
     <content><![CDATA[<p>SGD ? 是只是针对一个样本做的吗？ 难道不是学习了随机</p>
 <p>无偏估计：不考虑系统误差，只有随机误差，在大数情况下有效。
 也就是估计式的期望等于估计值</p>
@@ -13954,7 +13954,7 @@ line search: 搜索方向d_k
   </entry>
   <entry>
     <title>nju-course-cplus-lecture1-summary</title>
-    <url>/2019/nju-course-cplus-lecture1-summary-b9ef6f076085/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture1-summary/</url>
     <content><![CDATA[<blockquote>
 <p>静态数据区：全局变量、static存储类的局部变量以及常量的内存分配；
 extern int x; 引用其他文件的全局变量，注意初始值。 使用说明：
@@ -13998,7 +13998,7 @@ extern int x; 引用其他文件的全局变量，注意初始值。 使用说�
   </entry>
   <entry>
     <title>neu ai course</title>
-    <url>/2019/neu-ai-course-77110340f9f7/</url>
+    <url>/2019/09/19/neu-ai-course/</url>
     <content><![CDATA[<h2 id="人工智能">人工智能</h2>
 <h3 id="智能体与环境">1. 智能体与环境</h3>
 <p>智能体：通过传感器感知所处环境并通过执行器对该环境产生作用的计算机程序及其控制的硬件。</p>
@@ -14205,7 +14205,7 @@ class="math inline">\(\beta\)</span>搜索，在极大极小值算法的基础�
   </entry>
   <entry>
     <title>nju-course-cplus-lecture2-summary</title>
-    <url>/2019/nju-course-cplus-lecture2-summary-357b5a9efb7d/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture2-summary/</url>
     <content><![CDATA[<p>重点</p>
 <ol type="1">
 <li>抽象和封装 &gt;
@@ -14289,7 +14289,7 @@ cerr在命令行下， linux下命令行截取的是cerr,
   </entry>
   <entry>
     <title>neu algorithm course</title>
-    <url>/2019/neu-algorithm-course-c4c2d38c95c4/</url>
+    <url>/2019/09/19/neu-algorithm-course/</url>
     <content><![CDATA[<h2 id="neu-algorithm">NEU-Algorithm</h2>
 <p>主要是为了对比这学期学的算法书与本科学习的清华大学之间教材的区别。</p>
 <p>清华大学教材</p>
@@ -14514,7 +14514,7 @@ class="math inline">\(t_{ji}\)</span>。要求对于给定的n个作业，制定
   </entry>
   <entry>
     <title>nju-course-cplus</title>
-    <url>/2019/nju-course-cplus-lecture1-67428cb9a1a1/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture1/</url>
     <content><![CDATA[<h2 id="程序设计基础知识回顾">0 程序设计基础知识回顾</h2>
 <h3 id="基本">0.1 基本</h3>
 <p>程序=算法+数据结构</p>
@@ -14661,7 +14661,7 @@ file1.h, file2.h冲突怎么办。
   </entry>
   <entry>
     <title>nju-course-cplus-lecture2</title>
-    <url>/2019/nju-course-cplus-lecture2-aef72747c4c1/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture2/</url>
     <content><![CDATA[<h1 id="本节课重点">本节课重点</h1>
 <h2 id="抽象和封装">1. 抽象和封装</h2>
 <ul>
@@ -14839,7 +14839,7 @@ private: int x; }</p>
   </entry>
   <entry>
     <title>nju-course-cplus-lecture3-summary</title>
-    <url>/2019/nju-course-cplus-lecture3-summary-6932a488cfa1/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture3-summary/</url>
     <content><![CDATA[<h2 id="操作符重载">操作符重载</h2>
 <p>首先，不能考虑传统方法，即add，为什么？因为从某种意义上来讲极其不实用。</p>
 <p>所以考虑重载操作符, 下列不能重载 . 标志作用域的 sizeof()
@@ -14944,7 +14944,7 @@ B-&gt;()-&gt;f(), 第二个才访问到A的内容， B-&gt;()。
   </entry>
   <entry>
     <title>nju-course-cplus-lecture3</title>
-    <url>/2019/nju-course-cplus-lecture3-7e25a3e3d0bf/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture3/</url>
     <content><![CDATA[<h1 id="本节课重点">本节课重点</h1>
 <h2 id="操作符重载">操作符重载</h2>
 <p>比如对于复数来说，怎么实现加法？ - 成员函数add - 全局函数</p>
@@ -15143,7 +15143,7 @@ private只对自己使用。 protected针对继承元素。</p>
   </entry>
   <entry>
     <title>nju-course-cplus-lecture4-summary</title>
-    <url>/2019/nju-course-cplus-lecture4-summary-3c575f3819fe/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture4-summary/</url>
     <content><![CDATA[<p>泛型程序设计</p>
 <blockquote>
 <p>类型的多态</p>
@@ -15236,7 +15236,7 @@ accumulate</p></li>
   </entry>
   <entry>
     <title>nju-course-cplus-lecture5-summary</title>
-    <url>/2019/nju-course-cplus-lecture5-summary-e0699417912f/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture5-summary/</url>
     <content><![CDATA[<p>总结</p>
 <h1 id="输入输出">输入输出</h1>
 <p>按输入输出的类型分为三种：控制台、文件、字符串（局部的内存区域） 1.
@@ -15304,7 +15304,7 @@ eof</li>
   </entry>
   <entry>
     <title>nju-course-cplus-lecture5</title>
-    <url>/2019/nju-course-cplus-lecture5-6d947ee08682/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture5/</url>
     <content><![CDATA[<h1 id="重点">重点</h1>
 <h2 id="输入输出">9. 输入/输出</h2>
 <p>输入、输出具体的实现会音操作系统和计算机硬件的不同而有所不同，与平台相关。
@@ -15833,7 +15833,7 @@ Assertion failed:x=1,fileXXX,line YYY 可以返现异常错误，如
   </entry>
   <entry>
     <title>nju-course-cplus-lecture4</title>
-    <url>/2019/nju-course-cplus-lecture4-89515bc1c2bf/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture4/</url>
     <content><![CDATA[<h1 id="重点">重点</h1>
 <h2 id="泛型程序设计">泛型程序设计</h2>
 <p>一个程序实体能对多种类型的数据进行操作或描述的特性称为类属性。具有类属性的程序实体通常有：
@@ -16026,7 +16026,7 @@ match_major内容特别多，可以考虑用函数对象来做</li>
   </entry>
   <entry>
     <title>nju-course-cplus-lecture6-summary</title>
-    <url>/2019/nju-course-cplus-lecture6-summary-0bbddf9f302b/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture6-summary/</url>
     <content><![CDATA[<h1 id="重点">重点</h1>
 <ol type="1">
 <li>Window是一种基于图形界面的多任务操作系统。同时多个，交互，用户操作</li>
@@ -16083,7 +16083,7 @@ UINT
   </entry>
   <entry>
     <title>nju-course-cplus-lecture7</title>
-    <url>/2019/nju-course-cplus-lecture7-8f8dec171c14/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture7/</url>
     <content><![CDATA[<h1 id="重点">重点</h1>
 <h2
 id="转移构造函数转移赋值操作符重载函数">转移构造函数&amp;转移赋值操作符重载函数</h2>
@@ -16204,7 +16204,7 @@ f1、f2也可以到需要它们的时候（a+b）再执行（惰性求值）；�
   </entry>
   <entry>
     <title>nju-course-cplus-lecture6</title>
-    <url>/2019/nju-course-cplus-lecture6-0d4b502fed85/</url>
+    <url>/2019/09/19/nju-course-cplus-lecture6/</url>
     <content><![CDATA[<h1 id="重点">重点</h1>
 <p>Windows简介 消息驱动的程序结构 基于Windows
 API的过程式Window应用陈旭设计
@@ -16535,7 +16535,7 @@ OnPrepareDC(&amp;dc,NULL); 为ScrollView初始化dc dc.DPtoLP(&amp;point);
   </entry>
   <entry>
     <title>nju-course distributed system</title>
-    <url>/2019/nju-course-distributed-system-23a6ca7a515b/</url>
+    <url>/2019/09/19/nju-course-distributed-system/</url>
     <content><![CDATA[<h2 id="分布式系统模型">分布式系统模型</h2>
 <ol type="1">
 <li>什么是分布式系统？</li>
@@ -16888,7 +16888,7 @@ IaaS，基础设施即服务组件，让任何人都可以自行建立和提供�
   </entry>
   <entry>
     <title>nju-course mapreduce experiment</title>
-    <url>/2019/nju-course-mapreduce-experiment-7b4ad2932b94/</url>
+    <url>/2019/09/19/nju-course-mapreduce-experiment/</url>
     <content><![CDATA[<p>实验说明</p>
 <h2 id="mapreduce-java编程">MapReduce Java编程</h2>
 <p>主要工作： ### 1 实现Map类
@@ -16955,7 +16955,7 @@ FileSplit</a></p>
   </entry>
   <entry>
     <title>nju-course mapreduce summary</title>
-    <url>/2019/nju-course-mapreduce-summary-aaa91ad6c31a/</url>
+    <url>/2019/09/19/nju-course-mapreduce-summary/</url>
     <content><![CDATA[<h2 id="ch1-大数据技术简介">ch1 大数据技术简介</h2>
 <p>数据规模到底多大才叫大数据？
 大数据一词的重点不是在于数据规模的定义，而是指信息技术发展已经进入了一个新时代</p>
@@ -17227,7 +17227,7 @@ Spark集群部署后，需要在主从节点启动Master进程和Worker进程，
   </entry>
   <entry>
     <title>nju-course mlt</title>
-    <url>/2019/nju-course-mlt-773e74fb10e7/</url>
+    <url>/2019/09/19/nju-course-mlt/</url>
     <content><![CDATA[<h2 id="basicinequality">1. BasicInequality</h2>
 <p>有哪些不等式？ 这些不等式是为了解决什么样的问题的？</p>
 <p>凸函数：杰森不等式说明函数的期望大于期望的函数，这说明了什么？</p>
@@ -17575,7 +17575,7 @@ class="math inline">\(\delta\)</span>可容许</li>
   </entry>
   <entry>
     <title>numpy study</title>
-    <url>/2019/numpy-study-99af00a28daf/</url>
+    <url>/2019/09/12/numpy-study/</url>
     <content><![CDATA[<h2 id="numpy">2. numpy</h2>
 <p>https://www.numpy.org.cn/</p>
 <blockquote>
@@ -17832,7 +17832,7 @@ np.mat(A): 返回矩阵的抽象类型，什么时候用到也不知道</p>
   </entry>
   <entry>
     <title>python-study</title>
-    <url>/2019/python-study-764325c9e34f/</url>
+    <url>/2019/09/19/python-study/</url>
     <content><![CDATA[<h2 id="vscode的好处">1. vscode的好处</h2>
 <ol type="1">
 <li>显示思路过程</li>
@@ -18340,7 +18340,7 @@ https://www.lfd.uci.edu/~gohlke/pythonlibs/#pygraphviz</p>
   </entry>
   <entry>
     <title>python thinking</title>
-    <url>/2019/python-thinking-7ea8bfd5048c/</url>
+    <url>/2019/09/19/python-thinking/</url>
     <content><![CDATA[<p>python学习指南</p>
 <h2 id="tuple-list-dict的基本操作">tuple, list, dict的基本操作</h2>
 <ol type="1">
@@ -18402,7 +18402,7 @@ https://www.lfd.uci.edu/~gohlke/pythonlibs/#pygraphviz</p>
   </entry>
   <entry>
     <title>python pylint</title>
-    <url>/2019/python-pylint-29782d020373/</url>
+    <url>/2019/09/15/python-pylint/</url>
     <content><![CDATA[<p>https://blog.csdn.net/Jason_Lewis/article/details/75386598</p>
 ]]></content>
       <categories>
@@ -18416,7 +18416,7 @@ https://www.lfd.uci.edu/~gohlke/pythonlibs/#pygraphviz</p>
   </entry>
   <entry>
     <title>paper-read-graphsage</title>
-    <url>/2019/paper-read-graphsage-6ea74422864d/</url>
+    <url>/2019/12/06/paper-read-graphsage/</url>
     <content><![CDATA[<p>Overview:</p>
 <p>stochastic generalization of graph convolutions, and it is useful for
 massive, dynamic graphs that contain rich feature information.</p>
@@ -18649,7 +18649,7 @@ Self-Attention Networks &gt; 动态图</p></li>
   </entry>
   <entry>
     <title>spark study thinking</title>
-    <url>/2019/spark-study-thinking-1-649b108ce6d3/</url>
+    <url>/2019/09/19/spark-study-thinking-1/</url>
     <content><![CDATA[<p>spark中map就是把数据集分配到各个节点上，然后各个节点执行 &gt;
 思考Partioner的过程是什么</p>
 <p>Partitioner感觉上是全局变量 &gt;
@@ -18791,7 +18791,7 @@ master是否进行资源的分配</p>
   </entry>
   <entry>
     <title>spark study thinking</title>
-    <url>/2019/spark-study-thinking-a261c8159f04/</url>
+    <url>/2019/09/19/spark-study-thinking/</url>
     <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">val file_split = args(2).toInt  // 文件的切分，将文件划分为多少个mapper</span><br><span class="line">val numPartition = args(3).toInt // mapper后，形成多少个reducer</span><br><span class="line"></span><br><span class="line">// 还有其他建议参数</span><br><span class="line">// driver-memory, driver-cores 内存主要是启动内存，存储启动的数据，</span><br><span class="line">// ? driver所使用的数据，首先数据本身是可以放在多个位置吧，然后，其次，数据来源是本地文件的话，应该也可以在worker节点上，因为这样本身就可以做，在task执行时，直接就近选取接地那执行即可</span><br><span class="line">// 其而，是当执行collect()时， 数据将被拉回driver端？？？</span><br><span class="line"></span><br><span class="line">// executor-memory, executor-cores:</span><br><span class="line"></span><br><span class="line">// spark-default-parrallism: 如果一直从头默认，尽管是reduceByKey, 它有个参数partitioner也使用的是默认，那么这样看来也就是说基本上都是这个参数，除非中间设置repartitiones; 这里官方的建议是总cores的2-4倍</span><br><span class="line"></span><br><span class="line">// 然后 executor和worker,driver的对应, 首先系统会计算driver,worker剩下的内存，然后按照某种策略（一个worker装满再装下一个，还是一个一个worker地装）, 于是就形成了执行单元。</span><br><span class="line"></span><br><span class="line">// 对于每个executor, 在执行时必然需要用到数据，会采用就近原则，比如使用的是hdfs架构时，会优先从某个就近的地方读取</span><br><span class="line"></span><br><span class="line">// 分给每个executor的内存，有几个用途：1. 运行，包括代码执行, 所以有堆外内存，用于调节GC; </span><br><span class="line"></span><br><span class="line">// executor:  executor-cores， 按系统能给的最大程度在每个worker上给予的方式来分配executor. 然后executor, 然后，关于executor启动以及后面的执行又是怎么折腾的呢？怎么看出负载均衡这些东西的？ spark-ui</span><br><span class="line">https://blog.csdn.net/dandykang/article/details/48525467</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>所以整个并行化，spark需要关注的点</p>
 <ol type="1">
@@ -18979,7 +18979,7 @@ hash结构， - tree结构， 堆 - 抽象结构，栈、队列 - (key, value)�
   </entry>
   <entry>
     <title>study todo</title>
-    <url>/2019/study-todo-475e42e6f3b0/</url>
+    <url>/2019/09/18/study-todo/</url>
     <content><![CDATA[<ol type="1">
 <li><p>日志，了解加使用</p></li>
 <li><p>命令行</p></li>
@@ -19004,7 +19004,7 @@ hash结构， - tree结构， 堆 - 抽象结构，栈、队列 - (key, value)�
   </entry>
   <entry>
     <title>spark study</title>
-    <url>/2019/spark-study-ee540432fb17/</url>
+    <url>/2019/09/19/spark-study/</url>
     <content><![CDATA[<p>sc.textFile(,numpartition)</p>
 <p>如果numpartition参数比实际划分的SplitSize小的化，则按照SplitSize的数目在每个executor上执行；否则就按照numpartition参数进行执行；</p>
 <p>一定要区分资源调度和任务执行</p>
@@ -19275,7 +19275,7 @@ util.Properties.lineSeparator) writer.close(</li>
   </entry>
   <entry>
     <title>spcipy study</title>
-    <url>/2019/spcipy-study-4b76b86cf66d/</url>
+    <url>/2019/09/12/spcipy-study/</url>
     <content><![CDATA[<h2 id="概览">概览</h2>
 <p>scipy库依赖于numpy库，它提供了便捷且快速的N维数组操作。构建scipy库的原因是，它能与numpy数组一起工作，并提供许多用户友好和高效的数字实践，例如数值积分和优化的教程
 numerical integration, interpolation插值， optimization, linear
@@ -19504,7 +19504,7 @@ spmatrix: 以上的所有类型</li>
   </entry>
   <entry>
     <title>survey-of-gnn-systems</title>
-    <url>/2020/survey-of-gnn-systems-253c400cb676/</url>
+    <url>/2020/06/24/survey-of-gnn-systems/</url>
     <content><![CDATA[<ul>
 <li><a href="#aligraph">AliGraph</a>
 <ul>
@@ -19812,7 +19812,7 @@ DOI:10.1109/LCA.2020.2970395.</p></li>
   </entry>
   <entry>
     <title>target for work</title>
-    <url>/2019/target-for-work-e362996f8bd8/</url>
+    <url>/2019/12/01/target-for-work/</url>
     <content><![CDATA[<p>需要找清楚自己的工作内容</p>
 <p>自己必须学那些东西！</p>
 <p>注意说一个事情，不要说着说着，想到另一个点，又转移到另一个点。</p>
@@ -19821,7 +19821,7 @@ DOI:10.1109/LCA.2020.2970395.</p></li>
   </entry>
   <entry>
     <title>tools-latex-MathJax</title>
-    <url>/2019/tools-latex-MathJax-b0283ec1aa12/</url>
+    <url>/2019/10/14/tools-latex-MathJax/</url>
     <content><![CDATA[<p>https://colobu.com/2014/08/17/MathJax-quick-reference/</p>
 <p>MathJax是一个JavaScript引擎，用来显示网络上的数学公式。它支持大部分主流的浏览器，对大部分用户而言它不需要安装，既没有插件需要下载也没有软件需要安装，属于Apache。MathJax使用网络字体去产生高质量的排版，使其在所有分辨率都可缩放和显示，这远比包含公式的图片更有效得多。使用MathJax显示数学公式是基于文本的，而非图片。他可以被搜索引擎使用，这意味着方程式和页面上的文字一样是可以被搜索的。MathJax允许页面作者使用Tex、
 LaTex符号和MathML或者AsciiMath去书写公式。
@@ -19885,7 +19885,7 @@ class="math inline">\(\mathfrak{Z}\)</span></li>
   </entry>
   <entry>
     <title>tensorflow variable</title>
-    <url>/2019/tensorflow-variable-63af8c1f1dbc/</url>
+    <url>/2019/09/24/tensorflow-variable/</url>
     <content><![CDATA[<p>https://blog.csdn.net/shenxiaolu1984/article/details/52815641 &gt;
 tensorflow变量相关</p>
 <p>https://blog.csdn.net/huqinweI987/article/details/82771521 &gt;
@@ -19935,7 +19935,7 @@ tf.get_collection(tf.GraphKeys.VARIABLES)</p>
   </entry>
   <entry>
     <title>linux</title>
-    <url>/2019/tools-pygraphviz-study-eb13879f68e7/</url>
+    <url>/2019/11/01/tools-pygraphviz-study/</url>
     <content><![CDATA[<p>参考 1. <a href="http://graphviz.org/doc/info/attrs.html">Node, Edge
 and Graph Attributes of Pygraphviz</a> 2. <a
 href="https://www.cnblogs.com/liang1101/p/7641984.html">graphviz
@@ -20013,7 +20013,7 @@ C=pgv.AGraph(h);A.draw("a.svg");</code></li>
   </entry>
   <entry>
     <title>torch-study</title>
-    <url>/2019/torch-study-09a1932c0a22/</url>
+    <url>/2019/11/03/torch-study/</url>
     <content><![CDATA[<p>https://blog.csdn.net/qq_31590831/article/details/90764240</p>
 <h2 id="pytorch">pytorch</h2>
 <p>https://www.cnblogs.com/denny402/p/7520063.html</p>
@@ -20029,7 +20029,7 @@ https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html#variablehttp
   </entry>
   <entry>
     <title>vim</title>
-    <url>/2019/vim-03f7c94da709/</url>
+    <url>/2019/09/19/vim/</url>
     <content><![CDATA[<h1 id="vim">vim</h1>
 <h2 id="光标移动">光标移动</h2>
 <ol start="0" type="1">
@@ -20091,7 +20091,7 @@ y复制， p粘贴</p></li>
   </entry>
   <entry>
     <title>vscode using</title>
-    <url>/2019/vscode-using-e71ff5fd83de/</url>
+    <url>/2019/09/12/vscode-using/</url>
     <content><![CDATA[<p>? 关闭终端的快捷键: 暂时未发现</p>
 <p>搜索文件: ctrl+p</p>
 ]]></content>
@@ -20106,7 +20106,7 @@ y复制， p粘贴</p></li>
   </entry>
   <entry>
     <title>日记-210524.md</title>
-    <url>/2021/%E6%97%A5%E8%AE%B0-210524-md-9d6ef4f3e9c0/</url>
+    <url>/2021/05/24/%E6%97%A5%E8%AE%B0-210524-md/</url>
     <content><![CDATA[<h2 id="待思考的地方">待思考的地方</h2>
 <p>P38: 结论应该怎么写？</p>
 <h2 id="讲稿">讲稿</h2>
@@ -20212,7 +20212,7 @@ GGNN, GCN, GAT作为评估算法。</p>
   </entry>
   <entry>
     <title>日记-210518</title>
-    <url>/2021/%E6%97%A5%E8%AE%B0-210518-10b781ce206c/</url>
+    <url>/2021/05/18/%E6%97%A5%E8%AE%B0-210518/</url>
     <content><![CDATA[<p>今天被批评了，这些都是由我自己造成的。</p>
 <p>很多时候感到自己孤单，但是一细想是能体会到身边人对我的关心的。</p>
 <blockquote>
@@ -20341,7 +20341,7 @@ R2准确率均在0.99以上。 P10: 随机森林模型。 R2准确率均在0.95�
   </entry>
   <entry>
     <title>情绪管理的重要性</title>
-    <url>/2021/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0-%E6%83%85%E7%BB%AA%E7%AE%A1%E7%90%86-d97e12218af6/</url>
+    <url>/2021/05/08/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0-%E6%83%85%E7%BB%AA%E7%AE%A1%E7%90%86/</url>
     <content><![CDATA[<h2 id="情绪管理的观念">情绪管理的观念</h2>
 <p>概念： 1.
 情绪随时可能产生，有正向有负向，然而往往影响我们的是负面的情绪事情 2.
@@ -20396,7 +20396,7 @@ R2准确率均在0.99以上。 P10: 随机森林模型。 R2准确率均在0.95�
   </entry>
   <entry>
     <title>问题分析与解决</title>
-    <url>/2021/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0-%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90%E4%B8%8E%E8%A7%A3%E5%86%B3-f111709bda69/</url>
+    <url>/2021/05/10/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0-%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90%E4%B8%8E%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<h2 id="概述">1. 概述</h2>
 <p>几种错误的做法： - 否定状况 - 在错误时机追究责任 -
 夸张评价：来源与恐惧，因此想要逃离或者消极面对；危害：对问题置之不理</p>
@@ -20413,7 +20413,7 @@ SCQA分析法 3. 找出替代方案 4. 评估替代方案: 情境分析法 5. �
   </entry>
   <entry>
     <title>课程学习_高效能认识的七个习惯</title>
-    <url>/2021/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0-%E9%AB%98%E6%95%88%E8%83%BD%E8%AE%A4%E8%AF%86%E7%9A%84%E4%B8%83%E4%B8%AA%E4%B9%A0%E6%83%AF-e8878b26a334/</url>
+    <url>/2021/05/07/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0-%E9%AB%98%E6%95%88%E8%83%BD%E8%AE%A4%E8%AF%86%E7%9A%84%E4%B8%83%E4%B8%AA%E4%B9%A0%E6%83%AF/</url>
     <content><![CDATA[<p>https://elearning.kundou.cn/student/course-content/5fc9b77e5ebfdb9c5c6a6bf2?entrance=course_list&amp;lesson=yFQ2eUbYM</p>
 <h2 id="高效能人士的习惯概述">1. 高效能人士的习惯概述</h2>
 <p>如何使自己变成高效能人士？</p>

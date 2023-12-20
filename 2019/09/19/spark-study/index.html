@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"augf.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="sc.textFile(,numpartition) 如果numpartition参数比实际划分的SplitSize小的化，则按照SplitSize的数目在每个executor上执行；否则就按照numpartition参数进行执行； 一定要区分资源调度和任务执行 在任务执行阶段，每个executor只会按照其对应的InputSize单位来执行数据。如果有多个executor, 则按照多个的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spark study">
+<meta property="og:url" content="https://augf.github.io/2019/09/19/spark-study/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="sc.textFile(,numpartition) 如果numpartition参数比实际划分的SplitSize小的化，则按照SplitSize的数目在每个executor上执行；否则就按照numpartition参数进行执行； 一定要区分资源调度和任务执行 在任务执行阶段，每个executor只会按照其对应的InputSize单位来执行数据。如果有多个executor, 则按照多个的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/spark-study/asserts/scala_type.png">
+<meta property="article:published_time" content="2019-09-19T05:18:49.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta property="article:tag" content="spark">
+<meta property="article:tag" content="scala">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://augf.github.io/2019/09/19/spark-study/asserts/scala_type.png">
+
+<link rel="canonical" href="https://augf.github.io/2019/09/19/spark-study/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>spark study | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/spark-study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          spark study
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-19 13:18:49" itemprop="dateCreated datePublished" datetime="2019-09-19T13:18:49+08:00">2019-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/study/" itemprop="url" rel="index"><span itemprop="name">study</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>sc.textFile(,numpartition)</p>
+<p>如果numpartition参数比实际划分的SplitSize小的化，则按照SplitSize的数目在每个executor上执行；否则就按照numpartition参数进行执行；</p>
+<p>一定要区分资源调度和任务执行</p>
+<p>在任务执行阶段，每个executor只会按照其对应的InputSize单位来执行数据。如果有多个executor,
+则按照多个的executor来进行执行</p>
+<h1 id="写代码要考虑的事">写代码要考虑的事</h1>
+<p>代码之前——环境，环境如何配置？ 代码载体——IDE, 有哪些特点？
+代码语言——常用操作和模板进行总结，语法特性要能表达出来，用语言能够实现出任意自己想实现的犯方法
+- 角度1 - 数据结构 &gt; 1. 对基本数据结构操作的了解 &gt; 2.
+这些操作的输入、输出参数是什么？如何实现的？快慢如何 &gt; 3.
+如何自己定义？ - 算法 &gt;
+设计算法，算法正确性，算法的时间空间复杂度，算法的实现，代码复杂度 -
+角度2 基本数据结构，字符串，数组，元祖，列表，字典这些抽象的数据结构；
+对象，多态，操作符重载， 异常， debug</p>
+<p>代码调试——如何测试自己的代码是否正确 &gt; 测试语句，继承测试
+代码维护——Git, 版本控制 代码执行——编译器执行的角度（一般不用去考虑）
+代码上线——命令行设置</p>
+<blockquote>
+<p>非设计算法，主要调用接口，那么关注代码的含义，代码对应着实际上有哪些操作
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import spark</span><br><span class="line">// 前面一系列的环境配置先耍开</span><br><span class="line"></span><br><span class="line">def main()&#123;</span><br><span class="line">    </span><br><span class="line">    val conf = new SparkConf().setAppName().setMaster</span><br><span class="line">    conf.set()  // 这里可以配置哪些项？这些项又表示着什么？</span><br><span class="line"></span><br><span class="line">    val sc = new SparkContext()   // 2.3之后spark是怎么执行的</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>计算模式中节点故障和慢节点容错处理 特别是在流和交互式SQL查询中</p>
+<p>RDD能够保存世系图，而且提供保存到各个部分的功能。
+所以RDD能够很好地处理并行计算中的数据共享</p>
+<p>spark编程中开发者需要编写一个驱动程序来链接到工作进程，驱动程序定义一个或者多个RDD以及相关行动操作，驱动程序同时记录RDD的继承关系。
+工作进程是一直运行的进程</p>
+<p>操作 -
+定义操作，创建RDD，来自于内存集合和外部存储系统，转换操作生成的RDD -
+转换操作，只是转换，并未生成 - 控制操作，进行持久化 -
+行动操作，触发spark运行的程序</p>
+<p>分区，注意到分区是一个逻辑概念</p>
+<p>分区的多少，往往意味着并行计算的粒度
+如果是从本地文件创建，则默认值为程序所分配到的CPU数；如果是从hdfs上建立，则为文件的数据块数</p>
+<p>RDD首选位置
+Spark形成任务有向无环图时，会尽可能地把计算分配到靠近数据的位置，减少数据网络传输</p>
+<h2 id="scala">2. scala</h2>
+<p>https://learnxinyminutes.com/docs/scala/</p>
+<ul>
+<li>:help 查看所有的帮助</li>
+<li>:type (true, 2.0) &gt; 查看类型</li>
+<li>保存和加载 repl文件
+<ul>
+<li>:save /sites/repl-test.scala</li>
+<li>:load /sites/rep1-test.scala</li>
+</ul></li>
+<li>查看历史 :h? &gt; 怎么使用历史中的文件呢？
+<ul>
+<li>:history number</li>
+</ul></li>
+<li>编写长代码
+<ul>
+<li>:paste &gt; 怎么加载文件中代码还是不会</li>
+</ul></li>
+<li>退出
+<ul>
+<li>quit</li>
+</ul></li>
+</ul>
+<h3 id="类型">2.1 类型</h3>
+<ul>
+<li><p>val z:Type = value &gt; val, var</p>
+<ul>
+<li>Type: Int, Long, Double</li>
+<li>类型继承体系 <img data-src="asserts/scala_type.png" />
+<ul>
+<li>列表中没有元素了即, Nil = List[Nothing], 它是List[T]的子类</li>
+<li>Null类型的唯一实例是null值，可以将null赋值给任何引用但是不能赋值给值类型的变量</li>
+<li>与Java基本类型相对应的类，以及Unit类型，都扩展自AnyVal</li>
+<li>Any类定义了，A.isInstanceOf[B] 来判断A是否是类别B</li>
+<li>A.getClass.getSimpleName</li>
+</ul></li>
+</ul></li>
+<li><p>String &gt; raw" " 不含转义字符</p>
+<ul>
+<li>基本
+<ul>
+<li>属性
+<ul>
+<li>length</li>
+</ul></li>
+<li>init
+<ul>
+<li>直接赋值</li>
+<li>Char[], copyValueOf(char[], offset, count)</li>
+</ul></li>
+<li>增
+<ul>
+<li>尾部增加元素或元组 str = str.concat(str2); str = str+str2</li>
+</ul></li>
+<li>删
+<ul>
+<li>转变为替换或者查拼接</li>
+</ul></li>
+<li>改
+<ul>
+<li>改特定群组的值 str.replace(regex, "") //前面可以接正则表达式</li>
+</ul></li>
+<li>查
+<ul>
+<li>按索引查 str(i) str.charAt(i)</li>
+<li>按值查 str.indexof(c1) str.lastindexof(c1)</li>
+<li>查范围的值
+<ul>
+<li>只要求前面 str.take()</li>
+<li>只要求后面 str.drop()</li>
+<li>同时 str.substring(start_index, end_index) str.slice()</li>
+</ul></li>
+<li>查是否满足要求
+<ul>
+<li>str.startsWith() str.endsWith()</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>高级
+<ul>
+<li>预处理 trim()</li>
+<li>切分 split()</li>
+<li>格式化
+<ul>
+<li>s"${expression}" expression可以为上文的变量之类的 &gt;
+对于输出的各种类型的操作为使用变量的toString参数</li>
+<li>f"${}%1.0f dada"</li>
+<li>raw" "</li>
+<li>regr.r内置了正则表达式, 如 <code>"(.*)@(.*)".r</code></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>函数 def fun(x:Int, y:Int=4):Int={}</p>
+<ul>
+<li>默认参数</li>
+<li>可变参数, 由变量直接指定</li>
+<li>匿名函数 val sq: Int-&gt;Int = (x:Int)-&gt;x*x</li>
+<li>允许多返回值</li>
+<li>可以省略参数，可以省略返回值</li>
+</ul></li>
+<li><p>flow control</p>
+<ul>
+<li>range(5): (1 to 5 by 1) start to end by steo</li>
+<li>循环
+<ul>
+<li>().foreach{}</li>
+<li>while() {}</li>
+<li>for(a&lt;-array){}</li>
+</ul></li>
+<li>条件
+<ul>
+<li>简单本 val a = if(x==10) "" else " "</li>
+</ul></li>
+</ul></li>
+<li><p>Data Structures</p>
+<ul>
+<li>物理: 数组、链表</li>
+<li>不变的
+<ul>
+<li>Array() List()
+<ul>
+<li>sortBy, sortWith{case (a,b)} // 自定义</li>
+<li>distince</li>
+</ul></li>
+<li>Map()
+<ul>
+<li>sort: Map()没有sort函数，所以需要 用list</li>
+<li>获取值
+<ul>
+<li>apply() 返回默认方法，不知道谁制定的, default()
+会进行定义默认值</li>
+<li>getOrElse(v,defalut) 返回默认值</li>
+</ul></li>
+<li>增加，以及更新
+<ul>
+<li>错误： map(key) = new_value &gt;
+注意这条命令只能对于mutable的集合可用</li>
+</ul></li>
+<li>删除
+<ul>
+<li>remove(key)</li>
+</ul></li>
+<li>其他</li>
+<li>keys, values</li>
+<li>isEmpty</li>
+<li>max, min, filter, find</li>
+<li>sum,size</li>
+<li>++添加一个新的</li>
+<li>clear(), clone()</li>
+<li>count(): 技术</li>
+</ul></li>
+<li>Set()
+<ul>
+<li>操作</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>类 Classes</p>
+<ul>
+<li>构造函数： 直接在类的开头声明 class Dog(br: String) { var breed:
+String = br // 这里即构造函数 }</li>
+<li>变量和函数默认的访问控制权限是public &gt; 特别地，可以private def
+fun(): Type={} ？？？protect</li>
+</ul></li>
+<li><p>同名Object,
+实际上是该类的一个单例对象，在其他语言中往往对应的是静态方法，静态变量之类的东西。
+&gt;
+两者的区别感觉上说也就是Class需要new产生，而Object因为是静态的，所以可以直接使用</p></li>
+<li><p>case classes &gt; vs Classes, 如何使用？
+Classes强调的是封装，多态和行为。这些值在类中通常是私有的，方法是可扩展的。
+// 即默认情况下 &gt; 而case
+classes的目的是来持有不可变对象，它们往往有很少的方法，而且这些方法基本上没有副作用。
+使用起来定义简单，有点像结构体的感觉，pair case class Person(name:
+String, phoneNumber:String)</p></li>
+<li><p>trait 特征，实际上就是抽象类或者接口的概念； &gt;
+只需要定义值或方法的属性或者返回值即可。 由继承它的类来自行扩展 class A
+extends Dog with Bark {} // 扩展两个接口</p></li>
+<li><p>继承 &gt;
+继承利用的也是extends关键字，不过在scala中继承实体类有以下的要求：</p>
+<ul>
+<li>def只能重写另一个def</li>
+<li>val只能重写另一个val或不带参数的def(?,应该不会涉及到)</li>
+<li>var只能重写另一个抽象的var &gt; 可以定义自己的方法</li>
+</ul></li>
+<li><p>Pattern Matching &gt; scala特有的, 利用了case结构;
+这样的想法就是使得省去了break语句 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"> // Pattern matching might look familiar to the switch statements in the C family</span><br><span class="line">// of languages, but this is much more powerful. In Scala, you can match much</span><br><span class="line">// more:</span><br><span class="line">def matchEverything(obj: Any): String = obj match &#123;</span><br><span class="line">  // You can match values:</span><br><span class="line">  case &quot;Hello world&quot; =&gt; &quot;Got the string Hello world&quot;</span><br><span class="line"></span><br><span class="line">  // You can match by type:</span><br><span class="line">  case x: Double =&gt; &quot;Got a Double: &quot; + x</span><br><span class="line"></span><br><span class="line">  // You can specify conditions:</span><br><span class="line">  case x: Int if x &gt; 10000 =&gt; &quot;Got a pretty big number!&quot;</span><br><span class="line"></span><br><span class="line">  // You can match case classes as before:</span><br><span class="line">  case Person(name, number) =&gt; s&quot;Got contact info for $name!&quot;</span><br><span class="line"></span><br><span class="line">  // You can match regular expressions:</span><br><span class="line">  case email(name, domain) =&gt; s&quot;Got email address $name@$domain&quot;</span><br><span class="line"></span><br><span class="line">  // You can match tuples:</span><br><span class="line">  case (a: Int, b: Double, c: String) =&gt; s&quot;Got a tuple: $a, $b, $c&quot;</span><br><span class="line"></span><br><span class="line">  // You can match data structures:</span><br><span class="line">  case List(1, b, c) =&gt; s&quot;Got a list with three elements and starts with 1: 1, $b, $c&quot;</span><br><span class="line"></span><br><span class="line">  // You can nest patterns:</span><br><span class="line">  case List(List((1, 2, &quot;YAY&quot;))) =&gt; &quot;Got a list of list of tuple&quot;</span><br><span class="line"></span><br><span class="line">  // Match any case (default) if all previous haven&#x27;t matched</span><br><span class="line">  case _ =&gt; &quot;Got unknown object&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>函数式编程</p>
+<ul>
+<li>map</li>
+<li>foreach</li>
+<li>filter (1 to 15 by 2).filter(_%2==0)</li>
+<li>reduce &gt; 等价于 for{n&lt;-s} yield sq(n) &gt; //
+所有scala这门语言本身就支持 惰性求值, 想想真的nb</li>
+</ul></li>
+<li><p>implicit &gt; commonplace 频繁 &gt; 怎么说呢？
+实际上就是一种潜在的标记的感觉。默认的全局的变量。 &gt;
+对于方法，如果有一个参数通常是平凡的，但是又可能改变。这是就可以使用implicit作为参数。
+&gt; 编译器会自动向前寻找该标记然后进行解析</p>
+<ul>
+<li>def sendGreetings(toWhom:String)(implicit howMany:Int) = toWhom +
+howMany &gt; sendGreetings("wang") // "wang 100"</li>
+<li>implicit val myImplicitInt=100 &gt; ? 怎么用，不知道</li>
+<li>implicit def myImplicitFucion(breed:String) = new
+Dog("Golder"+breed) &gt; "wyp" // "Golder wyp" &gt;
+从理解上看，为什么不用默认形参或者指定参数，不会就只为了少点代码吧？？</li>
+</ul></li>
+<li><p>Misc</p>
+<ul>
+<li>import scala.collection</li>
+<li>import scala.collectin.immutable._</li>
+<li>import scala.collection.immutable.{List,Map}</li>
+<li>import scala.collection.immutable.{List=&gt;Li} // rename</li>
+<li>import scala.collection.immutable.{Map=&gt;<em>, Set=&gt;</em>, _}
+// 排序Map,Set</li>
+</ul></li>
+<li><p>Input / Output</p>
+<ul>
+<li>读 import scala.io.Source for(line &lt;-
+Source.fromFile("myfile").getLines()) println(line)</li>
+<li>写 val writer = new PrinterWriter("myfile.txt") writer.write(" " +
+util.Properties.lineSeparator) writer.close(</li>
+</ul></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spark/" rel="tag"># spark</a>
+              <a href="/tags/scala/" rel="tag"># scala</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/09/19/python-study/" rel="prev" title="python-study">
+      <i class="fa fa-chevron-left"></i> python-study
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/09/19/deeplearning-tensorflow-study/" rel="next" title="deeplearning tensorflow study">
+      deeplearning tensorflow study <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E4%BB%A3%E7%A0%81%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E4%BA%8B"><span class="nav-number">1.</span> <span class="nav-text">写代码要考虑的事</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#scala"><span class="nav-number">1.1.</span> <span class="nav-text">2. scala</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.1 类型</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : 'bfffcba5d930f419875b7db7f86a797b',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

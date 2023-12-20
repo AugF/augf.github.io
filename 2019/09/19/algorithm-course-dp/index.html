@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"augf.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="DP  DP是一种思想，就是通过构建图的模型来解决。但是有一个问题就是任何问题都可以表示为合法的图结构（只要是合法的图结构），即实际问题为有向图，一定存在入度为0的点和出度为0的点。那么根据依赖，就可以通过入门级动态规划得到解决的。  然后又想一个东西。问题可以分为哪几种类？  离散空间上的点？还是其他？ 从某种意义上来说，还有其他东西吗？   对吧？ 其实对应的就是图论上的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="algorithm course dp">
+<meta property="og:url" content="https://augf.github.io/2019/09/19/algorithm-course-dp/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="DP  DP是一种思想，就是通过构建图的模型来解决。但是有一个问题就是任何问题都可以表示为合法的图结构（只要是合法的图结构），即实际问题为有向图，一定存在入度为0的点和出度为0的点。那么根据依赖，就可以通过入门级动态规划得到解决的。  然后又想一个东西。问题可以分为哪几种类？  离散空间上的点？还是其他？ 从某种意义上来说，还有其他东西吗？   对吧？ 其实对应的就是图论上的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-19T00:56:21.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="nju">
+<meta property="article:tag" content="course">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://augf.github.io/2019/09/19/algorithm-course-dp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>algorithm course dp | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/algorithm-course-dp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          algorithm course dp
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-19 08:56:21" itemprop="dateCreated datePublished" datetime="2019-09-19T08:56:21+08:00">2019-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/nju-course/" itemprop="url" rel="index"><span itemprop="name">nju-course</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="dp">DP</h2>
+<blockquote>
+<p>DP是一种思想，就是通过构建图的模型来解决。但是有一个问题就是任何问题都可以表示为合法的图结构（只要是合法的图结构），即实际问题为有向图，一定存在入度为0的点和出度为0的点。那么根据依赖，就可以通过入门级动态规划得到解决的。</p>
+</blockquote>
+<p>然后又想一个东西。问题可以分为哪几种类？</p>
+<ol type="1">
+<li>离散空间上的点？还是其他？</li>
+<li>从某种意义上来说，还有其他东西吗？</li>
+</ol>
+<blockquote>
+<p>对吧？</p>
+<p>其实对应的就是图论上的最优路径的问题。 感觉上没错？</p>
+<p>又有人说动态规划就是图论上最优路的定义问题，感觉说的很没错了。</p>
+</blockquote>
+<p>如果把问题等效为图：其实在这里将问题等效为图，实际上每个节点对应的是图的状态，注意这里的状态空间而已，有的节点的状态不一定可以认为它是能行的。但这样一想又稍微有点过分，实际上它应该跟递归分治在一类。因为从表示和记录上，它是对原问题的最优解进行分解，在解的角度上进行建模而已。</p>
+<p>而回溯法和分支限界法才真正地从解空间入手，至少思想上是，具体是否是还得再思考。</p>
+<blockquote>
+<p>又一点想法：DP不过是问题可以分解为超级简单的图结构。</p>
+<p>DP理解其实可以有多个角度，只要某个角度理解明白也就明白了。</p>
+<p>首先，经典角度看成是解决非重复子问题。</p>
+<p>其次，本次课新的角度即看作是一个拓扑求解序列，从源头到尽头。a-&gt;b,
+往往意味着的是a的解决依赖于b，所以这里就可以考虑深度优先遍历，确保是连通的。</p>
+<blockquote>
+<ol type="1">
+<li>这里一个关键的考虑点就是BE边时，往往是需要汇聚当前的最优结果。</li>
+<li>对于CE边，当结果已经得到时，有一方便的数据结构可以存储，可以直接进行查看。</li>
+</ol>
+</blockquote>
+</blockquote>
+<p>？ DP能成功运行需要的条件是什么。</p>
+<p>最优子结构还是怎么的？</p>
+<p>理解是否图遍历问题？即根本不需要进行图遍历。</p>
+<p>图遍历的另一种感觉就是考虑上所有</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">通用框架</span><br><span class="line"></span><br><span class="line">Fibonacci by DP</span><br><span class="line"></span><br><span class="line">fibDP(soln, k)</span><br><span class="line">	int fib, f1, f2</span><br><span class="line">	if (k&lt;2) fib = k;</span><br><span class="line">	else</span><br><span class="line">		if (member(soln,k-1)==false) //member即查询子问题是否求解</span><br><span class="line">			f1=fibDP(soln,k-1)</span><br><span class="line">		else f1=retrieve(soln,k-1)</span><br><span class="line">		if (member(soln,k-2)==false)</span><br><span class="line">			f2=fibDP(soln,k-2)</span><br><span class="line">		else f2=retrieve(soln,k-2)</span><br><span class="line">	store(soln,k,fib)</span><br><span class="line">	return fib</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>解题三个步骤：</p>
+<ol type="1">
+<li>整体思路</li>
+<li>算法设计</li>
+<li>时空分析及正确性证明</li>
+<li>改进建议</li>
+</ol>
+</blockquote>
+<h3 id="matrix-multiplication">1. Matrix Multiplication</h3>
+<h4 id="v1.-递归版本">v1. 递归版本</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mmTry1(dim, len, seq)</span><br><span class="line">	if len&lt;3 bestCost=0</span><br><span class="line">	else</span><br><span class="line">		bestCost=\infity</span><br><span class="line">		for (i=1; i&lt;=len-1; i++)</span><br><span class="line">			c=cost of muitiplication at position seq[i]</span><br><span class="line">			newSeq=seq with ith elemnt deleted;</span><br><span class="line">			b=mmTry1(dim, len-1, newSeq)</span><br><span class="line">			bestCost=min(bestCost, b+c)</span><br><span class="line">	return bestCost</span><br></pre></td></tr></table></figure>
+<p>时间复杂度： T(n) = (n-1)T(n-1)+n. <span
+class="math inline">\(O((n-1)!)\)</span></p>
+<p>问题求解结构就是一棵树的结构。</p>
+<p>不是很清晰？</p>
+<h4 id="v2.-递归与分治">v2. 递归与分治</h4>
+<p>看子问题的求解方式，也可以知道递归与分治版本是没有动态规划强的。</p>
+<blockquote>
+<p>表面上看还是子问题的规模问题</p>
+</blockquote>
+<p>Improved Recursion</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mmTry2(dim, low, high)</span><br><span class="line">	if(higt-low==1) bestCost=0</span><br><span class="line">	else</span><br><span class="line">		bestCost=\infity</span><br><span class="line">		for(k=low+1;k&lt;=high-1;k++)</span><br><span class="line">			a=mmTry2(dim, low, k);</span><br><span class="line">			b=mmTry2(dim, k, high);</span><br><span class="line">			c=cost of multiplication at position k;</span><br><span class="line">			bestCost=min(bestCost, a+b+c)</span><br><span class="line">	return bestCost</span><br></pre></td></tr></table></figure>
+<p>时间复杂度： T(n) <span class="math inline">\(\geq\)</span> 2T(n-1) +
+O(n). <span class="math inline">\(\Omega(2^n)\)</span></p>
+<h4 id="v3.-入门级dp">v3. 入门级DP</h4>
+<p>用二维空间存储，子问题解。</p>
+<p>store(cost, low, high, bestCost)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mmTry2DP(dim, low, high, cost)</span><br><span class="line">	bestCost=0</span><br><span class="line">	for(k=low+1;k&lt;= high-1;k++)</span><br><span class="line">		if (member(low,k)==false)</span><br><span class="line">			a=mmTry2(dim,low,k)</span><br><span class="line">		else a=retrieve(cost,low,k)</span><br><span class="line">		if (member(k,high)==false)</span><br><span class="line">			a=mmTry2(dim,k,high)</span><br><span class="line">		else b=retrieve(cost,k,high)</span><br><span class="line">		c=cost of multiplication at position k;</span><br><span class="line">		bestCost=min(bestCost, a+b+c)</span><br><span class="line">	store(cost,low,high,bestCost)</span><br><span class="line">	return bestCost</span><br><span class="line">		</span><br></pre></td></tr></table></figure>
+<h4 id="v4.-高级dp">v4. 高级DP</h4>
+<blockquote>
+<p>为什么这个好？不需要编译器进行调度</p>
+<p>不管写法是否循环，都是用子问题的解去拼大问题的解。</p>
+<p>循环：人为规定子问题的求解顺序。</p>
+<p>递归：编译器决定递归的子问题求解顺序。</p>
+<p>Tips: 二维循环找调度，一维循环找最优</p>
+</blockquote>
+<p>DP求解方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Steps for applying DP:</span><br><span class="line"></span><br><span class="line">1.Define subproblems: # of subproblems</span><br><span class="line">2.Set the goal</span><br><span class="line">3.Define the recurrence</span><br><span class="line">	- larger subproblem &lt;- # smaller subproblems</span><br><span class="line">	- init. conditions</span><br><span class="line">4.Write pseudo-code</span><br><span class="line">	fill table in some order</span><br><span class="line">5.Analyze the time complexity</span><br><span class="line">6.Extract the optimal solution(optionally)</span><br></pre></td></tr></table></figure>
+<p>Common subproblems in DP</p>
+<ul>
+<li><p>1D subproblems</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: x_1, x_2, ...,x_n (array, sequence, string)</span><br><span class="line">Subproblems: x_1, x_2, ..., x_i (prefix/suffix)</span><br><span class="line">#: O(n)</span><br><span class="line">Examples: Maximum-sum subarray, Longest increasing subsequence, Text justification</span><br></pre></td></tr></table></figure></li>
+<li><p>2D subproblems</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">--Class 1</span><br><span class="line">Input: x_1, x_2, ...,x_m; y_1, y2, ...,y_n</span><br><span class="line">Subproblems: x_1,x_2,...,x_i; y_1,y_2,...,y_i</span><br><span class="line">#: O(mn)</span><br><span class="line">Examples: Edit distance, Longest common subsequence</span><br><span class="line"></span><br><span class="line">--Class 2*</span><br><span class="line">Input:x_1, x_2, ...,x_n</span><br><span class="line">Subproblems:x_i,...,x_j</span><br><span class="line">#: O(n^2)</span><br><span class="line">Examples: Matrix chain multiplication, Optimal BST</span><br></pre></td></tr></table></figure></li>
+<li><p>3D subproblems</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Floyd-Warshall algorithm</span><br><span class="line">	d(i,j,k)=min(d(i,j,k-1), d(i,k,k-1)+d(k,j,k-1))</span><br></pre></td></tr></table></figure></li>
+<li><p>DP on graphs</p>
+<ul>
+<li><p>On rooted tree</p>
+<p>Subproblems: rooted subtrees</p></li>
+<li><p>On DAG</p>
+<p>Subproblems: nodes after/before in the topo. order</p></li>
+</ul></li>
+<li><p>Knaspack problem</p>
+<p>Subset sum problem, Change-making problem</p></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+              <a href="/tags/nju/" rel="tag"># nju</a>
+              <a href="/tags/course/" rel="tag"># course</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/09/19/algorithm-course-divideAndConquer/" rel="prev" title="algorithm divideAndConquer">
+      <i class="fa fa-chevron-left"></i> algorithm divideAndConquer
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/09/19/algorithm-course-EquivalenceClass/" rel="next" title="algorithm course EquivalenceClass">
+      algorithm course EquivalenceClass <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#dp"><span class="nav-number">1.</span> <span class="nav-text">DP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#matrix-multiplication"><span class="nav-number">1.1.</span> <span class="nav-text">1. Matrix Multiplication</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#v1.-%E9%80%92%E5%BD%92%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.1.</span> <span class="nav-text">v1. 递归版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v2.-%E9%80%92%E5%BD%92%E4%B8%8E%E5%88%86%E6%B2%BB"><span class="nav-number">1.1.2.</span> <span class="nav-text">v2. 递归与分治</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v3.-%E5%85%A5%E9%97%A8%E7%BA%A7dp"><span class="nav-number">1.1.3.</span> <span class="nav-text">v3. 入门级DP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v4.-%E9%AB%98%E7%BA%A7dp"><span class="nav-number">1.1.4.</span> <span class="nav-text">v4. 高级DP</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : '844dc96013ed6f56b537993a2e60faad',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"augf.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Overview: stochastic generalization of graph convolutions, and it is useful for massive, dynamic graphs that contain rich feature information. 看自身的PPT, 实际上关于k的提法，从1,2,...,k其他是对于每个节点。 比如说图上的每个节点，先分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="paper-read-graphsage">
+<meta property="og:url" content="https://augf.github.io/2019/12/06/paper-read-graphsage/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="Overview: stochastic generalization of graph convolutions, and it is useful for massive, dynamic graphs that contain rich feature information. 看自身的PPT, 实际上关于k的提法，从1,2,...,k其他是对于每个节点。 比如说图上的每个节点，先分">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-06T07:22:24.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta property="article:tag" content="gnn">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://augf.github.io/2019/12/06/paper-read-graphsage/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>paper-read-graphsage | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/12/06/paper-read-graphsage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          paper-read-graphsage
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-06 15:22:24" itemprop="dateCreated datePublished" datetime="2019-12-06T15:22:24+08:00">2019-12-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/gnn/" itemprop="url" rel="index"><span itemprop="name">gnn</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Overview:</p>
+<p>stochastic generalization of graph convolutions, and it is useful for
+massive, dynamic graphs that contain rich feature information.</p>
+<p>看自身的PPT, 实际上关于k的提法，从1,2,...,k其他是对于每个节点。
+比如说图上的每个节点，先分别做一跳的表示。
+不断地一起共同的做，最终可以发现实际上所求的目标就最终表示是k跳来决定的。</p>
+<p>关键表达式其实就只有那一个。</p>
+<p>为什么inductive?
+实际上感觉是在图上把问题给固定下来了，也就是说实际上，来一个性的点之后，直接按照之前的所有的函数和模式，学习新的表示即可。
+&gt; 此时的表示是基于之前训练得到的新的表示? 还是旧的表示? &gt;
+之前的学习是学习对应的函数和参数，所以说?</p>
+<blockquote>
+<p>那么对于未知节点的表示，实际上又是如何查找和运行的呢?</p>
+</blockquote>
+<p>hierarchical 层次</p>
+<p>hierarchical pool: 层次遍历。 &gt; 如果将gnn适用于对整个图分类。</p>
+<p>Characterize GNN's discriminative power</p>
+<h2 id="paper">paper</h2>
+<h3 id="dataset">dataset</h3>
+<h4 id="ciatation-data">Ciatation data</h4>
+<p>predicting paper subject categories. six biology-related fields for
+2000-2005. node lable: six</p>
+<p>n = 302421, fix_size = 9.15 undirected citation graph dataste.</p>
+<p>train: 2000-2004 2005 test. 30% for validation</p>
+<p>features: node degrees and processed the paper abstracts
+300-dimensional word vectors.</p>
+<h4 id="reddit-data">Reddit data</h4>
+<p>which community different Reddit posts belong to.</p>
+<p>users post and comment on content in different topical
+communities.</p>
+<p>node label: the community.</p>
+<p>sampled 50 large communities. post-post graph.</p>
+<blockquote>
+<p>in the month of September, 2014.</p>
+</blockquote>
+<p>n=232965, fix_size=492 first 20 days for training and remaining for
+testing (0.3 for validation)</p>
+<p>features: 300-dimensional GloVe CommonCrawl word vectors.</p>
+<p>each post concatenated 1. the average embedding of the post title. 2.
+the average embedding of all the post' comments 3. the post's score. 4.
+the number of comments made on th post</p>
+<h4 id="protein-protein-interactions">Protein-protein interactions</h4>
+<p>the task of generalizing across graphs. requires learning about node
+roles rather than community structure.</p>
+<p>protein roles, in terms of their cellular functions from gene
+ontology. 我们未来了解节点的角色，即蛋白质的作用是什么, protein.
+使用基因本体论为它们做标记。</p>
+<p>节点与节点之间交互会构成人体的不同组织</p>
+<p>various protein-protein interaction graphs.</p>
+<p>node: protein graph: human tissue.</p>
+<p>features: positional gene sets, motif gene sets and immuological
+signatures labels: gene ontology sets</p>
+<p>n=2373, fix_size = 28.8</p>
+<h3 id="theoretical-analysis">5. Theoretical analysis</h3>
+<p>为了探究GraphSage如何学习图结构，尽管它本质上可能是基于功能。
+作为案例研究，我们考虑了graphsage是否可以学习预测节点的聚类稀疏，即节点1跳领域内闭合的三角形比例。
+&gt; 反映在图上是连在一起的意思吗？
+聚类系数是衡量节点本地淋雨聚类程度的一种流行度量，它是许多更复杂结构图案的基础。</p>
+<p>我们可以证明算法1能够将聚类稀疏近似为任意精度</p>
+<p>Theorem 1?: 公式表达</p>
+<p>对于每个图，都有一个算法1的参数设置，这样，如果每个节点的特征都不同，则它可以将改图的聚类系数近似为人影精度。</p>
+<p>即使从绝对连续的随机分布中采样节点特征输入，GraphSage也可以了解局部图的结构。</p>
+<p>证明背后的基本思想是，
+如果每个节点都有唯一的特征表示，则我们可以学习将节点映射到指标向量并识别节点领域。
+定理1的证明依赖于池聚合器的某些属性，所以更优 ### Appendices</p>
+<h4 id="algorithm-2">Algorithm 2</h4>
+<p>首先第一步预处理， K轮： Bk=B B(k-1) = Bk 加上 u的点的邻居 B(k-2) =
+B(k-1) 加上所有点的邻居 &gt; ? 反着来违反直觉，然后k=2是，即采样了S2,
+又采样了S1*S2 2-hop neighbors. &gt; 解释说这里其实是采样过程而已</p>
+<p>12-13 解释说运算肯定是只包括当前所需要的运算</p>
+<h4 id="dataset-1">Dataset</h4>
+<h4 id="deatails">Deatails</h4>
+<ol type="1">
+<li>Hyperparameter selection Random Walk: 50 random walks of length 5
+from each node in order to obtain the pairs needed for the unsupervised
+loss. Python, Perozzi[28]</li>
+</ol>
+<p>Logistic regression model SGDCClassifier from the scikit-learn Python
+package[26], with default settings.</p>
+<p>Hyperparameter selection DeepWalk: 0.01, 0.001, 0.0001 initial
+learning rates. 2<em>1e-6, 2</em>1e-7, 2*1e-8 unsupervised model</p>
+<p>big 1024, small 512</p>
+<p>All models user rectified linear units All the unsupervised GraphSAGE
+models and DeepWalk used 20 negative sample with context distributaion
+smoothing over node degress using a smoothing parameter of 0.75.</p>
+<p>rates: 0.2, 0.4, 0.8</p>
+<p>batch sizes 512, batch size 64</p>
+<ol start="2" type="1">
+<li>Hardware 4 NVIDIA Titan X Pascal GPUS (12Gb of RAM at 10Gbps speed),
+16 Intel Xeon CPUS(E5-2623 v4 @ 2.60GHz)</li>
+</ol>
+<p>3 days in a shred resource setting. &gt; 查一下这些硬件</p>
+<p>Titan X GPU: 4-7 days full resources were dedicated</p>
+<ol start="3" type="1">
+<li><p>Notes on the DeepWalk implementation DeepWalk is also equivalent
+to the node2vec model with p=q=1</p></li>
+<li><p>Notes on neighborhood sampling: subsample edges so that no nodel
+has degree large than 128. we only sample at most 25 neighbors per node.
+downsampling allows us to store neighborhood information as dense
+adjacency list, improves computational efficiency.</p></li>
+</ol>
+<p>Reddit data, downsampled the edges of the original graph as a
+pre-processing step, since the original graph is extremely dense. ##
+code</p>
+<h3 id="tensorflow">tensorflow</h3>
+<p>stochastic generalization of graph convolutions.</p>
+<p>GraphSage now has better support on smaller, static gaphs, don't have
+node features. 'identity features"</p>
+<p>task of inductive generalization(generating embeddings for nodes that
+were not present during training)</p>
+<p>identity features: increase the runtime. potentially increase
+performance(at the usual risk of overfitting)</p>
+<p>GraphSage is intended for use on large graphs &gt;100000 nodes.</p>
+<p>example_data: ppl</p>
+<ol type="1">
+<li>running the code if your benchmark does not require generalizing to
+unseen data, --identity_dim ?flag to a value int ht range [64, 256] &gt;
+目标是不需要inductive? 没错吧，那么不应该是也可以用到自身特征吗？ make
+the model embed unique node ids as attributes. increase the runtime and
+number of parameters , performance. &gt; node ids,
+节点标号作为属性，什么鬼？<br />
+set this flag and not try to pass dense one-hot vectors as featres(dut
+to sparsity) &gt; 单独抽出来可以理解 the "dimension" of identity
+features specifies how many parameter there are per node in the sparse
+identity-feature lookup table. &gt;
+这个维度是怎么展现的？不精确的？</li>
+</ol>
+<p>example_unsupervised.sh</p>
+<p>set a samll max iteration， very near convergence ?</p>
+<p>example_supervised.sh</p>
+<p>for PPI data &gt; mulit-output?
+除了节点编号，还要输出什么？懂了！，这里的意思是individual nodes to
+belong to multiple classes. --sigmoid, defalut: one-hot</p>
+<ol start="2" type="1">
+<li>Input format --train_prefix: specifies the following data files.
+X-G.json: a networkx-specified file decribing the input graph. Nodes
+have 'val' and 'test' 表示是交叉验证集和测试集的一部分 X-id_map.json:
+graph_node-ids映射到连续的整数 X-class_map.json: graph node ids map to
+classes X-feat.npy: a numpy-stored array of node features. ordering
+given by id 应该是对应的整数 X-walks.txt: a text file random walk
+co-occurrences (one pair per line) &gt; 共同出现的节点标号</li>
+</ol>
+<p>run random walks. graphsage.utils run_walks</p>
+<ol start="3" type="1">
+<li>Model variants
+<ul>
+<li>graphsage_mean</li>
+<li>graphsage_seq</li>
+<li>graphsage_maxpol</li>
+<li>graphsage_meanpool</li>
+<li>gcn</li>
+<li>n2v_an implementation of DeepWalk</li>
+</ul></li>
+<li>logging directory
+<ul>
+<li>--base_log_dir: default to the current directory;
+<sunp/sunsup>--<data_prefix>/graphsage-<model_description>/</li>
+<li>supervised model output F1 scores</li>
+<li>unsupervied train emmeddings and store them。 val.npy, val.txt.
+5-10Gb &gt; unsupervised 干什么？ 再看论文， use to the downstream
+machine learning applications. <code>eval_scripts</code></li>
+</ul></li>
+</ol>
+<h3 id="代码">代码</h3>
+<ol type="1">
+<li>tesorflow: 代码未看，速度快 python -m graphsage.supervised_train
+--train_prefix ./example_data/ppi --model graphsage_mean --sigmoid</li>
+</ol>
+<p>python -m graphsage.unsupervised_train --train_prefix
+./example_data/ppi --model graphsage_mean --max_total_steps 1000
+--validate_iter 10</p>
+<blockquote>
+<p>in order to learn useful, predictive representations in a fully
+unsupervised setting, use graph-based loss function.
+因为是无监督，所以loss是自己定义出来的，不需要真实标记参与进来 修改PPT,
+这里应该是无监督学习</p>
+</blockquote>
+<p>与GCN最大的区别，在于多了concat操作。</p>
+<p>samp_neighs = [sample_neigh + set([node[i]])]</p>
+<p>代码还有一个mock的bug未解决</p>
+<p>注意到这里其实有好几个loss functions</p>
+<ol start="2" type="1">
+<li>pytorch: 代码已看，速度快 总结：总依据是原本的算法。 word
+embedding特征, cora, pubmed引用数据集是这么做的！ 其他建议</li>
+</ol>
+<p>每轮是batch, 训练数据的读入。 256, 1024, 然后random.shuffle.
+下次再参与训练。</p>
+<p>在这里的特征使用了word embedding gcn: 81.5 4s, 训练方式是所有
+graphsage: 0.874 两个进行对比，不同在哪里！</p>
+<p>问题？ graphsage说将gcn改变为inductive, 就是这里进行改变吗？</p>
+<p>有证明sample取不同的阈值，可以达到不同的精确度</p>
+<h2 id="论文查找">论文查找</h2>
+<p>论文： Hamilton W, Ying Z, Leskovec J (2017) Inductive Representation
+Learning on Large Graphs</p>
+<h3 id="parallel-215">parallel 215</h3>
+<ol type="1">
+<li><p>Neugraph</p></li>
+<li><p>parallel computation of graph embedding: ! large graphs. framwork
+for parallel computation of a graph embedding using a cluster of compute
+nodes with resource constraints. propose a new way to evaluate the
+quality of graph embeddings that is independent of a specific inference.
+computation scales well, while largely maintaining the embedding
+quality.</p></li>
+<li><p>Accurate, Efficient and Scalable Graph Embedding &gt; a major
+challenge is to reduce the complexity of layered GCNs and make them
+parallelizable and scalable on very large graphs</p></li>
+<li><p>Towards Efficient Large-Scale Graph Neural Network
+Computing</p></li>
+</ol>
+<p>3篇文章是互不影响的关系</p>
+<p>interesting</p>
+<ol type="1">
+<li><p>Deep Inductive Graph Representation Learning</p></li>
+<li><p>large-Scale learnable graph convolutional networks &gt; subgraph
+train</p></li>
+<li><p>Generalizable Resource Allocation in Stream Processing via Deep
+Reinforcement Learning &gt; RL</p></li>
+<li><p>Deep Neural Representation Learning on Dynamic Graphs via
+Self-Attention Networks &gt; 动态图</p></li>
+</ol>
+<h3 id="distributed">distributed</h3>
+<h3 id="cluster-system">cluster system~~</h3>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/gnn/" rel="tag"># gnn</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/01/target-for-work/" rel="prev" title="target for work">
+      <i class="fa fa-chevron-left"></i> target for work
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/08/The-Minto-Pyramid-Princlple/" rel="next" title="The Minto Pyramid Princlple">
+      The Minto Pyramid Princlple <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#paper"><span class="nav-number">1.</span> <span class="nav-text">paper</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dataset"><span class="nav-number">1.1.</span> <span class="nav-text">dataset</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ciatation-data"><span class="nav-number">1.1.1.</span> <span class="nav-text">Ciatation data</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reddit-data"><span class="nav-number">1.1.2.</span> <span class="nav-text">Reddit data</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#protein-protein-interactions"><span class="nav-number">1.1.3.</span> <span class="nav-text">Protein-protein interactions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#theoretical-analysis"><span class="nav-number">1.2.</span> <span class="nav-text">5. Theoretical analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#algorithm-2"><span class="nav-number">1.2.1.</span> <span class="nav-text">Algorithm 2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dataset-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">Dataset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#deatails"><span class="nav-number">1.2.3.</span> <span class="nav-text">Deatails</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tensorflow"><span class="nav-number">1.3.</span> <span class="nav-text">tensorflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E6%9F%A5%E6%89%BE"><span class="nav-number">2.</span> <span class="nav-text">论文查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#parallel-215"><span class="nav-number">2.1.</span> <span class="nav-text">parallel 215</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#distributed"><span class="nav-number">2.2.</span> <span class="nav-text">distributed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cluster-system"><span class="nav-number">2.3.</span> <span class="nav-text">cluster system~~</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : '77cbae4dfbbd4cbdc679bbbb13c22618',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

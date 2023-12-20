@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"augf.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="参考: 吴恩达深度学习视频和网上教程  https:&#x2F;&#x2F;www.zybuluo.com&#x2F;hanbingtao&#x2F;note&#x2F;433855 隐藏层大于2的神经网路叫做深度神经网络 一个仅有隐藏层的神经网络可以拟合热河一个函数，但是它需要很多很多的神经元。 而深度网络就是考虑用少得多的神经元就能拟合同样的函数。 为了拟合一个函数，要么使用浅而宽的网络，要么使用深而窄的网络。 &gt; 后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deeplearning learn">
+<meta property="og:url" content="https://augf.github.io/2019/09/19/deeplearning-learn/index.html">
+<meta property="og:site_name" content="Life&#39;s Notes">
+<meta property="og:description" content="参考: 吴恩达深度学习视频和网上教程  https:&#x2F;&#x2F;www.zybuluo.com&#x2F;hanbingtao&#x2F;note&#x2F;433855 隐藏层大于2的神经网路叫做深度神经网络 一个仅有隐藏层的神经网络可以拟合热河一个函数，但是它需要很多很多的神经元。 而深度网络就是考虑用少得多的神经元就能拟合同样的函数。 为了拟合一个函数，要么使用浅而宽的网络，要么使用深而窄的网络。 &gt; 后">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-learn/ganzhiqi.png">
+<meta property="og:image" content="https://augf.github.io/2019/09/19/deeplearning-learn/and.png">
+<meta property="article:published_time" content="2019-09-19T05:03:19.000Z">
+<meta property="article:modified_time" content="2021-05-27T01:05:35.000Z">
+<meta property="article:author" content="Yun-Pan Wang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://augf.github.io/2019/09/19/deeplearning-learn/ganzhiqi.png">
+
+<link rel="canonical" href="https://augf.github.io/2019/09/19/deeplearning-learn/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>deeplearning learn | Life's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Life's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">岁月数载，愿不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://augf.github.io/2019/09/19/deeplearning-learn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/default-avatar.png">
+      <meta itemprop="name" content="Yun-Pan Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          deeplearning learn
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-19 13:03:19" itemprop="dateCreated datePublished" datetime="2019-09-19T13:03:19+08:00">2019-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-27 09:05:35" itemprop="dateModified" datetime="2021-05-27T09:05:35+08:00">2021-05-27</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>参考: 吴恩达深度学习视频和网上教程</p>
+</blockquote>
+<p>https://www.zybuluo.com/hanbingtao/note/433855</p>
+<p>隐藏层大于2的神经网路叫做深度神经网络</p>
+<p>一个仅有隐藏层的神经网络可以拟合热河一个函数，但是它需要很多很多的神经元。
+而深度网络就是考虑用少得多的神经元就能拟合同样的函数。</p>
+<p>为了拟合一个函数，要么使用浅而宽的网络，要么使用深而窄的网络。 &gt;
+后者给节约资源</p>
+<h2 id="感知器">1. 感知器</h2>
+<p><img data-src="ganzhiqi.png" /></p>
+<h2 id="组成">1.1 组成</h2>
+<ul>
+<li>输入权值 <span class="math inline">\(w_i\)</span></li>
+<li>激活函数, 比如阶跃函数，<span class="math inline">\(f(x) =
+z&gt;0?1:0\)</span></li>
+<li>输出，整个感知器的公式 <span class="math display">\[f(w \cdot x +
+b)\]</span></li>
+</ul>
+<p>如此，表示的就是一元函数。因为权值的不同取值，由此可以表达出不同的函数</p>
+<h2 id="表示能力">1.2 表示能力</h2>
+<ul>
+<li><p>and函数: <span class="math inline">\(w_1 = 0.5, w_2=0.5,
+b=-0.8\)</span> <img data-src="and.png" alt="and function" /> <span
+class="math display">\[y = 0.5x_1 + 0.5x_2 -0.8\]</span></p></li>
+<li><p>or函数： <span
+class="math display">\[y=0.5x_1+0.5x_2-0.3\]</span></p></li>
+<li><p>线性分类 &gt; 因为它的数学表示实际上就是一条直线
+<font color="red">不能表示一维以上的，比如异或运算</font> ## 1.3
+训练</p></li>
+</ul>
+<blockquote>
+<p>训练的主要想法就是进行更新权值</p>
+</blockquote>
+<blockquote>
+<p>更新 <span class="math inline">\(w_i, w_0=b\)</span></p>
+</blockquote>
+<p>深度学习： 反向传播是否可以保证收敛？？ 强化学习：探索和利用</p>
+<p>budget: 总共评估多少个节点 随机深林</p>
+<p>算法</p>
+<p>Q-learning &gt; 蒙特卡罗 + 动态规划</p>
+<h2 id="深度学习应用总结">1. 深度学习应用总结</h2>
+<p>分类 - Standard NN - CNN - RNN - Customl / Hybrid</p>
+<ol type="1">
+<li>structured vs unstructured
+<ul>
+<li>结构化数据： 组织为表格形式，每个维度都在人类的意义下具有解释性</li>
+<li>非结构化数据：例如图像或者音频，每个细小的单位是像素点。 &gt;
+从历史的角度来看，计算机很难解释非结构化数据。但是深度学习引入后，对非结构化数据也能解释的很好</li>
+</ul></li>
+<li>why 深度学习现在火起来？
+<ul>
+<li>大量数据的产生</li>
+<li>越来越深的神经网络的规模的上限会表现得越来越好 &gt;
+在小规模数据上，算法的优劣性不好比较。但是在大规模数据上，深度学习是远远领先的</li>
+</ul></li>
+<li>发展
+<ul>
+<li>Data</li>
+<li>Computation</li>
+<li>Algorithms:
+<ul>
+<li>特别地，从sigmoid函数到ReLu函数的改变，因为sigmoid函数在最低端和最上端点的梯度变化非常缓慢，不利于学习。可以是梯度下降得更快</li>
+</ul></li>
+</ul></li>
+</ol>
+<p>神经网络类比于人的大脑有点过度了，没有必要，因为从某种深度学习只是人的大脑一个非常简化的近似</p>
+<h3 id="神经网络与深度学习">1.1 神经网络与深度学习</h3>
+<ul>
+<li>二分类</li>
+<li>Logistic Regression &gt; 目标改变了，是从概率上来约束，即希望<span
+class="math inline">\(P(y=1|x)\)</span>最大，此时认为该算法是最优的</li>
+</ul>
+<h3 id="序列模型-sequence">1.5 序列模型 Sequence</h3>
+<p>https://mooc.study.163.com/learn/2001280005?tid=2001391038&amp;<em>trace_c_p_k2</em>=a561339e0cbf45b491dd9e12104a8641#/learn/content?type=detail&amp;id=2001771052</p>
+<blockquote>
+<p>序列模型是什么？
+其实，从某种意义上说，定义很简单。就是输入和输出的是序列。
+从某种意义上感觉，就是原本的数据是输入有很多维特征，而现在是这些维特征从另一个角度进行解释。即比如自然语言处理，输入为一个句子。
+每个单词作为输入的特征，但是这些特征并不是相互独立的。
+机器学习中好像有要求特征必须相互独立把</p>
+</blockquote>
+<blockquote>
+<p>在这里好像又从新起了一个名字？</p>
+</blockquote>
+<blockquote>
+<p>在这里看来，每维特征姑且叫做特征吧。
+这些是相关联的，有点像层次分析法，所以必须要使用神经网络来做。
+这些是序列的
+序列意味着什么？意味着之间的关系性，前后具有联系，不能割开看。
+如何做标记？ 这里认为<span
+class="math inline">\(x^{(i)}\)</span>表示第i个样本，<span
+class="math inline">\(x^{(i)&lt;t&gt;}\)</span>表示第i个样本的第t个特征，y同理。<span
+class="math inline">\(T_x^{(i)}\)</span>表示<span
+class="math inline">\(x^{i}\)</span>的长度？？？ -
+于是意味着x的输入还可以处理为不一样？？</p>
+</blockquote>
+<pre><code>&gt; 所以后面有说到，可以填充或者零填充使得每个输入语句达到同样的长度</code></pre>
+<p>如何来表示这些词？
+这里的一个想法是用字典(这里通常是最常见的词，不在其中的词使用UNK来表示)，使用One-hot编码来做</p>
+<h4 id="rnn在nlp中的应用">1.1.1 RNN在NLP中的应用</h4>
+<ul>
+<li>任务： 输入一个句子，对句子做情感分析，比如评分。
+比如：输入的x是一个句子，那么怎么感觉学习过程的有效性呢？
+首先必须思考神经网络结构是基于什么做的？比如在图中，是基于图的整个结构做的。
+而在NLP中这里针对的就是一个句子。</li>
+</ul>
+<p>那么，在自然中，多个句子之间是会存在相同的单词。
+所以，当对上一个单词训练结束后，再使用下一个单词进行训练就可。此时模型</p>
+<blockquote>
+<p>特别注意，深度学习是分领域的，等于说如果这里没有给定在哪个领域内是很难的。像在这里，邻域实际上决定了学习目标是什么。
+而这里的学习目标，以及输入，输出是什么，神经网络模型需要学习的是什么就显得非常重要了。所以这里需要特别思考</p>
+</blockquote>
+<ul>
+<li>RNN &gt; 这里理解的角度和自己的想象方式，从某种角度上还是出现了偏差
+&gt;
+这里的时间步，说的是上一个x训练的模型的参数，然后再影响到下一个x输入的模型的参数。
+？ 合理循环之说呢？ 不对！错误，这里看错了标记<span
+class="math inline">\(x^{&lt;t&gt;}\)</span>只的是第t步的特征，所以这里网络结构的输入依然是一个x。不可网络结构变得非常不一样，不再是每一维特征都有复杂的到最终的关系。</li>
+</ul>
+<p><span class="math display">\[a^{&lt;1&gt;} = g(W_{aa} a^{&lt;00&gt;}
++ W_{ax} x_{&lt;1&gt;} + b_a\]</span></p>
+<p><span class="math display">\[y^{&lt;1&gt;} = g(W_{ya} a^{&lt;1&gt;} +
+b_y\]</span> &gt; 其中<span
+class="math inline">\(a^{&lt;0&gt;}\)</span>是初始化的，<span
+class="math inline">\(a^{&lt;1&gt;}\)</span>是循环神经网络<span
+class="math inline">\(x^{&lt;1&gt;}\)</span>到<span
+class="math inline">\(x^{&lt;2&gt;}\)</span>传递的参数</p>
+<p>假设输入向量的维度为x，循环体的全连接层神经网络的输入大小为h+x.</p>
+<blockquote>
+<p>做深度学习时，最重要的想法就是能够转换为矩阵运算，然后记得通过检查维度来确定正确性</p>
+</blockquote>
+<blockquote>
+<p>RNN只用到了之前的信息。即只使用了序列前面的信息，未使用序列后面的信息</p>
+</blockquote>
+<h4 id="section">1.2</h4>
+<p>梯度下降优化</p>
+<blockquote>
+<p>如果对于凸函数，是具有全局最优解的 为什么凸函数具有全局最优解？ <span
+class="math inline">\(f(y)-f(x) \leq f&#39;(x) (y-x)\)</span>
+注意最凸优化中，把权重矩阵看成是x的参数，目标是看何时x能够降到最低点；直观上看就是，梯度下降的方向就是去往最低点的地方。因为全局只有一个最低点。</p>
+</blockquote>
+<ul>
+<li>凸函数的快速判断
+<ol type="1">
+<li>判断的性质 &gt; 一阶条件，即满足一阶不等式的公式，即证明不等式 &gt;
+二阶条件，直接对二阶求导公式需要大于等于0.
+对于矩阵来说，探究的就是矩阵的二阶导矩阵，此时称为Hessian矩阵。</li>
+<li>常见的1维凸函数
+<ul>
+<li>放射函数 <span class="math inline">\(ax+b, a,b \in R\)</span></li>
+<li>指数函数</li>
+<li>对数函数 <span class="math inline">\(logx\)</span></li>
+<li>幂函数 <span class="math inline">\(x^a\)</span>，绝对值幂函数</li>
+<li>负熵 xlogx</li>
+</ul></li>
+<li>常见的d维凸函数有：
+<ul>
+<li>仿射函数</li>
+<li>范数</li>
+</ul></li>
+<li>凸函数运算
+<ul>
+<li>非负加权求和: 所以这一点在神经网络中不能保证，所以就不是最优解</li>
+<li>与放射函数复合</li>
+<li>最大值或者上确界</li>
+</ul></li>
+</ol></li>
+</ul>
+<h2 id="各种优化器">2. 各种优化器</h2>
+<p>二阶Hessian矩阵：各个的偏导数</p>
+<p>一阶倒数刻画切线的斜率，二阶倒数刻画的是切线的斜率的变化率。</p>
+<p>二阶函数能刻画函数的凹凸性</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/09/19/gnn-gnn-parallel-gnn-overview-paper-summary/" rel="prev" title="gnn-parallel-gnn-overview-paper-summary">
+      <i class="fa fa-chevron-left"></i> gnn-parallel-gnn-overview-paper-summary
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/09/19/spark-study-thinking/" rel="next" title="spark study thinking">
+      spark study thinking <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjU1Mi8yMzA2Mg=="></div>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%84%9F%E7%9F%A5%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">1. 感知器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E6%88%90"><span class="nav-number">2.</span> <span class="nav-text">1.1 组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA%E8%83%BD%E5%8A%9B"><span class="nav-number">3.</span> <span class="nav-text">1.2 表示能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">1. 深度学习应用总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">4.1.</span> <span class="nav-text">1.1 神经网络与深度学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B-sequence"><span class="nav-number">4.2.</span> <span class="nav-text">1.5 序列模型 Sequence</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rnn%E5%9C%A8nlp%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">4.2.1.</span> <span class="nav-text">1.1.1 RNN在NLP中的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section"><span class="nav-number">4.2.2.</span> <span class="nav-text">1.2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E7%A7%8D%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">2. 各种优化器</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun-Pan Wang"
+      src="/images/default-avatar.png">
+  <p class="site-author-name" itemprop="name">Yun-Pan Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AugF" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AugF" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangyp@smail.nju.edu.cn" title="E-Mail → mailto:wangyp@smail.nju.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/Joswxe" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;Joswxe" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com" rel="noopener" target="_blank">Google</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/" title="https:&#x2F;&#x2F;cn.bing.com" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+</div>!
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9552a863f697c06e137f',
+      clientSecret: '65716dc606be017204585b55c9858ede23eae0b9',
+      repo        : 'augf.github.io',
+      owner       : 'AugF',
+      admin       : ['AugF'],
+      id          : 'aaac771ab78abfc20503e5079614d5d3',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
